@@ -1,7 +1,7 @@
 import { Nade } from "../models/Nade";
-import { GfycatPlayer } from "./nadepage/GfycatPlayer";
 import { CommentList } from "./CommentsList";
 import { NadeDescription } from "./NadeDescription";
+import { GfycatPlayerContrainer } from "./nadepage/GfycatPlayerContainer";
 
 type Props = {
   nade: Nade;
@@ -14,7 +14,7 @@ const NadePageMain: React.FC<Props> = ({ nade }) => {
 
   return (
     <>
-      <GfycatPlayer gfyID={nade.gfyID} onSave={onSaveGfycat} />
+      <GfycatPlayerContrainer gfyData={nade.gfycat} onSave={onSaveGfycat} />
       <NadeDescription />
       <CommentList nadeId={nade.id} />
     </>

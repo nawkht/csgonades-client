@@ -1,4 +1,4 @@
-import { Nade } from "../models/Nade";
+import { Nade, NadeBody } from "../models/Nade";
 import axios from "axios";
 
 const BASE_URL =
@@ -20,8 +20,42 @@ export class NadeApi {
   }
 
   static async byId(id: string): Promise<Nade | null> {
-    const res = await axios.get(`${BASE_URL}/nades/${id}`);
-    const nades = res.data as Nade;
-    return nades;
+    try {
+      const res = await axios.get(`${BASE_URL}/nades/${id}`, {
+        withCredentials: true
+      });
+      const nades = res.data as Nade;
+      return nades;
+    } catch (error) {
+      console.error("Failed to get nade", error.message);
+      return null;
+    }
+  }
+
+  static async save(nadeBody: NadeBody, token?: string): Promise<Nade | null> {
+    try {
+      if (!token) {
+        throw new Error("Missing auth token for request");
+      }
+
+      const res = await axios.post(`${BASE_URL}/nades`, nadeBody, {
+        headers: { Authorization: token }
+      });
+      const nade = res.data as Nade;
+      return nade;
+    } catch (error) {
+      console.error("Failed NadeApi.save", error.message);
+      return null;
+    }
+  }
+
+  static async registerView(id: string) {
+    await axios.post(
+      `${BASE_URL}/nades/${id}/countView`,
+      {},
+      {
+        withCredentials: true
+      }
+    );
   }
 }

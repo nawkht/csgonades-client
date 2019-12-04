@@ -20,6 +20,7 @@ const CommentList: React.FC<Props> = ({ nadeId }) => {
   return (
     <>
       <div className="comment-list">
+        <h3>Comments</h3>
         {comments.map(comment => (
           <NadeCommentItem key={comment.id} comment={comment} />
         ))}
@@ -27,8 +28,7 @@ const CommentList: React.FC<Props> = ({ nadeId }) => {
       <style jsx>{`
         .comment-list {
           margin-top: 18px;
-          background: white;
-          border-radius: 6px;
+          margin-bottom: 100px;
         }
       `}</style>
     </>

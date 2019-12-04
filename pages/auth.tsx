@@ -2,30 +2,51 @@ import React from "react";
 import { NextPage } from "next";
 import Router from "next/router";
 import { useDispatch } from "react-redux";
-import { setToken } from "../src/store/AuthStore/AuthActions";
+import {
+  setToken,
+  setUser,
+  signOutUser
+} from "../src/store/AuthStore/AuthActions";
+import { UserApi } from "../src/api/UserApi";
+import { TokenApi } from "../src/api/TokenApi";
 
 interface Props {
-  authToken?: string;
+  isFirstSignIn: boolean;
 }
 
-const Auth: NextPage<Props> = props => {
+const Auth: NextPage<Props> = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    if (props.authToken) {
-      console.log("Dispatching set token");
-      setToken(dispatch, props.authToken);
-    }
-
-    Router.push("/");
-  }, []);
+    console.log("Getting access token");
+    TokenApi.refreshToken()
+      .then(accessToken => {
+        setToken(dispatch, accessToken);
+        console.log("Got token, fetching user");
+        UserApi.fetchSelf(accessToken)
+          .then(user => {
+            console.log("Set user");
+            setUser(dispatch, user);
+            Router.push("/");
+          })
+          .catch(err => {
+            console.error("Failed to fetch user", err.message);
+            Router.push("/");
+          });
+      })
+      .catch(err => {
+        console.log("Failed", err.message);
+        signOutUser(dispatch);
+        Router.push("/");
+      });
+  });
 
   return <h4>Signing in...</h4>;
 };
 
-Auth.getInitialProps = async ({ query }) => {
-  const token = query.token as string;
+Auth.getInitialProps = async ({ query }): Promise<Props> => {
+  const isFirstSignIn = query.isFirstSignIn === "true" ? true : false;
   return {
-    authToken: token || undefined
+    isFirstSignIn
   };
 };
 

@@ -16,7 +16,6 @@ app
     });
 
     server.get("/nade/:id", (req, res) => {
-      console.log("Hello", req.params);
       app.render(req, res, "/nade", req.params);
     });
 

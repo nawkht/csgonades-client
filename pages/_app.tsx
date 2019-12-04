@@ -1,12 +1,25 @@
 import React from "react";
 import App, { AppContext } from "next/app";
-import Head from "next/head";
 import withRedux from "next-redux-wrapper";
-import { initReduxStore } from "../src/store";
+import { initReduxStore, AppState } from "../src/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
+import { Store } from "redux";
+import { TokenApi } from "../src/api/TokenApi";
+import {
+  setToken,
+  signOutUser,
+  setUser
+} from "../src/store/AuthStore/AuthActions";
+import { UserApi } from "../src/api/UserApi";
+import "react-image-crop/dist/ReactCrop.css";
+import { Persistor } from "redux-persist";
 
-class MyApp extends App {
+type Props = {
+  store: Store<AppState>;
+};
+
+class MyApp extends App<Props> {
   static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {};
 
@@ -17,29 +30,32 @@ class MyApp extends App {
     return { pageProps };
   }
 
+  async componentDidMount() {
+    const { store } = this.props;
+
+    try {
+      await TokenApi.setSessionCookie();
+      const accessToken = await TokenApi.refreshToken();
+      setToken(store.dispatch, accessToken);
+      if (accessToken) {
+        const user = await UserApi.fetchSelf(accessToken);
+        setUser(store.dispatch, user);
+      }
+    } catch (error) {
+      signOutUser(store.dispatch);
+    }
+  }
+
   render() {
     const { Component, pageProps } = this.props;
+    const { store } = this.props;
     //@ts-ignore
-    const store = this.props.store as any;
+    const persistor = store.__PERSISTOR as Persistor;
 
     return (
       <Provider store={store}>
-        <PersistGate persistor={store.__PERSISTOR} loading={null}>
-          <Head>
-            <link
-              href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900"
-              rel="stylesheet"
-              key="google-font-roboto"
-            />
-
-            <link
-              rel="stylesheet"
-              href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"
-            />
-          </Head>
-
+        <PersistGate persistor={persistor} loading={null}>
           <Component {...pageProps} />
-
           <style global jsx>{`
             html {
               -webkit-box-sizing: border-box;

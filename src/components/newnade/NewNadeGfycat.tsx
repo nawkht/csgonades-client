@@ -1,14 +1,19 @@
 import { Header, Icon, Button } from "semantic-ui-react";
-import { useState } from "react";
+import { useState, FC } from "react";
 import { GfyCatPlayer } from "../nadepage/GfycatPlayer";
 import { NewNadeGfycatModal } from "./NewNadeGfycatModal";
 
-export const NewNadeGfycat = () => {
+type Props = {
+  onSetGfycat: (gfyId: string) => void;
+};
+
+export const NewNadeGfycat: FC<Props> = ({ onSetGfycat }) => {
   const [gfycatID, setGfycatID] = useState<string | null>(null);
   const [isGfycatModalVisisble, setIsGfycatModalVisisble] = useState(false);
 
   function applyGfycatID(gfycatID: string) {
     setGfycatID(gfycatID);
+    onSetGfycat(gfycatID);
   }
 
   return (

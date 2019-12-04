@@ -1,6 +1,8 @@
 import { Nade } from "../models/Nade";
 import { Layout } from "../components/layout/layout";
 import { NadePageMain } from "../components/NadePageMain";
+import { Colors } from "../../constants/colors";
+import { NadeTitlebar } from "../components/newnade/NadeTitlebar";
 
 type Props = {
   nade: Nade;
@@ -9,6 +11,7 @@ type Props = {
 const NadePage: React.FC<Props> = ({ nade }) => {
   return (
     <Layout>
+      <NadeTitlebar title={nade.title} />
       <div className="nade-container">
         <div className="nade-main">
           <NadePageMain nade={nade} />
@@ -19,16 +22,14 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         {`
           .nade-container {
             display: flex;
-            padding: 18px;
           }
           .nade-main {
-            width: 65%;
-            margin-right: 18px;
+            min-width: 65%;
           }
           .nade-aside {
-            border: 1px solid purple;
-            background: orange;
+            border-left: 1px solid ${Colors.PRIMARY_BORDER};
             height: 50px;
+            background: white;
             flex: 1;
           }
         `}

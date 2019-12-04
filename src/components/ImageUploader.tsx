@@ -1,57 +1,126 @@
 import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
 import { useState, ChangeEvent } from "react";
+import { Button } from "semantic-ui-react";
 
-export const ImageUploader = () => {
+type Props = {
+  onImageCropped: (croppedImageBase64: string) => void;
+};
+
+export const ImageUploader = ({ onImageCropped }: Props) => {
+  const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string>("");
   const [crop, setCrop] = useState<ReactCrop.Crop>({
     aspect: 16 / 9,
     unit: "%",
-    width: 50,
-    height: 50,
-    x: 25,
-    y: 25
+    width: 100
   });
 
   function onSelectFile(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
 
-      reader.addEventListener(
-        "load",
-        () => {
-          const result = reader.result as string;
-          setImageSrc(result);
-        },
-        false
-      );
+      function onReaderImageLoaded() {
+        setImageSrc(reader.result as string);
+      }
+
+      reader.addEventListener("load", onReaderImageLoaded);
       reader.readAsDataURL(e.target.files[0]);
     }
   }
 
   function onImageLoaded(image: HTMLImageElement) {
-    console.log("Loaded image", image);
+    console.log("Loaded image");
+    setImage(image);
   }
 
-  function onCropComplete(crop: ReactCrop.Crop, _: ReactCrop.PercentCrop) {
-    console.log("onCropComplete", crop);
+  function onCropComplete(_: ReactCrop.Crop, __: ReactCrop.PercentCrop) {
+    console.log("onCropComplete");
   }
 
   function onCropChange(crop: ReactCrop.Crop, _: ReactCrop.PercentCrop) {
     setCrop(crop);
-    console.log("onCropChange", crop);
+  }
+
+  function cropImage() {
+    if (!image) {
+      console.error("No image");
+      return;
+    }
+    const canvas = document.createElement("canvas");
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    canvas.width = crop.width || 0;
+    canvas.height = crop.height || 0;
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      console.error("CTX err", ctx);
+      return;
+    } else if (crop.x === undefined) {
+      console.error("crop x err", crop);
+      return;
+    } else if (crop.y === undefined) {
+      console.error("crop y err", crop);
+      return;
+    } else if (crop.width === undefined) {
+      console.error("crop width err", crop);
+      return;
+    } else if (crop.height === undefined) {
+      console.error("crop height err", crop);
+      return;
+    }
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    const base64Image = canvas.toDataURL("image/jpeg");
+
+    console.log(base64Image);
+    onImageCropped(base64Image);
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        blob => {
+          if (!blob) {
+            console.error("Failed to load image blob");
+            return reject("Failed to load image blob");
+          }
+          // @ts-ignore
+          blob.name = "test";
+          console.log("Cropped image", blob);
+          resolve(blob);
+        },
+        "image/jpeg",
+        1
+      );
+    });
   }
 
   return (
     <>
-      <input type="file" onChange={onSelectFile} />
-      <ReactCrop
-        src={imageSrc}
-        crop={crop}
-        onImageLoaded={onImageLoaded}
-        onComplete={onCropComplete}
-        onChange={onCropChange}
-      />
+      <div>
+        <input type="file" onChange={onSelectFile} />
+        <br />
+        <ReactCrop
+          src={imageSrc}
+          crop={crop}
+          onImageLoaded={onImageLoaded}
+          onComplete={onCropComplete}
+          onChange={onCropChange}
+        />
+        <Button primary onClick={cropImage}>
+          Crop image
+        </Button>
+      </div>
     </>
   );
 };

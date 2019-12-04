@@ -1,4 +1,3 @@
-import * as React from "react";
 import Head from "next/head";
 import { Header } from "./header";
 import { MapNavigation } from "./navigation";
@@ -46,11 +45,6 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
           margin-top: ${UiConstants.HEADER_HEIGHT}px;
           background-color: #f2f2f2;
           flex: 1;
-        }
-
-        footer {
-          margin-left: ${UiConstants.SIDEBAR_WIDTH}px;
-          padding: 16px;
         }
       `}</style>
     </div>

@@ -1,9 +1,11 @@
 import jwt from "jsonwebtoken";
 
 export type User = {
-  steamID: string;
   nickname: string;
-  email: string | null;
+  steamID: string;
+  email?: string;
+  avatar?: string;
+  bio?: string;
 };
 
 const decodeUserFromToken = (token: string): User | null => {

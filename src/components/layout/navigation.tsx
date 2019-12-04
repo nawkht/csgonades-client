@@ -1,81 +1,34 @@
 import { FC } from "react";
-import Link from "next/link";
 import { UiConstants } from "../../../constants/ui";
 import { Colors } from "../../../constants/colors";
+import { MapLink } from "./MapLink";
+import { useRouter } from "next/router";
 
 const MapNavigation: FC = () => {
+  const router = useRouter();
+  const currentRoute = router.query.name;
   return (
     <>
       <aside id="mapnavigation">
         <nav>
           <ul>
-            <li>
-              <Link as="/map/dust2" href="/map?name=dust2">
-                <a className="nav-selected">
-                  <img src="/mapicons/dust2.png" />{" "}
-                  <span className="nav-text">Dust2</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link as="/map/mirage" href="/map?name=mirage">
-                <a>
-                  <img src="/mapicons/mirage.png" />{" "}
-                  <span className="nav-text">Mirage</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link as="/map/cache" href="/map?name=cache">
-                <a>
-                  <img src="/mapicons/cache.png" />{" "}
-                  <span className="nav-text">Cache</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link as="/map/nuke" href="/map?name=nuke">
-                <a>
-                  <img src="/mapicons/nuke.png" />{" "}
-                  <span className="nav-text">Nuke</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link as="/map/inferno" href="/map?name=inferno">
-                <a>
-                  <img src="/mapicons/inferno.png" />{" "}
-                  <span className="nav-text">Inferno</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link as="/map/overpass" href="/map?name=overpass">
-                <a>
-                  <img src="/mapicons/overpass.png" />{" "}
-                  <span className="nav-text">Overpass</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link as="/map/cobblestone" href="/map?name=cobblestone">
-                <a>
-                  <img src="/mapicons/cobblestone.png" />{" "}
-                  <span className="nav-text">Cobblestone</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link as="/map/train" href="/map?name=train">
-                <a>
-                  <img src="/mapicons/train.png" />{" "}
-                  <span className="nav-text">Train</span>
-                </a>
-              </Link>
-            </li>
+            <MapLink mapName="dust2" currentMapPath={currentRoute} />
+            <MapLink mapName="mirage" currentMapPath={currentRoute} />
+            <MapLink mapName="inferno" currentMapPath={currentRoute} />
+            <MapLink mapName="nuke" currentMapPath={currentRoute} />
+            <MapLink mapName="overpass" currentMapPath={currentRoute} />
+            <MapLink mapName="train" currentMapPath={currentRoute} />
+            <MapLink mapName="cache" currentMapPath={currentRoute} />
+            <MapLink mapName="cobblestone" currentMapPath={currentRoute} />
           </ul>
         </nav>
-        <footer>© 2019 CSGO Nades</footer>
+        <footer>
+          <div className="copyright">© 2019 CSGO Nades</div>
+          <div className="footer-links">
+            <a href="#">About</a> | <a href="#">Privacy Policy</a> |{" "}
+            <a href="#">Contact</a>
+          </div>
+        </footer>
       </aside>
       <style jsx>{`
         #mapnavigation {
@@ -94,37 +47,29 @@ const MapNavigation: FC = () => {
           margin: 0;
         }
 
-        li a {
-          text-decoration: none;
-          display: inline-flex;
-          align-content: center;
-          color: #444;
-          padding: 12px 18px;
-          width: 100%;
-          transition: background 0.2s;
-        }
-
-        li a:hover {
-          background: #f7f7f7;
-        }
-
-        li a img {
-          width: 30px;
-          height: 30px;
-        }
-
-        li a .nav-text {
-          align-self: center;
-          margin-left: 6px;
-        }
-
-        .nav-selected {
-          background: #f5f9ff;
-        }
-
         footer {
-          background: #24afff;
-          padding: 6px 12px;
+          background: ${Colors.PRIMARY};
+          color: white;
+        }
+
+        footer .footer-links {
+          text-align: center;
+          font-size: 0.8em;
+          padding-bottom: ${UiConstants.PADDING_MEDIUM}px;
+        }
+
+        footer .footer-links a {
+          color: white;
+        }
+
+        footer .footer-links a:hover {
+          color: white;
+          text-decoration: underline;
+        }
+
+        footer .copyright {
+          padding: ${UiConstants.PADDING_MEDIUM}px
+            ${UiConstants.PADDING_LARGE}px;
         }
       `}</style>
     </>

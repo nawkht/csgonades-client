@@ -21,7 +21,7 @@ export const GfyCatPlayer: FC<Props> = ({ gfycatID, aspect }) => {
       <iframe
         className="gfycat-frame"
         src={
-          `https://gfycat.com/ifr/${gfycatID}` ||
+          `https://gfycat.com/ifr/${gfycatID}?hd=1` ||
           "https://gfycat.com/ifr/selfishblaringblackbuck"
         }
         allowFullScreen
@@ -37,7 +37,6 @@ export const GfyCatPlayer: FC<Props> = ({ gfycatID, aspect }) => {
           height: 0;
           padding-bottom: ${aspectToPadding(aspect)};
           overflow: hidden;
-          border-radius: 3px;
           padding-top: 37px;
         }
 

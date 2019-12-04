@@ -17,7 +17,8 @@ const NadePageComponent: NextPage<Props> = ({ nade }) => {
 };
 
 NadePageComponent.getInitialProps = async context => {
-  const nadeId = context.query.name as string;
+  const nadeId = context.query.id as string;
+  console.log("Trying to get nade", nadeId, context.query);
   const nade = await NadeApi.byId(nadeId);
   return { nade };
 };

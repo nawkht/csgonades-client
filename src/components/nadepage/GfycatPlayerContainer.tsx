@@ -1,30 +1,36 @@
-import { useState, FC } from "react";
-import { GfyCatPlayer } from "./GfycatPlayer";
+import { useState, FC, useEffect } from "react";
 import { GfycatEditor } from "./GfycatEditor";
+import { NadeApi } from "../../api/NadeApi";
+import { GfycatVideoPlayer } from "./GfycatVideoPlayer";
+import { GfycatData } from "../../models/Nade";
 
 export type Aspect = "16:9" | "16:10";
 
 type Props = {
-  gfyID?: string;
+  gfyData?: GfycatData;
   onSave?: (gfyID: string) => void;
   disableEdit?: boolean;
-  aspect?: Aspect;
 };
 
 export const GfycatPlayerContrainer: FC<Props> = ({
   onSave,
-  gfyID,
-  disableEdit,
-  aspect
+  gfyData,
+  disableEdit
 }) => {
-  const [isEditing] = useState(true);
+  const [isEditing] = useState(false);
+  useEffect(() => {
+    if (gfyData) {
+      console.log("Registering view clientside");
+      NadeApi.registerView(gfyData.gfyId);
+    }
+  });
 
   return (
     <>
       <div className="gfycat-container">
-        <GfyCatPlayer gfycatID={gfyID} aspect={aspect} />
-        {isEditing && !disableEdit && !!onSave && (
-          <GfycatEditor gfyID={gfyID} onSave={onSave} />
+        <GfycatVideoPlayer gfyData={gfyData} />
+        {isEditing && !disableEdit && !!onSave && !!gfyData && (
+          <GfycatEditor gfyID={gfyData.gfyId} onSave={onSave} />
         )}
       </div>
       <style jsx>{`

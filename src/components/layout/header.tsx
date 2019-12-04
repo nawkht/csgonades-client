@@ -2,6 +2,7 @@ import { FC } from "react";
 import Link from "next/link";
 import { Colors } from "../../../constants/colors";
 import { UiConstants } from "../../../constants/ui";
+import { UserNav } from "./UserNav";
 
 const Header: FC = () => {
   return (
@@ -12,9 +13,7 @@ const Header: FC = () => {
             <img src="/logo.png" />
           </a>
         </Link>
-        <a href="http://localhost:5000/auth/steam" className="steam-login">
-          Loginz
-        </a>
+        <UserNav />
       </header>
       <style jsx>{`
         header {
@@ -27,15 +26,16 @@ const Header: FC = () => {
           background: #fff;
           border-bottom: 1px solid ${Colors.PRIMARY_BORDER};
           z-index: 999;
+          justify-content: space-between;
         }
 
         .logo {
           align-self: center;
-          padding-left: 16px;
+          padding-left: 18px;
         }
 
         .logo img {
-          height: 30px;
+          height: 35px;
         }
       `}</style>
     </>

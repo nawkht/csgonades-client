@@ -1,9 +1,9 @@
 import Document, {
   Html,
-  Head,
   Main,
   NextScript,
-  DocumentContext
+  DocumentContext,
+  Head
 } from "next/document";
 
 class MyDocument extends Document {
@@ -24,6 +24,15 @@ class MyDocument extends Document {
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900"
+            rel="stylesheet"
+            key="google-font-roboto"
+          />
+          <link
+            rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"
           />
         </Head>
         <body>

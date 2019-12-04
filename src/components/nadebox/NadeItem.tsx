@@ -14,7 +14,7 @@ const NadeItem: FC<Props> = ({ nade }) => {
       <div className="nadebox" style={{ display: "inline-block" }}>
         <div className="title">{nade.title}</div>
         <div className="video">
-          <VideoPlayer id={nade.gfyID} poster={""} />
+          <VideoPlayer id={nade.gfycat.gfyId} poster={""} />
         </div>
         <div className="stats">
           <div className="stat">

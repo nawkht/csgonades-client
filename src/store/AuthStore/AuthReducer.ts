@@ -1,25 +1,33 @@
 import { Reducer } from "redux";
 import { AuthActions } from "./AuthActions";
+import { User } from "../../models/User";
 
 export type AuthState = {
-  user: null;
+  user?: User;
   token?: string;
 };
 
-const initialState: AuthState = {
-  user: null
-};
+const initialState: AuthState = {};
 
 export const AuthReducer: Reducer<AuthState, AuthActions> = (
   state = initialState,
   action
-) => {
+): AuthState => {
   switch (action.type) {
     case "@@auth/SET_TOKEN":
-      console.log("Setting token");
       return {
         ...state,
-        authToken: action.payload
+        token: action.payload
+      };
+    case "@@auth/SET_USER":
+      return {
+        ...state,
+        user: action.payload
+      };
+    case "@@auth/SIGN_OUT":
+      return {
+        user: undefined,
+        token: undefined
       };
     default:
       return state;
