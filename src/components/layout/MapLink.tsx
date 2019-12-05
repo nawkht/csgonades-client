@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CsgoMap } from "../../models/Nade";
 import { UiConstants } from "../../../constants/ui";
 import { Colors } from "../../../constants/colors";
+import { capitalize } from "../../utils/Common";
 
 type Props = {
   mapName: CsgoMap;
@@ -63,9 +64,4 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
       `}</style>
     </>
   );
-};
-
-const capitalize = (s: string) => {
-  if (typeof s !== "string") return "";
-  return s.charAt(0).toUpperCase() + s.slice(1);
 };

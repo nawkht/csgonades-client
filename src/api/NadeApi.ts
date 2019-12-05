@@ -1,4 +1,4 @@
-import { Nade, NadeBody } from "../models/Nade";
+import { Nade, NadeBody, NadeUpdateBody } from "../models/Nade";
 import axios from "axios";
 
 const BASE_URL =
@@ -46,6 +46,30 @@ export class NadeApi {
     } catch (error) {
       console.error("Failed NadeApi.save", error.message);
       return null;
+    }
+  }
+
+  static async update(
+    nadeId: string,
+    updateFields: NadeUpdateBody,
+    token?: string
+  ): Promise<boolean> {
+    if (!token) {
+      throw new Error("Missing auth token for request");
+    }
+
+    try {
+      const res = await axios.put(`${BASE_URL}/nades/${nadeId}`, updateFields, {
+        headers: { Authorization: token }
+      });
+
+      if (res.status === 202) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("NadeApi.update failed", error);
+      return false;
     }
   }
 

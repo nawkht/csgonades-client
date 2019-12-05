@@ -6,15 +6,24 @@ import { Colors } from "../../../constants/colors";
 
 interface Props {
   nade: Nade;
+  onClick: (id: string) => void;
 }
 
-const NadeItem: FC<Props> = ({ nade }) => {
+const NadeItem: FC<Props> = ({ nade, onClick }) => {
   return (
     <>
-      <div className="nadebox" style={{ display: "inline-block" }}>
+      <div
+        onClick={() => onClick(nade.id)}
+        className="nadebox"
+        style={{ display: "inline-block" }}
+      >
         <div className="title">{nade.title}</div>
         <div className="video">
-          <VideoPlayer id={nade.gfycat.gfyId} poster={""} />
+          <VideoPlayer
+            gfyVideoUrl={nade.gfycat.smallVideoUrl}
+            id={nade.gfycat.gfyId}
+            poster={nade.images.thumbnail}
+          />
         </div>
         <div className="stats">
           <div className="stat">
@@ -30,15 +39,14 @@ const NadeItem: FC<Props> = ({ nade }) => {
           margin-right: 16px;
           margin-bottom: 16px;
           border: 1px solid ${Colors.PRIMARY_BORDER};
-          border-radius: 3px;
         }
 
         .title {
-          padding: 6px;
+          padding: 6px 12px;
+          text-align: center;
         }
 
         .stats {
-          margin-top: -5px;
           padding: 3px 6px;
         }
 

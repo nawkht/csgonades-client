@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Reveal, Image } from "semantic-ui-react";
+import { GfycatPlayerContrainer } from "../nadepage/GfycatPlayerContainer";
 
 interface Props {
   id: string;
   poster: string;
+  gfyVideoUrl: string;
 }
 
 export class VideoPlayer extends React.PureComponent<Props> {
@@ -27,7 +29,7 @@ export class VideoPlayer extends React.PureComponent<Props> {
   };
 
   render() {
-    const { poster, id } = this.props;
+    const { poster } = this.props;
     return (
       <div
         onMouseEnter={this.onMouseEnter}
@@ -42,18 +44,10 @@ export class VideoPlayer extends React.PureComponent<Props> {
             <Image src={poster} />
           </Reveal.Content>
           <Reveal.Content hidden>
-            <video
-              ref={this.videoRef}
-              loop
-              playsInline
-              preload="auto"
-              style={{ width: "100%" }}
-            >
-              <source
-                src={`https://thumbs.gfycat.com/${id}-mobile.mp4`}
-                type="video/mp4"
-              />
-            </video>
+            <GfycatPlayerContrainer
+              disableEdit
+              gfyData={{ gfyId: "", smallVideoUrl: this.props.gfyVideoUrl }}
+            />
           </Reveal.Content>
         </Reveal>
       </div>

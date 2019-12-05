@@ -3,9 +3,11 @@ import { persistStore } from "redux-persist";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 
 const rootReducer = combineReducers({
-  auth: AuthReducer
+  auth: AuthReducer,
+  notification: NotificationReducer
 });
 
 const middleWare =
@@ -26,7 +28,8 @@ export const initReduxStore = (initialState: AppState) => {
 
     // Mark some reducer as persisted on client
     const rootReducerClient = combineReducers({
-      auth: persistReducer({ key: "auth", storage }, AuthReducer)
+      auth: persistReducer({ key: "auth", storage }, AuthReducer),
+      notification: NotificationReducer
     });
 
     store = createStore(rootReducerClient, initialState, middleWare);

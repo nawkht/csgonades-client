@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Header } from "./header";
 import { MapNavigation } from "./navigation";
 import { UiConstants } from "../../../constants/ui";
+import { Notifications } from "./Notifications";
 
 interface Props {
   title?: string;
@@ -15,6 +16,8 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
       </Head>
 
       <Header />
+
+      <Notifications />
 
       <MapNavigation />
 

@@ -1,9 +1,11 @@
 import { FC, useRef, useState, useLayoutEffect, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { GfycatData } from "../../models/Nade";
+import { Icon } from "semantic-ui-react";
 
 type Props = {
   gfyData?: GfycatData;
+  editable?: boolean;
 };
 
 export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
@@ -33,7 +35,28 @@ export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
           width={width}
           height={height}
         />
+        <div className="edit-button-wrapper">
+          <Icon name="edit" color="yellow" size="large" />
+        </div>
       </div>
+      <style jsx>{`
+        .gfycat-player {
+          position: relative;
+        }
+
+        .gfycat-player:hover .edit-button-wrapper {
+          opacity: 1;
+        }
+
+        .edit-button-wrapper {
+          position: absolute;
+          top: 0;
+          right: 0;
+          opacity: 0;
+          transition: opacity 0.3s;
+          padding: 12px;
+        }
+      `}</style>
       <style jsx global>
         {`
           .gfycat-player video {
