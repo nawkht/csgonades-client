@@ -17,14 +17,11 @@ interface Props {
 const Auth: NextPage<Props> = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    console.log("Getting access token");
     TokenApi.refreshToken()
       .then(accessToken => {
         setToken(dispatch, accessToken);
-        console.log("Got token, fetching user");
         UserApi.fetchSelf(accessToken)
           .then(user => {
-            console.log("Set user");
             setUser(dispatch, user);
             Router.push("/");
           })
@@ -34,7 +31,7 @@ const Auth: NextPage<Props> = () => {
           });
       })
       .catch(err => {
-        console.log("Failed", err.message);
+        console.error("Failed", err.message);
         signOutUser(dispatch);
         Router.push("/");
       });

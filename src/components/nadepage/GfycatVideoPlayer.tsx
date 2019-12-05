@@ -21,15 +21,27 @@ export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
   }, [window]);
 
   return (
-    <div style={{ width: "100%" }} ref={ref}>
-      <ReactPlayer
-        playing
-        loop
-        url={gfyData ? gfyData.smallVideoUrl : ""}
-        width={width}
-        height={height}
-      />
-    </div>
+    <>
+      <div className="gfycat-player" style={{ width: "100%" }} ref={ref}>
+        <ReactPlayer
+          controls
+          playing
+          loop
+          playsinline
+          volume={0}
+          url={gfyData ? gfyData.smallVideoUrl : ""}
+          width={width}
+          height={height}
+        />
+      </div>
+      <style jsx global>
+        {`
+          .gfycat-player video {
+            outline: none;
+          }
+        `}
+      </style>
+    </>
   );
 };
 
@@ -51,7 +63,6 @@ function useWindowSize() {
     }
 
     function handleResize() {
-      console.log("Resize");
       setWindowSize(getSize());
     }
 

@@ -6,7 +6,6 @@ const NewNadeContainer: NextPage = () => {
 };
 
 NewNadeContainer.getInitialProps = async () => {
-  console.log("New nade page get init props");
   return {};
 };
 

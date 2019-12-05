@@ -13,7 +13,6 @@ export class UserApi {
     }
 
     try {
-      console.log("UserApi.fetchSelf sending req", `${BASE_URL}/users/self`);
       const res = await axios.get(`${BASE_URL}/users/self`, {
         headers: { Authorization: token }
       });

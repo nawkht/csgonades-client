@@ -8,9 +8,7 @@ type Props = {
 };
 
 const NadePageMain: React.FC<Props> = ({ nade }) => {
-  function onSaveGfycat(gfyID: string) {
-    console.log("Saved gfyid", gfyID);
-  }
+  function onSaveGfycat(gfyID: string) {}
 
   return (
     <>

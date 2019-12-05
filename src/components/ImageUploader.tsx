@@ -29,13 +29,10 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
   }
 
   function onImageLoaded(image: HTMLImageElement) {
-    console.log("Loaded image");
     setImage(image);
   }
 
-  function onCropComplete(_: ReactCrop.Crop, __: ReactCrop.PercentCrop) {
-    console.log("onCropComplete");
-  }
+  function onCropComplete(_: ReactCrop.Crop, __: ReactCrop.PercentCrop) {}
 
   function onCropChange(crop: ReactCrop.Crop, _: ReactCrop.PercentCrop) {
     setCrop(crop);
@@ -84,7 +81,6 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
 
     const base64Image = canvas.toDataURL("image/jpeg");
 
-    console.log(base64Image);
     onImageCropped(base64Image);
 
     return new Promise((resolve, reject) => {
@@ -96,7 +92,6 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
           }
           // @ts-ignore
           blob.name = "test";
-          console.log("Cropped image", blob);
           resolve(blob);
         },
         "image/jpeg",

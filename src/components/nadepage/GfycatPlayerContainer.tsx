@@ -20,7 +20,6 @@ export const GfycatPlayerContrainer: FC<Props> = ({
   const [isEditing] = useState(false);
   useEffect(() => {
     if (gfyData) {
-      console.log("Registering view clientside");
       NadeApi.registerView(gfyData.gfyId);
     }
   });
