@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { tokenSelector } from "../store/AuthStore/AuthSelectors";
 import { NadeApi } from "../api/NadeApi";
 import Router from "next/router";
+import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 
 const NewNadePage: FC = () => {
   const accessToken = useSelector(tokenSelector);
@@ -15,6 +16,16 @@ const NewNadePage: FC = () => {
   const [imageBase64, setImageBase64] = useState<string | null>(null);
 
   const cantSumbit = !gfyId || !imageBase64;
+
+  function onSetImageBase64(base64image: string) {
+    GoogleAnalytics.event("New Nade", "Set image");
+    setImageBase64(base64image);
+  }
+
+  function onSetGfycat(gfyId: string) {
+    GoogleAnalytics.event("New Nade", "Set gfycat");
+    setGfyId(gfyId);
+  }
 
   async function onSumbitNade() {
     if (!gfyId || !imageBase64) {
@@ -28,6 +39,7 @@ const NewNadePage: FC = () => {
     };
 
     const nade = await NadeApi.save(nadeBody, accessToken);
+    GoogleAnalytics.event("New Nade", "Submit");
 
     if (nade) {
       Router.push(`/nade/${nade.id}`);
@@ -44,11 +56,11 @@ const NewNadePage: FC = () => {
 
             <Grid.Row verticalAlign="middle">
               <Grid.Column>
-                <NewNadeGfycat onSetGfycat={setGfyId} />
+                <NewNadeGfycat onSetGfycat={onSetGfycat} />
               </Grid.Column>
 
               <Grid.Column>
-                <NewNadeImage onSetImageBase64={setImageBase64} />
+                <NewNadeImage onSetImageBase64={onSetImageBase64} />
               </Grid.Column>
             </Grid.Row>
           </Grid>
