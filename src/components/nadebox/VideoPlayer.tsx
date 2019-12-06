@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Reveal, Image } from "semantic-ui-react";
-import { GfycatPlayerContrainer } from "../nadepage/GfycatPlayerContainer";
+import { GfycatVideoPlayer } from "../nadepage/GfycatVideoPlayer";
 
 interface Props {
   id: string;
@@ -44,8 +44,8 @@ export class VideoPlayer extends React.PureComponent<Props> {
             <Image src={poster} />
           </Reveal.Content>
           <Reveal.Content hidden>
-            <GfycatPlayerContrainer
-              disableEdit
+            <GfycatVideoPlayer
+              editable={false}
               gfyData={{ gfyId: "", smallVideoUrl: this.props.gfyVideoUrl }}
             />
           </Reveal.Content>

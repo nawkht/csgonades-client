@@ -3,12 +3,30 @@ import { Header } from "./header";
 import { MapNavigation } from "./navigation";
 import { UiConstants } from "../../../constants/ui";
 import { Notifications } from "./Notifications";
+import { useEffect } from "react";
+import ReactGA from "react-ga";
 
 interface Props {
   title?: string;
 }
 
 export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
+  useEffect(() => {
+    const IS_BROWSER = typeof window !== "undefined";
+
+    if (IS_BROWSER && !window.GA_INITIALIZED) {
+      ReactGA.initialize("UA-71896446-6", {
+        testMode: process.env.NODE_ENV === "production" ? false : true,
+        debug: process.env.NODE_ENV === "production" ? false : true
+      });
+      window.GA_INITIALIZED = true;
+    }
+
+    const location = window.location.pathname + window.location.search;
+
+    ReactGA.pageview(location);
+  });
+
   return (
     <div id="page">
       <Head>

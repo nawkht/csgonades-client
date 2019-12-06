@@ -5,8 +5,4 @@ const NewNadeContainer: NextPage = () => {
   return <NewNadePage />;
 };
 
-NewNadeContainer.getInitialProps = async () => {
-  return {};
-};
-
 export default NewNadeContainer;

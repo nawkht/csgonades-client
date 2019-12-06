@@ -9,6 +9,7 @@ const BASE_URL =
 export class NadeApi {
   static async getAll() {
     const res = await axios.get(`${BASE_URL}/nades`);
+
     const nades = res.data as Nade[];
     return nades;
   }
@@ -24,6 +25,7 @@ export class NadeApi {
       const res = await axios.get(`${BASE_URL}/nades/${id}`, {
         withCredentials: true
       });
+
       const nades = res.data as Nade;
       return nades;
     } catch (error) {
