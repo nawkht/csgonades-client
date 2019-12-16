@@ -13,13 +13,23 @@ interface Props {
 export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
   useEffect(() => {
     const IS_BROWSER = typeof window !== "undefined";
+    const IS_PROD = process.env.NODE_ENV === "production";
 
     if (IS_BROWSER && !window.GA_INITIALIZED) {
       ReactGA.initialize("UA-71896446-6", {
-        testMode: process.env.NODE_ENV === "production" ? false : true,
-        debug: process.env.NODE_ENV === "production" ? false : true
+        testMode: IS_PROD ? false : true,
+        debug: IS_PROD ? false : true
       });
       window.GA_INITIALIZED = true;
+
+      if (IS_PROD) {
+        // @ts-ignore
+        ReactGA.ga(function(tracker) {
+          var clientId = tracker.get("clientId");
+          console.log("#GA Clientid", clientId);
+          // TODO: Might use this instead of setting custom session token
+        });
+      }
     }
 
     const location = window.location.pathname + window.location.search;

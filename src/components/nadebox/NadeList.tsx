@@ -14,6 +14,23 @@ const NadeList: FC<Props> = ({ nades }) => {
     router.push(`/nade/${id}`);
   }
 
+  if (nades.length === 0) {
+    return (
+      <>
+        <div className="nadelist-nonades">No nades :(</div>
+        <style jsx>{`
+          .nadelist-nonades {
+            margin: 18px;
+            background: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 1.4em;
+          }
+        `}</style>
+      </>
+    );
+  }
+
   return (
     <>
       <div id="nadelist">

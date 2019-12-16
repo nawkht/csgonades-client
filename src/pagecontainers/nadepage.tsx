@@ -4,6 +4,7 @@ import { NadePageMain } from "../components/NadePageMain";
 import { NadeTitlebar } from "../components/newnade/NadeTitlebar";
 import { NadeMetaPanel } from "../components/nadepage/NadeMeta/NadeMetaPanel";
 import { NadeStatus } from "../components/nadepage/NadeStatus";
+import { UserContainer } from "../components/nadepage/UserContainer";
 
 type Props = {
   nade: Nade;
@@ -20,6 +21,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         <div className="nade-aside">
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           <NadeMetaPanel nade={nade} />
+          <UserContainer user={nade.user} marginTop={18} />
         </div>
       </div>
       <style jsx>

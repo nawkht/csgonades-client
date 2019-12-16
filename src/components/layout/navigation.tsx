@@ -3,6 +3,7 @@ import { UiConstants } from "../../../constants/ui";
 import { Colors } from "../../../constants/colors";
 import { MapLink } from "./MapLink";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const MapNavigation: FC = () => {
   const router = useRouter();
@@ -15,18 +16,28 @@ const MapNavigation: FC = () => {
             <MapLink mapName="dust2" currentMapPath={currentRoute} />
             <MapLink mapName="mirage" currentMapPath={currentRoute} />
             <MapLink mapName="inferno" currentMapPath={currentRoute} />
-            <MapLink mapName="nuke" currentMapPath={currentRoute} />
             <MapLink mapName="overpass" currentMapPath={currentRoute} />
             <MapLink mapName="train" currentMapPath={currentRoute} />
             <MapLink mapName="cache" currentMapPath={currentRoute} />
+            <MapLink mapName="nuke" currentMapPath={currentRoute} />
+            <MapLink mapName="vertigo" currentMapPath={currentRoute} />
             <MapLink mapName="cobblestone" currentMapPath={currentRoute} />
           </ul>
         </nav>
         <footer>
           <div className="copyright">© 2019 CSGO Nades</div>
           <div className="footer-links">
-            <a href="#">About</a> | <a href="#">Privacy Policy</a> |{" "}
-            <a href="#">Contact</a>
+            <Link href="/about">
+              <a>About</a>
+            </Link>{" "}
+            |{" "}
+            <Link href="/privacypolicy">
+              <a>Privacy Policy</a>
+            </Link>{" "}
+            |{" "}
+            <Link href="/contact">
+              <a>Contact</a>
+            </Link>
           </div>
         </footer>
       </aside>

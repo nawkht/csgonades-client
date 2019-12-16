@@ -14,6 +14,7 @@ import {
 import { UserApi } from "../src/api/UserApi";
 import "react-image-crop/dist/ReactCrop.css";
 import { Persistor } from "redux-persist";
+import { GoogleAnalytics } from "../src/utils/GoogleAnalytics";
 
 type Props = {
   store: Store<AppState>;
@@ -40,6 +41,7 @@ class MyApp extends App<Props> {
       if (accessToken) {
         const user = await UserApi.fetchSelf(accessToken);
         setUser(store.dispatch, user);
+        GoogleAnalytics.setUserId(user.steamID);
       }
     } catch (error) {
       signOutUser(store.dispatch);

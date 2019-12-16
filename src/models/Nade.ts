@@ -9,6 +9,7 @@ export type CsgoMap =
   | "inferno"
   | "cache"
   | "overpass"
+  | "vertigo"
   | "train"
   | "cobblestone";
 

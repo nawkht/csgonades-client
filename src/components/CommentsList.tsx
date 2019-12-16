@@ -10,11 +10,23 @@ type Props = {
 const CommentList: React.FC<Props> = ({ nadeId }) => {
   const [comments, setComments] = React.useState<NadeComment[]>([]);
   React.useEffect(() => {
-    NadeCommentApi.byNadeId(nadeId)
-      .then(nadeComments => {
-        setComments(nadeComments);
-      })
-      .catch(err => console.error(err));
+    let isCancelled = false;
+    const fetchComments = async () => {
+      try {
+        const comments = await NadeCommentApi.byNadeId(nadeId);
+        if (!isCancelled) {
+          setComments(comments);
+        }
+      } catch (error) {
+        console.error("Error fetching comments", error);
+      }
+    };
+
+    fetchComments();
+
+    return () => {
+      isCancelled = true;
+    };
   });
 
   return (
