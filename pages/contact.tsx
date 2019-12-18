@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Layout } from "../src/components/layout/layout";
+import { Layout } from "../src/ui-common/layout/layout";
 import { Form } from "semantic-ui-react";
 
 const ContactPageContainer: NextPage = () => {

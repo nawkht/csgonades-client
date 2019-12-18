@@ -1,6 +1,6 @@
 import React from "react";
 import { NextPage } from "next";
-import { FrontPage } from "../src/pagecontainers/frontpage";
+import { FrontPage } from "../src/pages/frontpage/FrontPage";
 import { Nade } from "../src/models/Nade";
 
 interface Props {

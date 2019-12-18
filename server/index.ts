@@ -19,6 +19,10 @@ app
       app.render(req, res, "/nade", req.params);
     });
 
+    server.get("/users/:id", (req, res) => {
+      app.render(req, res, "/users", req.params);
+    });
+
     server.get("*", (req, res) => {
       return handle(req, res);
     });

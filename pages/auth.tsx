@@ -35,7 +35,7 @@ const Auth: NextPage<Props> = () => {
         signOutUser(dispatch);
         Router.push("/");
       });
-  });
+  }, []);
 
   return <h4>Signing in...</h4>;
 };

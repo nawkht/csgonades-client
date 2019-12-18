@@ -1,19 +1,13 @@
-import jwt from "jsonwebtoken";
+type Role = "administrator" | "moderator" | "user";
 
 export type User = {
   nickname: string;
   steamID: string;
-  email?: string;
-  avatar?: string;
-  bio?: string;
-};
-
-const decodeUserFromToken = (token: string): User | null => {
-  const decoded = jwt.decode(token, { complete: true });
-  // @ts-ignore
-  if (!decoded || !decoded.payload || !decoded.payload.user) {
-    return null;
-  }
-  // @ts-ignore
-  return decoded.payload.user;
+  email: string | null;
+  avatar: string | null;
+  bio: string | null;
+  role: Role;
+  createdAt: Date;
+  updatedAt: Date;
+  lastActive: Date;
 };

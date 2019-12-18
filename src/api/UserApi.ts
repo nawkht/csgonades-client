@@ -1,5 +1,6 @@
 import axios from "axios";
 import { User } from "../models/User";
+import { apiErrorFromAxios, ApiError } from "./ApiError";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -21,6 +22,32 @@ export class UserApi {
     } catch (error) {
       console.error(`Error in UserApi.fetchSelf`, error.message);
       throw error;
+    }
+  };
+
+  static fetchUser = async (
+    steamId: string
+  ): Promise<{ user?: User; error?: ApiError }> => {
+    try {
+      const res = await axios.get(`${BASE_URL}/users/${steamId}`);
+      const user = res.data as User;
+      return {
+        user
+      };
+    } catch (error) {
+      return {
+        error: apiErrorFromAxios(error)
+      };
+    }
+  };
+
+  static fetchUsers = async (): Promise<User[] | ApiError> => {
+    try {
+      const res = await axios.get(`${BASE_URL}/users`);
+      const users = res.data as User[];
+      return users;
+    } catch (error) {
+      return apiErrorFromAxios(error);
     }
   };
 }

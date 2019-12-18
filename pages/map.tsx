@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { Nade } from "../src/models/Nade";
 import { NadeApi } from "../src/api/NadeApi";
-import { MapPage } from "../src/pagecontainers/mappage";
+import { MapPage } from "../src/pages/maps/MapPage";
 import { GoogleAnalytics } from "../src/utils/GoogleAnalytics";
 import { useEffect } from "react";
 
@@ -14,7 +14,7 @@ interface Props {
 const Map: NextPage<Props> = ({ map, nades, apiCallDuration }) => {
   useEffect(() => {
     GoogleAnalytics.timing("NadeApi.getByMap", "network", apiCallDuration);
-  });
+  }, []);
 
   return <MapPage key={map} map={map} nades={nades} />;
 };

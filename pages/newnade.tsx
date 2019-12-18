@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { NewNadePage } from "../src/pagecontainers/newnadepage";
+import { NewNadePage } from "../src/pages/newnade/NewNadePage";
 
 const NewNadeContainer: NextPage = () => {
   return <NewNadePage />;
