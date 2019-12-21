@@ -6,8 +6,6 @@ type Props = {
 };
 
 export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
-  console.log("NadeDescriptionDisplay", value);
-
   if (!value || value.length === 0) {
     return <div>No description</div>;
   }

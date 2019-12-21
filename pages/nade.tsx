@@ -15,8 +15,6 @@ const NadePageComponent: NextPage<Props> = ({ nade, apiCallDuration }) => {
     GoogleAnalytics.timing("NadeApi.byId", "network", apiCallDuration);
   }, []);
 
-  console.log("Rendering NadePageComponent");
-
   if (!nade) {
     return null;
   }
