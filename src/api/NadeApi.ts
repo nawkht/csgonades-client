@@ -1,4 +1,10 @@
-import { Nade, NadeBody, NadeUpdateBody } from "../models/Nade";
+import {
+  Nade,
+  NadeBody,
+  NadeUpdateBody,
+  NadeLight,
+  CsgoMap
+} from "../models/Nade";
 import axios from "axios";
 
 const BASE_URL =
@@ -6,15 +12,25 @@ const BASE_URL =
     ? "https://api.csgonades.com"
     : "http://localhost:5000";
 
+export type NadeFilterOptions = {
+  smoke: boolean;
+  flash: boolean;
+  hegrenade: boolean;
+  molotov: boolean;
+};
+
 export class NadeApi {
-  static async getAll() {
+  static async getAll(): Promise<NadeLight[]> {
     const res = await axios.get(`${BASE_URL}/nades`);
 
-    const nades = res.data as Nade[];
+    const nades = res.data as NadeLight[];
     return nades;
   }
 
-  static async getByMap(mapName: string): Promise<Nade[]> {
+  static async getByMap(
+    mapName: CsgoMap,
+    filter?: NadeFilterOptions
+  ): Promise<NadeLight[]> {
     const res = await axios.get(`${BASE_URL}/nades/map/${mapName}`);
     const nades = res.data as Nade[];
     return nades;

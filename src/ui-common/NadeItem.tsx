@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
 import { VideoPlayer } from "./VideoPlayer";
-import { Nade } from "../models/Nade";
+import { NadeLight } from "../models/Nade";
 import { Colors } from "../../constants/colors";
 
 interface Props {
-  nade: Nade;
+  nade: NadeLight;
   onClick: (id: string) => void;
 }
 
@@ -39,6 +39,16 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
           margin-right: 16px;
           margin-bottom: 16px;
           border: 1px solid ${Colors.PRIMARY_BORDER};
+          border-radius: 4px;
+          cursor: pointer;
+          transform: scale(1);
+          box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
+          transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .nadebox:hover {
+          box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+          transform: scale(1.005);
         }
 
         .title {
@@ -58,6 +68,14 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
 
         .stat .icon-text {
           font-size: 0.75em;
+        }
+
+        .video {
+          border-top: 1px solid ${Colors.PRIMARY_BORDER};
+          border-bottom: 1px solid ${Colors.PRIMARY_BORDER};
+          margin-right: 1px;
+          margin-left: 1px;
+          overflow: hidden;
         }
       `}</style>
     </>

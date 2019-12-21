@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { NadeItem } from "./NadeItem";
-import { Nade } from "src/models/Nade";
+import { NadeLight } from "src/models/Nade";
 import { useRouter } from "next/router";
 
 interface Props {
-  nades: Nade[];
+  nades: NadeLight[];
 }
 
 const NadeList: FC<Props> = ({ nades }) => {

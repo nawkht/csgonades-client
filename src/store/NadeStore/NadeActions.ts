@@ -1,8 +1,36 @@
 import { tokenSelector } from "../AuthStore/AuthSelectors";
-import { NadeApi } from "../../api/NadeApi";
-import { ReduxDispatch, ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { NadeApi, NadeFilterOptions } from "../../api/NadeApi";
+import {
+  ReduxDispatch,
+  ReduxThunkAction,
+  useReduxDispatch
+} from "../StoreUtils/ThunkActionType";
 import { addNotificationAction } from "../NotificationStore/NotificationActions";
-import { NadeUpdateBody } from "../../models/Nade";
+import { NadeUpdateBody, NadeLight, CsgoMap } from "../../models/Nade";
+
+type AddNadesAction = {
+  type: "@@nades/add";
+  nades: NadeLight[];
+};
+export type NadeActions = AddNadesAction;
+
+export const addNadeAction = (nades: NadeLight[]): AddNadesAction => {
+  return {
+    type: "@@nades/add",
+    nades
+  };
+};
+
+export const useFetchNades = (mapName: CsgoMap) => {
+  const reduxDispatch = useReduxDispatch();
+  return (filter?: NadeFilterOptions) => {
+    const thunk: ReduxThunkAction = async (dispatch, getState) => {
+      const result = await NadeApi.getByMap(mapName, filter);
+      dispatch(addNadeAction(result));
+    };
+    reduxDispatch(thunk);
+  };
+};
 
 export const updateNadeAction = (
   reduxDispatch: ReduxDispatch<any>,

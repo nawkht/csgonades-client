@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User, UserLight } from "./User";
 import { Technique } from "./Technique";
 
 export type CsgoMap =
@@ -88,21 +88,32 @@ type NadeImages = {
 export type Nade = {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   gfycat: GfycatData;
   images: NadeImages;
-  map: CsgoMap;
+  map?: CsgoMap;
   stats: NadeStats;
-  movement: Movement;
-  technique: Technique;
-  tickrate: Tickrate;
-  type: NadeType;
+  movement?: Movement;
+  technique?: Technique;
+  tickrate?: Tickrate;
+  type?: NadeType;
   steamId: string;
-  user: User;
-  createAt: Date;
+  user: UserLight;
+  createdAt: Date;
   updatedAt: Date;
   status: Status;
   statusInfo?: StatusInfo;
+};
+
+export type NadeLight = {
+  id: string;
+  title?: string;
+  gfycat: GfycatData;
+  images: NadeImages;
+  type?: NadeType;
+  tickrate?: Tickrate;
+  createdAt: Date;
+  stats: NadeStats;
 };
 
 export type NadeBody = {

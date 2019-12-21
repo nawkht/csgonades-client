@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { User } from "../../models/User";
+import { User, UserLight } from "../../models/User";
 import Link from "next/link";
 
 type Props = {
-  user: User;
+  user: UserLight;
   marginTop?: number;
 };
 
@@ -11,7 +11,7 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
   const { avatar, nickname } = user;
   return (
     <>
-      <Link href={`/users/${user.steamID}`}>
+      <Link href={`/users/${user.steamId}`}>
         <a>
           <div className="user-container">
             <img

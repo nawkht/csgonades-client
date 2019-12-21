@@ -4,7 +4,7 @@ import { Dropdown, DropdownProps } from "semantic-ui-react";
 import { capitalize } from "../../../utils/Common";
 
 type Props = {
-  map: CsgoMap;
+  map?: CsgoMap;
   isEditing: boolean;
   onMapChange: (map: CsgoMap) => void;
 };
@@ -29,7 +29,7 @@ export const NadeMapValue: FC<Props> = ({ isEditing, map, onMapChange }) => {
           ]}
         />
       )}
-      {!isEditing && <span>{capitalize(map)}</span>}
+      {!isEditing && <span>{capitalize(map || "")}</span>}
     </>
   );
 };

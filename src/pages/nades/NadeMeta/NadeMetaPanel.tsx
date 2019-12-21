@@ -58,7 +58,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           <span className="map-meta-title">Movement</span>
           <NadeMovementValue
             isEditing={isEditing}
-            movement={movement}
+            movement={movement || "notset"}
             onChange={setMovement}
           />
         </div>
@@ -67,7 +67,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           <span className="map-meta-title">Technique</span>
           <NadeTechniqueValue
             isEditing={isEditing}
-            technique={technique}
+            technique={technique || "notset"}
             onChange={setTechnique}
           />
         </div>
@@ -76,7 +76,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           <span className="map-meta-title">Tickrate</span>
           <NadeTickrateValue
             isEditing={isEditing}
-            tickrate={tickrate}
+            tickrate={tickrate || "any"}
             onChange={setTickrate}
           />
         </div>

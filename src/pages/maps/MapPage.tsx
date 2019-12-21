@@ -1,17 +1,26 @@
 import { FC } from "react";
 import { Layout } from "../../ui-common/layout/layout";
-import { Nade } from "../../models/Nade";
+import { NadeLight, CsgoMap } from "../../models/Nade";
 import { NadeList } from "../../ui-common/NadeList";
+import { NadeFilter } from "./NadeFilter";
 
 type Props = {
-  map: string;
-  nades: Nade[];
+  map: CsgoMap;
+  nades: NadeLight[];
 };
 
-export const MapPage: FC<Props> = ({ nades }) => {
+export const MapPage: FC<Props> = ({ nades, map }) => {
   return (
     <Layout>
-      <NadeList nades={nades} />
+      <NadeFilter map={map} />
+      <div className="nade-list">
+        <NadeList nades={nades} />
+      </div>
+      <style jsx>{`
+        .nade-list {
+          margin-left: 35px;
+        }
+      `}</style>
     </Layout>
   );
 };

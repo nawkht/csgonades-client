@@ -14,7 +14,7 @@ type Props = {
 export const NadeDescription: FC<Props> = ({ nade }) => {
   const dispatch = useReduxDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [description, setDescription] = useState(nade.description);
+  const [description, setDescription] = useState(nade.description || "");
 
   function onCancelEdit() {
     setIsEditing(false);

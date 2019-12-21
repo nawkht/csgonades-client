@@ -31,14 +31,7 @@ export class VideoPlayer extends React.PureComponent<Props> {
   render() {
     const { poster } = this.props;
     return (
-      <div
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        style={{
-          paddingRight: 3,
-          paddingLeft: 3
-        }}
-      >
+      <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <Reveal animated="fade">
           <Reveal.Content visible>
             <Image src={poster} />

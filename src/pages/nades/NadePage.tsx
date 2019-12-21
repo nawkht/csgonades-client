@@ -3,9 +3,10 @@ import { Layout } from "../../ui-common/layout/layout";
 import { NadePageMain } from "./NadePageMain";
 import { NadeTitlebar } from "./NadeTitlebar";
 import { NadeMetaPanel } from "./NadeMeta/NadeMetaPanel";
-import { NadeStatus } from "./NadeStatus";
+import { NadeStatus } from "./NadeStatus/NadeStatus";
 import { UserContainer } from "./UserContainer";
 import { useIsAllowedNadeEdit } from "../../store/AuthStore/AuthHooks";
+import { AdminEditor } from "./AdminEditor/AdminEditor";
 
 type Props = {
   nade: Nade;
@@ -25,6 +26,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           <NadeMetaPanel allowEdit={allowEdit} nade={nade} />
           <UserContainer user={nade.user} marginTop={18} />
+          <AdminEditor nade={nade} />
         </div>
       </div>
       <style jsx>

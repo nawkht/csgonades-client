@@ -1,32 +1,39 @@
 import { NextPage } from "next";
-import { Nade } from "../src/models/Nade";
+import { Nade, NadeLight, CsgoMap } from "../src/models/Nade";
 import { NadeApi } from "../src/api/NadeApi";
 import { MapPage } from "../src/pages/maps/MapPage";
 import { GoogleAnalytics } from "../src/utils/GoogleAnalytics";
 import { useEffect } from "react";
+import { addNadeAction } from "../src/store/NadeStore/NadeActions";
+import { useSelector } from "react-redux";
+import { nadesSelector } from "../src/store/NadeStore/NadeSelectors";
 
 interface Props {
-  nades: Nade[];
-  map: string;
+  map: CsgoMap;
   apiCallDuration: number;
 }
 
-const Map: NextPage<Props> = ({ map, nades, apiCallDuration }) => {
+const Map: NextPage<Props> = ({ map, apiCallDuration }) => {
   useEffect(() => {
     GoogleAnalytics.timing("NadeApi.getByMap", "network", apiCallDuration);
   }, []);
+
+  const nades = useSelector(nadesSelector);
 
   return <MapPage key={map} map={map} nades={nades} />;
 };
 
 Map.getInitialProps = async context => {
-  const map = context.query.name as string;
+  const { dispatch } = context.store;
+  const map = context.query.name as CsgoMap;
 
   const timeBefore = Date.now();
   const nades = await NadeApi.getByMap(map);
   const timeAfter = Date.now();
   const apiCallDuration = timeAfter - timeBefore;
-  return { nades, map, apiCallDuration };
+
+  dispatch(addNadeAction(nades));
+  return { map, apiCallDuration };
 };
 
 export default Map;

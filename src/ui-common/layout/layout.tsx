@@ -69,6 +69,7 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
+          position: relative;
         }
 
         main {
