@@ -12,10 +12,14 @@ const rootReducer = combineReducers({
   nadeStore: NadeReducer
 });
 
-const middleWare =
-  process.env.NODE_ENV === "production"
-    ? applyMiddleware(thunk)
-    : composeWithDevTools(applyMiddleware(thunk));
+function createMiddleware() {
+  const isProduction = process.env.NODE_ENV === "production";
+  if (isProduction) {
+    return applyMiddleware(thunk);
+  } else {
+    return composeWithDevTools(applyMiddleware(thunk));
+  }
+}
 
 export type AppState = ReturnType<typeof rootReducer>;
 
@@ -35,11 +39,11 @@ export const initReduxStore = (initialState: AppState) => {
       nadeStore: NadeReducer
     });
 
-    store = createStore(rootReducerClient, initialState, middleWare);
+    store = createStore(rootReducerClient, initialState, createMiddleware());
 
     store.__PERSISTOR = persistStore(store);
   } else {
-    store = createStore(rootReducer, initialState, middleWare);
+    store = createStore(rootReducer, initialState, createMiddleware());
   }
   return store;
 };
