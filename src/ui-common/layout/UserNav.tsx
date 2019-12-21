@@ -5,13 +5,18 @@ import Link from "next/link";
 import { Colors } from "../../../constants/colors";
 import { Icon } from "semantic-ui-react";
 
+const AUTH_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.csgonades.com/auth/steam"
+    : "http://localhost:5000/auth/steam";
+
 export const UserNav: FC = () => {
   const user = useSelector(userSelector);
 
   if (!user) {
     return (
       <>
-        <a href="http://localhost:5000/auth/steam" className="steam-login">
+        <a href={AUTH_URL} className="steam-login">
           Sign inn
         </a>
       </>
