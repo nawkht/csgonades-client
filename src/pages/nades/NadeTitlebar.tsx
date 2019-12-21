@@ -28,7 +28,7 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
     <>
       <div className="nade-title">
         <div onClick={() => router.back()}>
-          <Icon className="back-icon" link name="chevron left" size="large" />
+          <Icon link className="back-icon" name="chevron left" size="large" />
         </div>
         {allowEdit && isEditing && (
           <div className="title-edit-container">
@@ -48,7 +48,6 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
                 <Button
                   icon="pencil alternate"
                   circular
-                  link
                   onClick={() => setIsEditing(true)}
                 />
               </div>

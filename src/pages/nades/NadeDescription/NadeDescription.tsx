@@ -34,7 +34,7 @@ export const NadeDescription: FC<Props> = ({ nade }) => {
             className="nade-desc-edit-wrapper"
             onClick={() => setIsEditing(true)}
           >
-            <Icon link name="edit" />
+            <Icon link={true} name="edit" />
           </div>
         )}
 
