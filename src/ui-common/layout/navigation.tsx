@@ -51,6 +51,7 @@ const MapNavigation: FC = () => {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          z-index: 999;
         }
         ul {
           list-style: none;
