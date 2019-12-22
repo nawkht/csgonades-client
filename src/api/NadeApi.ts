@@ -3,7 +3,8 @@ import {
   NadeBody,
   NadeUpdateBody,
   NadeLight,
-  CsgoMap
+  CsgoMap,
+  NadeStatusDTO
 } from "../models/Nade";
 import axios from "axios";
 
@@ -71,9 +72,10 @@ export class NadeApi {
     nadeId: string,
     updateFields: NadeUpdateBody,
     token?: string
-  ): Promise<boolean> {
+  ) {
     if (!token) {
-      throw new Error("Missing auth token for request");
+      console.warn("NadeApi.update no token provided");
+      return;
     }
 
     try {
@@ -81,13 +83,12 @@ export class NadeApi {
         headers: { Authorization: token }
       });
 
-      if (res.status === 202) {
-        return true;
-      }
-      return false;
+      const updatedNade = res.data as Nade;
+
+      return updatedNade;
     } catch (error) {
       console.error("NadeApi.update failed", error);
-      return false;
+      return;
     }
   }
 
@@ -99,5 +100,53 @@ export class NadeApi {
         withCredentials: true
       }
     );
+  }
+
+  static async updateNadeStatus(
+    nadeId: string,
+    updates: NadeStatusDTO,
+    token?: string
+  ) {
+    if (!token) {
+      console.warn("NadeApi.updateNadeStatus no token provided");
+      return;
+    }
+
+    try {
+      const res = await axios.patch(
+        `${BASE_URL}/nades/${nadeId}/status`,
+        updates,
+        {
+          headers: { Authorization: token }
+        }
+      );
+      const updatedNade = res.data as Nade;
+
+      return updatedNade;
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  }
+
+  static async updateUser(nadeId: string, steamId: string, token?: string) {
+    if (!token) {
+      console.warn("NadeApi.updateUser no token provided");
+      return;
+    }
+
+    const res = await axios.patch(
+      `${BASE_URL}/nades/${nadeId}/setuser/${steamId}`,
+      undefined,
+      {
+        headers: {
+          Authorization: token
+        }
+      }
+    );
+
+    const updatedNade = res.data as Nade;
+
+    return updatedNade;
   }
 }

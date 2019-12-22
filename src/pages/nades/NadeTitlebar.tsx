@@ -13,7 +13,7 @@ type Props = {
 export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-  const [nadeTitle, setNadeTitle] = useState(nade.title);
+  const [nadeTitle, setNadeTitle] = useState(nade.title || "");
 
   const dispatch = useReduxDispatch();
 

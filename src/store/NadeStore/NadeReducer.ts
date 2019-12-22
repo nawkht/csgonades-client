@@ -4,7 +4,7 @@ import { NadeActions } from "./NadeActions";
 
 export type NadeState = {
   nades: NadeLight[];
-  viewingNade?: Nade;
+  selectedNade?: Nade;
 };
 
 const initialState: NadeState = {
@@ -21,7 +21,11 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         nades: action.nades
       };
-
+    case "@@nades/add_selected":
+      return {
+        ...state,
+        selectedNade: action.nade
+      };
     default:
       return state;
   }

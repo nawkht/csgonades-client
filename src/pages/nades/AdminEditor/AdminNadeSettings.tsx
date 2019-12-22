@@ -1,15 +1,21 @@
-import { Nade } from "../../../models/Nade";
+import { Nade, Status, StatusInfo } from "../../../models/Nade";
 import { FC } from "react";
 import { StatusEditor } from "./StatusEditor";
 import { ForceUserSettings } from "./ForceUserSettings";
+import { useUpdateNadeStatus } from "../../../store/NadeStore/NadeActions";
 
 type Props = {
   nade: Nade;
   onDismiss: () => void;
 };
 
-export const AdminNadeSettings: FC<Props> = ({ nade }) => {
-  function onStatusSave() {}
+export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
+  const updateNadeStatus = useUpdateNadeStatus();
+
+  function onStatusSave(status: Status, statusInfo?: StatusInfo) {
+    updateNadeStatus(nade.id, { status, statusInfo });
+    onDismiss();
+  }
 
   return (
     <div>
@@ -20,7 +26,7 @@ export const AdminNadeSettings: FC<Props> = ({ nade }) => {
         onSave={onStatusSave}
       />
       <h3>Force User</h3>
-      <ForceUserSettings />
+      <ForceUserSettings nadeId={nade.id} />
       <h3>Force Stats</h3>
     </div>
   );

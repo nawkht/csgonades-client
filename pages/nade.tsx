@@ -1,19 +1,22 @@
 import { NextPage } from "next";
-import { Nade } from "../src/models/Nade";
 import { NadeApi } from "../src/api/NadeApi";
 import { NadePage } from "../src/pages/nades/NadePage";
 import { useEffect } from "react";
 import { GoogleAnalytics } from "../src/utils/GoogleAnalytics";
+import { addSelectedNadeAction } from "../src/store/NadeStore/NadeActions";
+import { useSelector } from "react-redux";
+import { selectedNadeSelector } from "../src/store/NadeStore/NadeSelectors";
 
 interface Props {
-  nade: Nade | null;
   apiCallDuration: number;
 }
 
-const NadePageComponent: NextPage<Props> = ({ nade, apiCallDuration }) => {
+const NadePageComponent: NextPage<Props> = ({ apiCallDuration }) => {
   useEffect(() => {
     GoogleAnalytics.timing("NadeApi.byId", "network", apiCallDuration);
   }, []);
+
+  const nade = useSelector(selectedNadeSelector);
 
   if (!nade) {
     return null;
@@ -23,6 +26,7 @@ const NadePageComponent: NextPage<Props> = ({ nade, apiCallDuration }) => {
 };
 
 NadePageComponent.getInitialProps = async context => {
+  const { dispatch } = context.store;
   const nadeId = context.query.id as string;
 
   const timeBefore = Date.now();
@@ -30,7 +34,16 @@ NadePageComponent.getInitialProps = async context => {
   const timeAfter = Date.now();
   const diff = timeAfter - timeBefore;
 
-  return { nade, apiCallDuration: diff };
+  if (nade) {
+    dispatch(addSelectedNadeAction(nade));
+  } else {
+    if (context.res) {
+      context.res.statusCode = 404;
+      context.res.end();
+    }
+  }
+
+  return { apiCallDuration: diff };
 };
 
 export default NadePageComponent;

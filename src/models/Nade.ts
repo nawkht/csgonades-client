@@ -143,6 +143,11 @@ export type NadeUpdateBody = {
   statusInfo?: StatusInfo;
 };
 
+export type NadeStatusDTO = {
+  status: Status;
+  statusInfo?: StatusInfo;
+};
+
 export const NewNade = (data: Nade): Nade => {
   return data;
 };
