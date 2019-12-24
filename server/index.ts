@@ -11,12 +11,12 @@ app
   .then(() => {
     const server = express();
 
-    server.get("/map/:name", (req, res) => {
-      app.render(req, res, "/map", req.params);
+    server.get("/maps/:name", (req, res) => {
+      app.render(req, res, "/maps", req.params);
     });
 
-    server.get("/nade/:id", (req, res) => {
-      app.render(req, res, "/nade", req.params);
+    server.get("/nades/:id", (req, res) => {
+      app.render(req, res, "/nades", req.params);
     });
 
     server.get("/users/:id", (req, res) => {

@@ -15,7 +15,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
   return (
     <>
       <li className={selected ? "nav-selected" : ""}>
-        <Link as={`/map/${mapName}`} href={`/map?name=${mapName}`}>
+        <Link as={`/maps/${mapName}`} href={`/map?name=${mapName}`}>
           <a>
             <div className="image-container">
               <img src={`/mapicons/${mapName}.png`} />

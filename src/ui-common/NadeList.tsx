@@ -11,7 +11,7 @@ const NadeList: FC<Props> = ({ nades }) => {
   const router = useRouter();
 
   function onNadeClick(id: string) {
-    router.push(`/nade/${id}`);
+    router.push(`/nades/${id}`);
   }
 
   if (nades.length === 0) {
