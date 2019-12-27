@@ -41,8 +41,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
         }
 
         li a img {
-          width: 30px;
-          margin-left: -5px;
+          width: 25px;
         }
 
         li a .nav-text {
