@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { useKeepAspectRatio } from "../utils/CommonHooks";
 
 type Props = {
@@ -9,13 +9,27 @@ type Props = {
 export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
   const [isHovering, setIsHovering] = useState(false);
   const { ref, height, width } = useKeepAspectRatio();
+  let hoverTimer: NodeJS.Timeout;
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimer) {
+        clearTimeout(hoverTimer);
+      }
+    };
+  }, []);
 
   function onHover() {
+    if (hoverTimer) {
+      clearTimeout(hoverTimer);
+    }
     setIsHovering(true);
   }
 
   function onUnHover() {
-    setIsHovering(false);
+    hoverTimer = setTimeout(() => {
+      setIsHovering(false);
+    }, 300);
   }
 
   return (
@@ -25,12 +39,11 @@ export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
         ref={ref}
         onMouseEnter={onHover}
         onMouseLeave={onUnHover}
+        style={{ height }}
       >
-        {!isHovering && (
-          <div className="front" style={{ width: width, height: height }}>
-            <img src={imageUrl} />
-          </div>
-        )}
+        <div className="front" style={{ width: width, height: height }}>
+          <img src={imageUrl} />
+        </div>
 
         {isHovering && (
           <div className="back" style={{ width, height }}>
@@ -40,8 +53,24 @@ export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
       </div>
       <style jsx>{`
         .player {
+          position: relative;
           width: 100%;
         }
+
+        .player:hover .front {
+          opacity: 0;
+        }
+
+        .front {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 1;
+          transition: opacity 0.3s;
+        }
+
         .front img {
           width: 100%;
         }
