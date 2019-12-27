@@ -22,7 +22,7 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
                   : "https://www.prndl.co/assets/user-placeholder-54d9b5720151ac85adf20a7dbef2a11821b1c35b64d40f32e928974c2c2abd6b.png"
               }
             />
-            <span>{nickname}</span>
+            <span className="user-nickname">{nickname}</span>
           </div>
         </a>
       </Link>
@@ -31,6 +31,11 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
           margin-top: ${marginTop || 0}px;
           display: flex;
           align-items: center;
+          color: #444;
+        }
+
+        .user-container:hover .user-nickname {
+          text-decoration: underline;
         }
 
         .user-avatar {

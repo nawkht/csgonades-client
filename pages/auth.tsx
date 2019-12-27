@@ -8,7 +8,7 @@ import {
   signOutUser
 } from "../src/store/AuthStore/AuthActions";
 import { UserApi } from "../src/api/UserApi";
-import { TokenApi } from "../src/api/TokenApi";
+import { AuthApi } from "../src/api/TokenApi";
 
 interface Props {
   isFirstSignIn: boolean;
@@ -17,7 +17,7 @@ interface Props {
 const Auth: NextPage<Props> = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    TokenApi.refreshToken()
+    AuthApi.refreshToken()
       .then(accessToken => {
         setToken(dispatch, accessToken);
         UserApi.fetchSelf(accessToken)
@@ -32,7 +32,7 @@ const Auth: NextPage<Props> = () => {
       })
       .catch(err => {
         console.error("Failed", err.message);
-        signOutUser(dispatch);
+        dispatch(signOutUser());
         Router.push("/");
       });
   }, []);

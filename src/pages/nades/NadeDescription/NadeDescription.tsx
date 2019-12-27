@@ -9,9 +9,10 @@ import { useReduxDispatch } from "../../../store/StoreUtils/ThunkActionType";
 
 type Props = {
   nade: Nade;
+  allowEdit: boolean;
 };
 
-export const NadeDescription: FC<Props> = ({ nade }) => {
+export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
   const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(nade.description || "");
@@ -29,7 +30,7 @@ export const NadeDescription: FC<Props> = ({ nade }) => {
   return (
     <>
       <div className="nade-desc-wrapper">
-        {!isEditing && (
+        {allowEdit && !isEditing && (
           <div
             className="nade-desc-edit-wrapper"
             onClick={() => setIsEditing(true)}

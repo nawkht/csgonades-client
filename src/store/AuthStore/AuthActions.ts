@@ -39,11 +39,9 @@ export function setToken(dispatch: Dispatch, token: string) {
   });
 }
 
-export function signOutUser(dispatch: Dispatch) {
-  dispatch({
-    type: "@@auth/SIGN_OUT"
-  });
-}
+export const signOutUser = (): SignOutAction => ({
+  type: "@@auth/SIGN_OUT"
+});
 
 export function setUser(dispatch: Dispatch, user: User) {
   dispatch({

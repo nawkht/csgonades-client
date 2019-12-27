@@ -22,7 +22,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
       <div className="nade-container">
         <div className="nade-main">
           <GfycatPlayerContrainer nade={nade} allowEdit={allowEdit} />
-          <NadeDescription nade={nade} />
+          <NadeDescription nade={nade} allowEdit={allowEdit} />
         </div>
         <div className="nade-aside">
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />

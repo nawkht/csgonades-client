@@ -74,13 +74,13 @@ export const useUnfavorite = () => {
         return;
       }
 
+      dispatch(removeFavoriteAction(favoriteId));
+
       const result = await FavoriteApi.unFavorite(favoriteId, token);
       if (result.isErr()) {
         console.warn("Error", result.error);
         return;
       }
-
-      dispatch(removeFavoriteAction(favoriteId));
     };
     reduxDispatch(thunk);
   };

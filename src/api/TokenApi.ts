@@ -9,7 +9,7 @@ type TokenRes = {
   accessToken: string;
 };
 
-export class TokenApi {
+export class AuthApi {
   static async refreshToken(): Promise<string> {
     const res = await axios.get<TokenRes>(`${BASE_URL}/auth/refresh`, {
       withCredentials: true
@@ -19,5 +19,20 @@ export class TokenApi {
 
   static async setSessionCookie(): Promise<void> {
     await axios.post(`${BASE_URL}/initSession`, {}, { withCredentials: true });
+  }
+
+  static async signOut(): Promise<void> {
+    try {
+      await axios.post(
+        `${BASE_URL}/auth/signout`,
+        {},
+        {
+          withCredentials: true
+        }
+      );
+      console.log("Posted signout");
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

@@ -5,7 +5,7 @@ import { initReduxStore, AppState } from "../src/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { TokenApi } from "../src/api/TokenApi";
+import { AuthApi } from "../src/api/TokenApi";
 import {
   setToken,
   signOutUser,
@@ -37,8 +37,8 @@ class MyApp extends App<Props> {
     const { store } = this.props;
 
     try {
-      await TokenApi.setSessionCookie();
-      const accessToken = await TokenApi.refreshToken();
+      await AuthApi.setSessionCookie();
+      const accessToken = await AuthApi.refreshToken();
       setToken(store.dispatch, accessToken);
       if (accessToken) {
         const user = await UserApi.fetchSelf(accessToken);
@@ -52,7 +52,7 @@ class MyApp extends App<Props> {
         GoogleAnalytics.setUserId(user.steamID);
       }
     } catch (error) {
-      signOutUser(store.dispatch);
+      store.dispatch(signOutUser());
     }
   }
 

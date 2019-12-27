@@ -4,6 +4,8 @@ import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import Link from "next/link";
 import { Colors } from "../../../constants/colors";
 import { Icon } from "semantic-ui-react";
+import { UserDropdown } from "./UserDropdown";
+import { SignInnButton } from "./SignInnButton";
 
 const AUTH_URL =
   process.env.NODE_ENV === "production"
@@ -14,13 +16,7 @@ export const UserNav: FC = () => {
   const user = useSelector(userSelector);
 
   if (!user) {
-    return (
-      <>
-        <a href={AUTH_URL} className="steam-login">
-          Sign inn
-        </a>
-      </>
-    );
+    return <SignInnButton />;
   } else {
     return (
       <>
@@ -32,21 +28,13 @@ export const UserNav: FC = () => {
             </a>
           </Link>
 
-          <span className="user-nav-user">
-            {user.avatar && <img className="user-avatar" src={user.avatar} />}
-            {user.nickname}
-          </span>
+          <UserDropdown user={user} />
         </div>
         <style jsx>{`
           .user-nav {
             align-self: center;
             padding-right: 18px;
             display: flex;
-          }
-
-          .user-nav-user {
-            display: flex;
-            align-self: center;
           }
 
           .add-nade-btn {
@@ -60,13 +48,6 @@ export const UserNav: FC = () => {
             font-size: 0.9em;
             display: flex;
             align-items: center;
-          }
-
-          .user-avatar {
-            align-self: center;
-            width: 20px;
-            border-radius: 50%;
-            margin-right: 6px;
           }
         `}</style>
       </>
