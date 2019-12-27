@@ -5,11 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
+import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
   notification: NotificationReducer,
-  nadeStore: NadeReducer
+  nadeStore: NadeReducer,
+  favoriteStore: FavoriteReducer
 });
 
 function createMiddleware() {
@@ -36,7 +38,8 @@ export const initReduxStore = (initialState: AppState) => {
     const rootReducerClient = combineReducers({
       auth: persistReducer({ key: "auth", storage }, AuthReducer),
       notification: NotificationReducer,
-      nadeStore: NadeReducer
+      nadeStore: NadeReducer,
+      favoriteStore: FavoriteReducer
     });
 
     store = createStore(rootReducerClient, initialState, createMiddleware());

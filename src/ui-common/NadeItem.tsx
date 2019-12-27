@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
-import { VideoPlayer } from "./VideoPlayer";
 import { NadeLight } from "../models/Nade";
 import { Colors } from "../../constants/colors";
+import { GfycatThumbnail } from "./GfycatThumbnail";
 
 interface Props {
   nade: NadeLight;
@@ -19,10 +19,9 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
       >
         <div className="title">{nade.title}</div>
         <div className="video">
-          <VideoPlayer
-            gfyVideoUrl={nade.gfycat.smallVideoUrl}
-            id={nade.gfycat.gfyId}
-            poster={nade.images.thumbnail}
+          <GfycatThumbnail
+            imageUrl={nade.images.thumbnail}
+            gfyUrl={nade.gfycat.smallVideoUrl}
           />
         </div>
         <div className="stats">

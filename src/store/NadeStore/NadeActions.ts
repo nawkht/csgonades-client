@@ -1,7 +1,6 @@
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { NadeApi, NadeFilterOptions } from "../../api/NadeApi";
 import {
-  ReduxDispatch,
   ReduxThunkAction,
   useReduxDispatch
 } from "../StoreUtils/ThunkActionType";
@@ -11,9 +10,7 @@ import {
   NadeLight,
   CsgoMap,
   NadeStatusDTO,
-  Nade,
-  Status,
-  StatusInfo
+  Nade
 } from "../../models/Nade";
 
 type AddNadesAction = {
@@ -99,28 +96,27 @@ export const useUpdateUser = () => {
   };
 };
 
-export const updateNadeAction = (
-  reduxDispatch: ReduxDispatch<any>,
-  nadeId: string,
-  data: NadeUpdateBody
-) => {
-  const thunk: ReduxThunkAction = async (dispatch, getState) => {
-    const authToken = tokenSelector(getState());
-    const updatedNade = await NadeApi.update(nadeId, data, authToken);
+export const useUpdateNadeAction = () => {
+  const reduxDispatch = useReduxDispatch();
+  return (nadeId: string, data: NadeUpdateBody) => {
+    const thunk: ReduxThunkAction = async (dispatch, getState) => {
+      const authToken = tokenSelector(getState());
+      const updatedNade = await NadeApi.update(nadeId, data, authToken);
 
-    if (!updatedNade) {
-      return addNotificationAction(dispatch, {
-        message: "Failed to update nade.",
-        severity: "error"
+      if (!updatedNade) {
+        return addNotificationAction(dispatch, {
+          message: "Failed to update nade.",
+          severity: "error"
+        });
+      }
+
+      dispatch(addSelectedNadeAction(updatedNade));
+
+      addNotificationAction(dispatch, {
+        message: "Updated nade details!",
+        severity: "success"
       });
-    }
-
-    dispatch(addSelectedNadeAction(updatedNade));
-
-    addNotificationAction(dispatch, {
-      message: "Updated nade details!",
-      severity: "success"
-    });
+    };
+    reduxDispatch(thunk);
   };
-  reduxDispatch(thunk);
 };

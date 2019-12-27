@@ -2,35 +2,57 @@ import { useState, FC, useEffect } from "react";
 import { GfycatEditor } from "./GfycatEditor";
 import { NadeApi } from "../api/NadeApi";
 import { GfycatVideoPlayer } from "./GfycatVideoPlayer";
-import { GfycatData } from "../models/Nade";
+import { GfycatData, Nade } from "../models/Nade";
 import { Colors } from "../../constants/colors";
+import { Icon } from "semantic-ui-react";
+import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
 
 export type Aspect = "16:9" | "16:10";
 
 type Props = {
-  gfyData?: GfycatData;
-  onSave?: (gfyID: string) => void;
-  disableEdit?: boolean;
+  nade: Nade;
+  allowEdit: boolean;
 };
 
-export const GfycatPlayerContrainer: FC<Props> = ({
-  onSave,
-  gfyData,
-  disableEdit
-}) => {
-  const [isEditing] = useState(false);
+export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
+  const updateNade = useUpdateNadeAction();
+  const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
-    if (gfyData) {
-      NadeApi.registerView(gfyData.gfyId);
+    if (nade.gfycat) {
+      NadeApi.registerView(nade.gfycat.gfyId);
     }
   }, []);
+
+  function onEditClick() {
+    setIsEditing(true);
+  }
+
+  function onCancelEdit() {
+    setIsEditing(false);
+  }
+
+  function onSaveGfycat(newGfyId: string) {
+    updateNade(nade.id, {
+      gfycatIdOrUrl: newGfyId
+    });
+  }
 
   return (
     <>
       <div className="gfycat-container">
-        <GfycatVideoPlayer gfyData={gfyData} />
-        {isEditing && !disableEdit && !!onSave && !!gfyData && (
-          <GfycatEditor gfyID={gfyData.gfyId} onSave={onSave} />
+        {!isEditing && allowEdit && (
+          <div className="edit-button" onClick={onEditClick}>
+            <Icon inverted circular link name="pencil alternate" size="large" />
+          </div>
+        )}
+
+        <GfycatVideoPlayer gfyData={nade.gfycat} />
+        {isEditing && !!nade.gfycat && (
+          <GfycatEditor
+            gfyID={nade.gfycat.gfyId}
+            onSave={onSaveGfycat}
+            onCancel={onCancelEdit}
+          />
         )}
       </div>
       <style jsx>{`
@@ -42,6 +64,21 @@ export const GfycatPlayerContrainer: FC<Props> = ({
           border-top-right-radius: 4px;
           border-bottom: none;
           overflow: hidden;
+        }
+
+        .gfycat-container:hover .edit-button {
+          opacity: 1;
+        }
+
+        .edit-button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          opacity: 0;
+          transition: opacity 0.3s;
+          padding: 12px;
+          color: white;
+          z-index: 998;
         }
       `}</style>
     </>

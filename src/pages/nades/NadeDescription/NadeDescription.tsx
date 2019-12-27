@@ -4,7 +4,7 @@ import { Nade } from "../../../models/Nade";
 import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
 import { Icon } from "semantic-ui-react";
 import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
-import { updateNadeAction } from "../../../store/NadeStore/NadeActions";
+import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";
 import { useReduxDispatch } from "../../../store/StoreUtils/ThunkActionType";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const NadeDescription: FC<Props> = ({ nade }) => {
-  const dispatch = useReduxDispatch();
+  const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(nade.description || "");
 
@@ -22,7 +22,7 @@ export const NadeDescription: FC<Props> = ({ nade }) => {
 
   function onSaveEdit(description: string) {
     setDescription(description);
-    updateNadeAction(dispatch, nade.id, { description });
+    updateNade(nade.id, { description });
     setIsEditing(false);
   }
 

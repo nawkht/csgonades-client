@@ -1,26 +1,28 @@
 import { Nade } from "../../models/Nade";
 import { Layout } from "../../ui-common/layout/layout";
-import { NadePageMain } from "./NadePageMain";
 import { NadeTitlebar } from "./NadeTitlebar";
 import { NadeMetaPanel } from "./NadeMeta/NadeMetaPanel";
 import { NadeStatus } from "./NadeStatus/NadeStatus";
 import { UserContainer } from "./UserContainer";
-import { useIsAllowedNadeEdit } from "../../store/AuthStore/AuthHooks";
 import { AdminEditor } from "./AdminEditor/AdminEditor";
+import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
+import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
+import { NadeDescription } from "./NadeDescription/NadeDescription";
 
 type Props = {
   nade: Nade;
 };
 
 const NadePage: React.FC<Props> = ({ nade }) => {
-  const allowEdit = useIsAllowedNadeEdit(nade);
+  const allowEdit = useCanEditNade(nade);
 
   return (
     <Layout>
       <NadeTitlebar nade={nade} allowEdit={allowEdit} />
       <div className="nade-container">
         <div className="nade-main">
-          <NadePageMain nade={nade} />
+          <GfycatPlayerContrainer nade={nade} allowEdit={allowEdit} />
+          <NadeDescription nade={nade} />
         </div>
         <div className="nade-aside">
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />

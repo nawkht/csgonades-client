@@ -15,6 +15,8 @@ import { UserApi } from "../src/api/UserApi";
 import "react-image-crop/dist/ReactCrop.css";
 import { Persistor } from "redux-persist";
 import { GoogleAnalytics } from "../src/utils/GoogleAnalytics";
+import { FavoriteApi } from "../src/api/FavoriteApi";
+import { addAllFavoritesAction } from "../src/store/FavoriteStore/FavoriteActions";
 
 type Props = {
   store: Store<AppState>;
@@ -40,6 +42,12 @@ class MyApp extends App<Props> {
       setToken(store.dispatch, accessToken);
       if (accessToken) {
         const user = await UserApi.fetchSelf(accessToken);
+        const favoritesResult = await FavoriteApi.getUserFavorites(accessToken);
+
+        if (favoritesResult.isOk()) {
+          store.dispatch(addAllFavoritesAction(favoritesResult.value));
+        }
+
         setUser(store.dispatch, user);
         GoogleAnalytics.setUserId(user.steamID);
       }

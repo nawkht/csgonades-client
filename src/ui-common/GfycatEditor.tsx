@@ -3,9 +3,10 @@ import { FC, useState, ChangeEvent } from "react";
 type Props = {
   gfyID?: string;
   onSave: (gfyID: string) => void;
+  onCancel: () => void;
 };
 
-export const GfycatEditor: FC<Props> = ({ gfyID, onSave }) => {
+export const GfycatEditor: FC<Props> = ({ gfyID, onSave, onCancel }) => {
   const [currentGfyID, updateGfyID] = useState(gfyID || "");
 
   function onGfyIDChange(event: ChangeEvent<HTMLInputElement>) {
@@ -26,7 +27,7 @@ export const GfycatEditor: FC<Props> = ({ gfyID, onSave }) => {
             onChange={onGfyIDChange}
           />
           <div className="gfycat-editor-buttons">
-            <button className="gfycat-editor-cancel" onClick={saveGfycat}>
+            <button className="gfycat-editor-cancel" onClick={onCancel}>
               CANCEL
             </button>
             <button className="gfycat-editor-save" onClick={saveGfycat}>

@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
 import { Icon, Input, Button } from "semantic-ui-react";
-import { updateNadeAction } from "../../store/NadeStore/NadeActions";
+import { useUpdateNadeAction } from "../../store/NadeStore/NadeActions";
 import { useReduxDispatch } from "../../store/StoreUtils/ThunkActionType";
 import { useRouter } from "next/router";
 import { Nade } from "../../models/Nade";
+import { FavoriteButton } from "./FavoriteButton";
 
 type Props = {
   nade: Nade;
@@ -12,16 +13,15 @@ type Props = {
 
 export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
   const router = useRouter();
+  const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [nadeTitle, setNadeTitle] = useState(nade.title || "");
-
-  const dispatch = useReduxDispatch();
 
   const theTitle = nadeTitle.length > 0 ? nadeTitle : "No title";
 
   function onTitleSave() {
     setIsEditing(false);
-    updateNadeAction(dispatch, nade.id, { title: nadeTitle });
+    updateNade(nade.id, { title: nadeTitle });
   }
 
   return (
@@ -55,14 +55,7 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
           </h1>
         )}
 
-        <Icon
-          circular
-          link
-          color="yellow"
-          className="favorite-icon"
-          name="star"
-          size="large"
-        />
+        <FavoriteButton nadeId={nade.id} />
       </div>
       <style jsx>{`
         .nade-title {

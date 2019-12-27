@@ -3,8 +3,7 @@ import { Nade } from "../../../models/Nade";
 import { Colors } from "../../../../constants/colors";
 import { Icon } from "semantic-ui-react";
 import { NadeMapValue } from "./NadeMapValue";
-import { updateNadeAction } from "../../../store/NadeStore/NadeActions";
-import { useReduxDispatch } from "../../../store/StoreUtils/ThunkActionType";
+import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";
 import { NadeMovementValue } from "./NadeMovementValue";
 import { NadeTickrateValue } from "./NadeTickrateValue";
 import { NadeTechniqueValue } from "./NadeTechniqueValue";
@@ -16,7 +15,7 @@ type Props = {
 };
 
 export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
-  const dispatch = useReduxDispatch();
+  const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [map, setMap] = useState(nade.map);
   const [movement, setMovement] = useState(nade.movement);
@@ -24,7 +23,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
   const [technique, setTechnique] = useState(nade.technique);
 
   function updateNadeMeta() {
-    updateNadeAction(dispatch, nade.id, {
+    updateNade(nade.id, {
       map,
       movement,
       tickrate,

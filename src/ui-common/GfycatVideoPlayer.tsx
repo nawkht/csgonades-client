@@ -1,26 +1,14 @@
-import { FC, useRef, useState, useLayoutEffect, useEffect } from "react";
+import { FC } from "react";
 import ReactPlayer from "react-player";
 import { GfycatData } from "../models/Nade";
-import { Icon } from "semantic-ui-react";
+import { useKeepAspectRatio } from "../utils/CommonHooks";
 
 type Props = {
   gfyData?: GfycatData;
-  editable?: boolean;
 };
 
 export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
-  const [width, setWidth] = useState<number>(0);
-  const [height, setHeight] = useState<number>(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const window = useWindowSize();
-
-  useLayoutEffect(() => {
-    if (ref.current) {
-      setWidth(ref.current.offsetWidth);
-      const height = ref.current.offsetWidth / (16 / 9);
-      setHeight(height);
-    }
-  }, [window]);
+  const { ref, height, width } = useKeepAspectRatio();
 
   return (
     <>
@@ -35,9 +23,6 @@ export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
           width={width}
           height={height}
         />
-        <div className="edit-button-wrapper">
-          <Icon inverted circular link name="pencil alternate" size="large" />
-        </div>
       </div>
       <style jsx>{`
         .gfycat-player {
@@ -46,16 +31,6 @@ export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
 
         .gfycat-player:hover .edit-button-wrapper {
           opacity: 1;
-        }
-
-        .edit-button-wrapper {
-          position: absolute;
-          top: 0;
-          right: 0;
-          opacity: 0;
-          transition: opacity 0.3s;
-          padding: 12px;
-          color: white;
         }
       `}</style>
       <style jsx global>
@@ -68,31 +43,3 @@ export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
     </>
   );
 };
-
-function useWindowSize() {
-  const isClient = typeof window === "object";
-
-  function getSize() {
-    return {
-      width: isClient ? window.innerWidth : undefined,
-      height: isClient ? window.innerHeight : undefined
-    };
-  }
-
-  const [windowSize, setWindowSize] = useState(getSize);
-
-  useEffect(() => {
-    if (!isClient) {
-      return;
-    }
-
-    function handleResize() {
-      setWindowSize(getSize());
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount and unmount
-
-  return windowSize;
-}
