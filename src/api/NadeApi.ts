@@ -4,7 +4,8 @@ import {
   NadeUpdateBody,
   NadeLight,
   CsgoMap,
-  NadeStatusDTO
+  NadeStatusDTO,
+  GfycatData
 } from "../models/Nade";
 import axios from "axios";
 import { AppResult, getError } from "../utils/ErrorUtil";
@@ -142,6 +143,18 @@ export class NadeApi {
       const updatedNade = res.data as Nade;
 
       return ok(updatedNade);
+    } catch (error) {
+      return err(getError(error));
+    }
+  }
+
+  static async validateGfycat(gfyIdOrUrl: string): AppResult<GfycatData> {
+    try {
+      const res = await axios.post(`${BASE_URL}/nades/validateGfycat`, {
+        gfycatIdOrUrl: gfyIdOrUrl
+      });
+      const gfycatData = res.data as GfycatData;
+      return ok(gfycatData);
     } catch (error) {
       return err(getError(error));
     }

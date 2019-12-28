@@ -75,7 +75,9 @@ export const useUpdateNadeStatus = () => {
         });
       }
 
+      startLoadingNadeAction(dispatch);
       const result = await NadeApi.updateNadeStatus(nadeId, updates, authToken);
+      stopLoadingNadeAction(dispatch);
 
       if (result.isErr()) {
         return addNotificationAction(dispatch, {
@@ -102,7 +104,9 @@ export const useUpdateUser = () => {
         });
       }
 
+      startLoadingNadeAction(dispatch);
       const result = await NadeApi.updateUser(nadeId, steamId, authToken);
+      stopLoadingNadeAction(dispatch);
 
       if (result.isErr()) {
         return addNotificationAction(dispatch, {
@@ -127,7 +131,9 @@ export const useUpdateNadeAction = () => {
         return;
       }
 
+      startLoadingNadeAction(dispatch);
       const result = await NadeApi.update(nadeId, data, authToken);
+      stopLoadingNadeAction(dispatch);
 
       if (result.isErr()) {
         return addNotificationAction(dispatch, {

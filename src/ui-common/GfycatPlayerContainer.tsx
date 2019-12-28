@@ -6,6 +6,7 @@ import { GfycatData, Nade } from "../models/Nade";
 import { Colors } from "../../constants/colors";
 import { Icon } from "semantic-ui-react";
 import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
+import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
 
 export type Aspect = "16:9" | "16:10";
 
@@ -47,13 +48,7 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
         )}
 
         <GfycatVideoPlayer gfyData={nade.gfycat} />
-        {isEditing && !!nade.gfycat && (
-          <GfycatEditor
-            gfyID={nade.gfycat.gfyId}
-            onSave={onSaveGfycat}
-            onCancel={onCancelEdit}
-          />
-        )}
+        {isEditing && <GfycatEditor nade={nade} onCancel={onCancelEdit} />}
       </div>
       <style jsx>{`
         .gfycat-container {

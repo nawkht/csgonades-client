@@ -113,6 +113,7 @@ export type StatusInfo = string;
 export type GfycatData = {
   gfyId: string;
   smallVideoUrl: string;
+  largeVideoUrl: string;
 };
 
 export type NadeImages = {
