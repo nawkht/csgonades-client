@@ -17,6 +17,7 @@ export class UserApi {
       const user = res.data as User;
       return ok(user);
     } catch (error) {
+      console.error(error);
       return err(getError(error));
     }
   };
@@ -27,6 +28,7 @@ export class UserApi {
       const user = res.data as User;
       return ok(user);
     } catch (error) {
+      console.error(error);
       return err(getError(error));
     }
   };
@@ -37,6 +39,7 @@ export class UserApi {
       const users = res.data as User[];
       return ok(users);
     } catch (error) {
+      console.error(error);
       return err(getError(error));
     }
   };

@@ -31,6 +31,7 @@ export class NadeApi {
 
       return ok(nades);
     } catch (error) {
+      console.error(error);
       return err(getError(error.message));
     }
   }
@@ -45,6 +46,7 @@ export class NadeApi {
 
       return ok(nades);
     } catch (error) {
+      console.error(error);
       return err(getError(error.message));
     }
   }
@@ -58,6 +60,7 @@ export class NadeApi {
       const nades = res.data as Nade;
       return ok(nades);
     } catch (error) {
+      console.error(error);
       return err(getError(error.message));
     }
   }
@@ -68,6 +71,7 @@ export class NadeApi {
       const nades = res.data as NadeLight[];
       return ok(nades);
     } catch (error) {
+      console.error(error);
       return err(getError(error.message));
     }
   }
@@ -80,6 +84,7 @@ export class NadeApi {
       const nades = res.data as NadeLight[];
       return ok(nades);
     } catch (error) {
+      console.error(error);
       return err(getError(error.message));
     }
   }
@@ -92,6 +97,7 @@ export class NadeApi {
       const nade = res.data as Nade;
       return ok(nade);
     } catch (error) {
+      console.error(error);
       return err(getError(error.message));
     }
   }
@@ -142,6 +148,7 @@ export class NadeApi {
 
       return ok(updatedNade);
     } catch (error) {
+      console.error(error);
       return err(getError(error));
     }
   }
@@ -166,6 +173,7 @@ export class NadeApi {
 
       return ok(updatedNade);
     } catch (error) {
+      console.error(error);
       return err(getError(error));
     }
   }
@@ -178,6 +186,7 @@ export class NadeApi {
       const gfycatData = res.data as GfycatData;
       return ok(gfycatData);
     } catch (error) {
+      console.error(error);
       return err(getError(error));
     }
   }
