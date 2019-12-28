@@ -27,15 +27,15 @@ const MapNavigation: FC = () => {
         <footer>
           <div className="copyright">© 2019 CSGO Nades</div>
           <div className="footer-links">
-            <Link href="/about">
+            <Link href="/about" as="/about">
               <a>About</a>
             </Link>{" "}
             |{" "}
-            <Link href="/privacypolicy">
+            <Link href="/privacypolicy" as="/privacypolicy">
               <a>Privacy Policy</a>
             </Link>{" "}
             |{" "}
-            <Link href="/contact">
+            <Link href="/contact" as="/contact">
               <a>Contact</a>
             </Link>
           </div>
