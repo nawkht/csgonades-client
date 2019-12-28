@@ -3,7 +3,6 @@ import { Icon } from "semantic-ui-react";
 import { NadeLight } from "../models/Nade";
 import { Colors } from "../../constants/colors";
 import { GfycatThumbnail } from "./GfycatThumbnail";
-import { truncateString } from "../utils/Common";
 
 interface Props {
   nade: NadeLight;

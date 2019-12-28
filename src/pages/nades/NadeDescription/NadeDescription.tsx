@@ -5,7 +5,6 @@ import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
 import { Icon } from "semantic-ui-react";
 import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
 import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";
-import { useReduxDispatch } from "../../../store/StoreUtils/ThunkActionType";
 
 type Props = {
   nade: Nade;

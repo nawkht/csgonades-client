@@ -34,25 +34,31 @@ class MyApp extends App<Props> {
   }
 
   async componentDidMount() {
-    const { store } = this.props;
+    const { dispatch } = this.props.store;
 
-    try {
-      await AuthApi.setSessionCookie();
-      const accessToken = await AuthApi.refreshToken();
-      setToken(store.dispatch, accessToken);
-      if (accessToken) {
-        const user = await UserApi.fetchSelf(accessToken);
-        const favoritesResult = await FavoriteApi.getUserFavorites(accessToken);
+    await AuthApi.setSessionCookie();
+    const tokenResult = await AuthApi.refreshToken();
 
-        if (favoritesResult.isOk()) {
-          store.dispatch(addAllFavoritesAction(favoritesResult.value));
-        }
+    if (tokenResult.isErr()) {
+      return;
+    }
 
-        setUser(store.dispatch, user);
-        GoogleAnalytics.setUserId(user.steamID);
-      }
-    } catch (error) {
-      store.dispatch(signOutUser());
+    const token = tokenResult.value;
+
+    setToken(dispatch, token);
+
+    const [userResult, favoriteResult] = await Promise.all([
+      UserApi.fetchSelf(token),
+      FavoriteApi.getUserFavorites(token)
+    ]);
+
+    if (userResult.isOk()) {
+      setUser(dispatch, userResult.value);
+      GoogleAnalytics.setUserId(userResult.value.steamID);
+    }
+
+    if (favoriteResult.isOk()) {
+      dispatch(addAllFavoritesAction(favoriteResult.value));
     }
   }
 

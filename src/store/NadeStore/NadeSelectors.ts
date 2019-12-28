@@ -5,11 +5,18 @@ export const nadesSelector = (state: AppState) => {
   return state.nadeStore.nades;
 };
 
-export const selectedNadeSelector = (state: AppState) => {
+const selectedNadeSelector = (state: AppState) => {
   return state.nadeStore.selectedNade;
 };
 
+const nadeLoadingSelector = (state: AppState) => state.nadeStore.loading;
+
 export const useIsLoadingNade = () => {
-  const isLoading = useSelector((state: AppState) => state.nadeStore.loading);
+  const isLoading = useSelector(nadeLoadingSelector);
   return isLoading;
+};
+
+export const useSelectedNade = () => {
+  const selectedNade = useSelector(selectedNadeSelector);
+  return selectedNade;
 };

@@ -1,11 +1,5 @@
 import { FC, useState } from "react";
-import {
-  Nade,
-  CsgoMap,
-  MapSite,
-  Tickrate,
-  Movement
-} from "../../../models/Nade";
+import { Nade } from "../../../models/Nade";
 import { Colors } from "../../../../constants/colors";
 import { Icon } from "semantic-ui-react";
 import { NadeMapValue } from "./NadeMapValue";
@@ -15,7 +9,6 @@ import { NadeTickrateValue } from "./NadeTickrateValue";
 import { NadeTechniqueValue } from "./NadeTechniqueValue";
 import { NadeViewsValue } from "./NadeViewsValue";
 import { NadeMapSiteValue } from "./NadeMapSiteValue";
-import { Technique } from "../../../models/Technique";
 
 type Props = {
   nade: Nade;

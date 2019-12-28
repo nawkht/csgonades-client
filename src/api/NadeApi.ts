@@ -23,33 +23,41 @@ export type NadeFilterOptions = {
 };
 
 export class NadeApi {
-  static async getAll(): Promise<NadeLight[]> {
-    const res = await axios.get(`${BASE_URL}/nades`);
+  static async getAll(): AppResult<NadeLight[]> {
+    try {
+      const res = await axios.get(`${BASE_URL}/nades`);
+      const nades = res.data as NadeLight[];
 
-    const nades = res.data as NadeLight[];
-    return nades;
+      return ok(nades);
+    } catch (error) {
+      return err(getError(error.message));
+    }
   }
 
   static async getByMap(
     mapName: CsgoMap,
     filter?: NadeFilterOptions
-  ): Promise<NadeLight[]> {
-    const res = await axios.get(`${BASE_URL}/nades/map/${mapName}`);
-    const nades = res.data as Nade[];
-    return nades;
+  ): AppResult<NadeLight[]> {
+    try {
+      const res = await axios.get(`${BASE_URL}/nades/map/${mapName}`);
+      const nades = res.data as NadeLight[];
+
+      return ok(nades);
+    } catch (error) {
+      return err(getError(error.message));
+    }
   }
 
-  static async byId(id: string): Promise<Nade | null> {
+  static async byId(id: string): AppResult<Nade> {
     try {
       const res = await axios.get(`${BASE_URL}/nades/${id}`, {
         withCredentials: true
       });
 
       const nades = res.data as Nade;
-      return nades;
+      return ok(nades);
     } catch (error) {
-      console.error("Failed to get nade", error.message);
-      return null;
+      return err(getError(error.message));
     }
   }
 
@@ -68,13 +76,8 @@ export class NadeApi {
   static async update(
     nadeId: string,
     updateFields: NadeUpdateBody,
-    token?: string
-  ) {
-    if (!token) {
-      console.warn("NadeApi.update no token provided");
-      return;
-    }
-
+    token: string
+  ): AppResult<Nade> {
     try {
       const res = await axios.put(`${BASE_URL}/nades/${nadeId}`, updateFields, {
         headers: { Authorization: token }
@@ -82,10 +85,10 @@ export class NadeApi {
 
       const updatedNade = res.data as Nade;
 
-      return updatedNade;
+      return ok(updatedNade);
     } catch (error) {
       console.error("NadeApi.update failed", error);
-      return;
+      return err(getError(error));
     }
   }
 
@@ -102,13 +105,8 @@ export class NadeApi {
   static async updateNadeStatus(
     nadeId: string,
     updates: NadeStatusDTO,
-    token?: string
-  ) {
-    if (!token) {
-      console.warn("NadeApi.updateNadeStatus no token provided");
-      return;
-    }
-
+    token: string
+  ): AppResult<Nade> {
     try {
       const res = await axios.patch(
         `${BASE_URL}/nades/${nadeId}/status`,
@@ -119,31 +117,33 @@ export class NadeApi {
       );
       const updatedNade = res.data as Nade;
 
-      return updatedNade;
+      return ok(updatedNade);
     } catch (error) {
-      console.error(error);
-      return;
+      return err(getError(error));
     }
   }
 
-  static async updateUser(nadeId: string, steamId: string, token?: string) {
-    if (!token) {
-      console.warn("NadeApi.updateUser no token provided");
-      return;
-    }
-
-    const res = await axios.patch(
-      `${BASE_URL}/nades/${nadeId}/setuser/${steamId}`,
-      undefined,
-      {
-        headers: {
-          Authorization: token
+  static async updateUser(
+    nadeId: string,
+    steamId: string,
+    token: string
+  ): AppResult<Nade> {
+    try {
+      const res = await axios.patch(
+        `${BASE_URL}/nades/${nadeId}/setuser/${steamId}`,
+        undefined,
+        {
+          headers: {
+            Authorization: token
+          }
         }
-      }
-    );
+      );
 
-    const updatedNade = res.data as Nade;
+      const updatedNade = res.data as Nade;
 
-    return updatedNade;
+      return ok(updatedNade);
+    } catch (error) {
+      return err(getError(error));
+    }
   }
 }

@@ -1,40 +1,15 @@
 import React from "react";
 import { NextPage } from "next";
-import Router from "next/router";
-import { useDispatch } from "react-redux";
-import {
-  setToken,
-  setUser,
-  signOutUser
-} from "../src/store/AuthStore/AuthActions";
-import { UserApi } from "../src/api/UserApi";
-import { AuthApi } from "../src/api/TokenApi";
+import { usePreloadUser } from "../src/store/AuthStore/AuthHooks";
 
 interface Props {
   isFirstSignIn: boolean;
 }
 
-const Auth: NextPage<Props> = () => {
-  const dispatch = useDispatch();
+const Auth: NextPage<Props> = ({ isFirstSignIn }) => {
+  const preloadUser = usePreloadUser();
   React.useEffect(() => {
-    AuthApi.refreshToken()
-      .then(accessToken => {
-        setToken(dispatch, accessToken);
-        UserApi.fetchSelf(accessToken)
-          .then(user => {
-            setUser(dispatch, user);
-            Router.push("/");
-          })
-          .catch(err => {
-            console.error("Failed to fetch user", err.message);
-            Router.push("/");
-          });
-      })
-      .catch(err => {
-        console.error("Failed", err.message);
-        dispatch(signOutUser());
-        Router.push("/");
-      });
+    preloadUser(isFirstSignIn);
   }, []);
 
   return <h4>Signing in...</h4>;

@@ -28,11 +28,14 @@ Map.getInitialProps = async context => {
   const map = context.query.name as CsgoMap;
 
   const timeBefore = Date.now();
-  const nades = await NadeApi.getByMap(map);
+  const nadesResult = await NadeApi.getByMap(map);
   const timeAfter = Date.now();
   const apiCallDuration = timeAfter - timeBefore;
 
-  dispatch(addNadeAction(nades));
+  if (nadesResult.isOk()) {
+    addNadeAction(nadesResult.value, dispatch);
+  }
+
   return { map, apiCallDuration };
 };
 

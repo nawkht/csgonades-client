@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { Icon, Input, Button } from "semantic-ui-react";
 import { useUpdateNadeAction } from "../../store/NadeStore/NadeActions";
-import { useReduxDispatch } from "../../store/StoreUtils/ThunkActionType";
 import { useRouter } from "next/router";
 import { Nade } from "../../models/Nade";
 import { FavoriteButton } from "./FavoriteButton";

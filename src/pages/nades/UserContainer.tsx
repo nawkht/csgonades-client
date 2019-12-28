@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { User, UserLight } from "../../models/User";
+import { UserLight } from "../../models/User";
 import Link from "next/link";
 
 type Props = {

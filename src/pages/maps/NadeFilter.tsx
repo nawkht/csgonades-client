@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 import { Colors } from "../../../constants/colors";
 import { TypeToggler } from "./TypeToggler";
 import { UiConstants } from "../../../constants/ui";
-import { useFetchNades } from "../../store/NadeStore/NadeActions";
 import { CsgoMap } from "../../models/Nade";
 import { NadeFilterOptions } from "../../api/NadeApi";
+import { useFetchNades } from "../../store/NadeStore/NadeHooks";
 
 type Props = {
   map: CsgoMap;

@@ -3,6 +3,8 @@ import { ThunkAction } from "redux-thunk";
 import { AppState } from "..";
 import { UserApi } from "../../api/UserApi";
 import { User } from "../../models/User";
+import { tokenSelector } from "./AuthSelectors";
+import { addNotificationAction } from "../NotificationStore/NotificationActions";
 
 type SetTokenAction = {
   type: "@@auth/SET_TOKEN";
@@ -25,9 +27,23 @@ export function fetchUser(dispatchFunc: Dispatch<any>) {
     dispatch,
     getState
   ) => {
-    const state = getState();
-    const user = await UserApi.fetchSelf(state.auth.token);
-    dispatch({ type: "@@auth/SET_USER", payload: user });
+    const authToken = tokenSelector(getState());
+    if (!authToken) {
+      return addNotificationAction(dispatch, {
+        message: "Can't fetch user, seems like your not signed in.",
+        severity: "error"
+      });
+    }
+
+    const userResult = await UserApi.fetchSelf(authToken);
+
+    if (userResult.isErr()) {
+      return addNotificationAction(dispatch, {
+        message: userResult.error.message,
+        severity: "error"
+      });
+    }
+    setUser(dispatch, userResult.value);
   };
   dispatchFunc(thunk);
 }

@@ -12,7 +12,6 @@ const Index: NextPage<Props> = props => {
 };
 
 Index.getInitialProps = async () => {
-  //const nades = await NadeApi.getAll();
   return { nades: [] };
 };
 

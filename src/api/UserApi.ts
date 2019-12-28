@@ -1,6 +1,7 @@
 import axios from "axios";
 import { User } from "../models/User";
-import { apiErrorFromAxios, ApiError } from "./ApiError";
+import { AppResult, getError } from "../utils/ErrorUtil";
+import { ok, err } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -8,46 +9,35 @@ const BASE_URL =
     : "http://localhost:5000";
 
 export class UserApi {
-  static fetchSelf = async (token?: string): Promise<User> => {
-    if (!token) {
-      throw new Error("UserApi.fetchSelf | No token provided");
-    }
-
+  static fetchSelf = async (token: string): AppResult<User> => {
     try {
       const res = await axios.get(`${BASE_URL}/users/self`, {
         headers: { Authorization: token }
       });
       const user = res.data as User;
-      return user;
+      return ok(user);
     } catch (error) {
-      console.error(`Error in UserApi.fetchSelf`, error.message);
-      throw error;
+      return err(getError(error));
     }
   };
 
-  static fetchUser = async (
-    steamId: string
-  ): Promise<{ user?: User; error?: ApiError }> => {
+  static fetchUser = async (steamId: string): AppResult<User> => {
     try {
       const res = await axios.get(`${BASE_URL}/users/${steamId}`);
       const user = res.data as User;
-      return {
-        user
-      };
+      return ok(user);
     } catch (error) {
-      return {
-        error: apiErrorFromAxios(error)
-      };
+      return err(getError(error));
     }
   };
 
-  static fetchUsers = async (): Promise<User[] | ApiError> => {
+  static fetchUsers = async (): AppResult<User[]> => {
     try {
       const res = await axios.get(`${BASE_URL}/users`);
       const users = res.data as User[];
-      return users;
+      return ok(users);
     } catch (error) {
-      return apiErrorFromAxios(error);
+      return err(getError(error));
     }
   };
 }

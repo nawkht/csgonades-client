@@ -1,6 +1,5 @@
 import { Header, Icon, Button } from "semantic-ui-react";
 import { useState, FC } from "react";
-import { GfycatVideoPlayer } from "../../ui-common/GfycatVideoPlayer";
 import { NewNadeGfycatModal } from "./NewNadeGfycatModal";
 import { GfyCatPlayer } from "../../ui-common/GfycatPlayer";
 

@@ -1,4 +1,4 @@
-import { User, UserLight } from "./User";
+import { UserLight } from "./User";
 import { Technique } from "./Technique";
 
 export const MapSites = {

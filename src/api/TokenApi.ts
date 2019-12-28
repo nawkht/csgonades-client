@@ -1,4 +1,6 @@
 import axios from "axios";
+import { AppResult, getError } from "../utils/ErrorUtil";
+import { ok, err } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -10,11 +12,15 @@ type TokenRes = {
 };
 
 export class AuthApi {
-  static async refreshToken(): Promise<string> {
-    const res = await axios.get<TokenRes>(`${BASE_URL}/auth/refresh`, {
-      withCredentials: true
-    });
-    return res.data.accessToken;
+  static async refreshToken(): AppResult<string> {
+    try {
+      const res = await axios.get<TokenRes>(`${BASE_URL}/auth/refresh`, {
+        withCredentials: true
+      });
+      return ok(res.data.accessToken);
+    } catch (error) {
+      return err(getError(error));
+    }
   }
 
   static async setSessionCookie(): Promise<void> {
@@ -30,7 +36,6 @@ export class AuthApi {
           withCredentials: true
         }
       );
-      console.log("Posted signout");
     } catch (error) {
       console.error(error);
     }

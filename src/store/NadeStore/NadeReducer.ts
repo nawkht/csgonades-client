@@ -28,6 +28,16 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         selectedNade: action.nade
       };
+    case "@@nades/START_LOADING":
+      return {
+        ...state,
+        loading: true
+      };
+    case "@@nades/STOP_LOADING":
+      return {
+        ...state,
+        loading: false
+      };
     default:
       return state;
   }
