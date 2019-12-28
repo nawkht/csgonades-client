@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CsgoMap } from "../../../models/Nade";
+import { CsgoMap, nadeMapOptions } from "../../../models/Nade";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import { capitalize } from "../../../utils/Common";
 
@@ -15,21 +15,26 @@ export const NadeMapValue: FC<Props> = ({ isEditing, map, onMapChange }) => {
     onMapChange(newMap);
   }
 
+  const mapText = map ? capitalize(map) : "Not selected...";
+
+  const options = [
+    { key: 1, text: "Choice 1", value: 1 },
+    { key: 2, text: "Choice 2", value: 2 },
+    { key: 3, text: "Choice 3", value: 3 }
+  ];
+
   return (
     <>
       {isEditing && (
         <Dropdown
           inline
+          placeholder="Select..."
           value={map}
           onChange={onChange}
-          options={[
-            { key: "notset", text: "Select..", value: "notset" },
-            { key: "dust2", text: "Dust2", value: "dust2" },
-            { key: "mirage", text: "Mirage", value: "mirage" }
-          ]}
+          options={nadeMapOptions()}
         />
       )}
-      {!isEditing && <span>{capitalize(map || "")}</span>}
+      {!isEditing && <span>{mapText}</span>}
     </>
   );
 };

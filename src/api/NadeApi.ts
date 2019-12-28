@@ -7,6 +7,8 @@ import {
   NadeStatusDTO
 } from "../models/Nade";
 import axios from "axios";
+import { AppResult, getError } from "../utils/ErrorUtil";
+import { ok, err } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -51,20 +53,15 @@ export class NadeApi {
     }
   }
 
-  static async save(nadeBody: NadeBody, token?: string): Promise<Nade | null> {
+  static async save(nadeBody: NadeBody, token: string): AppResult<Nade> {
     try {
-      if (!token) {
-        throw new Error("Missing auth token for request");
-      }
-
       const res = await axios.post(`${BASE_URL}/nades`, nadeBody, {
         headers: { Authorization: token }
       });
       const nade = res.data as Nade;
-      return nade;
+      return ok(nade);
     } catch (error) {
-      console.error("Failed NadeApi.save", error.message);
-      return null;
+      return err(getError(error.message));
     }
   }
 

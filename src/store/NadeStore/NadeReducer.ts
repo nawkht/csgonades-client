@@ -5,10 +5,12 @@ import { NadeActions } from "./NadeActions";
 export type NadeState = {
   nades: NadeLight[];
   selectedNade?: Nade;
+  loading: boolean;
 };
 
 const initialState: NadeState = {
-  nades: []
+  nades: [],
+  loading: false
 };
 
 export const NadeReducer: Reducer<NadeState, NadeActions> = (

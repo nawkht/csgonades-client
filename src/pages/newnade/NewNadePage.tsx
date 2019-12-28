@@ -4,14 +4,13 @@ import { Button, Segment, Grid, Divider } from "semantic-ui-react";
 import { NewNadeGfycat } from "./NewNadeGfycat";
 import { NewNadeImage } from "./NewNadeImage";
 import { NadeBody } from "../../models/Nade";
-import { useSelector } from "react-redux";
-import { tokenSelector } from "../../store/AuthStore/AuthSelectors";
-import { NadeApi } from "../../api/NadeApi";
-import Router from "next/router";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { useCreateNade } from "../../store/NadeStore/NadeHooks";
+import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
 
-const NewNadePage: FC = () => {
-  const accessToken = useSelector(tokenSelector);
+export const NewNadePage: FC = () => {
+  const isLoadingNade = useIsLoadingNade();
+  const createNade = useCreateNade();
   const [gfyId, setGfyId] = useState<string | null>(null);
   const [imageBase64, setImageBase64] = useState<string | null>(null);
 
@@ -38,12 +37,9 @@ const NewNadePage: FC = () => {
       imageBase64: imageBase64
     };
 
-    const nade = await NadeApi.save(nadeBody, accessToken);
-    GoogleAnalytics.event("New Nade", "Submit");
+    createNade(nadeBody);
 
-    if (nade) {
-      Router.push(`/nade/${nade.id}`);
-    }
+    GoogleAnalytics.event("New Nade", "Submit");
   }
 
   return (
@@ -65,7 +61,12 @@ const NewNadePage: FC = () => {
             </Grid.Row>
           </Grid>
         </Segment>
-        <Button disabled={cantSumbit} color="green" onClick={onSumbitNade}>
+        <Button
+          disabled={cantSumbit}
+          loading={isLoadingNade}
+          color="green"
+          onClick={onSumbitNade}
+        >
           Submit
         </Button>
       </div>
@@ -80,5 +81,3 @@ const NewNadePage: FC = () => {
     </Layout>
   );
 };
-
-export { NewNadePage };

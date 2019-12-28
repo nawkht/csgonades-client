@@ -7,7 +7,7 @@ import {
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 
 type Props = {
-  tickrate: Tickrate;
+  tickrate?: Tickrate;
   isEditing: boolean;
   onChange: (tickrate: Tickrate) => void;
 };
@@ -24,17 +24,20 @@ export const NadeTickrateValue: FC<Props> = ({
     onChange(newTickrate);
   }
 
+  const tickrateText = tickrate ? tickrateString(tickrate) : "Not selected...";
+
   return (
     <>
       {isEditing && (
         <Dropdown
           inline
+          placeholder="Select..."
           value={tickrate}
           onChange={onDropdownChange}
           options={options}
         />
       )}
-      {!isEditing && <span>{tickrateString(tickrate)}</span>}
+      {!isEditing && <span>{tickrateText}</span>}
     </>
   );
 };

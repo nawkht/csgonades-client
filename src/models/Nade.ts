@@ -1,20 +1,55 @@
 import { User, UserLight } from "./User";
 import { Technique } from "./Technique";
 
-export type CsgoMap =
-  | "notset"
-  | "dust2"
-  | "mirage"
-  | "nuke"
-  | "inferno"
-  | "cache"
-  | "overpass"
-  | "vertigo"
-  | "train"
-  | "cobblestone";
+export const MapSites = {
+  a: "A",
+  b: "B",
+  mid: "Mid"
+};
+
+export type MapSite = keyof typeof MapSites;
+
+export function nadeMapSiteOptions() {
+  let options = [];
+  for (let key in MapSites) {
+    options.push({
+      key,
+      //@ts-ignore
+      text: MapSites[key],
+      value: key
+    });
+  }
+  return options;
+}
+
+const CsGoMaps = {
+  dust2: "Dust2",
+  mirage: "Mirage",
+  nuke: "Nuke",
+  inferno: "Inferno",
+  cache: "Cache",
+  overpass: "Overpass",
+  vertigo: "Vertigo",
+  train: "Train",
+  cobblestone: "Cobblestone"
+};
+
+export type CsgoMap = keyof typeof CsGoMaps;
+
+export function nadeMapOptions() {
+  let options = [];
+  for (let key in CsGoMaps) {
+    options.push({
+      key,
+      //@ts-ignore
+      text: CsGoMaps[key],
+      value: key
+    });
+  }
+  return options;
+}
 
 export const NadeMovements = {
-  notset: "Select...",
   stationary: "Stationary",
   crouching: "Crouching",
   walking: "Walking",
@@ -65,7 +100,7 @@ export function tickrateString(tick: Tickrate) {
   return NadeTickrate[tick];
 }
 
-export type NadeType = "notset" | "smoke" | "flash" | "molotov" | "he-grenade";
+export type NadeType = "smoke" | "flash" | "molotov" | "he-grenade";
 
 export type NadeStats = {
   comments: number;
@@ -80,9 +115,11 @@ export type GfycatData = {
   smallVideoUrl: string;
 };
 
-type NadeImages = {
-  thumbnail: string;
-  large: string;
+export type NadeImages = {
+  thumbnailId: string;
+  thumbnailUrl: string;
+  largeId: string;
+  largeUrl: string;
 };
 
 export type Nade = {
@@ -103,6 +140,7 @@ export type Nade = {
   updatedAt: Date;
   status: Status;
   statusInfo?: StatusInfo;
+  mapSite?: MapSite;
 };
 
 export type NadeLight = {
@@ -114,19 +152,12 @@ export type NadeLight = {
   tickrate?: Tickrate;
   createdAt: Date;
   stats: NadeStats;
+  mapSite?: MapSite;
 };
 
 export type NadeBody = {
   gfycatIdOrUrl: string;
   imageBase64: string;
-  title?: string;
-  description?: string;
-  map?: CsgoMap;
-  movement?: Movement;
-  technique?: Technique;
-  tickrate?: Tickrate;
-  type?: NadeType;
-  steamId?: string;
 };
 
 export type NadeUpdateBody = {
@@ -141,6 +172,7 @@ export type NadeUpdateBody = {
   steamId?: string;
   status?: Status;
   statusInfo?: StatusInfo;
+  mapSite?: MapSite;
 };
 
 export type NadeStatusDTO = {

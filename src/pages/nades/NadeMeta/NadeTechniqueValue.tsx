@@ -7,9 +7,9 @@ import {
 } from "../../../models/Technique";
 
 type Props = {
-  technique: Technique;
+  technique?: Technique;
   isEditing: boolean;
-  onChange: (technique: Technique) => void;
+  onChange: (technique?: Technique) => void;
 };
 
 export const NadeTechniqueValue: FC<Props> = ({
@@ -24,17 +24,24 @@ export const NadeTechniqueValue: FC<Props> = ({
     onChange(newTechnique);
   }
 
+  const techniqueText = technique
+    ? techniqueString(technique)
+    : "Not selected...";
+
+  console.log("#", technique, techniqueText);
+
   return (
     <>
       {isEditing && (
         <Dropdown
+          placeholder="Select..."
           inline
           value={technique}
           onChange={onDropdownChange}
           options={options}
         />
       )}
-      {!isEditing && <span>{techniqueString(technique)}</span>}
+      {!isEditing && <span>{techniqueText}</span>}
     </>
   );
 };

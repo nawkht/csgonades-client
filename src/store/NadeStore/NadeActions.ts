@@ -23,6 +23,14 @@ type AddSelectedNadeAction = {
   nade: Nade;
 };
 
+type StartLoadingNadeAction = {
+  type: "@@nades/START_LOADING";
+};
+
+type StopLoadingNadeAction = {
+  type: "@@nades/STOP_LOADING";
+};
+
 export type NadeActions = AddNadesAction | AddSelectedNadeAction;
 
 export const addNadeAction = (nades: NadeLight[]): AddNadesAction => {
@@ -35,6 +43,14 @@ export const addNadeAction = (nades: NadeLight[]): AddNadesAction => {
 export const addSelectedNadeAction = (nade: Nade): AddSelectedNadeAction => ({
   type: "@@nades/add_selected",
   nade
+});
+
+export const startLoadingNadeAction = (): StartLoadingNadeAction => ({
+  type: "@@nades/START_LOADING"
+});
+
+export const stopLoadingNadeAction = (): StopLoadingNadeAction => ({
+  type: "@@nades/STOP_LOADING"
 });
 
 export const useFetchSelectedNade = (nadeId: string) => {

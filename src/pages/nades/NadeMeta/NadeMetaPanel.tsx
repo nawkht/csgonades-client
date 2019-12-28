@@ -1,5 +1,11 @@
 import { FC, useState } from "react";
-import { Nade } from "../../../models/Nade";
+import {
+  Nade,
+  CsgoMap,
+  MapSite,
+  Tickrate,
+  Movement
+} from "../../../models/Nade";
 import { Colors } from "../../../../constants/colors";
 import { Icon } from "semantic-ui-react";
 import { NadeMapValue } from "./NadeMapValue";
@@ -8,6 +14,8 @@ import { NadeMovementValue } from "./NadeMovementValue";
 import { NadeTickrateValue } from "./NadeTickrateValue";
 import { NadeTechniqueValue } from "./NadeTechniqueValue";
 import { NadeViewsValue } from "./NadeViewsValue";
+import { NadeMapSiteValue } from "./NadeMapSiteValue";
+import { Technique } from "../../../models/Technique";
 
 type Props = {
   nade: Nade;
@@ -21,13 +29,15 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
   const [movement, setMovement] = useState(nade.movement);
   const [tickrate, setTickrate] = useState(nade.tickrate);
   const [technique, setTechnique] = useState(nade.technique);
+  const [mapSite, setMapSite] = useState(nade.mapSite);
 
   function updateNadeMeta() {
     updateNade(nade.id, {
       map,
       movement,
       tickrate,
-      technique
+      technique,
+      mapSite
     });
     setIsEditing(false);
   }
@@ -54,10 +64,19 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
         </div>
 
         <div className="nade-meta-item">
+          <span className="map-meta-title">Site</span>
+          <NadeMapSiteValue
+            mapSite={mapSite}
+            isEditing={isEditing}
+            onChange={setMapSite}
+          />
+        </div>
+
+        <div className="nade-meta-item">
           <span className="map-meta-title">Movement</span>
           <NadeMovementValue
             isEditing={isEditing}
-            movement={movement || "notset"}
+            movement={movement}
             onChange={setMovement}
           />
         </div>
@@ -66,19 +85,21 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           <span className="map-meta-title">Technique</span>
           <NadeTechniqueValue
             isEditing={isEditing}
-            technique={technique || "notset"}
+            technique={technique}
             onChange={setTechnique}
           />
         </div>
 
-        <div className="nade-meta-item">
-          <span className="map-meta-title">Tickrate</span>
-          <NadeTickrateValue
-            isEditing={isEditing}
-            tickrate={tickrate || "any"}
-            onChange={setTickrate}
-          />
-        </div>
+        {technique === "jumpthrow" && (
+          <div className="nade-meta-item">
+            <span className="map-meta-title">Tickrate</span>
+            <NadeTickrateValue
+              isEditing={isEditing}
+              tickrate={tickrate || "any"}
+              onChange={setTickrate}
+            />
+          </div>
+        )}
 
         <div className="nade-meta-item">
           <span className="map-meta-title">Views</span>

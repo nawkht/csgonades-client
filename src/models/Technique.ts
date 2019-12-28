@@ -1,5 +1,4 @@
 const TechniqueValues = {
-  notset: "Not set",
   left: "Mouse left",
   right: "Mouse right",
   both: "Mouse both",

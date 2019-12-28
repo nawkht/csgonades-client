@@ -1,27 +1,27 @@
 import { FC } from "react";
-import { Movement, nadeMovementOptions } from "../../../models/Nade";
+import { MapSite, nadeMapSiteOptions } from "../../../models/Nade";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import { capitalize } from "../../../utils/Common";
 
 type Props = {
-  movement?: Movement;
+  mapSite?: MapSite;
   isEditing: boolean;
-  onChange: (movement: Movement) => void;
+  onChange: (mapSite: MapSite) => void;
 };
 
-export const NadeMovementValue: FC<Props> = ({
+export const NadeMapSiteValue: FC<Props> = ({
   isEditing,
-  movement,
+  mapSite,
   onChange
 }) => {
-  const options = nadeMovementOptions();
+  const options = nadeMapSiteOptions();
 
   function onDropdownChange(_: any, data: DropdownProps) {
-    const movement = data.value as Movement;
-    onChange(movement);
+    const mapSite = data.value as MapSite;
+    onChange(mapSite);
   }
 
-  const movementText = movement ? capitalize(movement) : "Not selected...";
+  const mapSiteText = mapSite ? capitalize(mapSite) : "Not selected...";
 
   return (
     <>
@@ -29,12 +29,12 @@ export const NadeMovementValue: FC<Props> = ({
         <Dropdown
           inline
           placeholder="Select..."
-          value={movement}
+          value={mapSite}
           onChange={onDropdownChange}
           options={options}
         />
       )}
-      {!isEditing && <span>{movementText}</span>}
+      {!isEditing && <span>{mapSiteText}</span>}
     </>
   );
 };

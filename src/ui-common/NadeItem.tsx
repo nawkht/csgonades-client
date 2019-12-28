@@ -3,6 +3,7 @@ import { Icon } from "semantic-ui-react";
 import { NadeLight } from "../models/Nade";
 import { Colors } from "../../constants/colors";
 import { GfycatThumbnail } from "./GfycatThumbnail";
+import { truncateString } from "../utils/Common";
 
 interface Props {
   nade: NadeLight;
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const NadeItem: FC<Props> = ({ nade, onClick }) => {
+  const title = nade.title || "No title...";
+
   return (
     <>
       <div
@@ -17,10 +20,10 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
         className="nadebox"
         style={{ display: "inline-block" }}
       >
-        <div className="title">{nade.title}</div>
+        <div className="title">{title}</div>
         <div className="video">
           <GfycatThumbnail
-            imageUrl={nade.images.thumbnail}
+            imageUrl={nade.images.thumbnailUrl}
             gfyUrl={nade.gfycat.smallVideoUrl}
           />
         </div>
@@ -53,6 +56,10 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
         .title {
           padding: 6px 12px;
           text-align: center;
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .stats {
