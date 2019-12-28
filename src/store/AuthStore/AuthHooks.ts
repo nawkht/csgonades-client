@@ -9,6 +9,7 @@ import { AuthApi } from "../../api/TokenApi";
 import { signOutUser, setToken, setUser } from "./AuthActions";
 import { UserApi } from "../../api/UserApi";
 import Router from "next/router";
+import { redirectMapPage, redirectUserPage } from "../../utils/Common";
 
 export const useIsSignedIn = (): boolean => {
   const user = useSelector(userSelector);
@@ -86,7 +87,7 @@ export const usePreloadUser = () => {
       setUser(dispatch, user);
 
       if (isFirstSignIn) {
-        Router.push(`/users/${user.steamID}`);
+        redirectUserPage(user.steamID);
       } else {
         Router.push("/");
       }

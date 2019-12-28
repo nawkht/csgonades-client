@@ -14,6 +14,7 @@ import {
   addNadeAction
 } from "./NadeActions";
 import { addNotificationAction } from "../NotificationStore/NotificationActions";
+import { redirectNadePage } from "../../utils/Common";
 
 export const useCanEditNade = (nade: Nade): boolean => {
   const user = useSelector(userSelector);
@@ -54,7 +55,7 @@ export const useCreateNade = () => {
         });
       }
 
-      Router.push(`/nades/${result.value.id}`);
+      redirectNadePage(result.value.id);
     };
     reduxDispatch(thunk);
   };

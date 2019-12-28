@@ -3,6 +3,7 @@ import { User } from "../../models/User";
 import { Dropdown } from "semantic-ui-react";
 import Router from "next/router";
 import { useSignOut } from "../../store/AuthStore/AuthHooks";
+import { redirectUserPage } from "../../utils/Common";
 
 type Props = {
   user: User;
@@ -11,7 +12,7 @@ type Props = {
 export const UserDropdown: FC<Props> = ({ user }) => {
   const signOut = useSignOut();
   function onProfileClick() {
-    Router.push(`/users/${user.steamID}`);
+    redirectUserPage(user.steamID);
   }
 
   function onFavoritesClick() {

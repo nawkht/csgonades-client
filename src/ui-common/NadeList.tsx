@@ -3,6 +3,7 @@ import { NadeItem } from "./NadeItem";
 import { NadeLight } from "src/models/Nade";
 import { useRouter } from "next/router";
 import { UiConstants } from "../../constants/ui";
+import { redirectNadePage } from "../utils/Common";
 
 interface Props {
   nades: NadeLight[];
@@ -15,7 +16,7 @@ const NadeList: FC<Props> = ({ nades, padding }) => {
   const nadeListPadding = typeof padding === "undefined" ? 18 : padding;
 
   function onNadeClick(id: string) {
-    router.push(`/nades/${id}`);
+    redirectNadePage(id);
   }
 
   if (nades.length === 0) {

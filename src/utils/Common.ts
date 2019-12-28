@@ -1,4 +1,19 @@
+import { CsgoMap } from "../models/Nade";
+import Router from "next/router";
+
 export const capitalize = (s: string) => {
   if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1);
+};
+
+export const redirectMapPage = (mapName: CsgoMap) => {
+  Router.push(`/maps?mapname=${mapName}`, `/maps/${mapName}`);
+};
+
+export const redirectUserPage = (steamId: string) => {
+  Router.push(`/users?id=${steamId}`, `/users/${steamId}`);
+};
+
+export const redirectNadePage = (nadeId: string) => {
+  Router.push(`/nades?id=${nadeId}`, `/nades/${nadeId}`);
 };
