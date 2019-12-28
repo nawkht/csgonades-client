@@ -6,11 +6,15 @@ import { FavoriteApi } from "../../api/FavoriteApi";
 import {
   addAllFavoritesAction,
   addFavoriteAction,
-  removeFavoriteAction
+  removeFavoriteAction,
+  addFavoritedNadesAction,
+  startLoadingFavoritedNadesAction,
+  stopLoadingFavoritedNades
 } from "./FavoriteActions";
 import { useSelector } from "react-redux";
 import { allFavoritesSelector } from "./FavoriteSelectors";
 import { Favorite } from "../../models/Favorite";
+import { NadeApi } from "../../api/NadeApi";
 
 export const useFetchFavorites = () => {
   const reduxDispatch = useReduxDispatch();
@@ -93,4 +97,44 @@ export const useIsFavorited = (nadeId: string): Favorite | null => {
     return result;
   }
   return null;
+};
+
+export const useFetchFavoritedNades = () => {
+  const reduxDispatch = useReduxDispatch();
+  return () => {
+    const thunk: ReduxThunkAction = async (dispatch, getState) => {
+      const token = getState().auth.token;
+
+      if (!token) {
+        return;
+      }
+
+      dispatch(startLoadingFavoritedNadesAction());
+
+      const favoritesResult = await FavoriteApi.getUserFavorites(token);
+
+      if (favoritesResult.isErr()) {
+        console.warn("Error", favoritesResult.error);
+        return;
+      }
+
+      const favorites = favoritesResult.value;
+
+      dispatch(addAllFavoritesAction(favorites));
+
+      const nadeIds = favorites.map(favorite => favorite.nadeId);
+      const nadesResult = await NadeApi.byNadeIdList(nadeIds);
+      dispatch(stopLoadingFavoritedNades());
+
+      if (nadesResult.isErr()) {
+        console.error(nadesResult.error);
+        return;
+      }
+
+      const nades = nadesResult.value;
+
+      dispatch(addFavoritedNadesAction(nades));
+    };
+    reduxDispatch(thunk);
+  };
 };

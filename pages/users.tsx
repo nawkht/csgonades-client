@@ -3,26 +3,36 @@ import { User } from "../src/models/User";
 import { UserApi } from "../src/api/UserApi";
 import { UserPage } from "../src/pages/users/UsersPage";
 import { AppError } from "../src/utils/ErrorUtil";
+import { NadeApi } from "../src/api/NadeApi";
+import { NadeLight } from "../src/models/Nade";
 
 interface Props {
   user?: User;
+  nades?: NadeLight[];
   error?: AppError;
 }
 
-const UserPageComponent: NextPage<Props> = ({ user, error }) => {
-  return <UserPage user={user} error={error} />;
+const UserPageComponent: NextPage<Props> = ({ user, nades, error }) => {
+  return <UserPage user={user} userNades={nades} error={error} />;
 };
 
 UserPageComponent.getInitialProps = async context => {
   const steamId = context.query.id as string;
 
-  const userResult = await UserApi.fetchUser(steamId);
+  const [userResult, nadeResult] = await Promise.all([
+    UserApi.fetchUser(steamId),
+    NadeApi.byUser(steamId)
+  ]);
 
   if (userResult.isErr()) {
     return { error: userResult.error };
   }
 
-  return { user: userResult.value };
+  if (nadeResult.isErr()) {
+    return { error: nadeResult.error };
+  }
+
+  return { user: userResult.value, nades: nadeResult.value };
 };
 
 export default UserPageComponent;

@@ -5,10 +5,13 @@ import { useRouter } from "next/router";
 
 interface Props {
   nades: NadeLight[];
+  padding?: number;
 }
 
-const NadeList: FC<Props> = ({ nades }) => {
+const NadeList: FC<Props> = ({ nades, padding }) => {
   const router = useRouter();
+
+  const nadeListPadding = typeof padding === "undefined" ? 18 : padding;
 
   function onNadeClick(id: string) {
     router.push(`/nades/${id}`);
@@ -20,10 +23,9 @@ const NadeList: FC<Props> = ({ nades }) => {
         <div className="nadelist-nonades">No nades :(</div>
         <style jsx>{`
           .nadelist-nonades {
-            margin: 18px;
             background: white;
             text-align: center;
-            padding: 12px;
+            padding: ${nadeListPadding}px;
             font-size: 1.4em;
           }
         `}</style>
@@ -42,7 +44,7 @@ const NadeList: FC<Props> = ({ nades }) => {
         {`
           #nadelist {
             display: flex;
-            padding: 18px;
+            padding: ${nadeListPadding}px;
           }
         `}
       </style>

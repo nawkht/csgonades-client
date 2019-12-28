@@ -62,6 +62,28 @@ export class NadeApi {
     }
   }
 
+  static async byUser(steamId: string): AppResult<NadeLight[]> {
+    try {
+      const res = await axios.get(`${BASE_URL}/nades/user/${steamId}`);
+      const nades = res.data as NadeLight[];
+      return ok(nades);
+    } catch (error) {
+      return err(getError(error.message));
+    }
+  }
+
+  static async byNadeIdList(nadeIds: string[]): AppResult<NadeLight[]> {
+    try {
+      const res = await axios.post(`${BASE_URL}/nades/list`, {
+        nadeIds
+      });
+      const nades = res.data as NadeLight[];
+      return ok(nades);
+    } catch (error) {
+      return err(getError(error.message));
+    }
+  }
+
   static async save(nadeBody: NadeBody, token: string): AppResult<Nade> {
     try {
       const res = await axios.post(`${BASE_URL}/nades`, nadeBody, {

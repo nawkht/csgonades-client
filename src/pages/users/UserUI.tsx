@@ -2,12 +2,16 @@ import { FC } from "react";
 import { User } from "../../models/User";
 import { formatDate } from "../../models/DateFormater";
 import { Colors } from "../../../constants/colors";
+import { capitalize } from "../../utils/Common";
+import { NadeList } from "../../ui-common/NadeList";
+import { NadeLight } from "../../models/Nade";
 
 type Props = {
   user: User;
+  nades: NadeLight[];
 };
 
-export const UserUI: FC<Props> = ({ user }) => {
+export const UserUI: FC<Props> = ({ user, nades }) => {
   return (
     <>
       <div className="user-container">
@@ -15,14 +19,18 @@ export const UserUI: FC<Props> = ({ user }) => {
           <h1>
             <img src={user.avatar || ""} /> {user.nickname}
           </h1>
-          <span>{user.role}</span>
+          {user.role !== "user" && (
+            <span className="user-role-badge">{capitalize(user.role)}</span>
+          )}
           <br />
-          <span>{formatDate(user.createdAt)}</span>
+          <span>Member since: {formatDate(user.createdAt)}</span>
           <br />
-          <span>{user.bio}</span>
+          <br />
+          <span className="bio">{user.bio}</span>
         </div>
         <div className="user-nades">
           <h2>Nades by {user.nickname}</h2>
+          <NadeList padding={0} nades={nades} />
         </div>
       </div>
       <style jsx>{`
@@ -32,12 +40,15 @@ export const UserUI: FC<Props> = ({ user }) => {
         }
 
         .user-details {
+          position: relative;
           background: white;
           margin-right: 18px;
           padding: 12px;
           flex: 1;
           max-width: 300px;
           border: 1px solid ${Colors.PRIMARY_BORDER};
+          align-self: flex-start;
+          border-radius: 3px;
         }
 
         .user-details h1 {
@@ -50,6 +61,17 @@ export const UserUI: FC<Props> = ({ user }) => {
           border-radius: 50%;
           width: 30px;
           margin-right: 12px;
+        }
+
+        .user-role-badge {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: ${Colors.PRIMARY};
+          color: white;
+          font-size: 0.8em;
+          padding: 3px 6px;
+          border-radius: 3px;
         }
       `}</style>
     </>
