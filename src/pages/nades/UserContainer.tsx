@@ -11,9 +11,9 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
   const { avatar, nickname } = user;
   return (
     <>
-      <Link href={`/users/${user.steamId}`}>
-        <a>
-          <div className="user-container">
+      <div className="user-container">
+        <Link href={`/users/${user.steamId}`}>
+          <a className="user-link">
             <img
               className="user-avatar"
               src={
@@ -23,12 +23,17 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
               }
             />
             <span className="user-nickname">{nickname}</span>
-          </div>
-        </a>
-      </Link>
+          </a>
+        </Link>
+      </div>
       <style jsx>{`
         .user-container {
           margin-top: ${marginTop || 0}px;
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .user-link {
           display: flex;
           align-items: center;
           color: #444;

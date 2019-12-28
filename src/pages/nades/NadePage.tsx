@@ -27,7 +27,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         <div className="nade-aside">
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           <NadeMetaPanel allowEdit={allowEdit} nade={nade} />
-          <UserContainer user={nade.user} marginTop={18} />
+          <UserContainer user={nade.user} marginTop={18 * 3} />
           <AdminEditor nade={nade} />
         </div>
       </div>

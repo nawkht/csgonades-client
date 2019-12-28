@@ -43,7 +43,7 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
       <div className="gfycat-container">
         {!isEditing && allowEdit && (
           <div className="edit-button" onClick={onEditClick}>
-            <Icon inverted circular link name="pencil alternate" size="large" />
+            <Icon link name="pencil alternate" />
           </div>
         )}
 
@@ -67,13 +67,15 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
 
         .edit-button {
           position: absolute;
-          top: 0;
-          right: 0;
+          top: 12px;
+          right: 12px;
           opacity: 0;
-          transition: opacity 0.3s;
-          padding: 12px;
+          transition: opacity 0.2s;
           color: white;
           z-index: 998;
+          padding: 3px 12px;
+          border-radius: 6px;
+          background rgba(50, 147, 168,0.7);
         }
       `}</style>
     </>
