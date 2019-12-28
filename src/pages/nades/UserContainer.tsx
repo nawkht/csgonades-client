@@ -12,7 +12,7 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
   return (
     <>
       <div className="user-container">
-        <Link href={`/users/${user.steamId}`}>
+        <Link href={`/users?id=${user.steamId}`} as={`/users/${user.steamId}`}>
           <a className="user-link">
             <img
               className="user-avatar"
