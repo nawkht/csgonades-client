@@ -47,7 +47,9 @@ export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
 
         {isHovering && (
           <div className="back" style={{ width, height }}>
-            <video autoPlay muted src={gfyUrl} />
+            <video autoPlay={true} controls={false} muted={true}>
+              <source src={gfyUrl} type="video/mp4" />
+            </video>
           </div>
         )}
       </div>
