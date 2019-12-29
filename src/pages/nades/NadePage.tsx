@@ -47,9 +47,10 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             margin-bottom: ${theme.isMobile
               ? theme.uiDimensions.INNER_GUTTER_SIZE
               : 0}px;
+            flex: 1;
           }
           .nade-aside {
-            min-width: 280px;
+            width: 280px;
           }
         `}
       </style>

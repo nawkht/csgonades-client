@@ -142,3 +142,32 @@ export const useFetchNades = (mapName: CsgoMap) => {
     reduxDispatch(thunk);
   };
 };
+
+export const useDeleteNade = () => {
+  const reduxDispatch = useReduxDispatch();
+  return (nadeId: string) => {
+    const thunk: ReduxThunkAction = async (dispatch, getState) => {
+      const authToken = tokenSelector(getState());
+      if (!authToken) {
+        return addNotificationAction(dispatch, {
+          message: "Can't update, seems like your not signed in.",
+          severity: "error"
+        });
+      }
+
+      startLoadingNadeAction(dispatch);
+      const result = await NadeApi.delete(nadeId, authToken);
+      stopLoadingNadeAction(dispatch);
+
+      if (result.isErr()) {
+        return addNotificationAction(dispatch, {
+          message: "Failed to delete nade.",
+          severity: "error"
+        });
+      }
+
+      Router.push("/", "/");
+    };
+    reduxDispatch(thunk);
+  };
+};

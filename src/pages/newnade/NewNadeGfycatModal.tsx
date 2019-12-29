@@ -18,8 +18,9 @@ export const NewNadeGfycatModal = ({
   const [error] = useState(null);
 
   function validateGfycat() {
-    // api call to validate
-    setGfycat(gfycatValue);
+    const cleanGfyId = cleanGfycatUrl(gfycatValue);
+    setGfycat(cleanGfyId);
+    setGfycatValue(cleanGfyId);
     onDismiss();
   }
 
@@ -44,3 +45,15 @@ export const NewNadeGfycatModal = ({
     </>
   );
 };
+
+function cleanGfycatUrl(gfycatIdOrUrl: string): string {
+  const index = gfycatIdOrUrl.lastIndexOf("/");
+  let gfyId: string | string[] = gfycatIdOrUrl.substr(index + 1);
+  gfyId = gfyId.split("-");
+
+  if (typeof gfyId === "string") {
+    return gfyId;
+  }
+
+  return gfyId[0];
+}

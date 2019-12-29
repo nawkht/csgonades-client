@@ -10,6 +10,7 @@ import { NadeViewsValue } from "./NadeViewsValue";
 import { NadeMapSiteValue } from "./NadeMapSiteValue";
 import { EditButton } from "../../../ui-common/EditButton";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { NadeTypeValue } from "./NadeTypeValue";
 
 type Props = {
   nade: Nade;
@@ -25,6 +26,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
   const [tickrate, setTickrate] = useState(nade.tickrate);
   const [technique, setTechnique] = useState(nade.technique);
   const [mapSite, setMapSite] = useState(nade.mapSite);
+  const [type, setType] = useState(nade.type);
 
   function updateNadeMeta() {
     updateNade(nade.id, {
@@ -32,7 +34,8 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
       movement,
       tickrate,
       technique,
-      mapSite
+      mapSite,
+      type
     });
     setIsEditing(false);
   }
@@ -52,6 +55,15 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
             />
           </div>
         )}
+
+        <div className="nade-meta-item">
+          <span className="map-meta-title">Type</span>
+          <NadeTypeValue
+            nadeType={type}
+            isEditing={isEditing}
+            onNadeTypeChange={setType}
+          />
+        </div>
 
         <div className="nade-meta-item">
           <span className="map-meta-title">Map</span>

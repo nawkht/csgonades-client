@@ -11,8 +11,7 @@ export const NewNadeGfycat: FC<Props> = ({ onSetGfycat }) => {
   const [gfycatID, setGfycatID] = useState<string | null>(null);
   const [isGfycatModalVisisble, setIsGfycatModalVisisble] = useState(false);
 
-  function applyGfycatID(gfyIdOrUrl: string) {
-    const gfyId = cleanGfycatUrl(gfyIdOrUrl);
+  function applyGfycatID(gfyId: string) {
     setGfycatID(gfyId);
     onSetGfycat(gfyId);
   }
@@ -54,9 +53,3 @@ export const NewNadeGfycat: FC<Props> = ({ onSetGfycat }) => {
     </>
   );
 };
-
-function cleanGfycatUrl(gfycatIdOrUrl: string): string {
-  const index = gfycatIdOrUrl.lastIndexOf("/");
-  const gfyId = gfycatIdOrUrl.substr(index + 1);
-  return gfyId;
-}

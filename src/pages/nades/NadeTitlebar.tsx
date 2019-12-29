@@ -91,7 +91,7 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
           align-items: center;
         }
 
-        .nade-title:hover .title-edit-button {
+        .title-contrainer:hover .title-edit-button {
           opacity: 1;
         }
 

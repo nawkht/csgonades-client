@@ -121,6 +121,19 @@ export class NadeApi {
     }
   }
 
+  static async delete(nadeId: string, token: string): AppResult<boolean> {
+    try {
+      await axios.delete(`${BASE_URL}/nades/${nadeId}`, {
+        headers: { Authorization: token }
+      });
+
+      return ok(true);
+    } catch (error) {
+      console.error("NadeApi.delete", error);
+      return err(getError(error));
+    }
+  }
+
   static async registerView(id: string) {
     await axios.post(
       `${BASE_URL}/nades/${id}/countView`,

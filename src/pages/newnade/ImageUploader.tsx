@@ -1,5 +1,5 @@
 import ReactCrop from "react-image-crop";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useRef } from "react";
 import { Button } from "semantic-ui-react";
 
 type Props = {
@@ -9,11 +9,16 @@ type Props = {
 export const ImageUploader = ({ onImageCropped }: Props) => {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [crop, setCrop] = useState<ReactCrop.Crop>({
     aspect: 16 / 9,
     unit: "%",
     width: 100
   });
+
+  function onSelectFileClick() {
+    fileInputRef.current?.click();
+  }
 
   function onSelectFile(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
@@ -102,20 +107,42 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
 
   return (
     <>
-      <div>
-        <input type="file" onChange={onSelectFile} />
-        <br />
+      <div className="image-uploader">
+        <input hidden ref={fileInputRef} type="file" onChange={onSelectFile} />
+        <Button onClick={onSelectFileClick}>UPLOAD IMAGE</Button>
+        {!image && (
+          <img
+            width="100%"
+            src="https://www.urbansplash.co.uk/images/placeholder-16-9.jpg"
+          />
+        )}
+
         <ReactCrop
           src={imageSrc}
           crop={crop}
           onImageLoaded={onImageLoaded}
           onComplete={onCropComplete}
           onChange={onCropChange}
+          style={{
+            width: 800
+          }}
         />
-        <Button primary onClick={cropImage}>
-          Crop image
-        </Button>
+
+        {image && (
+          <>
+            <br />
+            <Button primary onClick={cropImage}>
+              Crop image
+            </Button>
+          </>
+        )}
       </div>
+      <style jsx>{`
+        .image-uploader {
+          width: 800px;
+          min-height: 50vh;
+        }
+      `}</style>
     </>
   );
 };
