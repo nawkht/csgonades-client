@@ -1,13 +1,14 @@
 import { FC } from "react";
-import { UiConstants } from "../../../constants/ui";
-import { Colors } from "../../../constants/colors";
 import { MapLink } from "./MapLink";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 const MapNavigation: FC = () => {
+  const { colors, uiDimensions } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
+
   return (
     <>
       <aside id="mapnavigation">
@@ -43,11 +44,12 @@ const MapNavigation: FC = () => {
       </aside>
       <style jsx>{`
         #mapnavigation {
+          background: white;
           position: fixed;
-          top: ${UiConstants.HEADER_HEIGHT}px;
+          top: ${uiDimensions.HEADER_HEIGHT}px;
           bottom: 0;
-          width: ${UiConstants.SIDEBAR_WIDTH}px;
-          border-right: 1px solid ${Colors.PRIMARY_BORDER};
+          width: ${uiDimensions.SIDEBAR_WIDTH}px;
+          border-right: 1px solid ${colors.PRIMARY_BORDER};
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -60,14 +62,14 @@ const MapNavigation: FC = () => {
         }
 
         footer {
-          background: ${Colors.PRIMARY};
+          background: ${colors.PRIMARY};
           color: white;
         }
 
         footer .footer-links {
           text-align: center;
           font-size: 0.8em;
-          padding-bottom: ${UiConstants.PADDING_MEDIUM}px;
+          padding-bottom: ${uiDimensions.PADDING_MEDIUM}px;
         }
 
         footer .footer-links a {
@@ -80,8 +82,8 @@ const MapNavigation: FC = () => {
         }
 
         footer .copyright {
-          padding: ${UiConstants.PADDING_MEDIUM}px
-            ${UiConstants.PADDING_LARGE}px;
+          padding: ${uiDimensions.PADDING_MEDIUM}px
+            ${uiDimensions.PADDING_LARGE}px;
         }
       `}</style>
     </>

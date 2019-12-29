@@ -8,12 +8,14 @@ import { AdminEditor } from "./AdminEditor/AdminEditor";
 import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
 import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
 import { NadeDescription } from "./NadeDescription/NadeDescription";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   nade: Nade;
 };
 
 const NadePage: React.FC<Props> = ({ nade }) => {
+  const theme = useTheme();
   const allowEdit = useCanEditNade(nade);
 
   return (
@@ -35,14 +37,19 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         {`
           .nade-container {
             display: flex;
-            padding: 18px;
+            flex-direction: ${theme.isMobile ? "column" : "row"};
+            padding: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
           }
           .nade-main {
-            flex: 2;
-            margin-right: 18px;
+            margin-right: ${theme.isMobile
+              ? 0
+              : theme.uiDimensions.INNER_GUTTER_SIZE}px;
+            margin-bottom: ${theme.isMobile
+              ? theme.uiDimensions.INNER_GUTTER_SIZE
+              : 0}px;
           }
           .nade-aside {
-            flex: 1;
+            min-width: 280px;
           }
         `}
       </style>

@@ -39,7 +39,7 @@ export const useCreateNade = () => {
     const thunk: ReduxThunkAction = async (dispatch, getState) => {
       const { token } = getState().auth;
       if (!token) {
-        console.log("useCreateNade no token");
+        console.warn("useCreateNade no token");
         return;
       }
 

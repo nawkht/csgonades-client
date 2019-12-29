@@ -1,8 +1,0 @@
-export const UiConstants = {
-  SIDEBAR_WIDTH: 180,
-  HEADER_HEIGHT: 60,
-  PADDING_SMALL: 6,
-  PADDING_MEDIUM: 12,
-  PADDING_LARGE: 18,
-  PADDING_HUGE: 24
-};

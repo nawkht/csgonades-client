@@ -6,8 +6,10 @@ import {
   favoritedNades
 } from "../../store/FavoriteStore/FavoriteSelectors";
 import { NadeList } from "../../ui-common/NadeList";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 export const FavoritesPage: FC = () => {
+  const theme = useTheme();
   const isLoading = useSelector(isLoadingFavoritedNadesSelector);
   const nades = useSelector(favoritedNades);
   const fetchFavoritedNades = useFetchFavoritedNades();
@@ -15,19 +17,20 @@ export const FavoritesPage: FC = () => {
     fetchFavoritedNades();
   }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <>
       <div className="favorites-container">
-        <h2>Your favorites</h2>
-        <NadeList padding={0} nades={nades} />
+        {isLoading && <>Loading...</>}
+        {!isLoading && (
+          <>
+            <h2>Your favorites</h2>
+            <NadeList nades={nades} />
+          </>
+        )}
       </div>
       <style jsx>{`
         .favorites-container {
-          padding: 18px;
+          padding: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
         }
       `}</style>
     </>

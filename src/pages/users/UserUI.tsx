@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { User } from "../../models/User";
 import { formatDate } from "../../models/DateFormater";
-import { Colors } from "../../../constants/colors";
 import { capitalize } from "../../utils/Common";
 import { NadeList } from "../../ui-common/NadeList";
 import { NadeLight } from "../../models/Nade";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   user: User;
@@ -12,6 +12,8 @@ type Props = {
 };
 
 export const UserUI: FC<Props> = ({ user, nades }) => {
+  const { colors, isMobile, uiDimensions } = useTheme();
+
   return (
     <>
       <div className="user-container">
@@ -30,25 +32,26 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
         </div>
         <div className="user-nades">
           <h2>Nades by {user.nickname}</h2>
-          <NadeList padding={0} nades={nades} />
+          <NadeList nades={nades} />
         </div>
       </div>
       <style jsx>{`
         .user-container {
-          margin: 18px;
+          margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           display: flex;
+          flex-direction: ${isMobile ? "column" : "row"};
         }
 
         .user-details {
           position: relative;
           background: white;
-          margin-right: 18px;
+          margin-right: ${isMobile ? "0px" : "18px"};
           padding: 12px;
-          flex: 1;
-          max-width: 300px;
-          border: 1px solid ${Colors.PRIMARY_BORDER};
+          width: ${isMobile ? "100%" : "300px"};
+          border: 1px solid ${colors.PRIMARY_BORDER};
           align-self: flex-start;
           border-radius: 3px;
+          margin-bottom: ${isMobile ? uiDimensions.INNER_GUTTER_SIZE : 0}px;
         }
 
         .user-details h1 {
@@ -67,7 +70,7 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
           position: absolute;
           top: 12px;
           right: 12px;
-          background: ${Colors.PRIMARY};
+          background: ${colors.PRIMARY};
           color: white;
           font-size: 0.8em;
           padding: 3px 6px;

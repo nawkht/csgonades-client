@@ -28,8 +28,6 @@ export const NadeTechniqueValue: FC<Props> = ({
     ? techniqueString(technique)
     : "Not selected...";
 
-  console.log("#", technique, techniqueText);
-
   return (
     <>
       {isEditing && (

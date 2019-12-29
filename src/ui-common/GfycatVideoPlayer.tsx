@@ -2,13 +2,14 @@ import { FC, useState, useMemo } from "react";
 import ReactPlayer from "react-player";
 import { GfycatData } from "../models/Nade";
 import { useKeepAspectRatio } from "../utils/CommonHooks";
-import { Icon } from "semantic-ui-react";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 type Props = {
   gfyData: GfycatData;
 };
 
 export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
+  const { colors, durations } = useTheme();
   const [highDef, setHighDef] = useState(true);
   const { ref, height, width } = useKeepAspectRatio();
 
@@ -70,13 +71,17 @@ export const GfycatVideoPlayer: FC<Props> = ({ gfyData }) => {
 
           .quality {
             cursor: pointer;
-            background rgba(50, 147, 168,0.7);
+            background ${colors.PRIMARY_75_PERCENT};
             padding: 3px 12px;
             border-radius: 6px;
             font-size: 0.8em;
-            font-weight: bold;
             text-align: center;
             color: white;
+          transition: background ${durations.transition}s;
+          }
+
+          .quality:hover {
+            background ${colors.PRIMARY};
           }
 
           .gfycat-player video {

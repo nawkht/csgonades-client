@@ -1,19 +1,15 @@
 import { FC } from "react";
 import { NadeItem } from "./NadeItem";
 import { NadeLight } from "src/models/Nade";
-import { useRouter } from "next/router";
-import { UiConstants } from "../../constants/ui";
 import { redirectNadePage } from "../utils/Common";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 interface Props {
   nades: NadeLight[];
-  padding?: number;
 }
 
-const NadeList: FC<Props> = ({ nades, padding }) => {
-  const router = useRouter();
-
-  const nadeListPadding = typeof padding === "undefined" ? 18 : padding;
+const NadeList: FC<Props> = ({ nades }) => {
+  const { uiDimensions } = useTheme();
 
   function onNadeClick(id: string) {
     redirectNadePage(id);
@@ -27,8 +23,8 @@ const NadeList: FC<Props> = ({ nades, padding }) => {
         </div>
         <style jsx>{`
           .nadelist-nonade-container {
-            padding: ${nadeListPadding}px;
-            min-height: calc(100vh - ${UiConstants.HEADER_HEIGHT}px);
+            padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+            min-height: calc(100vh - ${uiDimensions.HEADER_HEIGHT}px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -57,7 +53,6 @@ const NadeList: FC<Props> = ({ nades, padding }) => {
         {`
           #nadelist {
             display: flex;
-            padding: ${nadeListPadding}px;
           }
         `}
       </style>

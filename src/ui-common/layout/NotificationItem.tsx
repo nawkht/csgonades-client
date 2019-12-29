@@ -3,23 +3,25 @@ import {
   NotificationSeverity
 } from "../../store/NotificationStore/NotificationActions";
 import { FC } from "react";
-import { Colors } from "../../../constants/colors";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   notification: AppNotification;
 };
 
 export const NotificationItem: FC<Props> = ({ notification }) => {
+  const { colors } = useTheme();
+
   function colorFromSeverity(severity: NotificationSeverity) {
     switch (severity) {
       case "info":
-        return Colors.PRIMARY_90_PERCENT;
+        return colors.PRIMARY_90_PERCENT;
       case "error":
-        return Colors.ERROR_90;
+        return colors.ERROR_90;
       case "success":
-        return Colors.SUCCESS_90;
+        return colors.SUCCESS_90;
       case "warning":
-        return Colors.WARNING_90;
+        return colors.WARNING_90;
     }
   }
 

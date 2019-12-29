@@ -1,7 +1,7 @@
 import { Button, Dropdown, DropdownProps } from "semantic-ui-react";
 import { FC, useState } from "react";
 import { Status, StatusInfo } from "../../../models/Nade";
-import { Colors } from "../../../../constants/colors";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   status: Status;
@@ -10,6 +10,7 @@ type Props = {
 };
 
 export const StatusEditor: FC<Props> = ({ status, statusInfo, onSave }) => {
+  const { colors } = useTheme();
   const [curStatus, setCurStatus] = useState(status);
   const [curStatusInfo, setCurStatusInfo] = useState(statusInfo);
   const shouldDisplayInfo = curStatus === "declined" || curStatus === "deleted";
@@ -59,7 +60,7 @@ export const StatusEditor: FC<Props> = ({ status, statusInfo, onSave }) => {
           resize: none;
           width: 100%;
           outline: none;
-          border: 1px solid ${Colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.PRIMARY_BORDER};
           padding: 6px 12px;
           margin-top: 12px;
         }

@@ -6,12 +6,14 @@ import thunk from "redux-thunk";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
+import { LayoutReducer } from "./LayoutStore/LayoutReducer";
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
   notification: NotificationReducer,
   nadeStore: NadeReducer,
-  favoriteStore: FavoriteReducer
+  favoriteStore: FavoriteReducer,
+  layoutStore: LayoutReducer
 });
 
 function createMiddleware() {
@@ -39,7 +41,8 @@ export const initReduxStore = (initialState: AppState) => {
       auth: persistReducer({ key: "auth", storage }, AuthReducer),
       notification: NotificationReducer,
       nadeStore: NadeReducer,
-      favoriteStore: FavoriteReducer
+      favoriteStore: FavoriteReducer,
+      layoutStore: LayoutReducer
     });
 
     store = createStore(rootReducerClient, initialState, createMiddleware());

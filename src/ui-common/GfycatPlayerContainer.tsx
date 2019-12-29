@@ -2,11 +2,10 @@ import { useState, FC, useEffect } from "react";
 import { GfycatEditor } from "./GfycatEditor";
 import { NadeApi } from "../api/NadeApi";
 import { GfycatVideoPlayer } from "./GfycatVideoPlayer";
-import { GfycatData, Nade } from "../models/Nade";
-import { Colors } from "../../constants/colors";
-import { Icon } from "semantic-ui-react";
+import { Nade } from "../models/Nade";
 import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
-import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
+import { EditButton } from "./EditButton";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 export type Aspect = "16:9" | "16:10";
 
@@ -16,6 +15,8 @@ type Props = {
 };
 
 export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
+  const { colors, durations } = useTheme();
+
   const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
@@ -42,8 +43,8 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
     <>
       <div className="gfycat-container">
         {!isEditing && allowEdit && (
-          <div className="edit-button" onClick={onEditClick}>
-            <Icon link name="pencil alternate" />
+          <div className="edit-button">
+            <EditButton isEditing={isEditing} onClick={onEditClick} />
           </div>
         )}
 
@@ -54,7 +55,7 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
         .gfycat-container {
           background: white;
           position: relative;
-          border: 1px solid ${Colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.PRIMARY_BORDER};
           border-top-left-radius: 4px;
           border-top-right-radius: 4px;
           border-bottom: none;
@@ -70,12 +71,8 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
           top: 12px;
           right: 12px;
           opacity: 0;
-          transition: opacity 0.2s;
-          color: white;
+          transition: opacity ${durations.transition}s;
           z-index: 998;
-          padding: 3px 12px;
-          border-radius: 6px;
-          background rgba(50, 147, 168,0.7);
         }
       `}</style>
     </>

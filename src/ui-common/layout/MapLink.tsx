@@ -1,9 +1,8 @@
 import { FC } from "react";
 import Link from "next/link";
 import { CsgoMap } from "../../models/Nade";
-import { UiConstants } from "../../../constants/ui";
-import { Colors } from "../../../constants/colors";
 import { capitalize } from "../../utils/Common";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   mapName: CsgoMap;
@@ -11,6 +10,8 @@ type Props = {
 };
 
 export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
+  const { colors, uiDimensions, durations } = useTheme();
+
   const selected = currentMapPath ? currentMapPath.includes(mapName) : false;
   return (
     <>
@@ -30,10 +31,10 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           display: inline-flex;
           align-content: center;
           color: #444;
-          padding: ${UiConstants.PADDING_MEDIUM}px
-            ${UiConstants.PADDING_LARGE}px;
+          padding: ${uiDimensions.PADDING_MEDIUM}px
+            ${uiDimensions.PADDING_LARGE}px;
           width: 100%;
-          transition: background 0.2s;
+          transition: background ${durations.transition}s;
         }
 
         li a:hover {
@@ -46,7 +47,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
 
         li a .nav-text {
           align-self: center;
-          margin-left: ${UiConstants.PADDING_SMALL}px;
+          margin-left: ${uiDimensions.PADDING_SMALL}px;
         }
 
         .image-container {
@@ -58,7 +59,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
         }
 
         .nav-selected {
-          background: ${Colors.PRIMARY_10_PERCENT};
+          background: ${colors.PRIMARY_10_PERCENT};
         }
       `}</style>
     </>

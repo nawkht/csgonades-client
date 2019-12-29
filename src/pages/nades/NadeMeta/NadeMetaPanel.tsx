@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { Nade } from "../../../models/Nade";
-import { Colors } from "../../../../constants/colors";
 import { Icon } from "semantic-ui-react";
 import { NadeMapValue } from "./NadeMapValue";
 import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";
@@ -9,6 +8,8 @@ import { NadeTickrateValue } from "./NadeTickrateValue";
 import { NadeTechniqueValue } from "./NadeTechniqueValue";
 import { NadeViewsValue } from "./NadeViewsValue";
 import { NadeMapSiteValue } from "./NadeMapSiteValue";
+import { EditButton } from "../../../ui-common/EditButton";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   nade: Nade;
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
+  const { colors, durations } = useTheme();
   const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [map, setMap] = useState(nade.map);
@@ -43,11 +45,11 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
     <>
       <div className="nade-meta-panel">
         {allowEdit && !isEditing && (
-          <div
-            className="nade-meta-edit-container"
-            onClick={() => setIsEditing(true)}
-          >
-            <Icon circular link name="pencil alternate" />
+          <div className="edit-btn-container">
+            <EditButton
+              isEditing={isEditing}
+              onClick={() => setIsEditing(true)}
+            />
           </div>
         )}
 
@@ -113,16 +115,20 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
       <style jsx>{`
         .nade-meta-panel {
           position: relative;
-          border-top: 1px solid ${Colors.PRIMARY_BORDER};
-          border-left: 1px solid ${Colors.PRIMARY_BORDER};
-          border-right: 1px solid ${Colors.PRIMARY_BORDER};
+          border-top: 1px solid ${colors.PRIMARY_BORDER};
+          border-left: 1px solid ${colors.PRIMARY_BORDER};
+          border-right: 1px solid ${colors.PRIMARY_BORDER};
           border-radius: 4px;
+        }
+
+        .nade-meta-panel:hover .edit-btn-container {
+          opacity: 1;
         }
 
         .nade-meta-item {
           background: white;
           padding: 12px 18px;
-          border-bottom: 1px solid ${Colors.PRIMARY_BORDER};
+          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
         }
 
         .map-meta-title {
@@ -131,14 +137,16 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           font-size: 0.9em;
           margin-right: 12px;
           min-width: 75px;
-          border-right: 1px dotted ${Colors.PRIMARY_BORDER};
+          border-right: 1px dotted ${colors.PRIMARY_BORDER};
         }
 
-        .nade-meta-edit-container {
+        .edit-btn-container {
           position: absolute;
           top: 100%;
-          right: 0px;
+          left: 0;
           padding-top: 6px;
+          opacity: 0;
+          transition: opacity ${durations.transition}s;
         }
       `}</style>
     </>

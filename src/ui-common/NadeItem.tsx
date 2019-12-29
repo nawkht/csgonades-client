@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
 import { NadeLight } from "../models/Nade";
-import { Colors } from "../../constants/colors";
 import { GfycatThumbnail } from "./GfycatThumbnail";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 interface Props {
   nade: NadeLight;
@@ -10,6 +10,7 @@ interface Props {
 }
 
 const NadeItem: FC<Props> = ({ nade, onClick }) => {
+  const { colors, isMobile, durations } = useTheme();
   const title = nade.title || "No title...";
 
   return (
@@ -36,15 +37,16 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
       <style jsx>{`
         .nadebox {
           background: #fff;
-          width: 220px;
-          margin-right: 16px;
+          width: ${isMobile ? "100%" : "220px"};
+          margin-right: ${isMobile ? 0 : 16}px;
           margin-bottom: 16px;
-          border: 1px solid ${Colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.PRIMARY_BORDER};
           border-radius: 4px;
           cursor: pointer;
           transform: scale(1);
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
-          transition: box-shadow 0.3s, transform 0.3s;
+          transition: box-shadow ${durations.transition}s,
+            transform ${durations.transition}s;
         }
 
         .nadebox:hover {
@@ -76,8 +78,8 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
         }
 
         .video {
-          border-top: 1px solid ${Colors.PRIMARY_BORDER};
-          border-bottom: 1px solid ${Colors.PRIMARY_BORDER};
+          border-top: 1px solid ${colors.PRIMARY_BORDER};
+          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
           margin-right: 1px;
           margin-left: 1px;
           overflow: hidden;

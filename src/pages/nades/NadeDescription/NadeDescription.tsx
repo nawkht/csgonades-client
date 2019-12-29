@@ -1,10 +1,10 @@
-import { Colors } from "../../../../constants/colors";
 import { FC, useState } from "react";
 import { Nade } from "../../../models/Nade";
 import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
-import { Icon } from "semantic-ui-react";
 import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
 import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";
+import { EditButton } from "../../../ui-common/EditButton";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   nade: Nade;
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
+  const { colors, durations } = useTheme();
   const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(nade.description || "");
@@ -29,12 +30,12 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
   return (
     <>
       <div className="nade-desc-wrapper">
-        {allowEdit && !isEditing && (
-          <div
-            className="nade-desc-edit-wrapper"
-            onClick={() => setIsEditing(true)}
-          >
-            <Icon link={true} name="edit" />
+        {allowEdit && (
+          <div className="edit-button">
+            <EditButton
+              isEditing={isEditing}
+              onClick={() => setIsEditing(true)}
+            />
           </div>
         )}
 
@@ -53,19 +54,26 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
         .nade-desc-wrapper {
           position: relative;
           background: white;
-          border: 1px solid ${Colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.PRIMARY_BORDER};
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
+        }
+
+        .nade-desc-wrapper:hover .edit-button {
+          opacity: 1;
         }
 
         .nade-desc-body {
           padding: 12px 18px;
         }
 
-        .nade-desc-edit-wrapper {
+        .edit-button {
           position: absolute;
-          top: 12px;
-          right: 18px;
+          top: calc(100%);
+          left: 0;
+          opacity: 0;
+          transition: opacity 0 ${durations}s;
+          padding-top: 6px;
         }
       `}</style>
     </>

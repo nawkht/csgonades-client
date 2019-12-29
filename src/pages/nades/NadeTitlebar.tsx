@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
-import { Icon, Input, Button } from "semantic-ui-react";
+import { Input, Button, Icon } from "semantic-ui-react";
 import { useUpdateNadeAction } from "../../store/NadeStore/NadeActions";
-import { useRouter } from "next/router";
 import { Nade } from "../../models/Nade";
 import { FavoriteButton } from "./FavoriteButton";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { EditButton } from "../../ui-common/EditButton";
 
 type Props = {
   nade: Nade;
@@ -11,7 +12,7 @@ type Props = {
 };
 
 export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
-  const router = useRouter();
+  const theme = useTheme();
   const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [nadeTitle, setNadeTitle] = useState(nade.title || "");
@@ -23,35 +24,46 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
     updateNade(nade.id, { title: nadeTitle });
   }
 
+  function onCancel() {
+    setIsEditing(false);
+    setNadeTitle(nade.title);
+  }
+
   return (
     <>
       <div className="nade-title">
-        <div onClick={() => router.back()}>
-          <Icon link className="back-icon" name="chevron left" size="large" />
-        </div>
         {allowEdit && isEditing && (
           <div className="title-edit-container">
             <Input
+              transparent
+              placeholder="Search..."
+              size="massive"
               value={nadeTitle}
               onChange={e => setNadeTitle(e.target.value)}
             />
-            <Button onClick={onTitleSave}>Update</Button>
+            <div className="nade-edit-container">
+              <span onClick={onCancel}>
+                <Icon circular link color="grey" name="cancel" />
+              </span>
+              <span onClick={onTitleSave}>
+                <Icon inverted circular link color="olive" name="check" />
+              </span>
+            </div>
           </div>
         )}
 
         {!isEditing && (
-          <h1>
-            {theTitle}
+          <div className="title-contrainer">
+            <h1>{theTitle}</h1>
             {allowEdit && (
               <div className="title-edit-button">
-                <Button
-                  icon="pencil alternate"
-                  circular
+                <EditButton
+                  isEditing={isEditing}
                   onClick={() => setIsEditing(true)}
                 />
               </div>
             )}
-          </h1>
+          </div>
         )}
 
         <FavoriteButton nadeId={nade.id} />
@@ -60,32 +72,38 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
         .nade-title {
           display: flex;
           align-items: center;
-          padding: 18px 18px 0 18px;
+          justify-content: space-between;
+          padding: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
+          padding-bottom: 0;
+        }
+
+        .title-contrainer {
+          display: flex;
+          align-items: center;
         }
 
         .nade-title h1 {
           display: inline-flex;
           padding: 0;
           margin: 0;
-          font-size: 1.9em;
-          margin-left: 12px;
+          font-size: ${theme.isMobile ? "1.3em" : "1.73em"};
           font-weight: normal;
-          flex: 1;
           align-items: center;
         }
 
-        .title-edit-container {
-          flex: 1;
-        }
-
-        .nade-title h1:hover .title-edit-button {
+        .nade-title:hover .title-edit-button {
           opacity: 1;
         }
 
-        .nade-title h1 .title-edit-button {
+        .nade-title .title-edit-button {
           margin-left: 12px;
           opacity: 0;
           transition: opacity 0.3s;
+        }
+
+        .title-edit-container {
+          display: flex;
+          align-items: center;
         }
       `}</style>
     </>

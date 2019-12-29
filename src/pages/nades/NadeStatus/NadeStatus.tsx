@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Status, StatusInfo } from "../../../models/Nade";
-import { Colors } from "../../../../constants/colors";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { ThemeState } from "../../../store/LayoutStore/LayoutReducer";
 
 type Props = {
   status: Status;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
+  const theme = useTheme();
+
   if (status === "accepted") {
     return null;
   }
@@ -40,7 +43,7 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
     }
   }
 
-  const statusColors = statusColor(status);
+  const statusColors = statusColor(status, theme);
 
   return (
     <>
@@ -66,30 +69,31 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
   );
 };
 
-function statusColor(status: Status) {
+function statusColor(status: Status, theme: ThemeState) {
+  const { colors } = theme;
   switch (status) {
     case "accepted":
       return {
-        border: Colors.PRIMARY_BORDER,
+        border: colors.PRIMARY_BORDER,
         background: "#00f064",
         text: "white"
       };
     case "pending":
       return {
-        border: Colors.PRIMARY_BORDER,
+        border: colors.PRIMARY_BORDER,
         background: "#f09800",
         text: "white"
       };
     case "declined":
       return {
-        border: Colors.PRIMARY_BORDER,
+        border: colors.PRIMARY_BORDER,
         background: "#bf0000",
         text: "white"
       };
 
     default:
       return {
-        border: Colors.PRIMARY_BORDER,
+        border: colors.PRIMARY_BORDER,
         background: "white",
         text: "#222"
       };
