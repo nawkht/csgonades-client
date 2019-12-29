@@ -43,15 +43,12 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
           border: 1px solid ${colors.PRIMARY_BORDER};
           border-radius: 4px;
           cursor: pointer;
-          transform: scale(1);
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
-          transition: box-shadow ${durations.transition}s,
-            transform ${durations.transition}s;
+          transition: box-shadow ${durations.transition}s;
         }
 
         .nadebox:hover {
           box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-          transform: scale(1.005);
         }
 
         .title {
