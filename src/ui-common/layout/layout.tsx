@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import ReactGA from "react-ga";
 import { useUpdateLayout } from "../../utils/CommonHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 
 interface Props {
   title?: string;
@@ -27,11 +28,9 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
       window.GA_INITIALIZED = true;
 
       if (IS_PROD) {
-        // @ts-ignore
-        ReactGA.ga(function(tracker) {
+        ReactGA.ga(function(tracker: any) {
           var clientId = tracker.get("clientId");
-          console.log("#GA Clientid", clientId);
-          // TODO: Might use this instead of setting custom session token
+          GoogleAnalytics.setUserId(clientId);
         });
       }
     }

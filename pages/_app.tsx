@@ -54,7 +54,6 @@ class MyApp extends App<Props> {
 
     if (userResult.isOk()) {
       setUser(dispatch, userResult.value);
-      GoogleAnalytics.setUserId(userResult.value.steamID);
     }
 
     if (favoriteResult.isOk()) {
