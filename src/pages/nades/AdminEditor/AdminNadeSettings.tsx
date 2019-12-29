@@ -36,7 +36,7 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
         onSave={onStatusSave}
       />
       <h3>Force User</h3>
-      <ForceUserSettings nadeId={nade.id} />
+      <ForceUserSettings onClose={onDismiss} nadeId={nade.id} />
       <h3>Force Stats</h3>
       <h3>Delete</h3>
       <p>Write "DELETE":</p>
