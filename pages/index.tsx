@@ -1,7 +1,7 @@
 import React from "react";
 import { NextPage } from "next";
 import { FrontPage } from "../src/pages/frontpage/FrontPage";
-import { Nade } from "../src/models/Nade";
+import { Nade } from "../src/models/Nade/Nade";
 
 interface Props {
   nades: Nade[];

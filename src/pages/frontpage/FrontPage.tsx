@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { FrontPageStats } from "./FrontPageStats";
-import { Nade } from "../../models/Nade";
+import { Nade } from "../../models/Nade/Nade";
 import { Layout } from "../../ui-common/layout/layout";
 import { FrontPageJumbo } from "./FrontPageJumbo";
 

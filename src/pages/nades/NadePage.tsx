@@ -1,4 +1,4 @@
-import { Nade } from "../../models/Nade";
+import { Nade } from "../../models/Nade/Nade";
 import { Layout } from "../../ui-common/layout/layout";
 import { NadeTitlebar } from "./NadeTitlebar";
 import { NadeMetaPanel } from "./NadeMeta/NadeMetaPanel";

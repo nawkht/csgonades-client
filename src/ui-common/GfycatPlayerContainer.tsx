@@ -2,7 +2,7 @@ import { useState, FC, useEffect } from "react";
 import { GfycatEditor } from "./GfycatEditor";
 import { NadeApi } from "../api/NadeApi";
 import { GfycatVideoPlayer } from "./GfycatVideoPlayer";
-import { Nade } from "../models/Nade";
+import { Nade } from "../models/Nade/Nade";
 import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
 import { EditButton } from "./EditButton";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";

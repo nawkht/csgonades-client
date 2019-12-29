@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
-import { NadeLight } from "../models/Nade";
+import { NadeLight } from "../models/Nade/Nade";
 import { GfycatThumbnail } from "./GfycatThumbnail";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { tickrateString } from "../models/Nade/NadeTickrate";
 
 interface Props {
   nade: NadeLight;
@@ -32,6 +33,12 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
             <Icon name="eye" size="small" />
             <span className="icon-text">{nade.stats.views}</span>
           </div>
+          {nade.tickrate && nade.tickrate !== "any" && (
+            <div className="stat tick">
+              <Icon name="code" size="small" />
+              <span className="icon-text">{tickrateString(nade.tickrate)}</span>
+            </div>
+          )}
         </div>
       </div>
       <style jsx>{`
@@ -61,17 +68,24 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
         }
 
         .stats {
-          padding: 3px 6px;
+          display: flex;
+          padding: 3px;
+          justify-content: space-between;
         }
 
         .stat {
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          margin-right: 6px;
         }
 
         .stat .icon-text {
           font-size: 0.75em;
+        }
+
+        .tick {
+          color: ${colors.PRIMARY};
         }
 
         .video {

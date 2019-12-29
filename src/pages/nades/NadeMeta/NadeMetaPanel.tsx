@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Nade } from "../../../models/Nade";
+import { Nade } from "../../../models/Nade/Nade";
 import { Icon } from "semantic-ui-react";
 import { NadeMapValue } from "./NadeMapValue";
 import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";

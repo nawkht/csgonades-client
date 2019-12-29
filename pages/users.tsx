@@ -4,7 +4,7 @@ import { UserApi } from "../src/api/UserApi";
 import { UserPage } from "../src/pages/users/UsersPage";
 import { AppError } from "../src/utils/ErrorUtil";
 import { NadeApi } from "../src/api/NadeApi";
-import { NadeLight } from "../src/models/Nade";
+import { NadeLight } from "../src/models/Nade/Nade";
 
 interface Props {
   user?: User;

@@ -1,8 +1,8 @@
 import { FC, useState, useMemo } from "react";
 import ReactPlayer from "react-player";
-import { GfycatData } from "../models/Nade";
 import { useKeepAspectRatio } from "../utils/CommonHooks";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { GfycatData } from "../models/Nade/GfycatData";
 
 type Props = {
   gfyData: GfycatData;

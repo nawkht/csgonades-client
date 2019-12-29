@@ -2,7 +2,7 @@ import { Button } from "semantic-ui-react";
 import { useIsAdminOrModerator } from "../../../store/AuthStore/AuthHooks";
 import { AdminEditorModal } from "./AdminEditorModal";
 import { useState, FC } from "react";
-import { Nade } from "../../../models/Nade";
+import { Nade } from "../../../models/Nade/Nade";
 
 type Props = {
   nade: Nade;

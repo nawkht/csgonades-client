@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { CSGNModal } from "../../../ui-common/CSGNModal";
 import { AdminNadeSettings } from "./AdminNadeSettings";
-import { Nade } from "../../../models/Nade";
+import { Nade } from "../../../models/Nade/Nade";
 
 type Props = {
   visible: boolean;

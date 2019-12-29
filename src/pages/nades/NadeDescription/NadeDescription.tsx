@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Nade } from "../../../models/Nade";
+import { Nade } from "../../../models/Nade/Nade";
 import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
 import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
 import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";

@@ -3,7 +3,7 @@ import { User } from "../../models/User";
 import { formatDate } from "../../models/DateFormater";
 import { capitalize } from "../../utils/Common";
 import { NadeList } from "../../ui-common/NadeList";
-import { NadeLight } from "../../models/Nade";
+import { NadeLight } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 type Props = {

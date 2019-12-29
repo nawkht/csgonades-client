@@ -3,7 +3,7 @@ import { User } from "../../models/User";
 import { UserNotFound } from "./UserNotFound";
 import { UserUI } from "./UserUI";
 import { AppError } from "../../utils/ErrorUtil";
-import { NadeLight } from "../../models/Nade";
+import { NadeLight } from "../../models/Nade/Nade";
 
 type Props = {
   user?: User;

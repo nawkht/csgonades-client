@@ -3,7 +3,7 @@ import { Layout } from "../../ui-common/layout/layout";
 import { Button, Segment, Grid, Divider } from "semantic-ui-react";
 import { NewNadeGfycat } from "./NewNadeGfycat";
 import { NewNadeImage } from "./NewNadeImage";
-import { NadeBody } from "../../models/Nade";
+import { NadeBody } from "../../models/Nade/Nade";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { useCreateNade } from "../../store/NadeStore/NadeHooks";
 import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";

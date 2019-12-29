@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Nade } from "../../models/Nade";
+import { Nade } from "../../models/Nade/Nade";
 import { userSelector } from "./AuthSelectors";
 import {
   useReduxDispatch,

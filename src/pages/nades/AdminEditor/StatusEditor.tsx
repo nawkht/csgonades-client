@@ -1,6 +1,6 @@
 import { Button, Dropdown, DropdownProps } from "semantic-ui-react";
 import { FC, useState } from "react";
-import { Status, StatusInfo } from "../../../models/Nade";
+import { Status, StatusInfo } from "../../../models/Nade/Nade";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {

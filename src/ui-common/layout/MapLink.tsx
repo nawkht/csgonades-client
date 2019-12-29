@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Link from "next/link";
-import { CsgoMap } from "../../models/Nade";
 import { capitalize } from "../../utils/Common";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
 
 type Props = {
   mapName: CsgoMap;

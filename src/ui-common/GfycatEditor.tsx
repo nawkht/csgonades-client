@@ -1,9 +1,8 @@
 import { FC, useState, ChangeEvent } from "react";
-import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
-import { Dimmer, Loader, Button, Input, Message } from "semantic-ui-react";
+import { Button, Input, Message } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
 import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
-import { Nade } from "../models/Nade";
+import { Nade } from "../models/Nade/Nade";
 
 type Props = {
   nade: Nade;

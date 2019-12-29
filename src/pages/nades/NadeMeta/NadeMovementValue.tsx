@@ -1,7 +1,10 @@
 import { FC } from "react";
-import { Movement, nadeMovementOptions } from "../../../models/Nade";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import { capitalize } from "../../../utils/Common";
+import {
+  Movement,
+  nadeMovementOptions
+} from "../../../models/Nade/NadeMovement";
 
 type Props = {
   movement?: Movement;

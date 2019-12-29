@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { MapSite, nadeMapSiteOptions } from "../../../models/Nade";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import { capitalize } from "../../../utils/Common";
+import { MapSite, nadeMapSiteOptions } from "../../../models/Nade/MapSite";
 
 type Props = {
   mapSite?: MapSite;

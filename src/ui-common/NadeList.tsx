@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { NadeItem } from "./NadeItem";
-import { NadeLight } from "src/models/Nade";
+import { NadeLight } from "src/models/Nade/Nade";
 import { redirectNadePage } from "../utils/Common";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 

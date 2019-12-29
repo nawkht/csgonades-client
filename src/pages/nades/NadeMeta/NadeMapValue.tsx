@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { CsgoMap, nadeMapOptions } from "../../../models/Nade";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import { capitalize } from "../../../utils/Common";
+import { CsgoMap, nadeMapOptions } from "../../../models/Nade/CsGoMap";
 
 type Props = {
   map?: CsgoMap;

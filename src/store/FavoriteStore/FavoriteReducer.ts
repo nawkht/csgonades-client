@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { Favorite } from "../../models/Favorite";
 import { FavoriteActions } from "./FavoriteActions";
-import { NadeLight } from "../../models/Nade";
+import { NadeLight } from "../../models/Nade/Nade";
 
 export type FavoritesState = {
   favorites: Favorite[];

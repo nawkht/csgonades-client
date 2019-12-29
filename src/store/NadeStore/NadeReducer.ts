@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { NadeLight, Nade } from "../../models/Nade";
+import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { NadeActions } from "./NadeActions";
 
 export type NadeState = {

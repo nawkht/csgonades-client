@@ -5,11 +5,7 @@ import { Notifications } from "./Notifications";
 import { useEffect } from "react";
 import ReactGA from "react-ga";
 import { useUpdateLayout } from "../../utils/CommonHooks";
-import {
-  useTheme,
-  useIsMobile,
-  useIsNavigationOpen
-} from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 interface Props {
   title?: string;
@@ -17,8 +13,7 @@ interface Props {
 
 export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
   useUpdateLayout();
-  const { isMobile, uiDimensions } = useTheme();
-  const isNaviationOpen = useIsNavigationOpen();
+  const { isMobile, uiDimensions, sideBarOpen } = useTheme();
 
   useEffect(() => {
     const IS_BROWSER = typeof window !== "undefined";
@@ -56,7 +51,7 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
 
       <Notifications />
 
-      {isNaviationOpen && <MapNavigation />}
+      {sideBarOpen && <MapNavigation />}
 
       <div id="content">
         <main>{children}</main>

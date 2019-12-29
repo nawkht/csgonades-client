@@ -1,4 +1,4 @@
-import { Nade, Status, StatusInfo } from "../../../models/Nade";
+import { Nade, Status, StatusInfo } from "../../../models/Nade/Nade";
 import { FC, useState } from "react";
 import { StatusEditor } from "./StatusEditor";
 import { ForceUserSettings } from "./ForceUserSettings";

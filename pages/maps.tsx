@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { Nade, NadeLight, CsgoMap } from "../src/models/Nade";
 import { NadeApi } from "../src/api/NadeApi";
 import { MapPage } from "../src/pages/maps/MapPage";
 import { GoogleAnalytics } from "../src/utils/GoogleAnalytics";
@@ -7,6 +6,7 @@ import { useEffect } from "react";
 import { addNadeAction } from "../src/store/NadeStore/NadeActions";
 import { useSelector } from "react-redux";
 import { nadesSelector } from "../src/store/NadeStore/NadeSelectors";
+import { CsgoMap } from "../src/models/Nade/CsGoMap";
 
 interface Props {
   map: CsgoMap;

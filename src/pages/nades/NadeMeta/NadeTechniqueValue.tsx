@@ -4,7 +4,7 @@ import {
   Technique,
   nadeTechniqueOptions,
   techniqueString
-} from "../../../models/Technique";
+} from "../../../models/Nade/Technique";
 
 type Props = {
   technique?: Technique;

@@ -1,5 +1,5 @@
 import { Favorite } from "../../models/Favorite";
-import { NadeLight } from "../../models/Nade";
+import { NadeLight } from "../../models/Nade/Nade";
 
 type AddAllFavoritesAction = {
   type: "@@favorites/add_all";

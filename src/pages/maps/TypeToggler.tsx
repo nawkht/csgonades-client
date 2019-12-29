@@ -1,6 +1,6 @@
-import { NadeType } from "../../models/Nade";
 import { FC } from "react";
 import { Popup } from "semantic-ui-react";
+import { NadeType } from "../../models/Nade/NadeType";
 
 type Props = {
   active: boolean;

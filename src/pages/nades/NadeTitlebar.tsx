@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Input, Button, Icon } from "semantic-ui-react";
 import { useUpdateNadeAction } from "../../store/NadeStore/NadeActions";
-import { Nade } from "../../models/Nade";
+import { Nade } from "../../models/Nade/Nade";
 import { FavoriteButton } from "./FavoriteButton";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { EditButton } from "../../ui-common/EditButton";

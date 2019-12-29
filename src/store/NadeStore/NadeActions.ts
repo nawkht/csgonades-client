@@ -10,7 +10,7 @@ import {
   NadeLight,
   NadeStatusDTO,
   Nade
-} from "../../models/Nade";
+} from "../../models/Nade/Nade";
 import { Dispatch } from "redux";
 
 type AddNadesAction = {

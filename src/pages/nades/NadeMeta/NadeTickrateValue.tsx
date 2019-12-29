@@ -1,10 +1,10 @@
 import { FC } from "react";
+import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
   Tickrate,
   nadeTickrateOptions,
   tickrateString
-} from "../../../models/Nade";
-import { Dropdown, DropdownProps } from "semantic-ui-react";
+} from "../../../models/Nade/NadeTickrate";
 
 type Props = {
   tickrate?: Tickrate;

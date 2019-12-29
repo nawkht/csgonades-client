@@ -1,4 +1,4 @@
-import { Nade, NadeBody, CsgoMap } from "../../models/Nade";
+import { Nade, NadeBody } from "../../models/Nade/Nade";
 import { useSelector } from "react-redux";
 import { userSelector, tokenSelector } from "../AuthStore/AuthSelectors";
 import {
@@ -15,6 +15,7 @@ import {
 } from "./NadeActions";
 import { addNotificationAction } from "../NotificationStore/NotificationActions";
 import { redirectNadePage } from "../../utils/Common";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
 
 export const useCanEditNade = (nade: Nade): boolean => {
   const user = useSelector(userSelector);

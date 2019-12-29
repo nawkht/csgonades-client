@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 import { TypeToggler } from "./TypeToggler";
-import { CsgoMap } from "../../models/Nade";
 import { NadeFilterOptions } from "../../api/NadeApi";
 import { useFetchNades } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
 
 type Props = {
   map: CsgoMap;
@@ -24,24 +24,28 @@ export const NadeFilter: FC<Props> = ({ map }) => {
     setShowMolotov(true);
     setShowHeGrenade(true);
     setIsDefault(true);
+
+    fetchNades();
   }
 
   function onSmokeClick() {
     if (!isDefault && showSmokes) {
       resetToogles();
     } else {
-      const filter: NadeFilterOptions = {
-        flash: showFlash,
-        hegrenade: showHeGrenade,
-        molotov: showMolotov,
-        smoke: showSmokes
-      };
-      fetchNades(filter);
       setShowSmokes(true);
       setShowFlash(false);
       setShowMolotov(false);
       setShowHeGrenade(false);
       setIsDefault(false);
+
+      const filter: NadeFilterOptions = {
+        flash: false,
+        hegrenade: false,
+        molotov: false,
+        smoke: true
+      };
+
+      fetchNades(filter);
     }
   }
 
@@ -54,6 +58,15 @@ export const NadeFilter: FC<Props> = ({ map }) => {
       setShowMolotov(false);
       setShowHeGrenade(false);
       setIsDefault(false);
+
+      const filter: NadeFilterOptions = {
+        flash: true,
+        hegrenade: false,
+        molotov: false,
+        smoke: false
+      };
+
+      fetchNades(filter);
     }
   }
 
@@ -66,6 +79,15 @@ export const NadeFilter: FC<Props> = ({ map }) => {
       setShowMolotov(true);
       setShowHeGrenade(false);
       setIsDefault(false);
+
+      const filter: NadeFilterOptions = {
+        flash: false,
+        hegrenade: false,
+        molotov: true,
+        smoke: false
+      };
+
+      fetchNades(filter);
     }
   }
 
@@ -78,6 +100,15 @@ export const NadeFilter: FC<Props> = ({ map }) => {
       setShowMolotov(false);
       setShowHeGrenade(true);
       setIsDefault(false);
+
+      const filter: NadeFilterOptions = {
+        flash: false,
+        hegrenade: true,
+        molotov: false,
+        smoke: false
+      };
+
+      fetchNades(filter);
     }
   }
 

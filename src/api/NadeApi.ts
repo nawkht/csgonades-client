@@ -3,13 +3,14 @@ import {
   NadeBody,
   NadeUpdateBody,
   NadeLight,
-  CsgoMap,
-  NadeStatusDTO,
-  GfycatData
-} from "../models/Nade";
+  NadeStatusDTO
+} from "../models/Nade/Nade";
 import axios from "axios";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 import { ok } from "neverthrow";
+import { encodeQueryData } from "../utils/Common";
+import { CsgoMap } from "../models/Nade/CsGoMap";
+import { GfycatData } from "../models/Nade/GfycatData";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -22,6 +23,14 @@ export type NadeFilterOptions = {
   hegrenade: boolean;
   molotov: boolean;
 };
+
+function nadeFilterToUrlParam(filter?: NadeFilterOptions) {
+  if (!filter) {
+    return "";
+  }
+
+  return "?" + encodeQueryData(filter);
+}
 
 export class NadeApi {
   static async getAll(): AppResult<NadeLight[]> {
@@ -40,7 +49,11 @@ export class NadeApi {
     filter?: NadeFilterOptions
   ): AppResult<NadeLight[]> {
     try {
-      const res = await axios.get(`${BASE_URL}/nades/map/${mapName}`);
+      const filterQuery = nadeFilterToUrlParam(filter);
+
+      const res = await axios.get(
+        `${BASE_URL}/nades/map/${mapName}${filterQuery}`
+      );
       const nades = res.data as NadeLight[];
 
       return ok(nades);

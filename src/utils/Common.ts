@@ -1,5 +1,5 @@
-import { CsgoMap } from "../models/Nade";
 import Router from "next/router";
+import { CsgoMap } from "../models/Nade/CsGoMap";
 
 export const capitalize = (s: string) => {
   if (typeof s !== "string") return "";
@@ -17,3 +17,10 @@ export const redirectUserPage = (steamId: string) => {
 export const redirectNadePage = (nadeId: string) => {
   Router.push(`/nades?id=${nadeId}`, `/nades/${nadeId}`);
 };
+
+export function encodeQueryData(data: any) {
+  const ret = [];
+  for (let d in data)
+    ret.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+  return ret.join("&");
+}
