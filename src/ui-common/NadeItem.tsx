@@ -23,8 +23,8 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
         <div className="title">{title}</div>
         <div className="video">
           <GfycatThumbnail
-            imageUrl={nade.images.thumbnailUrl}
-            gfyUrl={nade.gfycat.smallVideoUrl}
+            imageUrl={nade.images?.thumbnailUrl}
+            gfyUrl={nade.gfycat?.smallVideoUrl}
           />
         </div>
         <div className="stats">

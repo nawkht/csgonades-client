@@ -22,7 +22,7 @@ const Header: FC = () => {
             </div>
           )}
 
-          <Link href="/">
+          <Link href="/" as="/">
             <a className="logo">
               <img src="/logo.png" />
             </a>
