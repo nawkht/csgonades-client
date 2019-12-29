@@ -55,6 +55,7 @@ const MapNavigation: FC = () => {
           justify-content: space-between;
           z-index: 999;
         }
+
         ul {
           list-style: none;
           padding: 0;

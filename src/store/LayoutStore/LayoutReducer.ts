@@ -78,7 +78,7 @@ export const LayoutReducer: Reducer<ThemeState, LayoutActions> = (
         isMobile: true,
         sideBarOpen: false,
         uiDimensions: {
-          SIDEBAR_WIDTH: 0,
+          SIDEBAR_WIDTH: 180,
           HEADER_HEIGHT: 60,
           PADDING_SMALL: 6,
           PADDING_MEDIUM: 12,

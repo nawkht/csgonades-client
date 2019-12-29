@@ -17,7 +17,7 @@ interface Props {
 
 export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
   useUpdateLayout();
-  const theme = useTheme();
+  const { isMobile, uiDimensions } = useTheme();
   const isNaviationOpen = useIsNavigationOpen();
 
   useEffect(() => {
@@ -71,8 +71,8 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
         }
 
         main {
-          margin-left: ${theme.uiDimensions.SIDEBAR_WIDTH}px;
-          margin-top: ${theme.uiDimensions.HEADER_HEIGHT}px;
+          margin-left: ${isMobile ? 0 : uiDimensions.SIDEBAR_WIDTH}px;
+          margin-top: ${uiDimensions.HEADER_HEIGHT}px;
           background-color: #f2f2f2;
           flex: 1;
         }
