@@ -53,6 +53,7 @@ const NadeList: FC<Props> = ({ nades }) => {
         {`
           #nadelist {
             display: flex;
+            flex-wrap: wrap;
           }
         `}
       </style>
