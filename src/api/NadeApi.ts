@@ -8,8 +8,8 @@ import {
   GfycatData
 } from "../models/Nade";
 import axios from "axios";
-import { AppResult, getError } from "../utils/ErrorUtil";
-import { ok, err } from "neverthrow";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
+import { ok } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -31,8 +31,7 @@ export class NadeApi {
 
       return ok(nades);
     } catch (error) {
-      console.error(error);
-      return err(getError(error.message));
+      return extractApiError(error);
     }
   }
 
@@ -46,8 +45,7 @@ export class NadeApi {
 
       return ok(nades);
     } catch (error) {
-      console.error(error);
-      return err(getError(error.message));
+      return extractApiError(error);
     }
   }
 
@@ -60,8 +58,7 @@ export class NadeApi {
       const nades = res.data as Nade;
       return ok(nades);
     } catch (error) {
-      console.error(error);
-      return err(getError(error.message));
+      return extractApiError(error);
     }
   }
 
@@ -71,8 +68,7 @@ export class NadeApi {
       const nades = res.data as NadeLight[];
       return ok(nades);
     } catch (error) {
-      console.error(error);
-      return err(getError(error.message));
+      return extractApiError(error);
     }
   }
 
@@ -84,8 +80,7 @@ export class NadeApi {
       const nades = res.data as NadeLight[];
       return ok(nades);
     } catch (error) {
-      console.error(error);
-      return err(getError(error.message));
+      return extractApiError(error);
     }
   }
 
@@ -97,8 +92,7 @@ export class NadeApi {
       const nade = res.data as Nade;
       return ok(nade);
     } catch (error) {
-      console.error(error);
-      return err(getError(error.message));
+      return extractApiError(error);
     }
   }
 
@@ -116,8 +110,7 @@ export class NadeApi {
 
       return ok(updatedNade);
     } catch (error) {
-      console.error("NadeApi.update failed", error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   }
 
@@ -129,12 +122,13 @@ export class NadeApi {
 
       return ok(true);
     } catch (error) {
-      console.error("NadeApi.delete", error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   }
 
   static async registerView(id: string) {
+    try {
+    } catch (error) {}
     await axios.post(
       `${BASE_URL}/nades/${id}/countView`,
       {},
@@ -161,8 +155,7 @@ export class NadeApi {
 
       return ok(updatedNade);
     } catch (error) {
-      console.error(error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   }
 
@@ -186,8 +179,7 @@ export class NadeApi {
 
       return ok(updatedNade);
     } catch (error) {
-      console.error(error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   }
 
@@ -199,8 +191,7 @@ export class NadeApi {
       const gfycatData = res.data as GfycatData;
       return ok(gfycatData);
     } catch (error) {
-      console.error(error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   }
 }

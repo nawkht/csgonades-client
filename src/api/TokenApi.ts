@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AppResult, getError } from "../utils/ErrorUtil";
-import { ok, err } from "neverthrow";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
+import { ok } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -19,7 +19,7 @@ export class AuthApi {
       });
       return ok(res.data.accessToken);
     } catch (error) {
-      return err(getError(error));
+      return extractApiError(error);
     }
   }
 

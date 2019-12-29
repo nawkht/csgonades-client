@@ -1,7 +1,7 @@
 import axios from "axios";
-import { AppResult, getError } from "../utils/ErrorUtil";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
 import { Favorite } from "../models/Favorite";
-import { ok, err } from "neverthrow";
+import { ok } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -17,8 +17,7 @@ export class FavoriteApi {
       const favorites = res.data as Favorite[];
       return ok(favorites);
     } catch (error) {
-      const prettyError = getError(error);
-      return err(prettyError);
+      return extractApiError(error);
     }
   }
 
@@ -34,8 +33,7 @@ export class FavoriteApi {
       const favorite = res.data as Favorite;
       return ok(favorite);
     } catch (error) {
-      const prettyError = getError(error);
-      return err(prettyError);
+      return extractApiError(error);
     }
   }
 
@@ -49,8 +47,7 @@ export class FavoriteApi {
       });
       return ok(true);
     } catch (error) {
-      const prettyError = getError(error);
-      return err(prettyError);
+      return extractApiError(error);
     }
   }
 }

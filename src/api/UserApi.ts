@@ -1,7 +1,7 @@
 import axios from "axios";
 import { User } from "../models/User";
-import { AppResult, getError } from "../utils/ErrorUtil";
-import { ok, err } from "neverthrow";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
+import { ok } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -17,8 +17,7 @@ export class UserApi {
       const user = res.data as User;
       return ok(user);
     } catch (error) {
-      console.error(error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   };
 
@@ -28,8 +27,7 @@ export class UserApi {
       const user = res.data as User;
       return ok(user);
     } catch (error) {
-      console.error(error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   };
 
@@ -39,8 +37,7 @@ export class UserApi {
       const users = res.data as User[];
       return ok(users);
     } catch (error) {
-      console.error(error);
-      return err(getError(error));
+      return extractApiError(error);
     }
   };
 }
