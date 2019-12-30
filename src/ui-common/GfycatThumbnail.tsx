@@ -1,5 +1,4 @@
 import { FC, useState, useEffect, useRef, useMemo } from "react";
-import { useKeepAspectRatio } from "../utils/CommonHooks";
 import useComponentSize from "@rehooks/component-size";
 
 type Props = {

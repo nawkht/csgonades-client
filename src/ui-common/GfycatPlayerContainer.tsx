@@ -1,13 +1,10 @@
 import { useState, FC, useEffect, useMemo, useRef } from "react";
 import { GfycatEditor } from "./GfycatEditor";
 import { NadeApi } from "../api/NadeApi";
-import { GfycatVideoPlayer } from "./GfycatVideoPlayer";
 import { Nade } from "../models/Nade/Nade";
 import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
 import { EditButton } from "./EditButton";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
-import { useKeepAspectRatio } from "../utils/CommonHooks";
-import useComponentSize from "@rehooks/component-size";
 import { GfycatLargePlayer } from "./GfycatLargePlayer";
 
 export type Aspect = "16:9" | "16:10";

@@ -5,7 +5,6 @@ import {
 } from "../store/LayoutStore/LayoutActions";
 import { useDispatch } from "react-redux";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
-import useComponentSize from "@rehooks/component-size";
 
 export function useWindowSize() {
   const isClient = typeof window === "object";
@@ -33,32 +32,6 @@ export function useWindowSize() {
   }, []); // Empty array ensures that effect is only run on mount and unmount
 
   return windowSize;
-}
-
-export function useKeepAspectRatio() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { width } = useComponentSize(ref);
-  const height = useMemo(() => width / (16 / 9), [width]);
-
-  return {
-    ref,
-    height,
-    width
-  };
-}
-
-export function useComponentWidth() {
-  const [width, setWidth] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const window = useWindowSize();
-
-  useEffect(() => {
-    if (ref.current) {
-      setWidth(ref.current.offsetWidth);
-    }
-  }, [window]);
-
-  return { ref, width };
 }
 
 export function useUpdateLayout() {
