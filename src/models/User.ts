@@ -12,6 +12,10 @@ export type User = {
   lastActive: Date;
 };
 
+export type UserUpdateDTO = Partial<
+  Omit<User, "lastActive" | "updatedAt" | "avatar" | "steamID">
+>;
+
 export type UserLight = {
   nickname: string;
   steamId: string;

@@ -9,7 +9,8 @@ import { AuthApi } from "../../api/TokenApi";
 import { signOutUser, setToken, setUser } from "./AuthActions";
 import { UserApi } from "../../api/UserApi";
 import Router from "next/router";
-import { redirectMapPage, redirectUserPage } from "../../utils/Common";
+import { redirectUserPage } from "../../utils/Common";
+import { User } from "../../models/User";
 
 export const useIsSignedIn = (): boolean => {
   const user = useSelector(userSelector);
@@ -30,6 +31,26 @@ export const useIsAllowedNadeEdit = (nade: Nade): boolean => {
   }
 
   if (user.steamID === nade.steamId) {
+    return true;
+  }
+
+  return false;
+};
+
+export const useIsAllowedUserEdit = (user: User): boolean => {
+  const signedInUser = useSelector(userSelector);
+  if (!signedInUser) {
+    return false;
+  }
+
+  if (
+    signedInUser.role === "administrator" ||
+    signedInUser.role === "moderator"
+  ) {
+    return true;
+  }
+
+  if (signedInUser.steamID === user.steamID) {
     return true;
   }
 

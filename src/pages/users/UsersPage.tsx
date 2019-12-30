@@ -4,18 +4,14 @@ import { UserNotFound } from "./UserNotFound";
 import { UserUI } from "./UserUI";
 import { AppError } from "../../utils/ErrorUtil";
 import { NadeLight } from "../../models/Nade/Nade";
+import { useUsersState } from "../../store/UsersStore/UsersHooks";
 
-type Props = {
-  user?: User;
-  userNades?: NadeLight[];
-  error?: AppError;
-};
-
-const UserPage: React.FC<Props> = ({ user, userNades, error }) => {
+const UserPage: React.FC = () => {
+  const { user, error, nades } = useUsersState();
   return (
     <Layout>
       {error && <UserNotFound />}
-      {user && userNades && <UserUI user={user} nades={userNades} />}
+      {user && <UserUI user={user} nades={nades} />}
     </Layout>
   );
 };

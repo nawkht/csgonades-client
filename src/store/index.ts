@@ -7,13 +7,15 @@ import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { LayoutReducer } from "./LayoutStore/LayoutReducer";
+import { UsersReducer } from "./UsersStore/UsersReducer";
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
   notification: NotificationReducer,
   nadeStore: NadeReducer,
   favoriteStore: FavoriteReducer,
-  layoutStore: LayoutReducer
+  layoutStore: LayoutReducer,
+  usersStore: UsersReducer
 });
 
 function createMiddleware() {
@@ -42,7 +44,8 @@ export const initReduxStore = (initialState: AppState) => {
       notification: NotificationReducer,
       nadeStore: NadeReducer,
       favoriteStore: FavoriteReducer,
-      layoutStore: LayoutReducer
+      layoutStore: LayoutReducer,
+      usersStore: UsersReducer
     });
 
     store = createStore(rootReducerClient, initialState, createMiddleware());

@@ -1,38 +1,30 @@
 import { NextPage } from "next";
-import { User } from "../src/models/User";
 import { UserApi } from "../src/api/UserApi";
 import { UserPage } from "../src/pages/users/UsersPage";
-import { AppError } from "../src/utils/ErrorUtil";
 import { NadeApi } from "../src/api/NadeApi";
-import { NadeLight } from "../src/models/Nade/Nade";
+import {
+  setUsersError,
+  setViewingUserAction
+} from "../src/store/UsersStore/UsersActions";
 
-interface Props {
-  user?: User;
-  nades?: NadeLight[];
-  error?: AppError;
-}
-
-const UserPageComponent: NextPage<Props> = ({ user, nades, error }) => {
-  return <UserPage user={user} userNades={nades} error={error} />;
+const UserPageComponent: NextPage = () => {
+  return <UserPage />;
 };
 
 UserPageComponent.getInitialProps = async context => {
+  const { dispatch } = context.store;
   const steamId = context.query.id as string;
 
-  const [userResult, nadeResult] = await Promise.all([
-    UserApi.fetchUser(steamId),
-    NadeApi.byUser(steamId)
-  ]);
+  const userResult = await UserApi.fetchUser(steamId);
 
   if (userResult.isErr()) {
-    return { error: userResult.error };
+    dispatch(setUsersError(userResult.error));
+    return;
   }
 
-  if (nadeResult.isErr()) {
-    return { error: nadeResult.error };
-  }
+  dispatch(setViewingUserAction(userResult.value));
 
-  return { user: userResult.value, nades: nadeResult.value };
+  return;
 };
 
 export default UserPageComponent;
