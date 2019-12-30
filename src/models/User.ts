@@ -7,14 +7,17 @@ export type User = {
   avatar: string;
   bio?: string;
   role: Role;
-  createdAt: Date;
-  updatedAt: Date;
-  lastActive: Date;
+  createdAt: string;
+  updatedAt: string;
+  lastActive: string;
 };
 
-export type UserUpdateDTO = Partial<
-  Omit<User, "lastActive" | "updatedAt" | "avatar" | "steamID">
->;
+export type UserUpdateDTO = {
+  nickname?: string;
+  email?: string;
+  bio?: string;
+  createdAt?: Date;
+};
 
 export type UserLight = {
   nickname: string;

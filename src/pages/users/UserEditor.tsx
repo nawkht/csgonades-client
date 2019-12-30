@@ -1,17 +1,21 @@
 import { FC, useState } from "react";
 import { User, UserUpdateDTO } from "../../models/User";
-import { Button, Input, TextArea, Form } from "semantic-ui-react";
+import { Button, TextArea, Form } from "semantic-ui-react";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import {
   useUsersActions,
   useUsersState
 } from "../../store/UsersStore/UsersHooks";
+import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
+import ReactDatepicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type Props = {
   user: User;
 };
 
 export const UserEditor: FC<Props> = ({ user }) => {
+  const isAdminOrMod = useIsAdminOrModerator();
   const { stopEditingUser, updateUser } = useUsersActions();
   const { isEditing, isUpdatingUser } = useUsersState();
 
@@ -19,6 +23,9 @@ export const UserEditor: FC<Props> = ({ user }) => {
   const [nickname, setNickname] = useState(user.nickname);
   const [email, setEmail] = useState(user.email);
   const [bio, setBio] = useState(user.bio);
+  const [createdAt, setCreatedAt] = useState<Date | null>(
+    new Date(user.createdAt)
+  );
 
   if (!isEditing) {
     return null;
@@ -28,8 +35,11 @@ export const UserEditor: FC<Props> = ({ user }) => {
     const updatedUserFields: UserUpdateDTO = {
       bio,
       email,
-      nickname
+      nickname,
+      createdAt: createdAt || undefined
     };
+
+    console.log("Update", updatedUserFields);
 
     updateUser(updatedUserFields);
   }
@@ -62,6 +72,16 @@ export const UserEditor: FC<Props> = ({ user }) => {
               onChange={e => setBio(e.currentTarget.value)}
             />
           </Form.Field>
+          {isAdminOrMod && (
+            <Form.Field>
+              <label>Created at</label>
+              <ReactDatepicker
+                selected={createdAt}
+                onChange={newDate => setCreatedAt(newDate)}
+              />
+            </Form.Field>
+          )}
+
           <Button onClick={stopEditingUser}>Cancel</Button>
           <Button positive type="submit">
             Submit
