@@ -1,17 +1,19 @@
 import { FC } from "react";
 import { UserLight } from "../../models/User";
 import Link from "next/link";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   user: UserLight;
-  marginTop?: number;
 };
 
-export const UserContainer: FC<Props> = ({ user, marginTop }) => {
+export const UserContainer: FC<Props> = ({ user }) => {
+  const { uiDimensions, colors } = useTheme();
   const { avatar, nickname } = user;
   return (
     <>
       <div className="user-container">
+        <span className="user-label">Created by</span>
         <Link href={`/users?id=${user.steamId}`} as={`/users/${user.steamId}`}>
           <a className="user-link">
             <img
@@ -28,9 +30,22 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
       </div>
       <style jsx>{`
         .user-container {
-          margin-top: ${marginTop || 0}px;
           display: flex;
           justify-content: flex-end;
+          align-items: center;
+          font-size: 0.8em;
+          background: white;
+          border-right: 1px solid ${colors.PRIMARY_BORDER};
+          border-left: 1px solid ${colors.PRIMARY_BORDER};
+          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
+          padding: ${uiDimensions.PADDING_LARGE}px;
+          padding-top: 0;
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
+        }
+
+        .user-label {
+          margin-right: 6px;
         }
 
         .user-link {
@@ -39,12 +54,12 @@ export const UserContainer: FC<Props> = ({ user, marginTop }) => {
           color: #444;
         }
 
-        .user-container:hover .user-nickname {
+        .user-link:hover .user-nickname {
           text-decoration: underline;
         }
 
         .user-avatar {
-          width: 30px;
+          width: 25px;
           margin-right: 6px;
           border-radius: 50%;
         }

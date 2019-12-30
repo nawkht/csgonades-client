@@ -15,7 +15,7 @@ type Props = {
 };
 
 const NadePage: React.FC<Props> = ({ nade }) => {
-  const theme = useTheme();
+  const { uiDimensions, isMobile } = useTheme();
   const allowEdit = useCanEditNade(nade);
 
   return (
@@ -25,11 +25,11 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         <div className="nade-main">
           <GfycatPlayerContrainer nade={nade} allowEdit={allowEdit} />
           <NadeDescription nade={nade} allowEdit={allowEdit} />
+          <UserContainer user={nade.user} />
         </div>
         <div className="nade-aside">
-          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           <NadeMetaPanel allowEdit={allowEdit} nade={nade} />
-          <UserContainer user={nade.user} marginTop={18 * 3} />
+          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           <AdminEditor nade={nade} />
         </div>
       </div>
@@ -37,16 +37,12 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         {`
           .nade-container {
             display: flex;
-            flex-direction: ${theme.isMobile ? "column" : "row"};
-            padding: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
+            flex-direction: ${isMobile ? "column" : "row"};
+            padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           }
           .nade-main {
-            margin-right: ${theme.isMobile
-              ? 0
-              : theme.uiDimensions.INNER_GUTTER_SIZE}px;
-            margin-bottom: ${theme.isMobile
-              ? theme.uiDimensions.INNER_GUTTER_SIZE
-              : 0}px;
+            margin-right: ${isMobile ? 0 : uiDimensions.INNER_GUTTER_SIZE}px;
+            margin-bottom: ${isMobile ? uiDimensions.INNER_GUTTER_SIZE : 0}px;
             flex: 1;
           }
           .nade-aside {

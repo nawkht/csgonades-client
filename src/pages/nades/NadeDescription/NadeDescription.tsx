@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
-  const { colors, durations } = useTheme();
+  const { colors, durations, uiDimensions } = useTheme();
   const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(nade.description || "");
@@ -54,9 +54,8 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
         .nade-desc-wrapper {
           position: relative;
           background: white;
-          border: 1px solid ${colors.PRIMARY_BORDER};
-          border-bottom-left-radius: 4px;
-          border-bottom-right-radius: 4px;
+          border-left: 1px solid ${colors.PRIMARY_BORDER};
+          border-right: 1px solid ${colors.PRIMARY_BORDER};
         }
 
         .nade-desc-wrapper:hover .edit-button {
@@ -64,13 +63,13 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
         }
 
         .nade-desc-body {
-          padding: 12px 18px;
+          padding: ${uiDimensions.PADDING_LARGE}px;
         }
 
         .edit-button {
           position: absolute;
           top: calc(100%);
-          left: 0;
+          left: ${uiDimensions.PADDING_LARGE}px;
           opacity: 0;
           transition: opacity 0 ${durations}s;
           padding-top: 6px;

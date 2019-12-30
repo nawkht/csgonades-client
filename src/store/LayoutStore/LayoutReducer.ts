@@ -43,8 +43,8 @@ const initialState: ThemeState = {
     PADDING_MEDIUM: 12,
     PADDING_LARGE: 18,
     PADDING_HUGE: 24,
-    INNER_GUTTER_SIZE: 18,
-    OUTER_GUTTER_SIZE: 18
+    INNER_GUTTER_SIZE: 24,
+    OUTER_GUTTER_SIZE: 24
   },
   colors: {
     PRIMARY: "#1c90c0",

@@ -51,7 +51,7 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
       <style jsx>{`
         .status-container {
           position: relative;
-          margin-bottom: 18px;
+          margin-top: ${theme.uiDimensions.INNER_GUTTER_SIZE * 1.5}px;
           background: ${statusColors.background};
           border: 1px solid ${statusColors.border};
           padding: 12px 18px;
