@@ -38,7 +38,7 @@ export const AdminEditor: FC<Props> = ({ nade }) => {
       </div>
       <style jsx>{`
         .admin-editor {
-          margin-top: 18px;
+          margin-top: 36px;
         }
       `}</style>
     </>
