@@ -12,23 +12,21 @@ type Props = {
 };
 
 export const MapPage: FC<Props> = ({ nades, map }) => {
-  const theme = useTheme();
+  const { isMobile, uiDimensions } = useTheme();
+
+  const numItemsPerRow = isMobile ? 1 : 4;
 
   return (
     <Layout>
       <NadeFilter map={map} />
       <div className="nade-list">
-        <NadeList nades={nades} />
+        <NadeList numItemsPerRow={numItemsPerRow} nades={nades} />
       </div>
       <style jsx>{`
         .nade-list {
-          margin: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
-          margin-left: ${theme.isMobile
-            ? 0
-            : theme.uiDimensions.OUTER_GUTTER_SIZE + 35}px;
-          margin-top: ${theme.isMobile
-            ? 50
-            : theme.uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin-left: ${isMobile ? 0 : uiDimensions.OUTER_GUTTER_SIZE + 35}px;
+          margin-top: ${isMobile ? 50 : uiDimensions.OUTER_GUTTER_SIZE}px;
         }
       `}</style>
     </Layout>

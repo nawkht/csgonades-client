@@ -17,6 +17,8 @@ export const FavoritesPage: FC = () => {
     fetchFavoritedNades();
   }, []);
 
+  const numItemsPerRow = theme.isMobile ? 1 : 5;
+
   return (
     <>
       <div className="favorites-container">
@@ -24,7 +26,7 @@ export const FavoritesPage: FC = () => {
         {!isLoading && (
           <>
             <h2>Your favorites</h2>
-            <NadeList nades={nades} />
+            <NadeList numItemsPerRow={numItemsPerRow} nades={nades} />
           </>
         )}
       </div>

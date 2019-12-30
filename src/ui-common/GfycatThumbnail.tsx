@@ -59,6 +59,8 @@ export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
         .player {
           position: relative;
           width: 100%;
+          overflow: hidden;
+          z-index: 998;
         }
 
         .player:hover .front {
@@ -76,10 +78,10 @@ export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
         }
 
         .front img {
-          width: 100%;
+          width: 101%;
         }
         .back video {
-          width: 100%;
+          width: 101%;
         }
       `}</style>
     </>

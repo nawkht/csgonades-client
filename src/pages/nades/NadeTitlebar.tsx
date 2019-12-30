@@ -73,8 +73,12 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
-          padding-bottom: 0;
+          padding: ${theme.isMobile
+            ? theme.uiDimensions.INNER_GUTTER_SIZE
+            : theme.uiDimensions.OUTER_GUTTER_SIZE}px;
+          padding-bottom: ${theme.isMobile
+            ? theme.uiDimensions.INNER_GUTTER_SIZE
+            : 0}px;
         }
 
         .title-contrainer {

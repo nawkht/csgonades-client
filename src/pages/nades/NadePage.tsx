@@ -46,7 +46,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             flex: 1;
           }
           .nade-aside {
-            min-width: 280px;
+            width: ${isMobile ? "100%" : "280px"};
           }
         `}
       </style>

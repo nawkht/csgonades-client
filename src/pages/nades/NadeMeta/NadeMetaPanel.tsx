@@ -130,7 +130,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           border-top: 1px solid ${colors.PRIMARY_BORDER};
           border-left: 1px solid ${colors.PRIMARY_BORDER};
           border-right: 1px solid ${colors.PRIMARY_BORDER};
-          border-radius: 4px;
+          border-radius: 3px;
         }
 
         .nade-meta-panel:hover .edit-btn-container {

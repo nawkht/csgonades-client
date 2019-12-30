@@ -13,6 +13,7 @@ type Props = {
 
 export const UserUI: FC<Props> = ({ user, nades }) => {
   const { colors, isMobile, uiDimensions } = useTheme();
+  const numItemsPerRow = isMobile ? 1 : 3;
 
   return (
     <>
@@ -32,7 +33,7 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
         </div>
         <div className="user-nades">
           <h2>Nades by {user.nickname}</h2>
-          <NadeList nades={nades} />
+          <NadeList numItemsPerRow={numItemsPerRow} nades={nades} />
         </div>
       </div>
       <style jsx>{`
@@ -40,6 +41,10 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
           margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           display: flex;
           flex-direction: ${isMobile ? "column" : "row"};
+        }
+
+        .user-nades {
+          flex: 1;
         }
 
         .user-details {

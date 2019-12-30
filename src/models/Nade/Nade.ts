@@ -36,6 +36,7 @@ export type Nade = {
 
 export type NadeLight = {
   id: string;
+  status: Status;
   title?: string;
   gfycat: GfycatData;
   images: NadeImages;

@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
-  const { colors, durations } = useTheme();
+  const { colors, durations, isMobile } = useTheme();
 
   const updateNade = useUpdateNadeAction();
   const [isEditing, setIsEditing] = useState(false);
@@ -74,8 +74,8 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
           background: white;
           position: relative;
           border: 1px solid ${colors.PRIMARY_BORDER};
-          border-top-left-radius: 4px;
-          border-top-right-radius: 4px;
+          border-top-left-radius: ${isMobile ? 0 : 4}px;
+          border-top-right-radius: ${isMobile ? 0 : 4}px;
           border-bottom: none;
           overflow: hidden;
         }

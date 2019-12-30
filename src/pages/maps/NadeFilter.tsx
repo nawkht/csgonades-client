@@ -147,6 +147,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          z-index: 999;
         }
 
         .nade-filter-container .nade-filter {
@@ -165,6 +166,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           right: 0px;
           display: flex;
           justify-content: center;
+          z-index: 999;
         }
 
         .nade-filter-container-mobile .nade-filter {
