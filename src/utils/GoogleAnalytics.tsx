@@ -1,6 +1,7 @@
 import ReactGA from "react-ga";
 
 const IS_BROWSER = typeof window !== "undefined";
+const IS_PROD = process.env.NODE_ENV === "production";
 
 export class GoogleAnalytics {
   static event(category: string, action: string) {
@@ -35,9 +36,6 @@ export class GoogleAnalytics {
   }
 
   private static init() {
-    const IS_BROWSER = typeof window !== "undefined";
-    const IS_PROD = process.env.NODE_ENV === "production";
-
     if (IS_BROWSER && !window.GA_INITIALIZED) {
       ReactGA.initialize("UA-71896446-6", {
         testMode: IS_PROD ? false : true,
