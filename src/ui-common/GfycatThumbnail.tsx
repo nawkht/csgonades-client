@@ -1,5 +1,6 @@
 import { FC, useState, useEffect, useRef, useMemo } from "react";
 import useComponentSize from "@rehooks/component-size";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 type Props = {
   imageUrl: string;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
+  const { colors } = useTheme();
   const [isHovering, setIsHovering] = useState(false);
   const ref = useRef(null);
   const { width } = useComponentSize(ref);
@@ -61,6 +63,10 @@ export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
           width: 100%;
           overflow: hidden;
           z-index: 998;
+          background: #bbb url("/icons/loading.png");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 15%;
         }
 
         .player:hover .front {
