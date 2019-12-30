@@ -3,7 +3,6 @@ import { Header } from "./header";
 import { MapNavigation } from "./navigation";
 import { Notifications } from "./Notifications";
 import { useEffect } from "react";
-import ReactGA from "react-ga";
 import { useUpdateLayout } from "../../utils/CommonHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
@@ -17,27 +16,8 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
   const { isMobile, uiDimensions, sideBarOpen } = useTheme();
 
   useEffect(() => {
-    const IS_BROWSER = typeof window !== "undefined";
-    const IS_PROD = process.env.NODE_ENV === "production";
-
-    if (IS_BROWSER && !window.GA_INITIALIZED) {
-      ReactGA.initialize("UA-71896446-6", {
-        testMode: IS_PROD ? false : true,
-        debug: IS_PROD ? false : true
-      });
-      window.GA_INITIALIZED = true;
-
-      if (IS_PROD) {
-        ReactGA.ga(function(tracker: any) {
-          var clientId = tracker.get("clientId");
-          GoogleAnalytics.setUserId(clientId);
-        });
-      }
-    }
-
     const location = window.location.pathname + window.location.search;
-
-    ReactGA.pageview(location);
+    GoogleAnalytics.pageView(location);
   }, []);
 
   return (
