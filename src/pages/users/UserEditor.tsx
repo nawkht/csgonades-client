@@ -77,6 +77,8 @@ export const UserEditor: FC<Props> = ({ user }) => {
               <label>Created at</label>
               <ReactDatepicker
                 selected={createdAt}
+                showYearDropdown
+                showMonthDropdown
                 onChange={newDate => setCreatedAt(newDate)}
               />
             </Form.Field>

@@ -2,12 +2,16 @@ import { Nade, Status, StatusInfo } from "../../../models/Nade/Nade";
 import { FC, useState } from "react";
 import { StatusEditor } from "./StatusEditor";
 import { ForceUserSettings } from "./ForceUserSettings";
-import { useUpdateNadeStatus } from "../../../store/NadeStore/NadeActions";
+import {
+  useUpdateNadeStatus,
+  useUpdateNadeAction
+} from "../../../store/NadeStore/NadeActions";
 import {
   useDeleteNade,
   useForceNadeYear
 } from "../../../store/NadeStore/NadeHooks";
 import { Input, Button } from "semantic-ui-react";
+import ReactDatePicker from "react-datepicker";
 
 type Props = {
   nade: Nade;
@@ -16,10 +20,12 @@ type Props = {
 
 export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
   const updateNadeStatus = useUpdateNadeStatus();
-  const forceNadeYear = useForceNadeYear();
+  const updateNade = useUpdateNadeAction();
   const deleteNade = useDeleteNade();
   const [deleteConfimMessage, setDeleteConfimMessage] = useState("");
-  const [updatedYear, setUpdatedYear] = useState("");
+  const [createdAt, setCreatedAt] = useState<Date | null>(
+    new Date(nade.createdAt)
+  );
 
   function onStatusSave(status: Status, statusInfo?: StatusInfo) {
     updateNadeStatus(nade.id, { status, statusInfo });
@@ -32,8 +38,11 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
     }
   }
 
-  function onUpdateYear() {
-    forceNadeYear(nade.id, updatedYear);
+  function onUpdateCreatedAt() {
+    if (createdAt) {
+      updateNade(nade.id, { createdAt: createdAt });
+    }
+
     onDismiss();
   }
 
@@ -47,12 +56,15 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
       />
       <h3>Force User</h3>
       <ForceUserSettings onClose={onDismiss} nadeId={nade.id} />
-      <h3>Force Year</h3>
-      <Input
-        value={updatedYear}
-        onChange={(_, text) => setUpdatedYear(text.value)}
+      <h3>Force Date</h3>
+      <ReactDatePicker
+        selected={createdAt}
+        showYearDropdown
+        showMonthDropdown
+        onChange={newDate => setCreatedAt(newDate)}
       />
-      <Button onClick={onUpdateYear}>UPDATE YEAR</Button>
+      <br />
+      <Button onClick={onUpdateCreatedAt}>UPDATE YEAR</Button>
       <h3>Delete</h3>
       <p>Write "DELETE":</p>
       <Input

@@ -27,8 +27,8 @@ export type Nade = {
   type?: NadeType;
   steamId: string;
   user: UserLight;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   status: Status;
   statusInfo?: StatusInfo;
   mapSite?: MapSite;
@@ -42,7 +42,7 @@ export type NadeLight = {
   images: NadeImages;
   type?: NadeType;
   tickrate?: Tickrate;
-  createdAt: Date;
+  createdAt: string;
   stats: NadeStats;
   mapSite?: MapSite;
 };
@@ -65,6 +65,7 @@ export type NadeUpdateBody = {
   status?: Status;
   statusInfo?: StatusInfo;
   mapSite?: MapSite;
+  createdAt?: Date;
 };
 
 export type NadeStatusDTO = {
