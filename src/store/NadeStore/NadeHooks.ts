@@ -144,6 +144,40 @@ export const useFetchNades = (mapName: CsgoMap) => {
   };
 };
 
+export const useForceNadeYear = () => {
+  const reduxDispatch = useReduxDispatch();
+  return (nadeId: string, year: string) => {
+    const thunk: ReduxThunkAction = async (dispatch, getState) => {
+      const authToken = tokenSelector(getState());
+      if (!authToken) {
+        return addNotificationAction(dispatch, {
+          message: "Can't update, seems like your not signed in.",
+          severity: "error"
+        });
+      }
+
+      if (year.length !== 4) {
+        return addNotificationAction(dispatch, {
+          message: "Year must be 4 chars long",
+          severity: "error"
+        });
+      }
+
+      const result = await NadeApi.forceYear(nadeId, year, authToken);
+
+      if (result.isErr()) {
+        return addNotificationAction(dispatch, {
+          message: "Failed to update nade year.",
+          severity: "error"
+        });
+      }
+
+      addSelectedNadeAction(result.value, dispatch);
+    };
+    reduxDispatch(thunk);
+  };
+};
+
 export const useDeleteNade = () => {
   const reduxDispatch = useReduxDispatch();
   return (nadeId: string) => {

@@ -3,7 +3,10 @@ import { FC, useState } from "react";
 import { StatusEditor } from "./StatusEditor";
 import { ForceUserSettings } from "./ForceUserSettings";
 import { useUpdateNadeStatus } from "../../../store/NadeStore/NadeActions";
-import { useDeleteNade } from "../../../store/NadeStore/NadeHooks";
+import {
+  useDeleteNade,
+  useForceNadeYear
+} from "../../../store/NadeStore/NadeHooks";
 import { Input, Button } from "semantic-ui-react";
 
 type Props = {
@@ -13,8 +16,10 @@ type Props = {
 
 export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
   const updateNadeStatus = useUpdateNadeStatus();
+  const forceNadeYear = useForceNadeYear();
   const deleteNade = useDeleteNade();
   const [deleteConfimMessage, setDeleteConfimMessage] = useState("");
+  const [updatedYear, setUpdatedYear] = useState("");
 
   function onStatusSave(status: Status, statusInfo?: StatusInfo) {
     updateNadeStatus(nade.id, { status, statusInfo });
@@ -27,6 +32,11 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
     }
   }
 
+  function onUpdateYear() {
+    forceNadeYear(nade.id, updatedYear);
+    onDismiss();
+  }
+
   return (
     <div>
       <h3>Nade Status</h3>
@@ -37,7 +47,12 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
       />
       <h3>Force User</h3>
       <ForceUserSettings onClose={onDismiss} nadeId={nade.id} />
-      <h3>Force Stats</h3>
+      <h3>Force Year</h3>
+      <Input
+        value={updatedYear}
+        onChange={(_, text) => setUpdatedYear(text.value)}
+      />
+      <Button onClick={onUpdateYear}>UPDATE YEAR</Button>
       <h3>Delete</h3>
       <p>Write "DELETE":</p>
       <Input

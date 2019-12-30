@@ -196,6 +196,30 @@ export class NadeApi {
     }
   }
 
+  static async forceYear(
+    nadeId: string,
+    year: string,
+    token: string
+  ): AppResult<Nade> {
+    try {
+      const result = await axios.patch(
+        `${BASE_URL}/nades/${nadeId}/year/${year}`,
+        {},
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      );
+
+      const updatedNade = result.data as Nade;
+
+      return ok(updatedNade);
+    } catch (error) {
+      return extractApiError(error);
+    }
+  }
+
   static async validateGfycat(gfyIdOrUrl: string): AppResult<GfycatData> {
     try {
       const res = await axios.post(`${BASE_URL}/nades/validateGfycat`, {

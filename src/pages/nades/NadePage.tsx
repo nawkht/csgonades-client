@@ -9,6 +9,7 @@ import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
 import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
 import { NadeDescription } from "./NadeDescription/NadeDescription";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { dateFromNow } from "../../utils/DateUtils";
 
 type Props = {
   nade: Nade;
@@ -26,6 +27,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           <GfycatPlayerContrainer nade={nade} allowEdit={allowEdit} />
           <NadeDescription nade={nade} allowEdit={allowEdit} />
           <UserContainer user={nade.user} />
+          <div>Created {dateFromNow(nade.createdAt)}</div>
         </div>
         <div className="nade-aside">
           <NadeMetaPanel allowEdit={allowEdit} nade={nade} />
