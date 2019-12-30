@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
-import { Tab, Button } from "semantic-ui-react";
-import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
-import { NadeDescriptionTextArea } from "./NadeDescriptionTextArea";
+import "react-mde/lib/styles/css/react-mde-all.css";
+import ReactMde, { commands } from "react-mde";
+import Showdown from "showdown";
+import { Button } from "semantic-ui-react";
 
 type Props = {
   onSave: (description: string) => void;
@@ -9,45 +10,49 @@ type Props = {
   description: string;
 };
 
+const converter = new Showdown.Converter({
+  tables: true,
+  simplifiedAutoLink: true,
+  strikethrough: true,
+  tasklists: true,
+  simpleLineBreaks: true
+});
+
 export const NadeDescriptionEditor: FC<Props> = ({
   description,
   onCancel,
   onSave
 }) => {
   const [descValue, setDescValue] = useState(description);
+  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
   function onSaveDescription() {
     onSave(descValue);
   }
 
   return (
-    <Tab
-      panes={[
-        {
-          menuItem: "Edit",
-          render: () => (
-            <Tab.Pane>
-              <NadeDescriptionTextArea
-                description={descValue}
-                onDescriptionChange={setDescValue}
-              />
-
-              <Button onClick={onCancel}>Cancel</Button>
-              <Button onClick={onSaveDescription} positive>
-                Save
-              </Button>
-            </Tab.Pane>
-          )
-        },
-        {
-          menuItem: "Preview",
-          render: () => (
-            <Tab.Pane>
-              <NadeDescriptionDisplay value={descValue} />
-            </Tab.Pane>
-          )
+    <>
+      <ReactMde
+        value={descValue}
+        onChange={setDescValue}
+        selectedTab={selectedTab}
+        onTabChange={setSelectedTab}
+        commands={[
+          {
+            commands: [
+              commands.boldCommand,
+              commands.italicCommand,
+              commands.linkCommand,
+              commands.unorderedListCommand
+            ]
+          }
+        ]}
+        generateMarkdownPreview={markdown =>
+          Promise.resolve(converter.makeHtml(markdown))
         }
-      ]}
-    />
+      />
+      <Button onClick={onCancel}>Cancel</Button>
+      <Button onClick={onSaveDescription}>Save</Button>
+    </>
   );
 };

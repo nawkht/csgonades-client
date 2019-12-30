@@ -6,15 +6,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 import { AuthApi } from "../src/api/TokenApi";
-import {
-  setToken,
-  signOutUser,
-  setUser
-} from "../src/store/AuthStore/AuthActions";
+import { setToken, setUser } from "../src/store/AuthStore/AuthActions";
 import { UserApi } from "../src/api/UserApi";
 import "react-image-crop/dist/ReactCrop.css";
 import { Persistor } from "redux-persist";
-import { GoogleAnalytics } from "../src/utils/GoogleAnalytics";
 import { FavoriteApi } from "../src/api/FavoriteApi";
 import { addAllFavoritesAction } from "../src/store/FavoriteStore/FavoriteActions";
 

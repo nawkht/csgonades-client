@@ -39,16 +39,19 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
           </div>
         )}
 
-        <div className="nade-desc-body">
-          {!isEditing && <NadeDescriptionDisplay value={description} />}
-          {isEditing && (
-            <NadeDescriptionEditor
-              onCancel={onCancelEdit}
-              onSave={onSaveEdit}
-              description={description}
-            />
-          )}
-        </div>
+        {!isEditing && (
+          <div className="nade-desc-body">
+            <NadeDescriptionDisplay value={description} />
+          </div>
+        )}
+
+        {isEditing && (
+          <NadeDescriptionEditor
+            onCancel={onCancelEdit}
+            onSave={onSaveEdit}
+            description={description}
+          />
+        )}
       </div>
       <style jsx>{`
         .nade-desc-wrapper {
