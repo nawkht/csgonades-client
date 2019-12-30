@@ -1,12 +1,13 @@
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect, useMemo } from "react";
 import {
   setMobileAction,
   setBrowseraction
 } from "../store/LayoutStore/LayoutActions";
 import { useDispatch } from "react-redux";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import useComponentSize from "@rehooks/component-size";
 
-function useWindowSize() {
+export function useWindowSize() {
   const isClient = typeof window === "object";
 
   function getSize() {
@@ -35,24 +36,29 @@ function useWindowSize() {
 }
 
 export function useKeepAspectRatio() {
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const window = useWindowSize();
-
-  useLayoutEffect(() => {
-    if (ref.current) {
-      setWidth(ref.current.offsetWidth);
-      const height = ref.current.offsetWidth / (16 / 9);
-      setHeight(height);
-    }
-  }, [window]);
+  const { width } = useComponentSize(ref);
+  const height = useMemo(() => width / (16 / 9), [width]);
 
   return {
     ref,
-    width,
-    height
+    height,
+    width
   };
+}
+
+export function useComponentWidth() {
+  const [width, setWidth] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const window = useWindowSize();
+
+  useEffect(() => {
+    if (ref.current) {
+      setWidth(ref.current.offsetWidth);
+    }
+  }, [window]);
+
+  return { ref, width };
 }
 
 export function useUpdateLayout() {

@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, useMemo, useRef } from "react";
 import { NadeItem } from "./NadeItem";
 import { NadeLight } from "src/models/Nade/Nade";
 import { redirectNadePage } from "../utils/Common";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import useComponentSize from "@rehooks/component-size";
 
 interface Props {
   nades: NadeLight[];
@@ -10,6 +11,15 @@ interface Props {
 
 const NadeList: FC<Props> = ({ nades }) => {
   const { uiDimensions } = useTheme();
+  const ref = useRef(null);
+  const { width } = useComponentSize(ref);
+  const numItemsPerRow = 4;
+
+  const nadeItemWidth = useMemo(() => {
+    const totalSizeWithoutGutters =
+      width - numItemsPerRow * uiDimensions.INNER_GUTTER_SIZE;
+    return totalSizeWithoutGutters / numItemsPerRow;
+  }, [width]);
 
   function onNadeClick(id: string) {
     redirectNadePage(id);
@@ -44,9 +54,14 @@ const NadeList: FC<Props> = ({ nades }) => {
 
   return (
     <>
-      <div id="nadelist">
+      <div id="nadelist" ref={ref}>
         {nades.map(nade => (
-          <NadeItem onClick={onNadeClick} key={nade.title} nade={nade} />
+          <NadeItem
+            onClick={onNadeClick}
+            key={nade.title}
+            nade={nade}
+            itemWidth={nadeItemWidth}
+          />
         ))}
       </div>
       <style jsx>
@@ -54,6 +69,9 @@ const NadeList: FC<Props> = ({ nades }) => {
           #nadelist {
             display: flex;
             flex-wrap: wrap;
+            flex-direction: row;
+            margin-right: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
+            margin-left: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
           }
         `}
       </style>

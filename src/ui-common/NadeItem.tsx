@@ -8,10 +8,11 @@ import { tickrateString } from "../models/Nade/NadeTickrate";
 interface Props {
   nade: NadeLight;
   onClick: (id: string) => void;
+  itemWidth: number;
 }
 
-const NadeItem: FC<Props> = ({ nade, onClick }) => {
-  const { colors, isMobile, durations } = useTheme();
+const NadeItem: FC<Props> = ({ nade, onClick, itemWidth }) => {
+  const { colors, durations, uiDimensions } = useTheme();
   const title = nade.title || "No title...";
 
   return (
@@ -44,14 +45,13 @@ const NadeItem: FC<Props> = ({ nade, onClick }) => {
       <style jsx>{`
         .nadebox {
           background: #fff;
-          width: ${isMobile ? "100%" : "220px"};
-          margin-right: ${isMobile ? 0 : 16}px;
-          margin-bottom: 16px;
+          width: ${itemWidth}px;
           border: 1px solid ${colors.PRIMARY_BORDER};
           border-radius: 4px;
           cursor: pointer;
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
           transition: box-shadow ${durations.transition}s;
+          margin: ${uiDimensions.INNER_GUTTER_SIZE / 2}px;
         }
 
         .nadebox:hover {

@@ -1,5 +1,6 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useRef, useMemo } from "react";
 import { useKeepAspectRatio } from "../utils/CommonHooks";
+import useComponentSize from "@rehooks/component-size";
 
 type Props = {
   imageUrl: string;
@@ -8,7 +9,9 @@ type Props = {
 
 export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
   const [isHovering, setIsHovering] = useState(false);
-  const { ref, height, width } = useKeepAspectRatio();
+  const ref = useRef(null);
+  const { width } = useComponentSize(ref);
+  const height = useMemo(() => width / (16 / 9), [width]);
   let hoverTimer: NodeJS.Timeout;
 
   useEffect(() => {

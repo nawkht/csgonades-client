@@ -46,7 +46,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             flex: 1;
           }
           .nade-aside {
-            width: 280px;
+            min-width: 280px;
           }
         `}
       </style>
