@@ -11,8 +11,8 @@ import { UsersReducer } from "./UsersStore/UsersReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 
 const rootReducer = combineReducers({
-  auth: AuthReducer,
-  notification: NotificationReducer,
+  authStore: AuthReducer,
+  notificationStore: NotificationReducer,
   nadeStore: NadeReducer,
   favoriteStore: FavoriteReducer,
   layoutStore: LayoutReducer,
@@ -41,8 +41,8 @@ export const initReduxStore = (initialState: AppState) => {
 
     // Mark some reducer as persisted on client
     const rootReducerClient = combineReducers({
-      auth: persistReducer({ key: "auth", storage }, AuthReducer),
-      notification: NotificationReducer,
+      authStore: AuthReducer,
+      notificationStore: NotificationReducer,
       nadeStore: NadeReducer,
       favoriteStore: FavoriteReducer,
       layoutStore: LayoutReducer,

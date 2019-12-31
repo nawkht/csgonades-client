@@ -12,7 +12,7 @@ import { NadeApi } from "../../api/NadeApi";
 
 export const fetchFavoritesThunkAction = (): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const token = getState().auth.token;
+    const token = getState().authStore.token;
 
     if (!token) {
       console.warn("Trying to fetch favorite when not signed in");
@@ -34,7 +34,7 @@ export const fetchFavoritesThunkAction = (): ReduxThunkAction => {
 
 export const fetchFavoritedNadesThunkAction = (): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const token = getState().auth.token;
+    const token = getState().authStore.token;
 
     if (!token) {
       return;
@@ -66,7 +66,7 @@ export const fetchFavoritedNadesThunkAction = (): ReduxThunkAction => {
 
 export const addFavoriteThunkAction = (nadeId: string): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const token = getState().auth.token;
+    const token = getState().authStore.token;
 
     if (!token) {
       console.warn("Trying to fetch favorite when not signed in");
@@ -89,7 +89,7 @@ export const addUnFavoriteThunkAction = (
   favoriteId: string
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const token = getState().auth.token;
+    const token = getState().authStore.token;
 
     if (!token) {
       console.warn("Trying to remove favorite when not signed in");

@@ -1,9 +1,9 @@
 import { AppState } from "..";
 
 export const userSelector = (state: AppState) => {
-  return state.auth.user;
+  return state.authStore.user;
 };
 
 export const tokenSelector = (state: AppState) => {
-  return state.auth.token;
+  return state.authStore.token;
 };

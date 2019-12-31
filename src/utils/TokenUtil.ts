@@ -14,13 +14,20 @@ function decodeToken(token: string): DecodedToken {
 }
 
 export function tokenExpiredOrAboutTo(token: string): boolean {
-  const { exp } = decodeToken(token);
+  const timeLeft = timeToExpire(token);
+  const secondBeforeExpireToRefresh = 60;
 
-  const buffer = 60 * 1000; // 1 minute
-
-  if (Date.now() >= exp * 1000 - buffer) {
+  if (timeLeft < secondBeforeExpireToRefresh) {
     return true;
   }
 
   return false;
+}
+
+export function timeToExpire(token: string) {
+  const { exp } = decodeToken(token);
+  const now = Date.now();
+  const timeLeft = Math.round(exp - now / 1000);
+
+  return timeLeft;
 }

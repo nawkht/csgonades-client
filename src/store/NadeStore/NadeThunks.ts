@@ -58,7 +58,7 @@ export const fetchNadeByIdAction = (nadeId: string): ReduxThunkAction => {
 
 export const createNadeAction = (nadeBody: NadeBody): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const { token } = getState().auth;
+    const { token } = getState().authStore;
     if (!token) {
       console.warn("useCreateNade no token");
       return;

@@ -1,15 +1,15 @@
 import { Middleware } from "redux";
 import { AppState } from "..";
 import { tokenExpiredOrAboutTo } from "../../utils/TokenUtil";
+import { AuthApi } from "../../api/TokenApi";
+import { setToken, signOutUser } from "./AuthActions";
 
-let thunkBuffer = [];
-
-export const tokenRefreshMiddleware: Middleware<
-  any,
-  AppState
-> = store => next => action => {
+export const tokenRefreshMiddleware: Middleware<any, AppState> = ({
+  dispatch,
+  getState
+}) => next => action => {
   if (typeof action === "function") {
-    const token = store.getState().auth.token;
+    const token = getState().authStore.token;
 
     if (!token) {
       return next(action);
@@ -17,9 +17,27 @@ export const tokenRefreshMiddleware: Middleware<
 
     const shouldRefresh = tokenExpiredOrAboutTo(token);
 
-    console.log("> Should refresh token", shouldRefresh);
+    if (!shouldRefresh) {
+      return next(action);
+    }
 
+    AuthApi.refreshToken()
+      .then(tokenResult => {
+        if (tokenResult.isErr()) {
+          console.error("Failed to get new token, cookie expired?");
+          return dispatch(signOutUser());
+        }
+
+        const token = tokenResult.value;
+        dispatch(setToken(token));
+
+        return next(action);
+      })
+      .catch(error => {
+        console.log("Failed to refresh token", error);
+        return dispatch(signOutUser());
+      });
+  } else {
     return next(action);
   }
-  return next(action);
 };

@@ -41,7 +41,7 @@ export const updateUserThunk = (
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const steamId = getState().usersStore.viewingUser?.steamID;
-    const token = getState().auth.token;
+    const token = getState().authStore.token;
 
     if (!steamId || !token) {
       console.warn("Not viewing a user or missing token, cant update.");

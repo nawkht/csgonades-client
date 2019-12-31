@@ -2,12 +2,11 @@ import React from "react";
 import App, { AppContext } from "next/app";
 import withRedux from "next-redux-wrapper";
 import { initReduxStore, AppState } from "../src/store";
-import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 import "react-image-crop/dist/ReactCrop.css";
-import { Persistor } from "redux-persist";
 import { serverSideUserInitThunkAction } from "../src/store/AuthStore/AuthTunks";
+import { AuthApi } from "../src/api/TokenApi";
 
 type Props = {
   store: Store<AppState>;
@@ -25,8 +24,8 @@ class MyApp extends App<Props> {
   }
 
   async componentDidMount() {
-    console.log("App componentDidMount");
     const { dispatch } = this.props.store;
+    await AuthApi.setSessionCookie();
 
     // @ts-ignore
     await dispatch(serverSideUserInitThunkAction());
@@ -35,32 +34,28 @@ class MyApp extends App<Props> {
   render() {
     const { Component, pageProps } = this.props;
     const { store } = this.props;
-    //@ts-ignore
-    const persistor = store.__PERSISTOR as Persistor;
 
     return (
       <Provider store={store}>
-        <PersistGate persistor={persistor} loading={null}>
-          <Component {...pageProps} />
-          <style global jsx>{`
-            html {
-              -webkit-box-sizing: border-box;
-              -moz-box-sizing: border-box;
-              box-sizing: border-box;
-            }
-            *,
-            *:before,
-            *:after {
-              -webkit-box-sizing: inherit;
-              -moz-box-sizing: inherit;
-              box-sizing: inherit;
-            }
+        <Component {...pageProps} />
+        <style global jsx>{`
+          html {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+          }
+          *,
+          *:before,
+          *:after {
+            -webkit-box-sizing: inherit;
+            -moz-box-sizing: inherit;
+            box-sizing: inherit;
+          }
 
-            body {
-              font-family: "Roboto", sans-serif;
-            }
-          `}</style>
-        </PersistGate>
+          body {
+            font-family: "Roboto", sans-serif;
+          }
+        `}</style>
       </Provider>
     );
   }
