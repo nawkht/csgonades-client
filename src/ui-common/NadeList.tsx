@@ -14,11 +14,13 @@ const NadeList: FC<Props> = ({ nades, numItemsPerRow = 4 }) => {
   const ref = useRef(null);
   const { width } = useComponentSize(ref);
 
-  const nadeItemWidth = useMemo(() => {
+  function nadeItemWidthCalc(totalWidth: number) {
     const totalSizeWithoutGutters =
-      width - numItemsPerRow * uiDimensions.INNER_GUTTER_SIZE;
+      totalWidth - numItemsPerRow * uiDimensions.INNER_GUTTER_SIZE;
     return totalSizeWithoutGutters / numItemsPerRow;
-  }, [width]);
+  }
+
+  const nadeItemWidth = nadeItemWidthCalc(width);
 
   if (nades.length === 0) {
     return (

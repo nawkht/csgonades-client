@@ -3,6 +3,7 @@ import { MapLink } from "./MapLink";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { Icon } from "semantic-ui-react";
 
 const MapNavigation: FC = () => {
   const { colors, uiDimensions } = useTheme();
@@ -25,6 +26,7 @@ const MapNavigation: FC = () => {
             <MapLink mapName="cobblestone" currentMapPath={currentRoute} />
           </ul>
         </nav>
+
         <footer>
           <div className="copyright">© 2019 CSGO Nades</div>
           <div className="footer-links">
