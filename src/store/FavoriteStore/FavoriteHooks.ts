@@ -85,6 +85,17 @@ export const useUnfavorite = () => {
         console.warn("Error", result.error);
         return;
       }
+
+      const favoritesResult = await FavoriteApi.getUserFavorites(token);
+
+      if (favoritesResult.isErr()) {
+        console.warn("Error", favoritesResult.error);
+        return;
+      }
+
+      const favorites = favoritesResult.value;
+
+      dispatch(addAllFavoritesAction(favorites));
     };
     reduxDispatch(thunk);
   };

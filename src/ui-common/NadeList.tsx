@@ -7,10 +7,15 @@ import useComponentSize from "@rehooks/component-size";
 interface Props {
   nades: NadeLight[];
   numItemsPerRow?: number;
+  emptyMessage?: string;
 }
 
-const NadeList: FC<Props> = ({ nades, numItemsPerRow = 4 }) => {
-  const { uiDimensions } = useTheme();
+const NadeList: FC<Props> = ({
+  nades,
+  numItemsPerRow = 4,
+  emptyMessage = "No nades found"
+}) => {
+  const { uiDimensions, colors } = useTheme();
   const ref = useRef(null);
   const { width } = useComponentSize(ref);
 
@@ -21,40 +26,16 @@ const NadeList: FC<Props> = ({ nades, numItemsPerRow = 4 }) => {
   }
 
   const nadeItemWidth = nadeItemWidthCalc(width);
-
-  if (nades.length === 0) {
-    return (
-      <>
-        <div className="nadelist-nonade-container">
-          <div className="nadelist-nonades">NO NADES FOUND</div>
-        </div>
-        <style jsx>{`
-          .nadelist-nonade-container {
-            padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-            min-height: calc(100vh - ${uiDimensions.HEADER_HEIGHT}px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-          }
-          .nadelist-nonades {
-            background: white;
-            text-align: center;
-            padding: 12px;
-            font-size: 1.2em;
-            border-radius: 3px;
-          }
-        `}</style>
-      </>
-    );
-  }
+  const hasNades = nades.length > 0;
 
   return (
     <>
       <div id="nadelist" ref={ref}>
-        {nades.map(nade => (
-          <NadeItem key={nade.title} nade={nade} itemWidth={nadeItemWidth} />
-        ))}
+        {!hasNades && <div className="nadelist-nonades">{emptyMessage}</div>}
+        {hasNades &&
+          nades.map(nade => (
+            <NadeItem key={nade.title} nade={nade} itemWidth={nadeItemWidth} />
+          ))}
       </div>
       <style jsx>
         {`
@@ -64,6 +45,16 @@ const NadeList: FC<Props> = ({ nades, numItemsPerRow = 4 }) => {
             flex-direction: row;
             margin-right: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
             margin-left: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
+          }
+
+          .nadelist-nonades {
+            background: ${colors.WARNING};
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 1.2em;
+            border-radius: 3px;
+            width: 100%;
           }
         `}
       </style>

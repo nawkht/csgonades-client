@@ -35,6 +35,9 @@ export const FavoriteReducer: Reducer<FavoritesState, FavoriteActions> = (
         ...state,
         favorites: state.favorites.filter(
           favorite => favorite.id !== action.favoriteId
+        ),
+        favoritedNades: state.favoritedNades.filter(
+          fav => fav.id !== action.favoriteId
         )
       };
     case "@@favorites/START_LOADING_FAVORITED_NADES":

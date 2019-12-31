@@ -5,6 +5,7 @@ import { NadeList } from "../../ui-common/NadeList";
 import { NadeFilter } from "./NadeFilter";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { capitalize } from "../../utils/Common";
 
 type Props = {
   map: CsgoMap;
@@ -20,7 +21,13 @@ export const MapPage: FC<Props> = ({ nades, map }) => {
     <Layout>
       <NadeFilter map={map} />
       <div className="nade-list">
-        <NadeList numItemsPerRow={numItemsPerRow} nades={nades} />
+        <NadeList
+          numItemsPerRow={numItemsPerRow}
+          nades={nades}
+          emptyMessage={`No nades found for ${capitalize(
+            map
+          )}, maybe you can add some!`}
+        />
       </div>
       <style jsx>{`
         .nade-list {

@@ -26,7 +26,11 @@ export const FavoritesPage: FC = () => {
         {!isLoading && (
           <>
             <h2>Your favorites</h2>
-            <NadeList numItemsPerRow={numItemsPerRow} nades={nades} />
+            <NadeList
+              numItemsPerRow={numItemsPerRow}
+              nades={nades}
+              emptyMessage="You don't have any favorites yet!"
+            />
           </>
         )}
       </div>
