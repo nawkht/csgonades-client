@@ -1,5 +1,6 @@
 import Router from "next/router";
 import { CsgoMap } from "../models/Nade/CsGoMap";
+import { NadeType } from "../models/Nade/NadeType";
 
 export const capitalize = (s: string) => {
   if (typeof s !== "string") return "";
@@ -28,4 +29,20 @@ export function encodeQueryData(data: any) {
 export function logIt(message?: any) {
   const value = typeof message === "string" ? message : JSON.stringify(message);
   console.log(`%c >> ${value} `, "background: #222; color: #bada55");
+}
+
+export function iconFromType(type?: NadeType) {
+  switch (type) {
+    case "flash":
+      return "/icons/grenades/flash.png";
+    case "hegrenade":
+      return "/icons/grenades/grenade.png";
+    case "molotov":
+      return "/icons/grenades/molotov.png";
+    case "smoke":
+      return "/icons/grenades/smoke.png";
+    default:
+      console.warn("Provided unsupported type", type);
+      return "";
+  }
 }

@@ -5,6 +5,7 @@ import { GfycatThumbnail } from "./GfycatThumbnail";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { tickrateString } from "../models/Nade/NadeTickrate";
 import Link from "next/link";
+import { iconFromType } from "../utils/Common";
 
 interface Props {
   nade: NadeLight;
@@ -16,12 +17,15 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
   const title = nade.title || "No title...";
 
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
+  const iconUrl = iconFromType(nade.type);
 
   return (
     <>
       <Link href={`/nades?id=${nade.id}`} as={`/nades/${nade.id}`}>
         <a className={nadeBoxClassName} style={{ display: "inline-block" }}>
-          <div className="title">{title}</div>
+          <div className="title">
+            <img className="nade-type-icon" src={iconUrl} /> {title}
+          </div>
           <div className="video">
             <GfycatThumbnail
               imageUrl={nade.images?.thumbnailUrl}
@@ -67,7 +71,6 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
 
         .title {
           padding: 6px 12px;
-          text-align: center;
           display: block;
           white-space: nowrap;
           overflow: hidden;
@@ -75,6 +78,14 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
           background: ${colors.PRIMARY_90_PERCENT};
           color: white;
           transition: background ${durations.transition}s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nade-type-icon {
+          width: 15px;
+          margin-right: ${uiDimensions.PADDING_SMALL}px;
         }
 
         .pending-nade .title {

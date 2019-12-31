@@ -21,7 +21,7 @@ class MyDocument extends Document {
             content="initial-scale=1.0, width=device-width"
           />
           <meta charSet="utf-8" />
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="shortcut icon" href="/icons/favicon.ico" />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"

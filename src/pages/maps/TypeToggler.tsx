@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Popup } from "semantic-ui-react";
 import { NadeType } from "../../models/Nade/NadeType";
+import { iconFromType } from "../../utils/Common";
 
 type Props = {
   active: boolean;
@@ -51,19 +52,3 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
     </>
   );
 };
-
-function iconFromType(type: NadeType) {
-  switch (type) {
-    case "flash":
-      return "/icons/grenades/flash.png";
-    case "hegrenade":
-      return "/icons/grenades/grenade.png";
-    case "molotov":
-      return "/icons/grenades/molotov.png";
-    case "smoke":
-      return "/icons/grenades/smoke.png";
-    default:
-      console.warn("Provided unsupported type", type);
-      return "";
-  }
-}
