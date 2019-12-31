@@ -1,21 +1,26 @@
 import { FC } from "react";
 import { Statistic } from "semantic-ui-react";
+import { useSiteStats } from "../../store/NadeStore/NadeSelectors";
 
 const FrontPageStats: FC = () => {
+  const stats = useSiteStats();
+
   return (
     <>
       <div id="stats">
         <div id="stats-container">
-          <Statistic.Group size="mini" widths="two">
+          <Statistic.Group size="mini" widths="one">
             <Statistic>
-              <Statistic.Value>321</Statistic.Value>
+              <Statistic.Value>{stats.numNades}</Statistic.Value>
               <Statistic.Label>Nades</Statistic.Label>
             </Statistic>
 
-            <Statistic>
-              <Statistic.Value>7520</Statistic.Value>
-              <Statistic.Label>Users</Statistic.Label>
-            </Statistic>
+            {false && (
+              <Statistic>
+                <Statistic.Value>{stats.numUsers}</Statistic.Value>
+                <Statistic.Label>Users</Statistic.Label>
+              </Statistic>
+            )}
           </Statistic.Group>
         </div>
       </div>

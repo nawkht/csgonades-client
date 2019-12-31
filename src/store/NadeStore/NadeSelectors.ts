@@ -11,6 +11,8 @@ const selectedNadeSelector = (state: AppState) => {
 
 const nadeLoadingSelector = (state: AppState) => state.nadeStore.loading;
 
+const siteStatsSelector = (state: AppState) => state.nadeStore.siteStats;
+
 export const nadeFilterSelector = (state: AppState) =>
   state.nadeStore.nadeFilter;
 
@@ -22,4 +24,9 @@ export const useIsLoadingNade = () => {
 export const useSelectedNade = () => {
   const selectedNade = useSelector(selectedNadeSelector);
   return selectedNade;
+};
+
+export const useSiteStats = () => {
+  const siteStats = useSelector(siteStatsSelector);
+  return siteStats;
 };

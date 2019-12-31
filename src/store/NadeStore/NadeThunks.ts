@@ -5,7 +5,8 @@ import {
   addNadeAction,
   startLoadingNadeAction,
   stopLoadingNadeAction,
-  addSelectedNadeAction
+  addSelectedNadeAction,
+  addSiteStatsAction
 } from "./NadeActions";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import {
@@ -17,6 +18,39 @@ import { redirectNadePage } from "../../utils/Common";
 import Router from "next/router";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { nadeFilterSelector } from "./NadeSelectors";
+import { StatsApi } from "../../api/StatsApi";
+
+export const fetchSiteStatsThunk = (): ReduxThunkAction => {
+  return async dispatch => {
+    const result = await StatsApi.getStats();
+
+    if (result.isErr()) {
+      console.error(result.error);
+      return;
+    }
+
+    console.log("Got stats", result.value);
+
+    return dispatch(addSiteStatsAction(result.value));
+  };
+};
+
+export const fetchNewestNadesAction = (limit?: number): ReduxThunkAction => {
+  return async dispatch => {
+    startLoadingNadeAction(dispatch);
+    const nadesResult = await NadeApi.getAll();
+    stopLoadingNadeAction(dispatch);
+
+    if (nadesResult.isErr()) {
+      console.error(nadesResult.error);
+      return;
+    }
+
+    const nades = nadesResult.value;
+
+    return dispatch(addNadeAction(nades));
+  };
+};
 
 export const fetchNadesByMapAction = (mapName: CsgoMap): ReduxThunkAction => {
   return async (dispatch, getState) => {

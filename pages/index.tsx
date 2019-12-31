@@ -1,19 +1,22 @@
 import React from "react";
 import { NextPage } from "next";
 import { FrontPage } from "../src/pages/frontpage/FrontPage";
-import { Nade } from "../src/models/Nade/Nade";
-import { serverSideUserInitThunkAction } from "../src/store/AuthStore/AuthTunks";
+import {
+  fetchNewestNadesAction,
+  fetchSiteStatsThunk
+} from "../src/store/NadeStore/NadeThunks";
 
-interface Props {
-  nades: Nade[];
-}
-
-const Index: NextPage<Props> = props => {
-  return <FrontPage nades={props.nades} />;
+const Index: NextPage = props => {
+  return <FrontPage />;
 };
 
 Index.getInitialProps = async ({ store }) => {
-  return { nades: [] };
+  const { dispatch } = store;
+
+  await dispatch(fetchNewestNadesAction());
+  await dispatch(fetchSiteStatsThunk());
+
+  return;
 };
 
 export default Index;

@@ -2,12 +2,14 @@ import { Reducer } from "redux";
 import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { NadeActions, FilterByNadeType } from "./NadeActions";
 import { NadeFilterOptions } from "../../api/NadeApi";
+import { SiteStats } from "../../api/StatsApi";
 
 export type NadeState = {
   nades: NadeLight[];
   selectedNade?: Nade;
   loading: boolean;
   nadeFilter: NadeFilterOptions;
+  siteStats: SiteStats;
 };
 
 const initialState: NadeState = {
@@ -18,6 +20,10 @@ const initialState: NadeState = {
     hegrenade: false,
     molotov: false,
     smoke: false
+  },
+  siteStats: {
+    numNades: 0,
+    numUsers: 0
   }
 };
 
@@ -52,6 +58,11 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
       return {
         ...state,
         nadeFilter: initialState.nadeFilter
+      };
+    case "@@nades/ADD_SITE_STATS":
+      return {
+        ...state,
+        siteStats: action.stats
       };
     default:
       return state;

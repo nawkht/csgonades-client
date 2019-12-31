@@ -15,16 +15,15 @@ const FrontPageJumbo: FC = () => {
             Or maybe you are a nade mastermind and want to contribute by adding
             your own nades to the site.
           </p>
-          <Button basic color="teal">
-            Join the community
-          </Button>
         </div>
       </div>
       <style jsx>{`
         #jumbo {
           padding: 16px;
-          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("https://steamuserimages-a.akamaihd.net/ugc/156900587882364094/D3099466CF9E12AAAF97945A32D99D748E2BD427/");
+          background: linear-gradient(
+            rgba(38, 38, 38, 1),
+            rgba(38, 38, 38, 0.9)
+          );
           background-position: center;
           background-size: cover;
           display: flex;
