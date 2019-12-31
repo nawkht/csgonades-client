@@ -34,7 +34,7 @@ const NadeList: FC<Props> = ({
         {!hasNades && <div className="nadelist-nonades">{emptyMessage}</div>}
         {hasNades &&
           nades.map(nade => (
-            <NadeItem key={nade.title} nade={nade} itemWidth={nadeItemWidth} />
+            <NadeItem key={nade.id} nade={nade} itemWidth={nadeItemWidth} />
           ))}
       </div>
       <style jsx>

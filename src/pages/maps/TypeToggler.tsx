@@ -56,7 +56,7 @@ function iconFromType(type: NadeType) {
   switch (type) {
     case "flash":
       return "/icons/grenades/flash.png";
-    case "he-grenade":
+    case "hegrenade":
       return "/icons/grenades/grenade.png";
     case "molotov":
       return "/icons/grenades/molotov.png";

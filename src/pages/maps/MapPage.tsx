@@ -6,15 +6,16 @@ import { NadeFilter } from "./NadeFilter";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";
+import { useSelector } from "react-redux";
+import { nadesSelector } from "../../store/NadeStore/NadeSelectors";
 
 type Props = {
   map: CsgoMap;
-  nades: NadeLight[];
 };
 
-export const MapPage: FC<Props> = ({ nades, map }) => {
+export const MapPage: FC<Props> = ({ map }) => {
   const { isMobile, uiDimensions } = useTheme();
-
+  const nades = useSelector(nadesSelector);
   const numItemsPerRow = isMobile ? 1 : 4;
 
   return (

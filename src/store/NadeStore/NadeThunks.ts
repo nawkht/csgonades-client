@@ -16,12 +16,12 @@ import {
 import { redirectNadePage } from "../../utils/Common";
 import Router from "next/router";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
+import { nadeFilterSelector } from "./NadeSelectors";
 
-export const fetchNadesByMapAction = (
-  mapName: CsgoMap,
-  filter?: NadeFilterOptions
-): ReduxThunkAction => {
-  return async dispatch => {
+export const fetchNadesByMapAction = (mapName: CsgoMap): ReduxThunkAction => {
+  return async (dispatch, getState) => {
+    const filter = nadeFilterSelector(getState());
+
     startLoadingNadeAction(dispatch);
     const nadesResult = await NadeApi.getByMap(mapName, filter);
     stopLoadingNadeAction(dispatch);
@@ -33,7 +33,7 @@ export const fetchNadesByMapAction = (
 
     const nades = nadesResult.value;
 
-    return addNadeAction(nades, dispatch);
+    return dispatch(addNadeAction(nades));
   };
 };
 

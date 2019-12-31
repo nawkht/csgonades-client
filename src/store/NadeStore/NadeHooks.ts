@@ -17,6 +17,24 @@ import {
   updateNadeAction,
   updateNadeStatusAction
 } from "./NadeThunks";
+import { nadeFilterSelector } from "./NadeSelectors";
+import { NadeType } from "../../models/Nade/NadeType";
+import { filterByTypeAction } from "./NadeActions";
+
+export const useNadeFilter = () => {
+  const dispatch = useDispatch();
+  const nadeFilter = useSelector(nadeFilterSelector);
+
+  function filterByType(nadeType: NadeType, map: CsgoMap) {
+    dispatch(filterByTypeAction(nadeType));
+    dispatch(fetchNadesByMapAction(map));
+  }
+
+  return {
+    nadeFilter,
+    filterByType
+  };
+};
 
 export const useCanEditNade = (nade: Nade): boolean => {
   const user = useSelector(userSelector);
@@ -44,8 +62,7 @@ export const useUpdateGfycat = () => {
 
 export const useFetchNadesByMap = () => {
   const dispatch = useDispatch();
-  return (mapName: CsgoMap, filter?: NadeFilterOptions) =>
-    dispatch(fetchNadesByMapAction(mapName, filter));
+  return (mapName: CsgoMap) => dispatch(fetchNadesByMapAction(mapName));
 };
 
 export const useDeleteNade = () => {

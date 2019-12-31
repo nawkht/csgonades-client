@@ -2,7 +2,7 @@ export const NadeTypes = {
   smoke: "Smoke",
   flash: "Flash",
   molotov: "Molotov",
-  "he-grenade": "HE Grenade"
+  hegrenade: "HE Grenade"
 };
 
 export type NadeType = keyof typeof NadeTypes;

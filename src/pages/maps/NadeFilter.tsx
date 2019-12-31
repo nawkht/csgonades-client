@@ -1,7 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TypeToggler } from "./TypeToggler";
-import { NadeFilterOptions } from "../../api/NadeApi";
-import { useFetchNadesByMap } from "../../store/NadeStore/NadeHooks";
+import { useNadeFilter } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 
@@ -11,105 +10,24 @@ type Props = {
 
 export const NadeFilter: FC<Props> = ({ map }) => {
   const { colors, isMobile, uiDimensions } = useTheme();
-  const fetchNades = useFetchNadesByMap();
-  const [showSmokes, setShowSmokes] = useState(true);
-  const [showFlash, setShowFlash] = useState(true);
-  const [showMolotov, setShowMolotov] = useState(true);
-  const [showHeGrenade, setShowHeGrenade] = useState(true);
-  const [isDefault, setIsDefault] = useState(true);
+  const { filterByType, nadeFilter } = useNadeFilter();
 
-  function resetToogles() {
-    setShowSmokes(true);
-    setShowFlash(true);
-    setShowMolotov(true);
-    setShowHeGrenade(true);
-    setIsDefault(true);
-
-    fetchNades(map);
-  }
+  const { flash, hegrenade, molotov, smoke } = nadeFilter;
 
   function onSmokeClick() {
-    if (!isDefault && showSmokes) {
-      resetToogles();
-    } else {
-      setShowSmokes(true);
-      setShowFlash(false);
-      setShowMolotov(false);
-      setShowHeGrenade(false);
-      setIsDefault(false);
-
-      const filter: NadeFilterOptions = {
-        flash: false,
-        hegrenade: false,
-        molotov: false,
-        smoke: true
-      };
-
-      fetchNades(map, filter);
-    }
+    filterByType("smoke", map);
   }
 
   function onFlashClick() {
-    if (!isDefault && showFlash) {
-      resetToogles();
-    } else {
-      setShowSmokes(false);
-      setShowFlash(true);
-      setShowMolotov(false);
-      setShowHeGrenade(false);
-      setIsDefault(false);
-
-      const filter: NadeFilterOptions = {
-        flash: true,
-        hegrenade: false,
-        molotov: false,
-        smoke: false
-      };
-
-      fetchNades(map, filter);
-    }
+    filterByType("flash", map);
   }
 
   function onMolotovClick() {
-    if (!isDefault && showMolotov) {
-      resetToogles();
-    } else {
-      setShowSmokes(false);
-      setShowFlash(false);
-      setShowMolotov(true);
-      setShowHeGrenade(false);
-      setIsDefault(false);
-
-      const filter: NadeFilterOptions = {
-        flash: false,
-        hegrenade: false,
-        molotov: true,
-        smoke: false
-      };
-
-      fetchNades(map, filter);
-    }
+    filterByType("molotov", map);
   }
 
   function onHeGrenadeClick() {
-    if (!isDefault && showHeGrenade) {
-      resetToogles();
-    } else {
-      setShowSmokes(false);
-      setShowFlash(false);
-      setShowMolotov(false);
-      setShowHeGrenade(true);
-      setIsDefault(false);
-
-      const filter: NadeFilterOptions = {
-        flash: false,
-        hegrenade: true,
-        molotov: false,
-        smoke: false
-      };
-
-      fetchNades(map, filter);
-    }
+    filterByType("hegrenade", map);
   }
 
   return (
@@ -120,20 +38,16 @@ export const NadeFilter: FC<Props> = ({ map }) => {
         }
       >
         <div className="nade-filter">
+          <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
+          <TypeToggler active={flash} type="flash" onClick={onFlashClick} />
           <TypeToggler
-            active={showSmokes}
-            type="smoke"
-            onClick={onSmokeClick}
-          />
-          <TypeToggler active={showFlash} type="flash" onClick={onFlashClick} />
-          <TypeToggler
-            active={showMolotov}
+            active={molotov}
             type="molotov"
             onClick={onMolotovClick}
           />
           <TypeToggler
-            active={showHeGrenade}
-            type="he-grenade"
+            active={hegrenade}
+            type="hegrenade"
             onClick={onHeGrenadeClick}
           />
         </div>
