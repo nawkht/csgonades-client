@@ -6,6 +6,40 @@ import { AuthApi } from "../../api/TokenApi";
 import { redirectUserPage } from "../../utils/Common";
 import Router from "next/router";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
+import { FavoriteApi } from "../../api/FavoriteApi";
+import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
+
+export const serverSideUserInitThunkAction = (): ReduxThunkAction => {
+  return async dispatch => {
+    const tokenResult = await AuthApi.refreshToken();
+
+    // User not signed in, make sure store auth store is empty
+    if (tokenResult.isErr()) {
+      return dispatch(signOutUser());
+    }
+
+    const authToken = tokenResult.value;
+
+    dispatch(setToken(authToken));
+
+    // Preload state
+    const [userResult, favoriteResult] = await Promise.all([
+      UserApi.fetchSelf(authToken),
+      FavoriteApi.getUserFavorites(authToken)
+    ]);
+
+    if (userResult.isErr() || favoriteResult.isErr()) {
+      return dispatch(signOutUser());
+    }
+
+    const user = userResult.value;
+    const favorites = favoriteResult.value;
+
+    setUser(dispatch, user);
+    dispatch(addAllFavoritesAction(favorites));
+    return;
+  };
+};
 
 export const preloadUserThunkAction = (
   isFirstSignIn: boolean

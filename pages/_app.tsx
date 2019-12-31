@@ -5,13 +5,9 @@ import { initReduxStore, AppState } from "../src/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { AuthApi } from "../src/api/TokenApi";
-import { setToken, setUser } from "../src/store/AuthStore/AuthActions";
-import { UserApi } from "../src/api/UserApi";
 import "react-image-crop/dist/ReactCrop.css";
 import { Persistor } from "redux-persist";
-import { FavoriteApi } from "../src/api/FavoriteApi";
-import { addAllFavoritesAction } from "../src/store/FavoriteStore/FavoriteActions";
+import { serverSideUserInitThunkAction } from "../src/store/AuthStore/AuthTunks";
 
 type Props = {
   store: Store<AppState>;
@@ -29,31 +25,11 @@ class MyApp extends App<Props> {
   }
 
   async componentDidMount() {
+    console.log("App componentDidMount");
     const { dispatch } = this.props.store;
 
-    await AuthApi.setSessionCookie();
-    const tokenResult = await AuthApi.refreshToken();
-
-    if (tokenResult.isErr()) {
-      return;
-    }
-
-    const token = tokenResult.value;
-
-    dispatch(setToken(token));
-
-    const [userResult, favoriteResult] = await Promise.all([
-      UserApi.fetchSelf(token),
-      FavoriteApi.getUserFavorites(token)
-    ]);
-
-    if (userResult.isOk()) {
-      setUser(dispatch, userResult.value);
-    }
-
-    if (favoriteResult.isOk()) {
-      dispatch(addAllFavoritesAction(favoriteResult.value));
-    }
+    // @ts-ignore
+    await dispatch(serverSideUserInitThunkAction());
   }
 
   render() {
