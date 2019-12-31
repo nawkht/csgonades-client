@@ -39,8 +39,6 @@ export const UserEditor: FC<Props> = ({ user }) => {
       createdAt: createdAt || undefined
     };
 
-    console.log("Update", updatedUserFields);
-
     updateUser(updatedUserFields);
   }
 

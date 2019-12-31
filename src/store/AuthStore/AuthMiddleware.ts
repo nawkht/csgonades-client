@@ -34,7 +34,7 @@ export const tokenRefreshMiddleware: Middleware<any, AppState> = ({
         return next(action);
       })
       .catch(error => {
-        console.log("Failed to refresh token", error);
+        console.error("Failed to refresh token", error);
         return dispatch(signOutUser());
       });
   } else {

@@ -9,13 +9,10 @@ interface Props {
 }
 
 const Index: NextPage<Props> = props => {
-  console.log("Rendering index");
   return <FrontPage nades={props.nades} />;
 };
 
 Index.getInitialProps = async ({ store }) => {
-  console.log("Index.getInitialProps");
-  await store.dispatch(serverSideUserInitThunkAction());
   return { nades: [] };
 };
 
