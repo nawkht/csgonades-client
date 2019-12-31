@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { TypeToggler } from "./TypeToggler";
 import { NadeFilterOptions } from "../../api/NadeApi";
-import { useFetchNades } from "../../store/NadeStore/NadeHooks";
+import { useFetchNadesByMap } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 
@@ -11,7 +11,7 @@ type Props = {
 
 export const NadeFilter: FC<Props> = ({ map }) => {
   const { colors, isMobile, uiDimensions } = useTheme();
-  const fetchNades = useFetchNades(map);
+  const fetchNades = useFetchNadesByMap();
   const [showSmokes, setShowSmokes] = useState(true);
   const [showFlash, setShowFlash] = useState(true);
   const [showMolotov, setShowMolotov] = useState(true);
@@ -25,7 +25,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
     setShowHeGrenade(true);
     setIsDefault(true);
 
-    fetchNades();
+    fetchNades(map);
   }
 
   function onSmokeClick() {
@@ -45,7 +45,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
         smoke: true
       };
 
-      fetchNades(filter);
+      fetchNades(map, filter);
     }
   }
 
@@ -66,7 +66,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
         smoke: false
       };
 
-      fetchNades(filter);
+      fetchNades(map, filter);
     }
   }
 
@@ -87,7 +87,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
         smoke: false
       };
 
-      fetchNades(filter);
+      fetchNades(map, filter);
     }
   }
 
@@ -108,7 +108,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
         smoke: false
       };
 
-      fetchNades(filter);
+      fetchNades(map, filter);
     }
   }
 

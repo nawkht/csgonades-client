@@ -39,7 +39,7 @@ export class GoogleAnalytics {
     if (IS_BROWSER && !window.GA_INITIALIZED) {
       ReactGA.initialize("UA-71896446-6", {
         testMode: IS_PROD ? false : true,
-        debug: IS_PROD ? false : true
+        debug: IS_PROD ? false : false
       });
       window.GA_INITIALIZED = true;
     }

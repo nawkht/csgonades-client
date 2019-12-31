@@ -1,6 +1,3 @@
-import { ThunkAction } from "redux-thunk";
-import { AppState } from "..";
-import { ReduxDispatch } from "../StoreUtils/ThunkActionType";
 import nanoId from "nanoid";
 
 export type NotificationSeverity = "info" | "success" | "warning" | "error";
@@ -30,7 +27,7 @@ export type NotificationActions =
   | AddNotificationAction
   | RemoveNotificationAction;
 
-const makeAddNotificationAction = (
+export const addNotificationAction = (
   notification: AppNotification
 ): AddNotificationAction => {
   const id = nanoId();
@@ -45,37 +42,9 @@ const makeAddNotificationAction = (
   };
 };
 
-const makeRemoveNotificationAction = (
+export const removeNotificationAction = (
   id: string
 ): RemoveNotificationAction => ({
   type: "@@nottication/remove",
   id
 });
-
-export const addNotificationAction = (
-  appDispatch: ReduxDispatch<any>,
-  notification: AppNotification
-) => {
-  const thunk: ThunkAction<
-    any,
-    AppState,
-    any,
-    NotificationActions
-  > = async dispatch => {
-    const addAction = makeAddNotificationAction(notification);
-    const removeAction = makeRemoveNotificationAction(
-      addAction.notification.id
-    );
-    dispatch(addAction);
-    await notificationDeleteDelay(notification.durationSeconds);
-    dispatch(removeAction);
-  };
-  appDispatch(thunk);
-};
-
-const notificationDeleteDelay = (seconds?: number) => {
-  const time = seconds ? seconds * 1000 : 8 * 1000;
-  return new Promise(resolve => {
-    setTimeout(() => resolve(), time);
-  });
-};

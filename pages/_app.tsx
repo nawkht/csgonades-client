@@ -40,7 +40,7 @@ class MyApp extends App<Props> {
 
     const token = tokenResult.value;
 
-    setToken(dispatch, token);
+    dispatch(setToken(token));
 
     const [userResult, favoriteResult] = await Promise.all([
       UserApi.fetchSelf(token),

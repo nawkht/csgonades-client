@@ -1,208 +1,72 @@
-import { Nade, NadeBody } from "../../models/Nade/Nade";
-import { useSelector } from "react-redux";
-import { userSelector, tokenSelector } from "../AuthStore/AuthSelectors";
 import {
-  useReduxDispatch,
-  ReduxThunkAction
-} from "../StoreUtils/ThunkActionType";
-import { NadeApi, NadeFilterOptions } from "../../api/NadeApi";
-import Router from "next/router";
-import {
-  startLoadingNadeAction,
-  stopLoadingNadeAction,
-  addSelectedNadeAction,
-  addNadeAction
-} from "./NadeActions";
-import { addNotificationAction } from "../NotificationStore/NotificationActions";
-import { redirectNadePage } from "../../utils/Common";
+  Nade,
+  NadeBody,
+  NadeUpdateBody,
+  NadeStatusDTO
+} from "../../models/Nade/Nade";
+import { useSelector, useDispatch } from "react-redux";
+import { userSelector } from "../AuthStore/AuthSelectors";
+import { NadeFilterOptions } from "../../api/NadeApi";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
+import {
+  fetchNadesByMapAction,
+  createNadeAction,
+  updateNadeGfycatAction,
+  deleteNadeAction,
+  updateNadeUserAction,
+  updateNadeAction,
+  updateNadeStatusAction
+} from "./NadeThunks";
 
 export const useCanEditNade = (nade: Nade): boolean => {
   const user = useSelector(userSelector);
   if (!user) {
     return false;
-  }
-
-  if (user.role === "administrator" || user.role === "moderator") {
+  } else if (user.role === "administrator" || user.role === "moderator") {
     return true;
-  }
-
-  if (user.steamID === nade.steamId) {
+  } else if (user.steamID === nade.steamId) {
     return true;
+  } else {
+    return false;
   }
-
-  return false;
 };
 
 export const useCreateNade = () => {
-  const reduxDispatch = useReduxDispatch();
-  return (nadeBody: NadeBody) => {
-    const thunk: ReduxThunkAction = async (dispatch, getState) => {
-      const { token } = getState().auth;
-      if (!token) {
-        console.warn("useCreateNade no token");
-        return;
-      }
-
-      startLoadingNadeAction(dispatch);
-      const result = await NadeApi.save(nadeBody, token);
-      stopLoadingNadeAction(dispatch);
-
-      if (result.isErr()) {
-        console.error(result.error);
-        return addNotificationAction(dispatch, {
-          message: result.error.message,
-          severity: "error"
-        });
-      }
-
-      redirectNadePage(result.value.id);
-    };
-    reduxDispatch(thunk);
-  };
+  const dispatch = useDispatch();
+  return (nadeBody: NadeBody) => dispatch(createNadeAction(nadeBody));
 };
 
 export const useUpdateGfycat = () => {
-  const reduxDispatch = useReduxDispatch();
-  return (nadeId: string, newGfyId: string) => {
-    const thunk: ReduxThunkAction = async (dispatch, getState) => {
-      const authToken = tokenSelector(getState());
-      if (!authToken) {
-        return addNotificationAction(dispatch, {
-          message: "Can't update, seems like your not signed in.",
-          severity: "error"
-        });
-      }
-
-      startLoadingNadeAction(dispatch);
-      const result = await NadeApi.update(
-        nadeId,
-        {
-          gfycatIdOrUrl: newGfyId
-        },
-        authToken
-      );
-      stopLoadingNadeAction(dispatch);
-
-      if (result.isErr()) {
-        return addNotificationAction(dispatch, {
-          message: "Failed to update nade.",
-          severity: "error"
-        });
-      }
-
-      addSelectedNadeAction(result.value, dispatch);
-
-      addNotificationAction(dispatch, {
-        message: "Updated nade details!",
-        severity: "success"
-      });
-    };
-    reduxDispatch(thunk);
-  };
+  const dispatch = useDispatch();
+  return (nadeId: string, newGfyId: string) =>
+    dispatch(updateNadeGfycatAction(nadeId, newGfyId));
 };
 
-export const useFetchSelectedNade = (nadeId: string) => {
-  const reduxDispatch = useReduxDispatch();
-  return () => {
-    const thunk: ReduxThunkAction = async (dispatch, getState) => {
-      startLoadingNadeAction(dispatch);
-      const result = await NadeApi.byId(nadeId);
-      stopLoadingNadeAction(dispatch);
-
-      if (result.isErr()) {
-        return addNotificationAction(dispatch, {
-          message: "Failed to fetch nades.",
-          severity: "error"
-        });
-      }
-
-      addSelectedNadeAction(result.value, dispatch);
-    };
-    reduxDispatch(thunk);
-  };
-};
-
-export const useFetchNades = (mapName: CsgoMap) => {
-  const reduxDispatch = useReduxDispatch();
-  return (filter?: NadeFilterOptions) => {
-    const thunk: ReduxThunkAction = async dispatch => {
-      startLoadingNadeAction(dispatch);
-      const result = await NadeApi.getByMap(mapName, filter);
-      stopLoadingNadeAction(dispatch);
-
-      if (result.isErr()) {
-        return addNotificationAction(dispatch, {
-          message: "Failed to fetch nades.",
-          severity: "error"
-        });
-      }
-
-      addNadeAction(result.value, dispatch);
-    };
-    reduxDispatch(thunk);
-  };
-};
-
-export const useForceNadeYear = () => {
-  const reduxDispatch = useReduxDispatch();
-  return (nadeId: string, year: string) => {
-    const thunk: ReduxThunkAction = async (dispatch, getState) => {
-      const authToken = tokenSelector(getState());
-      if (!authToken) {
-        return addNotificationAction(dispatch, {
-          message: "Can't update, seems like your not signed in.",
-          severity: "error"
-        });
-      }
-
-      if (year.length !== 4) {
-        return addNotificationAction(dispatch, {
-          message: "Year must be 4 chars long",
-          severity: "error"
-        });
-      }
-
-      const result = await NadeApi.forceYear(nadeId, year, authToken);
-
-      if (result.isErr()) {
-        return addNotificationAction(dispatch, {
-          message: "Failed to update nade year.",
-          severity: "error"
-        });
-      }
-
-      addSelectedNadeAction(result.value, dispatch);
-    };
-    reduxDispatch(thunk);
-  };
+export const useFetchNadesByMap = () => {
+  const dispatch = useDispatch();
+  return (mapName: CsgoMap, filter?: NadeFilterOptions) =>
+    dispatch(fetchNadesByMapAction(mapName, filter));
 };
 
 export const useDeleteNade = () => {
-  const reduxDispatch = useReduxDispatch();
-  return (nadeId: string) => {
-    const thunk: ReduxThunkAction = async (dispatch, getState) => {
-      const authToken = tokenSelector(getState());
-      if (!authToken) {
-        return addNotificationAction(dispatch, {
-          message: "Can't update, seems like your not signed in.",
-          severity: "error"
-        });
-      }
+  const dispatch = useDispatch();
+  return (nadeId: string) => dispatch(deleteNadeAction(nadeId));
+};
 
-      startLoadingNadeAction(dispatch);
-      const result = await NadeApi.delete(nadeId, authToken);
-      stopLoadingNadeAction(dispatch);
+export const useUpdateUser = () => {
+  const dispatch = useDispatch();
+  return (nadeId: string, steamId: string) =>
+    dispatch(updateNadeUserAction(nadeId, steamId));
+};
 
-      if (result.isErr()) {
-        return addNotificationAction(dispatch, {
-          message: "Failed to delete nade.",
-          severity: "error"
-        });
-      }
+export const useUpdateNade = () => {
+  const dispatch = useDispatch();
+  return (nadeId: string, data: NadeUpdateBody) =>
+    dispatch(updateNadeAction(nadeId, data));
+};
 
-      Router.push("/", "/");
-    };
-    reduxDispatch(thunk);
-  };
+export const useUpdateNadeStatus = () => {
+  const dispatch = useDispatch();
+  return (nadeId: string, updates: NadeStatusDTO) =>
+    dispatch(updateNadeStatusAction(nadeId, updates));
 };

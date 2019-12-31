@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
-import { Input, Button, Icon } from "semantic-ui-react";
-import { useUpdateNadeAction } from "../../store/NadeStore/NadeActions";
+import { Input, Icon } from "semantic-ui-react";
 import { Nade } from "../../models/Nade/Nade";
 import { FavoriteButton } from "./FavoriteButton";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { EditButton } from "../../ui-common/EditButton";
+import { useUpdateNade } from "../../store/NadeStore/NadeHooks";
 
 type Props = {
   nade: Nade;
@@ -13,7 +13,7 @@ type Props = {
 
 export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
   const theme = useTheme();
-  const updateNade = useUpdateNadeAction();
+  const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
   const [nadeTitle, setNadeTitle] = useState(nade.title || "");
 

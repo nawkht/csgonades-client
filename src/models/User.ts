@@ -1,4 +1,4 @@
-type Role = "administrator" | "moderator" | "user";
+export type Role = "administrator" | "moderator" | "user";
 
 export type User = {
   nickname: string;

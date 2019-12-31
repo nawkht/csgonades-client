@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { Nade } from "../../../models/Nade/Nade";
 import { Icon } from "semantic-ui-react";
 import { NadeMapValue } from "./NadeMapValue";
-import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";
 import { NadeMovementValue } from "./NadeMovementValue";
 import { NadeTickrateValue } from "./NadeTickrateValue";
 import { NadeTechniqueValue } from "./NadeTechniqueValue";
@@ -11,6 +10,7 @@ import { NadeMapSiteValue } from "./NadeMapSiteValue";
 import { EditButton } from "../../../ui-common/EditButton";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { NadeTypeValue } from "./NadeTypeValue";
+import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
 
 type Props = {
   nade: Nade;
@@ -19,7 +19,7 @@ type Props = {
 
 export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
   const { colors, durations } = useTheme();
-  const updateNade = useUpdateNadeAction();
+  const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
   const [map, setMap] = useState(nade.map);
   const [movement, setMovement] = useState(nade.movement);

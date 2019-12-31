@@ -1,16 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Nade } from "../../models/Nade/Nade";
 import { userSelector } from "./AuthSelectors";
-import {
-  useReduxDispatch,
-  ReduxThunkAction
-} from "../StoreUtils/ThunkActionType";
-import { AuthApi } from "../../api/TokenApi";
-import { signOutUser, setToken, setUser } from "./AuthActions";
-import { UserApi } from "../../api/UserApi";
-import Router from "next/router";
-import { redirectUserPage } from "../../utils/Common";
 import { User } from "../../models/User";
+import { signOutUserThunk, preloadUserThunkAction } from "./AuthTunks";
 
 export const useIsSignedIn = (): boolean => {
   const user = useSelector(userSelector);
@@ -71,48 +63,12 @@ export const useIsAdminOrModerator = (): boolean => {
 };
 
 export const useSignOut = () => {
-  const reduxDispatch = useReduxDispatch();
-  return () => {
-    const thunk: ReduxThunkAction = async (dispatch, getState) => {
-      await AuthApi.signOut();
-      dispatch(signOutUser());
-    };
-    reduxDispatch(thunk);
-  };
+  const dispatch = useDispatch();
+  return () => dispatch(signOutUserThunk());
 };
 
 export const usePreloadUser = () => {
-  const reduxDispatch = useReduxDispatch();
-  return (isFirstSignIn: boolean) => {
-    const thunk: ReduxThunkAction = async (dispatch, getState) => {
-      const tokenResult = await AuthApi.refreshToken();
-
-      if (tokenResult.isErr()) {
-        console.error(tokenResult.error);
-        return;
-      }
-
-      const token = tokenResult.value;
-
-      setToken(dispatch, token);
-
-      const userResult = await UserApi.fetchSelf(token);
-
-      if (userResult.isErr()) {
-        console.error(userResult.error);
-        return;
-      }
-
-      const user = userResult.value;
-
-      setUser(dispatch, user);
-
-      if (isFirstSignIn) {
-        redirectUserPage(user.steamID);
-      } else {
-        Router.push("/");
-      }
-    };
-    reduxDispatch(thunk);
-  };
+  const dispatch = useDispatch();
+  return (isFirstSignIn: boolean) =>
+    dispatch(preloadUserThunkAction(isFirstSignIn));
 };

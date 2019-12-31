@@ -1,8 +1,8 @@
 import { FC, useState, ChangeEvent } from "react";
 import { Button, Input, Message } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
-import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
 import { Nade } from "../models/Nade/Nade";
+import { useUpdateNade } from "../store/NadeStore/NadeHooks";
 
 type Props = {
   nade: Nade;
@@ -13,7 +13,7 @@ export const GfycatEditor: FC<Props> = ({ nade, onCancel }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentGfyID, updateGfyID] = useState(nade.gfycat.gfyId);
-  const updateNade = useUpdateNadeAction();
+  const updateNade = useUpdateNade();
 
   function onGfyIDChange(event: ChangeEvent<HTMLInputElement>) {
     updateGfyID(event.target.value);

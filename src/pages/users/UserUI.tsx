@@ -17,14 +17,10 @@ type Props = {
 
 export const UserUI: FC<Props> = ({ user, nades }) => {
   const { isMobile, uiDimensions } = useTheme();
-  const { fetchUserNades, startEditingUser } = useUsersActions();
+  const { startEditingUser } = useUsersActions();
   const { isEditing } = useUsersState();
 
   const numItemsPerRow = isMobile ? 1 : 3;
-
-  useEffect(() => {
-    fetchUserNades();
-  }, []);
 
   return (
     <>

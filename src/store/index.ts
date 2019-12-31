@@ -8,6 +8,7 @@ import { NadeReducer } from "./NadeStore/NadeReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { LayoutReducer } from "./LayoutStore/LayoutReducer";
 import { UsersReducer } from "./UsersStore/UsersReducer";
+import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -21,9 +22,9 @@ const rootReducer = combineReducers({
 function createMiddleware() {
   const isProduction = process.env.NODE_ENV === "production";
   if (isProduction) {
-    return applyMiddleware(thunk);
+    return applyMiddleware(tokenRefreshMiddleware, thunk);
   } else {
-    return composeWithDevTools(applyMiddleware(thunk));
+    return composeWithDevTools(applyMiddleware(tokenRefreshMiddleware, thunk));
   }
 }
 

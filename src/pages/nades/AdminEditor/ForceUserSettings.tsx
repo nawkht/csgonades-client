@@ -1,6 +1,6 @@
 import { FC, useState, ChangeEvent } from "react";
 import { Button, Input } from "semantic-ui-react";
-import { useUpdateUser } from "../../../store/NadeStore/NadeActions";
+import { useUpdateUser } from "../../../store/NadeStore/NadeHooks";
 
 type Props = {
   nadeId: string;

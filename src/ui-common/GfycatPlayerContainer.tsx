@@ -2,10 +2,10 @@ import { useState, FC, useEffect, useMemo, useRef } from "react";
 import { GfycatEditor } from "./GfycatEditor";
 import { NadeApi } from "../api/NadeApi";
 import { Nade } from "../models/Nade/Nade";
-import { useUpdateNadeAction } from "../store/NadeStore/NadeActions";
 import { EditButton } from "./EditButton";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { GfycatLargePlayer } from "./GfycatLargePlayer";
+import { useUpdateNade } from "../store/NadeStore/NadeHooks";
 
 export type Aspect = "16:9" | "16:10";
 
@@ -17,7 +17,7 @@ type Props = {
 export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
   const { colors, durations, isMobile } = useTheme();
 
-  const updateNade = useUpdateNadeAction();
+  const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
   const [highDef, setHighDef] = useState(true);
 

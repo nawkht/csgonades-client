@@ -3,12 +3,9 @@ import { FC, useState } from "react";
 import { StatusEditor } from "./StatusEditor";
 import { ForceUserSettings } from "./ForceUserSettings";
 import {
-  useUpdateNadeStatus,
-  useUpdateNadeAction
-} from "../../../store/NadeStore/NadeActions";
-import {
   useDeleteNade,
-  useForceNadeYear
+  useUpdateNade,
+  useUpdateNadeStatus
 } from "../../../store/NadeStore/NadeHooks";
 import { Input, Button } from "semantic-ui-react";
 import ReactDatePicker from "react-datepicker";
@@ -20,7 +17,7 @@ type Props = {
 
 export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
   const updateNadeStatus = useUpdateNadeStatus();
-  const updateNade = useUpdateNadeAction();
+  const updateNade = useUpdateNade();
   const deleteNade = useDeleteNade();
   const [deleteConfimMessage, setDeleteConfimMessage] = useState("");
   const [createdAt, setCreatedAt] = useState<Date | null>(

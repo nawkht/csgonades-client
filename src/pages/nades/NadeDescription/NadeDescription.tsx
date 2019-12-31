@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 import { Nade } from "../../../models/Nade/Nade";
 import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
 import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
-import { useUpdateNadeAction } from "../../../store/NadeStore/NadeActions";
 import { EditButton } from "../../../ui-common/EditButton";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
 
 type Props = {
   nade: Nade;
@@ -13,7 +13,7 @@ type Props = {
 
 export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
   const { colors, durations, uiDimensions } = useTheme();
-  const updateNade = useUpdateNadeAction();
+  const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(nade.description || "");
 
