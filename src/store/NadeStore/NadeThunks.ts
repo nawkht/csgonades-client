@@ -29,8 +29,6 @@ export const fetchSiteStatsThunk = (): ReduxThunkAction => {
       return;
     }
 
-    console.log("Got stats", result.value);
-
     return dispatch(addSiteStatsAction(result.value));
   };
 };
