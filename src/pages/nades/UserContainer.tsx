@@ -2,19 +2,24 @@ import { FC } from "react";
 import { UserLight } from "../../models/User";
 import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { Nade } from "../../models/Nade/Nade";
+import { dateFromNow } from "../../utils/DateUtils";
 
 type Props = {
-  user: UserLight;
+  nade: Nade;
 };
 
-export const UserContainer: FC<Props> = ({ user }) => {
+export const UserContainer: FC<Props> = ({ nade }) => {
   const { uiDimensions, colors } = useTheme();
-  const { avatar, nickname } = user;
+  const { avatar, nickname } = nade.user;
   return (
     <>
       <div className="user-container">
         <span className="user-label">Created by</span>
-        <Link href={`/users?id=${user.steamId}`} as={`/users/${user.steamId}`}>
+        <Link
+          href={`/users?id=${nade.user.steamId}`}
+          as={`/users/${nade.user.steamId}`}
+        >
           <a className="user-link">
             <img
               className="user-avatar"
@@ -25,6 +30,7 @@ export const UserContainer: FC<Props> = ({ user }) => {
               }
             />
             <span className="user-nickname">{nickname}</span>
+            <span>, {dateFromNow(nade.createdAt)}.</span>
           </a>
         </Link>
       </div>

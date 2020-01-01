@@ -26,8 +26,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         <div className="nade-main">
           <GfycatPlayerContrainer nade={nade} allowEdit={allowEdit} />
           <NadeDescription nade={nade} allowEdit={allowEdit} />
-          <UserContainer user={nade.user} />
-          <div>Created {dateFromNow(nade.createdAt)}</div>
+          <UserContainer nade={nade} />
         </div>
         <div className="nade-aside">
           <NadeMetaPanel allowEdit={allowEdit} nade={nade} />
