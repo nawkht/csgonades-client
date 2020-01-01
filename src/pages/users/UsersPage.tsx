@@ -9,7 +9,7 @@ import { useUsersState } from "../../store/UsersStore/UsersHooks";
 const UserPage: React.FC = () => {
   const { user, error, nades } = useUsersState();
   return (
-    <Layout>
+    <Layout title={user ? user.nickname : "User not found"}>
       {error && <UserNotFound />}
       {user && <UserUI user={user} nades={nades} />}
     </Layout>

@@ -43,7 +43,7 @@ export const NewNadePage: FC = () => {
   }
 
   return (
-    <Layout>
+    <Layout title="New nade">
       <div className="nade-new-container">
         <h2>Add new nade</h2>
         <Segment placeholder>

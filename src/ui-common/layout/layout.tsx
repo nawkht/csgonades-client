@@ -11,7 +11,7 @@ interface Props {
   title?: string;
 }
 
-export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
+export const Layout: React.FC<Props> = ({ title, children }) => {
   useUpdateLayout();
   const { isMobile, uiDimensions, sideBarOpen } = useTheme();
 
@@ -20,10 +20,12 @@ export const Layout: React.FC<Props> = ({ title = "CSGONades", children }) => {
     GoogleAnalytics.pageView(location);
   }, []);
 
+  const pageTitle = title ? `CSGO Nades | ${title}` : `CSGO Nades`;
+
   return (
     <div id="page">
       <Head>
-        <title>{title}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <Header />

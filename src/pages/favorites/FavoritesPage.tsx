@@ -7,6 +7,7 @@ import {
 } from "../../store/FavoriteStore/FavoriteSelectors";
 import { NadeList } from "../../ui-common/NadeList";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { Layout } from "../../ui-common/layout/layout";
 
 export const FavoritesPage: FC = () => {
   const theme = useTheme();
@@ -20,7 +21,7 @@ export const FavoritesPage: FC = () => {
   const numItemsPerRow = theme.isMobile ? 1 : 5;
 
   return (
-    <>
+    <Layout title="Favorites">
       <div className="favorites-container">
         {isLoading && <>Loading...</>}
         {!isLoading && (
@@ -39,6 +40,6 @@ export const FavoritesPage: FC = () => {
           padding: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
         }
       `}</style>
-    </>
+    </Layout>
   );
 };

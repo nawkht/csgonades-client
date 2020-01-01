@@ -20,7 +20,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
   const allowEdit = useCanEditNade(nade);
 
   return (
-    <Layout>
+    <Layout title={nade.title || "New nade"}>
       <NadeTitlebar nade={nade} allowEdit={allowEdit} />
       <div className="nade-container">
         <div className="nade-main">

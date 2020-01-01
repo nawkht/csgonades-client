@@ -19,7 +19,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   const numItemsPerRow = isMobile ? 1 : 4;
 
   return (
-    <Layout>
+    <Layout title={capitalize(map)}>
       <NadeFilter map={map} />
       <div className="nade-list">
         <NadeList
