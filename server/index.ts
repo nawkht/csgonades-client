@@ -5,16 +5,11 @@ const port = parseInt(process.env.PORT || "3000", 10);
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
-var sslRedirect = require("heroku-ssl-redirect");
 
 app
   .prepare()
   .then(() => {
     const server = express();
-
-    if (!dev) {
-      server.use(sslRedirect);
-    }
 
     server.get("/maps/:name", (req, res) => {
       app.render(req, res, "/maps", req.params);
