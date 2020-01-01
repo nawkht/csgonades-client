@@ -108,8 +108,14 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
   return (
     <>
       <div className="image-uploader">
-        <input hidden ref={fileInputRef} type="file" onChange={onSelectFile} />
-        <Button onClick={onSelectFileClick}>UPLOAD IMAGE</Button>
+        <input
+          hidden
+          ref={fileInputRef}
+          type="file"
+          accept="image/jpeg"
+          onChange={onSelectFile}
+        />
+        <Button onClick={onSelectFileClick}>UPLOAD IMAGE (JPEG ONLY)</Button>
         {!image && (
           <img
             width="100%"
