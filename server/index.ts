@@ -1,6 +1,6 @@
 import next from "next";
 import express from "express";
-
+import { createSitemap } from "./createSiteMap";
 const port = parseInt(process.env.PORT || "3000", 10);
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -24,6 +24,13 @@ app
         res.redirect("https://" + req.headers.host + req.url);
       });
     }
+
+    server.get("/sitemap.xml", async function(req, res) {
+      res.header("Content-Type", "application/xml");
+      let xmlFile = await createSitemap();
+      // Send it to the browser
+      res.send(xmlFile);
+    });
 
     server.get("/maps/:name", (req, res) => {
       app.render(req, res, "/maps", req.params);
