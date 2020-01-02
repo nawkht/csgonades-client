@@ -30,7 +30,13 @@ export const UserDropdown: FC<Props> = ({ user }) => {
   return (
     <>
       <span className="user-nav-user">
-        {user.avatar && <img className="user-avatar" src={user.avatar} />}
+        {user.avatar && (
+          <img
+            className="user-avatar"
+            src={user.avatar}
+            alt={`avatar for ${user.nickname}`}
+          />
+        )}
         <Dropdown text={user.nickname}>
           <Dropdown.Menu direction="left">
             <Dropdown.Item

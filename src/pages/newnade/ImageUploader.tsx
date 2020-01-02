@@ -120,6 +120,7 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
           <img
             width="100%"
             src="https://www.urbansplash.co.uk/images/placeholder-16-9.jpg"
+            alt="Placeholder for result image"
           />
         )}
 

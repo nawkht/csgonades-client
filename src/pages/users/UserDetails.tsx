@@ -24,7 +24,8 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
     <>
       <div className="user-details">
         <h1>
-          <img src={user.avatar || ""} /> {user.nickname}
+          <img src={user.avatar || ""} alt={`avatar for ${user.nickname}`} />{" "}
+          {user.nickname}
         </h1>
         {user.role !== "user" && (
           <span className="user-role-badge">{capitalize(user.role)}</span>

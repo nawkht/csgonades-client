@@ -19,7 +19,10 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
         <Link as={`/maps/${mapName}`} href={`/maps?name=${mapName}`}>
           <a>
             <div className="image-container">
-              <img src={`/mapicons/${mapName}.png`} />
+              <img
+                src={`/mapicons/${mapName}.png`}
+                alt={`navigation icon for ${mapName}`}
+              />
             </div>
             <span className="nav-text">{capitalize(mapName)}</span>
           </a>

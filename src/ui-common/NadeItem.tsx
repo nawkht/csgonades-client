@@ -24,7 +24,11 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
       <Link href={`/nades?id=${nade.id}`} as={`/nades/${nade.id}`}>
         <a className={nadeBoxClassName} style={{ display: "inline-block" }}>
           <div className="title">
-            <img className="nade-type-icon" src={iconUrl} />{" "}
+            <img
+              className="nade-type-icon"
+              src={iconUrl}
+              alt={`nade icon ${nade.type}`}
+            />{" "}
             <span className="title-text">{title}</span>
           </div>
           <div className="video">

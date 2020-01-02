@@ -24,7 +24,7 @@ const Header: FC = () => {
 
           <Link href="/" as="/">
             <a className="logo">
-              <img src="/logo.png" />
+              <img src="/logo.png" alt="CSGO Nades logo" />
             </a>
           </Link>
         </div>

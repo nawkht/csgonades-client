@@ -19,7 +19,7 @@ export const NewNadeImage: FC<Props> = ({ onSetImageBase64 }) => {
     <>
       {croppedImage && (
         <>
-          <img src={croppedImage} />
+          <img src={croppedImage} alt="result image" />
           <Button primary onClick={() => setIsImageModalVisisble(true)}>
             Edit
           </Button>

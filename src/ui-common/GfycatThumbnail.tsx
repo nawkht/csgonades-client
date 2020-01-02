@@ -46,7 +46,7 @@ export const GfycatThumbnail: FC<Props> = ({ imageUrl, gfyUrl }) => {
         style={{ height }}
       >
         <div className="front" style={{ width: width, height: height }}>
-          <img src={imageUrl} />
+          <img src={imageUrl} alt={`nade thumbnail`} />
         </div>
 
         {isHovering && (

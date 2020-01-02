@@ -28,6 +28,7 @@ export const UserContainer: FC<Props> = ({ nade }) => {
                   ? avatar
                   : "https://www.prndl.co/assets/user-placeholder-54d9b5720151ac85adf20a7dbef2a11821b1c35b64d40f32e928974c2c2abd6b.png"
               }
+              alt={`avatar for ${nickname}`}
             />
             <span className="user-nickname">{nickname}</span>
             <span>, {dateFromNow(nade.createdAt)}.</span>
