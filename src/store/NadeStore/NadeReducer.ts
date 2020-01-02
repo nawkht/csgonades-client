@@ -5,16 +5,18 @@ import { NadeFilterOptions } from "../../api/NadeApi";
 import { SiteStats } from "../../api/StatsApi";
 
 export type NadeState = {
-  nades: NadeLight[];
+  nadesForMap: NadeLight[];
+  recentNades: NadeLight[];
   selectedNade?: Nade;
-  loading: boolean;
+  loadingNadesForMap: boolean;
   nadeFilter: NadeFilterOptions;
   siteStats: SiteStats;
 };
 
 const initialState: NadeState = {
-  nades: [],
-  loading: false,
+  nadesForMap: [],
+  recentNades: [],
+  loadingNadesForMap: false,
   nadeFilter: {
     flash: false,
     hegrenade: false,
@@ -35,7 +37,7 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/add":
       return {
         ...state,
-        nades: action.nades
+        nadesForMap: action.nades
       };
     case "@@nades/add_selected":
       return {
@@ -45,12 +47,12 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/START_LOADING":
       return {
         ...state,
-        loading: true
+        loadingNadesForMap: true
       };
     case "@@nades/STOP_LOADING":
       return {
         ...state,
-        loading: false
+        loadingNadesForMap: false
       };
     case "@@nades/FILTER_BY_TYPE":
       return handleFilterByType(action, state);
@@ -63,6 +65,11 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
       return {
         ...state,
         siteStats: action.stats
+      };
+    case "@@nades/ADD_RECENT":
+      return {
+        ...state,
+        recentNades: action.nades
       };
     default:
       return state;

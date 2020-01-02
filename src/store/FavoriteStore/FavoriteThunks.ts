@@ -9,6 +9,7 @@ import {
   addFavoritedNadesAction
 } from "./FavoriteActions";
 import { NadeApi } from "../../api/NadeApi";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 
 export const fetchFavoritesThunkAction = (): ReduxThunkAction => {
   return async (dispatch, getState) => {
@@ -74,12 +75,15 @@ export const addFavoriteThunkAction = (nadeId: string): ReduxThunkAction => {
     }
 
     const result = await FavoriteApi.favorite(nadeId, token);
+
     if (result.isErr()) {
       console.warn("Error", result.error);
       return;
     }
 
     const favorites = result.value;
+
+    GoogleAnalytics.event("Favorite", "Add favorite");
 
     dispatch(addFavoriteAction(favorites));
   };
@@ -97,6 +101,8 @@ export const addUnFavoriteThunkAction = (
     }
 
     dispatch(removeFavoriteAction(favoriteId));
+
+    GoogleAnalytics.event("Favorite", "Remove favorite");
 
     const result = await FavoriteApi.unFavorite(favoriteId, token);
     if (result.isErr()) {

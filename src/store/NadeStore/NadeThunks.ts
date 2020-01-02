@@ -1,12 +1,14 @@
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { NadeApi, NadeFilterOptions } from "../../api/NadeApi";
+import { NadeApi } from "../../api/NadeApi";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
   addNadeAction,
   startLoadingNadeAction,
   stopLoadingNadeAction,
   addSelectedNadeAction,
-  addSiteStatsAction
+  addSiteStatsAction,
+  filterByTypeAction,
+  addRecentNadesAction
 } from "./NadeActions";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import {
@@ -19,6 +21,19 @@ import Router from "next/router";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { nadeFilterSelector } from "./NadeSelectors";
 import { StatsApi } from "../../api/StatsApi";
+import { NadeType } from "../../models/Nade/NadeType";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+
+export const filterByNadeTypeThunk = (
+  map: CsgoMap,
+  nadeType: NadeType
+): ReduxThunkAction => {
+  return async dispatch => {
+    dispatch(filterByTypeAction(nadeType));
+    GoogleAnalytics.event("Nade filter", `Filter by ${nadeType}`);
+    dispatch(fetchNadesByMapActionThunk(map));
+  };
+};
 
 export const fetchSiteStatsThunk = (): ReduxThunkAction => {
   return async dispatch => {
@@ -35,9 +50,7 @@ export const fetchSiteStatsThunk = (): ReduxThunkAction => {
 
 export const fetchNewestNadesAction = (limit?: number): ReduxThunkAction => {
   return async dispatch => {
-    startLoadingNadeAction(dispatch);
     const nadesResult = await NadeApi.getAll();
-    stopLoadingNadeAction(dispatch);
 
     if (nadesResult.isErr()) {
       console.error(nadesResult.error);
@@ -46,36 +59,38 @@ export const fetchNewestNadesAction = (limit?: number): ReduxThunkAction => {
 
     const nades = nadesResult.value;
 
-    return dispatch(addNadeAction(nades));
+    return dispatch(addRecentNadesAction(nades));
   };
 };
 
-export const fetchNadesByMapAction = (mapName: CsgoMap): ReduxThunkAction => {
+export const fetchNadesByMapActionThunk = (
+  mapName: CsgoMap
+): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const filter = nadeFilterSelector(getState());
-
     startLoadingNadeAction(dispatch);
+
+    const filter = nadeFilterSelector(getState());
     const nadesResult = await NadeApi.getByMap(mapName, filter);
-    stopLoadingNadeAction(dispatch);
 
     if (nadesResult.isErr()) {
       console.error(nadesResult.error);
-      return;
+      return stopLoadingNadeAction(dispatch);
     }
 
     const nades = nadesResult.value;
 
-    return dispatch(addNadeAction(nades));
+    dispatch(addNadeAction(nades));
+
+    return stopLoadingNadeAction(dispatch);
   };
 };
 
 export const fetchNadeByIdAction = (nadeId: string): ReduxThunkAction => {
   return async dispatch => {
-    startLoadingNadeAction(dispatch);
     const result = await NadeApi.byId(nadeId);
-    stopLoadingNadeAction(dispatch);
 
     if (result.isErr()) {
+      stopLoadingNadeAction(dispatch);
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to fetch nades.",
@@ -96,9 +111,7 @@ export const createNadeAction = (nadeBody: NadeBody): ReduxThunkAction => {
       return;
     }
 
-    startLoadingNadeAction(dispatch);
     const result = await NadeApi.save(nadeBody, token);
-    stopLoadingNadeAction(dispatch);
 
     if (result.isErr()) {
       console.error(result.error);
@@ -109,8 +122,6 @@ export const createNadeAction = (nadeBody: NadeBody): ReduxThunkAction => {
         })
       );
     }
-
-    redirectNadePage(result.value.id);
   };
 };
 
@@ -125,11 +136,10 @@ export const updateNadeAction = (
       return;
     }
 
-    startLoadingNadeAction(dispatch);
     const result = await NadeApi.update(nadeId, data, authToken);
-    stopLoadingNadeAction(dispatch);
 
     if (result.isErr()) {
+      stopLoadingNadeAction(dispatch);
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to update nade.",
@@ -164,7 +174,6 @@ export const updateNadeGfycatAction = (
       );
     }
 
-    startLoadingNadeAction(dispatch);
     const result = await NadeApi.update(
       nadeId,
       {
@@ -172,7 +181,6 @@ export const updateNadeGfycatAction = (
       },
       authToken
     );
-    stopLoadingNadeAction(dispatch);
 
     if (result.isErr()) {
       return dispatch(
@@ -206,11 +214,10 @@ export const deleteNadeAction = (nadeId: string): ReduxThunkAction => {
       );
     }
 
-    startLoadingNadeAction(dispatch);
     const result = await NadeApi.delete(nadeId, authToken);
-    stopLoadingNadeAction(dispatch);
 
     if (result.isErr()) {
+      stopLoadingNadeAction(dispatch);
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to delete nade.",
@@ -238,9 +245,7 @@ export const updateNadeUserAction = (
       );
     }
 
-    startLoadingNadeAction(dispatch);
     const result = await NadeApi.updateUser(nadeId, steamId, authToken);
-    stopLoadingNadeAction(dispatch);
 
     if (result.isErr()) {
       return dispatch(
@@ -270,9 +275,7 @@ export const updateNadeStatusAction = (
       );
     }
 
-    startLoadingNadeAction(dispatch);
     const result = await NadeApi.updateNadeStatus(nadeId, updates, authToken);
-    stopLoadingNadeAction(dispatch);
 
     if (result.isErr()) {
       return dispatch(

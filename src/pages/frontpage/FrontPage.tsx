@@ -4,12 +4,13 @@ import { Layout } from "../../ui-common/layout/layout";
 import { FrontPageJumbo } from "./FrontPageJumbo";
 import { NadeList } from "../../ui-common/NadeList";
 import { useSelector } from "react-redux";
-import { nadesSelector } from "../../store/NadeStore/NadeSelectors";
+import { recentNadesSelector } from "../../store/NadeStore/NadeSelectors";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 export const FrontPage: FC = () => {
-  const { uiDimensions } = useTheme();
-  const nades = useSelector(nadesSelector);
+  const { isMobile, uiDimensions } = useTheme();
+  const nades = useSelector(recentNadesSelector);
+  const numItemsPerRow = isMobile ? 1 : 4;
 
   return (
     <Layout>
@@ -17,7 +18,7 @@ export const FrontPage: FC = () => {
       <FrontPageStats />
       <div className="recent-nades">
         <h3>Most recent nades</h3>
-        <NadeList nades={nades} />
+        <NadeList disableLoader numItemsPerRow={numItemsPerRow} nades={nades} />
       </div>
       <style jsx>{`
         .recent-nades {

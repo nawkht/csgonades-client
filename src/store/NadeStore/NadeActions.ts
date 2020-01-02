@@ -8,6 +8,11 @@ type AddNadesAction = {
   nades: NadeLight[];
 };
 
+type AddRcentNadesAction = {
+  type: "@@nades/ADD_RECENT";
+  nades: NadeLight[];
+};
+
 type AddSelectedNadeAction = {
   type: "@@nades/add_selected";
   nade: Nade;
@@ -37,6 +42,7 @@ export type AddSiteStats = {
 
 export type NadeActions =
   | AddNadesAction
+  | AddRcentNadesAction
   | AddSelectedNadeAction
   | StartLoadingNadeAction
   | StopLoadingNadeAction
@@ -47,6 +53,13 @@ export type NadeActions =
 export const addSiteStatsAction = (stats: SiteStats): AddSiteStats => ({
   type: "@@nades/ADD_SITE_STATS",
   stats
+});
+
+export const addRecentNadesAction = (
+  nades: NadeLight[]
+): AddRcentNadesAction => ({
+  type: "@@nades/ADD_RECENT",
+  nades
 });
 
 export const addNadeAction = (nades: NadeLight[]) => ({

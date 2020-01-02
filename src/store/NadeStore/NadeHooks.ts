@@ -6,28 +6,26 @@ import {
 } from "../../models/Nade/Nade";
 import { useSelector, useDispatch } from "react-redux";
 import { userSelector } from "../AuthStore/AuthSelectors";
-import { NadeFilterOptions } from "../../api/NadeApi";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
-  fetchNadesByMapAction,
+  fetchNadesByMapActionThunk,
   createNadeAction,
   updateNadeGfycatAction,
   deleteNadeAction,
   updateNadeUserAction,
   updateNadeAction,
-  updateNadeStatusAction
+  updateNadeStatusAction,
+  filterByNadeTypeThunk
 } from "./NadeThunks";
 import { nadeFilterSelector } from "./NadeSelectors";
 import { NadeType } from "../../models/Nade/NadeType";
-import { filterByTypeAction } from "./NadeActions";
 
 export const useNadeFilter = () => {
   const dispatch = useDispatch();
   const nadeFilter = useSelector(nadeFilterSelector);
 
   function filterByType(nadeType: NadeType, map: CsgoMap) {
-    dispatch(filterByTypeAction(nadeType));
-    dispatch(fetchNadesByMapAction(map));
+    dispatch(filterByNadeTypeThunk(map, nadeType));
   }
 
   return {
@@ -62,7 +60,7 @@ export const useUpdateGfycat = () => {
 
 export const useFetchNadesByMap = () => {
   const dispatch = useDispatch();
-  return (mapName: CsgoMap) => dispatch(fetchNadesByMapAction(mapName));
+  return (mapName: CsgoMap) => dispatch(fetchNadesByMapActionThunk(mapName));
 };
 
 export const useDeleteNade = () => {
