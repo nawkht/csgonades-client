@@ -25,14 +25,6 @@ export function nadeMapOptions() {
   return options;
 }
 
-export function mapsList() {
-  let maps: string[] = [];
-  for (let key in CsGoMaps) {
-    maps.push(key);
-  }
-  return maps;
-}
-
 export function mapString(csgoMap: CsgoMap) {
   return CsGoMaps[csgoMap];
 }

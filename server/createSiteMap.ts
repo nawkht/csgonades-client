@@ -1,6 +1,24 @@
 import axios from "axios";
-import { NadeLight } from "../src/models/Nade/Nade";
-import { mapsList } from "../src/models/Nade/CsGoMap";
+
+const CsGoMaps = {
+  dust2: "Dust2",
+  mirage: "Mirage",
+  nuke: "Nuke",
+  inferno: "Inferno",
+  cache: "Cache",
+  overpass: "Overpass",
+  vertigo: "Vertigo",
+  train: "Train",
+  cobblestone: "Cobblestone"
+};
+
+function mapsList() {
+  let maps: string[] = [];
+  for (let key in CsGoMaps) {
+    maps.push(key);
+  }
+  return maps;
+}
 
 const SITE_ROOT = "https://www.csgonades.com";
 const API_SOURCE = "https://api.csgonades.com";
@@ -48,9 +66,7 @@ const createSitemap = async () => {
   });
 
   try {
-    const result = await axios.get<NadeLight[]>(
-      `${API_SOURCE}/nades?limit=all`
-    );
+    const result = await axios.get<any[]>(`${API_SOURCE}/nades?limit=all`);
     const nades = result.data;
 
     for (let nade of nades) {
