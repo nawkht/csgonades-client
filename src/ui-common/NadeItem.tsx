@@ -24,7 +24,8 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
       <Link href={`/nades?id=${nade.id}`} as={`/nades/${nade.id}`}>
         <a className={nadeBoxClassName} style={{ display: "inline-block" }}>
           <div className="title">
-            <img className="nade-type-icon" src={iconUrl} /> {title}
+            <img className="nade-type-icon" src={iconUrl} />{" "}
+            <span className="title-text">{title}</span>
           </div>
           <div className="video">
             <GfycatThumbnail
@@ -72,15 +73,18 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
         .title {
           padding: 6px 12px;
           display: block;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
           background: ${colors.PRIMARY_90_PERCENT};
           color: white;
           transition: background ${durations.transition}s;
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        .title-text {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .nade-type-icon {
