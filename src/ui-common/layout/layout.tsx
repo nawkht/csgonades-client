@@ -6,12 +6,15 @@ import { useEffect } from "react";
 import { useUpdateLayout } from "../../utils/CommonHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+// @ts-ignore
+import removeMd from "remove-markdown";
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-export const Layout: React.FC<Props> = ({ title, children }) => {
+export const Layout: React.FC<Props> = ({ title, description, children }) => {
   useUpdateLayout();
   const { isMobile, uiDimensions, sideBarOpen } = useTheme();
 
@@ -28,11 +31,15 @@ export const Layout: React.FC<Props> = ({ title, children }) => {
   }, []);
 
   const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
+  const pageDescription = description
+    ? removeMd(description)
+    : "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
 
   return (
     <div id="page">
       <Head>
         <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
       </Head>
 
       <Header />
