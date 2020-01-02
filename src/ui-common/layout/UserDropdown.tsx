@@ -2,7 +2,10 @@ import { FC } from "react";
 import { User } from "../../models/User";
 import { Dropdown } from "semantic-ui-react";
 import Router from "next/router";
-import { useSignOut } from "../../store/AuthStore/AuthHooks";
+import {
+  useSignOut,
+  useIsAdminOrModerator
+} from "../../store/AuthStore/AuthHooks";
 import { redirectUserPage } from "../../utils/Common";
 
 type Props = {
@@ -10,6 +13,7 @@ type Props = {
 };
 
 export const UserDropdown: FC<Props> = ({ user }) => {
+  const isAdminOrMod = useIsAdminOrModerator();
   const signOut = useSignOut();
   function onProfileClick() {
     redirectUserPage(user.steamID);
@@ -17,6 +21,10 @@ export const UserDropdown: FC<Props> = ({ user }) => {
 
   function onFavoritesClick() {
     Router.push(`/favorites`);
+  }
+
+  function onAdminClick() {
+    Router.push(`/admin`);
   }
 
   return (
@@ -35,6 +43,9 @@ export const UserDropdown: FC<Props> = ({ user }) => {
               icon="star"
               onClick={onFavoritesClick}
             />
+            {isAdminOrMod && (
+              <Dropdown.Item text="Admin" icon="star" onClick={onAdminClick} />
+            )}
             <Dropdown.Divider />
             <Dropdown.Item
               text="Sign out"

@@ -44,6 +44,19 @@ export class NadeApi {
     }
   }
 
+  static async getPending(token: string): AppResult<NadeLight[]> {
+    try {
+      const res = await axios.get<NadeLight[]>(`${BASE_URL}/nades/pending`, {
+        headers: { Authorization: token }
+      });
+      const nades = res.data;
+
+      return ok(nades);
+    } catch (error) {
+      return extractApiError(error);
+    }
+  }
+
   static async getByMap(
     mapName: CsgoMap,
     filter?: NadeFilterOptions

@@ -9,6 +9,7 @@ import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { LayoutReducer } from "./LayoutStore/LayoutReducer";
 import { UsersReducer } from "./UsersStore/UsersReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
+import { AdminReducer } from "./AdminStore/AdminReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   nadeStore: NadeReducer,
   favoriteStore: FavoriteReducer,
   layoutStore: LayoutReducer,
-  usersStore: UsersReducer
+  usersStore: UsersReducer,
+  adminStore: AdminReducer
 });
 
 function createMiddleware() {
@@ -35,23 +37,7 @@ export const initReduxStore = (initialState: AppState) => {
   const isClient = typeof window !== "undefined";
 
   if (isClient) {
-    const { persistReducer } = require("redux-persist");
-
-    const storage = require("redux-persist/lib/storage").default;
-
-    // Mark some reducer as persisted on client
-    const rootReducerClient = combineReducers({
-      authStore: AuthReducer,
-      notificationStore: NotificationReducer,
-      nadeStore: NadeReducer,
-      favoriteStore: FavoriteReducer,
-      layoutStore: LayoutReducer,
-      usersStore: UsersReducer
-    });
-
-    store = createStore(rootReducerClient, initialState, createMiddleware());
-
-    store.__PERSISTOR = persistStore(store);
+    store = createStore(rootReducer, initialState, createMiddleware());
   } else {
     store = createStore(rootReducer, initialState, createMiddleware());
   }
