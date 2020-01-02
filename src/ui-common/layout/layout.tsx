@@ -16,8 +16,15 @@ export const Layout: React.FC<Props> = ({ title, children }) => {
   const { isMobile, uiDimensions, sideBarOpen } = useTheme();
 
   useEffect(() => {
-    const location = window.location.pathname + window.location.search;
-    GoogleAnalytics.pageView(location);
+    let delayedAnalytics = setTimeout(() => {
+      const location = window.location.pathname + window.location.search;
+      GoogleAnalytics.pageView(location);
+    }, 500);
+    return () => {
+      if (delayedAnalytics) {
+        clearTimeout(delayedAnalytics);
+      }
+    };
   }, []);
 
   const pageTitle = title ? `CSGO Nades | ${title}` : `CSGO Nades`;
