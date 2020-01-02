@@ -40,6 +40,12 @@ export const Layout: React.FC<Props> = ({ title, description, children }) => {
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        <meta name="og:description" content={pageDescription} />
+        <meta name="og:title" content={pageTitle} />
+        <meta name="og:site_name" content="CSGONades" />
+        <meta name="og:type" content="website" />
+        <meta name="og:locale" content="en_EN" />
+        <meta name="og:url" content="https://www.csgonades.com/" />
       </Head>
 
       <Header />
