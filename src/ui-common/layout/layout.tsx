@@ -46,6 +46,10 @@ export const Layout: React.FC<Props> = ({ title, description, children }) => {
         <meta name="og:type" content="website" />
         <meta name="og:locale" content="en_EN" />
         <meta name="og:url" content="https://www.csgonades.com/" />
+        <meta
+          name="keywords"
+          content="de_dust2 de_train de_mirage de_inferno de_cbble de_overpass de_cache nades flashbang smoke incendiary molotov he grenade csgo cs:go counter-strike global offensive"
+        />
       </Head>
 
       <Header />
