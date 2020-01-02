@@ -24,3 +24,7 @@ export function nadeMapOptions() {
   }
   return options;
 }
+
+export function mapString(csgoMap: CsgoMap) {
+  return CsGoMaps[csgoMap];
+}

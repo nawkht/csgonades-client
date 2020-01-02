@@ -27,7 +27,7 @@ export const Layout: React.FC<Props> = ({ title, children }) => {
     };
   }, []);
 
-  const pageTitle = title ? `CSGO Nades | ${title}` : `CSGO Nades`;
+  const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
 
   return (
     <div id="page">

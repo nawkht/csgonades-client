@@ -9,7 +9,8 @@ import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
 import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
 import { NadeDescription } from "./NadeDescription/NadeDescription";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { dateFromNow } from "../../utils/DateUtils";
+import { mapString } from "../../models/Nade/CsGoMap";
+import { nadeTypeString } from "../../models/Nade/NadeType";
 
 type Props = {
   nade: Nade;
@@ -19,8 +20,16 @@ const NadePage: React.FC<Props> = ({ nade }) => {
   const { uiDimensions, isMobile } = useTheme();
   const allowEdit = useCanEditNade(nade);
 
+  let layoutTitle = "New nade";
+
+  if (nade.title && nade.map && nade.type) {
+    layoutTitle = `${nade.title} - ${mapString(nade.map)} - ${nadeTypeString(
+      nade.type
+    )}`;
+  }
+
   return (
-    <Layout title={nade.title || "New nade"}>
+    <Layout title={layoutTitle}>
       <NadeTitlebar nade={nade} allowEdit={allowEdit} />
       <div className="nade-container">
         <div className="nade-main">
