@@ -32,7 +32,10 @@ class MyApp extends App<Props> {
   }
 
   async componentDidMount() {
+    const { store } = this.props;
     await AuthApi.setSessionCookie();
+    // @ts-ignore
+    await store.dispatch(serverSideUserInitThunkAction());
   }
 
   render() {
