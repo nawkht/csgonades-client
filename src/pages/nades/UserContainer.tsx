@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { UserLight } from "../../models/User";
 import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { Nade } from "../../models/Nade/Nade";

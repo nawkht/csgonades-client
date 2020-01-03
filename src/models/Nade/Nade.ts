@@ -7,7 +7,6 @@ import { Tickrate } from "./NadeTickrate";
 import { NadeType } from "./NadeType";
 import { NadeImages } from "./NadeImages";
 import { GfycatData } from "./GfycatData";
-import { NadeStats } from "./NadeStats";
 
 export type Status = "pending" | "accepted" | "declined" | "deleted";
 
@@ -20,7 +19,6 @@ export type Nade = {
   gfycat: GfycatData;
   images: NadeImages;
   map?: CsgoMap;
-  stats: NadeStats;
   movement?: Movement;
   technique?: Technique;
   tickrate?: Tickrate;
@@ -32,6 +30,8 @@ export type Nade = {
   status: Status;
   statusInfo?: StatusInfo;
   mapSite?: MapSite;
+  viewCount: number;
+  favoriteCount: number;
 };
 
 export type NadeLight = {
@@ -40,11 +40,12 @@ export type NadeLight = {
   title?: string;
   gfycat: GfycatData;
   images: NadeImages;
-  stats: NadeStats;
   type?: NadeType;
   mapSite?: MapSite;
   tickrate?: Tickrate;
   createdAt: Date;
+  viewCount: number;
+  favoriteCount: number;
 };
 
 export type NadeBody = {

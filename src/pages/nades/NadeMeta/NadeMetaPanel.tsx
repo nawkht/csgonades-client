@@ -110,7 +110,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
 
         <div className="nade-meta-item">
           <span className="map-meta-title">Views</span>
-          <NadeViewsValue views={nade.stats.views} />
+          <NadeViewsValue views={nade.viewCount} />
         </div>
 
         {isEditing && (

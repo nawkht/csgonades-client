@@ -40,7 +40,7 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
           <div className="stats">
             <div className="stat">
               <Icon name="eye" size="small" />
-              <span className="icon-text">{nade.stats.views}</span>
+              <span className="icon-text">{nade.viewCount}</span>
             </div>
             {nade.tickrate && nade.tickrate !== "any" && (
               <div className="stat tick">
