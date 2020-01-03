@@ -40,11 +40,11 @@ export type NadeLight = {
   title?: string;
   gfycat: GfycatData;
   images: NadeImages;
-  type?: NadeType;
-  tickrate?: Tickrate;
-  createdAt: string;
   stats: NadeStats;
+  type?: NadeType;
   mapSite?: MapSite;
+  tickrate?: Tickrate;
+  createdAt: Date;
 };
 
 export type NadeBody = {

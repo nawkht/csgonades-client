@@ -16,7 +16,7 @@ export const UserDropdown: FC<Props> = ({ user }) => {
   const isAdminOrMod = useIsAdminOrModerator();
   const signOut = useSignOut();
   function onProfileClick() {
-    redirectUserPage(user.steamID);
+    redirectUserPage(user.steamId);
   }
 
   function onFavoritesClick() {

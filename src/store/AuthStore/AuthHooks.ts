@@ -22,7 +22,7 @@ export const useIsAllowedNadeEdit = (nade: Nade): boolean => {
     return true;
   }
 
-  if (user.steamID === nade.steamId) {
+  if (user.steamId === nade.steamId) {
     return true;
   }
 
@@ -42,7 +42,7 @@ export const useIsAllowedUserEdit = (user: User): boolean => {
     return true;
   }
 
-  if (signedInUser.steamID === user.steamID) {
+  if (signedInUser.steamId === user.steamId) {
     return true;
   }
 

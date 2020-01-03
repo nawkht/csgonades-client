@@ -68,7 +68,7 @@ export const preloadUserThunkAction = (
     setUser(dispatch, user);
 
     if (isFirstSignIn) {
-      redirectUserPage(user.steamID);
+      redirectUserPage(user.steamId);
     } else {
       Router.push("/");
     }

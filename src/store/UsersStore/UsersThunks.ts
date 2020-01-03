@@ -12,8 +12,9 @@ import { NadeApi } from "../../api/NadeApi";
 import { UserUpdateDTO } from "../../models/User";
 
 export const fetchUserAction = (steamId: string): ReduxThunkAction => {
-  return async dispatch => {
-    const userResult = await UserApi.fetchUser(steamId);
+  return async (dispatch, getState) => {
+    const token = getState().authStore.token;
+    const userResult = await UserApi.fetchUser(steamId, token);
 
     if (userResult.isErr()) {
       dispatch(setUsersError(userResult.error));
@@ -40,7 +41,7 @@ export const updateUserThunk = (
   updatedField: UserUpdateDTO
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const steamId = getState().usersStore.viewingUser?.steamID;
+    const steamId = getState().usersStore.viewingUser?.steamId;
     const token = getState().authStore.token;
 
     if (!steamId || !token) {

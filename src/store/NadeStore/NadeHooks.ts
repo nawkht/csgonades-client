@@ -40,7 +40,7 @@ export const useCanEditNade = (nade: Nade): boolean => {
     return false;
   } else if (user.role === "administrator" || user.role === "moderator") {
     return true;
-  } else if (user.steamID === nade.steamId) {
+  } else if (user.steamId === nade.steamId) {
     return true;
   } else {
     return false;

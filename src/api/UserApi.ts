@@ -21,9 +21,18 @@ export class UserApi {
     }
   };
 
-  static fetchUser = async (steamId: string): AppResult<User> => {
+  static fetchUser = async (
+    steamId: string,
+    token?: string
+  ): AppResult<User> => {
     try {
-      const res = await axios.get(`${BASE_URL}/users/${steamId}`);
+      let config = {};
+
+      if (token) {
+        config = { headers: { Authorization: token } };
+      }
+
+      const res = await axios.get(`${BASE_URL}/users/${steamId}`, config);
       const user = res.data as User;
       return ok(user);
     } catch (error) {
