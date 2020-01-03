@@ -1,5 +1,4 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { persistStore } from "redux-persist";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
@@ -10,6 +9,7 @@ import { LayoutReducer } from "./LayoutStore/LayoutReducer";
 import { UsersReducer } from "./UsersStore/UsersReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AdminReducer } from "./AdminStore/AdminReducer";
+import logger from "redux-logger";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,

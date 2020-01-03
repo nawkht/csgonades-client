@@ -9,9 +9,11 @@ import { addNotificationActionThunk } from "../NotificationStore/NotificationThu
 import { FavoriteApi } from "../../api/FavoriteApi";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
 
-export const serverSideUserInitThunkAction = (): ReduxThunkAction => {
+export const serverSideUserInitThunkAction = (
+  cookie?: string
+): ReduxThunkAction => {
   return async dispatch => {
-    const tokenResult = await AuthApi.refreshToken();
+    const tokenResult = await AuthApi.refreshToken(cookie);
 
     // User not signed in, make sure store auth store is empty
     if (tokenResult.isErr()) {

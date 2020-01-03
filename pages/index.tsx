@@ -10,7 +10,7 @@ const Index: NextPage = props => {
   return <FrontPage />;
 };
 
-Index.getInitialProps = async ({ store }) => {
+Index.getInitialProps = async ({ store, req }) => {
   const { dispatch } = store;
 
   await dispatch(fetchNewestNadesAction());

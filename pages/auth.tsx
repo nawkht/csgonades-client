@@ -1,6 +1,7 @@
 import React from "react";
 import { NextPage } from "next";
 import { usePreloadUser } from "../src/store/AuthStore/AuthHooks";
+import { Dimmer, Loader } from "semantic-ui-react";
 
 interface Props {
   isFirstSignIn: boolean;
@@ -12,7 +13,11 @@ const Auth: NextPage<Props> = ({ isFirstSignIn }) => {
     preloadUser(isFirstSignIn);
   }, []);
 
-  return <h4>Signing in...</h4>;
+  return (
+    <Dimmer active>
+      <Loader>Signing in...</Loader>
+    </Dimmer>
+  );
 };
 
 Auth.getInitialProps = async ({ query }): Promise<Props> => {

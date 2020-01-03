@@ -16,6 +16,14 @@ class MyApp extends App<Props> {
   static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {};
 
+    const { store, req } = ctx;
+
+    const isServer = typeof window === "undefined";
+
+    if (isServer) {
+      await store.dispatch(serverSideUserInitThunkAction(req?.headers.cookie));
+    }
+
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
@@ -24,11 +32,7 @@ class MyApp extends App<Props> {
   }
 
   async componentDidMount() {
-    const { dispatch } = this.props.store;
     await AuthApi.setSessionCookie();
-
-    // @ts-ignore
-    await dispatch(serverSideUserInitThunkAction());
   }
 
   render() {

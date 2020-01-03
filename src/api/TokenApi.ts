@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 import { ok } from "neverthrow";
 
@@ -12,11 +12,22 @@ type TokenRes = {
 };
 
 export class AuthApi {
-  static async refreshToken(): AppResult<string> {
+  static async refreshToken(cookie?: string): AppResult<string> {
     try {
-      const res = await axios.get<TokenRes>(`${BASE_URL}/auth/refresh`, {
+      let config: AxiosRequestConfig = {
         withCredentials: true
-      });
+      };
+
+      if (cookie) {
+        config = {
+          ...config,
+          headers: {
+            cookie: cookie
+          }
+        };
+      }
+
+      const res = await axios.get<TokenRes>(`${BASE_URL}/auth/refresh`, config);
       return ok(res.data.accessToken);
     } catch (error) {
       return extractApiError(error);
