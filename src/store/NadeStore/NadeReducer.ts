@@ -3,6 +3,7 @@ import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { NadeActions, FilterByNadeType } from "./NadeActions";
 import { NadeFilterOptions } from "../../api/NadeApi";
 import { SiteStats } from "../../api/StatsApi";
+import { AppError } from "../../utils/ErrorUtil";
 
 export type NadeState = {
   nadesForMap: NadeLight[];
@@ -11,6 +12,7 @@ export type NadeState = {
   loadingNadesForMap: boolean;
   nadeFilter: NadeFilterOptions;
   siteStats: SiteStats;
+  error?: AppError;
 };
 
 const initialState: NadeState = {
@@ -70,6 +72,11 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
       return {
         ...state,
         recentNades: action.nades
+      };
+    case "@@nades/ADD_NADE_ERROR":
+      return {
+        ...state,
+        error: action.error
       };
     default:
       return state;

@@ -8,7 +8,8 @@ import {
   addSelectedNadeAction,
   addSiteStatsAction,
   filterByTypeAction,
-  addRecentNadesAction
+  addRecentNadesAction,
+  addNadeError
 } from "./NadeActions";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import {
@@ -91,12 +92,8 @@ export const fetchNadeByIdAction = (nadeId: string): ReduxThunkAction => {
 
     if (result.isErr()) {
       stopLoadingNadeAction(dispatch);
-      return dispatch(
-        addNotificationActionThunk({
-          message: "Failed to fetch nades.",
-          severity: "error"
-        })
-      );
+      dispatch(addNadeError(result.error));
+      return;
     }
 
     return addSelectedNadeAction(result.value, dispatch);

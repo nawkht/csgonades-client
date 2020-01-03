@@ -2,6 +2,7 @@ import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { Dispatch } from "redux";
 import { NadeType } from "../../models/Nade/NadeType";
 import { SiteStats } from "../../api/StatsApi";
+import { AppError } from "../../utils/ErrorUtil";
 
 type AddNadesAction = {
   type: "@@nades/add";
@@ -40,6 +41,11 @@ export type AddSiteStats = {
   stats: SiteStats;
 };
 
+export type AddNadeError = {
+  type: "@@nades/ADD_NADE_ERROR";
+  error: AppError;
+};
+
 export type NadeActions =
   | AddNadesAction
   | AddRcentNadesAction
@@ -48,11 +54,17 @@ export type NadeActions =
   | StopLoadingNadeAction
   | FilterByNadeType
   | ResetNadeFilter
-  | AddSiteStats;
+  | AddSiteStats
+  | AddNadeError;
 
 export const addSiteStatsAction = (stats: SiteStats): AddSiteStats => ({
   type: "@@nades/ADD_SITE_STATS",
   stats
+});
+
+export const addNadeError = (error: AppError): AddNadeError => ({
+  type: "@@nades/ADD_NADE_ERROR",
+  error
 });
 
 export const addRecentNadesAction = (
