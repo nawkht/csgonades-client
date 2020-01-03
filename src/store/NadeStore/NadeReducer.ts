@@ -39,17 +39,20 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/add":
       return {
         ...state,
-        nadesForMap: action.nades
+        nadesForMap: action.nades,
+        error: undefined
       };
     case "@@nades/add_selected":
       return {
         ...state,
-        selectedNade: action.nade
+        selectedNade: action.nade,
+        error: undefined
       };
     case "@@nades/START_LOADING":
       return {
         ...state,
-        loadingNadesForMap: true
+        loadingNadesForMap: true,
+        error: undefined
       };
     case "@@nades/STOP_LOADING":
       return {
@@ -71,7 +74,8 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/ADD_RECENT":
       return {
         ...state,
-        recentNades: action.nades
+        recentNades: action.nades,
+        error: undefined
       };
     case "@@nades/ADD_NADE_ERROR":
       return {
