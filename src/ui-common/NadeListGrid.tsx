@@ -13,13 +13,11 @@ type Props = {
 
 export const NadeListGrid: FC<Props> = ({
   nades,
-  loading,
   emptyMessage = "No nades found"
 }) => {
   const { uiDimensions, isMobile } = useTheme();
 
   const hasNades = nades.length > 0;
-  const isLoading = loading || false;
 
   if (!hasNades) {
     return (
@@ -40,12 +38,7 @@ export const NadeListGrid: FC<Props> = ({
   return (
     <>
       <div className="nadelist">
-        {isLoading && (
-          <div style={{ marginTop: "30vh", width: "100%" }}>
-            <Loader active inline="centered" />
-          </div>
-        )}
-        {!isLoading &&
+        {nades.length > 0 &&
           nades.map(nade => (
             <div className="nadelist-item" key={nade.id}>
               {!isMobile && <NadeItem nade={nade} />}
@@ -64,6 +57,15 @@ export const NadeListGrid: FC<Props> = ({
 
         .nadelist-item {
           padding: ${uiDimensions.INNER_GUTTER_SIZE / 2}px;
+        }
+
+        .nadelist-loading {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          padding: 0;
+          border: 1px solid red;
         }
       `}</style>
     </>

@@ -1,13 +1,31 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { UserNav } from "./UserNav";
-import { Icon } from "semantic-ui-react";
+import { Icon, Loader } from "semantic-ui-react";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
 
 const Header: FC = () => {
+  const [loading, setIsLoading] = useState(false);
   const { colors, uiDimensions } = useTheme();
   const { isNavOpen, toggleNav } = useNavigation();
+  const isLoading = useIsLoadingNade();
+  let timer: NodeJS.Timer;
+
+  // If loading takes for than 500ms show loader
+  useEffect(() => {
+    if (isLoading) {
+      timer = setTimeout(() => {
+        setIsLoading(true);
+      }, 500);
+    } else {
+      setIsLoading(false);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isLoading]);
 
   return (
     <>
@@ -23,6 +41,10 @@ const Header: FC = () => {
               <img src="/logo.png" alt="CSGO Nades logo" />
             </a>
           </Link>
+        </div>
+
+        <div className="app-loading">
+          <Loader active={loading} inline="centered" size="small" />
         </div>
 
         <UserNav />
@@ -51,6 +73,16 @@ const Header: FC = () => {
           border-bottom: 1px solid ${colors.PRIMARY_BORDER};
           z-index: 999;
           justify-content: space-between;
+        }
+
+        .app-loading {
+          position: fixed;
+          left: 0;
+          right: 0;
+          height: ${uiDimensions.HEADER_HEIGHT}px;
+          display: flex;
+          align-items: center;
+          pointer-events: none;
         }
 
         .logo {
