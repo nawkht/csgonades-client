@@ -13,6 +13,7 @@ export type ThemeState = {
     INNER_GUTTER_SIZE: number;
     OUTER_GUTTER_SIZE: number;
     MOBILE_THRESHHOLD: number;
+    BORDER_RADIUS: number;
   };
   colors: {
     PRIMARY: string;
@@ -44,7 +45,8 @@ const initialState: ThemeState = {
     PADDING_HUGE: 24,
     INNER_GUTTER_SIZE: 24,
     OUTER_GUTTER_SIZE: 24,
-    MOBILE_THRESHHOLD: 850
+    MOBILE_THRESHHOLD: 850,
+    BORDER_RADIUS: 4
   },
   colors: {
     PRIMARY: "#1c90c0",
@@ -85,7 +87,8 @@ export const LayoutReducer: Reducer<ThemeState, LayoutActions> = (
           PADDING_HUGE: 24,
           INNER_GUTTER_SIZE: 18,
           OUTER_GUTTER_SIZE: 0,
-          MOBILE_THRESHHOLD: 850
+          MOBILE_THRESHHOLD: 850,
+          BORDER_RADIUS: 4
         }
       };
     default:

@@ -5,7 +5,7 @@ import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import Link from "next/link";
 
 export const AdminUsers: FC = () => {
-  const { colors } = useTheme();
+  const { colors, uiDimensions } = useTheme();
   const { users, fetchUsers } = useAdminPage();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const AdminUsers: FC = () => {
       <style jsx>{`
         .users {
           background: white;
-          border-radius: 3px;
+          border-radius: ${uiDimensions.BORDER_RADIUS}px;
           overflow: hidden;
         }
 

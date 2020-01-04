@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 type Props = {
   title: string;
@@ -12,6 +13,7 @@ export const CSGNModal: FC<Props> = ({
   visible,
   onDismiss
 }) => {
+  const { uiDimensions } = useTheme();
   if (!visible) {
     return null;
   }
@@ -38,13 +40,15 @@ export const CSGNModal: FC<Props> = ({
           display: flex;
           justify-content: center;
         }
+
         .modal {
           background: red;
           align-self: center;
           background: #fff;
-          border-radius: 3px;
+          border-radius: ${uiDimensions.BORDER_RADIUS}px;
           min-width: 50%;
         }
+
         .modal-title {
           padding: 18px;
           border-bottom: 1px solid #e6e6e6;

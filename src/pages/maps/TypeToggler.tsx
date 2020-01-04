@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Popup } from "semantic-ui-react";
-import { NadeType } from "../../models/Nade/NadeType";
+import { NadeType, nadeTypeString } from "../../models/Nade/NadeType";
 import { iconFromType } from "../../utils/Common";
 
 type Props = {
@@ -20,10 +20,10 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
         <Popup
           size="mini"
           inverted
-          content={type}
+          content={nadeTypeString(type)}
           style={{ padding: 6 }}
           offset="0, 6px"
-          position="right center"
+          position="bottom center"
           trigger={<div className="icon" />}
         />
       </div>

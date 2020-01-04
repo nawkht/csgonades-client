@@ -8,7 +8,7 @@ import { SignInnButton } from "./SignInnButton";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 export const UserNav: FC = () => {
-  const { colors, isMobile } = useTheme();
+  const { colors, isMobile, uiDimensions } = useTheme();
   const user = useSelector(userSelector);
 
   if (!user) {
@@ -39,7 +39,7 @@ export const UserNav: FC = () => {
             align-self: center;
             margin-right: 18px;
             padding: 6px 12px;
-            border-radius: 3px;
+            border-radius: ${uiDimensions.BORDER_RADIUS}px;
             background: ${colors.SUCCESS};
             color: white;
             font-weight: bold;

@@ -56,7 +56,7 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
           border: 1px solid ${statusColors.border};
           padding: 12px 18px;
           color: ${statusColors.text};
-          border-radius: 4px;
+          border-radius: ${theme.uiDimensions.BORDER_RADIUS}px;
         }
 
         .status-edit {

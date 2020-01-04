@@ -3,6 +3,7 @@ import { Button, Input, Message } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
 import { Nade } from "../models/Nade/Nade";
 import { useUpdateNade } from "../store/NadeStore/NadeHooks";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 type Props = {
   nade: Nade;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const GfycatEditor: FC<Props> = ({ nade, onCancel }) => {
+  const { uiDimensions } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentGfyID, updateGfyID] = useState(nade.gfycat.gfyId);
@@ -83,7 +85,7 @@ export const GfycatEditor: FC<Props> = ({ nade, onCancel }) => {
           align-self: center;
           width: 50%;
           background: white;
-          border-radius: 3px;
+          border-radius: ${uiDimensions.BORDER_RADIUS}px;
           padding: 12px;
         }
 
