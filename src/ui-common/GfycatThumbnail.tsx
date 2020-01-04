@@ -1,6 +1,4 @@
 import { FC, useState, useEffect, useRef, useMemo } from "react";
-import useComponentSize from "@rehooks/component-size";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 type Props = {
   imageUrl: string;

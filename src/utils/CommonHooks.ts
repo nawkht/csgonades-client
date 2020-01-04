@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef, useLayoutEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import {
   setMobileAction,
   setBrowseraction
 } from "../store/LayoutStore/LayoutActions";
 import { useDispatch } from "react-redux";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { isMobile } from "react-device-detect";
 
 export function useWindowSize() {
   const isClient = typeof window === "object";
@@ -35,24 +35,14 @@ export function useWindowSize() {
 }
 
 export function useUpdateLayout() {
-  const { isMobile } = useTheme();
   const dispatch = useDispatch();
   const window = useWindowSize();
 
   useEffect(() => {
-    if (window.width && window.width > 1000) {
-      dispatch(setBrowseraction());
+    if (isMobile) {
+      dispatch(setMobileAction());
     } else {
-      dispatch(setMobileAction());
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isMobile && window.width && window.width > 1000) {
       dispatch(setBrowseraction());
-    }
-    if (!isMobile && window.width && window.width < 1000) {
-      dispatch(setMobileAction());
     }
   }, [window]);
 }
