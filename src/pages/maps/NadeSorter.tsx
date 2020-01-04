@@ -1,36 +1,50 @@
 import { useSortingMethod } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { Icon, Button } from "semantic-ui-react";
+import { Dropdown } from "semantic-ui-react";
 
 export const NadeSorter = () => {
-  const { colors } = useTheme();
+  const { colors, uiDimensions } = useTheme();
   const { sortingMethod, setSortingMethod } = useSortingMethod();
 
   return (
     <>
       <div className="nade-sorter">
-        <button
-          className={
-            sortingMethod === "date" ? "sorting-btn selected" : "sorting-btn"
-          }
-          onClick={() => setSortingMethod("date")}
-        >
-          <Icon name="sort" />
-          Sort by date
-        </button>
-        <button
-          className={
-            sortingMethod === "name" ? "sorting-btn selected" : "sorting-btn"
-          }
-          onClick={() => setSortingMethod("name")}
-        >
-          <Icon name="sort" />
-          Sort by name
-        </button>
+        <span>Sort by</span>
+        <Dropdown
+          inline
+          options={[
+            {
+              key: "date",
+              text: "Date",
+              value: "date"
+            },
+            {
+              key: "name",
+              text: "Name",
+              value: "name"
+            }
+          ]}
+          direction="left"
+          onChange={(_, data) => {
+            const newMethod = data.value as any;
+            setSortingMethod(newMethod);
+          }}
+          value={sortingMethod}
+        />
       </div>
       <style jsx>{`
         .nade-sorter {
           display: flex;
+          padding: 12px 18px;
+          background: white;
+          border: 1px solid ${colors.PRIMARY_BORDER};
+          border-top: none;
+          border-bottom-left-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-bottom-right-radius: ${uiDimensions.BORDER_RADIUS}px;
+        }
+
+        .nade-sorter span {
+          margin-right: 6px;
         }
 
         .sorting-btn {
