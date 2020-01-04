@@ -2,7 +2,8 @@ import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { NadeApi } from "../../api/NadeApi";
-import { addPendingNadesAction } from "./AdminActions";
+import { addPendingNadesAction, addUsersAction } from "./AdminActions";
+import { UserApi } from "../../api/UserApi";
 
 export const fetchPendingNadeThunk = (): ReduxThunkAction => {
   return async (dispatch, getState) => {
@@ -26,5 +27,28 @@ export const fetchPendingNadeThunk = (): ReduxThunkAction => {
     const nades = result.value;
 
     dispatch(addPendingNadesAction(nades));
+  };
+};
+
+export const fetchUsersThunk = (): ReduxThunkAction => {
+  return async (dispatch, getState) => {
+    const authToken = tokenSelector(getState());
+    if (!authToken) {
+      return dispatch(
+        addNotificationActionThunk({
+          message: "Can't fetch users, seems like your not signed in.",
+          severity: "error"
+        })
+      );
+    }
+
+    const users = await UserApi.fetchUsers(authToken);
+
+    if (users.isErr()) {
+      console.error(users.error);
+      return;
+    }
+
+    return dispatch(addUsersAction(users.value));
   };
 };

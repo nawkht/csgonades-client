@@ -13,7 +13,6 @@ export type NadeState = {
   selectedNade?: Nade;
   loadingNadesForMap: boolean;
   nadeFilter: NadeFilterOptions;
-  siteStats: SiteStats;
   error?: AppError;
 };
 
@@ -27,10 +26,6 @@ const initialState: NadeState = {
     hegrenade: false,
     molotov: false,
     smoke: false
-  },
-  siteStats: {
-    numNades: 0,
-    numUsers: 0
   }
 };
 
@@ -69,11 +64,7 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         nadeFilter: initialState.nadeFilter
       };
-    case "@@nades/ADD_SITE_STATS":
-      return {
-        ...state,
-        siteStats: action.stats
-      };
+
     case "@@nades/ADD_RECENT":
       return {
         ...state,

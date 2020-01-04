@@ -59,7 +59,6 @@ export type NadeActions =
   | StopLoadingNadeAction
   | FilterByNadeType
   | ResetNadeFilter
-  | AddSiteStats
   | AddNadeError
   | SetSortingNameAction;
 
@@ -70,11 +69,6 @@ export const setSortingMethodAction = (
 ): SetSortingNameAction => ({
   type: "@@nades/SET_SORTING_METHOD",
   sortingMethod
-});
-
-export const addSiteStatsAction = (stats: SiteStats): AddSiteStats => ({
-  type: "@@nades/ADD_SITE_STATS",
-  stats
 });
 
 export const addNadeError = (error: AppError): AddNadeError => ({

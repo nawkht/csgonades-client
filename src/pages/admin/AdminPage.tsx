@@ -1,4 +1,4 @@
-import { FC, useReducer } from "react";
+import { FC } from "react";
 import { Layout } from "../../ui-common/layout/layout";
 import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { AdminNav } from "./AdminNav";

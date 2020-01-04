@@ -1,4 +1,5 @@
 import { NadeLight } from "../../models/Nade/Nade";
+import { User } from "../../models/User";
 
 export type AdminRoutes = "pending-nades" | "user";
 
@@ -12,7 +13,15 @@ type AddPendingNadesAction = {
   nades: NadeLight[];
 };
 
-export type AdminActions = ChangeAdminRouterAction | AddPendingNadesAction;
+type AddUsersAction = {
+  type: "@@admin/ADD_USERS";
+  users: User[];
+};
+
+export type AdminActions =
+  | ChangeAdminRouterAction
+  | AddPendingNadesAction
+  | AddUsersAction;
 
 export const changeAdminRouteAction = (
   route: AdminRoutes
@@ -26,4 +35,9 @@ export const addPendingNadesAction = (
 ): AddPendingNadesAction => ({
   type: "@@admin/ADD_PENDING_NADES",
   nades
+});
+
+export const addUsersAction = (users: User[]): AddUsersAction => ({
+  type: "@@admin/ADD_USERS",
+  users
 });

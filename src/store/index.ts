@@ -10,6 +10,7 @@ import { UsersReducer } from "./UsersStore/UsersReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AdminReducer } from "./AdminStore/AdminReducer";
 import logger from "redux-logger";
+import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   favoriteStore: FavoriteReducer,
   layoutStore: LayoutReducer,
   usersStore: UsersReducer,
-  adminStore: AdminReducer
+  adminStore: AdminReducer,
+  globalStore: GlobalReducer
 });
 
 function createMiddleware() {

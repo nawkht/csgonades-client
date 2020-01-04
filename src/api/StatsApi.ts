@@ -10,6 +10,7 @@ const BASE_URL =
 export type SiteStats = {
   numUsers: number;
   numNades: number;
+  numPending: number;
 };
 
 export class StatsApi {

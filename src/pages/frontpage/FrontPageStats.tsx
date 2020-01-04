@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Statistic } from "semantic-ui-react";
-import { useSiteStats } from "../../store/NadeStore/NadeSelectors";
+import { useSiteStats } from "../../store/GlobalStore/GlobalHooks";
 
 const FrontPageStats: FC = () => {
-  const stats = useSiteStats();
+  const { stats } = useSiteStats();
 
   return (
     <>

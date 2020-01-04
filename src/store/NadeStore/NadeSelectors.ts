@@ -20,8 +20,6 @@ const selectedNadeSelector = (state: AppState) => {
 const nadeLoadingSelector = (state: AppState) =>
   state.nadeStore.loadingNadesForMap;
 
-const siteStatsSelector = (state: AppState) => state.nadeStore.siteStats;
-
 export const nadeErrorSelector = (state: AppState) => {
   return state.nadeStore.error;
 };
@@ -37,11 +35,6 @@ export const useIsLoadingNade = () => {
 export const useSelectedNade = () => {
   const selectedNade = useSelector(selectedNadeSelector);
   return selectedNade;
-};
-
-export const useSiteStats = () => {
-  const siteStats = useSelector(siteStatsSelector);
-  return siteStats;
 };
 
 export const useNadeError = () => {

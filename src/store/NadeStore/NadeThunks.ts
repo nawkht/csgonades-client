@@ -6,7 +6,6 @@ import {
   startLoadingNadeAction,
   stopLoadingNadeAction,
   addSelectedNadeAction,
-  addSiteStatsAction,
   filterByTypeAction,
   addRecentNadesAction,
   addNadeError
@@ -32,19 +31,6 @@ export const filterByNadeTypeThunk = (
     dispatch(filterByTypeAction(nadeType));
     GoogleAnalytics.event("Nade filter", `Filter by ${nadeType}`);
     dispatch(fetchNadesByMapActionThunk(map));
-  };
-};
-
-export const fetchSiteStatsThunk = (): ReduxThunkAction => {
-  return async dispatch => {
-    const result = await StatsApi.getStats();
-
-    if (result.isErr()) {
-      console.error(result.error);
-      return;
-    }
-
-    return dispatch(addSiteStatsAction(result.value));
   };
 };
 
