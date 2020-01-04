@@ -8,64 +8,16 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
-  const [isHovering, setIsHovering] = useState(false);
-  const [hasSentEvent, setHasSentEvent] = useState(false);
-  const ref = useRef(null);
-  let hoverTimer: NodeJS.Timeout;
-  let hoverEventTimer: NodeJS.Timeout;
+  const { ref, isHovering } = useHoverDelayedEvent(onViewEvent, 5000);
 
-  useEffect(() => {
-    return () => {
-      if (hoverTimer) {
-        clearTimeout(hoverTimer);
-      }
-      if (hoverEventTimer) {
-        clearTimeout(hoverEventTimer);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isHovering) {
-      hoverEventTimer = setTimeout(() => {
-        if (!hasSentEvent) {
-          GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
-          NadeApi.registerView(nade.id);
-          setHasSentEvent(true);
-        }
-      }, 5000);
-    } else {
-      if (hoverEventTimer) {
-        clearTimeout(hoverEventTimer);
-      }
-    }
-  }, [isHovering]);
-
-  function onHover() {
-    if (hoverTimer) {
-      clearTimeout(hoverTimer);
-    }
-    setIsHovering(true);
-  }
-
-  function onUnHover() {
-    if (hoverEventTimer) {
-      clearTimeout(hoverEventTimer);
-    }
-
-    hoverTimer = setTimeout(() => {
-      setIsHovering(false);
-    }, 300);
+  function onViewEvent() {
+    GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
+    NadeApi.registerView(nade.id);
   }
 
   return (
     <>
-      <div
-        className="player"
-        ref={ref}
-        onMouseEnter={onHover}
-        onMouseLeave={onUnHover}
-      >
+      <div className="player" ref={ref}>
         <div className="front">
           <img src={nade.images.thumbnailUrl} alt={`nade thumbnail`} />
         </div>
@@ -111,3 +63,46 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     </>
   );
 };
+
+function useHoverDelayedEvent(cb: Function, delay: number) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHover] = useState(false);
+  const [hasFired, setHasFired] = useState(false);
+  let timer: NodeJS.Timeout;
+
+  useEffect(() => {
+    const div = ref.current;
+    if (div) {
+      div.onmouseenter = onHover;
+      div.onmouseleave = onUnHover;
+    }
+  }, [ref]);
+
+  useEffect(() => {
+    if (!isHovering) {
+      clearTimeout(timer);
+    }
+    if (isHovering && !hasFired) {
+      timer = setTimeout(() => {
+        cb();
+        setHasFired(true);
+      }, delay);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isHovering, hasFired]);
+
+  function onHover() {
+    setIsHover(true);
+  }
+
+  function onUnHover() {
+    setIsHover(false);
+  }
+
+  return {
+    ref,
+    isHovering
+  };
+}
