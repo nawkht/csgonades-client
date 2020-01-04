@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import { Icon } from "semantic-ui-react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
@@ -17,20 +17,31 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { colors, durations, uiDimensions } = useTheme();
   const elementRef = useRef(null);
-  const windowHeight = window && window.innerHeight;
 
   // Element scroll position
   useScrollPosition(
     ({ currPos }) => {
-      if (currPos.y > 0 && currPos.y < windowHeight / 2) {
-        setIsPlaying(true);
-      } else {
-        setIsPlaying(false);
+      const shouldPlay = isWithinPlayPosition(currPos.y);
+      if (shouldPlay && !isPlaying) {
+        startPlaying();
+      }
+      if (!shouldPlay && isPlaying) {
+        stopPlaying();
       }
     },
-    [],
-    elementRef
+    [isPlaying],
+    elementRef,
+    undefined,
+    250
   );
+
+  function startPlaying() {
+    setIsPlaying(true);
+  }
+
+  function stopPlaying() {
+    setIsPlaying(false);
+  }
 
   const title = nade.title || "No title...";
 
@@ -192,17 +203,15 @@ function nadeStatusToClassName(status: Status) {
   }
 }
 
-import { useRef, useLayoutEffect } from "react";
+function isWithinPlayPosition(y: number) {
+  const windowHeight = window && window.innerHeight;
+  const playArea = windowHeight / 3;
 
-const isBrowser = typeof window !== `undefined`;
-
-function getScrollPosition({ element, useWindow }: any) {
-  if (!isBrowser) return { x: 0, y: 0 };
-
-  const target = element ? element.current : document.body;
-  const position = target.getBoundingClientRect();
-
-  return useWindow
-    ? { x: window.scrollX, y: window.scrollY }
-    : { x: position.left, y: position.top };
+  if (y < -100) {
+    return false;
+  } else if (y < playArea) {
+    return true;
+  } else {
+    return false;
+  }
 }
