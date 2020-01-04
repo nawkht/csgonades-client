@@ -17,7 +17,7 @@ type Props = {
 };
 
 const NadePage: React.FC<Props> = ({ nade }) => {
-  const { uiDimensions, isMobile } = useTheme();
+  const { uiDimensions } = useTheme();
   const allowEdit = useCanEditNade(nade);
 
   let layoutTitle = "New nade";
@@ -47,16 +47,31 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         {`
           .nade-container {
             display: flex;
-            flex-direction: ${isMobile ? "column" : "row"};
+            flex-direction: row;
             padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           }
           .nade-main {
-            margin-right: ${isMobile ? 0 : uiDimensions.INNER_GUTTER_SIZE}px;
-            margin-bottom: ${isMobile ? uiDimensions.INNER_GUTTER_SIZE : 0}px;
+            margin-right: ${uiDimensions.INNER_GUTTER_SIZE}px;
+            margin-bottom: 0;
             flex: 1;
           }
           .nade-aside {
-            width: ${isMobile ? "100%" : "280px"};
+            width: 280px;
+          }
+
+          @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+            .nade-container {
+              flex-direction: column;
+            }
+
+            .nade-main {
+              margin-right: 0;
+              margin-bottom: ${uiDimensions.INNER_GUTTER_SIZE}px;
+            }
+
+            .nade-aside {
+              width: 100%;
+            }
           }
         `}
       </style>
