@@ -22,7 +22,7 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
   // Element scroll position
   useScrollPosition(
     ({ currPos }) => {
-      if (currPos.y > 0 && currPos.y < windowHeight / 5) {
+      if (currPos.y > 0 && currPos.y < windowHeight / 3) {
         setIsPlaying(true);
       } else {
         setIsPlaying(false);
@@ -59,7 +59,7 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
             </div>
             {isPlaying && (
               <div className="media-video">
-                <video autoPlay muted playsInline controls={false}>
+                <video autoPlay muted playsInline loop controls={false}>
                   <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
                 </video>
               </div>

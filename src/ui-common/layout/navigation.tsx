@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 const MapNavigation: FC = () => {
-  const { colors, uiDimensions, sideBarOpen, durations } = useTheme();
+  const { colors, uiDimensions, sideBarOpen, durations, isMobile } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
 
-  const navClassName = sideBarOpen ? "open" : "closed";
+  const navClassName = isMobile ? (sideBarOpen ? "open" : "closed") : "open";
 
   return (
     <>
