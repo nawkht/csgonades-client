@@ -13,18 +13,12 @@ export const serverSideUserInitThunkAction = (
   cookie?: string
 ): ReduxThunkAction => {
   return async dispatch => {
-    if (cookie) {
-      console.log("> Fetching tokens with cookie", cookie);
-    }
     const tokenResult = await AuthApi.refreshToken(cookie);
 
     // User not signed in, make sure store auth store is empty
     if (tokenResult.isErr()) {
-      console.log("> Failed to fetch tokens");
       return dispatch(signOutUser());
     }
-
-    console.log("> Tokens fetched");
 
     const authToken = tokenResult.value;
 
@@ -43,7 +37,6 @@ export const serverSideUserInitThunkAction = (
     const user = userResult.value;
     const favorites = favoriteResult.value;
 
-    console.log("> Setting user");
     setUser(dispatch, user);
     dispatch(addAllFavoritesAction(favorites));
     return;
