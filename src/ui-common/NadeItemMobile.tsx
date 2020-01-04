@@ -1,4 +1,4 @@
-import { FC, useState, useRef } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { Icon } from "semantic-ui-react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
@@ -7,6 +7,8 @@ import Link from "next/link";
 import { iconFromType } from "../utils/Common";
 // @ts-ignore
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
+import { NadeApi } from "../api/NadeApi";
+import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 
 interface Props {
   nade: NadeLight;
@@ -15,8 +17,10 @@ interface Props {
 
 export const NadeItemMobile: FC<Props> = ({ nade }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasSentEvent, setHasSentEvent] = useState(false);
   const { colors, durations, uiDimensions } = useTheme();
   const elementRef = useRef(null);
+  let timer: NodeJS.Timer;
 
   // Element scroll position
   useScrollPosition(
@@ -34,6 +38,20 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
     undefined,
     250
   );
+
+  useEffect(() => {
+    if (isPlaying && !hasSentEvent) {
+      timer = setTimeout(() => {
+        console.log("> Event > Viewed video for 5 sec");
+        NadeApi.registerView(nade.id);
+        GoogleAnalytics.event("NadeItem", "Mobile play gfycat", nade.id);
+        setHasSentEvent(true);
+      }, 10000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isPlaying, hasSentEvent]);
 
   function startPlaying() {
     setIsPlaying(true);
