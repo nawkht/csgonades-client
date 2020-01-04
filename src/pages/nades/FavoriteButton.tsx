@@ -70,7 +70,7 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
           position="left center"
           trigger={
             <span className="favicon-container">
-              <Icon className="favorite-icon" name="star" />
+              <Icon className="favorite-icon" name="star" size="big" />
             </span>
           }
         />
@@ -82,8 +82,6 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
             animation-delay: 3s;
             display: flex;
             align-content: center;
-            font-size: 2em;
-            margin-bottom: -0.4em;
           }
 
           @keyframes twinkle {
@@ -106,28 +104,30 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
   }
 
   return (
-    <div
-      onClick={onFavoriteClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <Popup
-        size="mini"
-        inverted
-        content={favorite ? "Unfavorite" : "Favorite"}
-        style={{ padding: 6 }}
-        offset="0, 6px"
-        position="left center"
-        trigger={
-          <Icon
-            link
-            color={starColor}
-            className="favorite-icon"
-            name="star"
-            size="large"
-          />
-        }
-      />
-    </div>
+    <>
+      <div
+        onClick={onFavoriteClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        <Popup
+          size="mini"
+          inverted
+          content={favorite ? "Unfavorite" : "Favorite"}
+          style={{ padding: 6 }}
+          offset="0, 6px"
+          position="left center"
+          trigger={
+            <Icon
+              link
+              color={starColor}
+              className="favorite-icon"
+              name="star"
+              size="big"
+            />
+          }
+        />
+      </div>
+    </>
   );
 };
