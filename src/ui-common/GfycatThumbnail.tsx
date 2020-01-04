@@ -8,6 +8,7 @@ type Props = {
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const [hasSentEvent, setHasSentEvent] = useState(false);
   const ref = useRef(null);
   let hoverTimer: NodeJS.Timeout;
   let hoverEventTimer: NodeJS.Timeout;
@@ -26,8 +27,11 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   useEffect(() => {
     if (isHovering) {
       hoverEventTimer = setTimeout(() => {
-        GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
-      }, 3000);
+        if (!hasSentEvent) {
+          GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
+          setHasSentEvent(true);
+        }
+      }, 5000);
     } else {
       if (hoverEventTimer) {
         clearTimeout(hoverEventTimer);
