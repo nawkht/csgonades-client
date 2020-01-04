@@ -1,51 +1,32 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { Icon } from "semantic-ui-react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { tickrateString } from "../models/Nade/NadeTickrate";
-import Link from "next/link";
 import { iconFromType } from "../utils/Common";
-// @ts-ignore
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import { NadeApi } from "../api/NadeApi";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
+import Router from "next/router";
 
 interface Props {
   nade: NadeLight;
-  isPlaying: boolean;
 }
 
 export const NadeItemMobile: FC<Props> = ({ nade }) => {
+  const [showMenu, setShowMenu] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasSentEvent, setHasSentEvent] = useState(false);
   const { colors, durations, uiDimensions } = useTheme();
-  const elementRef = useRef(null);
   let timer: NodeJS.Timer;
-
-  // Element scroll position
-  useScrollPosition(
-    ({ currPos }) => {
-      const shouldPlay = isWithinPlayPosition(currPos.y);
-      if (shouldPlay && !isPlaying) {
-        startPlaying();
-      }
-      if (!shouldPlay && isPlaying) {
-        stopPlaying();
-      }
-    },
-    [isPlaying],
-    elementRef,
-    undefined,
-    250
-  );
 
   useEffect(() => {
     if (isPlaying && !hasSentEvent) {
       timer = setTimeout(() => {
+        console.log("> Gfy view event");
         NadeApi.registerView(nade.id);
         GoogleAnalytics.event("NadeItem", "Mobile play gfycat", nade.id);
         setHasSentEvent(true);
-      }, 10000);
+      }, 5000);
     }
     return () => {
       clearTimeout(timer);
@@ -60,60 +41,90 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
     setIsPlaying(false);
   }
 
-  const title = nade.title || "No title...";
+  function onItemClick() {
+    setShowMenu(!showMenu);
+  }
 
+  function onPlayClick() {
+    setIsPlaying(!isPlaying);
+  }
+
+  function onDetailsClick() {
+    Router.push(`/nades?id=${nade.id}`, `/nades/${nade.id}`);
+  }
+
+  const title = nade.title || "No title...";
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
   const iconUrl = iconFromType(nade.type);
 
   return (
     <>
-      <Link href={`/nades?id=${nade.id}`} as={`/nades/${nade.id}`}>
-        <a
-          className={nadeBoxClassName}
-          style={{ display: "inline-block" }}
-          ref={elementRef}
-        >
-          <div className="title">
-            <img
-              className="nade-type-icon"
-              src={iconUrl}
-              alt={`nade icon ${nade.type}`}
-            />{" "}
-            <span className="title-text">{title}</span>
-          </div>
-          <div className="media-content">
-            <div className="media-image">
-              <img src={nade.images.thumbnailUrl} alt={`nade thumbnail`} />
-            </div>
-            {isPlaying && (
-              <div className="media-video">
-                <video autoPlay muted playsInline loop controls={false}>
-                  <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
-                </video>
+      <div
+        className={nadeBoxClassName}
+        style={{ display: "inline-block" }}
+        onClick={onItemClick}
+      >
+        {showMenu && (
+          <div className="context-menu">
+            <div className="context-btns">
+              <div className="context-action" onClick={onPlayClick}>
+                {isPlaying && (
+                  <>
+                    <Icon name="pause" /> <span>Pause</span>
+                  </>
+                )}
+                {!isPlaying && (
+                  <>
+                    <Icon name="play" /> <span>Play</span>
+                  </>
+                )}
               </div>
-            )}
-          </div>
-          <div className="stats">
-            <div className="stat">
-              <Icon name="eye" size="small" />
-              <span className="icon-text">{nade.viewCount}</span>
-            </div>
-            {nade.tickrate && nade.tickrate !== "any" && (
-              <div className="stat tick">
-                <Icon name="code" size="small" />
-                <span className="icon-text">
-                  {tickrateString(nade.tickrate)}
-                </span>
+              <div className="context-action" onClick={onDetailsClick}>
+                <Icon name="chevron right" /> Details
               </div>
-            )}
+            </div>
           </div>
-        </a>
-      </Link>
+        )}
+
+        <div className="title">
+          <img
+            className="nade-type-icon"
+            src={iconUrl}
+            alt={`nade icon ${nade.type}`}
+          />{" "}
+          <span className="title-text">{title}</span>
+        </div>
+        <div className="media-content">
+          <div className="media-image">
+            <img src={nade.images.thumbnailUrl} alt={`nade thumbnail`} />
+          </div>
+          {isPlaying && (
+            <div className="media-video">
+              <video autoPlay muted playsInline loop controls={false}>
+                <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
+              </video>
+            </div>
+          )}
+        </div>
+        <div className="stats">
+          <div className="stat">
+            <Icon name="eye" size="small" />
+            <span className="icon-text">{nade.viewCount}</span>
+          </div>
+          {nade.tickrate && nade.tickrate !== "any" && (
+            <div className="stat tick">
+              <Icon name="code" size="small" />
+              <span className="icon-text">{tickrateString(nade.tickrate)}</span>
+            </div>
+          )}
+        </div>
+      </div>
       <style jsx>{`
         .nadebox {
           background: #fff;
           width: 100%;
           overflow: hidden;
+          position: relative;
         }
 
         .nadebox:hover {
@@ -122,6 +133,30 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
 
         .nadebox:hover .title {
           background: ${colors.PRIMARY};
+        }
+
+        .context-menu {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          z-index: 997;
+        }
+
+        .context-btns {
+          padding: 12px;
+          display: flex;
+        }
+
+        .context-action {
+          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.8);
+          padding: 12px 18px;
+          margin: 6px;
         }
 
         .title {

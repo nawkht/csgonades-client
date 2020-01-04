@@ -62,7 +62,10 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
           </div>
         )}
 
-        <GfycatLargePlayer gfyUrl={videoUrl} />
+        <GfycatLargePlayer
+          poster={nade.images.thumbnailUrl}
+          gfyUrl={videoUrl}
+        />
         {isEditing && <GfycatEditor nade={nade} onCancel={onCancelEdit} />}
 
         <div className="quality-toggle" onClick={toggleQuality}>

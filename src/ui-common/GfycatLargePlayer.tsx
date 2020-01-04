@@ -1,10 +1,13 @@
 import { FC, useRef, useMemo } from "react";
 import useComponentSize from "@rehooks/component-size";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 type Props = {
   gfyUrl: string;
+  poster: string;
 };
 
-export const GfycatLargePlayer: FC<Props> = ({ gfyUrl }) => {
+export const GfycatLargePlayer: FC<Props> = ({ gfyUrl, poster }) => {
+  const { isMobile } = useTheme();
   const ref = useRef(null);
   const { width } = useComponentSize(ref);
   const height = useMemo(() => width / (16 / 9), [width]);
@@ -15,7 +18,8 @@ export const GfycatLargePlayer: FC<Props> = ({ gfyUrl }) => {
         <video
           key={gfyUrl}
           className="video-player"
-          autoPlay
+          poster={poster}
+          autoPlay={!isMobile}
           controls
           muted
           loop

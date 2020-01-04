@@ -49,7 +49,7 @@ export const NadeListGrid: FC<Props> = ({
           nades.map(nade => (
             <div className="nadelist-item" key={nade.id}>
               {!isMobile && <NadeItem nade={nade} />}
-              {isMobile && <NadeItemMobile nade={nade} isPlaying={false} />}
+              {isMobile && <NadeItemMobile nade={nade} />}
             </div>
           ))}
       </div>

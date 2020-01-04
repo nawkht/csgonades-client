@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { FC, useState, useEffect, useRef, useCallback } from "react";
 import { NadeLight } from "../models/Nade/Nade";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 import { NadeApi } from "../api/NadeApi";
@@ -9,6 +9,12 @@ type Props = {
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   const { ref, isHovering } = useHoverDelayedEvent(onViewEvent, 5000);
+
+  const measuredRef = useCallback((node: HTMLVideoElement) => {
+    if (node !== null) {
+      node.playbackRate = 1;
+    }
+  }, []);
 
   function onViewEvent() {
     GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
@@ -24,7 +30,15 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
 
         {isHovering && (
           <div className="back">
-            <video autoPlay={true} controls={false} muted={true}>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls={false}
+              ref={measuredRef}
+              poster={nade.images.thumbnailUrl}
+            >
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
             </video>
           </div>
