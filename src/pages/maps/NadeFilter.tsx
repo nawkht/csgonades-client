@@ -3,13 +3,14 @@ import { TypeToggler } from "./TypeToggler";
 import { useNadeFilter } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { NadeSorter } from "./NadeSorter";
 
 type Props = {
   map: CsgoMap;
 };
 
 export const NadeFilter: FC<Props> = ({ map }) => {
-  const { colors, isMobile, uiDimensions } = useTheme();
+  const { colors, uiDimensions } = useTheme();
   const { filterByType, nadeFilter } = useNadeFilter();
 
   const { flash, hegrenade, molotov, smoke } = nadeFilter;
@@ -32,11 +33,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
 
   return (
     <>
-      <div
-        className={
-          isMobile ? "nade-filter-container-mobile" : "nade-filter-container"
-        }
-      >
+      <div className="nade-filter-container">
         <div className="nade-filter">
           <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
           <TypeToggler active={flash} type="flash" onClick={onFlashClick} />
@@ -51,44 +48,26 @@ export const NadeFilter: FC<Props> = ({ map }) => {
             onClick={onHeGrenadeClick}
           />
         </div>
+        <div className="nade-sorter">
+          <NadeSorter />
+        </div>
       </div>
       <style jsx>{`
         .nade-filter-container {
-          position: fixed;
-          top: ${uiDimensions.HEADER_HEIGHT}px;
-          left: ${uiDimensions.SIDEBAR_WIDTH}px;
-          bottom: 0;
           display: flex;
-          flex-direction: column;
-          justify-content: center;
+          flex-direction: row;
           z-index: 999;
+          padding-left: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          padding-right: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          justify-content: space-between;
         }
 
-        .nade-filter-container .nade-filter {
+        .nade-filter {
           background: white;
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 3px;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
-          border-top: 1px solid ${colors.PRIMARY_BORDER};
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
-        }
-
-        .nade-filter-container-mobile {
-          position: fixed;
-          top: ${uiDimensions.HEADER_HEIGHT}px;
-          left: 0px;
-          right: 0px;
-          display: flex;
-          justify-content: center;
-          z-index: 999;
-        }
-
-        .nade-filter-container-mobile .nade-filter {
-          background: white;
-          border-bottom-right-radius: 3px;
           border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
           border-right: 1px solid ${colors.PRIMARY_BORDER};
-          border-top: 1px solid ${colors.PRIMARY_BORDER};
+          border-left: 1px solid ${colors.PRIMARY_BORDER};
           border-bottom: 1px solid ${colors.PRIMARY_BORDER};
           display: flex;
         }

@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const MapPage: FC<Props> = ({ map }) => {
-  const { isMobile, uiDimensions } = useTheme();
+  const { uiDimensions } = useTheme();
   const nades = useSelector(nadesSelector);
 
   return (
@@ -30,8 +30,8 @@ export const MapPage: FC<Props> = ({ map }) => {
       <style jsx>{`
         .nade-list {
           margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          margin-left: ${isMobile ? 0 : uiDimensions.OUTER_GUTTER_SIZE + 35}px;
-          margin-top: ${isMobile ? 50 : uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin-left: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin-top: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           min-height: 100%;
         }
       `}</style>

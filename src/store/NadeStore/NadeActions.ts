@@ -46,6 +46,11 @@ export type AddNadeError = {
   error: AppError;
 };
 
+export type SetSortingNameAction = {
+  type: "@@nades/SET_SORTING_METHOD";
+  sortingMethod: SortingMethod;
+};
+
 export type NadeActions =
   | AddNadesAction
   | AddRcentNadesAction
@@ -55,7 +60,17 @@ export type NadeActions =
   | FilterByNadeType
   | ResetNadeFilter
   | AddSiteStats
-  | AddNadeError;
+  | AddNadeError
+  | SetSortingNameAction;
+
+export type SortingMethod = "name" | "date";
+
+export const setSortingMethodAction = (
+  sortingMethod: SortingMethod
+): SetSortingNameAction => ({
+  type: "@@nades/SET_SORTING_METHOD",
+  sortingMethod
+});
 
 export const addSiteStatsAction = (stats: SiteStats): AddSiteStats => ({
   type: "@@nades/ADD_SITE_STATS",

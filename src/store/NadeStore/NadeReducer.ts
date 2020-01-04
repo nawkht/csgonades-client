@@ -1,11 +1,13 @@
 import { Reducer } from "redux";
 import { NadeLight, Nade } from "../../models/Nade/Nade";
-import { NadeActions, FilterByNadeType } from "./NadeActions";
+import { NadeActions, FilterByNadeType, SortingMethod } from "./NadeActions";
 import { NadeFilterOptions } from "../../api/NadeApi";
 import { SiteStats } from "../../api/StatsApi";
 import { AppError } from "../../utils/ErrorUtil";
+import moment from "moment";
 
 export type NadeState = {
+  sorthingMethod: SortingMethod;
   nadesForMap: NadeLight[];
   recentNades: NadeLight[];
   selectedNade?: Nade;
@@ -16,6 +18,7 @@ export type NadeState = {
 };
 
 const initialState: NadeState = {
+  sorthingMethod: "date",
   nadesForMap: [],
   recentNades: [],
   loadingNadesForMap: false,
@@ -39,7 +42,7 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/add":
       return {
         ...state,
-        nadesForMap: action.nades,
+        nadesForMap: sortNades(state.sorthingMethod, action.nades),
         error: undefined
       };
     case "@@nades/add_selected":
@@ -82,6 +85,13 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         error: action.error
       };
+    case "@@nades/SET_SORTING_METHOD":
+      const sortedNades = sortNades(action.sortingMethod, state.nadesForMap);
+      return {
+        ...state,
+        sorthingMethod: action.sortingMethod,
+        nadesForMap: sortedNades
+      };
     default:
       return state;
   }
@@ -114,5 +124,21 @@ function handleFilterByType(
       ...prevState,
       nadeFilter: defaults
     };
+  }
+}
+
+function sortNades(method: SortingMethod, nades: NadeLight[]) {
+  const nadeCopy = [...nades];
+  switch (method) {
+    case "name":
+      nadeCopy.sort((a, b) => {
+        return (a.title || "").localeCompare(b.title || "");
+      });
+      return nadeCopy;
+    default:
+      nadeCopy.sort((a, b) => {
+        return moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf();
+      });
+      return nadeCopy;
   }
 }

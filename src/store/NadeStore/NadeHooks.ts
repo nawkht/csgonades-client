@@ -17,8 +17,10 @@ import {
   updateNadeStatusAction,
   filterByNadeTypeThunk
 } from "./NadeThunks";
-import { nadeFilterSelector } from "./NadeSelectors";
+import { nadeFilterSelector, sortingMethodSelector } from "./NadeSelectors";
 import { NadeType } from "../../models/Nade/NadeType";
+import { SortingMethod, setSortingMethodAction } from "./NadeActions";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 
 export const useNadeFilter = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,20 @@ export const useNadeFilter = () => {
   return {
     nadeFilter,
     filterByType
+  };
+};
+
+export const useSortingMethod = () => {
+  const dispatch = useDispatch();
+  const sortingMethod = useSelector(sortingMethodSelector);
+
+  const setSortingMethod = (method: SortingMethod) => {
+    GoogleAnalytics.event("Nade filter", `Sort by ${method}`);
+    dispatch(setSortingMethodAction(method));
+  };
+  return {
+    sortingMethod,
+    setSortingMethod
   };
 };
 

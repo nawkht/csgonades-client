@@ -22,7 +22,7 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
   // Element scroll position
   useScrollPosition(
     ({ currPos }) => {
-      if (currPos.y > 0 && currPos.y < windowHeight / 3) {
+      if (currPos.y > 0 && currPos.y < windowHeight / 2) {
         setIsPlaying(true);
       } else {
         setIsPlaying(false);

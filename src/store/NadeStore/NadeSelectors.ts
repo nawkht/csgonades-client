@@ -5,6 +5,10 @@ export const nadesSelector = (state: AppState) => {
   return state.nadeStore.nadesForMap;
 };
 
+export const sortingMethodSelector = (state: AppState) => {
+  return state.nadeStore.sorthingMethod;
+};
+
 export const recentNadesSelector = (state: AppState) => {
   return state.nadeStore.recentNades;
 };

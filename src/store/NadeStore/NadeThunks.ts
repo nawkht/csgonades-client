@@ -17,7 +17,6 @@ import {
   NadeBody,
   NadeStatusDTO
 } from "../../models/Nade/Nade";
-import { redirectNadePage } from "../../utils/Common";
 import Router from "next/router";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { nadeFilterSelector } from "./NadeSelectors";
