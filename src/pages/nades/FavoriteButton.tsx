@@ -60,22 +60,48 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
 
   if (!isSignedIn) {
     return (
-      <Popup
-        size="mini"
-        inverted
-        content={"You need to be signed in to favorite."}
-        style={{ padding: 6 }}
-        offset="0, 6px"
-        position="left center"
-        trigger={
-          <Icon
-            color="grey"
-            className="favorite-icon"
-            name="star"
-            size="large"
-          />
-        }
-      />
+      <>
+        <Popup
+          size="mini"
+          inverted
+          content={"You need to be signed in to favorite."}
+          style={{ padding: 6 }}
+          offset="0, 6px"
+          position="left center"
+          trigger={
+            <span className="favicon-container">
+              <Icon className="favorite-icon" name="star" />
+            </span>
+          }
+        />
+        <style jsx>{`
+          .favicon-container {
+            animation-name: twinkle;
+            color: grey;
+            animation-duration: 1s;
+            animation-delay: 3s;
+            display: flex;
+            align-content: center;
+            font-size: 2em;
+            margin-bottom: -0.4em;
+          }
+
+          @keyframes twinkle {
+            0% {
+              color: grey;
+              transform: scale(1);
+            }
+            50% {
+              transform: scale(1.3);
+              color: #ffbf00;
+            }
+            100% {
+              transform: scale(1);
+              color: grey;
+            }
+          }
+        `}</style>
+      </>
     );
   }
 
