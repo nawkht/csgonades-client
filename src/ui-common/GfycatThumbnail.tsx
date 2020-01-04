@@ -27,7 +27,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     if (isHovering) {
       hoverEventTimer = setTimeout(() => {
         GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
-      }, 1000);
+      }, 3000);
     } else {
       if (hoverEventTimer) {
         clearTimeout(hoverEventTimer);
