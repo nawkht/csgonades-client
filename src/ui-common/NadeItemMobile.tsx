@@ -22,7 +22,6 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
   useEffect(() => {
     if (isPlaying && !hasSentEvent) {
       timer = setTimeout(() => {
-        console.log("> Gfy view event");
         NadeApi.registerView(nade.id);
         GoogleAnalytics.event("NadeItem", "Mobile play gfycat", nade.id);
         setHasSentEvent(true);
