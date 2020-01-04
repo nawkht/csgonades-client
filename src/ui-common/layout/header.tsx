@@ -8,19 +8,17 @@ import {
 } from "../../store/LayoutStore/LayoutHooks";
 
 const Header: FC = () => {
-  const { colors, isMobile, sideBarOpen, uiDimensions } = useTheme();
+  const { colors, sideBarOpen, uiDimensions } = useTheme();
   const toggleNavigation = useToogleNavigation();
 
   return (
     <>
       <header>
         <div className="logo-container">
-          {isMobile && (
-            <div className="hamburger" onClick={toggleNavigation}>
-              {sideBarOpen && <Icon name="cancel" size="large" />}
-              {!sideBarOpen && <Icon name="bars" size="large" />}
-            </div>
-          )}
+          <div className="hamburger" onClick={toggleNavigation}>
+            {sideBarOpen && <Icon name="cancel" size="large" />}
+            {!sideBarOpen && <Icon name="bars" size="large" />}
+          </div>
 
           <Link href="/" as="/">
             <a className="logo">
@@ -41,6 +39,7 @@ const Header: FC = () => {
         .hamburger {
           margin-right: 18px;
           cursor: pointer;
+          display: none;
         }
 
         header {
@@ -62,6 +61,12 @@ const Header: FC = () => {
 
         .logo img {
           height: 35px;
+        }
+
+        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+          .hamburger {
+            display: block;
+          }
         }
       `}</style>
     </>

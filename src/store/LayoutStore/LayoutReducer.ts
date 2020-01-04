@@ -13,6 +13,7 @@ export type ThemeState = {
     PADDING_HUGE: number;
     INNER_GUTTER_SIZE: number;
     OUTER_GUTTER_SIZE: number;
+    MOBILE_THRESHHOLD: number;
   };
   colors: {
     PRIMARY: string;
@@ -44,7 +45,8 @@ const initialState: ThemeState = {
     PADDING_LARGE: 18,
     PADDING_HUGE: 24,
     INNER_GUTTER_SIZE: 24,
-    OUTER_GUTTER_SIZE: 24
+    OUTER_GUTTER_SIZE: 24,
+    MOBILE_THRESHHOLD: 850
   },
   colors: {
     PRIMARY: "#1c90c0",
@@ -85,7 +87,8 @@ export const LayoutReducer: Reducer<ThemeState, LayoutActions> = (
           PADDING_LARGE: 18,
           PADDING_HUGE: 24,
           INNER_GUTTER_SIZE: 18,
-          OUTER_GUTTER_SIZE: 0
+          OUTER_GUTTER_SIZE: 0,
+          MOBILE_THRESHHOLD: 850
         }
       };
     case "@@layout/TOGGLE_NAVIGATION":

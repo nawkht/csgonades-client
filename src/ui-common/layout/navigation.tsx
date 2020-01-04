@@ -3,16 +3,17 @@ import { MapLink } from "./MapLink";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { Icon } from "semantic-ui-react";
 
 const MapNavigation: FC = () => {
-  const { colors, uiDimensions } = useTheme();
+  const { colors, uiDimensions, sideBarOpen, durations } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
 
+  const navClassName = sideBarOpen ? "open" : "closed";
+
   return (
     <>
-      <aside id="mapnavigation">
+      <aside id="mapnavigation" className={navClassName}>
         <nav>
           <ul>
             <MapLink mapName="dust2" currentMapPath={currentRoute} />
@@ -56,6 +57,16 @@ const MapNavigation: FC = () => {
           flex-direction: column;
           justify-content: space-between;
           z-index: 999;
+          transition: left ${durations.transition}s;
+          overflow-y: auto;
+        }
+
+        .closed {
+          left: -${uiDimensions.SIDEBAR_WIDTH}px;
+        }
+
+        .open {
+          left: 0;
         }
 
         ul {

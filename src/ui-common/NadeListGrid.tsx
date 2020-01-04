@@ -46,8 +46,8 @@ export const NadeListGrid: FC<Props> = ({
         )}
         {!isLoading &&
           nades.map(nade => (
-            <div className="nadelist-item">
-              <NadeItem key={nade.id} nade={nade} />
+            <div className="nadelist-item" key={nade.id}>
+              <NadeItem nade={nade} />
             </div>
           ))}
       </div>

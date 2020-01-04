@@ -16,7 +16,7 @@ interface Props {
 
 export const Layout: React.FC<Props> = ({ title, description, children }) => {
   useUpdateLayout();
-  const { isMobile, uiDimensions, sideBarOpen } = useTheme();
+  const { uiDimensions } = useTheme();
 
   useEffect(() => {
     let delayedAnalytics = setTimeout(() => {
@@ -56,7 +56,7 @@ export const Layout: React.FC<Props> = ({ title, description, children }) => {
 
       <Notifications />
 
-      {sideBarOpen && <MapNavigation />}
+      <MapNavigation />
 
       <div id="content">
         <main>{children}</main>
@@ -71,10 +71,16 @@ export const Layout: React.FC<Props> = ({ title, description, children }) => {
         }
 
         main {
-          margin-left: ${isMobile ? 0 : uiDimensions.SIDEBAR_WIDTH}px;
+          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
           margin-top: ${uiDimensions.HEADER_HEIGHT}px;
           background-color: #f2f2f2;
           flex: 1;
+        }
+
+        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+          main {
+            margin-left: 0;
+          }
         }
       `}</style>
     </div>
