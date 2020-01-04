@@ -6,14 +6,7 @@ type LayoutSetBrowser = {
   type: "@@layout/SET_BROWSER";
 };
 
-type LayoutToggleNavigation = {
-  type: "@@layout/TOGGLE_NAVIGATION";
-};
-
-export type LayoutActions =
-  | LayoutSetMobile
-  | LayoutSetBrowser
-  | LayoutToggleNavigation;
+export type LayoutActions = LayoutSetMobile | LayoutSetBrowser;
 
 export const setMobileAction = (): LayoutSetMobile => ({
   type: "@@layout/SET_MOBILE"
@@ -21,8 +14,4 @@ export const setMobileAction = (): LayoutSetMobile => ({
 
 export const setBrowseraction = (): LayoutSetBrowser => ({
   type: "@@layout/SET_BROWSER"
-});
-
-export const toggleNavigationAction = (): LayoutToggleNavigation => ({
-  type: "@@layout/TOGGLE_NAVIGATION"
 });

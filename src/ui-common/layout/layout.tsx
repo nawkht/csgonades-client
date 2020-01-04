@@ -2,12 +2,13 @@ import Head from "next/head";
 import { Header } from "./header";
 import { MapNavigation } from "./navigation";
 import { Notifications } from "./Notifications";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUpdateLayout } from "../../utils/CommonHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 // @ts-ignore
 import removeMd from "remove-markdown";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 
 interface Props {
   title?: string;
@@ -15,8 +16,13 @@ interface Props {
 }
 
 export const Layout: React.FC<Props> = ({ title, description, children }) => {
+  const { closeNav } = useNavigation();
   useUpdateLayout();
   const { uiDimensions } = useTheme();
+
+  useEffect(() => {
+    closeNav();
+  }, []);
 
   useEffect(() => {
     let delayedAnalytics = setTimeout(() => {

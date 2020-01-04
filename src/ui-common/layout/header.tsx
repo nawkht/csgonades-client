@@ -2,22 +2,20 @@ import { FC } from "react";
 import Link from "next/link";
 import { UserNav } from "./UserNav";
 import { Icon } from "semantic-ui-react";
-import {
-  useToogleNavigation,
-  useTheme
-} from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 
 const Header: FC = () => {
-  const { colors, sideBarOpen, uiDimensions } = useTheme();
-  const toggleNavigation = useToogleNavigation();
+  const { colors, uiDimensions } = useTheme();
+  const { isNavOpen, toggleNav } = useNavigation();
 
   return (
     <>
       <header>
         <div className="logo-container">
-          <div className="hamburger" onClick={toggleNavigation}>
-            {sideBarOpen && <Icon name="cancel" size="large" />}
-            {!sideBarOpen && <Icon name="bars" size="large" />}
+          <div className="hamburger" onClick={toggleNav}>
+            {isNavOpen && <Icon name="cancel" size="large" />}
+            {!isNavOpen && <Icon name="bars" size="large" />}
           </div>
 
           <Link href="/" as="/">

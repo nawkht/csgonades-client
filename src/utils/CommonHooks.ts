@@ -4,7 +4,7 @@ import {
   setBrowseraction
 } from "../store/LayoutStore/LayoutActions";
 import { useDispatch } from "react-redux";
-import { isMobile } from "react-device-detect";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 export function useWindowSize() {
   const isClient = typeof window === "object";
@@ -35,11 +35,14 @@ export function useWindowSize() {
 }
 
 export function useUpdateLayout() {
+  const { uiDimensions } = useTheme();
   const dispatch = useDispatch();
   const window = useWindowSize();
 
   useEffect(() => {
-    if (isMobile) {
+    const width = window.width || 1000;
+
+    if (width < uiDimensions.MOBILE_THRESHHOLD) {
       dispatch(setMobileAction());
     } else {
       dispatch(setBrowseraction());

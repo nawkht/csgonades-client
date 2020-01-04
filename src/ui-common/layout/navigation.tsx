@@ -3,13 +3,15 @@ import { MapLink } from "./MapLink";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 
 const MapNavigation: FC = () => {
-  const { colors, uiDimensions, sideBarOpen, durations, isMobile } = useTheme();
+  const { isNavOpen } = useNavigation();
+  const { colors, uiDimensions, durations } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
 
-  const navClassName = isMobile ? (sideBarOpen ? "open" : "closed") : "open";
+  const navClassName = isNavOpen ? "open" : "closed";
 
   return (
     <>

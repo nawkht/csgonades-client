@@ -4,6 +4,7 @@ import { GlobalActions } from "./GlobalActions";
 
 export type GlobalState = {
   stats: SiteStats;
+  isNavOpen: boolean;
 };
 
 const initialState: GlobalState = {
@@ -11,7 +12,8 @@ const initialState: GlobalState = {
     numNades: 0,
     numUsers: 0,
     numPending: 0
-  }
+  },
+  isNavOpen: false
 };
 
 export const GlobalReducer: Reducer<GlobalState, GlobalActions> = (
@@ -23,6 +25,16 @@ export const GlobalReducer: Reducer<GlobalState, GlobalActions> = (
       return {
         ...state,
         stats: action.stats
+      };
+    case "@@global/TOGGLE_NAVIGATION":
+      return {
+        ...state,
+        isNavOpen: !state.isNavOpen
+      };
+    case "@@global/CLOSE_NAVIGATION":
+      return {
+        ...state,
+        isNavOpen: false
       };
     default:
       return state;

@@ -3,7 +3,6 @@ import { LayoutActions } from "./LayoutActions";
 
 export type ThemeState = {
   isMobile: boolean;
-  sideBarOpen: boolean;
   uiDimensions: {
     SIDEBAR_WIDTH: number;
     HEADER_HEIGHT: number;
@@ -36,7 +35,6 @@ export type ThemeState = {
 
 const initialState: ThemeState = {
   isMobile: false,
-  sideBarOpen: true,
   uiDimensions: {
     SIDEBAR_WIDTH: 180,
     HEADER_HEIGHT: 60,
@@ -78,7 +76,6 @@ export const LayoutReducer: Reducer<ThemeState, LayoutActions> = (
       return {
         ...state,
         isMobile: true,
-        sideBarOpen: false,
         uiDimensions: {
           SIDEBAR_WIDTH: 180,
           HEADER_HEIGHT: 60,
@@ -90,11 +87,6 @@ export const LayoutReducer: Reducer<ThemeState, LayoutActions> = (
           OUTER_GUTTER_SIZE: 0,
           MOBILE_THRESHHOLD: 850
         }
-      };
-    case "@@layout/TOGGLE_NAVIGATION":
-      return {
-        ...state,
-        sideBarOpen: !state.sideBarOpen
       };
     default:
       return state;
