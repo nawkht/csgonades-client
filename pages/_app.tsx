@@ -21,6 +21,8 @@ class MyApp extends App<Props> {
     const isServer = typeof window === "undefined";
 
     if (isServer) {
+      console.log("> Server Side | Has request", !!req);
+      console.log("> Server Side | Has cookie", !!req?.headers.cookie);
       await store.dispatch(serverSideUserInitThunkAction(req?.headers.cookie));
     }
 

@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
-import { NadeList } from "../../ui-common/NadeList";
+import { NadeListGrid } from "../../ui-common/NadeListGrid";
 
 export const AdminPendingNades: FC = () => {
   const { fetchPendingNades, pendingNades } = useAdminPage();
@@ -9,5 +9,5 @@ export const AdminPendingNades: FC = () => {
     fetchPendingNades();
   }, []);
 
-  return <NadeList nades={pendingNades} emptyMessage="No pending nades!" />;
+  return <NadeListGrid nades={pendingNades} emptyMessage="No pending nades!" />;
 };

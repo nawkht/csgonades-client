@@ -5,9 +5,9 @@ import {
   isLoadingFavoritedNadesSelector,
   favoritedNades
 } from "../../store/FavoriteStore/FavoriteSelectors";
-import { NadeList } from "../../ui-common/NadeList";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { Layout } from "../../ui-common/layout/layout";
+import { NadeListGrid } from "../../ui-common/NadeListGrid";
 
 export const FavoritesPage: FC = () => {
   const theme = useTheme();
@@ -18,8 +18,6 @@ export const FavoritesPage: FC = () => {
     fetchFavoritedNades();
   }, []);
 
-  const numItemsPerRow = theme.isMobile ? 1 : 5;
-
   return (
     <Layout title="Favorites">
       <div className="favorites-container">
@@ -27,8 +25,7 @@ export const FavoritesPage: FC = () => {
         {!isLoading && (
           <>
             <h2>Your favorites</h2>
-            <NadeList
-              numItemsPerRow={numItemsPerRow}
+            <NadeListGrid
               nades={nades}
               emptyMessage="You don't have any favorites yet!"
             />

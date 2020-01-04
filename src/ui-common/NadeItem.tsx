@@ -9,10 +9,9 @@ import { iconFromType } from "../utils/Common";
 
 interface Props {
   nade: NadeLight;
-  itemWidth: number;
 }
 
-export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
+export const NadeItem: FC<Props> = ({ nade }) => {
   const { colors, durations, uiDimensions, isMobile } = useTheme();
   const title = nade.title || "No title...";
 
@@ -56,13 +55,12 @@ export const NadeItem: FC<Props> = ({ nade, itemWidth }) => {
       <style jsx>{`
         .nadebox {
           background: #fff;
-          width: ${itemWidth}px;
+          width: 100%;
           border: ${isMobile ? 0 : 1}px solid ${colors.PRIMARY_BORDER};
           border-radius: ${isMobile ? 0 : 3}px;
           cursor: pointer;
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
           transition: box-shadow ${durations.transition}s;
-          margin: ${uiDimensions.INNER_GUTTER_SIZE / 2}px;
           overflow: hidden;
         }
 

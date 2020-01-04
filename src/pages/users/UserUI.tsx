@@ -1,6 +1,5 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 import { User } from "../../models/User";
-import { NadeList } from "../../ui-common/NadeList";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { UserDetails } from "./UserDetails";
@@ -9,6 +8,7 @@ import {
   useUsersActions,
   useUsersState
 } from "../../store/UsersStore/UsersHooks";
+import { NadeListGrid } from "../../ui-common/NadeListGrid";
 
 type Props = {
   user: User;
@@ -19,8 +19,6 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
   const { isMobile, uiDimensions } = useTheme();
   const { startEditingUser } = useUsersActions();
   const { isEditing } = useUsersState();
-
-  const numItemsPerRow = isMobile ? 1 : 3;
 
   return (
     <>
@@ -33,7 +31,7 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
         <UserEditor user={user} />
         <div className="user-nades">
           <h2>Nades by {user.nickname}</h2>
-          <NadeList numItemsPerRow={numItemsPerRow} nades={nades} />
+          <NadeListGrid nades={nades} />
         </div>
       </div>
       <style jsx>{`
