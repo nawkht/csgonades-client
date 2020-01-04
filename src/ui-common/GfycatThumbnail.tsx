@@ -1,6 +1,7 @@
 import { FC, useState, useEffect, useRef } from "react";
 import { NadeLight } from "../models/Nade/Nade";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
+import { NadeApi } from "../api/NadeApi";
 
 type Props = {
   nade: NadeLight;
@@ -29,6 +30,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
       hoverEventTimer = setTimeout(() => {
         if (!hasSentEvent) {
           GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
+          NadeApi.registerView(nade.id);
           setHasSentEvent(true);
         }
       }, 5000);
