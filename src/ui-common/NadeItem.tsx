@@ -31,10 +31,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
             <span className="title-text">{title}</span>
           </div>
           <div className="video">
-            <GfycatThumbnail
-              imageUrl={nade.images?.thumbnailUrl}
-              gfyUrl={nade.gfycat?.smallVideoUrl}
-            />
+            <GfycatThumbnail nade={nade} />
           </div>
           <div className="stats">
             <div className="stat">
