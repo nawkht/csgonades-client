@@ -31,10 +31,12 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap"
             rel="stylesheet"
             key="google-font-roboto"
+            media="all"
           />
           <link
             rel="stylesheet"
             href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"
+            media="all"
           />
         </Head>
         <body>
