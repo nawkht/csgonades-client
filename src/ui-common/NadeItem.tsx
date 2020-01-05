@@ -65,16 +65,11 @@ export const NadeItem: FC<Props> = ({ nade }) => {
           box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
         }
 
-        .nadebox:hover .title {
-          background: ${colors.PRIMARY};
-        }
-
         .title {
           padding: 6px 12px;
           display: block;
-          background: ${colors.PRIMARY_90_PERCENT};
+          background: ${colors.PRIMARY};
           color: white;
-          transition: background ${durations.transition}s;
           display: flex;
           align-items: center;
           justify-content: center;

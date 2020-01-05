@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <meta
             name="viewport"
@@ -28,11 +28,7 @@ class MyDocument extends Document {
           />
           <link rel="icon" href="/icons/favicon.ico" type="image/x-icon" />
           <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
-          />
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap"
             rel="stylesheet"
             key="google-font-roboto"
           />
