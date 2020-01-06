@@ -28,13 +28,11 @@ export const saveTournamentThunk = (
       return;
     }
 
-    console.log("Saving tournament");
     const res = await TournamentApi.save(tournament, authToken);
 
     if (res.isErr()) {
       console.error(res.error);
       return;
     }
-    console.log("Tournament saved");
   };
 };
