@@ -50,7 +50,7 @@ export const UserDropdown: FC<Props> = ({ user }) => {
               onClick={onFavoritesClick}
             />
             {isAdminOrMod && (
-              <Dropdown.Item text="Admin" icon="star" onClick={onAdminClick} />
+              <Dropdown.Item text="Admin" icon="spy" onClick={onAdminClick} />
             )}
             <Dropdown.Divider />
             <Dropdown.Item

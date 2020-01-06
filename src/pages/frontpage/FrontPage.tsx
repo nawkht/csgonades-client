@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { recentNadesSelector } from "../../store/NadeStore/NadeSelectors";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
+import { TournamentsContainer } from "./Tournaments";
 
 export const FrontPage: FC = () => {
   const { isMobile, uiDimensions } = useTheme();
@@ -15,6 +16,7 @@ export const FrontPage: FC = () => {
     <Layout>
       <FrontPageJumbo />
       <FrontPageStats />
+      <TournamentsContainer />
       <div className="recent-nades">
         <h3>Most recent nades</h3>
         <NadeListGrid nades={nades} />

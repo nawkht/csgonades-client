@@ -37,6 +37,13 @@ export const AdminNav: FC = () => {
           <Label>{stats.numUsers}</Label>
           Users
         </Menu.Item>
+        <Menu.Item
+          name="tournaments"
+          active={route === "tournaments"}
+          onClick={handleItemClick}
+        >
+          Add tournament
+        </Menu.Item>
       </Menu>
     </div>
   );

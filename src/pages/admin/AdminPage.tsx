@@ -6,6 +6,7 @@ import { useAdminPage } from "../../store/AdminStore/AdminHooks";
 import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminUsers } from "./AdminUsers";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { AdminTournaments } from "./AdminTournaments";
 
 export const AdminPage: FC = () => {
   const theme = useTheme();
@@ -22,6 +23,8 @@ export const AdminPage: FC = () => {
         return <AdminPendingNades />;
       case "user":
         return <AdminUsers />;
+      case "tournaments":
+        return <AdminTournaments />;
       default:
         return null;
     }

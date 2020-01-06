@@ -9,8 +9,8 @@ import { LayoutReducer } from "./LayoutStore/LayoutReducer";
 import { UsersReducer } from "./UsersStore/UsersReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AdminReducer } from "./AdminStore/AdminReducer";
-import logger from "redux-logger";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
+import { TournamentReducer } from "./TournamentStore/TournamentReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
@@ -20,7 +20,8 @@ const rootReducer = combineReducers({
   layoutStore: LayoutReducer,
   usersStore: UsersReducer,
   adminStore: AdminReducer,
-  globalStore: GlobalReducer
+  globalStore: GlobalReducer,
+  tournamentStore: TournamentReducer
 });
 
 function createMiddleware() {

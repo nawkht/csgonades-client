@@ -35,8 +35,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"
-            media="all"
+            href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
           />
         </Head>
         <body>
