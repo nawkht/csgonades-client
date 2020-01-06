@@ -50,16 +50,23 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           width: 100%;
           overflow: hidden;
           z-index: 998;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 15%;
+          display: block;
+          padding-top: 56.25%;
+          background: black;
         }
 
         .front {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          z-index: 901;
         }
 
         .front img {
           width: 100%;
+          display: block;
         }
 
         .back {
@@ -68,10 +75,12 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           left: 0;
           bottom: 0;
           right: 0;
+          z-index: 902;
         }
 
         .back video {
           width: 100%;
+          display: block;
         }
       `}</style>
     </>

@@ -104,7 +104,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
 
         .stats {
           display: flex;
-          padding: 3px;
+          padding: 3px 6px 3px 9px;
           justify-content: space-between;
           color: #444;
         }
