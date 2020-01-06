@@ -7,6 +7,8 @@ import { iconFromType, kFormatter } from "../utils/Common";
 import { NadeApi } from "../api/NadeApi";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 import Router from "next/router";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 interface Props {
   nade: NadeLight;
@@ -95,7 +97,12 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
         </div>
         <div className="media-content">
           <div className="media-image">
-            <img src={nade.images.thumbnailUrl} alt={`nade thumbnail`} />
+            <LazyLoadImage
+              effect="blur"
+              alt={`nade thumbnail`}
+              src={nade.images.thumbnailUrl} // use normal <img> attributes as props
+              width={"100%"}
+            />
           </div>
           {isPlaying && (
             <div className="media-video">

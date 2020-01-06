@@ -2,6 +2,8 @@ import { FC, useState, useEffect, useRef, useCallback } from "react";
 import { NadeLight } from "../models/Nade/Nade";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 import { NadeApi } from "../api/NadeApi";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 type Props = {
   nade: NadeLight;
@@ -25,7 +27,12 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     <>
       <div className="player" ref={ref}>
         <div className="front">
-          <img src={nade.images.thumbnailUrl} alt={`nade thumbnail`} />
+          <LazyLoadImage
+            effect="blur"
+            alt={`nade thumbnail`}
+            src={nade.images.thumbnailUrl} // use normal <img> attributes as props
+            width={"100%"}
+          />
         </div>
 
         {isHovering && (

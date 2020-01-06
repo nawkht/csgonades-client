@@ -34,12 +34,6 @@ export const MapPage: FC<Props> = ({ map }) => {
           margin-top: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           min-height: 100%;
         }
-
-        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
-          .nade-list {
-            margin-bottom: 50vh;
-          }
-        }
       `}</style>
     </Layout>
   );
