@@ -46,3 +46,23 @@ export function iconFromType(type?: NadeType) {
       return "";
   }
 }
+
+export function roundViewCount(views: number) {
+  if (views % 100 < 10) {
+    return `${views}`;
+  } else {
+    const thousands = Math.round(views / 1000) * 1000;
+    return `${thousands}k`;
+  }
+}
+
+export function kFormatter(num: number) {
+  const isBelow1k = Math.abs(num) > 999;
+
+  if (isBelow1k) {
+    // @ts-ignore
+    return Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k";
+  } else {
+    return Math.sign(num) * Math.abs(num);
+  }
+}

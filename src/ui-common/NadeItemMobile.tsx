@@ -3,7 +3,7 @@ import { Icon } from "semantic-ui-react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { tickrateString } from "../models/Nade/NadeTickrate";
-import { iconFromType } from "../utils/Common";
+import { iconFromType, kFormatter } from "../utils/Common";
 import { NadeApi } from "../api/NadeApi";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 import Router from "next/router";
@@ -108,7 +108,7 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
         <div className="stats">
           <div className="stat">
             <Icon name="eye" size="small" />
-            <span className="icon-text">{nade.viewCount}</span>
+            <span className="icon-text">{kFormatter(nade.viewCount)}</span>
           </div>
           {nade.tickrate && nade.tickrate !== "any" && (
             <div className="stat tick">

@@ -5,7 +5,7 @@ import { GfycatThumbnail } from "./GfycatThumbnail";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { tickrateString } from "../models/Nade/NadeTickrate";
 import Link from "next/link";
-import { iconFromType } from "../utils/Common";
+import { iconFromType, kFormatter } from "../utils/Common";
 
 interface Props {
   nade: NadeLight;
@@ -36,7 +36,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
           <div className="stats">
             <div className="stat">
               <Icon name="eye" size="small" />
-              <span className="icon-text">{nade.viewCount}</span>
+              <span className="icon-text">{kFormatter(nade.viewCount)}</span>
             </div>
             {nade.tickrate && nade.tickrate !== "any" && (
               <div className="stat tick">
