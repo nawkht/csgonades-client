@@ -141,7 +141,6 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
         .nade-meta-panel {
           border: 1px solid ${colors.PRIMARY_BORDER};
           border-radius: ${uiDimensions.BORDER_RADIUS};
-          overflow: hidden;
         }
 
         .nade-meta-item {
