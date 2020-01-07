@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import { LayoutActions } from "./LayoutActions";
+import { assertNever } from "../../utils/Common";
 
 export type ThemeState = {
   isMobile: boolean;
@@ -92,6 +93,7 @@ export const LayoutReducer: Reducer<ThemeState, LayoutActions> = (
         }
       };
     default:
+      assertNever(action);
       return state;
   }
 };

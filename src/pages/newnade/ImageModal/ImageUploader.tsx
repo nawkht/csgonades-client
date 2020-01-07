@@ -130,9 +130,6 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
           onImageLoaded={onImageLoaded}
           onComplete={onCropComplete}
           onChange={onCropChange}
-          style={{
-            width: 800
-          }}
         />
 
         {image && (
@@ -146,8 +143,9 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
       </div>
       <style jsx>{`
         .image-uploader {
-          width: 800px;
-          min-height: 50vh;
+          max-width: 75vw;
+          display: block;
+          margin: 0 auto;
         }
       `}</style>
     </>

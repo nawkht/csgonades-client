@@ -66,3 +66,17 @@ export function kFormatter(num: number) {
     return Math.sign(num) * Math.abs(num);
   }
 }
+
+export function cleanGfycatUrl(gfycatIdOrUrl: string): string {
+  const index = gfycatIdOrUrl.lastIndexOf("/");
+  let gfyId: string | string[] = gfycatIdOrUrl.substr(index + 1);
+  gfyId = gfyId.split("-");
+
+  if (typeof gfyId === "string") {
+    return gfyId;
+  }
+
+  return gfyId[0];
+}
+
+export function assertNever(never: never) {}

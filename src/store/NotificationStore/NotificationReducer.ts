@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import { NotificationActions, AppNotification } from "./NotificationActions";
 import { persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { assertNever } from "../../utils/Common";
 
 export type ToolTips = {
   seenFavoriteTip: boolean;
@@ -45,6 +46,7 @@ export const NotificationReducer: Reducer<
         [action.toolTip]: true
       };
     default:
+      assertNever(action);
       return state;
   }
 };

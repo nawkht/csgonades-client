@@ -47,6 +47,8 @@ export const CSGNModal: FC<Props> = ({
           background: #fff;
           border-radius: ${uiDimensions.BORDER_RADIUS};
           min-width: 50%;
+          max-width: 90vw;
+          max-height: 90vh;
         }
 
         .modal-title {

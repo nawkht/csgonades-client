@@ -3,6 +3,7 @@ import { User } from "../../models/User";
 import { UsersActions } from "./UsersActions";
 import { NadeLight } from "../../models/Nade/Nade";
 import { AppError } from "../../utils/ErrorUtil";
+import { assertNever } from "../../utils/Common";
 
 export type UsersState = {
   viewingUser?: User;
@@ -61,6 +62,7 @@ export const UsersReducer: Reducer<UsersState, UsersActions> = (
         isLoading: false
       };
     default:
+      assertNever(action);
       return state;
   }
 };

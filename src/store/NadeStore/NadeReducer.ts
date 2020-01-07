@@ -5,6 +5,7 @@ import { NadeFilterOptions } from "../../api/NadeApi";
 import { SiteStats } from "../../api/StatsApi";
 import { AppError } from "../../utils/ErrorUtil";
 import moment from "moment";
+import { assertNever } from "../../utils/Common";
 
 export type NadeState = {
   sorthingMethod: SortingMethod;
@@ -84,6 +85,7 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         nadesForMap: sortedNades
       };
     default:
+      assertNever(action);
       return state;
   }
 };

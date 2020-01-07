@@ -1,31 +1,23 @@
 import { Header, Icon, Button } from "semantic-ui-react";
 import { useState, FC } from "react";
 import { NewNadeImageModal } from "./NewNadeImageModal";
+import { useNewNade } from "../../../store/NewNadeStore/NewNadeHooks";
 
-type Props = {
-  onSetImageBase64: (imageBase64: string) => void;
-};
-
-export const NewNadeImage: FC<Props> = ({ onSetImageBase64 }) => {
+export const AddImageContainer: FC = () => {
+  const { addImage, imageData } = useNewNade();
   const [isImageModalVisisble, setIsImageModalVisisble] = useState(false);
-  const [croppedImage, setCroppedImage] = useState<string | null>(null);
-
-  function setImageBase64(imageBase64: string) {
-    setCroppedImage(imageBase64);
-    onSetImageBase64(imageBase64);
-  }
 
   return (
     <>
-      {croppedImage && (
+      {!!imageData && (
         <>
-          <img src={croppedImage} alt="result image" />
+          <img src={imageData} alt="result image" />
           <Button primary onClick={() => setIsImageModalVisisble(true)}>
             Edit
           </Button>
         </>
       )}
-      {!croppedImage && (
+      {!imageData && (
         <>
           <Header icon>
             <Icon name="image" />
@@ -41,7 +33,7 @@ export const NewNadeImage: FC<Props> = ({ onSetImageBase64 }) => {
       <NewNadeImageModal
         onDismiss={() => setIsImageModalVisisble(false)}
         visible={isImageModalVisisble}
-        setBase64Image={setImageBase64}
+        setBase64Image={addImage}
       />
     </>
   );

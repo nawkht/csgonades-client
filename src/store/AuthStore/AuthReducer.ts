@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import { AuthActions } from "./AuthActions";
 import { User } from "../../models/User";
+import { assertNever } from "../../utils/Common";
 
 export type AuthState = {
   user?: User;
@@ -30,6 +31,7 @@ export const AuthReducer: Reducer<AuthState, AuthActions> = (
         token: undefined
       };
     default:
+      assertNever(action);
       return state;
   }
 };

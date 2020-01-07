@@ -1,46 +1,38 @@
 import { Header, Icon, Button } from "semantic-ui-react";
 import { useState, FC } from "react";
 import { NewNadeGfycatModal } from "./NewNadeGfycatModal";
-import { GfyCatPlayer } from "../../ui-common/GfycatPlayer";
+import { GfycatLargePlayer } from "../../../ui-common/GfycatLargePlayer";
+import { useNewNade } from "../../../store/NewNadeStore/NewNadeHooks";
 
-type Props = {
-  onSetGfycat: (gfyId: string) => void;
-};
-
-export const NewNadeGfycat: FC<Props> = ({ onSetGfycat }) => {
-  const [gfycatID, setGfycatID] = useState<string | null>(null);
+export const AddGfyContainer: FC = () => {
+  const { gfyData } = useNewNade();
   const [isGfycatModalVisisble, setIsGfycatModalVisisble] = useState(false);
-
-  function applyGfycatID(gfyId: string) {
-    setGfycatID(gfyId);
-    onSetGfycat(gfyId);
-  }
 
   return (
     <>
       <div className="gfycat-container">
-        {gfycatID && (
+        {gfyData && (
           <>
-            <GfyCatPlayer gfycatID={gfycatID} />
+            <GfycatLargePlayer gfyUrl={gfyData.largeVideoUrl} />
             <Button primary onClick={() => setIsGfycatModalVisisble(true)}>
               Edit
             </Button>
           </>
         )}
-        {!gfycatID && (
+        {!gfyData && (
           <>
             <Header icon>
               <Icon name="video" />
               Gfycat
             </Header>
             <br />
+
             <Button primary onClick={() => setIsGfycatModalVisisble(true)}>
               Add
             </Button>
           </>
         )}
         <NewNadeGfycatModal
-          setGfycat={applyGfycatID}
           visible={isGfycatModalVisisble}
           onDismiss={() => setIsGfycatModalVisisble(false)}
         />

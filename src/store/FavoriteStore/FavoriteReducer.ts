@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import { Favorite } from "../../models/Favorite";
 import { FavoriteActions } from "./FavoriteActions";
 import { NadeLight } from "../../models/Nade/Nade";
+import { assertNever } from "../../utils/Common";
 
 export type FavoritesState = {
   favorites: Favorite[];
@@ -56,6 +57,7 @@ export const FavoriteReducer: Reducer<FavoritesState, FavoriteActions> = (
         favoritedNades: action.nades
       };
     default:
+      assertNever(action);
       return state;
   }
 };

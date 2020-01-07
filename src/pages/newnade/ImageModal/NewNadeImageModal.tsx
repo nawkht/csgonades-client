@@ -1,4 +1,4 @@
-import { CSGNModal } from "../../ui-common/CSGNModal";
+import { CSGNModal } from "../../../ui-common/CSGNModal";
 import { ImageUploader } from "./ImageUploader";
 
 type Props = {

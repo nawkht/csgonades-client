@@ -1,5 +1,4 @@
 import { Reducer } from "redux";
-
 import { Tournament } from "../../models/Tournament";
 import { TournamentActions } from "./TournamentActions";
 

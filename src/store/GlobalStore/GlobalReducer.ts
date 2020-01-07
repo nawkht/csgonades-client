@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import { SiteStats } from "../../api/StatsApi";
 import { GlobalActions } from "./GlobalActions";
+import { assertNever } from "../../utils/Common";
 
 export type GlobalState = {
   stats: SiteStats;
@@ -37,6 +38,7 @@ export const GlobalReducer: Reducer<GlobalState, GlobalActions> = (
         isNavOpen: false
       };
     default:
+      assertNever(action);
       return state;
   }
 };

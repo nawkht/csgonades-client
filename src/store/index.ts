@@ -11,6 +11,7 @@ import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AdminReducer } from "./AdminStore/AdminReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 import { TournamentReducer } from "./TournamentStore/TournamentReducer";
+import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   usersStore: UsersReducer,
   adminStore: AdminReducer,
   globalStore: GlobalReducer,
-  tournamentStore: TournamentReducer
+  tournamentStore: TournamentReducer,
+  newNadeStore: NewNadeReducer
 });
 
 function createMiddleware() {

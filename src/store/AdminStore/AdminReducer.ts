@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import { AdminActions, AdminRoutes } from "./AdminActions";
 import { NadeLight } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
+import { assertNever } from "../../utils/Common";
 
 export type AdminState = {
   route: AdminRoutes;
@@ -36,6 +37,7 @@ export const AdminReducer: Reducer<AdminState, AdminActions> = (
         users: action.users
       };
     default:
+      assertNever(action);
       return state;
   }
 };

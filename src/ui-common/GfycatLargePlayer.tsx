@@ -3,7 +3,7 @@ import useComponentSize from "@rehooks/component-size";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 type Props = {
   gfyUrl: string;
-  poster: string;
+  poster?: string;
 };
 
 export const GfycatLargePlayer: FC<Props> = ({ gfyUrl, poster }) => {

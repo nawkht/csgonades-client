@@ -1,46 +1,14 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Layout } from "../../ui-common/layout/layout";
 import { Button, Segment, Grid, Divider } from "semantic-ui-react";
-import { NewNadeGfycat } from "./NewNadeGfycat";
-import { NewNadeImage } from "./NewNadeImage";
-import { NadeBody } from "../../models/Nade/Nade";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { useCreateNade } from "../../store/NadeStore/NadeHooks";
-import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
+import { AddGfyContainer } from "./GfyModal/AddGfyContainer";
+import { AddImageContainer } from "./ImageModal/AddImageContainer";
+import { useNewNade } from "../../store/NewNadeStore/NewNadeHooks";
 
 export const NewNadePage: FC = () => {
-  const isLoadingNade = useIsLoadingNade();
-  const createNade = useCreateNade();
-  const [gfyId, setGfyId] = useState<string | null>(null);
-  const [imageBase64, setImageBase64] = useState<string | null>(null);
+  const { gfyData, imageData, submit, loadingSubmit } = useNewNade();
 
-  const cantSumbit = !gfyId || !imageBase64;
-
-  function onSetImageBase64(base64image: string) {
-    GoogleAnalytics.event("New Nade", "Set image");
-    setImageBase64(base64image);
-  }
-
-  function onSetGfycat(gfyId: string) {
-    GoogleAnalytics.event("New Nade", "Set gfycat");
-    setGfyId(gfyId);
-  }
-
-  async function onSumbitNade() {
-    if (!gfyId || !imageBase64) {
-      console.warn("Tried to submit with no gfyid or image");
-      return;
-    }
-
-    const nadeBody: NadeBody = {
-      gfycatIdOrUrl: gfyId,
-      imageBase64: imageBase64
-    };
-
-    createNade(nadeBody);
-
-    GoogleAnalytics.event("New Nade", "Submit");
-  }
+  const cantSumbit = !gfyData || !imageData;
 
   return (
     <Layout title="New nade">
@@ -52,20 +20,19 @@ export const NewNadePage: FC = () => {
 
             <Grid.Row verticalAlign="middle">
               <Grid.Column>
-                <NewNadeGfycat onSetGfycat={onSetGfycat} />
+                <AddGfyContainer />
               </Grid.Column>
-
               <Grid.Column>
-                <NewNadeImage onSetImageBase64={onSetImageBase64} />
+                <AddImageContainer />
               </Grid.Column>
             </Grid.Row>
           </Grid>
         </Segment>
         <Button
-          disabled={cantSumbit}
-          loading={isLoadingNade}
+          disabled={cantSumbit || loadingSubmit}
+          loading={loadingSubmit}
           color="green"
-          onClick={onSumbitNade}
+          onClick={submit}
         >
           Submit
         </Button>
