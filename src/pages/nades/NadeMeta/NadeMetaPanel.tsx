@@ -140,7 +140,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
 
         .nade-meta-panel {
           border: 1px solid ${colors.PRIMARY_BORDER};
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
           overflow: hidden;
         }
 
@@ -156,7 +156,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
 
         .map-meta-title {
           display: inline-block;
-          font-weight: bold;
+          font-weight: 400;
           font-size: 0.9em;
           margin-right: 12px;
           min-width: 75px;

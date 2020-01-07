@@ -35,7 +35,7 @@ export const SignInnButton: FC = () => {
           padding: 6px 12px;
           background: #222;
           color: white;
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
         }
 
         .steam-login span {

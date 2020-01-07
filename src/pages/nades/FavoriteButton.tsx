@@ -76,27 +76,9 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
         />
         <style jsx>{`
           .favicon-container {
-            animation-name: twinkle;
             color: grey;
-            animation-duration: 1s;
-            animation-delay: 3s;
             display: flex;
             align-content: center;
-          }
-
-          @keyframes twinkle {
-            0% {
-              color: grey;
-              transform: scale(1);
-            }
-            50% {
-              transform: scale(1.3);
-              color: #ffbf00;
-            }
-            100% {
-              transform: scale(1);
-              color: grey;
-            }
           }
         `}</style>
       </>

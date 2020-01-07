@@ -39,7 +39,7 @@ export const UserNav: FC = () => {
             align-self: center;
             margin-right: 18px;
             padding: 6px 12px;
-            border-radius: ${uiDimensions.BORDER_RADIUS}px;
+            border-radius: ${uiDimensions.BORDER_RADIUS};
             background: ${colors.SUCCESS};
             color: white;
             font-weight: bold;

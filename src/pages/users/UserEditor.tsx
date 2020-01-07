@@ -97,7 +97,7 @@ export const UserEditor: FC<Props> = ({ user }) => {
           width: ${isMobile ? "100%" : "300px"};
           border: 1px solid ${colors.PRIMARY_BORDER};
           align-self: flex-start;
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
           margin-bottom: ${isMobile ? uiDimensions.INNER_GUTTER_SIZE : 0}px;
         }
 

@@ -45,7 +45,7 @@ export const CSGNModal: FC<Props> = ({
           background: red;
           align-self: center;
           background: #fff;
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
           min-width: 50%;
         }
 

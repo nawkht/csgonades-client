@@ -85,7 +85,7 @@ export const GfycatEditor: FC<Props> = ({ nade, onCancel }) => {
           align-self: center;
           width: 50%;
           background: white;
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
           padding: 12px;
         }
 

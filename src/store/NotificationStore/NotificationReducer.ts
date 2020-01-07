@@ -1,12 +1,26 @@
 import { Reducer } from "redux";
 import { NotificationActions, AppNotification } from "./NotificationActions";
+import { persistReducer, PersistConfig } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+export type ToolTips = {
+  seenFavoriteTip: boolean;
+};
+
+export const initialTooltips: ToolTips = {
+  seenFavoriteTip: false
+};
+
+export type ToolTipKeys = keyof typeof initialTooltips;
 
 export type NotificationState = {
   notifications: AppNotification[];
+  seenFavoriteTip: boolean;
 };
 
 const initialState: NotificationState = {
-  notifications: []
+  notifications: [],
+  ...initialTooltips
 };
 
 export const NotificationReducer: Reducer<
@@ -14,19 +28,34 @@ export const NotificationReducer: Reducer<
   NotificationActions
 > = (state = initialState, action): NotificationState => {
   switch (action.type) {
-    case "@@notification/add":
+    case "@@notification/ADD":
       return {
         ...state,
         notifications: [...state.notifications, action.notification]
       };
-    case "@@nottication/remove":
+    case "@@notification/REMOVE":
+      const removed = state.notifications.filter(n => n.id !== action.id);
       return {
         ...state,
-        notifications: state.notifications.filter(notifi => {
-          notifi.id !== action.id;
-        })
+        notifications: removed
+      };
+    case "@@notification/SEEN_TOOL_TIP":
+      return {
+        ...state,
+        [action.toolTip]: true
       };
     default:
       return state;
   }
 };
+
+const persistConfig: PersistConfig<NotificationState> = {
+  key: "notificationReducer",
+  storage,
+  whitelist: ["seenFavoriteTip"]
+};
+
+export const PersistedNotificationReducer = persistReducer(
+  persistConfig,
+  NotificationReducer
+);

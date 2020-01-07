@@ -50,7 +50,7 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           width: ${isMobile ? "100%" : "300px"};
           border: 1px solid ${colors.PRIMARY_BORDER};
           align-self: flex-start;
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
           margin-bottom: ${isMobile ? uiDimensions.INNER_GUTTER_SIZE : 0}px;
         }
 
@@ -74,7 +74,7 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           color: white;
           font-size: 0.8em;
           padding: 3px 6px;
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
         }
       `}</style>
     </>

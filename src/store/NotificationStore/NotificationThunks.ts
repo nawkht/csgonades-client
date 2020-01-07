@@ -1,12 +1,13 @@
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
-  AppNotification,
+  AppNotificationCreate,
   addNotificationAction,
-  removeNotificationAction
+  removeNotificationAction,
+  seenToolTip
 } from "./NotificationActions";
 
 export const addNotificationActionThunk = (
-  notification: AppNotification
+  notification: AppNotificationCreate
 ): ReduxThunkAction => {
   return async dispatch => {
     const addAction = addNotificationAction(notification);
@@ -14,6 +15,21 @@ export const addNotificationActionThunk = (
     dispatch(addAction);
     await notificationDeleteDelay(notification.durationSeconds);
     dispatch(removeAction);
+  };
+};
+
+export const displayToolTipThunk = (): ReduxThunkAction => {
+  return async dispatch => {
+    dispatch(
+      addNotificationActionThunk({
+        title: "Favorite nades",
+        message:
+          "Click on the star in the top right corner to favorite this nade.\nFirst you need to sign in.",
+        severity: "info",
+        durationSeconds: 20
+      })
+    );
+    dispatch(seenToolTip("seenFavoriteTip"));
   };
 };
 

@@ -1,43 +1,57 @@
 import nanoId from "nanoid";
+import { capitalize } from "../../utils/Common";
+import { ToolTipKeys } from "./NotificationReducer";
 
 export type NotificationSeverity = "info" | "success" | "warning" | "error";
 
-export type AppNotification = {
+export type AppNotificationCreate = {
   id?: string;
+  title?: string;
   message: string;
   severity: NotificationSeverity;
   durationSeconds?: number;
 };
 
-type NoUndefinedField<T> = {
-  [P in keyof T]-?: NoUndefinedField<NonNullable<T[P]>>;
+export type AppNotification = {
+  id: string;
+  title?: string;
+  message: string;
+  severity: NotificationSeverity;
+  durationSeconds: number;
 };
 
 type AddNotificationAction = {
-  type: "@@notification/add";
-  notification: NoUndefinedField<AppNotification>;
+  type: "@@notification/ADD";
+  notification: AppNotification;
 };
 
 type RemoveNotificationAction = {
-  type: "@@nottication/remove";
+  type: "@@notification/REMOVE";
   id: string;
+};
+
+type SetSeenToolTipAction = {
+  type: "@@notification/SEEN_TOOL_TIP";
+  toolTip: ToolTipKeys;
 };
 
 export type NotificationActions =
   | AddNotificationAction
-  | RemoveNotificationAction;
+  | RemoveNotificationAction
+  | SetSeenToolTipAction;
 
 export const addNotificationAction = (
-  notification: AppNotification
+  notification: AppNotificationCreate
 ): AddNotificationAction => {
   const id = nanoId();
-  const noti: NoUndefinedField<AppNotification> = {
+  const noti: AppNotification = {
     ...notification,
     id,
-    durationSeconds: notification.durationSeconds || 8
+    durationSeconds: notification.durationSeconds || 8,
+    title: notification.title || capitalize(notification.severity)
   };
   return {
-    type: "@@notification/add",
+    type: "@@notification/ADD",
     notification: noti
   };
 };
@@ -45,6 +59,11 @@ export const addNotificationAction = (
 export const removeNotificationAction = (
   id: string
 ): RemoveNotificationAction => ({
-  type: "@@nottication/remove",
+  type: "@@notification/REMOVE",
   id
+});
+
+export const seenToolTip = (toolTip: ToolTipKeys): SetSeenToolTipAction => ({
+  type: "@@notification/SEEN_TOOL_TIP",
+  toolTip
 });

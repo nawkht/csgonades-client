@@ -39,8 +39,8 @@ export const NadeSorter = () => {
           background: white;
           border: 1px solid ${colors.PRIMARY_BORDER};
           border-top: none;
-          border-bottom-left-radius: ${uiDimensions.BORDER_RADIUS}px;
-          border-bottom-right-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-bottom-left-radius: ${uiDimensions.BORDER_RADIUS};
+          border-bottom-right-radius: ${uiDimensions.BORDER_RADIUS};
         }
 
         .nade-sorter span {

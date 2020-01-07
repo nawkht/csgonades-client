@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { NotificationReducer } from "./NotificationStore/NotificationReducer";
+import { PersistedNotificationReducer } from "./NotificationStore/NotificationReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { LayoutReducer } from "./LayoutStore/LayoutReducer";
@@ -14,7 +14,7 @@ import { TournamentReducer } from "./TournamentStore/TournamentReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
-  notificationStore: NotificationReducer,
+  notificationStore: PersistedNotificationReducer,
   nadeStore: NadeReducer,
   favoriteStore: FavoriteReducer,
   layoutStore: LayoutReducer,

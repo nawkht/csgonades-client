@@ -2,12 +2,10 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { notificationSelector } from "../../store/NotificationStore/NotificationSelectors";
 import { NotificationItem } from "./NotificationItem";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 export const Notifications: FC = () => {
+  const { uiDimensions } = useTheme();
   const notifications = useSelector(notificationSelector);
-
-  if (notifications.length === 0) {
-    return null;
-  }
 
   return (
     <>
@@ -19,11 +17,13 @@ export const Notifications: FC = () => {
       <style jsx>{`
         .notification-container {
           position: fixed;
-          bottom: 18px;
-          right: 18px;
+          bottom: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          right: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           z-index: 999;
-          width: 200px;
-          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          flex-basis: fit-content;
+          align-items: flex-end;
         }
       `}</style>
     </>

@@ -33,7 +33,7 @@ export const AdminUsers: FC = () => {
       <style jsx>{`
         .users {
           background: white;
-          border-radius: ${uiDimensions.BORDER_RADIUS}px;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
           overflow: hidden;
         }
 
