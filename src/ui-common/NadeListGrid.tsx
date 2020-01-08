@@ -51,7 +51,7 @@ export const NadeListGrid: FC<Props> = ({
         .nadelist {
           min-height: 100px;
           display: grid;
-          grid-template-columns: repeat(4, minmax(250px, 1fr));
+          grid-template-columns: repeat(6, minmax(250px, 1fr));
           margin-left: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
           margin-right: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
         }
@@ -66,16 +66,15 @@ export const NadeListGrid: FC<Props> = ({
           left: 0;
           right: 0;
           padding: 0;
-          border: 1px solid red;
         }
 
-        @media only screen and (max-width: 1500px) {
+        @media only screen and (max-width: 1800px) {
           .nadelist {
-            grid-template-columns: repeat(4, minmax(250px, 1fr));
+            grid-template-columns: repeat(5, minmax(250px, 1fr));
           }
         }
 
-        @media only screen and (max-width: 1100px) {
+        @media only screen and (max-width: 1400px) {
           .nadelist {
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
           }
