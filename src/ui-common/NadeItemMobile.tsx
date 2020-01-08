@@ -260,16 +260,3 @@ function nadeStatusToClassName(status: Status) {
       return "nadebox";
   }
 }
-
-function isWithinPlayPosition(y: number) {
-  const windowHeight = window && window.innerHeight;
-  const playArea = windowHeight / 3;
-
-  if (y < -100) {
-    return false;
-  } else if (y < playArea) {
-    return true;
-  } else {
-    return false;
-  }
-}
