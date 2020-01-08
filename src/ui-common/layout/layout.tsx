@@ -2,9 +2,8 @@ import Head from "next/head";
 import { Header } from "./header";
 import { MapNavigation } from "./navigation";
 import { Notifications } from "./Notifications";
-import { useEffect, useState } from "react";
-import { useUpdateLayout } from "../../utils/CommonHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useEffect } from "react";
+import { useTheme, useThemeSync } from "../../store/LayoutStore/LayoutHooks";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 // @ts-ignore
 import removeMd from "remove-markdown";
@@ -16,8 +15,8 @@ interface Props {
 }
 
 export const Layout: React.FC<Props> = ({ title, description, children }) => {
+  useThemeSync();
   const { closeNav } = useNavigation();
-  useUpdateLayout();
   const { uiDimensions } = useTheme();
 
   useEffect(() => {

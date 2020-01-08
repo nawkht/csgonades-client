@@ -71,6 +71,13 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           border-bottom: 1px solid ${colors.PRIMARY_BORDER};
           display: flex;
         }
+
+        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+          .nade-filter-container {
+            padding-left: 12px;
+            padding-right: 12px;
+          }
+        }
       `}</style>
     </>
   );

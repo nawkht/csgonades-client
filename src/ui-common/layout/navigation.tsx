@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { isMobile } from "react-device-detect";
 
 const MapNavigation: FC = () => {
   const { isNavOpen } = useNavigation();
@@ -11,7 +12,7 @@ const MapNavigation: FC = () => {
   const router = useRouter();
   const currentRoute = router.query.name;
 
-  const navClassName = isNavOpen ? "open" : "closed";
+  const navClassName = isMobile ? (isNavOpen ? "open" : "closed") : "";
 
   return (
     <>
@@ -61,14 +62,15 @@ const MapNavigation: FC = () => {
           z-index: 999;
           transition: left ${durations.transition}s;
           overflow-y: auto;
+          left: 0;
         }
 
         .closed {
-          left: -${uiDimensions.SIDEBAR_WIDTH}px;
+          left: -${uiDimensions.SIDEBAR_WIDTH}px !important;
         }
 
         .open {
-          left: 0;
+          left: 0 !important;
         }
 
         ul {
@@ -100,6 +102,12 @@ const MapNavigation: FC = () => {
         footer .copyright {
           padding: ${uiDimensions.PADDING_MEDIUM}px
             ${uiDimensions.PADDING_LARGE}px;
+        }
+
+        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+          #mapnavigation {
+            left: -${uiDimensions.SIDEBAR_WIDTH}px;
+          }
         }
       `}</style>
     </>

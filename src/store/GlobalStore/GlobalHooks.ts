@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { siteStatsSelector, isNavOpenSelector } from "./GlobalSelectors";
 import { fetchSiteStatsThunk } from "./GlobalThunks";
 import { toggleNavigationAction, closeNavigationAction } from "./GlobalActions";
-import { useTheme } from "../LayoutStore/LayoutHooks";
 
 export const useSiteStats = () => {
   const dispatch = useDispatch();
@@ -16,11 +15,8 @@ export const useSiteStats = () => {
 };
 
 export const useNavigation = () => {
-  const { isMobile } = useTheme();
   const dispatch = useDispatch();
-  const isNavOpenStore = useSelector(isNavOpenSelector);
-
-  const isNavOpen = !isMobile ? true : isNavOpenStore;
+  const isNavOpen = useSelector(isNavOpenSelector);
 
   function toggleNav() {
     dispatch(toggleNavigationAction());

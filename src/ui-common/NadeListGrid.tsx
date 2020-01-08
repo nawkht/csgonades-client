@@ -2,8 +2,9 @@ import { FC } from "react";
 import { NadeLight } from "../models/Nade/Nade";
 import { NadeItem } from "./NadeItem";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
-import { Loader, Message } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 import { NadeItemMobile } from "./NadeItemMobile";
+import { isMobile } from "react-device-detect";
 
 type Props = {
   nades: NadeLight[];
@@ -15,7 +16,7 @@ export const NadeListGrid: FC<Props> = ({
   nades,
   emptyMessage = "No nades found"
 }) => {
-  const { uiDimensions, isMobile } = useTheme();
+  const { uiDimensions } = useTheme();
 
   const hasNades = nades.length > 0;
 

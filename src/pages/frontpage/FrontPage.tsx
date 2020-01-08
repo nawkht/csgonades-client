@@ -25,6 +25,12 @@ export const FrontPage: FC = () => {
         .recent-nades {
           margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
         }
+
+        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+          .recent-nades {
+            margin: 0;
+          }
+        }
       `}</style>
     </Layout>
   );
