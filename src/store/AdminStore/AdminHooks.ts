@@ -21,8 +21,8 @@ export const useAdminPage = () => {
     dispatch(fetchPendingNadeThunk());
   }
 
-  function fetchUsers() {
-    dispatch(fetchUsersThunk());
+  function fetchUsers(page: number, limit: number, sortByActivity: boolean) {
+    dispatch(fetchUsersThunk(page, limit, sortByActivity));
   }
 
   return {

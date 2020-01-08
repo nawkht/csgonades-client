@@ -30,7 +30,11 @@ export const fetchPendingNadeThunk = (): ReduxThunkAction => {
   };
 };
 
-export const fetchUsersThunk = (): ReduxThunkAction => {
+export const fetchUsersThunk = (
+  page: number,
+  limit: number,
+  sortByActivity: boolean
+): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const authToken = tokenSelector(getState());
     if (!authToken) {
@@ -42,7 +46,12 @@ export const fetchUsersThunk = (): ReduxThunkAction => {
       );
     }
 
-    const users = await UserApi.fetchUsers(authToken);
+    const users = await UserApi.fetchUsers(
+      page,
+      limit,
+      sortByActivity,
+      authToken
+    );
 
     if (users.isErr()) {
       console.error(users.error);

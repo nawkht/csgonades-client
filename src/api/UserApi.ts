@@ -40,11 +40,19 @@ export class UserApi {
     }
   };
 
-  static fetchUsers = async (token: string): AppResult<User[]> => {
+  static fetchUsers = async (
+    page: number,
+    limit: number,
+    sortByActivity: boolean,
+    token: string
+  ): AppResult<User[]> => {
     try {
-      const res = await axios.get(`${BASE_URL}/users`, {
-        headers: { Authorization: token }
-      });
+      const res = await axios.get(
+        `${BASE_URL}/users?page=${page}&limit=${limit}&sortActive=${sortByActivity}`,
+        {
+          headers: { Authorization: token }
+        }
+      );
       const users = res.data as User[];
       return ok(users);
     } catch (error) {
