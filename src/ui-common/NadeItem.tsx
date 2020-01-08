@@ -50,9 +50,11 @@ export const NadeItem: FC<Props> = ({ nade }) => {
               </div>
             )}
 
-            <div className="stat">
-              <span className="new-badge">NEW</span>
-            </div>
+            {isNew && (
+              <div className="stat">
+                <span className="new-badge">NEW</span>
+              </div>
+            )}
           </div>
         </a>
       </Link>
