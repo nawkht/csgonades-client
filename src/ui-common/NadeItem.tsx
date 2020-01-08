@@ -6,6 +6,7 @@ import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { tickrateString } from "../models/Nade/NadeTickrate";
 import Link from "next/link";
 import { iconFromType, kFormatter } from "../utils/Common";
+import { isLessThanDaysAgo } from "../utils/DateUtils";
 
 interface Props {
   nade: NadeLight;
@@ -17,6 +18,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
 
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
   const iconUrl = iconFromType(nade.type);
+  const isNew = isLessThanDaysAgo(nade.createdAt, 3);
 
   return (
     <>
@@ -38,6 +40,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
               <Icon name="eye" size="small" />
               <span className="icon-text">{kFormatter(nade.viewCount)}</span>
             </div>
+
             {nade.tickrate && nade.tickrate !== "any" && (
               <div className="stat tick">
                 <Icon name="code" size="small" />
@@ -46,6 +49,10 @@ export const NadeItem: FC<Props> = ({ nade }) => {
                 </span>
               </div>
             )}
+
+            <div className="stat">
+              <span className="new-badge">NEW</span>
+            </div>
           </div>
         </a>
       </Link>
@@ -105,15 +112,14 @@ export const NadeItem: FC<Props> = ({ nade }) => {
         .stats {
           display: flex;
           padding: 3px 6px 3px 9px;
-          justify-content: space-between;
           color: #444;
+          align-items: center;
         }
 
         .stat {
-          display: inline-flex;
           align-items: center;
           justify-content: center;
-          margin-right: 6px;
+          margin-right: 12px;
         }
 
         .stat .icon-text {
@@ -122,6 +128,14 @@ export const NadeItem: FC<Props> = ({ nade }) => {
 
         .tick {
           color: ${colors.PRIMARY};
+        }
+
+        .new-badge {
+          font-size: 0.6em;
+          border-radius: 4px;
+          padding: 3px;
+          border: 1px solid ${colors.SUCCESS};
+          color: ${colors.SUCCESS};
         }
 
         .video {

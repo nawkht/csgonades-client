@@ -7,3 +7,10 @@ export function dateFromNow(date: Date | string) {
 export function prettyDate(date: Date | string) {
   return moment(date).format("MMM Do YYYY");
 }
+
+export function isLessThanDaysAgo(date: Date | string, days: number) {
+  const daysToHours = days * 24;
+  let hoursAgo = moment().diff(moment(date), "hours", false);
+
+  return hoursAgo < daysToHours;
+}
