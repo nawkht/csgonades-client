@@ -1,4 +1,4 @@
-import { NadeLight, Nade } from "../../models/Nade/Nade";
+import { NadeLight, Nade, MapCoordinates } from "../../models/Nade/Nade";
 import { Dispatch } from "redux";
 import { NadeType } from "../../models/Nade/NadeType";
 import { SiteStats } from "../../api/StatsApi";
@@ -9,6 +9,11 @@ export type AddNadesForMapAction = {
   type: "@@nades/ADD_FOR_MAP";
   map: CsgoMap;
   nades: NadeLight[];
+};
+
+export type FilterByMapCoordinates = {
+  type: "@@nades/FILTER_BY_MAP_COORDINATES";
+  coords: MapCoordinates;
 };
 
 type AddRcentNadesAction = {
@@ -57,7 +62,8 @@ export type NadeActions =
   | FilterByNadeType
   | ResetNadeFilter
   | AddNadeError
-  | SetSortingNameAction;
+  | SetSortingNameAction
+  | FilterByMapCoordinates;
 
 export type SortingMethod = "name" | "date";
 
@@ -110,3 +116,10 @@ export const startLoadingNadeAction = (dispatch: Dispatch) => {
     type: "@@nades/START_LOADING"
   });
 };
+
+export const filterByMapCoordsAction = (
+  coords: MapCoordinates
+): FilterByMapCoordinates => ({
+  type: "@@nades/FILTER_BY_MAP_COORDINATES",
+  coords
+});

@@ -52,6 +52,7 @@ export type NadeLight = {
   createdAt: Date;
   viewCount: number;
   favoriteCount: number;
+  mapEndCoord?: MapCoordinates;
 };
 
 export type NadeBody = {

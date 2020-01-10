@@ -17,7 +17,7 @@ export const MapPage: FC<Props> = ({ map }) => {
 
   return (
     <Layout title={capitalize(map)}>
-      <NadeFilter />
+      <NadeFilter map={map} />
       <div className="nade-list">
         <NadeListGrid
           nades={nades}

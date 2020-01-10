@@ -3,7 +3,8 @@ import {
   NadeBody,
   NadeUpdateBody,
   NadeStatusDTO,
-  NadeLight
+  NadeLight,
+  MapCoordinates
 } from "../../models/Nade/Nade";
 import { useSelector, useDispatch } from "react-redux";
 import { userSelector } from "../AuthStore/AuthSelectors";
@@ -21,10 +22,16 @@ import {
 import {
   nadeFilterSelector,
   sortingMethodSelector,
-  nadesForMapSelector
+  nadesForMapSelector,
+  mapFilterCoordinateSelector
 } from "./NadeSelectors";
 import { NadeType } from "../../models/Nade/NadeType";
-import { SortingMethod, setSortingMethodAction } from "./NadeActions";
+import {
+  SortingMethod,
+  setSortingMethodAction,
+  filterByMapCoordsAction,
+  resetNadeFilterAction
+} from "./NadeActions";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { useMemo } from "react";
 import moment from "moment";
@@ -38,9 +45,14 @@ export const useNadeFilter = () => {
     dispatch(filterByNadeTypeThunk(nadeType));
   }
 
+  function reset() {
+    dispatch(resetNadeFilterAction());
+  }
+
   return {
     nadeFilter,
-    filterByType
+    filterByType,
+    reset
   };
 };
 
@@ -110,6 +122,20 @@ export const useUpdateNadeStatus = () => {
     dispatch(updateNadeStatusAction(nadeId, updates));
 };
 
+export const useFilterByCoords = () => {
+  const dispatch = useDispatch();
+
+  const coords = useSelector(mapFilterCoordinateSelector);
+
+  const filterByMapCoords = (coords: MapCoordinates) =>
+    dispatch(filterByMapCoordsAction(coords));
+
+  return {
+    coords,
+    filterByMapCoords
+  };
+};
+
 export const useNadesForMap = (map: CsgoMap) => {
   const nadesForMap = useSelector(nadesForMapSelector(map));
   const nadeFilter = useSelector(nadeFilterSelector);
@@ -118,11 +144,17 @@ export const useNadesForMap = (map: CsgoMap) => {
     if (!nadesForMap) {
       return [];
     }
+    let processedNades;
 
-    const sorted = sortNades(nadeFilter.sorthingMethod, nadesForMap);
-    const filtered = applyNadeFilter(nadeFilter, sorted);
+    processedNades = sortNades(nadeFilter.sorthingMethod, nadesForMap);
+    processedNades = applyNadeFilter(nadeFilter, processedNades);
 
-    return filtered;
+    if (nadeFilter.coords) {
+      console.log("Filtering by coords");
+      processedNades = nadesForCoords(processedNades, nadeFilter.coords);
+    }
+
+    return processedNades;
   }, [map, nadesForMap, nadeFilter]);
 
   return {
@@ -158,4 +190,21 @@ function applyNadeFilter(nadeFilter: NadeFilters, nades: NadeLight[]) {
   } else {
     return nades;
   }
+}
+
+function nadesForCoords(nades: NadeLight[], coords: MapCoordinates) {
+  const MIN_DISTANCE = 50;
+  return nades.filter(n => {
+    if (!n.mapEndCoord) {
+      return false;
+    }
+    const dist = Math.sqrt(
+      Math.pow(n.mapEndCoord.x - coords.x, 2) +
+        Math.pow(n.mapEndCoord.y - coords.y, 2)
+    );
+
+    if (dist < MIN_DISTANCE) {
+      return true;
+    }
+  });
 }

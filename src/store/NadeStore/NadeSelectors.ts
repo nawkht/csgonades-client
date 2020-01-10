@@ -12,6 +12,10 @@ export const nadesForMapSelector = (map: CsgoMap) => {
   };
 };
 
+export const mapFilterCoordinateSelector = (state: AppState) => {
+  return state.nadeStore.nadeFilter.coords;
+};
+
 export const nadesForMapTimeSinceFetchSelector = (map: CsgoMap) => {
   return (state: AppState) => {
     return state.nadeStore.nadesByMap[map]?.addedAt;

@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { NadeLight, Nade } from "../../models/Nade/Nade";
+import { NadeLight, Nade, MapCoordinates } from "../../models/Nade/Nade";
 import {
   NadeActions,
   FilterByNadeType,
@@ -16,6 +16,7 @@ export type NadeFilters = {
   hegrenade: boolean;
   molotov: boolean;
   sorthingMethod: SortingMethod;
+  coords?: MapCoordinates;
 };
 
 type MapNadeDate = {
@@ -54,6 +55,14 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
   switch (action.type) {
     case "@@nades/ADD_FOR_MAP":
       return handleAddNade(action, state);
+    case "@@nades/FILTER_BY_MAP_COORDINATES":
+      return {
+        ...state,
+        nadeFilter: {
+          ...state.nadeFilter,
+          coords: action.coords
+        }
+      };
     case "@@nades/add_selected":
       return {
         ...state,
