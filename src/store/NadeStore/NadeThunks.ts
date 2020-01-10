@@ -124,6 +124,7 @@ export const updateNadeAction = (
     const authToken = tokenSelector(getState());
 
     if (!authToken) {
+      console.error("Missing token");
       return;
     }
 

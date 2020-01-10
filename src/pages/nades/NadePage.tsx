@@ -12,6 +12,7 @@ import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { mapString } from "../../models/Nade/CsGoMap";
 import { nadeTypeString } from "../../models/Nade/NadeType";
 import { useTryShowFavoriteTooltip } from "../../store/NotificationStore/NotificationHooks";
+import { MapPositionEditor } from "./MapPositionEditor/MapPositionEditor";
 
 type Props = {
   nade: Nade;
@@ -42,6 +43,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         <div className="nade-aside">
           <NadeMetaPanel allowEdit={allowEdit} nade={nade} />
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+          <MapPositionEditor nade={nade} />
           <AdminEditor nade={nade} />
         </div>
       </div>

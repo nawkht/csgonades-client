@@ -12,6 +12,11 @@ export type Status = "pending" | "accepted" | "declined" | "deleted";
 
 export type StatusInfo = string;
 
+export type MapCoordinates = {
+  x: number;
+  y: number;
+};
+
 export type Nade = {
   id: string;
   title: string;
@@ -32,6 +37,7 @@ export type Nade = {
   mapSite?: MapSite;
   viewCount: number;
   favoriteCount: number;
+  mapEndCoord?: MapCoordinates;
 };
 
 export type NadeLight = {
@@ -67,6 +73,7 @@ export type NadeUpdateBody = {
   statusInfo?: StatusInfo;
   mapSite?: MapSite;
   createdAt?: Date;
+  mapEndCoord?: MapCoordinates;
 };
 
 export type NadeStatusDTO = {
