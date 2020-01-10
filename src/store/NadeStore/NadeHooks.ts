@@ -21,7 +21,6 @@ import {
 import {
   nadeFilterSelector,
   sortingMethodSelector,
-  nadesSelector,
   nadesForMapSelector
 } from "./NadeSelectors";
 import { NadeType } from "../../models/Nade/NadeType";

@@ -1,6 +1,11 @@
 import { Reducer } from "redux";
 import { NadeLight, Nade } from "../../models/Nade/Nade";
-import { NadeActions, FilterByNadeType, SortingMethod } from "./NadeActions";
+import {
+  NadeActions,
+  FilterByNadeType,
+  SortingMethod,
+  AddNadesForMapAction
+} from "./NadeActions";
 import { AppError } from "../../utils/ErrorUtil";
 import { assertNever } from "../../utils/Common";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
@@ -13,15 +18,20 @@ export type NadeFilters = {
   sorthingMethod: SortingMethod;
 };
 
-type NadesByMap = Partial<{ [map in CsgoMap]: NadeLight[] }>;
+type MapNadeDate = {
+  nades: NadeLight[];
+  addedAt: Date;
+};
+
+type NadesByMap = { [map in CsgoMap]?: MapNadeDate };
 
 export type NadeState = {
-  nadesByMap: NadesByMap;
-  recentNades: NadeLight[];
-  selectedNade?: Nade;
-  loadingNadesForMap: boolean;
-  nadeFilter: NadeFilters;
-  error?: AppError;
+  readonly nadesByMap: NadesByMap;
+  readonly recentNades: NadeLight[];
+  readonly selectedNade?: Nade;
+  readonly loadingNadesForMap: boolean;
+  readonly nadeFilter: NadeFilters;
+  readonly error?: AppError;
 };
 
 const initialState: NadeState = {
@@ -43,15 +53,7 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
 ): NadeState => {
   switch (action.type) {
     case "@@nades/ADD_FOR_MAP":
-      return {
-        ...state,
-        nadesByMap: {
-          ...state.nadesByMap,
-          [action.map]: action.nades
-        },
-        loadingNadesForMap: false,
-        error: undefined
-      };
+      return handleAddNade(action, state);
     case "@@nades/add_selected":
       return {
         ...state,
@@ -96,6 +98,23 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
       return state;
   }
 };
+
+function handleAddNade(
+  action: AddNadesForMapAction,
+  state: NadeState
+): NadeState {
+  const nadesByMap = { ...state.nadesByMap };
+  nadesByMap[action.map] = {
+    nades: action.nades,
+    addedAt: new Date()
+  };
+  return {
+    ...state,
+    nadesByMap,
+    loadingNadesForMap: false,
+    error: undefined
+  };
+}
 
 function handleFilterByType(
   action: FilterByNadeType,

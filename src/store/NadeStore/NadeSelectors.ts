@@ -8,7 +8,13 @@ export const nadesSelector = (state: AppState) => {
 
 export const nadesForMapSelector = (map: CsgoMap) => {
   return (state: AppState) => {
-    return state.nadeStore.nadesByMap[map];
+    return state.nadeStore.nadesByMap[map]?.nades;
+  };
+};
+
+export const nadesForMapTimeSinceFetchSelector = (map: CsgoMap) => {
+  return (state: AppState) => {
+    return state.nadeStore.nadesByMap[map]?.addedAt;
   };
 };
 

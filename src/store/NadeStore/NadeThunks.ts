@@ -19,6 +19,8 @@ import Router from "next/router";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { NadeType } from "../../models/Nade/NadeType";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { nadesForMapTimeSinceFetchSelector } from "./NadeSelectors";
+import moment from "moment";
 
 export const filterByNadeTypeThunk = (nadeType: NadeType): ReduxThunkAction => {
   return async dispatch => {
@@ -45,7 +47,25 @@ export const fetchNewestNadesAction = (limit?: number): ReduxThunkAction => {
 export const fetchNadesByMapActionThunk = (
   mapName: CsgoMap
 ): ReduxThunkAction => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const state = getState();
+
+    const timeSinceFetch = nadesForMapTimeSinceFetchSelector(mapName)(state);
+
+    const MAP_NADES_TTL_MINS = 15;
+    // Don't refetch if allready fetched
+    if (timeSinceFetch) {
+      const minutesSinceFetch = moment().diff(
+        moment(timeSinceFetch),
+        "minutes",
+        false
+      );
+
+      if (minutesSinceFetch < MAP_NADES_TTL_MINS) {
+        return;
+      }
+    }
+
     startLoadingNadeAction(dispatch);
 
     const nadesResult = await NadeApi.getByMap(mapName);

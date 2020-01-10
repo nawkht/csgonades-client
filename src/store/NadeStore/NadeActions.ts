@@ -5,7 +5,7 @@ import { SiteStats } from "../../api/StatsApi";
 import { AppError } from "../../utils/ErrorUtil";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 
-type AddNadesForMapAction = {
+export type AddNadesForMapAction = {
   type: "@@nades/ADD_FOR_MAP";
   map: CsgoMap;
   nades: NadeLight[];
