@@ -1,16 +1,16 @@
 import { SiteStats } from "../../api/StatsApi";
 
 type AddSiteStatsAction = {
-  type: "@@global/ADD_SITE_STATS";
-  stats: SiteStats;
+  readonly type: "@@global/ADD_SITE_STATS";
+  readonly stats: SiteStats;
 };
 
 type ToggleNavigation = {
-  type: "@@global/TOGGLE_NAVIGATION";
+  readonly type: "@@global/TOGGLE_NAVIGATION";
 };
 
 type CloseNavigation = {
-  type: "@@global/CLOSE_NAVIGATION";
+  readonly type: "@@global/CLOSE_NAVIGATION";
 };
 
 export type GlobalActions =
@@ -22,7 +22,6 @@ export const addSiteStatsActon = (stats: SiteStats): AddSiteStatsAction => ({
   type: "@@global/ADD_SITE_STATS",
   stats
 });
-
 export const toggleNavigationAction = (): ToggleNavigation => ({
   type: "@@global/TOGGLE_NAVIGATION"
 });

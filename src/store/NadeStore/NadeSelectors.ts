@@ -1,12 +1,19 @@
 import { AppState } from "..";
 import { useSelector } from "react-redux";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
 
 export const nadesSelector = (state: AppState) => {
-  return state.nadeStore.nadesForMap;
+  return state.nadeStore.nadesByMap;
+};
+
+export const nadesForMapSelector = (map: CsgoMap) => {
+  return (state: AppState) => {
+    return state.nadeStore.nadesByMap[map];
+  };
 };
 
 export const sortingMethodSelector = (state: AppState) => {
-  return state.nadeStore.sorthingMethod;
+  return state.nadeStore.nadeFilter.sorthingMethod;
 };
 
 export const recentNadesSelector = (state: AppState) => {
@@ -24,8 +31,9 @@ export const nadeErrorSelector = (state: AppState) => {
   return state.nadeStore.error;
 };
 
-export const nadeFilterSelector = (state: AppState) =>
-  state.nadeStore.nadeFilter;
+export const nadeFilterSelector = (state: AppState) => {
+  return state.nadeStore.nadeFilter;
+};
 
 export const useIsLoadingNade = () => {
   const isLoading = useSelector(nadeLoadingSelector);

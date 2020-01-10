@@ -8,7 +8,6 @@ import {
 import axios from "axios";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 import { ok } from "neverthrow";
-import { encodeQueryData } from "../utils/Common";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { GfycatData } from "../models/Nade/GfycatData";
 
@@ -16,21 +15,6 @@ const BASE_URL =
   process.env.NODE_ENV === "production"
     ? "https://api.csgonades.com"
     : "http://localhost:5000";
-
-export type NadeFilterOptions = {
-  smoke: boolean;
-  flash: boolean;
-  hegrenade: boolean;
-  molotov: boolean;
-};
-
-function nadeFilterToUrlParam(filter?: NadeFilterOptions) {
-  if (!filter) {
-    return "";
-  }
-
-  return "?" + encodeQueryData(filter);
-}
 
 export class NadeApi {
   static async getAll(): AppResult<NadeLight[]> {
@@ -57,16 +41,9 @@ export class NadeApi {
     }
   }
 
-  static async getByMap(
-    mapName: CsgoMap,
-    filter?: NadeFilterOptions
-  ): AppResult<NadeLight[]> {
+  static async getByMap(mapName: CsgoMap): AppResult<NadeLight[]> {
     try {
-      const filterQuery = nadeFilterToUrlParam(filter);
-
-      const res = await axios.get(
-        `${BASE_URL}/nades/map/${mapName}${filterQuery}`
-      );
+      const res = await axios.get(`${BASE_URL}/nades/map/${mapName}`);
       const nades = res.data as NadeLight[];
 
       return ok(nades);

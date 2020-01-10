@@ -3,9 +3,11 @@ import { Dispatch } from "redux";
 import { NadeType } from "../../models/Nade/NadeType";
 import { SiteStats } from "../../api/StatsApi";
 import { AppError } from "../../utils/ErrorUtil";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
 
-type AddNadesAction = {
-  type: "@@nades/add";
+type AddNadesForMapAction = {
+  type: "@@nades/ADD_FOR_MAP";
+  map: CsgoMap;
   nades: NadeLight[];
 };
 
@@ -21,10 +23,6 @@ type AddSelectedNadeAction = {
 
 type StartLoadingNadeAction = {
   type: "@@nades/START_LOADING";
-};
-
-type StopLoadingNadeAction = {
-  type: "@@nades/STOP_LOADING";
 };
 
 export type FilterByNadeType = {
@@ -52,11 +50,10 @@ export type SetSortingNameAction = {
 };
 
 export type NadeActions =
-  | AddNadesAction
+  | AddNadesForMapAction
   | AddRcentNadesAction
   | AddSelectedNadeAction
   | StartLoadingNadeAction
-  | StopLoadingNadeAction
   | FilterByNadeType
   | ResetNadeFilter
   | AddNadeError
@@ -83,8 +80,12 @@ export const addRecentNadesAction = (
   nades
 });
 
-export const addNadeAction = (nades: NadeLight[]) => ({
-  type: "@@nades/add",
+export const addNadesForMapAction = (
+  map: CsgoMap,
+  nades: NadeLight[]
+): AddNadesForMapAction => ({
+  type: "@@nades/ADD_FOR_MAP",
+  map,
   nades
 });
 
@@ -107,11 +108,5 @@ export const addSelectedNadeAction = (nade: Nade, dispatch: Dispatch) => {
 export const startLoadingNadeAction = (dispatch: Dispatch) => {
   dispatch({
     type: "@@nades/START_LOADING"
-  });
-};
-
-export const stopLoadingNadeAction = (dispatch: Dispatch) => {
-  dispatch({
-    type: "@@nades/STOP_LOADING"
   });
 };

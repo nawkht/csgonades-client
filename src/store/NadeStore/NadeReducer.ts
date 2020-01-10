@@ -1,32 +1,39 @@
 import { Reducer } from "redux";
 import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { NadeActions, FilterByNadeType, SortingMethod } from "./NadeActions";
-import { NadeFilterOptions } from "../../api/NadeApi";
-import { SiteStats } from "../../api/StatsApi";
 import { AppError } from "../../utils/ErrorUtil";
-import moment from "moment";
 import { assertNever } from "../../utils/Common";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
+
+export type NadeFilters = {
+  smoke: boolean;
+  flash: boolean;
+  hegrenade: boolean;
+  molotov: boolean;
+  sorthingMethod: SortingMethod;
+};
+
+type NadesByMap = Partial<{ [map in CsgoMap]: NadeLight[] }>;
 
 export type NadeState = {
-  sorthingMethod: SortingMethod;
-  nadesForMap: NadeLight[];
+  nadesByMap: NadesByMap;
   recentNades: NadeLight[];
   selectedNade?: Nade;
   loadingNadesForMap: boolean;
-  nadeFilter: NadeFilterOptions;
+  nadeFilter: NadeFilters;
   error?: AppError;
 };
 
 const initialState: NadeState = {
-  sorthingMethod: "date",
-  nadesForMap: [],
+  nadesByMap: {},
   recentNades: [],
   loadingNadesForMap: false,
   nadeFilter: {
     flash: false,
     hegrenade: false,
     molotov: false,
-    smoke: false
+    smoke: false,
+    sorthingMethod: "date"
   }
 };
 
@@ -35,10 +42,14 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
   action
 ): NadeState => {
   switch (action.type) {
-    case "@@nades/add":
+    case "@@nades/ADD_FOR_MAP":
       return {
         ...state,
-        nadesForMap: sortNades(state.sorthingMethod, action.nades),
+        nadesByMap: {
+          ...state.nadesByMap,
+          [action.map]: action.nades
+        },
+        loadingNadesForMap: false,
         error: undefined
       };
     case "@@nades/add_selected":
@@ -52,11 +63,6 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         loadingNadesForMap: true,
         error: undefined
-      };
-    case "@@nades/STOP_LOADING":
-      return {
-        ...state,
-        loadingNadesForMap: false
       };
     case "@@nades/FILTER_BY_TYPE":
       return handleFilterByType(action, state);
@@ -78,11 +84,12 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         error: action.error
       };
     case "@@nades/SET_SORTING_METHOD":
-      const sortedNades = sortNades(action.sortingMethod, state.nadesForMap);
       return {
         ...state,
-        sorthingMethod: action.sortingMethod,
-        nadesForMap: sortedNades
+        nadeFilter: {
+          ...state.nadeFilter,
+          sorthingMethod: action.sortingMethod
+        }
       };
     default:
       assertNever(action);
@@ -105,6 +112,7 @@ function handleFilterByType(
     return {
       ...prevState,
       nadeFilter: {
+        ...prevState.nadeFilter,
         flash: false,
         hegrenade: false,
         molotov: false,
@@ -115,23 +123,10 @@ function handleFilterByType(
     defaults[action.nadeType] = true;
     return {
       ...prevState,
-      nadeFilter: defaults
+      nadeFilter: {
+        ...prevState.nadeFilter,
+        ...defaults
+      }
     };
-  }
-}
-
-function sortNades(method: SortingMethod, nades: NadeLight[]) {
-  const nadeCopy = [...nades];
-  switch (method) {
-    case "name":
-      nadeCopy.sort((a, b) => {
-        return (a.title || "").localeCompare(b.title || "");
-      });
-      return nadeCopy;
-    default:
-      nadeCopy.sort((a, b) => {
-        return moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf();
-      });
-      return nadeCopy;
   }
 }

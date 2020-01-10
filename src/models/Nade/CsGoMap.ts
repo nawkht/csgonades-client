@@ -11,6 +11,7 @@ const CsGoMaps = {
 };
 
 export type CsgoMap = keyof typeof CsGoMaps;
+export type CsgoMapKeys = keyof typeof CsGoMaps | undefined;
 
 export function nadeMapOptions() {
   let options = [];

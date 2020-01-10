@@ -5,30 +5,26 @@ import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeSorter } from "./NadeSorter";
 
-type Props = {
-  map: CsgoMap;
-};
-
-export const NadeFilter: FC<Props> = ({ map }) => {
+export const NadeFilter: FC = () => {
   const { colors, uiDimensions } = useTheme();
   const { filterByType, nadeFilter } = useNadeFilter();
 
   const { flash, hegrenade, molotov, smoke } = nadeFilter;
 
   function onSmokeClick() {
-    filterByType("smoke", map);
+    filterByType("smoke");
   }
 
   function onFlashClick() {
-    filterByType("flash", map);
+    filterByType("flash");
   }
 
   function onMolotovClick() {
-    filterByType("molotov", map);
+    filterByType("molotov");
   }
 
   function onHeGrenadeClick() {
-    filterByType("hegrenade", map);
+    filterByType("hegrenade");
   }
 
   return (

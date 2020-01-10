@@ -2,7 +2,8 @@ import {
   Nade,
   NadeBody,
   NadeUpdateBody,
-  NadeStatusDTO
+  NadeStatusDTO,
+  NadeLight
 } from "../../models/Nade/Nade";
 import { useSelector, useDispatch } from "react-redux";
 import { userSelector } from "../AuthStore/AuthSelectors";
@@ -17,17 +18,25 @@ import {
   updateNadeStatusAction,
   filterByNadeTypeThunk
 } from "./NadeThunks";
-import { nadeFilterSelector, sortingMethodSelector } from "./NadeSelectors";
+import {
+  nadeFilterSelector,
+  sortingMethodSelector,
+  nadesSelector,
+  nadesForMapSelector
+} from "./NadeSelectors";
 import { NadeType } from "../../models/Nade/NadeType";
 import { SortingMethod, setSortingMethodAction } from "./NadeActions";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { useMemo } from "react";
+import moment from "moment";
+import { NadeFilters } from "./NadeReducer";
 
 export const useNadeFilter = () => {
   const dispatch = useDispatch();
   const nadeFilter = useSelector(nadeFilterSelector);
 
-  function filterByType(nadeType: NadeType, map: CsgoMap) {
-    dispatch(filterByNadeTypeThunk(map, nadeType));
+  function filterByType(nadeType: NadeType) {
+    dispatch(filterByNadeTypeThunk(nadeType));
   }
 
   return {
@@ -101,3 +110,53 @@ export const useUpdateNadeStatus = () => {
   return (nadeId: string, updates: NadeStatusDTO) =>
     dispatch(updateNadeStatusAction(nadeId, updates));
 };
+
+export const useNadesForMap = (map: CsgoMap) => {
+  const nadesForMap = useSelector(nadesForMapSelector(map));
+  const nadeFilter = useSelector(nadeFilterSelector);
+
+  const nades = useMemo(() => {
+    if (!nadesForMap) {
+      return [];
+    }
+
+    const sorted = sortNades(nadeFilter.sorthingMethod, nadesForMap);
+    const filtered = applyNadeFilter(nadeFilter, sorted);
+
+    return filtered;
+  }, [map, nadesForMap, nadeFilter]);
+
+  return {
+    nades
+  };
+};
+
+function sortNades(method: SortingMethod, nades: NadeLight[]) {
+  const nadeCopy = [...nades];
+  switch (method) {
+    case "name":
+      nadeCopy.sort((a, b) => {
+        return (a.title || "").localeCompare(b.title || "");
+      });
+      return nadeCopy;
+    default:
+      nadeCopy.sort((a, b) => {
+        return moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf();
+      });
+      return nadeCopy;
+  }
+}
+
+function applyNadeFilter(nadeFilter: NadeFilters, nades: NadeLight[]) {
+  if (nadeFilter.flash) {
+    return nades.filter(n => n.type === "flash");
+  } else if (nadeFilter.smoke) {
+    return nades.filter(n => n.type === "smoke");
+  } else if (nadeFilter.molotov) {
+    return nades.filter(n => n.type === "molotov");
+  } else if (nadeFilter.hegrenade) {
+    return nades.filter(n => n.type === "hegrenade");
+  } else {
+    return nades;
+  }
+}

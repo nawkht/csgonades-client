@@ -4,8 +4,8 @@ import { GlobalActions } from "./GlobalActions";
 import { assertNever } from "../../utils/Common";
 
 export type GlobalState = {
-  stats: SiteStats;
-  isNavOpen: boolean;
+  readonly stats: SiteStats;
+  readonly isNavOpen: boolean;
 };
 
 const initialState: GlobalState = {

@@ -4,9 +4,8 @@ import { NadeFilter } from "./NadeFilter";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";
-import { useSelector } from "react-redux";
-import { nadesSelector } from "../../store/NadeStore/NadeSelectors";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
+import { useNadesForMap } from "../../store/NadeStore/NadeHooks";
 
 type Props = {
   map: CsgoMap;
@@ -14,11 +13,11 @@ type Props = {
 
 export const MapPage: FC<Props> = ({ map }) => {
   const { uiDimensions } = useTheme();
-  const nades = useSelector(nadesSelector);
+  const { nades } = useNadesForMap(map);
 
   return (
     <Layout title={capitalize(map)}>
-      <NadeFilter map={map} />
+      <NadeFilter />
       <div className="nade-list">
         <NadeListGrid
           nades={nades}
