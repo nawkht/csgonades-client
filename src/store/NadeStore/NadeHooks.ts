@@ -136,6 +136,30 @@ export const useFilterByCoords = () => {
   };
 };
 
+type Coords = {
+  key: string;
+  pos: MapCoordinates;
+};
+
+export const useCoordsForMap = (map: CsgoMap): Coords[] => {
+  const nadesForMap = useSelector(nadesForMapSelector(map));
+  if (!nadesForMap) {
+    return [];
+  }
+
+  const tmp = nadesForMap.map(n => ({ pos: n.mapEndCoord, key: n.id }));
+  let coords: Coords[] = [];
+  for (let n of tmp) {
+    if (n.pos) {
+      coords.push({
+        key: n.key,
+        pos: n.pos
+      });
+    }
+  }
+  return coords;
+};
+
 export const useNadesForMap = (map: CsgoMap) => {
   const nadesForMap = useSelector(nadesForMapSelector(map));
   const nadeFilter = useSelector(nadeFilterSelector);

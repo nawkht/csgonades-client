@@ -1,8 +1,17 @@
-import { FC, useState, useRef, useEffect, MouseEvent, useMemo } from "react";
+import {
+  FC,
+  useState,
+  useRef,
+  useEffect,
+  MouseEvent,
+  useMemo,
+  SyntheticEvent
+} from "react";
 import { MapCoordinates } from "../../models/Nade/Nade";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { Icon } from "semantic-ui-react";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { useCoordsForMap } from "../../store/NadeStore/NadeHooks";
 
 type Props = {
   onDismiss: () => void;
@@ -12,8 +21,21 @@ type Props = {
 
 export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const rawCoords = useCoordsForMap(map);
   const [elementOffset, setElementOffset] = useState({ left: 0, top: 0 });
   const [mapWidth, setMapWidth] = useState(0);
+
+  const coords = useMemo(() => {
+    const sizeRatio = 1024 / mapWidth;
+    const relativeCoords = rawCoords.map(c => ({
+      key: c.key,
+      pos: {
+        x: c.pos.x / sizeRatio,
+        y: c.pos.y / sizeRatio
+      }
+    }));
+    return relativeCoords;
+  }, [rawCoords, mapWidth]);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -50,12 +72,23 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
     });
   }
 
+  function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
+    console.log("> On image loaded");
+    if (ref.current) {
+      setElementOffset({
+        top: ref.current.offsetTop,
+        left: ref.current.offsetLeft
+      });
+      setMapWidth(ref.current.offsetWidth);
+    }
+  }
+
   return (
     <>
       <div className="position-modal">
         <div className="position-content">
           <div className="position-title">
-            CLICK ON THE MAP TO FIND NADES AT THE LOCATION{" "}
+            CLICK ON THE MAP TO FIND NADES AT THE LOCATION
             <span onClick={onDismiss}>
               <Icon name="cancel" />
             </span>
@@ -64,8 +97,16 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
             <img
               src={`/mapsoverlays/${map}.jpg`}
               alt="CSGO Nades logo"
+              onLoad={onImageLoad}
               onClick={onMapClick}
             />
+            {coords.map(c => (
+              <div
+                key={c.key}
+                className="point"
+                style={{ top: c.pos.y - 5, left: c.pos.x - 5 }}
+              ></div>
+            ))}
           </div>
         </div>
       </div>
@@ -107,16 +148,13 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
           border-radius: 50%;
           background: #bdeb34;
           border: 1px solid black;
+          pointer-events: none;
         }
 
         .position-content img {
           display: block;
           max-height: 70vh;
           max-width: 100%;
-        }
-
-        .btns {
-          display: flex;
         }
       `}</style>
     </>
