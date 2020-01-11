@@ -5,9 +5,9 @@ import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { NadeSorter } from "./NadeSorter";
 import { MapPositionFilter } from "./MapPositionFilter";
-import { Button, Icon } from "semantic-ui-react";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 import { NadeFilterResetButton } from "./NadeFilterResetButton";
+import { isMobile } from "react-device-detect";
 
 type Props = {
   map: CsgoMap;
@@ -43,7 +43,9 @@ export const NadeFilter: FC<Props> = ({ map }) => {
   return (
     <>
       <div className="nade-filter-container">
-        <MapPositionFilter map={map} />
+        <div className="nade-filter-pos">
+          <MapPositionFilter map={map} />
+        </div>
 
         <div className="nade-filter">
           <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
@@ -92,6 +94,14 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           .nade-filter-container {
             padding-left: 12px;
             padding-right: 12px;
+          }
+
+          .nade-sorter {
+            display: none;
+          }
+
+          .nade-filter-pos {
+            display: none;
           }
         }
       `}</style>
