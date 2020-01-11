@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Layout } from "../../ui-common/layout/layout";
-import { NadeFilter } from "./NadeFilter";
+import { NadeFilter } from "./NadeFilter/NadeFilter";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";

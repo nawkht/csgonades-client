@@ -40,6 +40,24 @@ import { NadeFilters } from "./NadeReducer";
 export const useNadeFilter = () => {
   const dispatch = useDispatch();
   const nadeFilter = useSelector(nadeFilterSelector);
+  const sortingMethod = useSelector(sortingMethodSelector);
+  const coords = useSelector(mapFilterCoordinateSelector);
+
+  const canReset = useMemo(() => {
+    const hasCoords = !coords;
+    const isSortingByDate = sortingMethod === "date";
+    const isDefaultTypeFilter =
+      !nadeFilter.flash &&
+      !nadeFilter.hegrenade &&
+      !nadeFilter.molotov &&
+      !nadeFilter.smoke;
+
+    if (!isDefaultTypeFilter || !hasCoords || !isSortingByDate) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [coords, sortingMethod, nadeFilter]);
 
   function filterByType(nadeType: NadeType) {
     dispatch(filterByNadeTypeThunk(nadeType));
@@ -49,24 +67,24 @@ export const useNadeFilter = () => {
     dispatch(resetNadeFilterAction());
   }
 
+  function setSortingMethod(method: SortingMethod) {
+    GoogleAnalytics.event("Nade filter", `Sort by ${method}`);
+    dispatch(setSortingMethodAction(method));
+  }
+
+  function filterByMapCoords(coords: MapCoordinates) {
+    dispatch(filterByMapCoordsAction(coords));
+  }
+
   return {
     nadeFilter,
     filterByType,
-    reset
-  };
-};
-
-export const useSortingMethod = () => {
-  const dispatch = useDispatch();
-  const sortingMethod = useSelector(sortingMethodSelector);
-
-  const setSortingMethod = (method: SortingMethod) => {
-    GoogleAnalytics.event("Nade filter", `Sort by ${method}`);
-    dispatch(setSortingMethodAction(method));
-  };
-  return {
+    canReset,
+    reset,
+    setSortingMethod,
     sortingMethod,
-    setSortingMethod
+    filterByMapCoords,
+    coords
   };
 };
 
@@ -120,25 +138,6 @@ export const useUpdateNadeStatus = () => {
   const dispatch = useDispatch();
   return (nadeId: string, updates: NadeStatusDTO) =>
     dispatch(updateNadeStatusAction(nadeId, updates));
-};
-
-export const useFilterByCoords = () => {
-  const dispatch = useDispatch();
-
-  const coords = useSelector(mapFilterCoordinateSelector);
-
-  const filterByMapCoords = (coords: MapCoordinates) =>
-    dispatch(filterByMapCoordsAction(coords));
-
-  return {
-    coords,
-    filterByMapCoords
-  };
-};
-
-type Coords = {
-  key: string;
-  pos: MapCoordinates;
 };
 
 export const useNadesForMap = (map: CsgoMap) => {

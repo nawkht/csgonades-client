@@ -1,17 +1,9 @@
-import {
-  FC,
-  useState,
-  useRef,
-  useEffect,
-  MouseEvent,
-  useMemo,
-  SyntheticEvent
-} from "react";
-import { MapCoordinates } from "../../models/Nade/Nade";
-import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { FC, useState, useRef, MouseEvent, SyntheticEvent } from "react";
+import { MapCoordinates } from "../../../models/Nade/Nade";
+import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { Icon } from "semantic-ui-react";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { useRawNadesForMap } from "../../store/NadeStore/NadeHooks";
+import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
+import { useRawNadesForMap } from "../../../store/NadeStore/NadeHooks";
 import { MapPosIcon } from "./MapPosIcon";
 
 type Props = {
@@ -22,22 +14,10 @@ type Props = {
 
 export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [mapLoaded, setMapLoade] = useState(false);
   const { nades } = useRawNadesForMap(map);
   const [elementOffset, setElementOffset] = useState({ left: 0, top: 0 });
   const [mapWidth, setMapWidth] = useState(0);
-
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      if (ref.current) {
-        setElementOffset({
-          top: ref.current.offsetTop,
-          left: ref.current.offsetLeft
-        });
-        setMapWidth(ref.current.offsetWidth);
-      }
-    }, 500);
-    return () => clearTimeout(delay);
-  }, []);
 
   function onMapClick(event: MouseEvent<HTMLImageElement>) {
     const { left, top } = elementOffset;
@@ -68,6 +48,7 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
         left: ref.current.offsetLeft
       });
       setMapWidth(ref.current.offsetWidth);
+      setMapLoade(true);
     }
   }
 
@@ -88,9 +69,10 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
               onLoad={onImageLoad}
               onClick={onMapClick}
             />
-            {nades.map(n => (
-              <MapPosIcon key={n.id} nade={n} mapWidth={mapWidth} />
-            ))}
+            {mapLoaded &&
+              nades.map(n => (
+                <MapPosIcon key={n.id} nade={n} mapWidth={mapWidth} />
+              ))}
           </div>
         </div>
       </div>
@@ -129,7 +111,7 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
 
         .position-content img {
           display: block;
-          max-height: 70vh;
+          max-height: 80vh;
           max-width: 100%;
           cursor: pointer;
         }

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Popup } from "semantic-ui-react";
-import { NadeType, nadeTypeString } from "../../models/Nade/NadeType";
-import { iconFromType } from "../../utils/Common";
+import { NadeType, nadeTypeString } from "../../../models/Nade/NadeType";
+import { iconFromType } from "../../../utils/Common";
 
 type Props = {
   active: boolean;
@@ -17,28 +17,24 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
   return (
     <>
       <div className={className} onClick={onClick}>
-        <Popup
-          size="mini"
-          inverted
-          content={nadeTypeString(type)}
-          style={{ padding: 6 }}
-          offset="0, 6px"
-          position="bottom center"
-          trigger={<div className="icon" />}
-        />
+        <div className="icon" />
       </div>
       <style jsx>{`
         .type-toggler {
           padding: 6px;
           display: flex;
           align-items: center;
-          opacity: 0.3;
           cursor: pointer;
-          transition: opacity 0.3s;
+          background: #e0e1e2;
+          transition: background 0.2s;
+        }
+
+        .type-toggler:hover {
+          background: #c0c1c2;
         }
 
         .type-toggler.active {
-          opacity: 1;
+          background: #c0c1c2;
         }
 
         .icon {

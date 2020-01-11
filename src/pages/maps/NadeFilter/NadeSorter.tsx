@@ -1,26 +1,25 @@
-import { useSortingMethod } from "../../store/NadeStore/NadeHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { Dropdown } from "semantic-ui-react";
+import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 
 export const NadeSorter = () => {
   const { colors, uiDimensions } = useTheme();
-  const { sortingMethod, setSortingMethod } = useSortingMethod();
+  const { sortingMethod, setSortingMethod } = useNadeFilter();
 
   return (
     <>
       <div className="nade-sorter">
-        <span>Sort by</span>
         <Dropdown
           inline
           options={[
             {
               key: "date",
-              text: "Date",
+              text: "By Date",
               value: "date"
             },
             {
               key: "name",
-              text: "Name",
+              text: "By Name",
               value: "name"
             }
           ]}
@@ -36,11 +35,9 @@ export const NadeSorter = () => {
         .nade-sorter {
           display: flex;
           padding: 12px 18px;
-          background: white;
-          border: 1px solid ${colors.PRIMARY_BORDER};
-          border-top: none;
-          border-bottom-left-radius: ${uiDimensions.BORDER_RADIUS};
-          border-bottom-right-radius: ${uiDimensions.BORDER_RADIUS};
+          background: #e0e1e2;
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
         }
 
         .nade-sorter span {
@@ -54,7 +51,6 @@ export const NadeSorter = () => {
           display: flex;
           padding: 12px;
           border-right: 1px solid ${colors.PRIMARY_BORDER};
-          background: white;
           opacity: 0.5;
         }
 

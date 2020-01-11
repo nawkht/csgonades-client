@@ -1,22 +1,20 @@
 import { FC } from "react";
 import { TypeToggler } from "./TypeToggler";
-import {
-  useNadeFilter,
-  useFilterByCoords
-} from "../../store/NadeStore/NadeHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { NadeSorter } from "./NadeSorter";
 import { MapPositionFilter } from "./MapPositionFilter";
 import { Button, Icon } from "semantic-ui-react";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
+import { NadeFilterResetButton } from "./NadeFilterResetButton";
 
 type Props = {
   map: CsgoMap;
 };
 
 export const NadeFilter: FC<Props> = ({ map }) => {
-  const { colors, uiDimensions } = useTheme();
+  const { uiDimensions } = useTheme();
   const { filterByType, nadeFilter, reset } = useNadeFilter();
 
   const { flash, hegrenade, molotov, smoke } = nadeFilter;
@@ -45,9 +43,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
   return (
     <>
       <div className="nade-filter-container">
-        <div className="nade-position-filter">
-          <MapPositionFilter map={map} />
-        </div>
+        <MapPositionFilter map={map} />
 
         <div className="nade-filter">
           <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
@@ -68,10 +64,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           <NadeSorter />
         </div>
 
-        <div className="reset" onClick={onReset}>
-          <span>CLEAR</span>
-          <Icon name="undo" />
-        </div>
+        <NadeFilterResetButton />
       </div>
       <style jsx>{`
         .nade-filter-container {
@@ -84,44 +77,15 @@ export const NadeFilter: FC<Props> = ({ map }) => {
         }
 
         .nade-filter {
-          background: white;
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
-          border-left: 1px solid ${colors.PRIMARY_BORDER};
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
           display: flex;
-          margin-right: 18px;
-        }
-
-        .nade-position-filter {
-          background: white;
-          border-bottom-left-radius: 3px;
-          border-bottom-right-radius: 3px;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
-          border-left: 1px solid ${colors.PRIMARY_BORDER};
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
-        }
-
-        .reset {
-          padding: 12px;
-          background: white;
-          border-bottom-left-radius: 3px;
-          border-bottom-right-radius: 3px;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
-          border-left: 1px solid ${colors.PRIMARY_BORDER};
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
-          cursor: pointer;
-        }
-
-        .reset span {
-          margin-right: 6px;
+          overflow: hidden;
         }
 
         .nade-sorter,
-        .nade-position-filter,
         .nade-filter {
-          margin-right: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          margin-right: 6px;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
