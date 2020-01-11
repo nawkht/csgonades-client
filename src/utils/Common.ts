@@ -36,7 +36,7 @@ export function iconFromType(type?: NadeType) {
     case "flash":
       return "/icons/grenades/flash.png";
     case "hegrenade":
-      return "/icons/grenades/grenade.png";
+      return "/icons/grenades/hegrenade.png";
     case "molotov":
       return "/icons/grenades/molotov.png";
     case "smoke":

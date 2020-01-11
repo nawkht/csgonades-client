@@ -11,7 +11,8 @@ import { MapCoordinates } from "../../models/Nade/Nade";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { Icon } from "semantic-ui-react";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { useCoordsForMap } from "../../store/NadeStore/NadeHooks";
+import { useRawNadesForMap } from "../../store/NadeStore/NadeHooks";
+import { MapPosIcon } from "./MapPosIcon";
 
 type Props = {
   onDismiss: () => void;
@@ -21,21 +22,9 @@ type Props = {
 
 export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const rawCoords = useCoordsForMap(map);
+  const { nades } = useRawNadesForMap(map);
   const [elementOffset, setElementOffset] = useState({ left: 0, top: 0 });
   const [mapWidth, setMapWidth] = useState(0);
-
-  const coords = useMemo(() => {
-    const sizeRatio = 1024 / mapWidth;
-    const relativeCoords = rawCoords.map(c => ({
-      key: c.key,
-      pos: {
-        x: c.pos.x / sizeRatio,
-        y: c.pos.y / sizeRatio
-      }
-    }));
-    return relativeCoords;
-  }, [rawCoords, mapWidth]);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -73,7 +62,6 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
   }
 
   function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
-    console.log("> On image loaded");
     if (ref.current) {
       setElementOffset({
         top: ref.current.offsetTop,
@@ -100,12 +88,8 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
               onLoad={onImageLoad}
               onClick={onMapClick}
             />
-            {coords.map(c => (
-              <div
-                key={c.key}
-                className="point"
-                style={{ top: c.pos.y - 5, left: c.pos.x - 5 }}
-              ></div>
+            {nades.map(n => (
+              <MapPosIcon key={n.id} nade={n} mapWidth={mapWidth} />
             ))}
           </div>
         </div>
@@ -143,20 +127,11 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
           position: relative;
         }
 
-        .point {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: #bdeb34;
-          border: 1px solid black;
-          pointer-events: none;
-        }
-
         .position-content img {
           display: block;
           max-height: 70vh;
           max-width: 100%;
+          cursor: pointer;
         }
       `}</style>
     </>

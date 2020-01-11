@@ -141,25 +141,6 @@ type Coords = {
   pos: MapCoordinates;
 };
 
-export const useCoordsForMap = (map: CsgoMap): Coords[] => {
-  const nadesForMap = useSelector(nadesForMapSelector(map));
-  if (!nadesForMap) {
-    return [];
-  }
-
-  const tmp = nadesForMap.map(n => ({ pos: n.mapEndCoord, key: n.id }));
-  let coords: Coords[] = [];
-  for (let n of tmp) {
-    if (n.pos) {
-      coords.push({
-        key: n.key,
-        pos: n.pos
-      });
-    }
-  }
-  return coords;
-};
-
 export const useNadesForMap = (map: CsgoMap) => {
   const nadesForMap = useSelector(nadesForMapSelector(map));
   const nadeFilter = useSelector(nadeFilterSelector);
@@ -174,12 +155,25 @@ export const useNadesForMap = (map: CsgoMap) => {
     processedNades = applyNadeFilter(nadeFilter, processedNades);
 
     if (nadeFilter.coords) {
-      console.log("Filtering by coords");
       processedNades = nadesForCoords(processedNades, nadeFilter.coords);
     }
 
     return processedNades;
   }, [map, nadesForMap, nadeFilter]);
+
+  return {
+    nades
+  };
+};
+
+export const useRawNadesForMap = (map: CsgoMap) => {
+  const nades = useSelector(nadesForMapSelector(map));
+
+  if (!nades) {
+    return {
+      nades: []
+    };
+  }
 
   return {
     nades
@@ -217,7 +211,7 @@ function applyNadeFilter(nadeFilter: NadeFilters, nades: NadeLight[]) {
 }
 
 function nadesForCoords(nades: NadeLight[], coords: MapCoordinates) {
-  const MIN_DISTANCE = 50;
+  const MIN_DISTANCE = 20;
   return nades.filter(n => {
     if (!n.mapEndCoord) {
       return false;
