@@ -28,13 +28,17 @@ export const NadeFilterResetButton: FC = () => {
 
         .reset {
           padding: 12px;
-          background: #e0e1e2;
+          background: #db2828;
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
           cursor: pointer;
+          color: white;
+          transition: all 0.2s;
         }
 
         .disabled {
+          color: black;
+          background: #e0e1e2;
           opacity: 0.45;
           cursor: not-allowed;
         }
