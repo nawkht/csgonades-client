@@ -85,10 +85,10 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
 
   return (
     <>
-      <div className="position-modal">
+      <div className="position-modal" onClick={onDismiss}>
         <div className="position-content">
           <div className="position-title">
-            CLICK ON THE MAP TO FIND NADES AT THE LOCATION
+            <span>CLICK ON THE MAP TO FIND NADES AT THE LOCATION</span>
             <span onClick={onDismiss}>
               <Icon name="cancel" />
             </span>
@@ -129,12 +129,14 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
           display: block;
           background: white;
           border-radius: 4px;
+          overflow: hidden;
         }
 
         .position-title {
           padding: 12px;
-          font-size: 1.3em;
-          text-align: center;
+          font-size: 1.1em;
+          display: flex;
+          justify-content: space-between;
         }
 
         .map-image {
