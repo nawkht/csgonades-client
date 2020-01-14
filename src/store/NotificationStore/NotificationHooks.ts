@@ -57,7 +57,7 @@ export const useTryShowCoordTip = () => {
       clearTimeout(startShowTimer);
       clearTimeout(stopShowTimer);
     };
-  }, []);
+  }, [hasSeen]);
 
   return { displayCoordsTip, onCloseCoordsTip };
 };

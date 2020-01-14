@@ -55,7 +55,7 @@ export const NotificationReducer: Reducer<
 const persistConfig: PersistConfig<NotificationState> = {
   key: "notificationReducer",
   storage,
-  whitelist: ["seenFavoriteTip"]
+  whitelist: ["seenFavoriteTip", "seenCoordinateTip"]
 };
 
 export const PersistedNotificationReducer = persistReducer(
