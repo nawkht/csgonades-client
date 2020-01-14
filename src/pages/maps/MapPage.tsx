@@ -30,13 +30,14 @@ export const MapPage: FC<Props> = ({ map }) => {
         .nade-list {
           margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           margin-left: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          margin-top: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin-top: ${uiDimensions.OUTER_GUTTER_SIZE * 2}px;
           min-height: 100%;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
           .nade-list {
             margin: 0;
+            margin-top: ${uiDimensions.INNER_GUTTER_SIZE * 2.5}px;
           }
         }
       `}</style>

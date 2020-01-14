@@ -36,39 +36,56 @@ export const NadeFilter: FC<Props> = ({ map }) => {
   return (
     <>
       <div className="nade-filter-container">
-        <div className="nade-filter-pos">
-          <MapPositionFilter map={map} />
-        </div>
+        <div className="nade-filter-bg">
+          <div className="main-filters">
+            <div className="nade-filter-pos">
+              <MapPositionFilter map={map} />
+            </div>
 
-        <div className="nade-filter">
-          <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
-          <TypeToggler active={flash} type="flash" onClick={onFlashClick} />
-          <TypeToggler
-            active={molotov}
-            type="molotov"
-            onClick={onMolotovClick}
-          />
-          <TypeToggler
-            active={hegrenade}
-            type="hegrenade"
-            onClick={onHeGrenadeClick}
-          />
-        </div>
+            <div className="nade-filter">
+              <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
+              <TypeToggler active={flash} type="flash" onClick={onFlashClick} />
+              <TypeToggler
+                active={molotov}
+                type="molotov"
+                onClick={onMolotovClick}
+              />
+              <TypeToggler
+                active={hegrenade}
+                type="hegrenade"
+                onClick={onHeGrenadeClick}
+              />
+            </div>
 
-        <div className="nade-sorter">
-          <NadeSorter />
-        </div>
+            <div className="nade-sorter">
+              <NadeSorter />
+            </div>
+          </div>
 
-        <NadeFilterResetButton />
+          <NadeFilterResetButton />
+        </div>
       </div>
       <style jsx>{`
         .nade-filter-container {
+          position: fixed;
+          top: ${uiDimensions.HEADER_HEIGHT}px;
+          left: ${uiDimensions.SIDEBAR_WIDTH}px;
+          right: 0;
+          z-index: 999;
+        }
+
+        .nade-filter-bg {
           display: flex;
           flex-direction: row;
-          z-index: 999;
-          padding-left: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          padding-right: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          flex-wrap: wrap;
+          margin-left: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin-right: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+        }
+
+        .main-filters {
+          display: flex;
+          background: rgba(242, 242, 242, 0.9);
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
         }
 
         .nade-filter {
@@ -78,7 +95,6 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           overflow: hidden;
         }
 
-        .nade-sorter,
         .nade-filter {
           margin-right: 6px;
         }
@@ -87,6 +103,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           .nade-filter-container {
             padding-left: 12px;
             padding-right: 12px;
+            left: 0;
           }
 
           .nade-sorter {
@@ -95,6 +112,10 @@ export const NadeFilter: FC<Props> = ({ map }) => {
 
           .nade-filter-pos {
             display: none;
+          }
+
+          .nade-filter {
+            margin-right: 0;
           }
         }
       `}</style>
