@@ -4,20 +4,21 @@ import { persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { assertNever } from "../../utils/Common";
 
-export type ToolTips = {
+export interface ToolTips {
   seenFavoriteTip: boolean;
-};
+  seenCoordinateTip: boolean;
+}
 
 export const initialTooltips: ToolTips = {
-  seenFavoriteTip: false
+  seenFavoriteTip: false,
+  seenCoordinateTip: false
 };
 
 export type ToolTipKeys = keyof typeof initialTooltips;
 
-export type NotificationState = {
+export interface NotificationState extends ToolTips {
   notifications: AppNotification[];
-  seenFavoriteTip: boolean;
-};
+}
 
 const initialState: NotificationState = {
   notifications: [],

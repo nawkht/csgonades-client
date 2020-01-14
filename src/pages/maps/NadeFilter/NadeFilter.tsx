@@ -5,9 +5,7 @@ import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { NadeSorter } from "./NadeSorter";
 import { MapPositionFilter } from "./MapPositionFilter";
-import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 import { NadeFilterResetButton } from "./NadeFilterResetButton";
-import { isMobile } from "react-device-detect";
 
 type Props = {
   map: CsgoMap;
@@ -15,14 +13,9 @@ type Props = {
 
 export const NadeFilter: FC<Props> = ({ map }) => {
   const { uiDimensions } = useTheme();
-  const { filterByType, nadeFilter, reset } = useNadeFilter();
+  const { filterByType, nadeFilter } = useNadeFilter();
 
   const { flash, hegrenade, molotov, smoke } = nadeFilter;
-
-  function onReset() {
-    GoogleAnalytics.event("Nade filter", `Reset`);
-    reset();
-  }
 
   function onSmokeClick() {
     filterByType("smoke");

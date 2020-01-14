@@ -4,7 +4,8 @@ import { MapPositionSelector } from "./MapPositionSelector";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { MapCoordinates } from "../../../models/Nade/Nade";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { Tip } from "../../../ui-common/Tip";
+import { useTryShowCoordTip } from "../../../store/NotificationStore/NotificationHooks";
 
 type Props = {
   map: CsgoMap;
@@ -13,7 +14,7 @@ type Props = {
 export const MapPositionFilter: FC<Props> = ({ map }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { filterByMapCoords, coords } = useNadeFilter();
-  const { colors } = useTheme();
+  const { displayCoordsTip, onCloseCoordsTip } = useTryShowCoordTip();
 
   const onSelect = (coords: MapCoordinates) => {
     setIsOpen(false);
@@ -36,12 +37,14 @@ export const MapPositionFilter: FC<Props> = ({ map }) => {
 
   return (
     <>
-      <div className={className} onClick={onOpen}>
-        <div className={"position-filter"}>
-          <span>POSITION</span>
-          <Icon name="location arrow" />
+      <Tip visisble={displayCoordsTip} onClick={onCloseCoordsTip}>
+        <div className={className} onClick={onOpen}>
+          <div className={"position-filter"}>
+            <span>MAP</span>
+            <Icon name="location arrow" />
+          </div>
         </div>
-      </div>
+      </Tip>
       {isOpen && (
         <MapPositionSelector
           map={map}
