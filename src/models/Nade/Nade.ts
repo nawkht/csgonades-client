@@ -38,6 +38,7 @@ export type Nade = {
   viewCount: number;
   favoriteCount: number;
   mapEndCoord?: MapCoordinates;
+  score: number;
 };
 
 export type NadeLight = {
@@ -53,6 +54,7 @@ export type NadeLight = {
   viewCount: number;
   favoriteCount: number;
   mapEndCoord?: MapCoordinates;
+  score: number;
 };
 
 export type NadeBody = {

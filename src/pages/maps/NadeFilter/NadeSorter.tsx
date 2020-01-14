@@ -13,6 +13,11 @@ export const NadeSorter = () => {
           inline
           options={[
             {
+              key: "score",
+              text: "By Hot",
+              value: "score"
+            },
+            {
               key: "date",
               text: "By Date",
               value: "date"
@@ -26,6 +31,7 @@ export const NadeSorter = () => {
           direction="left"
           onChange={(_, data) => {
             const newMethod = data.value as any;
+            console.log("> Setting sorting method", newMethod);
             setSortingMethod(newMethod);
           }}
           value={sortingMethod}
@@ -38,6 +44,7 @@ export const NadeSorter = () => {
           background: #e0e1e2;
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
+          z-index: 1001;
         }
 
         .nade-sorter span {

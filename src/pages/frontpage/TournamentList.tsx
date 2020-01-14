@@ -48,7 +48,7 @@ export const TournamentList: FC<Props> = ({ tournaments }) => {
                 </td>
                 <td>
                   {t.twitchUrl && (
-                    <a href={t.twitchUrl} target="_blank">
+                    <a href={t.twitchUrl} target="_blank" rel="nofollow">
                       <Icon name="twitch" size="large" />
                     </a>
                   )}

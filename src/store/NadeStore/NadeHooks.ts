@@ -45,7 +45,7 @@ export const useNadeFilter = () => {
 
   const canReset = useMemo(() => {
     const hasCoords = !coords;
-    const isSortingByDate = sortingMethod === "date";
+    const isSortingByDate = sortingMethod === "score";
     const isDefaultTypeFilter =
       !nadeFilter.flash &&
       !nadeFilter.hegrenade &&
@@ -187,6 +187,10 @@ function sortNades(method: SortingMethod, nades: NadeLight[]) {
         return (a.title || "").localeCompare(b.title || "");
       });
       return nadeCopy;
+    case "score": {
+      nadeCopy.sort((a, b) => b.score - a.score);
+      return nadeCopy;
+    }
     default:
       nadeCopy.sort((a, b) => {
         return moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf();

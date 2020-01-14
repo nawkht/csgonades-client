@@ -56,7 +56,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           position: relative;
           width: 100%;
           overflow: hidden;
-          z-index: 998;
           display: block;
           padding-top: 56.25%;
           background: black;
@@ -68,7 +67,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           left: 0;
           bottom: 0;
           right: 0;
-          z-index: 901;
         }
 
         .front img {
@@ -82,7 +80,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           left: 0;
           bottom: 0;
           right: 0;
-          z-index: 902;
         }
 
         .back video {

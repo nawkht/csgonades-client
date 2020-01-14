@@ -44,7 +44,7 @@ const initialState: NadeState = {
     hegrenade: false,
     molotov: false,
     smoke: false,
-    sorthingMethod: "date"
+    sorthingMethod: "score"
   }
 };
 

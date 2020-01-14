@@ -65,7 +65,7 @@ export type NadeActions =
   | SetSortingNameAction
   | FilterByMapCoordinates;
 
-export type SortingMethod = "name" | "date";
+export type SortingMethod = "name" | "date" | "score";
 
 export const setSortingMethodAction = (
   sortingMethod: SortingMethod
