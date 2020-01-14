@@ -3,7 +3,7 @@ import { Dropdown } from "semantic-ui-react";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 
 export const NadeSorter = () => {
-  const { colors, uiDimensions } = useTheme();
+  const { colors, layers } = useTheme();
   const { sortingMethod, setSortingMethod } = useNadeFilter();
 
   return (
@@ -44,7 +44,7 @@ export const NadeSorter = () => {
           background: #e0e1e2;
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
-          z-index: 1001;
+          z-index: ${layers.TOP_UI};
         }
 
         .nade-sorter span {

@@ -8,7 +8,7 @@ import { isMobile } from "react-device-detect";
 
 const MapNavigation: FC = () => {
   const { isNavOpen } = useNavigation();
-  const { colors, uiDimensions, durations } = useTheme();
+  const { colors, uiDimensions, durations, layers } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
 
@@ -59,7 +59,7 @@ const MapNavigation: FC = () => {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          z-index: 999;
+          z-index: ${layers.TOP_UI};
           transition: left ${durations.transition}s;
           overflow-y: auto;
           left: 0;

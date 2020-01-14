@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
-  const { colors, durations, isMobile } = useTheme();
+  const { colors, durations, isMobile, layers } = useTheme();
 
   const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
@@ -97,7 +97,7 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
           right: 12px;
           opacity: 0;
           transition: opacity ${durations.transition}s;
-          z-index: 998;
+          z-index: ${layers.UNDER_UI};
         }
 
         .quality-toggle {
@@ -115,7 +115,7 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
           font-size: 0.8em;
           background: ${colors.PRIMARY_75_PERCENT};
           color: white;
-          z-index: 999;
+          z-index: ${layers.UNDER_UI};
           transition: background ${durations.transition}s;
           display: flex;
           align-content: center;

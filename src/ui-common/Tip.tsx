@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 
 type Props = {
   visisble: boolean;
@@ -6,6 +7,7 @@ type Props = {
 };
 
 export const Tip: FC<Props> = ({ children, visisble, onClick }) => {
+  const { layers } = useTheme();
   return (
     <>
       <div className="tip-container">
@@ -23,7 +25,7 @@ export const Tip: FC<Props> = ({ children, visisble, onClick }) => {
       <style jsx>{`
         .tip-container {
           position: relative;
-          z-index: 998;
+          z-index: ${layers.TOP_UI};
         }
 
         .tip {

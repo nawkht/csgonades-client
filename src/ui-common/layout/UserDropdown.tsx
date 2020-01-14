@@ -7,12 +7,14 @@ import {
   useIsAdminOrModerator
 } from "../../store/AuthStore/AuthHooks";
 import { redirectUserPage } from "../../utils/Common";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   user: User;
 };
 
 export const UserDropdown: FC<Props> = ({ user }) => {
+  const { layers } = useTheme();
   const isAdminOrMod = useIsAdminOrModerator();
   const signOut = useSignOut();
   function onProfileClick() {
@@ -65,7 +67,7 @@ export const UserDropdown: FC<Props> = ({ user }) => {
         .user-nav-user {
           display: flex;
           align-self: center;
-          z-index: 999;
+          z-index: ${layers.TOP_UI};
         }
 
         .user-avatar {

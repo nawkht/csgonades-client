@@ -3,6 +3,7 @@ import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { Button } from "semantic-ui-react";
 import { MapCoordinates } from "../../../models/Nade/Nade";
 import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   map: CsgoMap;
@@ -19,6 +20,7 @@ export const MapPositionModal: FC<Props> = ({
   mapEndCoord,
   onSave
 }) => {
+  const { layers } = useTheme();
   const ref = useRef<HTMLDivElement>(null);
   const [elementOffset, setElementOffset] = useState({ left: 0, top: 0 });
   const [mapWidth, setMapWidth] = useState(0);
@@ -112,7 +114,7 @@ export const MapPositionModal: FC<Props> = ({
           bottom: 0;
           display: flex;
           background: rgba(0, 0, 0, 0.8);
-          z-index: 1000;
+          z-index: ${layers.MODAL};
           align-items: center;
           justify-content: space-around;
         }

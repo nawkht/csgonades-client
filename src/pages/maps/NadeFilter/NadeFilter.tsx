@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const NadeFilter: FC<Props> = ({ map }) => {
-  const { uiDimensions } = useTheme();
+  const { uiDimensions, layers } = useTheme();
   const { filterByType, nadeFilter } = useNadeFilter();
 
   const { flash, hegrenade, molotov, smoke } = nadeFilter;
@@ -71,7 +71,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           top: ${uiDimensions.HEADER_HEIGHT}px;
           left: ${uiDimensions.SIDEBAR_WIDTH}px;
           right: 0;
-          z-index: 998;
+          z-index: ${layers.UNDER_UI};
         }
 
         .nade-filter-bg {

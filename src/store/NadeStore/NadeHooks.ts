@@ -165,6 +165,40 @@ export const useNadesForMap = (map: CsgoMap) => {
   };
 };
 
+type Coord = {
+  key: string;
+  x: number;
+  y: number;
+};
+
+export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
+  const nades = useSelector(nadesForMapSelector(map));
+
+  const unqiueNadesForPosition: NadeLight[] = [];
+
+  if (!nades) {
+    return unqiueNadesForPosition;
+  }
+
+  const unique: any = {};
+
+  for (let nade of nades) {
+    if (nade.mapEndCoord && nade.type) {
+      const { x, y } = nade.mapEndCoord;
+      const roundedX = Math.ceil(x / 30) * 30;
+      const roundedY = Math.ceil(y / 30) * 30;
+      const coordKey = `${nade.type}(${roundedX},${roundedY})`;
+
+      if (!unique[coordKey]) {
+        unqiueNadesForPosition.push(nade);
+        unique[coordKey] = true;
+      }
+    }
+  }
+
+  return unqiueNadesForPosition;
+};
+
 export const useRawNadesForMap = (map: CsgoMap) => {
   const nades = useSelector(nadesForMapSelector(map));
 

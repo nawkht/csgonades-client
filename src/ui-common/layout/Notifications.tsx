@@ -4,7 +4,7 @@ import { notificationSelector } from "../../store/NotificationStore/Notification
 import { NotificationItem } from "./NotificationItem";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 export const Notifications: FC = () => {
-  const { uiDimensions } = useTheme();
+  const { uiDimensions, layers } = useTheme();
   const notifications = useSelector(notificationSelector);
 
   return (
@@ -19,7 +19,7 @@ export const Notifications: FC = () => {
           position: fixed;
           bottom: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           right: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          z-index: 999;
+          z-index: ${layers.MODAL};
           display: flex;
           flex-direction: column;
           flex-basis: fit-content;

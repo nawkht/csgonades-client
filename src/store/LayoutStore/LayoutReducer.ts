@@ -16,6 +16,11 @@ export type ThemeState = {
     MOBILE_THRESHHOLD: number;
     BORDER_RADIUS: string;
   };
+  layers: {
+    MODAL: number;
+    UNDER_UI: number;
+    TOP_UI: number;
+  };
   colors: {
     PRIMARY: string;
     PRIMARY_10_PERCENT: string;
@@ -48,6 +53,11 @@ const initialState: ThemeState = {
     OUTER_GUTTER_SIZE: 24,
     MOBILE_THRESHHOLD: 850,
     BORDER_RADIUS: "0.25rem"
+  },
+  layers: {
+    MODAL: 999,
+    TOP_UI: 900,
+    UNDER_UI: 890
   },
   colors: {
     PRIMARY: "#1c90c0",

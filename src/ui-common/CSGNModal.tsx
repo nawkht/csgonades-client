@@ -13,7 +13,7 @@ export const CSGNModal: FC<Props> = ({
   visible,
   onDismiss
 }) => {
-  const { uiDimensions } = useTheme();
+  const { uiDimensions, layers } = useTheme();
   if (!visible) {
     return null;
   }
@@ -35,7 +35,7 @@ export const CSGNModal: FC<Props> = ({
           left: 0;
           right: 0;
           bottom: 0;
-          z-index: 999;
+          z-index: ${layers.MODAL};
           background: rgba(0, 0, 0, 0.8);
           display: flex;
           justify-content: center;

@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const EditButton: FC<Props> = ({ onClick, isEditing }) => {
-  const { colors, durations } = useTheme();
+  const { colors, durations, layers } = useTheme();
 
   if (isEditing) {
     return null;
@@ -28,7 +28,7 @@ export const EditButton: FC<Props> = ({ onClick, isEditing }) => {
           font-size: 0.8em;
           background: ${colors.PRIMARY_75_PERCENT};
           color: white;
-          z-index: 999;
+          z-index: ${layers.UNDER_UI};
           transition: background ${durations.transition}s;
           display: flex;
           align-content: center;

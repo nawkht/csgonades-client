@@ -8,7 +8,7 @@ import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
 
 const Header: FC = () => {
   const [loading, setIsLoading] = useState(false);
-  const { colors, uiDimensions } = useTheme();
+  const { colors, uiDimensions, layers } = useTheme();
   const { isNavOpen, toggleNav } = useNavigation();
   const isLoading = useIsLoadingNade();
   let timer: NodeJS.Timer;
@@ -71,7 +71,7 @@ const Header: FC = () => {
           display: flex;
           background: #fff;
           border-bottom: 1px solid ${colors.PRIMARY_BORDER};
-          z-index: 999;
+          z-index: ${layers.TOP_UI};
           justify-content: space-between;
         }
 

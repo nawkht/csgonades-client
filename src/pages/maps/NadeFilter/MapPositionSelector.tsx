@@ -3,8 +3,12 @@ import { MapCoordinates } from "../../../models/Nade/Nade";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { Icon } from "semantic-ui-react";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
-import { useRawNadesForMap } from "../../../store/NadeStore/NadeHooks";
+import {
+  useRawNadesForMap,
+  useNadeCoordinatesForMap
+} from "../../../store/NadeStore/NadeHooks";
 import { MapPosIcon } from "./MapPosIcon";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   onDismiss: () => void;
@@ -14,8 +18,9 @@ type Props = {
 
 export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const { layers } = useTheme();
   const [mapLoaded, setMapLoade] = useState(false);
-  const { nades } = useRawNadesForMap(map);
+  const nades = useNadeCoordinatesForMap(map);
   const [elementOffset, setElementOffset] = useState({ left: 0, top: 0 });
   const [mapWidth, setMapWidth] = useState(0);
 
@@ -84,9 +89,9 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
           left: 0;
           right: 0;
           bottom: 0;
+          z-index: 2000;
           display: flex;
           background: rgba(0, 0, 0, 0.8);
-          z-index: 1000;
           align-items: center;
           justify-content: space-around;
         }
