@@ -19,7 +19,7 @@ export const FavoritesPage: FC = () => {
   }, []);
 
   return (
-    <Layout title="Favorites">
+    <Layout title="Favorites" canonical="/favorites">
       <div className="favorites-container">
         {isLoading && <>Loading...</>}
         {!isLoading && (

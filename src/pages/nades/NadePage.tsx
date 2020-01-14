@@ -32,7 +32,11 @@ const NadePage: React.FC<Props> = ({ nade }) => {
   }
 
   return (
-    <Layout title={layoutTitle} description={nade.description}>
+    <Layout
+      title={layoutTitle}
+      description={nade.description}
+      canonical={`/nades/${nade.id}`}
+    >
       <NadeTitlebar nade={nade} allowEdit={allowEdit} />
       <div className="nade-container">
         <div className="nade-main">

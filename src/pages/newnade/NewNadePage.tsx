@@ -11,7 +11,7 @@ export const NewNadePage: FC = () => {
   const cantSumbit = !gfyData || !imageData;
 
   return (
-    <Layout title="New nade">
+    <Layout title="New nade" canonical="/newnade">
       <div className="nade-new-container">
         <h2>Add new nade</h2>
         <Segment placeholder>

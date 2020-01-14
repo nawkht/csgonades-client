@@ -31,7 +31,7 @@ export const AdminPage: FC = () => {
   }
 
   return (
-    <Layout title="Admin">
+    <Layout title="Admin" canonical="/admin">
       <div className="admin-container">
         <div className="admin-nav">
           <AdminNav />

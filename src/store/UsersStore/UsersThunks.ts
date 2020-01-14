@@ -17,9 +17,11 @@ export const fetchUserAction = (steamId: string): ReduxThunkAction => {
     const userResult = await UserApi.fetchUser(steamId, token);
 
     if (userResult.isErr()) {
+      console.log("> User error");
       dispatch(setUsersError(userResult.error));
       return;
     }
+    console.log("> User ok", userResult.value);
 
     dispatch(setViewingUserAction(userResult.value));
   };

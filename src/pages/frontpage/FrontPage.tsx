@@ -9,11 +9,11 @@ import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { TournamentsContainer } from "./Tournaments";
 
 export const FrontPage: FC = () => {
-  const { isMobile, uiDimensions } = useTheme();
+  const { uiDimensions } = useTheme();
   const nades = useSelector(recentNadesSelector);
 
   return (
-    <Layout>
+    <Layout canonical="">
       <FrontPageJumbo />
       <FrontPageStats />
       <TournamentsContainer />

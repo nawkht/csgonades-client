@@ -4,7 +4,7 @@ import { Layout } from "../src/ui-common/layout/layout";
 const AboutPageContainer: NextPage = () => {
   return (
     <>
-      <Layout>
+      <Layout canonical="/about">
         <div className="about">
           <h1>About</h1>
           <h2>The story</h2>

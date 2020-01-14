@@ -1,10 +1,11 @@
 import { NextPage } from "next";
 import { Layout } from "../src/ui-common/layout/layout";
+import Link from "next/link";
 
 const PrivacyPolicyPageContainer: NextPage = () => {
   return (
     <>
-      <Layout>
+      <Layout title="Privacy Policy" canonical="/privacypolicy">
         <div className="privacy-policy">
           <h1>Privacy Policy</h1>
           <p>
@@ -93,7 +94,11 @@ const PrivacyPolicyPageContainer: NextPage = () => {
           <h2>Contact Us</h2>
           <p>
             If you have any questions or suggestions about my Privacy Policy, do
-            not hesitate to contact us.
+            not hesitate to{" "}
+            <Link href="/contact" as="/contact">
+              <a>contact us</a>
+            </Link>
+            .
           </p>
         </div>
       </Layout>

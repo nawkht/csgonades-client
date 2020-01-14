@@ -39,8 +39,8 @@ const ContactPageContainer: NextPage = () => {
 
   return (
     <>
-      <Layout>
-        <div className="about">
+      <Layout title="Contact" canonical="/contact">
+        <div className="contact">
           <h1>Contact</h1>
           <Form widths="equal" onSubmit={onSubmit}>
             <Form.Input
@@ -82,7 +82,7 @@ const ContactPageContainer: NextPage = () => {
         </div>
       </Layout>
       <style jsx>{`
-        .about {
+        .contact {
           margin: 18px;
           background: white;
           padding: 18px;

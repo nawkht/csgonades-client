@@ -4,7 +4,7 @@ import { Message } from "semantic-ui-react";
 
 export const NadeNotFound: FC = () => {
   return (
-    <Layout>
+    <Layout title="Not found">
       <div className="not-found">
         <Message negative size="large">
           <Message.Header>404 NOT FOUND</Message.Header>
