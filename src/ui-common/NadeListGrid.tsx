@@ -74,7 +74,7 @@ export const NadeListGrid: FC<Props> = ({
           }
         }
 
-        @media only screen and (max-width: 1400px) {
+        @media only screen and (max-width: 1460px) {
           .nadelist {
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
           }
