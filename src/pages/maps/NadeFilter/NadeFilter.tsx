@@ -71,7 +71,7 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           top: ${uiDimensions.HEADER_HEIGHT}px;
           left: ${uiDimensions.SIDEBAR_WIDTH}px;
           right: 0;
-          z-index: 999;
+          z-index: 998;
         }
 
         .nade-filter-bg {

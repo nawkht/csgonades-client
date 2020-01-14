@@ -37,7 +37,7 @@ export const UserDropdown: FC<Props> = ({ user }) => {
             alt={`avatar for ${user.nickname}`}
           />
         )}
-        <Dropdown text={user.nickname}>
+        <Dropdown className="dropdown" text={user.nickname}>
           <Dropdown.Menu direction="left">
             <Dropdown.Item
               text="Profile"
@@ -65,6 +65,7 @@ export const UserDropdown: FC<Props> = ({ user }) => {
         .user-nav-user {
           display: flex;
           align-self: center;
+          z-index: 999;
         }
 
         .user-avatar {
