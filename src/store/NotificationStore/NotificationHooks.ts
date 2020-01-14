@@ -7,6 +7,7 @@ import {
   hasSeenTip
 } from "./NotificationSelectors";
 import { seenToolTip } from "./NotificationActions";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 
 export const useTryShowFavoriteTooltip = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export const useTryShowCoordTip = () => {
   const hasSeen = useSelector(hasSeenTip("seenCoordinateTip"));
 
   function onCloseCoordsTip() {
+    GoogleAnalytics.event("Tip", "Coords tip close");
     setDisplayCoordsTip(false);
   }
 
