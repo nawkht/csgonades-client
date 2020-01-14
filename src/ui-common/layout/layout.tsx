@@ -13,13 +13,15 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  metaThumbNail?: string;
 }
 
 export const Layout: React.FC<Props> = ({
   title,
   description,
   children,
-  canonical
+  canonical,
+  metaThumbNail
 }) => {
   const [pathname, setPathname] = useState("");
   useThemeSync();
@@ -75,6 +77,7 @@ export const Layout: React.FC<Props> = ({
             content={`https://www.csgonades.com${canonical}`}
           />
         )}
+        {metaThumbNail && <meta property="og:image" content={metaThumbNail} />}
       </Head>
 
       <Header />
