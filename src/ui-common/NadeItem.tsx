@@ -41,6 +41,13 @@ export const NadeItem: FC<Props> = ({ nade }) => {
               <span className="icon-text">{kFormatter(nade.viewCount)}</span>
             </div>
 
+            {nade.favoriteCount > 0 && (
+              <div className="stat">
+                <Icon name="star" size="small" color="yellow" />
+                <span className="icon-text">{nade.favoriteCount}</span>
+              </div>
+            )}
+
             {nade.tickrate && nade.tickrate !== "any" && (
               <div className="stat tick">
                 <Icon name="code" size="small" />
@@ -49,6 +56,8 @@ export const NadeItem: FC<Props> = ({ nade }) => {
                 </span>
               </div>
             )}
+
+            <div className="spacer"></div>
 
             {isNew && (
               <div className="stat">
@@ -125,7 +134,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
         }
 
         .stat .icon-text {
-          font-size: 0.75em;
+          font-size: 0.7em;
         }
 
         .tick {
@@ -143,6 +152,10 @@ export const NadeItem: FC<Props> = ({ nade }) => {
         .video {
           overflow: hidden;
         }
+
+        .spacer {
+          flex: 1;
+        
       `}</style>
     </>
   );
