@@ -29,7 +29,7 @@ const Header: FC = () => {
 
   return (
     <>
-      <header>
+      <div className="header">
         <div className="logo-container">
           <div className="hamburger" onClick={toggleNav}>
             {isNavOpen && <Icon name="cancel" size="large" />}
@@ -48,7 +48,7 @@ const Header: FC = () => {
         </div>
 
         <UserNav />
-      </header>
+      </div>
       <style jsx>{`
         .logo-container {
           display: flex;
@@ -62,16 +62,11 @@ const Header: FC = () => {
           display: none;
         }
 
-        header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
+        .header {
           height: ${uiDimensions.HEADER_HEIGHT}px;
           display: flex;
           background: #fff;
           border-bottom: 1px solid ${colors.PRIMARY_BORDER};
-          z-index: ${layers.TOP_UI};
           justify-content: space-between;
         }
 

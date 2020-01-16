@@ -30,39 +30,15 @@ const MapNavigation: FC = () => {
             <MapLink mapName="cobblestone" currentMapPath={currentRoute} />
           </ul>
         </nav>
-
-        <footer>
-          <div className="copyright">© 2019 CSGO Nades</div>
-          <div className="footer-links">
-            <Link href="/about" as="/about">
-              <a>About</a>
-            </Link>{" "}
-            |{" "}
-            <Link href="/privacypolicy" as="/privacypolicy">
-              <a>Privacy Policy</a>
-            </Link>{" "}
-            |{" "}
-            <Link href="/contact" as="/contact">
-              <a>Contact</a>
-            </Link>
-          </div>
-        </footer>
       </aside>
       <style jsx>{`
         #mapnavigation {
-          background: white;
-          position: fixed;
-          top: ${uiDimensions.HEADER_HEIGHT}px;
-          bottom: 0;
-          width: ${uiDimensions.SIDEBAR_WIDTH}px;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          z-index: ${layers.TOP_UI};
           transition: left ${durations.transition}s;
           overflow-y: auto;
-          left: 0;
+          background: white;
         }
 
         .closed {
@@ -79,34 +55,14 @@ const MapNavigation: FC = () => {
           margin: 0;
         }
 
-        footer {
-          background: ${colors.PRIMARY};
-          color: white;
-        }
-
-        footer .footer-links {
-          text-align: center;
-          font-size: 0.8em;
-          padding-bottom: ${uiDimensions.PADDING_MEDIUM}px;
-        }
-
-        footer .footer-links a {
-          color: white;
-        }
-
-        footer .footer-links a:hover {
-          color: white;
-          text-decoration: underline;
-        }
-
-        footer .copyright {
-          padding: ${uiDimensions.PADDING_MEDIUM}px
-            ${uiDimensions.PADDING_LARGE}px;
-        }
-
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
           #mapnavigation {
+            position: absolute;
+            top: ${uiDimensions.HEADER_HEIGHT}px;
             left: -${uiDimensions.SIDEBAR_WIDTH}px;
+            bottom: 0;
+            z-index: 999;
+            border-right: 1px solid ${colors.PRIMARY_BORDER};
           }
         }
       `}</style>

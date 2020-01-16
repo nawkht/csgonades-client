@@ -8,6 +8,7 @@ import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { Footer } from "./Footer";
 
 interface Props {
   title?: string;
@@ -26,7 +27,7 @@ export const Layout: React.FC<Props> = ({
   const [pathname, setPathname] = useState("");
   useThemeSync();
   const { closeNav } = useNavigation();
-  const { uiDimensions } = useTheme();
+  const { uiDimensions, colors } = useTheme();
 
   useEffect(() => {
     closeNav();
@@ -51,7 +52,7 @@ export const Layout: React.FC<Props> = ({
     : "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
 
   return (
-    <div id="page">
+    <>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
@@ -80,37 +81,80 @@ export const Layout: React.FC<Props> = ({
         {metaThumbNail && <meta property="og:image" content={metaThumbNail} />}
       </Head>
 
-      <Header />
+      <div id="layout">
+        <header>
+          <Header />
+        </header>
+
+        <aside>
+          <MapNavigation />
+        </aside>
+
+        <main>{children}</main>
+
+        <footer>
+          <Footer />
+        </footer>
+      </div>
 
       <Notifications />
 
-      <MapNavigation />
-
-      <div id="content">
-        <main>{children}</main>
-      </div>
-
       <style jsx>{`
-        #content {
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          position: relative;
+        #layout {
+          display: grid;
+          grid-template-columns: ${uiDimensions.SIDEBAR_WIDTH}px 2fr 2fr 2fr;
+          grid-template-rows: ${uiDimensions.HEADER_HEIGHT}px auto 45px;
+          grid-template-areas:
+            "header header header header"
+            "sidebar main main main"
+            "footer footer footer footer";
+          height: 100vh;
+        }
+
+        header {
+          grid-area: header;
+          max-height: ${uiDimensions.HEADER_HEIGHT}px;
+        }
+
+        aside {
+          grid-area: sidebar;
+          border-right: 1px solid ${colors.PRIMARY_BORDER};
         }
 
         main {
-          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
-          margin-top: ${uiDimensions.HEADER_HEIGHT}px;
-          background-color: #f2f2f2;
+          grid-area: main;
+          overflow-y: auto;
+          overflow-x: hidden;
+          background: #f3f3f3;
+        }
+
+        footer {
+          grid-area: footer;
+        }
+
+        #page {
+          max-height: 100vh;
+        }
+
+        #content {
+          display: flex;
+          max-height: calc(100vh - ${uiDimensions.HEADER_HEIGHT}px);
+          border: 1px solid orange;
+        }
+
+        .page-content {
           flex: 1;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
-          main {
-            margin-left: 0;
+          #layout {
+            grid-template-areas:
+              "header header header header"
+              "main main main main"
+              "footer footer footer footer";
           }
         }
       `}</style>
-    </div>
+    </>
   );
 };
