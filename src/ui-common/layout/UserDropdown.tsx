@@ -67,7 +67,6 @@ export const UserDropdown: FC<Props> = ({ user }) => {
         .user-nav-user {
           display: flex;
           align-self: center;
-          z-index: ${layers.TOP_UI};
         }
 
         .user-avatar {

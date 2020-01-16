@@ -44,7 +44,6 @@ export const NadeSorter = () => {
           background: #e0e1e2;
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
-          z-index: ${layers.TOP_UI};
         }
 
         .nade-sorter span {
