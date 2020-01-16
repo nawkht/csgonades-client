@@ -11,3 +11,5 @@ export const pendingNadesSelector = (state: AppState) => {
 export const adminUsersSelector = (state: AppState) => {
   return state.adminStore.users;
 };
+
+export const reportsSelector = (state: AppState) => state.adminStore.reports;

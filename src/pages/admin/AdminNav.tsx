@@ -38,6 +38,13 @@ export const AdminNav: FC = () => {
           Users
         </Menu.Item>
         <Menu.Item
+          name="reports"
+          active={route === "reports"}
+          onClick={handleItemClick}
+        >
+          Reports
+        </Menu.Item>
+        <Menu.Item
           name="tournaments"
           active={route === "tournaments"}
           onClick={handleItemClick}

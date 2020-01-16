@@ -3,17 +3,20 @@ import { AdminActions, AdminRoutes } from "./AdminActions";
 import { NadeLight } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
 import { assertNever } from "../../utils/Common";
+import { Report } from "../../models/Report";
 
 export type AdminState = {
   route: AdminRoutes;
   pendingNades: NadeLight[];
   users: User[];
+  reports: Report[];
 };
 
 const initialState: AdminState = {
   route: "pending-nades",
   pendingNades: [],
-  users: []
+  users: [],
+  reports: []
 };
 
 export const AdminReducer: Reducer<AdminState, AdminActions> = (
@@ -35,6 +38,11 @@ export const AdminReducer: Reducer<AdminState, AdminActions> = (
       return {
         ...state,
         users: action.users
+      };
+    case "@@admin/ADD_REPORTS":
+      return {
+        ...state,
+        reports: action.reports
       };
     default:
       assertNever(action);
