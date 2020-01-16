@@ -67,11 +67,6 @@ export const NadeFilter: FC<Props> = ({ map }) => {
       </div>
       <style jsx>{`
         .nade-filter-container {
-          position: fixed;
-          top: ${uiDimensions.HEADER_HEIGHT}px;
-          left: ${uiDimensions.SIDEBAR_WIDTH}px;
-          right: 0;
-          z-index: ${layers.UNDER_UI};
         }
 
         .nade-filter-bg {

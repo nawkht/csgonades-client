@@ -123,27 +123,11 @@ export const Layout: React.FC<Props> = ({
 
         main {
           grid-area: main;
-          overflow-y: auto;
-          overflow-x: hidden;
           background: #f3f3f3;
         }
 
         footer {
           grid-area: footer;
-        }
-
-        #page {
-          max-height: 100vh;
-        }
-
-        #content {
-          display: flex;
-          max-height: calc(100vh - ${uiDimensions.HEADER_HEIGHT}px);
-          border: 1px solid orange;
-        }
-
-        .page-content {
-          flex: 1;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
