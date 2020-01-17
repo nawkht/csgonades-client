@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { NotificationList } from "./NotificationList";
 
 export const NotificationIndicator: FC = () => {
@@ -10,6 +11,14 @@ export const NotificationIndicator: FC = () => {
   const { notificationCount } = useNotifications();
 
   function toggleNotificationTab() {
+    if (!notificationTabVisible) {
+      GoogleAnalytics.event(
+        "Notification",
+        "Open tab",
+        `Count(${notificationCount})`
+      );
+    }
+
     setNotificationTabVisible(!notificationTabVisible);
   }
 
@@ -17,7 +26,8 @@ export const NotificationIndicator: FC = () => {
     <>
       <div className="notification-wrapper">
         <div className="notification-indicator" onClick={toggleNotificationTab}>
-          <Icon name="bell" /> <span>{notificationCount}</span>
+          <Icon name="bell" />
+          <span>{notificationCount}</span>
         </div>
         <NotificationList visble={notificationTabVisible} />
       </div>

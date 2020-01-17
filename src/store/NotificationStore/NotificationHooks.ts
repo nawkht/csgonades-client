@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { notificationsSelector } from "./NotificationSelectors";
 import {
   fetchNotifications,
@@ -23,6 +24,7 @@ export const useNotifications = () => {
   const markNotificationAsViewed = useCallback(
     (id: string) => {
       dispatch(markNotifcationAsViewedThunk(id));
+      GoogleAnalytics.event("Notification", "Marked as viewed");
     },
     [dispatch]
   );
