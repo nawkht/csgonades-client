@@ -107,7 +107,7 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/TOGGLE_MAP_POSITION_MODAL":
       return {
         ...state,
-        positionModalOpen: !state.positionModalOpen
+        positionModalOpen: action.visisble
       };
     default:
       assertNever(action);

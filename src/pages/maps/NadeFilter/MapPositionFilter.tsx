@@ -19,10 +19,14 @@ export const MapPositionFilter: FC<Props> = ({ map }) => {
     ? "nade-position-filter active"
     : "nade-position-filter";
 
+  function onShowMap() {
+    toggleMapPositionModal(true);
+  }
+
   return (
     <>
       <Tip visisble={displayCoordsTip} onClick={onCloseCoordsTip}>
-        <div className={className} onClick={toggleMapPositionModal}>
+        <div className={className} onClick={onShowMap}>
           <div className={"position-filter"}>
             <span>MAP</span>
             <Icon name="location arrow" />

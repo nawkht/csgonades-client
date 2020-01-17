@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
@@ -79,9 +79,12 @@ export const useNadeFilter = () => {
     dispatch(filterByMapCoordsAction(coords));
   }
 
-  function toggleMapPositionModal() {
-    dispatch(toggleMapPositionModalAction());
-  }
+  const toggleMapPositionModal = useCallback(
+    (visible: boolean) => {
+      dispatch(toggleMapPositionModalAction(visible));
+    },
+    [dispatch]
+  );
 
   return {
     nadeFilter,

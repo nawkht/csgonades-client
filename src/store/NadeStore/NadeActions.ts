@@ -13,6 +13,7 @@ export type AddNadesForMapAction = {
 
 export type ToogleMapPositionModal = {
   type: "@@nades/TOGGLE_MAP_POSITION_MODAL";
+  visisble: boolean;
 };
 
 export type FilterByMapCoordinates = {
@@ -129,6 +130,9 @@ export const filterByMapCoordsAction = (
   coords
 });
 
-export const toggleMapPositionModalAction = (): ToogleMapPositionModal => ({
-  type: "@@nades/TOGGLE_MAP_POSITION_MODAL"
+export const toggleMapPositionModalAction = (
+  visisble: boolean
+): ToogleMapPositionModal => ({
+  type: "@@nades/TOGGLE_MAP_POSITION_MODAL",
+  visisble
 });

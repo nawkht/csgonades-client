@@ -16,8 +16,12 @@ export const MapPositionModal: FC<Props> = ({ map }) => {
   } = useNadeFilter();
 
   const onSelect = (coords: MapCoordinates) => {
-    toggleMapPositionModal();
+    toggleMapPositionModal(false);
     filterByMapCoords(coords);
+  };
+
+  const onDismiss = () => {
+    toggleMapPositionModal(false);
   };
 
   return (
@@ -26,7 +30,7 @@ export const MapPositionModal: FC<Props> = ({ map }) => {
         <MapPositionSelector
           map={map}
           onClick={onSelect}
-          onDismiss={toggleMapPositionModal}
+          onDismiss={onDismiss}
         />
       )}
     </>
