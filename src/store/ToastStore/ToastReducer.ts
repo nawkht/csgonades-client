@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { assertNever } from "../../utils/Common";
-import { AppToast, NotificationActions } from "./ToastActions";
+import { AppToast, ToastActions } from "./ToastActions";
 
 export interface ToastState {
   toasts: AppToast[];
@@ -10,7 +10,7 @@ const initialState: ToastState = {
   toasts: []
 };
 
-export const ToastReducer: Reducer<ToastState, NotificationActions> = (
+export const ToastReducer: Reducer<ToastState, ToastActions> = (
   state = initialState,
   action
 ): ToastState => {

@@ -8,7 +8,7 @@ import { UserNav } from "./UserNav";
 
 const Header: FC = () => {
   const [loading, setIsLoading] = useState(false);
-  const { colors, uiDimensions, layers } = useTheme();
+  const { colors, uiDimensions } = useTheme();
   const { isNavOpen, toggleNav } = useNavigation();
   const isLoading = useIsLoadingNade();
   let timer: NodeJS.Timer;

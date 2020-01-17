@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Button, Divider, Grid, Segment } from "semantic-ui-react";
 import { useNewNade } from "../../store/NewNadeStore/NewNadeHooks";
-import { Layout } from "../../ui-common/layout/layout";
+import { Layout } from "../../ui-common/layout/Layout";
 import { AddGfyContainer } from "./GfyModal/AddGfyContainer";
 import { AddImageContainer } from "./ImageModal/AddImageContainer";
 

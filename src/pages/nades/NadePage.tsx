@@ -5,7 +5,7 @@ import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
 import { useShowFavoriteTip } from "../../store/TipStore/TipHooks";
 import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
-import { Layout } from "../../ui-common/layout/layout";
+import { Layout } from "../../ui-common/layout/Layout";
 import { AdminEditor } from "./AdminEditor/AdminEditor";
 import { MapPositionEditor } from "./MapPositionEditor/MapPositionEditor";
 import { NadeDescription } from "./NadeDescription/NadeDescription";

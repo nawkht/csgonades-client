@@ -1,134 +1,88 @@
+import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { Icon } from "semantic-ui-react";
+import { Notification, NotificationType } from "../../models/Notification";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { AppToast, ToastSeverity } from "../../store/ToastStore/ToastActions";
-import { useDismissToast } from "../../store/ToastStore/ToastHooks";
+import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 
 type Props = {
-  notification: AppToast;
+  notification: Notification;
 };
 
 export const NotificationItem: FC<Props> = ({ notification }) => {
-  const dismissToast = useDismissToast();
-  const [fadingOut, setIsFadingOut] = useState(false);
+  const [wasViewed] = useState(notification.hasBeenViewed);
+  const { markNotificationAsViewed } = useNotifications();
+  const { colors } = useTheme();
+  const msg = notificationMessage(notification.type);
 
   useEffect(() => {
-    const fadeOutTimer = setTimeout(() => {
-      setIsFadingOut(true);
-    }, notification.durationSeconds * 1000 - 500);
+    const viewedTimer = setTimeout(() => {
+      markNotificationAsViewed(notification.id);
+    }, 1000);
     return () => {
-      clearTimeout(fadeOutTimer);
+      clearTimeout(viewedTimer);
     };
   }, []);
 
-  const { colors } = useTheme();
-
-  function colorFromSeverity(severity: ToastSeverity) {
-    switch (severity) {
-      case "info":
-        return colors.PRIMARY_90_PERCENT;
-      case "error":
-        return colors.ERROR_90;
-      case "success":
-        return colors.SUCCESS_90;
-      case "warning":
-        return colors.WARNING_90;
-    }
-  }
-
-  const className = fadingOut
-    ? "notification-item fade-out"
-    : "notification-item";
-
   return (
     <>
-      <div className={className}>
-        {notification.title && (
-          <div className="toast-title">
-            {notification.title}
-            <span
-              className="toast-close-btn"
-              onClick={() => dismissToast(notification.id)}
-            >
-              <Icon name="close" />
-            </span>
-          </div>
-        )}
-        <div className="noti-msg">{notification.message}</div>
-      </div>
+      <Link
+        href={`/nades?id=${notification.entityId}`}
+        as={`/nades/${notification.entityId}`}
+      >
+        <a className={wasViewed ? "notification" : "notification new"}>
+          <Icon name="bell" />
+          {msg}
+        </a>
+      </Link>
       <style jsx>{`
-        .notification-item {
-          position: relative;
-          background: white;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-          color: #222;
-          display: inline-block;
-          border-radius: 0.25rem;
-          opacity: 1;
-          transition: opacity 0.5s;
-          display: flex;
-          flex-direction: column;
-          margin-top: 12px;
-          min-width: 200px;
-          opacity: 0;
-          animation-name: fadeIn;
-          animation-duration: 1s;
-          animation-fill-mode: forwards;
-          overflow: hidden;
-          padding-bottom: 5px;
+        .notification {
+          white-space: nowrap;
+          border: 1px solid ${colors.PRIMARY_BORDER};
+          padding: 6px;
+          border-radius: 4px;
+          margin-bottom: 6px;
+          color: black;
         }
 
-        .noti-progress {
-          position: absolute;
-          bottom: -20px;
-          left: -5px;
-          right: -5px;
+        .new {
+          animation-name: indicateUnread;
+          animation-duration: 4s;
         }
 
-        .toast-title {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-          padding: 8px 12px;
-          display: flex;
-          justify-content: space-between;
-          font-weight: 400;
-          color: ${colorFromSeverity(notification.severity)};
+        .notification:last-child {
+          margin-bottom: 0;
         }
 
-        .toast-close-btn {
-          color: #6c757d;
-          cursor: pointer;
-          transition: color 0.2s;
-        }
-
-        .toast-close-btn:hover {
-          color: #222;
-        }
-
-        .noti-msg {
-          padding: 8px 12px;
-          white-space: pre-wrap;
-        }
-
-        .fade-out {
-          opacity: 0;
-          transform: scale(1, 0);
-        }
-
-        .noti-msg p {
-          margin: 0;
-          padding: 0;
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
+        @keyframes indicateUnread {
+          0% {
+            background-color: white;
           }
-          to {
-            opacity: 1;
+          10% {
+            background-color: rgb(232, 241, 255);
+          }
+          90% {
+            background-color: rgb(232, 241, 255);
+          }
+          100% {
+            background-color: white;
           }
         }
       `}</style>
     </>
   );
 };
+
+function notificationMessage(type: NotificationType) {
+  switch (type) {
+    case "accepted-nade":
+      return "Your nade has been accepted!";
+    case "declined-nade":
+      return "Your nade was declined!";
+    case "favorited-nade":
+      return "Your nade was favorited by a used.";
+    default:
+      console.warn("Unknown notification type");
+      return "Unknown notification.";
+  }
+}

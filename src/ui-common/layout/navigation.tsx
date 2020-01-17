@@ -5,7 +5,7 @@ import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { MapLink } from "./MapLink";
 
-const MapNavigation: FC = () => {
+export const Navigation: FC = () => {
   const { isNavOpen } = useNavigation();
   const { colors, uiDimensions, durations, layers } = useTheme();
   const router = useRouter();
@@ -70,5 +70,3 @@ const MapNavigation: FC = () => {
     </>
   );
 };
-
-export { MapNavigation };

@@ -6,9 +6,9 @@ import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useTheme, useThemeSync } from "../../store/LayoutStore/LayoutHooks";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { Footer } from "./Footer";
-import { Header } from "./header";
-import { MapNavigation } from "./navigation";
-import { Notifications } from "./Notifications";
+import { Header } from "./Header";
+import { Navigation } from "./Navigation";
+import { ToastList } from "./ToastList";
 
 interface Props {
   title?: string;
@@ -85,7 +85,7 @@ export const Layout: React.FC<Props> = ({
         <Header />
       </header>
 
-      <MapNavigation />
+      <Navigation />
 
       <div id="layout">
         <main>{children}</main>
@@ -95,7 +95,7 @@ export const Layout: React.FC<Props> = ({
         </footer>
       </div>
 
-      <Notifications />
+      <ToastList />
 
       <style jsx>{`
         #layout {

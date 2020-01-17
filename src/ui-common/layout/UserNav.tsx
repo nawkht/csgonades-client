@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Icon } from "semantic-ui-react";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { NotificationIndicator } from "./NotificationIndicator";
 import { SignInnButton } from "./SignInnButton";
 import { UserDropdown } from "./UserDropdown";
 
@@ -17,6 +18,7 @@ export const UserNav: FC = () => {
     return (
       <>
         <div className="user-nav">
+          <NotificationIndicator />
           {!isMobile && (
             <Link href="/newnade">
               <a className="add-nade-btn">

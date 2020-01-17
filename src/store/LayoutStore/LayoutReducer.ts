@@ -34,6 +34,7 @@ export type ThemeState = {
     ERROR_90: string;
     WARNING: string;
     WARNING_90: string;
+    GREY: string;
   };
   durations: {
     transition: number;
@@ -71,7 +72,8 @@ const initialState: ThemeState = {
     ERROR: "#c01c1c",
     ERROR_90: "rgba(192, 28, 28, 0.9)",
     WARNING: "#c05b1c",
-    WARNING_90: "rgba(192, 91, 28, 0.9)"
+    WARNING_90: "rgba(192, 91, 28, 0.9)",
+    GREY: "#bbb"
   },
   durations: {
     transition: 0.15

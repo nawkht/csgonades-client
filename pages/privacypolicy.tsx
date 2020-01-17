@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import { Layout } from "../src/ui-common/layout/layout";
+import { Layout } from "../src/ui-common/layout/Layout";
 
 const PrivacyPolicyPageContainer: NextPage = () => {
   return (

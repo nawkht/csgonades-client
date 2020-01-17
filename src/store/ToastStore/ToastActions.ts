@@ -29,7 +29,7 @@ type RemoveToastAction = {
   id: string;
 };
 
-export type NotificationActions = AddToastAction | RemoveToastAction;
+export type ToastActions = AddToastAction | RemoveToastAction;
 
 export const addNotificationAction = (
   notification: AppToastCreate

@@ -9,6 +9,7 @@ import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 import { LayoutReducer } from "./LayoutStore/LayoutReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
+import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedTipReducer } from "./TipStore/TipReducer";
 import { ToastReducer } from "./ToastStore/ToastReducer";
 import { TournamentReducer } from "./TournamentStore/TournamentReducer";
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   globalStore: GlobalReducer,
   tournamentStore: TournamentReducer,
   newNadeStore: NewNadeReducer,
-  tipStore: PersistedTipReducer
+  tipStore: PersistedTipReducer,
+  notificationStore: NotificationReducer
 });
 
 function createMiddleware() {

@@ -1,5 +1,5 @@
 import { useUsersState } from "../../store/UsersStore/UsersHooks";
-import { Layout } from "../../ui-common/layout/layout";
+import { Layout } from "../../ui-common/layout/Layout";
 import { UserNotFound } from "./UserNotFound";
 import { UserUI } from "./UserUI";
 

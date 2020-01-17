@@ -6,7 +6,7 @@ import {
   isLoadingFavoritedNadesSelector
 } from "../../store/FavoriteStore/FavoriteSelectors";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { Layout } from "../../ui-common/layout/layout";
+import { Layout } from "../../ui-common/layout/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 
 export const FavoritesPage: FC = () => {
