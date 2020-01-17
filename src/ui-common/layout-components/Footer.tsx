@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 export const Footer: FC = () => {
-  const { colors, uiDimensions, durations, layers } = useTheme();
+  const { colors, uiDimensions } = useTheme();
 
   return (
     <>

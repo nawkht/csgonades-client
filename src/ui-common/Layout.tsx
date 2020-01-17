@@ -5,10 +5,10 @@ import removeMd from "remove-markdown";
 import { useNavigation } from "../store/GlobalStore/GlobalHooks";
 import { useTheme, useThemeSync } from "../store/LayoutStore/LayoutHooks";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
-import { Footer } from "./layout/Footer";
-import { Header } from "./layout/Header";
-import { Navigation } from "./layout/Navigation";
-import { ToastList } from "./layout/ToastList";
+import { Footer } from "./layout-components/Footer";
+import { Header } from "./layout-components/Header";
+import { Navigation } from "./layout-components/Navigation";
+import { ToastList } from "./toast/ToastList";
 
 interface Props {
   title?: string;
