@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, Form, Icon, TextArea } from "semantic-ui-react";
 import { ReportApi } from "../../api/ReportApi";
 import { ReportAddDto } from "../../models/Report";
-import { addNotificationActionThunk } from "../../store/NotificationStore/NotificationThunks";
+import { addNotificationActionThunk } from "../../store/ToastStore/ToastThunks";
 import { CSGNModal } from "../../ui-common/CSGNModal";
 
 type Props = {

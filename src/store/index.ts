@@ -9,13 +9,14 @@ import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 import { LayoutReducer } from "./LayoutStore/LayoutReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
-import { PersistedNotificationReducer } from "./NotificationStore/NotificationReducer";
+import { PersistedTipReducer } from "./TipStore/TipReducer";
+import { ToastReducer } from "./ToastStore/ToastReducer";
 import { TournamentReducer } from "./TournamentStore/TournamentReducer";
 import { UsersReducer } from "./UsersStore/UsersReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
-  notificationStore: PersistedNotificationReducer,
+  toastStore: ToastReducer,
   nadeStore: NadeReducer,
   favoriteStore: FavoriteReducer,
   layoutStore: LayoutReducer,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   adminStore: AdminReducer,
   globalStore: GlobalReducer,
   tournamentStore: TournamentReducer,
-  newNadeStore: NewNadeReducer
+  newNadeStore: NewNadeReducer,
+  tipStore: PersistedTipReducer
 });
 
 function createMiddleware() {

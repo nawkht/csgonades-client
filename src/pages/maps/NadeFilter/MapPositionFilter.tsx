@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Icon } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
-import { useTryShowCoordTip } from "../../../store/NotificationStore/NotificationHooks";
+import { useTryShowCoordTip } from "../../../store/TipStore/TipHooks";
 import { Tip } from "../../../ui-common/Tip";
 
 type Props = {

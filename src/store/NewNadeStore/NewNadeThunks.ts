@@ -1,8 +1,8 @@
 import { NadeApi } from "../../api/NadeApi";
 import { NadeBody } from "../../models/Nade/Nade";
 import { cleanGfycatUrl, redirectNadePage } from "../../utils/Common";
-import { addNotificationAction } from "../NotificationStore/NotificationActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { addNotificationAction } from "../ToastStore/ToastActions";
 import {
   nadeNadeClearAction,
   newNadeAddGfyDataAction,

@@ -1,13 +1,13 @@
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { seenTipAction } from "../TipStore/TipActions";
 import {
   addNotificationAction,
-  AppNotificationCreate,
-  removeNotificationAction,
-  seenToolTip
-} from "./NotificationActions";
+  AppToastCreate,
+  removeNotificationAction
+} from "./ToastActions";
 
 export const addNotificationActionThunk = (
-  notification: AppNotificationCreate
+  notification: AppToastCreate
 ): ReduxThunkAction => {
   return async dispatch => {
     const addAction = addNotificationAction(notification);
@@ -29,7 +29,7 @@ export const displayToolTipThunk = (): ReduxThunkAction => {
         durationSeconds: 20
       })
     );
-    dispatch(seenToolTip("seenFavoriteTip"));
+    dispatch(seenTipAction("seenFavoriteTip"));
   };
 };
 

@@ -4,8 +4,8 @@ import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
 import { redirectUserPage } from "../../utils/Common";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
-import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
 import { setToken, setUser, signOutUser } from "./AuthActions";
 import { tokenSelector } from "./AuthSelectors";
 

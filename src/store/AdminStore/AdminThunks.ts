@@ -2,8 +2,8 @@ import { NadeApi } from "../../api/NadeApi";
 import { ReportApi } from "../../api/ReportApi";
 import { UserApi } from "../../api/UserApi";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
-import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
 import {
   addPendingNadesAction,
   addReportsAction,

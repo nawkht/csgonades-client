@@ -1,17 +1,17 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { notificationSelector } from "../../store/NotificationStore/NotificationSelectors";
+import { toastSelector } from "../../store/ToastStore/ToastSelectors";
 import { NotificationItem } from "./NotificationItem";
 export const Notifications: FC = () => {
   const { uiDimensions, layers } = useTheme();
-  const notifications = useSelector(notificationSelector);
+  const toasts = useSelector(toastSelector);
 
   return (
     <>
       <div className="notification-container">
-        {notifications.map(noti => (
-          <NotificationItem key={noti.id} notification={noti} />
+        {toasts.map(toast => (
+          <NotificationItem key={toast.id} notification={toast} />
         ))}
       </div>
       <style jsx>{`

@@ -10,8 +10,8 @@ import {
 import { NadeType } from "../../models/Nade/NadeType";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
-import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
 import {
   addNadeError,
   addNadesForMapAction,

@@ -3,7 +3,7 @@ import { Nade } from "../../models/Nade/Nade";
 import { nadeTypeString } from "../../models/Nade/NadeType";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
-import { useTryShowFavoriteTooltip } from "../../store/NotificationStore/NotificationHooks";
+import { useShowFavoriteTip } from "../../store/TipStore/TipHooks";
 import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
 import { Layout } from "../../ui-common/layout/layout";
 import { AdminEditor } from "./AdminEditor/AdminEditor";
@@ -20,7 +20,7 @@ type Props = {
 };
 
 const NadePage: React.FC<Props> = ({ nade }) => {
-  useTryShowFavoriteTooltip();
+  useShowFavoriteTip();
   const { uiDimensions } = useTheme();
   const allowEdit = useCanEditNade(nade);
 

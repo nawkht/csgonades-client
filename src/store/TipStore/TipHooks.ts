@@ -1,35 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { removeNotificationAction, seenToolTip } from "./NotificationActions";
-import {
-  hasSeenFavoriteTipSelector,
-  hasSeenTip
-} from "./NotificationSelectors";
-import { displayToolTipThunk } from "./NotificationThunks";
-
-export const useTryShowFavoriteTooltip = () => {
-  const dispatch = useDispatch();
-  const seenFavoriteTip = useSelector(hasSeenFavoriteTipSelector);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!seenFavoriteTip) {
-        dispatch(displayToolTipThunk());
-      }
-    }, 15000);
-
-    return () => clearTimeout(timer);
-  }, [seenFavoriteTip]);
-};
-
-export const useDismissToast = () => {
-  const dispatch = useDispatch();
-
-  return (id: string) => {
-    dispatch(removeNotificationAction(id));
-  };
-};
+import { displayToolTipThunk } from "../ToastStore/ToastThunks";
+import { seenTipAction } from "./TipActions";
+import { hasSeenTip } from "./TipSelectors";
 
 export const useTryShowCoordTip = () => {
   const dispatch = useDispatch();
@@ -45,7 +19,7 @@ export const useTryShowCoordTip = () => {
     const startShowTimer = setTimeout(() => {
       if (!hasSeen) {
         setDisplayCoordsTip(true);
-        dispatch(seenToolTip("seenCoordinateTip"));
+        dispatch(seenTipAction("seenCoordinateTip"));
       }
     }, 1000);
     const stopShowTimer = setTimeout(() => {
@@ -59,4 +33,19 @@ export const useTryShowCoordTip = () => {
   }, [hasSeen]);
 
   return { displayCoordsTip, onCloseCoordsTip };
+};
+
+export const useShowFavoriteTip = () => {
+  const dispatch = useDispatch();
+  const seenFavoriteTip = useSelector(hasSeenTip("seenFavoriteTip"));
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!seenFavoriteTip) {
+        dispatch(displayToolTipThunk());
+      }
+    }, 15000);
+
+    return () => clearTimeout(timer);
+  }, [seenFavoriteTip]);
 };
