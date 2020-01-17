@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { recentNadesSelector } from "../../store/NadeStore/NadeSelectors";
-import { Layout } from "../../ui-common/layout/Layout";
+import { Layout } from "../../ui-common/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { FrontPageJumbo } from "./FrontPageJumbo";
 import { FrontPageStats } from "./FrontPageStats";

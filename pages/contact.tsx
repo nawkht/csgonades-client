@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import { ContactApi } from "../src/api/ContactApi";
 import { ConctactDTO } from "../src/models/Contact";
-import { Layout } from "../src/ui-common/layout/Layout";
+import { Layout } from "../src/ui-common/Layout";
 
 const ContactPageContainer: NextPage = () => {
   const [name, setName] = useState<string>("");

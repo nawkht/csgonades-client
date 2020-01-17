@@ -2,13 +2,13 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
-import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
-import { useTheme, useThemeSync } from "../../store/LayoutStore/LayoutHooks";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
-import { Navigation } from "./Navigation";
-import { ToastList } from "./ToastList";
+import { useNavigation } from "../store/GlobalStore/GlobalHooks";
+import { useTheme, useThemeSync } from "../store/LayoutStore/LayoutHooks";
+import { GoogleAnalytics } from "../utils/GoogleAnalytics";
+import { Footer } from "./layout/Footer";
+import { Header } from "./layout/Header";
+import { Navigation } from "./layout/Navigation";
+import { ToastList } from "./layout/ToastList";
 
 interface Props {
   title?: string;

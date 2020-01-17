@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
 import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { Layout } from "../../ui-common/layout/Layout";
+import { Layout } from "../../ui-common/Layout";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminReports } from "./AdminReports";

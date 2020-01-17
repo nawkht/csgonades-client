@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Layout } from "../src/ui-common/layout/Layout";
+import { Layout } from "../src/ui-common/Layout";
 
 const AboutPageContainer: NextPage = () => {
   return (

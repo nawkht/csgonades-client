@@ -2,7 +2,7 @@ import { FC } from "react";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNadesForMap } from "../../store/NadeStore/NadeHooks";
-import { Layout } from "../../ui-common/layout/Layout";
+import { Layout } from "../../ui-common/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { capitalize } from "../../utils/Common";
 import { MapPositionModal } from "./NadeFilter/MapPositionModal";
