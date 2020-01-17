@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { Button, Input } from "semantic-ui-react";
 import { useUpdateUser } from "../../../store/NadeStore/NadeHooks";
 

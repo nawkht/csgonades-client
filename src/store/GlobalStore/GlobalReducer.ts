@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { SiteStats } from "../../api/StatsApi";
-import { GlobalActions } from "./GlobalActions";
 import { assertNever } from "../../utils/Common";
+import { GlobalActions } from "./GlobalActions";
 
 export type GlobalState = {
   readonly stats: SiteStats;

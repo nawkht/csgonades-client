@@ -1,16 +1,16 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { NadeBody } from "../../models/Nade/Nade";
 import { NadeApi } from "../../api/NadeApi";
+import { NadeBody } from "../../models/Nade/Nade";
+import { cleanGfycatUrl, redirectNadePage } from "../../utils/Common";
+import { addNotificationAction } from "../NotificationStore/NotificationActions";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
-  newNadeErrorAction,
-  newNadeAddGfyDataAction,
-  newNadeStartLoadingAction,
   nadeNadeClearAction,
+  newNadeAddGfyDataAction,
+  newNadeErrorAction,
+  newNadeStartLoadingAction,
   newNadeSubmitError,
   newNadeSubmitStartLoadingAction
 } from "./NewNadeActions";
-import { cleanGfycatUrl, redirectNadePage } from "../../utils/Common";
-import { addNotificationAction } from "../NotificationStore/NotificationActions";
 
 export const tryAddGfycat = (gfyIdOrUrl: string): ReduxThunkAction => {
   return async dispatch => {

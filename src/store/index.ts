@@ -1,17 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { AuthReducer } from "./AuthStore/AuthReducer";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { PersistedNotificationReducer } from "./NotificationStore/NotificationReducer";
-import { NadeReducer } from "./NadeStore/NadeReducer";
-import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
-import { LayoutReducer } from "./LayoutStore/LayoutReducer";
-import { UsersReducer } from "./UsersStore/UsersReducer";
-import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AdminReducer } from "./AdminStore/AdminReducer";
+import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
+import { AuthReducer } from "./AuthStore/AuthReducer";
+import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
-import { TournamentReducer } from "./TournamentStore/TournamentReducer";
+import { LayoutReducer } from "./LayoutStore/LayoutReducer";
+import { NadeReducer } from "./NadeStore/NadeReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
+import { PersistedNotificationReducer } from "./NotificationStore/NotificationReducer";
+import { TournamentReducer } from "./TournamentStore/TournamentReducer";
+import { UsersReducer } from "./UsersStore/UsersReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,

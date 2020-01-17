@@ -1,9 +1,9 @@
 import Document, {
+  DocumentContext,
+  Head,
   Html,
   Main,
-  NextScript,
-  DocumentContext,
-  Head
+  NextScript
 } from "next/document";
 
 class MyDocument extends Document {

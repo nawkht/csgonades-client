@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AppResult, extractApiError } from "../utils/ErrorUtil";
 import { ok } from "neverthrow";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"

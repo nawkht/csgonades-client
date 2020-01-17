@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
-import { NewNadeActions } from "./NewNadeActions";
 import { GfycatData } from "../../models/Nade/GfycatData";
 import { assertNever } from "../../utils/Common";
+import { NewNadeActions } from "./NewNadeActions";
 
 export type NewNadeState = {
   gfyData?: GfycatData;

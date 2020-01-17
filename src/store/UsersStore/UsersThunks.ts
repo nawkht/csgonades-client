@@ -1,15 +1,15 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { UserApi } from "../../api/UserApi";
-import {
-  setViewingUserAction,
-  setUsersError,
-  setUserNadesAction,
-  startLoadingUserUpdateAction,
-  stopLoadingUserUpdateAction,
-  stopEditingUserAction
-} from "./UsersActions";
 import { NadeApi } from "../../api/NadeApi";
+import { UserApi } from "../../api/UserApi";
 import { UserUpdateDTO } from "../../models/User";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import {
+  setUserNadesAction,
+  setUsersError,
+  setViewingUserAction,
+  startLoadingUserUpdateAction,
+  stopEditingUserAction,
+  stopLoadingUserUpdateAction
+} from "./UsersActions";
 
 export const fetchUserAction = (steamId: string): ReduxThunkAction => {
   return async (dispatch, getState) => {

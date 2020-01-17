@@ -1,7 +1,7 @@
 import axios from "axios";
-import { AppResult, extractApiError } from "../utils/ErrorUtil";
-import { Favorite } from "../models/Favorite";
 import { ok } from "neverthrow";
+import { Favorite } from "../models/Favorite";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"

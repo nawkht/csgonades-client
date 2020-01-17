@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import { MapPage } from "../src/pages/maps/MapPage";
 import { CsgoMap } from "../src/models/Nade/CsGoMap";
-import { fetchNadesByMapActionThunk } from "../src/store/NadeStore/NadeThunks";
+import { MapPage } from "../src/pages/maps/MapPage";
 import { resetNadeFilterAction } from "../src/store/NadeStore/NadeActions";
+import { fetchNadesByMapActionThunk } from "../src/store/NadeStore/NadeThunks";
 
 interface Props {
   map: CsgoMap;

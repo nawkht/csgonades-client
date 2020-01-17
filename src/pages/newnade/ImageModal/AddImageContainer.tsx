@@ -1,7 +1,7 @@
-import { Header, Icon, Button } from "semantic-ui-react";
-import { useState, FC } from "react";
-import { NewNadeImageModal } from "./NewNadeImageModal";
+import { FC, useState } from "react";
+import { Button, Header, Icon } from "semantic-ui-react";
 import { useNewNade } from "../../../store/NewNadeStore/NewNadeHooks";
+import { NewNadeImageModal } from "./NewNadeImageModal";
 
 export const AddImageContainer: FC = () => {
   const { addImage, imageData } = useNewNade();

@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
-import { Menu, Label, MenuItemProps } from "semantic-ui-react";
-import { useAdminPage } from "../../store/AdminStore/AdminHooks";
+import { Label, Menu, MenuItemProps } from "semantic-ui-react";
 import { AdminRoutes } from "../../store/AdminStore/AdminActions";
+import { useAdminPage } from "../../store/AdminStore/AdminHooks";
 import { useSiteStats } from "../../store/GlobalStore/GlobalHooks";
 
 export const AdminNav: FC = () => {

@@ -6,11 +6,11 @@ import {
   stopEditingUserAction
 } from "./UsersActions";
 import {
-  viewingUserSelector,
   isEditingUserSelector,
-  userNadesSelector,
+  isUpdatingUserSelector,
   userErrorSelector,
-  isUpdatingUserSelector
+  userNadesSelector,
+  viewingUserSelector
 } from "./UsersSelectors";
 import { updateUserThunk } from "./UsersThunks";
 

@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { NadeLight } from "../models/Nade/Nade";
-import { NadeItem } from "./NadeItem";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
-import { Message } from "semantic-ui-react";
-import { NadeItemMobile } from "./NadeItemMobile";
 import { isMobile } from "react-device-detect";
+import { Message } from "semantic-ui-react";
+import { NadeLight } from "../models/Nade/Nade";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { NadeItem } from "./NadeItem";
+import { NadeItemMobile } from "./NadeItemMobile";
 
 type Props = {
   nades: NadeLight[];

@@ -1,19 +1,19 @@
+import { mapString } from "../../models/Nade/CsGoMap";
 import { Nade } from "../../models/Nade/Nade";
+import { nadeTypeString } from "../../models/Nade/NadeType";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
+import { useTryShowFavoriteTooltip } from "../../store/NotificationStore/NotificationHooks";
+import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
 import { Layout } from "../../ui-common/layout/layout";
-import { NadeTitlebar } from "./NadeTitlebar";
+import { AdminEditor } from "./AdminEditor/AdminEditor";
+import { MapPositionEditor } from "./MapPositionEditor/MapPositionEditor";
+import { NadeDescription } from "./NadeDescription/NadeDescription";
 import { NadeMetaPanel } from "./NadeMeta/NadeMetaPanel";
 import { NadeStatus } from "./NadeStatus/NadeStatus";
-import { UserContainer } from "./UserContainer";
-import { AdminEditor } from "./AdminEditor/AdminEditor";
-import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
-import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
-import { NadeDescription } from "./NadeDescription/NadeDescription";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { mapString } from "../../models/Nade/CsGoMap";
-import { nadeTypeString } from "../../models/Nade/NadeType";
-import { useTryShowFavoriteTooltip } from "../../store/NotificationStore/NotificationHooks";
-import { MapPositionEditor } from "./MapPositionEditor/MapPositionEditor";
+import { NadeTitlebar } from "./NadeTitlebar";
 import { ReportButton } from "./ReportButton";
+import { UserContainer } from "./UserContainer";
 
 type Props = {
   nade: Nade;

@@ -1,5 +1,5 @@
-import { FC, useRef, useMemo } from "react";
 import useComponentSize from "@rehooks/component-size";
+import { FC, useMemo, useRef } from "react";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 type Props = {
   gfyUrl: string;

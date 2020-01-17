@@ -1,10 +1,9 @@
 import { FC } from "react";
-
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
   NadeType,
-  nadeTypeString,
-  nadeTypeOptions
+  nadeTypeOptions,
+  nadeTypeString
 } from "../../../models/Nade/NadeType";
 
 type Props = {

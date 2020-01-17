@@ -1,14 +1,14 @@
-import React from "react";
-import App, { AppContext } from "next/app";
 import withRedux from "next-redux-wrapper";
-import { initReduxStore, AppState } from "../src/store";
+import App, { AppContext } from "next/app";
+import React from "react";
+import "react-image-crop/dist/ReactCrop.css";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import "react-image-crop/dist/ReactCrop.css";
-import { serverSideUserInitThunkAction } from "../src/store/AuthStore/AuthTunks";
-import { AuthApi } from "../src/api/TokenApi";
-import { persistStore, Persistor } from "redux-persist";
+import { Persistor, persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+import { AuthApi } from "../src/api/TokenApi";
+import { AppState, initReduxStore } from "../src/store";
+import { serverSideUserInitThunkAction } from "../src/store/AuthStore/AuthTunks";
 
 type Props = {
   store: Store<AppState>;

@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { Layout } from "../../ui-common/layout/layout";
-import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
-import { AdminNav } from "./AdminNav";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
-import { AdminPendingNades } from "./AdminPendingNades";
-import { AdminUsers } from "./AdminUsers";
+import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { AdminTournaments } from "./AdminTournaments";
+import { Layout } from "../../ui-common/layout/layout";
+import { AdminNav } from "./AdminNav";
+import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminReports } from "./AdminReports";
+import { AdminTournaments } from "./AdminTournaments";
+import { AdminUsers } from "./AdminUsers";
 
 export const AdminPage: FC = () => {
   const theme = useTheme();

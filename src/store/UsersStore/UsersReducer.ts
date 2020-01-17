@@ -1,9 +1,9 @@
 import { Reducer } from "redux";
-import { User } from "../../models/User";
-import { UsersActions } from "./UsersActions";
 import { NadeLight } from "../../models/Nade/Nade";
-import { AppError } from "../../utils/ErrorUtil";
+import { User } from "../../models/User";
 import { assertNever } from "../../utils/Common";
+import { AppError } from "../../utils/ErrorUtil";
+import { UsersActions } from "./UsersActions";
 
 export type UsersState = {
   viewingUser?: User;

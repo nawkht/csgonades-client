@@ -1,26 +1,26 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import moment from "moment";
+import Router from "next/router";
 import { NadeApi } from "../../api/NadeApi";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
-  addNadesForMapAction,
-  startLoadingNadeAction,
-  addSelectedNadeAction,
-  filterByTypeAction,
-  addRecentNadesAction,
-  addNadeError
-} from "./NadeActions";
-import { tokenSelector } from "../AuthStore/AuthSelectors";
-import {
-  NadeUpdateBody,
   NadeBody,
-  NadeStatusDTO
+  NadeStatusDTO,
+  NadeUpdateBody
 } from "../../models/Nade/Nade";
-import Router from "next/router";
-import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { NadeType } from "../../models/Nade/NadeType";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { tokenSelector } from "../AuthStore/AuthSelectors";
+import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import {
+  addNadeError,
+  addNadesForMapAction,
+  addRecentNadesAction,
+  addSelectedNadeAction,
+  filterByTypeAction,
+  startLoadingNadeAction
+} from "./NadeActions";
 import { nadesForMapTimeSinceFetchSelector } from "./NadeSelectors";
-import moment from "moment";
 
 export const filterByNadeTypeThunk = (nadeType: NadeType): ReduxThunkAction => {
   return async dispatch => {

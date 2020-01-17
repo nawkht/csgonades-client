@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
-  Technique,
   nadeTechniqueOptions,
+  Technique,
   techniqueString
 } from "../../../models/Nade/Technique";
 

@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { TypeToggler } from "./TypeToggler";
-import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { NadeSorter } from "./NadeSorter";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 import { MapPositionFilter } from "./MapPositionFilter";
 import { NadeFilterResetButton } from "./NadeFilterResetButton";
+import { NadeSorter } from "./NadeSorter";
+import { TypeToggler } from "./TypeToggler";
 
 type Props = {
   map: CsgoMap;

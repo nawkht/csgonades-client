@@ -1,7 +1,7 @@
-import { FC } from "react";
 import Link from "next/link";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { FC } from "react";
 import { Nade } from "../../models/Nade/Nade";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { dateFromNow } from "../../utils/DateUtils";
 
 type Props = {

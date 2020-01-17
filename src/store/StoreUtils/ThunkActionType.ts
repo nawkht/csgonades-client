@@ -1,7 +1,7 @@
-import { ThunkDispatch, ThunkAction } from "redux-thunk";
-import { AppState } from "..";
 import { useDispatch } from "react-redux";
-import { Action, AnyAction } from "redux";
+import { Action } from "redux";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { AppState } from "..";
 
 export type ReduxDispatch<A> = ThunkDispatch<AppState, any, Action<A>>;
 

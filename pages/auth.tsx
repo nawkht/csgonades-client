@@ -1,7 +1,7 @@
-import React from "react";
 import { NextPage } from "next";
-import { usePreloadUser } from "../src/store/AuthStore/AuthHooks";
+import React from "react";
 import { Dimmer, Loader } from "semantic-ui-react";
+import { usePreloadUser } from "../src/store/AuthStore/AuthHooks";
 
 interface Props {
   isFirstSignIn: boolean;

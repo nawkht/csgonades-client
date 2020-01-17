@@ -1,5 +1,5 @@
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { Dropdown } from "semantic-ui-react";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 
 export const NadeSorter = () => {

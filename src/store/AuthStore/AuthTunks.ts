@@ -1,13 +1,13 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { tokenSelector } from "./AuthSelectors";
-import { UserApi } from "../../api/UserApi";
-import { setUser, signOutUser, setToken } from "./AuthActions";
-import { AuthApi } from "../../api/TokenApi";
-import { redirectUserPage } from "../../utils/Common";
 import Router from "next/router";
-import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
 import { FavoriteApi } from "../../api/FavoriteApi";
+import { AuthApi } from "../../api/TokenApi";
+import { UserApi } from "../../api/UserApi";
+import { redirectUserPage } from "../../utils/Common";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
+import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { setToken, setUser, signOutUser } from "./AuthActions";
+import { tokenSelector } from "./AuthSelectors";
 
 export const serverSideUserInitThunkAction = (
   cookie?: string

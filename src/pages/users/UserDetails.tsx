@@ -1,10 +1,10 @@
-import { User } from "../../models/User";
 import { FC } from "react";
-import { formatDate } from "../../models/DateFormater";
-import { capitalize } from "../../utils/Common";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { Button } from "semantic-ui-react";
+import { formatDate } from "../../models/DateFormater";
+import { User } from "../../models/User";
 import { useIsAllowedUserEdit } from "../../store/AuthStore/AuthHooks";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { capitalize } from "../../utils/Common";
 
 type Props = {
   isEditing: boolean;

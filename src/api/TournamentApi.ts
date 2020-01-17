@@ -1,7 +1,7 @@
-import { TournamentCreateDTO, Tournament } from "../models/Tournament";
 import axios from "axios";
-import { AppResult, extractApiError } from "../utils/ErrorUtil";
 import { ok } from "neverthrow";
+import { Tournament, TournamentCreateDTO } from "../models/Tournament";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"

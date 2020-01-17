@@ -1,8 +1,8 @@
 import { Reducer } from "redux";
-import { NotificationActions, AppNotification } from "./NotificationActions";
-import { persistReducer, PersistConfig } from "redux-persist";
+import { PersistConfig, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { assertNever } from "../../utils/Common";
+import { AppNotification, NotificationActions } from "./NotificationActions";
 
 export interface ToolTips {
   seenFavoriteTip: boolean;

@@ -1,10 +1,10 @@
-import { FC, useState, useEffect } from "react";
 import Link from "next/link";
-import { UserNav } from "./UserNav";
+import { FC, useEffect, useState } from "react";
 import { Icon, Loader } from "semantic-ui-react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
+import { UserNav } from "./UserNav";
 
 const Header: FC = () => {
   const [loading, setIsLoading] = useState(false);

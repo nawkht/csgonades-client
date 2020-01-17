@@ -1,12 +1,12 @@
 import { NextPage } from "next";
+import { NadeNotFound } from "../src/pages/nades/NadeNotFound";
 import { NadePage } from "../src/pages/nades/NadePage";
 import {
-  useSelectedNade,
   nadeErrorSelector,
-  useNadeError
+  useNadeError,
+  useSelectedNade
 } from "../src/store/NadeStore/NadeSelectors";
 import { fetchNadeByIdAction } from "../src/store/NadeStore/NadeThunks";
-import { NadeNotFound } from "../src/pages/nades/NadeNotFound";
 
 const NadePageComponent: NextPage = () => {
   const error = useNadeError();

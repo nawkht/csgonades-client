@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
-import { useTournaments } from "../../store/TournamentStore/TournamentHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTournaments } from "../../store/TournamentStore/TournamentHooks";
 import { TournamentList } from "./TournamentList";
 
 export const TournamentsContainer: FC = () => {

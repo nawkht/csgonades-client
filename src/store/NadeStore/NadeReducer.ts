@@ -1,14 +1,14 @@
 import { Reducer } from "redux";
-import { NadeLight, Nade, MapCoordinates } from "../../models/Nade/Nade";
-import {
-  NadeActions,
-  FilterByNadeType,
-  SortingMethod,
-  AddNadesForMapAction
-} from "./NadeActions";
-import { AppError } from "../../utils/ErrorUtil";
-import { assertNever } from "../../utils/Common";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { MapCoordinates, Nade, NadeLight } from "../../models/Nade/Nade";
+import { assertNever } from "../../utils/Common";
+import { AppError } from "../../utils/ErrorUtil";
+import {
+  AddNadesForMapAction,
+  FilterByNadeType,
+  NadeActions,
+  SortingMethod
+} from "./NadeActions";
 
 export type NadeFilters = {
   smoke: boolean;

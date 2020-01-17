@@ -1,12 +1,12 @@
 import { UserLight } from "../User";
-import { Technique } from "./Technique";
-import { MapSite } from "./MapSite";
 import { CsgoMap } from "./CsGoMap";
+import { GfycatData } from "./GfycatData";
+import { MapSite } from "./MapSite";
+import { NadeImages } from "./NadeImages";
 import { Movement } from "./NadeMovement";
 import { Tickrate } from "./NadeTickrate";
 import { NadeType } from "./NadeType";
-import { NadeImages } from "./NadeImages";
-import { GfycatData } from "./GfycatData";
+import { Technique } from "./Technique";
 
 export type Status = "pending" | "accepted" | "declined" | "deleted";
 

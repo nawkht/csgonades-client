@@ -1,9 +1,9 @@
 import { FC, useEffect } from "react";
-import { useFetchFavoritedNades } from "../../store/FavoriteStore/FavoriteHooks";
 import { useSelector } from "react-redux";
+import { useFetchFavoritedNades } from "../../store/FavoriteStore/FavoriteHooks";
 import {
-  isLoadingFavoritedNadesSelector,
-  favoritedNades
+  favoritedNades,
+  isLoadingFavoritedNadesSelector
 } from "../../store/FavoriteStore/FavoriteSelectors";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { Layout } from "../../ui-common/layout/layout";

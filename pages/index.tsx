@@ -1,8 +1,8 @@
-import React from "react";
 import { NextPage } from "next";
+import React from "react";
 import { FrontPage } from "../src/pages/frontpage/FrontPage";
-import { fetchNewestNadesAction } from "../src/store/NadeStore/NadeThunks";
 import { fetchSiteStatsThunk } from "../src/store/GlobalStore/GlobalThunks";
+import { fetchNewestNadesAction } from "../src/store/NadeStore/NadeThunks";
 
 const Index: NextPage = props => {
   return <FrontPage />;

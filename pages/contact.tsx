@@ -1,9 +1,9 @@
 import { NextPage } from "next";
-import { Layout } from "../src/ui-common/layout/layout";
-import { Form, Button, Message } from "semantic-ui-react";
 import { useState } from "react";
-import { ConctactDTO } from "../src/models/Contact";
+import { Button, Form, Message } from "semantic-ui-react";
 import { ContactApi } from "../src/api/ContactApi";
+import { ConctactDTO } from "../src/models/Contact";
+import { Layout } from "../src/ui-common/layout/layout";
 
 const ContactPageContainer: NextPage = () => {
   const [name, setName] = useState<string>("");

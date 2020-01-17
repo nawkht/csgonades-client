@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
-import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 import { Icon } from "semantic-ui-react";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 
 export const NadeFilterResetButton: FC = () => {
   const { reset, canReset } = useNadeFilter();

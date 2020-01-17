@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
-import { LayoutActions } from "./LayoutActions";
 import { assertNever } from "../../utils/Common";
+import { LayoutActions } from "./LayoutActions";
 
 export type ThemeState = {
   isMobile: boolean;

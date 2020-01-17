@@ -1,7 +1,7 @@
-import { CSGNModal } from "../../../ui-common/CSGNModal";
-import { Input, Button, Message } from "semantic-ui-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Button, Input, Message } from "semantic-ui-react";
 import { useNewNade } from "../../../store/NewNadeStore/NewNadeHooks";
+import { CSGNModal } from "../../../ui-common/CSGNModal";
 
 type Props = {
   visible: boolean;

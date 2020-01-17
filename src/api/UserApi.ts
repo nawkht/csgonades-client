@@ -1,7 +1,7 @@
 import axios from "axios";
+import { ok } from "neverthrow";
 import { User, UserUpdateDTO } from "../models/User";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
-import { ok } from "neverthrow";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"

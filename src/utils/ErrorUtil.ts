@@ -1,6 +1,5 @@
-import { Result } from "neverthrow";
-import { err } from "neverthrow";
 import { AxiosError } from "axios";
+import { err, Result } from "neverthrow";
 
 export type AppError = {
   status: number;

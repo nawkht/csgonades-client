@@ -1,10 +1,10 @@
-import {
-  NotificationSeverity,
-  AppNotification
-} from "../../store/NotificationStore/NotificationActions";
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
+import { Icon } from "semantic-ui-react";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { Icon, Progress } from "semantic-ui-react";
+import {
+  AppNotification,
+  NotificationSeverity
+} from "../../store/NotificationStore/NotificationActions";
 import { useDismissToast } from "../../store/NotificationStore/NotificationHooks";
 
 type Props = {

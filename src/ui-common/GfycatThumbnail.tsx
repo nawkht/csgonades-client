@@ -1,9 +1,9 @@
-import { FC, useState, useEffect, useRef, useCallback } from "react";
-import { NadeLight } from "../models/Nade/Nade";
-import { GoogleAnalytics } from "../utils/GoogleAnalytics";
-import { NadeApi } from "../api/NadeApi";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { NadeApi } from "../api/NadeApi";
+import { NadeLight } from "../models/Nade/Nade";
+import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 
 type Props = {
   nade: NadeLight;

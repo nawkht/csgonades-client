@@ -1,8 +1,8 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { TournamentApi } from "../../api/TournamentApi";
-import { addTournamentsAction } from "./TournamentActions";
 import { TournamentCreateDTO } from "../../models/Tournament";
+import { tokenSelector } from "../AuthStore/AuthSelectors";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { addTournamentsAction } from "./TournamentActions";
 
 export const fetchTournamentsThunk = (): ReduxThunkAction => {
   return async dispatch => {

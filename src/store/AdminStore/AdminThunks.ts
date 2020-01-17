@@ -1,14 +1,14 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import { NadeApi } from "../../api/NadeApi";
+import { ReportApi } from "../../api/ReportApi";
+import { UserApi } from "../../api/UserApi";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { addNotificationActionThunk } from "../NotificationStore/NotificationThunks";
-import { NadeApi } from "../../api/NadeApi";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
   addPendingNadesAction,
-  addUsersAction,
-  addReportsAction
+  addReportsAction,
+  addUsersAction
 } from "./AdminActions";
-import { UserApi } from "../../api/UserApi";
-import { ReportApi } from "../../api/ReportApi";
 
 export const fetchPendingNadeThunk = (): ReduxThunkAction => {
   return async (dispatch, getState) => {

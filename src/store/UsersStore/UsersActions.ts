@@ -1,6 +1,6 @@
+import { NadeLight } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
 import { AppError } from "../../utils/ErrorUtil";
-import { NadeLight } from "../../models/Nade/Nade";
 
 type SetViewingUserAction = {
   type: "@@users/SET_VIEWING_USER";

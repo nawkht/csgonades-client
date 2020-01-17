@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { newNadeAddImageAction } from "./NewNadeActions";
-import { tryAddGfycat, trySubmitNewNade } from "./NewNadeThunks";
 import {
-  newNadeGfyIsLoading,
-  newNadeGfyError,
   newNadeGfyData,
+  newNadeGfyError,
+  newNadeGfyIsLoading,
   newNadeImageData,
   newNadeLoadingSubmit
 } from "./NewNadeSelectors";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { tryAddGfycat, trySubmitNewNade } from "./NewNadeThunks";
 
 export const useNewNade = () => {
   const dispatch = useDispatch();

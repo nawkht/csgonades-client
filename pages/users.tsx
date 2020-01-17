@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import { UserPage } from "../src/pages/users/UsersPage";
-import {
-  fetchUserAction,
-  fetchNadesForUserAction
-} from "../src/store/UsersStore/UsersThunks";
 import { userErrorSelector } from "../src/store/UsersStore/UsersSelectors";
+import {
+  fetchNadesForUserAction,
+  fetchUserAction
+} from "../src/store/UsersStore/UsersThunks";
 
 const UserPageComponent: NextPage = () => {
   return <UserPage />;

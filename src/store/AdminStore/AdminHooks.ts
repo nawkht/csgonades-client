@@ -1,15 +1,15 @@
-import { useSelector, useDispatch } from "react-redux";
-import {
-  adminRouteSelector,
-  pendingNadesSelector,
-  adminUsersSelector,
-  reportsSelector
-} from "./AdminSelectors";
+import { useDispatch, useSelector } from "react-redux";
 import { AdminRoutes, changeAdminRouteAction } from "./AdminActions";
 import {
+  adminRouteSelector,
+  adminUsersSelector,
+  pendingNadesSelector,
+  reportsSelector
+} from "./AdminSelectors";
+import {
   fetchPendingNadeThunk,
-  fetchUsersThunk,
-  fetchReportsThunk
+  fetchReportsThunk,
+  fetchUsersThunk
 } from "./AdminThunks";
 
 export const useAdminPage = () => {

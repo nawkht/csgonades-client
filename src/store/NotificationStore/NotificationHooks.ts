@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { displayToolTipThunk } from "./NotificationThunks";
 import { useEffect, useState } from "react";
-import { removeNotificationAction } from "./NotificationActions";
+import { useDispatch, useSelector } from "react-redux";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { removeNotificationAction, seenToolTip } from "./NotificationActions";
 import {
   hasSeenFavoriteTipSelector,
   hasSeenTip
 } from "./NotificationSelectors";
-import { seenToolTip } from "./NotificationActions";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { displayToolTipThunk } from "./NotificationThunks";
 
 export const useTryShowFavoriteTooltip = () => {
   const dispatch = useDispatch();

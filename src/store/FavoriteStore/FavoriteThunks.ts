@@ -1,15 +1,15 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { FavoriteApi } from "../../api/FavoriteApi";
-import {
-  addFavoriteAction,
-  removeFavoriteAction,
-  addAllFavoritesAction,
-  startLoadingFavoritedNadesAction,
-  stopLoadingFavoritedNades,
-  addFavoritedNadesAction
-} from "./FavoriteActions";
 import { NadeApi } from "../../api/NadeApi";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
+import {
+  addAllFavoritesAction,
+  addFavoriteAction,
+  addFavoritedNadesAction,
+  removeFavoriteAction,
+  startLoadingFavoritedNadesAction,
+  stopLoadingFavoritedNades
+} from "./FavoriteActions";
 
 export const fetchFavoritesThunkAction = (): ReduxThunkAction => {
   return async (dispatch, getState) => {

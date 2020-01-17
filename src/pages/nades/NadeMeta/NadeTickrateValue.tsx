@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
-  Tickrate,
   nadeTickrateOptions,
+  Tickrate,
   tickrateString
 } from "../../../models/Nade/NadeTickrate";
 

@@ -1,9 +1,9 @@
-import { FC, useState, ChangeEvent } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { Button, Input, Message } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
 import { Nade } from "../models/Nade/Nade";
-import { useUpdateNade } from "../store/NadeStore/NadeHooks";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { useUpdateNade } from "../store/NadeStore/NadeHooks";
 
 type Props = {
   nade: Nade;

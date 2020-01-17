@@ -1,8 +1,7 @@
-import { FC, useState, useRef, useEffect, MouseEvent, useMemo } from "react";
-import { CsgoMap } from "../../../models/Nade/CsGoMap";
+import { FC, MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "semantic-ui-react";
+import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { MapCoordinates } from "../../../models/Nade/Nade";
-import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {

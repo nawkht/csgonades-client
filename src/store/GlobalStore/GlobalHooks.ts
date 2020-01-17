@@ -1,7 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";
-import { siteStatsSelector, isNavOpenSelector } from "./GlobalSelectors";
+import { useDispatch, useSelector } from "react-redux";
+import { closeNavigationAction, toggleNavigationAction } from "./GlobalActions";
+import { isNavOpenSelector, siteStatsSelector } from "./GlobalSelectors";
 import { fetchSiteStatsThunk } from "./GlobalThunks";
-import { toggleNavigationAction, closeNavigationAction } from "./GlobalActions";
 
 export const useSiteStats = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
-import { Input, Icon } from "semantic-ui-react";
+import { Icon, Input } from "semantic-ui-react";
 import { Nade } from "../../models/Nade/Nade";
-import { FavoriteButton } from "./FavoriteButton";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { EditButton } from "../../ui-common/EditButton";
 import { useUpdateNade } from "../../store/NadeStore/NadeHooks";
+import { EditButton } from "../../ui-common/EditButton";
+import { FavoriteButton } from "./FavoriteButton";
 
 type Props = {
   nade: Nade;

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { notificationSelector } from "../../store/NotificationStore/NotificationSelectors";
 import { NotificationItem } from "./NotificationItem";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 export const Notifications: FC = () => {
   const { uiDimensions, layers } = useTheme();
   const notifications = useSelector(notificationSelector);

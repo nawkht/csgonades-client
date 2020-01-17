@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { User } from "../../models/User";
 import { NadeLight } from "../../models/Nade/Nade";
+import { User } from "../../models/User";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { UserDetails } from "./UserDetails";
-import { UserEditor } from "./UserEditor";
 import {
   useUsersActions,
   useUsersState
 } from "../../store/UsersStore/UsersHooks";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
+import { UserDetails } from "./UserDetails";
+import { UserEditor } from "./UserEditor";
 
 type Props = {
   user: User;

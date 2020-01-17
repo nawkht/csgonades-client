@@ -1,5 +1,5 @@
-import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { StatsApi } from "../../api/StatsApi";
+import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { addSiteStatsActon } from "./GlobalActions";
 
 export const fetchSiteStatsThunk = (): ReduxThunkAction => {

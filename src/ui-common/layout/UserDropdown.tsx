@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { User } from "../../models/User";
-import { Dropdown } from "semantic-ui-react";
 import Router from "next/router";
+import { FC } from "react";
+import { Dropdown } from "semantic-ui-react";
+import { User } from "../../models/User";
 import {
-  useSignOut,
-  useIsAdminOrModerator
+  useIsAdminOrModerator,
+  useSignOut
 } from "../../store/AuthStore/AuthHooks";
-import { redirectUserPage } from "../../utils/Common";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { redirectUserPage } from "../../utils/Common";
 
 type Props = {
   user: User;

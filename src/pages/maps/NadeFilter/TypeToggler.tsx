@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { Popup } from "semantic-ui-react";
-import { NadeType, nadeTypeString } from "../../../models/Nade/NadeType";
+import { NadeType } from "../../../models/Nade/NadeType";
 import { iconFromType } from "../../../utils/Common";
 
 type Props = {

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { Tournament } from "../../models/Tournament";
-import { prettyDate } from "../../utils/DateUtils";
 import { Flag, Icon } from "semantic-ui-react";
+import { Tournament } from "../../models/Tournament";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { prettyDate } from "../../utils/DateUtils";
 
 type Props = {
   tournaments: Tournament[];

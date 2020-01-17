@@ -1,6 +1,6 @@
 import { NadeLight } from "../../models/Nade/Nade";
-import { User } from "../../models/User";
 import { Report } from "../../models/Report";
+import { User } from "../../models/User";
 
 export type AdminRoutes = "pending-nades" | "user" | "tournaments" | "reports";
 

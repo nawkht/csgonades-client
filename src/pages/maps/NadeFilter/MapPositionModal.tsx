@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
-import { MapPositionSelector } from "./MapPositionSelector";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { MapCoordinates } from "../../../models/Nade/Nade";
+import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { MapPositionSelector } from "./MapPositionSelector";
 
 type Props = {
   map: CsgoMap;

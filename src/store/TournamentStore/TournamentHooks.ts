@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTournamentsThunk, saveTournamentThunk } from "./TournamentThunks";
 import { TournamentCreateDTO } from "../../models/Tournament";
 import { tournamentSelector } from "./TournamentSelectors";
+import { fetchTournamentsThunk, saveTournamentThunk } from "./TournamentThunks";
 
 export const useTournaments = () => {
   const dispatch = useDispatch();

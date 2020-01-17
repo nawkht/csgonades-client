@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
-import { Form, Button } from "semantic-ui-react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useTournaments } from "../../store/TournamentStore/TournamentHooks";
+import { Button, Form } from "semantic-ui-react";
 import { TournamentCreateDTO } from "../../models/Tournament";
+import { useTournaments } from "../../store/TournamentStore/TournamentHooks";
 
 export const AdminTournaments: FC = () => {
   const { saveTournament } = useTournaments();

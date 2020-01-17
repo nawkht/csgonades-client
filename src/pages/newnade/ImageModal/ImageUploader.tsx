@@ -1,5 +1,5 @@
+import { ChangeEvent, useRef, useState } from "react";
 import ReactCrop from "react-image-crop";
-import { useState, ChangeEvent, useRef } from "react";
 import { Button } from "semantic-ui-react";
 
 type Props = {

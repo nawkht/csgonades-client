@@ -1,14 +1,14 @@
-import { FC, useState, useEffect } from "react";
-import { Icon } from "semantic-ui-react";
-import { NadeLight, Status } from "../models/Nade/Nade";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
-import { tickrateString } from "../models/Nade/NadeTickrate";
-import { iconFromType, kFormatter } from "../utils/Common";
-import { NadeApi } from "../api/NadeApi";
-import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 import Router from "next/router";
+import { FC, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { Icon } from "semantic-ui-react";
+import { NadeApi } from "../api/NadeApi";
+import { NadeLight, Status } from "../models/Nade/Nade";
+import { tickrateString } from "../models/Nade/NadeTickrate";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { iconFromType, kFormatter } from "../utils/Common";
+import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 
 interface Props {
   nade: NadeLight;

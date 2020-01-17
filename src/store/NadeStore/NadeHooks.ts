@@ -1,43 +1,43 @@
-import {
-  Nade,
-  NadeBody,
-  NadeUpdateBody,
-  NadeStatusDTO,
-  NadeLight,
-  MapCoordinates
-} from "../../models/Nade/Nade";
-import { useSelector, useDispatch } from "react-redux";
-import { userSelector } from "../AuthStore/AuthSelectors";
+import moment from "moment";
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
-  fetchNadesByMapActionThunk,
-  createNadeAction,
-  updateNadeGfycatAction,
-  deleteNadeAction,
-  updateNadeUserAction,
-  updateNadeAction,
-  updateNadeStatusAction,
-  filterByNadeTypeThunk
-} from "./NadeThunks";
-import {
-  nadeFilterSelector,
-  sortingMethodSelector,
-  nadesForMapSelector,
-  mapFilterCoordinateSelector,
-  postionModalOpenSelector
-} from "./NadeSelectors";
+  MapCoordinates,
+  Nade,
+  NadeBody,
+  NadeLight,
+  NadeStatusDTO,
+  NadeUpdateBody
+} from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { userSelector } from "../AuthStore/AuthSelectors";
 import {
-  SortingMethod,
-  setSortingMethodAction,
   filterByMapCoordsAction,
   resetNadeFilterAction,
+  setSortingMethodAction,
+  SortingMethod,
   toggleMapPositionModalAction
 } from "./NadeActions";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { useMemo } from "react";
-import moment from "moment";
 import { NadeFilters } from "./NadeReducer";
+import {
+  mapFilterCoordinateSelector,
+  nadeFilterSelector,
+  nadesForMapSelector,
+  postionModalOpenSelector,
+  sortingMethodSelector
+} from "./NadeSelectors";
+import {
+  createNadeAction,
+  deleteNadeAction,
+  fetchNadesByMapActionThunk,
+  filterByNadeTypeThunk,
+  updateNadeAction,
+  updateNadeGfycatAction,
+  updateNadeStatusAction,
+  updateNadeUserAction
+} from "./NadeThunks";
 
 export const useNadeFilter = () => {
   const dispatch = useDispatch();

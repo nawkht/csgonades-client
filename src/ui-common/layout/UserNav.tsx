@@ -1,11 +1,11 @@
+import Link from "next/link";
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { userSelector } from "../../store/AuthStore/AuthSelectors";
-import Link from "next/link";
 import { Icon } from "semantic-ui-react";
-import { UserDropdown } from "./UserDropdown";
-import { SignInnButton } from "./SignInnButton";
+import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { SignInnButton } from "./SignInnButton";
+import { UserDropdown } from "./UserDropdown";
 
 export const UserNav: FC = () => {
   const { colors, isMobile, uiDimensions } = useTheme();

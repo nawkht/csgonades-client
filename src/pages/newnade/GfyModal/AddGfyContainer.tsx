@@ -1,8 +1,8 @@
-import { Header, Icon, Button } from "semantic-ui-react";
-import { useState, FC } from "react";
-import { NewNadeGfycatModal } from "./NewNadeGfycatModal";
-import { GfycatLargePlayer } from "../../../ui-common/GfycatLargePlayer";
+import { FC, useState } from "react";
+import { Button, Header, Icon } from "semantic-ui-react";
 import { useNewNade } from "../../../store/NewNadeStore/NewNadeHooks";
+import { GfycatLargePlayer } from "../../../ui-common/GfycatLargePlayer";
+import { NewNadeGfycatModal } from "./NewNadeGfycatModal";
 
 export const AddGfyContainer: FC = () => {
   const { gfyData } = useNewNade();

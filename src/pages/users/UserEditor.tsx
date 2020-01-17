@@ -1,14 +1,14 @@
 import { FC, useState } from "react";
+import ReactDatepicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Button, Form, TextArea } from "semantic-ui-react";
 import { User, UserUpdateDTO } from "../../models/User";
-import { Button, TextArea, Form } from "semantic-ui-react";
+import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import {
   useUsersActions,
   useUsersState
 } from "../../store/UsersStore/UsersHooks";
-import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
-import ReactDatepicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 type Props = {
   user: User;

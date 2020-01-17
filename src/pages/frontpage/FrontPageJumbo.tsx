@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Button } from "semantic-ui-react";
 
 const FrontPageJumbo: FC = () => {
   return (

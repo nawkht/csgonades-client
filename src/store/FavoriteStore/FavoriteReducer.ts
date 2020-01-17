@@ -1,8 +1,8 @@
 import { Reducer } from "redux";
 import { Favorite } from "../../models/Favorite";
-import { FavoriteActions } from "./FavoriteActions";
 import { NadeLight } from "../../models/Nade/Nade";
 import { assertNever } from "../../utils/Common";
+import { FavoriteActions } from "./FavoriteActions";
 
 export type FavoritesState = {
   favorites: Favorite[];

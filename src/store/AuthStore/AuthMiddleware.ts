@@ -1,7 +1,7 @@
 import { Middleware } from "redux";
 import { AppState } from "..";
-import { tokenExpiredOrAboutTo } from "../../utils/TokenUtil";
 import { AuthApi } from "../../api/TokenApi";
+import { tokenExpiredOrAboutTo } from "../../utils/TokenUtil";
 import { setToken, signOutUser } from "./AuthActions";
 
 export const tokenRefreshMiddleware: Middleware<any, AppState> = ({

@@ -1,12 +1,12 @@
+import Link from "next/link";
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
 import { NadeLight, Status } from "../models/Nade/Nade";
-import { GfycatThumbnail } from "./GfycatThumbnail";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { tickrateString } from "../models/Nade/NadeTickrate";
-import Link from "next/link";
+import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { iconFromType, kFormatter } from "../utils/Common";
 import { isLessThanDaysAgo } from "../utils/DateUtils";
+import { GfycatThumbnail } from "./GfycatThumbnail";
 
 interface Props {
   nade: NadeLight;

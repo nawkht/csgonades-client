@@ -1,7 +1,7 @@
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
-  AppNotificationCreate,
   addNotificationAction,
+  AppNotificationCreate,
   removeNotificationAction,
   seenToolTip
 } from "./NotificationActions";

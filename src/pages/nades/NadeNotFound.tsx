@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Layout } from "../../ui-common/layout/layout";
 import { Message } from "semantic-ui-react";
+import { Layout } from "../../ui-common/layout/layout";
 
 export const NadeNotFound: FC = () => {
   return (

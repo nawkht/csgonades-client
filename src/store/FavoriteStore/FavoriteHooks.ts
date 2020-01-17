@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
-import { allFavoritesSelector } from "./FavoriteSelectors";
+import { useDispatch, useSelector } from "react-redux";
 import { Favorite } from "../../models/Favorite";
+import { allFavoritesSelector } from "./FavoriteSelectors";
 import {
   addFavoriteThunkAction,
   addUnFavoriteThunkAction,
-  fetchFavoritesThunkAction,
-  fetchFavoritedNadesThunkAction
+  fetchFavoritedNadesThunkAction,
+  fetchFavoritesThunkAction
 } from "./FavoriteThunks";
 
 export const useFetchFavorites = () => {

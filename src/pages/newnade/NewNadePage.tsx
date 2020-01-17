@@ -1,9 +1,9 @@
 import { FC } from "react";
+import { Button, Divider, Grid, Segment } from "semantic-ui-react";
+import { useNewNade } from "../../store/NewNadeStore/NewNadeHooks";
 import { Layout } from "../../ui-common/layout/layout";
-import { Button, Segment, Grid, Divider } from "semantic-ui-react";
 import { AddGfyContainer } from "./GfyModal/AddGfyContainer";
 import { AddImageContainer } from "./ImageModal/AddImageContainer";
-import { useNewNade } from "../../store/NewNadeStore/NewNadeHooks";
 
 export const NewNadePage: FC = () => {
   const { gfyData, imageData, submit, loadingSubmit } = useNewNade();

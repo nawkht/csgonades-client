@@ -1,9 +1,9 @@
 import { Reducer } from "redux";
-import { AdminActions, AdminRoutes } from "./AdminActions";
 import { NadeLight } from "../../models/Nade/Nade";
+import { Report } from "../../models/Report";
 import { User } from "../../models/User";
 import { assertNever } from "../../utils/Common";
-import { Report } from "../../models/Report";
+import { AdminActions, AdminRoutes } from "./AdminActions";
 
 export type AdminState = {
   route: AdminRoutes;

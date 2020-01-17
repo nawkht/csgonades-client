@@ -1,15 +1,15 @@
-import {
-  Nade,
-  NadeBody,
-  NadeUpdateBody,
-  NadeLight,
-  NadeStatusDTO
-} from "../models/Nade/Nade";
 import axios from "axios";
-import { AppResult, extractApiError } from "../utils/ErrorUtil";
 import { ok } from "neverthrow";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { GfycatData } from "../models/Nade/GfycatData";
+import {
+  Nade,
+  NadeBody,
+  NadeLight,
+  NadeStatusDTO,
+  NadeUpdateBody
+} from "../models/Nade/Nade";
+import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"

@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { FrontPageStats } from "./FrontPageStats";
-import { Layout } from "../../ui-common/layout/layout";
-import { FrontPageJumbo } from "./FrontPageJumbo";
 import { useSelector } from "react-redux";
-import { recentNadesSelector } from "../../store/NadeStore/NadeSelectors";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { recentNadesSelector } from "../../store/NadeStore/NadeSelectors";
+import { Layout } from "../../ui-common/layout/layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
+import { FrontPageJumbo } from "./FrontPageJumbo";
+import { FrontPageStats } from "./FrontPageStats";
 import { TournamentsContainer } from "./Tournaments";
 
 export const FrontPage: FC = () => {

@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { Nade } from "../../../models/Nade/Nade";
-import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
-import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
-import { EditButton } from "../../../ui-common/EditButton";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
+import { EditButton } from "../../../ui-common/EditButton";
+import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
+import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
 
 type Props = {
   nade: Nade;

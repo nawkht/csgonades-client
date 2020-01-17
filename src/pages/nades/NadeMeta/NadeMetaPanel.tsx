@@ -1,16 +1,16 @@
 import { FC, useState } from "react";
-import { Nade } from "../../../models/Nade/Nade";
 import { Icon } from "semantic-ui-react";
+import { Nade } from "../../../models/Nade/Nade";
+import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
+import { EditButton } from "../../../ui-common/EditButton";
+import { NadeMapSiteValue } from "./NadeMapSiteValue";
 import { NadeMapValue } from "./NadeMapValue";
 import { NadeMovementValue } from "./NadeMovementValue";
-import { NadeTickrateValue } from "./NadeTickrateValue";
 import { NadeTechniqueValue } from "./NadeTechniqueValue";
-import { NadeViewsValue } from "./NadeViewsValue";
-import { NadeMapSiteValue } from "./NadeMapSiteValue";
-import { EditButton } from "../../../ui-common/EditButton";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { NadeTickrateValue } from "./NadeTickrateValue";
 import { NadeTypeValue } from "./NadeTypeValue";
-import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
+import { NadeViewsValue } from "./NadeViewsValue";
 
 type Props = {
   nade: Nade;

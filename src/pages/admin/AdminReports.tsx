@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { FC, useEffect } from "react";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
-import Link from "next/link";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 export const AdminReports: FC = () => {

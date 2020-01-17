@@ -1,11 +1,11 @@
+import { FC, useEffect, useState } from "react";
 import { Icon, Popup } from "semantic-ui-react";
+import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import {
   useAddFavorite,
-  useUnfavorite,
-  useIsFavorited
+  useIsFavorited,
+  useUnfavorite
 } from "../../store/FavoriteStore/FavoriteHooks";
-import { FC, useState, useEffect } from "react";
-import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 
 type Props = {
   nadeId: string;
