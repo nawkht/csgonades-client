@@ -11,6 +11,10 @@ export type AddNadesForMapAction = {
   nades: NadeLight[];
 };
 
+export type ToogleMapPositionModal = {
+  type: "@@nades/TOGGLE_MAP_POSITION_MODAL";
+};
+
 export type FilterByMapCoordinates = {
   type: "@@nades/FILTER_BY_MAP_COORDINATES";
   coords: MapCoordinates;
@@ -63,7 +67,8 @@ export type NadeActions =
   | ResetNadeFilter
   | AddNadeError
   | SetSortingNameAction
-  | FilterByMapCoordinates;
+  | FilterByMapCoordinates
+  | ToogleMapPositionModal;
 
 export type SortingMethod = "name" | "date" | "score";
 
@@ -122,4 +127,8 @@ export const filterByMapCoordsAction = (
 ): FilterByMapCoordinates => ({
   type: "@@nades/FILTER_BY_MAP_COORDINATES",
   coords
+});
+
+export const toggleMapPositionModalAction = (): ToogleMapPositionModal => ({
+  type: "@@nades/TOGGLE_MAP_POSITION_MODAL"
 });

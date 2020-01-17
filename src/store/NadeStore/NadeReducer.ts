@@ -33,12 +33,14 @@ export type NadeState = {
   readonly loadingNadesForMap: boolean;
   readonly nadeFilter: NadeFilters;
   readonly error?: AppError;
+  readonly positionModalOpen: boolean;
 };
 
 const initialState: NadeState = {
   nadesByMap: {},
   recentNades: [],
   loadingNadesForMap: false,
+  positionModalOpen: false,
   nadeFilter: {
     flash: false,
     hegrenade: false,
@@ -101,6 +103,11 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
           ...state.nadeFilter,
           sorthingMethod: action.sortingMethod
         }
+      };
+    case "@@nades/TOGGLE_MAP_POSITION_MODAL":
+      return {
+        ...state,
+        positionModalOpen: !state.positionModalOpen
       };
     default:
       assertNever(action);

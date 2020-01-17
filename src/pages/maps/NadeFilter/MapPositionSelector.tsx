@@ -1,14 +1,10 @@
-import { FC, useState, useRef, MouseEvent, SyntheticEvent } from "react";
-import { MapCoordinates } from "../../../models/Nade/Nade";
-import { CsgoMap } from "../../../models/Nade/CsGoMap";
+import { FC, MouseEvent, SyntheticEvent, useRef, useState } from "react";
 import { Icon } from "semantic-ui-react";
+import { CsgoMap } from "../../../models/Nade/CsGoMap";
+import { MapCoordinates } from "../../../models/Nade/Nade";
+import { useNadeCoordinatesForMap } from "../../../store/NadeStore/NadeHooks";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
-import {
-  useRawNadesForMap,
-  useNadeCoordinatesForMap
-} from "../../../store/NadeStore/NadeHooks";
 import { MapPosIcon } from "./MapPosIcon";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 
 type Props = {
   onDismiss: () => void;
@@ -18,7 +14,6 @@ type Props = {
 
 export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { layers } = useTheme();
   const [mapLoaded, setMapLoade] = useState(false);
   const nades = useNadeCoordinatesForMap(map);
   const [elementOffset, setElementOffset] = useState({ left: 0, top: 0 });
@@ -89,7 +84,7 @@ export const MapPositionSelector: FC<Props> = ({ map, onClick, onDismiss }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          z-index: 2000;
+          z-index: 999;
           display: flex;
           background: rgba(0, 0, 0, 0.8);
           align-items: center;

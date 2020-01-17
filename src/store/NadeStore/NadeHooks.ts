@@ -23,14 +23,16 @@ import {
   nadeFilterSelector,
   sortingMethodSelector,
   nadesForMapSelector,
-  mapFilterCoordinateSelector
+  mapFilterCoordinateSelector,
+  postionModalOpenSelector
 } from "./NadeSelectors";
 import { NadeType } from "../../models/Nade/NadeType";
 import {
   SortingMethod,
   setSortingMethodAction,
   filterByMapCoordsAction,
-  resetNadeFilterAction
+  resetNadeFilterAction,
+  toggleMapPositionModalAction
 } from "./NadeActions";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { useMemo } from "react";
@@ -42,6 +44,7 @@ export const useNadeFilter = () => {
   const nadeFilter = useSelector(nadeFilterSelector);
   const sortingMethod = useSelector(sortingMethodSelector);
   const coords = useSelector(mapFilterCoordinateSelector);
+  const postionModalOpen = useSelector(postionModalOpenSelector);
 
   const canReset = useMemo(() => {
     const hasCoords = !coords;
@@ -76,6 +79,10 @@ export const useNadeFilter = () => {
     dispatch(filterByMapCoordsAction(coords));
   }
 
+  function toggleMapPositionModal() {
+    dispatch(toggleMapPositionModalAction());
+  }
+
   return {
     nadeFilter,
     filterByType,
@@ -84,7 +91,9 @@ export const useNadeFilter = () => {
     setSortingMethod,
     sortingMethod,
     filterByMapCoords,
-    coords
+    coords,
+    toggleMapPositionModal,
+    postionModalOpen
   };
 };
 

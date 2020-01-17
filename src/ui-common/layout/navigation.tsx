@@ -1,10 +1,9 @@
-import { FC } from "react";
-import { MapLink } from "./MapLink";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { FC } from "react";
 import { isMobile } from "react-device-detect";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { MapLink } from "./MapLink";
 
 const MapNavigation: FC = () => {
   const { isNavOpen } = useNavigation();
@@ -33,12 +32,19 @@ const MapNavigation: FC = () => {
       </aside>
       <style jsx>{`
         #mapnavigation {
+          position: fixed;
+          top: ${uiDimensions.HEADER_HEIGHT}px;
+          left: 0;
+          bottom: 0;
+          z-index: 999;
+          border-right: 1px solid ${colors.PRIMARY_BORDER};
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           transition: left ${durations.transition}s;
           overflow-y: auto;
           background: white;
+          width: ${uiDimensions.SIDEBAR_WIDTH}px;
         }
 
         .closed {
@@ -57,12 +63,7 @@ const MapNavigation: FC = () => {
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
           #mapnavigation {
-            position: absolute;
-            top: ${uiDimensions.HEADER_HEIGHT}px;
             left: -${uiDimensions.SIDEBAR_WIDTH}px;
-            bottom: 0;
-            z-index: 999;
-            border-right: 1px solid ${colors.PRIMARY_BORDER};
           }
         }
       `}</style>

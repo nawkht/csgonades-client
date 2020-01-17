@@ -6,6 +6,7 @@ import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { useNadesForMap } from "../../store/NadeStore/NadeHooks";
+import { MapPositionModal } from "./NadeFilter/MapPositionModal";
 
 type Props = {
   map: CsgoMap;
@@ -27,10 +28,12 @@ export const MapPage: FC<Props> = ({ map }) => {
           )} on these settings, maybe you can add some!`}
         />
       </div>
+
+      <MapPositionModal map={map} />
+
       <style jsx>{`
         .nade-list {
-          margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          min-height: 100%;
+          padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
         }
 
         @media only screen and (max-width: 860px) {

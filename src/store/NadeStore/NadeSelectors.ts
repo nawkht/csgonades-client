@@ -45,6 +45,9 @@ export const nadeFilterSelector = (state: AppState) => {
   return state.nadeStore.nadeFilter;
 };
 
+export const postionModalOpenSelector = (state: AppState) =>
+  state.nadeStore.positionModalOpen;
+
 export const useIsLoadingNade = () => {
   const isLoading = useSelector(nadeLoadingSelector);
   return isLoading;

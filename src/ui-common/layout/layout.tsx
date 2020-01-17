@@ -1,14 +1,14 @@
 import Head from "next/head";
-import { Header } from "./header";
-import { MapNavigation } from "./navigation";
-import { Notifications } from "./Notifications";
 import { useEffect, useState } from "react";
-import { useTheme, useThemeSync } from "../../store/LayoutStore/LayoutHooks";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { useTheme, useThemeSync } from "../../store/LayoutStore/LayoutHooks";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { Footer } from "./Footer";
+import { Header } from "./header";
+import { MapNavigation } from "./navigation";
+import { Notifications } from "./Notifications";
 
 interface Props {
   title?: string;
@@ -81,15 +81,13 @@ export const Layout: React.FC<Props> = ({
         {metaThumbNail && <meta property="og:image" content={metaThumbNail} />}
       </Head>
 
+      <header>
+        <Header />
+      </header>
+
+      <MapNavigation />
+
       <div id="layout">
-        <header>
-          <Header />
-        </header>
-
-        <aside>
-          <MapNavigation />
-        </aside>
-
         <main>{children}</main>
 
         <footer>
@@ -101,41 +99,34 @@ export const Layout: React.FC<Props> = ({
 
       <style jsx>{`
         #layout {
-          display: grid;
-          grid-template-columns: ${uiDimensions.SIDEBAR_WIDTH}px 2fr 2fr 2fr;
-          grid-template-rows: ${uiDimensions.HEADER_HEIGHT}px auto 45px;
-          grid-template-areas:
-            "header header header header"
-            "sidebar main main main"
-            "footer footer footer footer";
-          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
         }
 
         header {
-          grid-area: header;
           max-height: ${uiDimensions.HEADER_HEIGHT}px;
-        }
-
-        aside {
-          grid-area: sidebar;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 900;
         }
 
         main {
-          grid-area: main;
           background: #f3f3f3;
+          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
+          margin-top: ${uiDimensions.HEADER_HEIGHT}px;
+          flex: 1;
         }
 
         footer {
-          grid-area: footer;
+          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
-          #layout {
-            grid-template-areas:
-              "header header header header"
-              "main main main main"
-              "footer footer footer footer";
+          main {
+            margin-left: 0;
           }
         }
       `}</style>
