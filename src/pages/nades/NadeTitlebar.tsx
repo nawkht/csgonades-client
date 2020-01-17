@@ -1,9 +1,11 @@
+import Router from "next/router";
 import { FC, useState } from "react";
 import { Icon, Input } from "semantic-ui-react";
 import { Nade } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../../store/NadeStore/NadeHooks";
 import { EditButton } from "../../ui-common/EditButton";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { FavoriteButton } from "./FavoriteButton";
 
 type Props = {
@@ -27,6 +29,11 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
   function onCancel() {
     setIsEditing(false);
     setNadeTitle(nade.title);
+  }
+
+  function navigateBack() {
+    GoogleAnalytics.event("NadePage", "Navigate back");
+    Router.back();
   }
 
   return (
@@ -54,6 +61,9 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
 
         {!isEditing && (
           <div className="title-contrainer">
+            <div className="back-btn" onClick={navigateBack}>
+              <Icon name="chevron left" /> Back
+            </div>
             <h1>{theTitle}</h1>
             {allowEdit && (
               <div className="title-edit-button">
@@ -90,9 +100,10 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
           display: inline-flex;
           padding: 0;
           margin: 0;
-          font-size: ${theme.isMobile ? "1.3em" : "1.73em"};
+          font-size: ${theme.isMobile ? "1.3em" : "1.4em"};
           font-weight: normal;
           align-items: center;
+          margin-top: -2px;
         }
 
         .title-contrainer:hover .title-edit-button {
@@ -108,6 +119,20 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
         .title-edit-container {
           display: flex;
           align-items: center;
+        }
+
+        .back-btn {
+          cursor: pointer;
+          font-size: 1.2em;
+          opacity: 0.8;
+          margin-right: 12px;
+          border-right: 1px solid ${theme.colors.PRIMARY_BORDER};
+          padding-right: 12px;
+          font-weight: 400;
+        }
+
+        .back-btn:hover {
+          opacity: 1;
         }
       `}</style>
     </>
