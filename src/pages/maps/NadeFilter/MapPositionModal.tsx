@@ -13,7 +13,7 @@ export const MapPositionModal: FC<Props> = ({ map }) => {
     postionModalOpen,
     toggleMapPositionModal,
     filterByMapCoords
-  } = useNadeFilter();
+  } = useNadeFilter(map);
 
   const onSelect = (coords: MapCoordinates) => {
     toggleMapPositionModal(false);

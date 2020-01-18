@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const MapPositionFilter: FC<Props> = ({ map }) => {
-  const { toggleMapPositionModal, coords } = useNadeFilter();
+  const { toggleMapPositionModal, coords } = useNadeFilter(map);
   const { displayCoordsTip, onCloseCoordsTip } = useTryShowCoordTip();
 
   const hasCoordsSelected = !!coords;

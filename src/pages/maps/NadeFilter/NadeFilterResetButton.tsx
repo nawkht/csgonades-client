@@ -1,10 +1,15 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
+import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 
-export const NadeFilterResetButton: FC = () => {
-  const { reset, canReset } = useNadeFilter();
+type Props = {
+  map: CsgoMap;
+};
+
+export const NadeFilterResetButton: FC<Props> = ({ map }) => {
+  const { reset, canReset } = useNadeFilter(map);
 
   function onReset() {
     GoogleAnalytics.event("Nade filter", `Reset`);

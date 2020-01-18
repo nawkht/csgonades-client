@@ -1,10 +1,16 @@
+import { FC } from "react";
 import { Dropdown } from "semantic-ui-react";
+import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 
-export const NadeSorter = () => {
-  const { colors, layers } = useTheme();
-  const { sortingMethod, setSortingMethod } = useNadeFilter();
+type Props = {
+  map: CsgoMap;
+};
+
+export const NadeSorter: FC<Props> = ({ map }) => {
+  const { colors } = useTheme();
+  const { sortingMethod, setSortingMethod } = useNadeFilter(map);
 
   return (
     <>

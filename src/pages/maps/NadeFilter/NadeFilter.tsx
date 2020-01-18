@@ -13,7 +13,7 @@ type Props = {
 
 export const NadeFilter: FC<Props> = ({ map }) => {
   const { uiDimensions, layers } = useTheme();
-  const { filterByType, nadeFilter } = useNadeFilter();
+  const { filterByType, nadeFilter } = useNadeFilter(map);
 
   const { flash, hegrenade, molotov, smoke } = nadeFilter;
 
@@ -58,11 +58,11 @@ export const NadeFilter: FC<Props> = ({ map }) => {
             </div>
 
             <div className="nade-sorter">
-              <NadeSorter />
+              <NadeSorter map={map} />
             </div>
           </div>
 
-          <NadeFilterResetButton />
+          <NadeFilterResetButton map={map} />
         </div>
       </div>
       <style jsx>{`

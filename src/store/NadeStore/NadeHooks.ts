@@ -22,11 +22,9 @@ import {
 } from "./NadeActions";
 import { NadeFilters } from "./NadeReducer";
 import {
-  mapFilterCoordinateSelector,
-  nadeFilterSelector,
+  filterForMapSelector,
   nadesForMapSelector,
-  postionModalOpenSelector,
-  sortingMethodSelector
+  postionModalOpenSelector
 } from "./NadeSelectors";
 import {
   createNadeAction,
@@ -39,11 +37,10 @@ import {
   updateNadeUserAction
 } from "./NadeThunks";
 
-export const useNadeFilter = () => {
+export const useNadeFilter = (map: CsgoMap) => {
   const dispatch = useDispatch();
-  const nadeFilter = useSelector(nadeFilterSelector);
-  const sortingMethod = useSelector(sortingMethodSelector);
-  const coords = useSelector(mapFilterCoordinateSelector);
+  const nadeFilter = useSelector(filterForMapSelector(map));
+  const { sortingMethod, coords } = nadeFilter;
   const postionModalOpen = useSelector(postionModalOpenSelector);
 
   const canReset = useMemo(() => {
@@ -63,20 +60,20 @@ export const useNadeFilter = () => {
   }, [coords, sortingMethod, nadeFilter]);
 
   function filterByType(nadeType: NadeType) {
-    dispatch(filterByNadeTypeThunk(nadeType));
+    dispatch(filterByNadeTypeThunk(nadeType, map));
   }
 
   function reset() {
-    dispatch(resetNadeFilterAction());
+    dispatch(resetNadeFilterAction(map));
   }
 
   function setSortingMethod(method: SortingMethod) {
     GoogleAnalytics.event("Nade filter", `Sort by ${method}`);
-    dispatch(setSortingMethodAction(method));
+    dispatch(setSortingMethodAction(method, map));
   }
 
   function filterByMapCoords(coords: MapCoordinates) {
-    dispatch(filterByMapCoordsAction(coords));
+    dispatch(filterByMapCoordsAction(coords, map));
   }
 
   const toggleMapPositionModal = useCallback(
@@ -154,7 +151,7 @@ export const useUpdateNadeStatus = () => {
 
 export const useNadesForMap = (map: CsgoMap) => {
   const nadesForMap = useSelector(nadesForMapSelector(map));
-  const nadeFilter = useSelector(nadeFilterSelector);
+  const nadeFilter = useSelector(filterForMapSelector(map));
 
   const nades = useMemo(() => {
     if (!nadesForMap) {
@@ -162,7 +159,7 @@ export const useNadesForMap = (map: CsgoMap) => {
     }
     let processedNades;
 
-    processedNades = sortNades(nadeFilter.sorthingMethod, nadesForMap);
+    processedNades = sortNades(nadeFilter.sortingMethod, nadesForMap);
     processedNades = applyNadeFilter(nadeFilter, processedNades);
 
     if (nadeFilter.coords) {

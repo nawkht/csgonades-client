@@ -22,9 +22,12 @@ import {
 } from "./NadeActions";
 import { nadesForMapTimeSinceFetchSelector } from "./NadeSelectors";
 
-export const filterByNadeTypeThunk = (nadeType: NadeType): ReduxThunkAction => {
+export const filterByNadeTypeThunk = (
+  nadeType: NadeType,
+  map: CsgoMap
+): ReduxThunkAction => {
   return async dispatch => {
-    dispatch(filterByTypeAction(nadeType));
+    dispatch(filterByTypeAction(nadeType, map));
     GoogleAnalytics.event("Nade filter", `Filter by ${nadeType}`);
   };
 };

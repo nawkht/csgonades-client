@@ -15,7 +15,7 @@ export type NadeFilters = {
   flash: boolean;
   hegrenade: boolean;
   molotov: boolean;
-  sorthingMethod: SortingMethod;
+  sortingMethod: SortingMethod;
   coords?: MapCoordinates;
 };
 
@@ -26,28 +26,42 @@ type MapNadeDate = {
 
 type NadesByMap = { [map in CsgoMap]?: MapNadeDate };
 
+type FilterByMap = { [map in CsgoMap]: NadeFilters };
+
 export type NadeState = {
   readonly nadesByMap: NadesByMap;
+  readonly filterByMap: FilterByMap;
   readonly recentNades: NadeLight[];
   readonly selectedNade?: Nade;
   readonly loadingNadesForMap: boolean;
-  readonly nadeFilter: NadeFilters;
   readonly error?: AppError;
   readonly positionModalOpen: boolean;
 };
 
+const defaultFilter: NadeFilters = {
+  flash: false,
+  hegrenade: false,
+  molotov: false,
+  smoke: false,
+  sortingMethod: "score"
+};
+
 const initialState: NadeState = {
   nadesByMap: {},
+  filterByMap: {
+    cache: defaultFilter,
+    cobblestone: defaultFilter,
+    dust2: defaultFilter,
+    inferno: defaultFilter,
+    mirage: defaultFilter,
+    nuke: defaultFilter,
+    overpass: defaultFilter,
+    train: defaultFilter,
+    vertigo: defaultFilter
+  },
   recentNades: [],
   loadingNadesForMap: false,
-  positionModalOpen: false,
-  nadeFilter: {
-    flash: false,
-    hegrenade: false,
-    molotov: false,
-    smoke: false,
-    sorthingMethod: "score"
-  }
+  positionModalOpen: false
 };
 
 export const NadeReducer: Reducer<NadeState, NadeActions> = (
@@ -58,11 +72,14 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/ADD_FOR_MAP":
       return handleAddNade(action, state);
     case "@@nades/FILTER_BY_MAP_COORDINATES":
+      const filterForMap = { ...state.filterByMap[action.map] };
+      filterForMap.coords = action.coords;
+
       return {
         ...state,
-        nadeFilter: {
-          ...state.nadeFilter,
-          coords: action.coords
+        filterByMap: {
+          ...state.filterByMap,
+          [action.map]: filterForMap
         }
       };
     case "@@nades/add_selected":
@@ -82,7 +99,10 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
     case "@@nades/RESET_NADE_FILTER":
       return {
         ...state,
-        nadeFilter: initialState.nadeFilter
+        filterByMap: {
+          ...state.filterByMap,
+          [action.map]: defaultFilter
+        }
       };
 
     case "@@nades/ADD_RECENT":
@@ -97,11 +117,14 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         error: action.error
       };
     case "@@nades/SET_SORTING_METHOD":
+      const filter = { ...state.filterByMap[action.map] };
+      filter.sortingMethod = action.sortingMethod;
+
       return {
         ...state,
-        nadeFilter: {
-          ...state.nadeFilter,
-          sorthingMethod: action.sortingMethod
+        filterByMap: {
+          ...state.filterByMap,
+          [action.map]: filter
         }
       };
     case "@@nades/TOGGLE_MAP_POSITION_MODAL":
@@ -143,24 +166,32 @@ function handleFilterByType(
     smoke: false
   };
 
-  if (prevState.nadeFilter[action.nadeType]) {
+  const filter = { ...prevState.filterByMap[action.map] };
+
+  if (filter[action.nadeType]) {
     return {
       ...prevState,
-      nadeFilter: {
-        ...prevState.nadeFilter,
-        flash: false,
-        hegrenade: false,
-        molotov: false,
-        smoke: false
+      filterByMap: {
+        ...prevState.filterByMap,
+        [action.map]: {
+          ...filter,
+          flash: false,
+          hegrenade: false,
+          molotov: false,
+          smoke: false
+        }
       }
     };
   } else {
     defaults[action.nadeType] = true;
     return {
       ...prevState,
-      nadeFilter: {
-        ...prevState.nadeFilter,
-        ...defaults
+      filterByMap: {
+        ...prevState.filterByMap,
+        [action.map]: {
+          ...filter,
+          ...defaults
+        }
       }
     };
   }

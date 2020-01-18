@@ -19,6 +19,7 @@ export type ToogleMapPositionModal = {
 export type FilterByMapCoordinates = {
   type: "@@nades/FILTER_BY_MAP_COORDINATES";
   coords: MapCoordinates;
+  map: CsgoMap;
 };
 
 type AddRcentNadesAction = {
@@ -38,10 +39,12 @@ type StartLoadingNadeAction = {
 export type FilterByNadeType = {
   type: "@@nades/FILTER_BY_TYPE";
   nadeType: NadeType;
+  map: CsgoMap;
 };
 
 export type ResetNadeFilter = {
   type: "@@nades/RESET_NADE_FILTER";
+  map: CsgoMap;
 };
 
 export type AddSiteStats = {
@@ -57,6 +60,7 @@ export type AddNadeError = {
 export type SetSortingNameAction = {
   type: "@@nades/SET_SORTING_METHOD";
   sortingMethod: SortingMethod;
+  map: CsgoMap;
 };
 
 export type NadeActions =
@@ -74,10 +78,12 @@ export type NadeActions =
 export type SortingMethod = "name" | "date" | "score";
 
 export const setSortingMethodAction = (
-  sortingMethod: SortingMethod
+  sortingMethod: SortingMethod,
+  map: CsgoMap
 ): SetSortingNameAction => ({
   type: "@@nades/SET_SORTING_METHOD",
-  sortingMethod
+  sortingMethod,
+  map
 });
 
 export const addNadeError = (error: AppError): AddNadeError => ({
@@ -101,13 +107,18 @@ export const addNadesForMapAction = (
   nades
 });
 
-export const filterByTypeAction = (nadeType: NadeType): FilterByNadeType => ({
+export const filterByTypeAction = (
+  nadeType: NadeType,
+  map: CsgoMap
+): FilterByNadeType => ({
   type: "@@nades/FILTER_BY_TYPE",
-  nadeType
+  nadeType,
+  map
 });
 
-export const resetNadeFilterAction = (): ResetNadeFilter => ({
-  type: "@@nades/RESET_NADE_FILTER"
+export const resetNadeFilterAction = (map: CsgoMap): ResetNadeFilter => ({
+  type: "@@nades/RESET_NADE_FILTER",
+  map
 });
 
 export const addSelectedNadeAction = (nade: Nade, dispatch: Dispatch) => {
@@ -124,10 +135,12 @@ export const startLoadingNadeAction = (dispatch: Dispatch) => {
 };
 
 export const filterByMapCoordsAction = (
-  coords: MapCoordinates
+  coords: MapCoordinates,
+  map: CsgoMap
 ): FilterByMapCoordinates => ({
   type: "@@nades/FILTER_BY_MAP_COORDINATES",
-  coords
+  coords,
+  map
 });
 
 export const toggleMapPositionModalAction = (

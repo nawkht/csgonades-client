@@ -23,9 +23,7 @@ export const MapPage: FC<Props> = ({ map }) => {
       <div className="nade-list">
         <NadeListGrid
           nades={nades}
-          emptyMessage={`No nades found for ${capitalize(
-            map
-          )} on these settings, maybe you can add some!`}
+          emptyMessage={`No nades found. Sign in and add something! :)`}
         />
       </div>
 
