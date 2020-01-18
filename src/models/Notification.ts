@@ -1,7 +1,10 @@
 export type NotificationType =
   | "accepted-nade"
   | "favorited-nade"
-  | "declined-nade";
+  | "declined-nade"
+  | "new-report"
+  | "new-contact-msg"
+  | "new-nade";
 
 export type Notification = {
   id: string;

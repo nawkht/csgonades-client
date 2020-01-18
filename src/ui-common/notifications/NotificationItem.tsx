@@ -81,6 +81,12 @@ function notificationMessage(type: NotificationType) {
       return "Your nade was declined!";
     case "favorited-nade":
       return "Your nade was favorited by a used.";
+    case "new-contact-msg":
+      return "New contact message.";
+    case "new-nade":
+      return "New nade added.";
+    case "new-report":
+      return "New report added";
     default:
       console.warn("Unknown notification type");
       return "Unknown notification.";
