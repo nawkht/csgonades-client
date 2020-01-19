@@ -5,7 +5,6 @@ import { NadeLight, Status } from "../models/Nade/Nade";
 import { tickrateString } from "../models/Nade/NadeTickrate";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { iconFromType, kFormatter } from "../utils/Common";
-import { isLessThanDaysAgo } from "../utils/DateUtils";
 import { GfycatThumbnail } from "./GfycatThumbnail";
 
 interface Props {
@@ -18,7 +17,6 @@ export const NadeItem: FC<Props> = ({ nade }) => {
 
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
   const iconUrl = iconFromType(nade.type);
-  const isNew = isLessThanDaysAgo(nade.createdAt, 3);
   const favoriteIconColor = nade.isFavorited ? "yellow" : undefined;
 
   return (
@@ -37,10 +35,18 @@ export const NadeItem: FC<Props> = ({ nade }) => {
             <GfycatThumbnail nade={nade} />
           </div>
           <div className="stats">
-            <div className="stat">
-              <Icon name="eye" size="small" />
-              <span className="icon-text">{kFormatter(nade.viewCount)}</span>
-            </div>
+            {nade.viewCount > 500 && (
+              <div className="stat">
+                <Icon name="eye" size="small" />
+                <span className="icon-text">{kFormatter(nade.viewCount)}</span>
+              </div>
+            )}
+
+            {nade.viewCount <= 500 && (
+              <div className="stat">
+                <span className="new-badge">NEW</span>
+              </div>
+            )}
 
             {nade.favoriteCount > 0 && (
               <div className="stat">
@@ -55,14 +61,6 @@ export const NadeItem: FC<Props> = ({ nade }) => {
                 <span className="icon-text">
                   {tickrateString(nade.tickrate)}
                 </span>
-              </div>
-            )}
-
-            <div className="spacer"></div>
-
-            {isNew && (
-              <div className="stat">
-                <span className="new-badge">NEW</span>
               </div>
             )}
           </div>
