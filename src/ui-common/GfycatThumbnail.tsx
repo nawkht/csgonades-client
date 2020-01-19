@@ -10,11 +10,19 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
-  const { ref, isHovering } = useHoverDelayedEvent(onViewEvent, 5000);
+  const [seekPercentage, setSeekPercentage] = useState(0);
+  const { ref, isHovering } = useHoverDelayedEvent(onViewEvent, 3000);
 
   const measuredRef = useCallback((node: HTMLVideoElement) => {
     if (node !== null) {
-      node.playbackRate = 1;
+      node.playbackRate = 2;
+      node.ontimeupdate = function() {
+        const perc = (node.currentTime / node.duration) * 100;
+        setSeekPercentage(perc);
+      };
+      node.onpause = () => {
+        setSeekPercentage(0);
+      };
     }
   }, []);
 
@@ -48,6 +56,9 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
             >
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
             </video>
+            <div className="seek-bar">
+              <div className="seek-progress" />
+            </div>
           </div>
         )}
       </div>
@@ -80,6 +91,26 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           left: 0;
           bottom: 0;
           right: 0;
+        }
+
+        .seek-bar {
+          background: rgba(0, 0, 0, 0.3);
+          height: 4px;
+          position: absolute;
+          bottom: 3px;
+          left: 3px;
+          right: 3px;
+          z-index: 900;
+          border-radius: 4px;
+          overflow: hidden;
+        }
+
+        .seek-progress {
+          background: rgba(255, 255, 255, 0.75);
+          height: 4px;
+          width: ${seekPercentage}%;
+          transition: width 0.5s;
+          border-radius: 4px;
         }
 
         .back video {
