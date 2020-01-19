@@ -56,6 +56,7 @@ export type NadeLight = {
   mapEndCoord?: MapCoordinates;
   score: number;
   userAvatar: string;
+  isFavorited?: boolean;
 };
 
 export type NadeBody = {

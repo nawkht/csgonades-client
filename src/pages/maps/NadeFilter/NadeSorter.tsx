@@ -37,7 +37,6 @@ export const NadeSorter: FC<Props> = ({ map }) => {
           direction="left"
           onChange={(_, data) => {
             const newMethod = data.value as any;
-            console.log("> Setting sorting method", newMethod);
             setSortingMethod(newMethod);
           }}
           value={sortingMethod}

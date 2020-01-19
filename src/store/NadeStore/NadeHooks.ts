@@ -13,6 +13,7 @@ import {
 import { NadeType } from "../../models/Nade/NadeType";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { userSelector } from "../AuthStore/AuthSelectors";
+import { favoritedNadeIdsSelector } from "../FavoriteStore/FavoriteSelectors";
 import {
   filterByMapCoordsAction,
   resetNadeFilterAction,
@@ -151,15 +152,24 @@ export const useUpdateNadeStatus = () => {
 
 export const useNadesForMap = (map: CsgoMap) => {
   const nadesForMap = useSelector(nadesForMapSelector(map));
+  const favoritedNadeIds = useSelector(favoritedNadeIdsSelector);
   const nadeFilter = useSelector(filterForMapSelector(map));
 
   const nades = useMemo(() => {
     if (!nadesForMap) {
       return [];
     }
-    let processedNades;
+    let processedNades: NadeLight[];
 
-    processedNades = sortNades(nadeFilter.sortingMethod, nadesForMap);
+    processedNades = nadesForMap.map(n => {
+      const favorited = favoritedNadeIds.includes(n.id);
+      return {
+        ...n,
+        isFavorited: favorited
+      };
+    });
+
+    processedNades = sortNades(nadeFilter.sortingMethod, processedNades);
     processedNades = applyNadeFilter(nadeFilter, processedNades);
 
     if (nadeFilter.coords) {
@@ -167,7 +177,7 @@ export const useNadesForMap = (map: CsgoMap) => {
     }
 
     return processedNades;
-  }, [map, nadesForMap, nadeFilter]);
+  }, [map, nadesForMap, nadeFilter, favoritedNadeIds]);
 
   return {
     nades

@@ -19,6 +19,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
   const iconUrl = iconFromType(nade.type);
   const isNew = isLessThanDaysAgo(nade.createdAt, 3);
+  const favoriteIconColor = nade.isFavorited ? "yellow" : undefined;
 
   return (
     <>
@@ -43,7 +44,7 @@ export const NadeItem: FC<Props> = ({ nade }) => {
 
             {nade.favoriteCount > 0 && (
               <div className="stat">
-                <Icon name="star" size="small" color="yellow" />
+                <Icon name="star" size="small" color={favoriteIconColor} />
                 <span className="icon-text">{nade.favoriteCount}</span>
               </div>
             )}

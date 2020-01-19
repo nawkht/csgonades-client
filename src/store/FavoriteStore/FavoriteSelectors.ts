@@ -11,3 +11,7 @@ export const favoritedNades = (state: AppState) => {
 export const isLoadingFavoritedNadesSelector = (state: AppState) => {
   return state.favoriteStore.loadingFavoritedNade;
 };
+
+export const favoritedNadeIdsSelector = (state: AppState) => {
+  return state.favoriteStore.favorites.map(f => f.nadeId);
+};

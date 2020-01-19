@@ -11,11 +11,11 @@ const BASE_URL =
 export class FavoriteApi {
   static async getUserFavorites(token: string): AppResult<Favorite[]> {
     try {
-      const res = await axios.get(`${BASE_URL}/favorites`, {
+      const res = await axios.get<Favorite[]>(`${BASE_URL}/favorites`, {
         headers: { Authorization: token }
       });
-      const favorites = res.data as Favorite[];
-      return ok(favorites);
+      const favoritedNades = res.data;
+      return ok(favoritedNades);
     } catch (error) {
       return extractApiError(error);
     }
