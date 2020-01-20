@@ -1,7 +1,9 @@
 import { FC } from "react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
+import { useIsSignedIn } from "../../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { FilterByFavoriteToggle } from "./FilterByFavoriteToggle";
 import { MapPositionFilter } from "./MapPositionFilter";
 import { NadeFilterResetButton } from "./NadeFilterResetButton";
 import { NadeSorter } from "./NadeSorter";
@@ -12,7 +14,8 @@ type Props = {
 };
 
 export const NadeFilter: FC<Props> = ({ map }) => {
-  const { uiDimensions, layers } = useTheme();
+  const { uiDimensions } = useTheme();
+  const isSignedIn = useIsSignedIn();
   const { filterByType, nadeFilter } = useNadeFilter(map);
 
   const { flash, hegrenade, molotov, smoke } = nadeFilter;
@@ -57,6 +60,12 @@ export const NadeFilter: FC<Props> = ({ map }) => {
               />
             </div>
 
+            {isSignedIn && (
+              <div className="nade-fav-filter">
+                <FilterByFavoriteToggle map={map} />
+              </div>
+            )}
+
             <div className="nade-sorter">
               <NadeSorter map={map} />
             </div>
@@ -78,9 +87,6 @@ export const NadeFilter: FC<Props> = ({ map }) => {
 
         .main-filters {
           display: flex;
-          background: rgba(242, 242, 242, 0.9);
-          border-bottom-left-radius: 4px;
-          border-bottom-right-radius: 4px;
         }
 
         .nade-filter {

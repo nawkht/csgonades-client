@@ -7,8 +7,6 @@ import {
   NadeStatusDTO,
   NadeUpdateBody
 } from "../../models/Nade/Nade";
-import { NadeType } from "../../models/Nade/NadeType";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
@@ -17,20 +15,9 @@ import {
   addNadesForMapAction,
   addRecentNadesAction,
   addSelectedNadeAction,
-  filterByTypeAction,
   startLoadingNadeAction
 } from "./NadeActions";
 import { nadesForMapTimeSinceFetchSelector } from "./NadeSelectors";
-
-export const filterByNadeTypeThunk = (
-  nadeType: NadeType,
-  map: CsgoMap
-): ReduxThunkAction => {
-  return async dispatch => {
-    dispatch(filterByTypeAction(nadeType, map));
-    GoogleAnalytics.event("Nade filter", `Filter by ${nadeType}`);
-  };
-};
 
 export const fetchNewestNadesAction = (limit?: number): ReduxThunkAction => {
   return async dispatch => {

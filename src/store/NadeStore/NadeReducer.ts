@@ -5,6 +5,7 @@ import { assertNever } from "../../utils/Common";
 import { AppError } from "../../utils/ErrorUtil";
 import {
   AddNadesForMapAction,
+  FilterByFavorites,
   FilterByNadeType,
   NadeActions,
   SortingMethod
@@ -16,6 +17,7 @@ export type NadeFilters = {
   hegrenade: boolean;
   molotov: boolean;
   sortingMethod: SortingMethod;
+  favorites: boolean;
   coords?: MapCoordinates;
 };
 
@@ -43,6 +45,7 @@ const defaultFilter: NadeFilters = {
   hegrenade: false,
   molotov: false,
   smoke: false,
+  favorites: false,
   sortingMethod: "score"
 };
 
@@ -132,11 +135,29 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         positionModalOpen: action.visisble
       };
+    case "@@@nades/FILTER_BY_FAVORITES":
+      return handleFavoriteFilterToggle(state, action);
     default:
       assertNever(action);
       return state;
   }
 };
+
+function handleFavoriteFilterToggle(
+  state: NadeState,
+  action: FilterByFavorites
+): NadeState {
+  const filter = { ...state.filterByMap[action.map] };
+  filter.favorites = !filter.favorites;
+
+  return {
+    ...state,
+    filterByMap: {
+      ...state.filterByMap,
+      [action.map]: filter
+    }
+  };
+}
 
 function handleAddNade(
   action: AddNadesForMapAction,

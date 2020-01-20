@@ -42,6 +42,11 @@ export type FilterByNadeType = {
   map: CsgoMap;
 };
 
+export type FilterByFavorites = {
+  type: "@@@nades/FILTER_BY_FAVORITES";
+  map: CsgoMap;
+};
+
 export type ResetNadeFilter = {
   type: "@@nades/RESET_NADE_FILTER";
   map: CsgoMap;
@@ -69,10 +74,11 @@ export type NadeActions =
   | AddSelectedNadeAction
   | StartLoadingNadeAction
   | FilterByNadeType
+  | FilterByFavorites
+  | FilterByMapCoordinates
   | ResetNadeFilter
   | AddNadeError
   | SetSortingNameAction
-  | FilterByMapCoordinates
   | ToogleMapPositionModal;
 
 export type SortingMethod = "name" | "date" | "score";
@@ -113,6 +119,13 @@ export const filterByTypeAction = (
 ): FilterByNadeType => ({
   type: "@@nades/FILTER_BY_TYPE",
   nadeType,
+  map
+});
+
+export const toggleFilterByFavoritesAction = (
+  map: CsgoMap
+): FilterByFavorites => ({
+  type: "@@@nades/FILTER_BY_FAVORITES",
   map
 });
 

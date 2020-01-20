@@ -28,7 +28,7 @@ export const MapPositionFilter: FC<Props> = ({ map }) => {
       <Tip visisble={displayCoordsTip} onClick={onCloseCoordsTip}>
         <div className={className} onClick={onShowMap}>
           <div className={"position-filter"}>
-            <span>MAP</span>
+            <span>Map</span>
             <Icon name="location arrow" />
           </div>
         </div>
@@ -40,6 +40,7 @@ export const MapPositionFilter: FC<Props> = ({ map }) => {
           border-bottom-right-radius: 3px;
           margin-right: 6px;
           transition: background 0.2s;
+          font-weight: 400;
         }
 
         .nade-position-filter:hover {

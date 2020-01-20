@@ -21,10 +21,6 @@ export const UserDropdown: FC<Props> = ({ user }) => {
     redirectUserPage(user.steamId);
   }
 
-  function onFavoritesClick() {
-    Router.push(`/favorites`);
-  }
-
   function onAdminClick() {
     Router.push(`/admin`);
   }
@@ -45,11 +41,6 @@ export const UserDropdown: FC<Props> = ({ user }) => {
               text="Profile"
               icon="user"
               onClick={onProfileClick}
-            />
-            <Dropdown.Item
-              text="Favorites"
-              icon="star"
-              onClick={onFavoritesClick}
             />
             {isAdminOrMod && (
               <Dropdown.Item text="Admin" icon="spy" onClick={onAdminClick} />

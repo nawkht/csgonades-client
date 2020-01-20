@@ -16,9 +16,11 @@ import { userSelector } from "../AuthStore/AuthSelectors";
 import { favoritedNadeIdsSelector } from "../FavoriteStore/FavoriteSelectors";
 import {
   filterByMapCoordsAction,
+  filterByTypeAction,
   resetNadeFilterAction,
   setSortingMethodAction,
   SortingMethod,
+  toggleFilterByFavoritesAction,
   toggleMapPositionModalAction
 } from "./NadeActions";
 import { NadeFilters } from "./NadeReducer";
@@ -31,7 +33,6 @@ import {
   createNadeAction,
   deleteNadeAction,
   fetchNadesByMapActionThunk,
-  filterByNadeTypeThunk,
   updateNadeAction,
   updateNadeGfycatAction,
   updateNadeStatusAction,
@@ -41,19 +42,25 @@ import {
 export const useNadeFilter = (map: CsgoMap) => {
   const dispatch = useDispatch();
   const nadeFilter = useSelector(filterForMapSelector(map));
-  const { sortingMethod, coords } = nadeFilter;
+  const { sortingMethod, coords, favorites } = nadeFilter;
   const postionModalOpen = useSelector(postionModalOpenSelector);
 
   const canReset = useMemo(() => {
     const hasCoords = !coords;
     const isSortingByDate = sortingMethod === "score";
+    const isShowingFavorites = favorites;
     const isDefaultTypeFilter =
       !nadeFilter.flash &&
       !nadeFilter.hegrenade &&
       !nadeFilter.molotov &&
       !nadeFilter.smoke;
 
-    if (!isDefaultTypeFilter || !hasCoords || !isSortingByDate) {
+    if (
+      !isDefaultTypeFilter ||
+      !hasCoords ||
+      !isSortingByDate ||
+      isShowingFavorites
+    ) {
       return true;
     } else {
       return false;
@@ -61,7 +68,8 @@ export const useNadeFilter = (map: CsgoMap) => {
   }, [coords, sortingMethod, nadeFilter]);
 
   function filterByType(nadeType: NadeType) {
-    dispatch(filterByNadeTypeThunk(nadeType, map));
+    GoogleAnalytics.event("Nade filter", `Filter by ${nadeType}`);
+    dispatch(filterByTypeAction(nadeType, map));
   }
 
   function reset() {
@@ -75,6 +83,11 @@ export const useNadeFilter = (map: CsgoMap) => {
 
   function filterByMapCoords(coords: MapCoordinates) {
     dispatch(filterByMapCoordsAction(coords, map));
+  }
+
+  function toggleFilterByFavorites() {
+    GoogleAnalytics.event("Nade filter", `By favorites`);
+    dispatch(toggleFilterByFavoritesAction(map));
   }
 
   const toggleMapPositionModal = useCallback(
@@ -94,7 +107,9 @@ export const useNadeFilter = (map: CsgoMap) => {
     filterByMapCoords,
     coords,
     toggleMapPositionModal,
-    postionModalOpen
+    postionModalOpen,
+    toggleFilterByFavorites,
+    isShowingFavorites: favorites
   };
 };
 
@@ -174,6 +189,10 @@ export const useNadesForMap = (map: CsgoMap) => {
 
     if (nadeFilter.coords) {
       processedNades = nadesForCoords(processedNades, nadeFilter.coords);
+    }
+
+    if (nadeFilter.favorites) {
+      processedNades = processedNades.filter(n => n.isFavorited);
     }
 
     return processedNades;
