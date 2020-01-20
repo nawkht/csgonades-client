@@ -40,6 +40,7 @@ export const MapPositionEditor: FC<Props> = ({ nade }) => {
           content="Set position"
           icon="location arrow"
           labelPosition="left"
+          color="orange"
           onClick={toggleEditor}
         />
       </div>
@@ -52,7 +53,7 @@ export const MapPositionEditor: FC<Props> = ({ nade }) => {
       />
       <style jsx>{`
         .position-btn {
-          margin-top: 40px;
+          width: 48%;
         }
       `}</style>
     </>

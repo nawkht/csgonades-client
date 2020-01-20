@@ -8,6 +8,7 @@ import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminReports } from "./AdminReports";
 import { AdminTournaments } from "./AdminTournaments";
 import { AdminUsers } from "./AdminUsers";
+import { ArticleEditor } from "./ArticleEditor";
 
 export const AdminPage: FC = () => {
   const theme = useTheme();
@@ -28,6 +29,8 @@ export const AdminPage: FC = () => {
         return <AdminTournaments />;
       case "reports":
         return <AdminReports />;
+      case "write-article":
+        return <ArticleEditor />;
       default:
         return null;
     }

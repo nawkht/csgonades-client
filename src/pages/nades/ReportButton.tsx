@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Form, Icon, TextArea } from "semantic-ui-react";
+import { Button, Form, TextArea } from "semantic-ui-react";
 import { ReportApi } from "../../api/ReportApi";
 import { ReportAddDto } from "../../models/Report";
 import { addNotificationActionThunk } from "../../store/ToastStore/ToastThunks";
@@ -39,10 +39,14 @@ export const ReportButton: FC<Props> = ({ nadeId }) => {
   return (
     <>
       <div className="report-btn-container">
-        <Button fluid color="vk" onClick={onToggle}>
-          <Icon name="flag" />
-          Report
-        </Button>
+        <Button
+          fluid
+          onClick={onToggle}
+          content="Report"
+          icon="flag"
+          labelPosition="left"
+          color="red"
+        />
       </div>
       <CSGNModal
         visible={showReportForm}
@@ -67,7 +71,7 @@ export const ReportButton: FC<Props> = ({ nadeId }) => {
       </CSGNModal>
       <style jsx>{`
         .report-btn-container {
-          margin-top: 54px;
+          width: 48%;
         }
       `}</style>
     </>

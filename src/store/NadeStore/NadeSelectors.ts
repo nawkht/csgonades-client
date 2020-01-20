@@ -2,8 +2,11 @@ import { useSelector } from "react-redux";
 import { AppState } from "..";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 
-export const nadesForMapSelector = (map: CsgoMap) => {
+export const nadesForMapSelector = (map?: CsgoMap) => {
   return (state: AppState) => {
+    if (!map) {
+      return [];
+    }
     return state.nadeStore.nadesByMap[map]?.nades;
   };
 };

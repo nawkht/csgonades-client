@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
@@ -282,3 +282,42 @@ function nadesForCoords(nades: NadeLight[], coords: MapCoordinates) {
     }
   });
 }
+
+export const useSimilarNades = (nade: Nade) => {
+  const dispatch = useDispatch();
+  const nadesForMap = useSelector(nadesForMapSelector(nade.map));
+
+  useEffect(() => {
+    if (!nadesForMap && nade.map) {
+      dispatch(fetchNadesByMapActionThunk(nade.map));
+    }
+  }, [nadesForMap, nade]);
+
+  if (!nade.map || !nade.type || !nade.mapEndCoord || !nadesForMap) {
+    return [];
+  }
+
+  const nadesWithSameType = nadesForMap.filter(n => n.type === nade.type);
+
+  const MIN_DISTANCE = 20;
+
+  const { x, y } = nade.mapEndCoord;
+
+  const similarNades = nadesWithSameType.filter(n => {
+    if (n.id === nade.id) {
+      return false;
+    }
+    if (!n.mapEndCoord) {
+      return false;
+    }
+    const dist = Math.sqrt(
+      Math.pow(n.mapEndCoord.x - x, 2) + Math.pow(n.mapEndCoord.y - y, 2)
+    );
+
+    if (dist < MIN_DISTANCE) {
+      return true;
+    }
+  });
+
+  return similarNades;
+};

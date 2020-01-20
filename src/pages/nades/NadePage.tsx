@@ -7,12 +7,14 @@ import { useShowFavoriteTip } from "../../store/TipStore/TipHooks";
 import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
 import { Layout } from "../../ui-common/Layout";
 import { AdminEditor } from "./AdminEditor/AdminEditor";
+import { FavoriteButton } from "./FavoriteButton";
 import { MapPositionEditor } from "./MapPositionEditor/MapPositionEditor";
 import { NadeDescription } from "./NadeDescription/NadeDescription";
 import { NadeMetaPanel } from "./NadeMeta/NadeMetaPanel";
 import { NadeStatus } from "./NadeStatus/NadeStatus";
 import { NadeTitlebar } from "./NadeTitlebar";
 import { ReportButton } from "./ReportButton";
+import { SimilarNades } from "./SimilarNades";
 import { UserContainer } from "./UserContainer";
 
 type Props = {
@@ -39,49 +41,120 @@ const NadePage: React.FC<Props> = ({ nade }) => {
       canonical={`/nades/${nade.id}`}
       metaThumbNail={nade.images.largeUrl}
     >
-      <NadeTitlebar nade={nade} allowEdit={allowEdit} />
-      <div className="nade-container">
-        <div className="nade-main">
-          <GfycatPlayerContrainer nade={nade} allowEdit={allowEdit} />
-          <NadeDescription nade={nade} allowEdit={allowEdit} />
-          <UserContainer nade={nade} />
+      <div className="nade-page">
+        <div className="n-title">
+          <NadeTitlebar
+            key={`title-${nade.id}`}
+            nade={nade}
+            allowEdit={allowEdit}
+          />
         </div>
-        <div className="nade-aside">
-          <NadeMetaPanel allowEdit={allowEdit} nade={nade} />
-          <ReportButton nadeId={nade.id} />
-          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
-          <MapPositionEditor nade={nade} />
-          <AdminEditor nade={nade} />
+
+        <div className="n-stats">
+          <NadeMetaPanel
+            key={`meta-${nade.id}`}
+            allowEdit={allowEdit}
+            nade={nade}
+          />
+          <NadeStatus
+            key={`status-${nade.id}`}
+            status={nade.status}
+            statusInfo={nade.statusInfo}
+          />
+
+          <div className="n-actions">
+            <div className="n-action-row">
+              <FavoriteButton key={`fav-${nade.id}`} nadeId={nade.id} />
+              <ReportButton key={`rep-${nade.id}`} nadeId={nade.id} />
+            </div>
+
+            <div className="n-action-row">
+              <MapPositionEditor key={`pos-${nade.id}`} nade={nade} />
+              <AdminEditor key={`admin-${nade.id}`} nade={nade} />
+            </div>
+          </div>
+        </div>
+
+        <div className="n-video">
+          <GfycatPlayerContrainer
+            key={`gfy-${nade.id}`}
+            nade={nade}
+            allowEdit={allowEdit}
+          />
+        </div>
+        <div className="n-description">
+          <NadeDescription
+            key={`desc-${nade.id}`}
+            nade={nade}
+            allowEdit={allowEdit}
+          />
+          <UserContainer key={`user-${nade.id}`} nade={nade} />
+        </div>
+
+        <div className="n-similar">
+          <SimilarNades key={`sim-${nade.id}`} nade={nade} />
         </div>
       </div>
+
       <style jsx>
         {`
-          .nade-container {
+          .nade-page {
+            display: grid;
+            grid-template-columns: auto auto 300px;
+            grid-template-rows: auto auto auto auto auto;
+            grid-template-areas:
+              "title title title"
+              "video video stats"
+              "video video stats"
+              "desc desc stats"
+              "sim sim sim";
+            grid-column-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
+            margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          }
+
+          .n-title {
+            grid-area: title;
+          }
+          .n-video {
+            grid-area: video;
+          }
+
+          .n-stats {
+            grid-area: stats;
+          }
+
+          .n-description {
+            grid-area: desc;
+          }
+
+          .n-similar {
+            grid-area: sim;
+          }
+
+          .n-action-row {
             display: flex;
-            flex-direction: row;
-            padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          }
-          .nade-main {
-            margin-right: ${uiDimensions.INNER_GUTTER_SIZE}px;
-            margin-bottom: 0;
-            flex: 1;
-          }
-          .nade-aside {
-            width: 280px;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-top: 18px;
           }
 
           @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
-            .nade-container {
-              flex-direction: column;
+            .nade-page {
+              grid-template-columns: 50% 50%;
+              grid-template-rows: auto auto auto auto auto auto;
+              grid-template-areas:
+                "title title"
+                "video video"
+                "video video"
+                "desc desc"
+                "stats stats"
+                "sim sim";
+              grid-column-gap: 0;
+              margin: 18px;
             }
 
-            .nade-main {
-              margin-right: 0;
-              margin-bottom: ${uiDimensions.INNER_GUTTER_SIZE}px;
-            }
-
-            .nade-aside {
-              width: 100%;
+            .n-stats {
+              margin-top: 18px;
             }
           }
         `}

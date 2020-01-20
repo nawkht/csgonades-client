@@ -6,7 +6,6 @@ import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../../store/NadeStore/NadeHooks";
 import { EditButton } from "../../ui-common/EditButton";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { FavoriteButton } from "./FavoriteButton";
 
 type Props = {
   nade: Nade;
@@ -75,20 +74,13 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
             )}
           </div>
         )}
-
-        <FavoriteButton nadeId={nade.id} />
       </div>
       <style jsx>{`
         .nade-title {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: ${theme.isMobile
-            ? theme.uiDimensions.INNER_GUTTER_SIZE
-            : theme.uiDimensions.OUTER_GUTTER_SIZE}px;
-          padding-bottom: ${theme.isMobile
-            ? theme.uiDimensions.INNER_GUTTER_SIZE
-            : 0}px;
+          margin-bottom: 18px;
         }
 
         .title-contrainer {

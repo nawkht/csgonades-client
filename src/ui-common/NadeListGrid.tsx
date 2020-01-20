@@ -10,11 +10,13 @@ type Props = {
   nades: NadeLight[];
   loading?: boolean;
   emptyMessage?: string;
+  onItemClick?: () => void;
 };
 
 export const NadeListGrid: FC<Props> = ({
   nades,
-  emptyMessage = "No nades found"
+  emptyMessage = "No nades found",
+  onItemClick
 }) => {
   const { uiDimensions } = useTheme();
 
@@ -42,8 +44,10 @@ export const NadeListGrid: FC<Props> = ({
         {nades.length > 0 &&
           nades.map(nade => (
             <div className="nadelist-item" key={nade.id}>
-              {!isMobile && <NadeItem nade={nade} />}
-              {isMobile && <NadeItemMobile nade={nade} />}
+              {!isMobile && <NadeItem nade={nade} onItemClick={onItemClick} />}
+              {isMobile && (
+                <NadeItemMobile nade={nade} onItemClick={onItemClick} />
+              )}
             </div>
           ))}
       </div>

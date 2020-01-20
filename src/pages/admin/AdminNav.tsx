@@ -51,6 +51,13 @@ export const AdminNav: FC = () => {
         >
           Add tournament
         </Menu.Item>
+        <Menu.Item
+          name="write-article"
+          active={route === "write-article"}
+          onClick={handleItemClick}
+        >
+          New article
+        </Menu.Item>
       </Menu>
     </div>
   );

@@ -20,7 +20,6 @@ UserPageComponent.getInitialProps = async context => {
   const error = userErrorSelector(getState());
 
   if (error && context.res) {
-    console.log("> Had error");
     context.res.statusCode = 404;
   }
 

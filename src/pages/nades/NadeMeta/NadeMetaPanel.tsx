@@ -4,7 +4,6 @@ import { Nade } from "../../../models/Nade/Nade";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
 import { EditButton } from "../../../ui-common/EditButton";
-import { NadeMapSiteValue } from "./NadeMapSiteValue";
 import { NadeMapValue } from "./NadeMapValue";
 import { NadeMovementValue } from "./NadeMovementValue";
 import { NadeTechniqueValue } from "./NadeTechniqueValue";
@@ -67,15 +66,6 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           </div>
 
           <div className="nade-meta-item">
-            <span className="map-meta-title">Site</span>
-            <NadeMapSiteValue
-              mapSite={mapSite}
-              isEditing={isEditing}
-              onChange={setMapSite}
-            />
-          </div>
-
-          <div className="nade-meta-item">
             <span className="map-meta-title">Movement</span>
             <NadeMovementValue
               isEditing={isEditing}
@@ -108,18 +98,18 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
             <span className="map-meta-title">Views</span>
             <NadeViewsValue views={nade.viewCount} />
           </div>
-
-          {isEditing && (
-            <div className="nade-meta-edit-container">
-              <span onClick={cancelUpdate}>
-                <Icon circular link color="grey" name="cancel" />
-              </span>
-              <span onClick={updateNadeMeta}>
-                <Icon inverted circular link color="olive" name="check" />
-              </span>
-            </div>
-          )}
         </div>
+
+        {isEditing && (
+          <div className="nade-meta-edit-container">
+            <span onClick={cancelUpdate}>
+              <Icon circular link color="grey" name="cancel" />
+            </span>
+            <span onClick={updateNadeMeta}>
+              <Icon inverted circular link color="olive" name="check" />
+            </span>
+          </div>
+        )}
         {allowEdit && !isEditing && (
           <div className="edit-btn-container">
             <EditButton
@@ -139,18 +129,24 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
         }
 
         .nade-meta-panel {
-          border: 1px solid ${colors.PRIMARY_BORDER};
-          border-radius: ${uiDimensions.BORDER_RADIUS};
         }
 
         .nade-meta-item {
           background: white;
           padding: 12px 18px;
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.PRIMARY_BORDER};
+          border-bottom: 0;
+        }
+
+        .nade-meta-item:first-child {
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
         }
 
         .nade-meta-item:last-child {
-          border-bottom: 0;
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
+          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
         }
 
         .map-meta-title {
@@ -164,9 +160,8 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
 
         .edit-btn-container {
           position: absolute;
-          top: 100%;
-          left: 0;
-          padding-top: 6px;
+          top: 6px;
+          right: 6px;
           opacity: 0;
           transition: opacity ${durations.transition}s;
         }

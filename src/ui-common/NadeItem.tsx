@@ -9,9 +9,10 @@ import { GfycatThumbnail } from "./GfycatThumbnail";
 
 interface Props {
   nade: NadeLight;
+  onItemClick?: () => void;
 }
 
-export const NadeItem: FC<Props> = ({ nade }) => {
+export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
   const { colors, durations, uiDimensions, isMobile } = useTheme();
   const title = nade.title || "No title...";
 
@@ -22,7 +23,11 @@ export const NadeItem: FC<Props> = ({ nade }) => {
   return (
     <>
       <Link href={`/nades?id=${nade.id}`} as={`/nades/${nade.id}`}>
-        <a className={nadeBoxClassName} style={{ display: "inline-block" }}>
+        <a
+          className={nadeBoxClassName}
+          style={{ display: "inline-block" }}
+          onClick={onItemClick}
+        >
           <div className="title">
             <img
               className="nade-type-icon"

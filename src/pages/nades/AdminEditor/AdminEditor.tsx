@@ -27,18 +27,23 @@ export const AdminEditor: FC<Props> = ({ nade }) => {
   return (
     <>
       <div className="admin-editor">
-        <Button fluid onClick={showModal}>
-          MODERATOR EDIT
-        </Button>
-        <AdminEditorModal
-          nade={nade}
-          visible={isEditing}
-          onDismiss={dismissModal}
+        <Button
+          fluid
+          content="Admin"
+          icon="user secret"
+          labelPosition="left"
+          color="orange"
+          onClick={showModal}
         />
       </div>
+      <AdminEditorModal
+        nade={nade}
+        visible={isEditing}
+        onDismiss={dismissModal}
+      />
       <style jsx>{`
         .admin-editor {
-          margin-top: 36px;
+          width: 48%;
         }
       `}</style>
     </>

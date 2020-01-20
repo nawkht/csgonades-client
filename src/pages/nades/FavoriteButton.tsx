@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from "react";
-import { Icon, Popup } from "semantic-ui-react";
+import { FC } from "react";
+import { Button, Popup } from "semantic-ui-react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import {
   useAddFavorite,
@@ -16,45 +16,13 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
   const favorite = useIsFavorited(nadeId);
   const addFavorite = useAddFavorite();
   const unFavorite = useUnfavorite();
-  const [starColor, setStarColor] = useState<any>(favorite ? "yellow" : "grey");
-  const [didClickFavorite, setDidClickFavorite] = useState(false);
-
-  useEffect(() => {
-    if (favorite) {
-      setStarColor("yellow");
-    } else {
-      setStarColor("grey");
-    }
-  }, [favorite]);
+  const isFavorited = favorite;
 
   function onFavoriteClick() {
-    setDidClickFavorite(true);
-
     if (favorite) {
       unFavorite(favorite.id);
     } else {
       addFavorite(nadeId);
-      setStarColor("yellow");
-    }
-  }
-
-  function onMouseEnter() {
-    if (favorite) {
-      setStarColor("grey");
-    } else {
-      setStarColor("yellow");
-    }
-  }
-
-  function onMouseLeave() {
-    if (didClickFavorite) {
-      setDidClickFavorite(false);
-      return;
-    }
-    if (favorite) {
-      setStarColor("yellow");
-    } else {
-      setStarColor("grey");
     }
   }
 
@@ -67,15 +35,23 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
           content={"You need to be signed in to favorite."}
           style={{ padding: 6 }}
           offset="0, 6px"
-          position="left center"
+          position="top center"
           trigger={
             <span className="favicon-container">
-              <Icon className="favorite-icon" name="star" size="big" />
+              <Button
+                fluid
+                disabled
+                content="Favorite"
+                icon="star"
+                labelPosition="left"
+                color="yellow"
+              />
             </span>
           }
         />
         <style jsx>{`
           .favicon-container {
+            width: 48%;
             color: grey;
             display: flex;
             align-content: center;
@@ -87,29 +63,21 @@ export const FavoriteButton: FC<Props> = ({ nadeId }) => {
 
   return (
     <>
-      <div
-        onClick={onFavoriteClick}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        <Popup
-          size="mini"
-          inverted
-          content={favorite ? "Unfavorite" : "Favorite"}
-          style={{ padding: 6 }}
-          offset="0, 6px"
-          position="left center"
-          trigger={
-            <Icon
-              link
-              color={starColor}
-              className="favorite-icon"
-              name="star"
-              size="big"
-            />
-          }
+      <div className="fav-btn-container">
+        <Button
+          fluid
+          content={isFavorited ? "Unfavorite" : "Favorite"}
+          icon="star"
+          labelPosition="left"
+          color="yellow"
+          onClick={onFavoriteClick}
         />
       </div>
+      <style jsx>{`
+        .fav-btn-container {
+          width: 48%;
+        }
+      `}</style>
     </>
   );
 };

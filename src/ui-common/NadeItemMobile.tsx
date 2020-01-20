@@ -12,9 +12,10 @@ import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 
 interface Props {
   nade: NadeLight;
+  onItemClick?: () => void;
 }
 
-export const NadeItemMobile: FC<Props> = ({ nade }) => {
+export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasSentEvent, setHasSentEvent] = useState(false);
@@ -34,15 +35,8 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
     };
   }, [isPlaying, hasSentEvent]);
 
-  function startPlaying() {
-    setIsPlaying(true);
-  }
-
-  function stopPlaying() {
-    setIsPlaying(false);
-  }
-
-  function onItemClick() {
+  function onNadeItemClick() {
+    onItemClick && onItemClick();
     setShowMenu(!showMenu);
   }
 
@@ -63,7 +57,7 @@ export const NadeItemMobile: FC<Props> = ({ nade }) => {
       <div
         className={nadeBoxClassName}
         style={{ display: "inline-block" }}
-        onClick={onItemClick}
+        onClick={onNadeItemClick}
       >
         {showMenu && (
           <div className="context-menu">
