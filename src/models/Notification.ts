@@ -13,4 +13,5 @@ export type Notification = {
   entityId: string;
   hasBeenViewed: boolean;
   createdAt: Date;
+  count?: number;
 };

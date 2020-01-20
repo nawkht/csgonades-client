@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { Icon } from "semantic-ui-react";
-import { Notification, NotificationType } from "../../models/Notification";
+import { Notification } from "../../models/Notification";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
+import { prettyDate } from "../../utils/DateUtils";
 
 type Props = {
   notification: Notification;
@@ -13,7 +14,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
   const [wasViewed] = useState(notification.hasBeenViewed);
   const { markNotificationAsViewed } = useNotifications();
   const { colors } = useTheme();
-  const msg = notificationMessage(notification.type);
+  const msg = notificationMessage(notification);
 
   useEffect(() => {
     const viewedTimer = setTimeout(() => {
@@ -31,8 +32,10 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
         as={`/nades/${notification.entityId}`}
       >
         <a className={wasViewed ? "notification" : "notification new"}>
-          <Icon name="bell" />
-          {msg}
+          <div className="noti-msg">
+            <Icon name="bell" /> {msg}
+          </div>
+          <div className="noti-date">{prettyDate(notification.createdAt)}</div>
         </a>
       </Link>
       <style jsx>{`
@@ -43,6 +46,12 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
           border-radius: 4px;
           margin-bottom: 6px;
           color: black;
+        }
+
+        .noti-date {
+          font-size: 0.8em;
+          margin-top: 4px;
+          text-align: right;
         }
 
         .new {
@@ -73,14 +82,14 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
   );
 };
 
-function notificationMessage(type: NotificationType) {
-  switch (type) {
+function notificationMessage(noti: Notification) {
+  switch (noti.type) {
     case "accepted-nade":
       return "Your nade has been accepted!";
     case "declined-nade":
       return "Your nade was declined!";
     case "favorited-nade":
-      return "Your nade was favorited by a used.";
+      return `Your nade was favorited ${noti.count} times.`;
     case "new-contact-msg":
       return "New contact message.";
     case "new-nade":
