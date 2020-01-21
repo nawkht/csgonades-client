@@ -12,8 +12,10 @@ export const NadeFilterResetButton: FC<Props> = ({ map }) => {
   const { reset, canReset } = useNadeFilter(map);
 
   function onReset() {
-    GoogleAnalytics.event("Nade filter", `Reset`);
-    reset();
+    if (canReset) {
+      GoogleAnalytics.event("Nade filter", `Reset`);
+      reset();
+    }
   }
 
   const className = canReset ? "reset" : "reset disabled";
