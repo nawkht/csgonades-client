@@ -22,6 +22,7 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
         position="bottom center"
         inverted
         mouseEnterDelay={500}
+        openOnTriggerClick={false}
         size="tiny"
         trigger={
           <div className={className} onClick={onClick}>

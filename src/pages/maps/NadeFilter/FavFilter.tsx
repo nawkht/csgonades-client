@@ -21,6 +21,7 @@ export const FavFilter: FC<Props> = ({ map }) => {
         inverted
         size="tiny"
         mouseEnterDelay={500}
+        openOnTriggerClick={false}
         trigger={
           <div
             className={`fav-filter ${active}`}
