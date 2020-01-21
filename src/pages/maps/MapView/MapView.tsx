@@ -107,8 +107,8 @@ export const MapView: FC<Props> = ({ map }) => {
 
         .hint-animate {
           animation-name: hintAnimate;
-          animation-duration: 1.5s;
-          animation-delay: 3s;
+          animation-duration: 0.75s;
+          animation-delay: 5s;
         }
 
         .visisble {
@@ -176,11 +176,8 @@ export const MapView: FC<Props> = ({ map }) => {
           0% {
             transform: translateX(-100%);
           }
-          25% {
-            transform: translateX(-85%);
-          }
-          75% {
-            transform: translateX(-85%);
+          50% {
+            transform: translateX(-95%);
           }
           100% {
             transform: translateX(-100%);

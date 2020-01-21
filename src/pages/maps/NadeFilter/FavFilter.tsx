@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Icon } from "semantic-ui-react";
+import { Icon, Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 
@@ -7,27 +7,44 @@ type Props = {
   map: CsgoMap;
 };
 
-export const FilterByFavoriteToggle: FC<Props> = ({ map }) => {
+export const FavFilter: FC<Props> = ({ map }) => {
   const { toggleFilterByFavorites, isShowingFavorites } = useNadeFilter(map);
 
   const active = isShowingFavorites ? "active" : "";
 
   return (
     <>
-      <div className={`fav-filter ${active}`} onClick={toggleFilterByFavorites}>
-        Favorites <Icon name="star" color="yellow" />
-      </div>
+      <Popup
+        content="Your favorites"
+        hoverable
+        position="bottom center"
+        inverted
+        size="tiny"
+        trigger={
+          <div
+            className={`fav-filter ${active}`}
+            onClick={toggleFilterByFavorites}
+          >
+            <Icon name="star" color="yellow" />
+          </div>
+        }
+      />
       <style jsx>{`
         .fav-filter {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
           background: #e0e1e2;
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
           margin-right: 6px;
           transition: background 0.2s;
           height: 100%;
-          padding: 12px;
           cursor: pointer;
           font-weight: 400;
+          font-size: 1.4em;
+          padding-left: 10px;
+          padding-right: 6px;
         }
 
         .fav-filter:hover {

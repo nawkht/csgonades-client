@@ -6,7 +6,7 @@ import { Layout } from "../../ui-common/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { capitalize } from "../../utils/Common";
 import { MapView } from "./MapView/MapView";
-import { NadeFilter } from "./NadeFilter/NadeFilter";
+import { Filters } from "./NadeFilter/Filters";
 
 type Props = {
   map: CsgoMap;
@@ -19,7 +19,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   return (
     <Layout title={capitalize(map)} canonical={`/maps/${map}`}>
       <div className="map-page-wrapper">
-        <NadeFilter map={map} />
+        <Filters map={map} />
 
         <div className="nade-list">
           <NadeListGrid

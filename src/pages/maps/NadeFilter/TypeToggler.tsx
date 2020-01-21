@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { NadeType } from "../../../models/Nade/NadeType";
+import { Popup } from "semantic-ui-react";
+import { NadeType, nadeTypeString } from "../../../models/Nade/NadeType";
 import { iconFromType } from "../../../utils/Common";
 
 type Props = {
@@ -15,9 +16,19 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
 
   return (
     <>
-      <div className={className} onClick={onClick}>
-        <div className="icon" />
-      </div>
+      <Popup
+        content={nadeTypeString(type)}
+        hoverable
+        position="bottom center"
+        inverted
+        size="tiny"
+        trigger={
+          <div className={className} onClick={onClick}>
+            <div className="icon" />
+          </div>
+        }
+      />
+
       <style jsx>{`
         .type-toggler {
           padding: 6px;
