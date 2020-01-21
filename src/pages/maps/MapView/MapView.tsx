@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useRef, useState } from "react";
+import { FC, SyntheticEvent, useMemo, useRef, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
@@ -6,6 +6,7 @@ import {
   useNadeCoordinatesForMap,
   useNadeFilter
 } from "../../../store/NadeStore/NadeHooks";
+import { useMapViewTip } from "../../../store/TipStore/TipHooks";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 import { MapPosIcon } from "./MapPosIcon";
 
@@ -21,6 +22,19 @@ export const MapView: FC<Props> = ({ map }) => {
   const nades = useNadeCoordinatesForMap(map);
   const { uiDimensions } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
+  const { hasOpenedMapView, didOpenMapView } = useMapViewTip();
+
+  const wrapperClassName = useMemo(() => {
+    const classes = ["mapview-wrapper"];
+    if (visisble) {
+      classes.push("visisble");
+    }
+    if (!hasOpenedMapView) {
+      classes.push("hint-animate");
+    }
+
+    return classes.join(" ");
+  }, [visisble, hasOpenedMapView]);
 
   function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
     if (ref.current) {
@@ -39,15 +53,15 @@ export const MapView: FC<Props> = ({ map }) => {
     if (visisble) {
       GoogleAnalytics.event("MapView", "Open mapview");
       setVisisble(false);
+      didOpenMapView();
     } else {
       GoogleAnalytics.event("MapView", "Close mapview");
       setVisisble(true);
     }
   }
-
   return (
     <>
-      <div className={`mapview-wrapper ${visisble ? "visisible" : ""}`}>
+      <div className={wrapperClassName}>
         <div ref={ref} className="mapview-map">
           <img
             src={`/mapsoverlays/${map}.jpg`}
@@ -91,7 +105,13 @@ export const MapView: FC<Props> = ({ map }) => {
           pointer-events: none;
         }
 
-        .visisible {
+        .hint-animate {
+          animation-name: hintAnimate;
+          animation-duration: 1.5s;
+          animation-delay: 3s;
+        }
+
+        .visisble {
           transform: translateX(0px);
         }
 
@@ -150,6 +170,21 @@ export const MapView: FC<Props> = ({ map }) => {
 
         .close-btn:hover {
           background: rgba(168, 50, 50, 1);
+        }
+
+        @keyframes hintAnimate {
+          0% {
+            transform: translateX(-100%);
+          }
+          25% {
+            transform: translateX(-85%);
+          }
+          75% {
+            transform: translateX(-85%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {

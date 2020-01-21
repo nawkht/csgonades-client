@@ -5,11 +5,11 @@ import { TipActions } from "./TipActions";
 
 type TipState = {
   seenFavoriteTip: boolean;
-  seenCoordinateTip: boolean;
+  hasOpenedMapView: boolean;
 };
 
 const INITIAL_STATE: TipState = {
-  seenCoordinateTip: false,
+  hasOpenedMapView: false,
   seenFavoriteTip: false
 };
 

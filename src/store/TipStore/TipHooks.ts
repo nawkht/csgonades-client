@@ -1,38 +1,21 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { displayToolTipThunk } from "../ToastStore/ToastThunks";
 import { seenTipAction } from "./TipActions";
 import { hasSeenTip } from "./TipSelectors";
 
-export const useTryShowCoordTip = () => {
+export const useMapViewTip = () => {
   const dispatch = useDispatch();
-  const [displayCoordsTip, setDisplayCoordsTip] = useState(false);
-  const hasSeen = useSelector(hasSeenTip("seenCoordinateTip"));
+  const hasOpenedMapView = useSelector(hasSeenTip("hasOpenedMapView"));
 
-  function onCloseCoordsTip() {
-    GoogleAnalytics.event("Tip", "Coords tip close");
-    setDisplayCoordsTip(false);
-  }
+  const didOpenMapView = useCallback(() => {
+    dispatch(seenTipAction("hasOpenedMapView"));
+  }, [dispatch]);
 
-  useEffect(() => {
-    const startShowTimer = setTimeout(() => {
-      if (!hasSeen) {
-        setDisplayCoordsTip(true);
-        dispatch(seenTipAction("seenCoordinateTip"));
-      }
-    }, 1000);
-    const stopShowTimer = setTimeout(() => {
-      setDisplayCoordsTip(false);
-    }, 10000);
-
-    return () => {
-      clearTimeout(startShowTimer);
-      clearTimeout(stopShowTimer);
-    };
-  }, [hasSeen]);
-
-  return { displayCoordsTip, onCloseCoordsTip };
+  return {
+    hasOpenedMapView,
+    didOpenMapView
+  };
 };
 
 export const useShowFavoriteTip = () => {
