@@ -47,8 +47,9 @@ export const fetchNadesByMapActionThunk = (
 
     const timeSinceFetch = nadesForMapTimeSinceFetchSelector(mapName)(state);
 
-    const MAP_NADES_TTL_MINS = 15;
-    // Don't refetch if allready fetched
+    const MAP_NADES_TTL_MINS = 1;
+
+    // Don't refetch if spam requesting
     if (!noCache && timeSinceFetch) {
       const minutesSinceFetch = moment().diff(
         moment(timeSinceFetch),
