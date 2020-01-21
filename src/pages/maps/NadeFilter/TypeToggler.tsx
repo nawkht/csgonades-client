@@ -21,6 +21,7 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
         hoverable
         position="bottom center"
         inverted
+        mouseEnterDelay={500}
         size="tiny"
         trigger={
           <div className={className} onClick={onClick}>
@@ -31,12 +32,19 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
 
       <style jsx>{`
         .type-toggler {
-          padding: 6px;
+          padding: 6px 10px;
           display: flex;
           align-items: center;
           cursor: pointer;
           background: #e0e1e2;
           transition: background 0.2s;
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
+          margin-right: 3px;
+        }
+
+        .type-toggler:last-child {
+          border-right: none;
         }
 
         .type-toggler:hover {

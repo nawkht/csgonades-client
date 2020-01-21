@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Icon } from "semantic-ui-react";
+import { Icon, Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
@@ -20,24 +20,35 @@ export const NadeFilterResetButton: FC<Props> = ({ map }) => {
 
   return (
     <>
-      <div className="reset-padder"></div>
-      <div className={className} onClick={onReset}>
-        <span>RESET</span>
-        <Icon name="undo" />
-      </div>
-      <style jsx>{`
-        .reset-padder {
-          flex: 1;
+      <Popup
+        content="Reset filter"
+        hoverable
+        position="bottom center"
+        inverted
+        mouseEnterDelay={500}
+        size="tiny"
+        trigger={
+          <div className={className} onClick={onReset}>
+            <Icon name="undo" />
+          </div>
         }
+      />
 
+      <style jsx>{`
         .reset {
-          padding: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          padding-left: 12px;
+          padding-right: 10px;
+          padding-bottom: 3px;
           background: #db2828;
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
           cursor: pointer;
           color: white;
           transition: all 0.2s;
+          margin-left: 12px;
         }
 
         .disabled {

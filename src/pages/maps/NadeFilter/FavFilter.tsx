@@ -20,6 +20,7 @@ export const FavFilter: FC<Props> = ({ map }) => {
         position="bottom center"
         inverted
         size="tiny"
+        mouseEnterDelay={500}
         trigger={
           <div
             className={`fav-filter ${active}`}
@@ -37,7 +38,7 @@ export const FavFilter: FC<Props> = ({ map }) => {
           background: #e0e1e2;
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
-          margin-right: 6px;
+          margin-right: 12px;
           transition: background 0.2s;
           height: 100%;
           cursor: pointer;

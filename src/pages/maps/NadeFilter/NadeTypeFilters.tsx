@@ -41,14 +41,11 @@ export const NadeTypeFilters: FC<Props> = ({ map }) => {
       </div>
       <style jsx>{`
         .nade-filter {
-          border-bottom-left-radius: 3px;
-          border-bottom-right-radius: 3px;
           display: flex;
-          overflow: hidden;
         }
 
         .nade-filter {
-          margin-right: 6px;
+          margin-right: 12px;
         }
       `}</style>
     </>

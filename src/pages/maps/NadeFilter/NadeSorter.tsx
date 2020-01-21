@@ -46,7 +46,7 @@ export const NadeSorter: FC<Props> = ({ map }) => {
         .nade-sorter {
           display: flex;
           padding: 12px 18px;
-          background: #e0e1e2;
+          background: #ededed;
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
         }

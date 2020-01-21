@@ -26,9 +26,9 @@ export const Filters: FC<Props> = ({ map }) => {
           <div className="nade-sorter">
             <NadeSorter map={map} />
           </div>
-        </div>
 
-        <NadeFilterResetButton map={map} />
+          <NadeFilterResetButton map={map} />
+        </div>
       </div>
       <style jsx>{`
         .nade-filter-container {
