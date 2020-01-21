@@ -5,7 +5,7 @@ import { useNadesForMap } from "../../store/NadeStore/NadeHooks";
 import { Layout } from "../../ui-common/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { capitalize } from "../../utils/Common";
-import { MapPositionModal } from "./NadeFilter/MapPositionModal";
+import { MapView } from "./MapView/MapView";
 import { NadeFilter } from "./NadeFilter/NadeFilter";
 
 type Props = {
@@ -18,18 +18,24 @@ export const MapPage: FC<Props> = ({ map }) => {
 
   return (
     <Layout title={capitalize(map)} canonical={`/maps/${map}`}>
-      <NadeFilter map={map} />
+      <div className="map-page-wrapper">
+        <NadeFilter map={map} />
 
-      <div className="nade-list">
-        <NadeListGrid
-          nades={nades}
-          emptyMessage={`No nades found. Sign in and add something! :)`}
-        />
+        <div className="nade-list">
+          <NadeListGrid
+            nades={nades}
+            emptyMessage={`No nades found. Sign in and add something! :)`}
+          />
+        </div>
       </div>
 
-      <MapPositionModal map={map} />
+      <MapView map={map} />
 
       <style jsx>{`
+        .map-page-wrapper {
+          margin-left: 18px;
+        }
+
         .nade-list {
           padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
         }

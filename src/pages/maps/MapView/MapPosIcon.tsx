@@ -4,11 +4,12 @@ import { NadeLight } from "../../../models/Nade/Nade";
 type Props = {
   nade: NadeLight;
   mapWidth: number;
+  onPress: (pos: { x: number; y: number }) => void;
 };
 
-const ICON_SIZE = 20;
+const ICON_SIZE = 30;
 
-export const MapPosIcon: FC<Props> = ({ nade, mapWidth }) => {
+export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
   const position = useMemo(() => {
     const sizeRatio = 1024 / mapWidth;
     const { mapEndCoord } = nade;
@@ -18,6 +19,15 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth }) => {
     };
   }, [nade, mapWidth]);
 
+  function onClick() {
+    if (nade.mapEndCoord) {
+      onPress({
+        x: nade.mapEndCoord.x,
+        y: nade.mapEndCoord.y
+      });
+    }
+  }
+
   return (
     <>
       <div
@@ -26,6 +36,7 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth }) => {
           top: position.y - ICON_SIZE / 2,
           left: position.x - ICON_SIZE / 2
         }}
+        onClick={onClick}
       >
         <img src={`/icons/grenades/${nade.type}.png`} />
       </div>
@@ -37,27 +48,20 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth }) => {
           border-radius: 50%;
           pointer-events: none;
           opacity: 0.75;
-          transition: opacity 0.2s;
           transform: scale(1);
-          animation-name: example;
-          animation-duration: 2s;
-          animation-iteration-count: infinite;
+          transition: opacity 0.2s, transform 0.2s;
+          cursor: pointer;
+          pointer-events: all;
         }
 
         .point img {
           width: 100%;
         }
 
-        @keyframes example {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.1);
-          }
-          100% {
-            transform: scale(1);
-          }
+        .point:hover {
+          transform: scale(1.1);
+          opacity: 1;
+          z-index: 999;
         }
       `}</style>
     </>

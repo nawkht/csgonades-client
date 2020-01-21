@@ -4,7 +4,6 @@ import { useIsSignedIn } from "../../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 import { FilterByFavoriteToggle } from "./FilterByFavoriteToggle";
-import { MapPositionFilter } from "./MapPositionFilter";
 import { NadeFilterResetButton } from "./NadeFilterResetButton";
 import { NadeSorter } from "./NadeSorter";
 import { TypeToggler } from "./TypeToggler";
@@ -41,10 +40,6 @@ export const NadeFilter: FC<Props> = ({ map }) => {
       <div className="nade-filter-container">
         <div className="nade-filter-bg">
           <div className="main-filters">
-            <div className="nade-filter-pos">
-              <MapPositionFilter map={map} />
-            </div>
-
             <div className="nade-filter">
               <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
               <TypeToggler active={flash} type="flash" onClick={onFlashClick} />
@@ -108,10 +103,6 @@ export const NadeFilter: FC<Props> = ({ map }) => {
           }
 
           .nade-sorter {
-            display: none;
-          }
-
-          .nade-filter-pos {
             display: none;
           }
 
