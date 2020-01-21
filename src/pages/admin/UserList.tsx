@@ -4,9 +4,9 @@ import { Button, Pagination } from "semantic-ui-react";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
 import { useSiteStats } from "../../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { prettyDate } from "../../utils/DateUtils";
+import { dateFromNow, prettyDate } from "../../utils/DateUtils";
 
-const USER_LIMIT = 10;
+const USER_LIMIT = 15;
 
 export const UserList: FC = () => {
   const { colors } = useTheme();
@@ -34,20 +34,37 @@ export const UserList: FC = () => {
       <div>
         <Button onClick={() => setSortByActivity(false)}>By created at</Button>
         <Button onClick={() => setSortByActivity(true)}>By last active</Button>
-        {users.map(user => (
-          <Link
-            href={`/users?id=${user.steamId}`}
-            as={`/users/${user.steamId}`}
-            key={user.steamId}
-          >
-            <a className="user">
-              <img src={user.avatar} />
-              <span className="nickname">{user.nickname}</span>
-              <span className="created-at">{prettyDate(user.createdAt)}</span>
-              <span className="last-active">{prettyDate(user.lastActive)}</span>
-            </a>
-          </Link>
-        ))}
+        <table id="users">
+          <thead>
+            <tr>
+              <td></td>
+              <td>Nickname</td>
+              <td>Last active</td>
+              <td>Created at</td>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr>
+                <td className="avatar">
+                  <img src={user.avatar} />
+                </td>
+                <td className="nickname">
+                  <Link
+                    href={`/users?id=${user.steamId}`}
+                    as={`/users/${user.steamId}`}
+                    key={user.steamId}
+                  >
+                    <a>{user.nickname}</a>
+                  </Link>
+                </td>
+                <td className="last-active">{dateFromNow(user.lastActive)}</td>
+                <td className="-created-at">{prettyDate(user.createdAt)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
         <Pagination
           defaultActivePage={1}
           totalPages={pages}
@@ -58,26 +75,51 @@ export const UserList: FC = () => {
         />
       </div>
       <style jsx>{`
-        .user {
-          display: flex;
-          align-items: center;
+        #users {
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        thead td {
+          font-weight: normal;
+        }
+
+        tr {
           border-bottom: 1px solid ${colors.PRIMARY_BORDER};
+        }
+
+        td {
           padding: 6px;
-          color: #444;
+          vertical-align: center;
+        }
+
+        .avatar {
+          width: 40px;
+        }
+
+        .avatar img {
+          width: 100%;
+          border-radius: 50%;
+          display: block;
         }
 
         .nickname {
-          flex: 1;
+          width: 75%;
+          color: black;
+        }
+
+        .nickname a {
+          color: black;
+        }
+
+        .nickname a:hover {
+          text-decoration: underline;
+        }
+
+        .last-active {
         }
 
         .created-at {
-          margin-right: 18px;
-        }
-
-        .user img {
-          width: 30px;
-          margin-right: 6px;
-          border-radius: 50%;
         }
       `}</style>
     </>
