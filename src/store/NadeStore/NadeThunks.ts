@@ -35,16 +35,21 @@ export const fetchNewestNadesAction = (limit?: number): ReduxThunkAction => {
 };
 
 export const fetchNadesByMapActionThunk = (
-  mapName: CsgoMap
+  mapName?: CsgoMap,
+  noCache?: boolean
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
+    if (!mapName) {
+      return;
+    }
+
     const state = getState();
 
     const timeSinceFetch = nadesForMapTimeSinceFetchSelector(mapName)(state);
 
     const MAP_NADES_TTL_MINS = 15;
     // Don't refetch if allready fetched
-    if (timeSinceFetch) {
+    if (!noCache && timeSinceFetch) {
       const minutesSinceFetch = moment().diff(
         moment(timeSinceFetch),
         "minutes",

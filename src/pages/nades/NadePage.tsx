@@ -64,7 +64,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
 
           <div className="n-actions">
             <div className="n-action-row">
-              <FavoriteButton key={`fav-${nade.id}`} nadeId={nade.id} />
+              <FavoriteButton key={`fav-${nade.id}`} nade={nade} />
               <ReportButton key={`rep-${nade.id}`} nadeId={nade.id} />
             </div>
 

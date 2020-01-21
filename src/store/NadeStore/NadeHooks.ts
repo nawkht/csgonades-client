@@ -26,6 +26,7 @@ import {
 import { NadeFilters } from "./NadeReducer";
 import {
   filterForMapSelector,
+  nadeForMapLastUpdateSelector,
   nadesForMapSelector,
   postionModalOpenSelector
 } from "./NadeSelectors";
@@ -166,6 +167,7 @@ export const useUpdateNadeStatus = () => {
 };
 
 export const useNadesForMap = (map: CsgoMap) => {
+  const nadesAddedAt = useSelector(nadeForMapLastUpdateSelector(map));
   const nadesForMap = useSelector(nadesForMapSelector(map));
   const favoritedNadeIds = useSelector(favoritedNadeIdsSelector);
   const nadeFilter = useSelector(filterForMapSelector(map));
@@ -196,7 +198,7 @@ export const useNadesForMap = (map: CsgoMap) => {
     }
 
     return processedNades;
-  }, [map, nadesForMap, nadeFilter, favoritedNadeIds]);
+  }, [map, nadesForMap, nadeFilter, favoritedNadeIds, nadesAddedAt]);
 
   return {
     nades

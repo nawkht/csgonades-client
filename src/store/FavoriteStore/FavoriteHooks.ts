@@ -1,26 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Favorite } from "../../models/Favorite";
+import { Nade } from "../../models/Nade/Nade";
 import { allFavoritesSelector } from "./FavoriteSelectors";
 import {
   addFavoriteThunkAction,
   addUnFavoriteThunkAction,
-  fetchFavoritedNadesThunkAction,
-  fetchFavoritesThunkAction
+  fetchFavoritedNadesThunkAction
 } from "./FavoriteThunks";
-
-export const useFetchFavorites = () => {
-  const dispatch = useDispatch();
-  return () => dispatch(fetchFavoritesThunkAction());
-};
 
 export const useAddFavorite = () => {
   const dispatch = useDispatch();
-  return (nadeId: string) => dispatch(addFavoriteThunkAction(nadeId));
+  return (nade: Nade) => {
+    dispatch(addFavoriteThunkAction(nade));
+  };
 };
 
 export const useUnfavorite = () => {
   const dispatch = useDispatch();
-  return (favoriteId: string) => dispatch(addUnFavoriteThunkAction(favoriteId));
+  return (favoriteId: string, nade: Nade) => {
+    dispatch(addUnFavoriteThunkAction(favoriteId, nade));
+  };
 };
 
 export const useIsFavorited = (nadeId: string): Favorite | null => {

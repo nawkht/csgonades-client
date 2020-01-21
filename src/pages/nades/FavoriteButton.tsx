@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Button, Popup } from "semantic-ui-react";
+import { Nade } from "../../models/Nade/Nade";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import {
   useAddFavorite,
@@ -8,21 +9,21 @@ import {
 } from "../../store/FavoriteStore/FavoriteHooks";
 
 type Props = {
-  nadeId: string;
+  nade: Nade;
 };
 
-export const FavoriteButton: FC<Props> = ({ nadeId }) => {
+export const FavoriteButton: FC<Props> = ({ nade }) => {
   const isSignedIn = useIsSignedIn();
-  const favorite = useIsFavorited(nadeId);
+  const favorite = useIsFavorited(nade.id);
   const addFavorite = useAddFavorite();
   const unFavorite = useUnfavorite();
   const isFavorited = favorite;
 
   function onFavoriteClick() {
     if (favorite) {
-      unFavorite(favorite.id);
+      unFavorite(favorite.id, nade);
     } else {
-      addFavorite(nadeId);
+      addFavorite(nade);
     }
   }
 

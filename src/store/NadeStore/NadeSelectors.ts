@@ -11,6 +11,15 @@ export const nadesForMapSelector = (map?: CsgoMap) => {
   };
 };
 
+export const nadeForMapLastUpdateSelector = (map?: CsgoMap) => {
+  return (state: AppState) => {
+    if (!map) {
+      return new Date();
+    }
+    return state.nadeStore.nadesByMap[map]?.addedAt;
+  };
+};
+
 export const filterForMapSelector = (map: CsgoMap) => {
   return (state: AppState) => {
     return state.nadeStore.filterByMap[map];
