@@ -24,7 +24,7 @@ export const displayToolTipThunk = (): ReduxThunkAction => {
       addNotificationActionThunk({
         title: "Favorite nades",
         message:
-          "Click on the star in the top right corner to favorite this nade.\nFirst you need to sign in.",
+          "Sign in and favorite some nades\nto find them quicker next time!",
         severity: "info",
         durationSeconds: 20
       })
