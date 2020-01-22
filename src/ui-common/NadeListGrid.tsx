@@ -58,6 +58,7 @@ export const NadeListGrid: FC<Props> = ({
           grid-template-columns: repeat(6, minmax(250px, 1fr));
           margin-left: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
           margin-right: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
+          width: 100%;
         }
 
         .nadelist-item {

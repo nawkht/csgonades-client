@@ -16,19 +16,21 @@ type Props = {
 };
 
 export const UserUI: FC<Props> = ({ user, nades }) => {
-  const { isMobile, uiDimensions } = useTheme();
+  const { uiDimensions } = useTheme();
   const { startEditingUser } = useUsersActions();
   const { isEditing } = useUsersState();
 
   return (
     <>
       <div className="user-container">
-        <UserDetails
-          isEditing={isEditing}
-          user={user}
-          onEditClick={startEditingUser}
-        />
-        <UserEditor user={user} />
+        <div className="user-details">
+          <UserDetails
+            isEditing={isEditing}
+            user={user}
+            onEditClick={startEditingUser}
+          />
+          <UserEditor user={user} />
+        </div>
         <div className="user-nades">
           <h2>Nades by {user.nickname}</h2>
           <NadeListGrid nades={nades} />
@@ -39,11 +41,19 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
           position: relative;
           margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
           display: flex;
-          flex-direction: ${isMobile ? "column" : "row"};
+          flex-direction: column;
+        }
+
+        .user-details {
+          margin-bottom: ${uiDimensions.INNER_GUTTER_SIZE}px;
         }
 
         .user-nades {
           flex: 1;
+        }
+
+        .user-nades h2 {
+          font-weight: 300;
         }
       `}</style>
     </>

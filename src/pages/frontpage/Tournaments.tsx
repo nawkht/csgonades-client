@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useTournaments } from "../../store/TournamentStore/TournamentHooks";
 import { TournamentList } from "./TournamentList";
@@ -6,10 +6,6 @@ import { TournamentList } from "./TournamentList";
 export const TournamentsContainer: FC = () => {
   const { uiDimensions } = useTheme();
   const { tournaments, fetchTournaments } = useTournaments();
-
-  useEffect(() => {
-    fetchTournaments();
-  }, []);
 
   return (
     <>

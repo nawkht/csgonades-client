@@ -30,11 +30,12 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
         {user.role !== "user" && (
           <span className="user-role-badge">{capitalize(user.role)}</span>
         )}
-        <br />
-        <span>Member since: {formatDate(user.createdAt)}</span>
-        <br />
-        <br />
-        <span className="bio">{user.bio}</span>
+
+        <div className="member-since">
+          <span>Member since</span> {formatDate(user.createdAt)}
+        </div>
+
+        {!!user.bio && <div className="bio">{user.bio}</div>}
         {allowEdit && (
           <Button fluid onClick={onEditClick}>
             EDIT USER
@@ -47,7 +48,7 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           background: white;
           margin-right: ${isMobile ? "0px" : "18px"};
           padding: 12px;
-          width: ${isMobile ? "100%" : "300px"};
+          width: ${isMobile ? "100%" : "400px"};
           border: 1px solid ${colors.PRIMARY_BORDER};
           align-self: flex-start;
           border-radius: ${uiDimensions.BORDER_RADIUS};
@@ -64,6 +65,19 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           border-radius: 50%;
           width: 30px;
           margin-right: 12px;
+        }
+
+        .member-since {
+          margin-bottom: 12px;
+        }
+
+        .member-since span {
+          font-weight: normal;
+          margin-right: 6px;
+        }
+
+        .bio {
+          margin-bottom: 12px;
         }
 
         .user-role-badge {

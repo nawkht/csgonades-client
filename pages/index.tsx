@@ -3,16 +3,20 @@ import React from "react";
 import { FrontPage } from "../src/pages/frontpage/FrontPage";
 import { fetchSiteStatsThunk } from "../src/store/GlobalStore/GlobalThunks";
 import { fetchNewestNadesAction } from "../src/store/NadeStore/NadeThunks";
+import { fetchTournamentsThunk } from "../src/store/TournamentStore/TournamentThunks";
 
-const Index: NextPage = props => {
+const Index: NextPage = () => {
   return <FrontPage />;
 };
 
-Index.getInitialProps = async ({ store, req }) => {
+Index.getInitialProps = async ({ store }) => {
   const { dispatch } = store;
 
-  await dispatch(fetchNewestNadesAction());
-  await dispatch(fetchSiteStatsThunk());
+  await Promise.all([
+    dispatch(fetchTournamentsThunk()),
+    dispatch(fetchNewestNadesAction()),
+    dispatch(fetchSiteStatsThunk())
+  ]);
 
   return;
 };

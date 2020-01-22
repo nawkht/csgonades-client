@@ -14,8 +14,10 @@ UserPageComponent.getInitialProps = async context => {
   const { dispatch, getState } = context.store;
   const steamId = context.query.id as string;
 
-  await dispatch(fetchUserAction(steamId));
-  await dispatch(fetchNadesForUserAction(steamId));
+  await Promise.all([
+    dispatch(fetchUserAction(steamId)),
+    dispatch(fetchNadesForUserAction(steamId))
+  ]);
 
   const error = userErrorSelector(getState());
 
