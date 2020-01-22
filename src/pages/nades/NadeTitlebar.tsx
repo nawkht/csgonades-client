@@ -1,11 +1,12 @@
-import Router from "next/router";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { Icon, Input } from "semantic-ui-react";
 import { Nade } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../../store/NadeStore/NadeHooks";
 import { EditButton } from "../../ui-common/EditButton";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { capitalize } from "../../utils/Common";
 
 type Props = {
   nade: Nade;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
+  const router = useRouter();
   const theme = useTheme();
   const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
@@ -28,11 +30,6 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
   function onCancel() {
     setIsEditing(false);
     setNadeTitle(nade.title);
-  }
-
-  function navigateBack() {
-    GoogleAnalytics.event("NadePage", "Navigate back");
-    Router.back();
   }
 
   return (
@@ -60,10 +57,17 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
 
         {!isEditing && (
           <div className="title-contrainer">
-            <div className="back-btn" onClick={navigateBack}>
-              <Icon name="chevron left" /> Back
-            </div>
-            <h1>{theTitle}</h1>
+            {nade.map && (
+              <div className="back-btn">
+                <Link href={`/maps?name=${nade.map}`} as={`/maps/${nade.map}`}>
+                  <a>{capitalize(nade.map)}</a>
+                </Link>
+
+                <Icon name="chevron right" />
+              </div>
+            )}
+
+            <h1 className="title-text">{theTitle}</h1>
             {allowEdit && (
               <div className="title-edit-button">
                 <EditButton
@@ -114,17 +118,21 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
         }
 
         .back-btn {
-          cursor: pointer;
-          font-size: 1.2em;
-          opacity: 0.8;
-          margin-right: 12px;
-          border-right: 1px solid ${theme.colors.PRIMARY_BORDER};
-          padding-right: 12px;
+          display: flex;
+          font-size: 1.1em;
           font-weight: 400;
+          color: #bbb;
         }
 
-        .back-btn:hover {
-          opacity: 1;
+        .back-btn a {
+          color: ${theme.colors.PRIMARY_BLACK};
+          margin-right: 6px;
+          font-size: 1.1em;
+        }
+
+        .back-btn a:hover {
+          text-decoration: underline;
+          color: ${theme.colors.PRIMARY};
         }
       `}</style>
     </>
