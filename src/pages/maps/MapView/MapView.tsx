@@ -20,7 +20,7 @@ export const MapView: FC<Props> = ({ map }) => {
   const [mapLoaded, setMapLoade] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadeCoordinatesForMap(map);
-  const { uiDimensions } = useTheme();
+  const { uiDimensions, colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
   const { hasOpenedMapView, didOpenMapView } = useMapViewTip();
 
@@ -29,12 +29,19 @@ export const MapView: FC<Props> = ({ map }) => {
     if (visisble) {
       classes.push("visisble");
     }
-    if (!hasOpenedMapView) {
-      classes.push("hint-animate");
-    }
-
     return classes.join(" ");
   }, [visisble, hasOpenedMapView]);
+
+  const tabClassName = useMemo(() => {
+    const classes = ["mapview-tab"];
+    if (visisble) {
+      classes.push("active");
+    }
+    if (!hasOpenedMapView) {
+      classes.push("tab-hint-animated");
+    }
+    return classes.join(" ");
+  }, [visisble]);
 
   function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
     if (ref.current) {
@@ -44,19 +51,19 @@ export const MapView: FC<Props> = ({ map }) => {
   }
 
   function onNadeClick(pos: { x: number; y: number }) {
-    GoogleAnalytics.event("MapView", "Click nade");
     filterByMapCoords(pos);
     setVisisble(false);
+    GoogleAnalytics.event("MapView", "Click nade");
   }
 
   function onHandleClick() {
     if (visisble) {
-      GoogleAnalytics.event("MapView", "Open mapview");
       setVisisble(false);
       didOpenMapView();
-    } else {
       GoogleAnalytics.event("MapView", "Close mapview");
+    } else {
       setVisisble(true);
+      GoogleAnalytics.event("MapView", "Open mapview");
     }
   }
   return (
@@ -78,7 +85,7 @@ export const MapView: FC<Props> = ({ map }) => {
               />
             ))}
 
-          <div className="mapview-tab" onClick={onHandleClick}>
+          <div className={tabClassName} onClick={onHandleClick}>
             <Icon
               name={visisble ? "chevron left" : "chevron right"}
               size="large"
@@ -105,10 +112,11 @@ export const MapView: FC<Props> = ({ map }) => {
           pointer-events: none;
         }
 
-        .hint-animate {
-          animation-name: hintAnimate;
-          animation-duration: 0.75s;
+        .tab-hint-animated {
+          animation-name: tabHint;
+          animation-duration: 20s;
           animation-delay: 5s;
+          animation-iteration-count: infinite;
         }
 
         .visisble {
@@ -116,7 +124,7 @@ export const MapView: FC<Props> = ({ map }) => {
         }
 
         .mapview-tab {
-          background: #151515;
+          background: ${colors.PRIMARY_75_PERCENT};
           padding: 20px 0px;
           position: absolute;
           left: 100%;
@@ -125,13 +133,21 @@ export const MapView: FC<Props> = ({ map }) => {
           border-top-right-radius: 4px;
           border-bottom-right-radius: 4px;
           pointer-events: all;
-          transform: translateY(-50%);
+          transform: translateY(-50%) scale(1);
           cursor: pointer;
           transition: background 0.15s;
         }
 
         .mapview-tab:hover {
-          background: #151515;
+          background: ${colors.PRIMARY};
+        }
+
+        .mapview-tab.active {
+          background: rgba(21, 21, 21, 0.75);
+        }
+
+        .mapview-tab.active:hover {
+          background: rgba(21, 21, 21, 1);
         }
 
         .mapview-map {
@@ -181,6 +197,33 @@ export const MapView: FC<Props> = ({ map }) => {
           }
           100% {
             transform: translateX(-100%);
+          }
+        }
+
+        @keyframes tabHint {
+          0% {
+            background: ${colors.PRIMARY_75_PERCENT};
+            transform: translateY(-50%) scale(1);
+          }
+          2.5% {
+            background: ${colors.SUCCESS_90};
+            transform: translateY(-50%) scale(1.15);
+          }
+          5% {
+            background: ${colors.PRIMARY_75_PERCENT};
+            transform: translateY(-50%) scale(1.05);
+          }
+          7.5% {
+            background: ${colors.SUCCESS_90};
+            transform: translateY(-50%) scale(1.15);
+          }
+          10% {
+            background: ${colors.PRIMARY_75_PERCENT};
+            transform: translateY(-50%) scale(1);
+          }
+          90% {
+            background: ${colors.PRIMARY_75_PERCENT};
+            transform: translateY(-50%) scale(1);
           }
         }
 
