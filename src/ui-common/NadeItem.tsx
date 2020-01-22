@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
-import { Icon } from "semantic-ui-react";
+import { Icon, Popup } from "semantic-ui-react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { tickrateString } from "../models/Nade/NadeTickrate";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
@@ -60,13 +60,26 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
               </div>
             )}
 
+            <div className="spacer" />
+
             {nade.tickrate && nade.tickrate !== "any" && (
-              <div className="stat tick">
-                <Icon name="code" size="small" />
-                <span className="icon-text">
-                  {tickrateString(nade.tickrate)}
-                </span>
-              </div>
+              <Popup
+                content="Uses jumpthrow bind"
+                hoverable
+                inverted
+                size="tiny"
+                position="bottom center"
+                mouseEnterDelay={500}
+                openOnTriggerClick={false}
+                trigger={
+                  <div className="stat tick">
+                    <Icon name="terminal" size="small" />
+                    <span className="icon-text">
+                      {tickrateString(nade.tickrate)}
+                    </span>
+                  </div>
+                }
+              />
             )}
           </div>
         </a>
@@ -143,6 +156,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
         .tick {
           color: ${colors.PRIMARY};
+          margin-right: 0;
         }
 
         .new-badge {
@@ -159,7 +173,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
         .spacer {
           flex: 1;
-        
+        }
       `}</style>
     </>
   );

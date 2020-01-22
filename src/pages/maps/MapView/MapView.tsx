@@ -86,14 +86,7 @@ export const MapView: FC<Props> = ({ map }) => {
             ))}
 
           <div className={tabClassName} onClick={onHandleClick}>
-            <Icon
-              name={visisble ? "chevron left" : "chevron right"}
-              size="large"
-            />
-          </div>
-
-          <div className="close-btn" onClick={onHandleClick}>
-            <Icon name="cancel" size="large" />
+            <Icon name={visisble ? "cancel" : "map outline"} size="large" />
           </div>
         </div>
       </div>
@@ -125,7 +118,7 @@ export const MapView: FC<Props> = ({ map }) => {
 
         .mapview-tab {
           background: ${colors.PRIMARY_75_PERCENT};
-          padding: 20px 0px;
+          padding: 25px 5px;
           position: absolute;
           left: 100%;
           top: calc(50%);
@@ -143,11 +136,11 @@ export const MapView: FC<Props> = ({ map }) => {
         }
 
         .mapview-tab.active {
-          background: rgba(21, 21, 21, 0.75);
+          background: rgba(194, 43, 43, 0.75);
         }
 
         .mapview-tab.active:hover {
-          background: rgba(21, 21, 21, 1);
+          background: rgba(194, 43, 43, 1);
         }
 
         .mapview-map {
@@ -164,40 +157,6 @@ export const MapView: FC<Props> = ({ map }) => {
           border-top-right-radius: 4px;
           border-bottom-right-radius: 4px;
           pointer-events: all;
-        }
-
-        .close-btn {
-          position: absolute;
-          top: 12px;
-          right: 12px;
-          color: rgba(0, 0, 0);
-          background: rgba(168, 50, 50, 0.5);
-          border-radius: 50%;
-          width: 35px;
-          height: 35px;
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          padding-left: 2px;
-          padding-top: 1px;
-          cursor: pointer;
-          transition: background 0.15s;
-        }
-
-        .close-btn:hover {
-          background: rgba(168, 50, 50, 1);
-        }
-
-        @keyframes hintAnimate {
-          0% {
-            transform: translateX(-100%);
-          }
-          50% {
-            transform: translateX(-95%);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
         }
 
         @keyframes tabHint {
