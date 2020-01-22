@@ -33,8 +33,8 @@ export const Filters: FC<Props> = ({ map }) => {
       <style jsx>{`
         .nade-filter-container {
           display: flex;
-          margin-left: ${uiDimensions.OUTER_GUTTER_SIZE}px;
-          margin-right: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin-left: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          margin-right: ${uiDimensions.INNER_GUTTER_SIZE}px;
         }
 
         .nade-filter-bg {
@@ -43,12 +43,6 @@ export const Filters: FC<Props> = ({ map }) => {
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
-          .nade-filter-container {
-            padding-left: 12px;
-            padding-right: 12px;
-            left: 0;
-          }
-
           .nade-sorter {
             display: none;
           }

@@ -76,7 +76,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
           background: #fff;
           width: 100%;
           border: ${isMobile ? 0 : 1}px solid ${colors.PRIMARY_BORDER};
-          border-radius: ${isMobile ? 0 : uiDimensions.BORDER_RADIUS};
+          border-radius: ${uiDimensions.BORDER_RADIUS};
           cursor: pointer;
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
           transition: box-shadow ${durations.transition}s;

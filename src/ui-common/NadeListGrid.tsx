@@ -53,16 +53,11 @@ export const NadeListGrid: FC<Props> = ({
       </div>
       <style jsx>{`
         .nadelist {
-          min-height: 100px;
           display: grid;
           grid-template-columns: repeat(6, minmax(250px, 1fr));
-          margin-left: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
-          margin-right: -${uiDimensions.INNER_GUTTER_SIZE / 2}px;
+          grid-column-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          grid-row-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
           width: 100%;
-        }
-
-        .nadelist-item {
-          padding: ${uiDimensions.INNER_GUTTER_SIZE / 2}px;
         }
 
         .nadelist-loading {

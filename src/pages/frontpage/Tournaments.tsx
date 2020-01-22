@@ -14,7 +14,7 @@ export const TournamentsContainer: FC = () => {
       </div>
       <style jsx>{`
         .tournaments {
-          margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin: ${uiDimensions.INNER_GUTTER_SIZE}px;
         }
       `}</style>
     </>

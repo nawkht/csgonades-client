@@ -24,7 +24,7 @@ export const Footer: FC = () => {
         </div>
         <div className="powered-by">
           Powered by{" "}
-          <a href="" rel="nofollow">
+          <a href="https://steamcommunity.com/" rel="nofollow">
             Steam
           </a>
         </div>
@@ -35,6 +35,7 @@ export const Footer: FC = () => {
           color: white;
           display: flex;
           height: 100%;
+          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
         }
 
         .footer .copyright {
@@ -71,7 +72,15 @@ export const Footer: FC = () => {
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
           .footer {
-            font-size: 0.7em;
+            flex-direction: column;
+            margin-left: 0;
+          }
+          .footer .copyright {
+            text-align: center;
+          }
+
+          .powered-by {
+            text-align: center;
           }
         }
       `}</style>

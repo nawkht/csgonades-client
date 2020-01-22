@@ -125,6 +125,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           width: 100%;
           overflow: hidden;
           position: relative;
+          border-radius: ${uiDimensions.BORDER_RADIUS};
         }
 
         .nadebox:hover {

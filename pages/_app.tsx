@@ -75,6 +75,14 @@ class MyApp extends App<Props> {
             font-weight: 300;
             color: #212529;
           }
+
+          h1,
+          h2,
+          h3,
+          h4,
+          h5 {
+            font-weight: 400;
+          }
         `}</style>
       </Provider>
     );

@@ -90,9 +90,7 @@ export const Layout: React.FC<Props> = ({
       <div id="layout">
         <main>{children}</main>
 
-        <footer>
-          <Footer />
-        </footer>
+        <Footer />
       </div>
 
       <ToastList />
@@ -118,10 +116,6 @@ export const Layout: React.FC<Props> = ({
           margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
           margin-top: ${uiDimensions.HEADER_HEIGHT}px;
           flex: 1;
-        }
-
-        footer {
-          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {

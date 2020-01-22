@@ -37,10 +37,13 @@ export const MapPage: FC<Props> = ({ map }) => {
         }
 
         .nade-list {
-          padding: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          padding: ${uiDimensions.INNER_GUTTER_SIZE}px;
         }
 
         @media only screen and (max-width: 860px) {
+          .map-page-wrapper {
+            margin-left: 0;
+          }
           .nade-list {
             margin-top: ${uiDimensions.INNER_GUTTER_SIZE * 2.5}px;
           }

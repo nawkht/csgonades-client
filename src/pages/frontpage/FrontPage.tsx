@@ -23,12 +23,12 @@ export const FrontPage: FC = () => {
       </div>
       <style jsx>{`
         .recent-nades {
-          margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin: ${uiDimensions.INNER_GUTTER_SIZE}px;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
-          .recent-nades {
-            margin: 0;
+          .recent-nades h3 {
+            margin-top: ${uiDimensions.PADDING_HUGE}px;
           }
         }
       `}</style>
