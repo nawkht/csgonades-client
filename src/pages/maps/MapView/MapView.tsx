@@ -41,7 +41,7 @@ export const MapView: FC<Props> = ({ map }) => {
       classes.push("tab-hint-animated");
     }
     return classes.join(" ");
-  }, [visisble]);
+  }, [visisble, hasOpenedMapView]);
 
   function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
     if (ref.current) {
