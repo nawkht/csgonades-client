@@ -137,6 +137,11 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
       };
     case "@@@nades/FILTER_BY_FAVORITES":
       return handleFavoriteFilterToggle(state, action);
+    case "@@nades/CLEAR_SELECTED":
+      return {
+        ...state,
+        selectedNade: undefined
+      };
     default:
       assertNever(action);
       return state;

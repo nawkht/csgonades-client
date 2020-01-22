@@ -32,6 +32,10 @@ type AddSelectedNadeAction = {
   nade: Nade;
 };
 
+type ClearSelectedNadeAction = {
+  type: "@@nades/CLEAR_SELECTED";
+};
+
 type StartLoadingNadeAction = {
   type: "@@nades/START_LOADING";
 };
@@ -79,7 +83,8 @@ export type NadeActions =
   | ResetNadeFilter
   | AddNadeError
   | SetSortingNameAction
-  | ToogleMapPositionModal;
+  | ToogleMapPositionModal
+  | ClearSelectedNadeAction;
 
 export type SortingMethod = "name" | "date" | "score";
 
@@ -161,4 +166,8 @@ export const toggleMapPositionModalAction = (
 ): ToogleMapPositionModal => ({
   type: "@@nades/TOGGLE_MAP_POSITION_MODAL",
   visisble
+});
+
+export const clearSelectedNadeAction = (): ClearSelectedNadeAction => ({
+  type: "@@nades/CLEAR_SELECTED"
 });
