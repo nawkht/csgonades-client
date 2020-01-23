@@ -1,15 +1,14 @@
 import { FC } from "react";
-import { Flag, Icon } from "semantic-ui-react";
 import { Tournament } from "../../models/Tournament";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
-import { prettyDate } from "../../utils/DateUtils";
+import { TournamentItem } from "./TournamentItem";
 
 type Props = {
   tournaments: Tournament[];
 };
 
 export const TournamentList: FC<Props> = ({ tournaments }) => {
-  const { colors } = useTheme();
+  const { uiDimensions } = useTheme();
   if (tournaments.length === 0) {
     return null;
   }
@@ -18,93 +17,22 @@ export const TournamentList: FC<Props> = ({ tournaments }) => {
     <div>
       <h3>Tournaments</h3>
       <div className="table-container">
-        <table>
-          <tbody>
-            <tr>
-              <td className="icon"></td>
-              <td className="name">Name</td>
-              <td>Start date</td>
-              <td>End date</td>
-              <td>Location</td>
-            </tr>
-            {tournaments.map(t => (
-              <tr key={t.id}>
-                <td className="icon">
-                  <img src={t.iconUrl} />
-                </td>
-                {t.eventUrl ? (
-                  <td className="name link">
-                    <a href={t.eventUrl} target="_blank">
-                      {t.name}
-                    </a>
-                  </td>
-                ) : (
-                  <td className="name">{t.name}</td>
-                )}
-                <td>{prettyDate(t.startDate)}</td>
-                <td>{prettyDate(t.endDate)}</td>
-                <td>
-                  <Flag name={t.country} /> {t.city}
-                </td>
-                <td>
-                  {t.twitchUrl && (
-                    <a href={t.twitchUrl} target="_blank" rel="nofollow">
-                      <Icon name="twitch" size="large" />
-                    </a>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {tournaments.map(t => (
+          <TournamentItem key={t.id} tournament={t} />
+        ))}
       </div>
       <style jsx>{`
         .table-container {
-          background: white;
-          border: 1px solid ${colors.PRIMARY_BORDER};
-          border-radius: 4px;
-          overflow: hidden;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(250px, 1fr));
+          grid-column-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          grid-row-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
         }
 
-        table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-
-        .icon {
-          width: 25px;
-        }
-
-        tr {
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
-        }
-
-        tr:last-child {
-          border-bottom: none;
-        }
-
-        tr td {
-          padding: 6px 12px;
-        }
-
-        tr:first-child {
-          font-weight: bold;
-        }
-
-        .link a {
-          color: ${colors.PRIMARY};
-        }
-
-        .link a:hover {
-          text-decoration: underline;
-        }
-
-        .icon img {
-          width: 16px;
-        }
-
-        .name {
-          flex: 1;
+        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+          .table-container {
+            grid-template-columns: repeat(1, minmax(250px, 1fr));
+          }
         }
       `}</style>
     </div>
