@@ -53,7 +53,6 @@ const Header: FC = () => {
         .logo-container {
           display: flex;
           align-items: center;
-          margin-left: 18px;
         }
 
         .hamburger {
@@ -68,6 +67,7 @@ const Header: FC = () => {
           background: #fff;
           border-bottom: 1px solid ${colors.PRIMARY_BORDER};
           justify-content: space-between;
+          padding: 0px ${uiDimensions.INNER_GUTTER_SIZE}px;
         }
 
         .app-loading {
@@ -82,10 +82,13 @@ const Header: FC = () => {
 
         .logo {
           align-self: center;
+          height: 100%;
+          padding: 12px 0px;
         }
 
         .logo img {
-          height: 35px;
+          height: 100%;
+          display: block;
         }
 
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {

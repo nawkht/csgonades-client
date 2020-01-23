@@ -34,7 +34,6 @@ export const SignInnButton: FC = () => {
         }
         .steam-login {
           display: flex;
-          margin-right: 18px;
           border-radius: 8px;
           align-items: center;
           color: white;
