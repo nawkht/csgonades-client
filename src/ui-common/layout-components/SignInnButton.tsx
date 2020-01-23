@@ -14,7 +14,9 @@ export const SignInnButton: FC = () => {
       <div className="steam-login-wrapper">
         <a className="steam-login" href={AUTH_URL} rel="nofollow">
           <div className="steam-content">
-            <div className="steam-header">Sign in through STEAM</div>
+            <div className="steam-header">
+              Sign in through <span>STEAM</span>
+            </div>
             <div className="steam-notice">
               This site not accosiated with Valve Corp.
             </div>
@@ -71,6 +73,10 @@ export const SignInnButton: FC = () => {
         .steam-header {
           background: rgba(34, 34, 34, 1);
           padding: 6px 56px 3px 12px;
+        }
+
+        .steam-header span {
+          font-weight: normal;
         }
 
         .steam-notice {
