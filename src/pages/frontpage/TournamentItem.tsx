@@ -58,7 +58,7 @@ export const TournamentItem: FC<Props> = ({ tournament }) => {
           background: #1f2125 url(${tournament.iconUrl});
           background-repeat: no-repeat;
           background-position: center;
-          background-size: 15%;
+          background-size: 20%;
         }
 
         .tournament-header h3 {
