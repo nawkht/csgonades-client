@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { useNavigation } from "../store/GlobalStore/GlobalHooks";
@@ -24,10 +24,15 @@ export const Layout: React.FC<Props> = ({
   canonical,
   metaThumbNail
 }) => {
-  const [pathname, setPathname] = useState("");
   useThemeSync();
-  const { closeNav } = useNavigation();
-  const { uiDimensions, colors } = useTheme();
+  const { closeNav, isNavOpen } = useNavigation();
+  const { uiDimensions, colors, durations } = useTheme();
+
+  const mobileNavClassName = useMemo(() => {
+    if (isNavOpen) {
+      return "open";
+    }
+  }, [isNavOpen]);
 
   useEffect(() => {
     closeNav();
@@ -36,7 +41,6 @@ export const Layout: React.FC<Props> = ({
   useEffect(() => {
     let delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
-      setPathname(window.location.pathname);
       GoogleAnalytics.pageView(location);
     }, 500);
     return () => {
@@ -85,7 +89,13 @@ export const Layout: React.FC<Props> = ({
         <Header />
       </header>
 
-      <Navigation />
+      <aside id="navigation">
+        <Navigation />
+      </aside>
+
+      <aside id="mobile-navigation" className={mobileNavClassName}>
+        <Navigation />
+      </aside>
 
       <div id="layout">
         <main>{children}</main>
@@ -118,9 +128,46 @@ export const Layout: React.FC<Props> = ({
           flex: 1;
         }
 
+        #navigation,
+        #mobile-navigation {
+          position: fixed;
+          top: ${uiDimensions.HEADER_HEIGHT}px;
+          left: 0;
+          bottom: 0;
+          z-index: 999;
+          border-right: 1px solid ${colors.PRIMARY_BORDER};
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow-y: auto;
+          background: white;
+          width: ${uiDimensions.SIDEBAR_WIDTH}px;
+        }
+
+        #mobile-navigation {
+          transform: translateX(-100%);
+          transition: transform ${durations.transition}s;
+        }
+
+        #mobile-navigation.open {
+          transform: translateX(0);
+        }
+
+        #mobile-navigation {
+          display: none;
+        }
+
         @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
           main {
             margin-left: 0;
+          }
+
+          #navigation {
+            display: none;
+          }
+
+          #mobile-navigation {
+            display: block;
           }
         }
       `}</style>
