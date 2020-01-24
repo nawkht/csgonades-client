@@ -1,12 +1,10 @@
 import { AppState } from "..";
 
-export const newNadeGfyIsLoading = (state: AppState) =>
-  state.newNadeStore.loadingGfy;
+export const newNadeGfyError = (state: AppState) => state.newNadeStore.error;
 
-export const newNadeLoadingSubmit = (state: AppState) =>
-  state.newNadeStore.loadingSubmit;
+export const newNadeLoadingSelector = (state: AppState) =>
+  state.newNadeStore.loading;
 
-export const newNadeGfyError = (state: AppState) => state.newNadeStore.gfyError;
-export const newNadeImageData = (state: AppState) =>
-  state.newNadeStore.imageData;
 export const newNadeGfyData = (state: AppState) => state.newNadeStore.gfyData;
+
+export const newNadeStepSelector = (state: AppState) => state.newNadeStore.step;

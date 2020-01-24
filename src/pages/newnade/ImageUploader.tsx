@@ -4,9 +4,10 @@ import { Button } from "semantic-ui-react";
 
 type Props = {
   onImageCropped: (croppedImageBase64: string) => void;
+  loading: boolean;
 };
 
-export const ImageUploader = ({ onImageCropped }: Props) => {
+export const ImageUploader = ({ onImageCropped, loading }: Props) => {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -115,7 +116,29 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
           accept="image/jpeg"
           onChange={onSelectFile}
         />
-        <Button onClick={onSelectFileClick}>UPLOAD IMAGE (JPEG ONLY)</Button>
+        <div className="file-selector-btn">
+          <Button
+            loading={loading}
+            disabled={loading}
+            onClick={onSelectFileClick}
+            color="teal"
+          >
+            Add image
+          </Button>
+          {image && (
+            <>
+              <br />
+              <Button
+                loading={loading}
+                disabled={loading}
+                positive
+                onClick={cropImage}
+              >
+                Submit
+              </Button>
+            </>
+          )}
+        </div>
         {!image && (
           <img
             width="100%"
@@ -131,21 +154,16 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
           onComplete={onCropComplete}
           onChange={onCropChange}
         />
-
-        {image && (
-          <>
-            <br />
-            <Button primary onClick={cropImage}>
-              Crop image
-            </Button>
-          </>
-        )}
       </div>
       <style jsx>{`
         .image-uploader {
-          max-width: 75vw;
+          max-width: 70vw;
           display: block;
-          margin: 0 auto;
+        }
+
+        .file-selector-btn {
+          margin-bottom: 12px;
+          display: flex;
         }
       `}</style>
     </>

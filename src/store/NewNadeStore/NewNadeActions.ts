@@ -1,27 +1,21 @@
 import { GfycatData } from "../../models/Nade/GfycatData";
+import { NewNadeStep } from "./NewNadeReducer";
 
-type NewNadeImageError = {
-  type: "@@newnade/IMG_ERROR";
-  error: string;
+type NewNadeStartLoading = {
+  type: "@@newnade/START_LOADING";
 };
 
-// TODO: Handle image error
-
-type NewNadeSubmitStartLoading = {
-  type: "@@newnade/SUBMIT_START_LOAD";
-};
-
-export const newNadeSubmitStartLoadingAction = (): NewNadeSubmitStartLoading => ({
-  type: "@@newnade/SUBMIT_START_LOAD"
+export const newNadeStartLoadingAction = (): NewNadeStartLoading => ({
+  type: "@@newnade/START_LOADING"
 });
 
-type NewNadeGfyError = {
-  type: "@@newnade/GFY_ERROR";
+type NewNadeError = {
+  type: "@@newnade/ERROR";
   error: string;
 };
 
-export const newNadeErrorAction = (error: string): NewNadeGfyError => ({
-  type: "@@newnade/GFY_ERROR",
+export const newNadeErrorAction = (error: string): NewNadeError => ({
+  type: "@@newnade/ERROR",
   error
 });
 
@@ -31,14 +25,6 @@ type NewNadeClearAction = {
 
 export const nadeNadeClearAction = (): NewNadeClearAction => ({
   type: "@@newnade/CLEAR_ALL"
-});
-
-type NewNadeSumbitError = {
-  type: "@@newnade/SUBMIT_ERROR";
-};
-
-export const newNadeSubmitError = (): NewNadeSumbitError => ({
-  type: "@@newnade/SUBMIT_ERROR"
 });
 
 type NewNadeAddGfycat = {
@@ -53,30 +39,19 @@ export const newNadeAddGfyDataAction = (
   gfyData
 });
 
-type NewNadeAddImage = {
-  type: "@@newnade/ADD_IMG";
-  imgData: string;
+type NewNadeSetStep = {
+  type: "@@nednade/SET_STEP";
+  step: NewNadeStep;
 };
 
-export const newNadeAddImageAction = (imgData: string): NewNadeAddImage => ({
-  type: "@@newnade/ADD_IMG",
-  imgData
-});
-
-type NewNadeStartGfyLoading = {
-  type: "@@newnade/START_LOADING_GFY";
-};
-
-export const newNadeStartLoadingAction = (): NewNadeStartGfyLoading => ({
-  type: "@@newnade/START_LOADING_GFY"
+export const newNadeSetStep = (step: NewNadeStep): NewNadeSetStep => ({
+  type: "@@nednade/SET_STEP",
+  step
 });
 
 export type NewNadeActions =
   | NewNadeAddGfycat
   | NewNadeClearAction
-  | NewNadeGfyError
-  | NewNadeAddImage
-  | NewNadeStartGfyLoading
-  | NewNadeSumbitError
-  | NewNadeImageError
-  | NewNadeSubmitStartLoading;
+  | NewNadeError
+  | NewNadeStartLoading
+  | NewNadeSetStep;

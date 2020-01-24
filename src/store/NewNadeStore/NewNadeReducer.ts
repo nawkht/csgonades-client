@@ -3,18 +3,18 @@ import { GfycatData } from "../../models/Nade/GfycatData";
 import { assertNever } from "../../utils/Common";
 import { NewNadeActions } from "./NewNadeActions";
 
+export type NewNadeStep = "gfycat" | "result-img";
+
 export type NewNadeState = {
+  step: NewNadeStep;
   gfyData?: GfycatData;
-  imageData?: string;
-  gfyError?: string;
-  imgError?: string;
-  loadingGfy: boolean;
-  loadingSubmit: boolean;
+  loading: boolean;
+  error?: string;
 };
 
 const initialState: NewNadeState = {
-  loadingGfy: false,
-  loadingSubmit: false
+  step: "gfycat",
+  loading: false
 };
 
 export const NewNadeReducer: Reducer<NewNadeState, NewNadeActions> = (
@@ -28,45 +28,25 @@ export const NewNadeReducer: Reducer<NewNadeState, NewNadeActions> = (
       return {
         ...state,
         gfyData: action.gfyData,
-        gfyError: undefined,
-        loadingGfy: false
+        loading: false,
+        error: undefined
       };
-    case "@@newnade/ADD_IMG":
+    case "@@nednade/SET_STEP":
       return {
         ...state,
-        imgError: undefined,
-        imageData: action.imgData
+        step: action.step
       };
-    case "@@newnade/GFY_ERROR":
+    case "@@newnade/ERROR":
       return {
         ...state,
-        gfyError: action.error,
-        loadingGfy: false,
-        gfyData: undefined
+        loading: false,
+        error: action.error
       };
-    case "@@newnade/START_LOADING_GFY":
+    case "@@newnade/START_LOADING":
       return {
         ...state,
-        loadingGfy: true,
-        gfyError: undefined
-      };
-    case "@@newnade/IMG_ERROR":
-      return {
-        ...state,
-        imgError: action.error,
-        imageData: undefined
-      };
-    case "@@newnade/SUBMIT_ERROR":
-      return {
-        ...state,
-        loadingSubmit: false
-      };
-    case "@@newnade/SUBMIT_START_LOAD":
-      return {
-        ...state,
-        loadingSubmit: true,
-        gfyError: undefined,
-        imgError: undefined
+        loading: true,
+        error: undefined
       };
     default:
       assertNever(action);

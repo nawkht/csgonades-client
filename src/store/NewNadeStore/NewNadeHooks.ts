@@ -1,46 +1,45 @@
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
-import { newNadeAddImageAction } from "./NewNadeActions";
+import { nadeNadeClearAction, newNadeSetStep } from "./NewNadeActions";
+import { NewNadeStep } from "./NewNadeReducer";
 import {
   newNadeGfyData,
   newNadeGfyError,
-  newNadeGfyIsLoading,
-  newNadeImageData,
-  newNadeLoadingSubmit
+  newNadeLoadingSelector,
+  newNadeStepSelector
 } from "./NewNadeSelectors";
-import { tryAddGfycat, trySubmitNewNade } from "./NewNadeThunks";
+import { tryAddGfycat, tryAddImage } from "./NewNadeThunks";
 
 export const useNewNade = () => {
   const dispatch = useDispatch();
-  const gfyIsLoading = useSelector(newNadeGfyIsLoading);
-  const gfyError = useSelector(newNadeGfyError);
+  const currentStep = useSelector(newNadeStepSelector);
+  const loading = useSelector(newNadeLoadingSelector);
+  const error = useSelector(newNadeGfyError);
   const gfyData = useSelector(newNadeGfyData);
-  const imageData = useSelector(newNadeImageData);
-  const loadingSubmit = useSelector(newNadeLoadingSubmit);
 
   function addGfycat(gfyIdOrUrl: string) {
-    GoogleAnalytics.event("New Nade", "Set gfycat");
     dispatch(tryAddGfycat(gfyIdOrUrl));
   }
 
   function addImage(imgData: string) {
-    GoogleAnalytics.event("New Nade", "Set image");
-    dispatch(newNadeAddImageAction(imgData));
+    dispatch(tryAddImage(imgData));
   }
 
-  function submit() {
-    dispatch(trySubmitNewNade());
-    GoogleAnalytics.event("New Nade", "Submit");
+  function setStep(step: NewNadeStep) {
+    dispatch(newNadeSetStep(step));
+  }
+
+  function reset() {
+    dispatch(nadeNadeClearAction());
   }
 
   return {
-    gfyIsLoading,
-    gfyError,
+    currentStep,
+    setStep,
+    error,
     gfyData,
-    imageData,
     addGfycat,
     addImage,
-    loadingSubmit,
-    submit
+    loading,
+    reset
   };
 };
