@@ -212,11 +212,12 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
         }
 
         .new-badge {
-          padding: 3px;
+          padding: 3px 6px;
           font-size: 0.7em;
           border-radius: 4px;
-          border: 1px solid ${colors.SUCCESS};
-          color: ${colors.SUCCESS};
+          background: #709c14;
+          color: white;
+          font-weight: normal;
         }
 
         .video {
