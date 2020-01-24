@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { FC } from "react";
-import { Icon, Popup } from "semantic-ui-react";
+import { FaRunning } from "react-icons/fa";
+import { GoEye, GoTerminal } from "react-icons/go";
+import { TiStarFullOutline } from "react-icons/ti";
+import { Popup } from "semantic-ui-react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { tickrateString } from "../models/Nade/NadeTickrate";
 import { useTheme } from "../store/LayoutStore/LayoutHooks";
@@ -18,7 +21,9 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
   const iconUrl = iconFromType(nade.type);
-  const favoriteIconColor = nade.isFavorited ? "yellow" : undefined;
+  const favoriteIconColor = nade.isFavorited ? "#fac800" : undefined;
+
+  const hasMovement = nade.movement === "running";
 
   return (
     <>
@@ -33,7 +38,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
               className="nade-type-icon"
               src={iconUrl}
               alt={`nade icon ${nade.type}`}
-            />{" "}
+            />
             <span className="title-text">{title}</span>
           </div>
           <div className="video">
@@ -42,8 +47,8 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
           <div className="stats">
             {nade.viewCount > 500 && (
               <div className="stat">
-                <Icon name="eye" size="small" />
-                <span className="icon-text">{kFormatter(nade.viewCount)}</span>
+                <GoEye />
+                <span className="stat-text">{kFormatter(nade.viewCount)}</span>
               </div>
             )}
 
@@ -55,32 +60,51 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
             {nade.favoriteCount > 0 && (
               <div className="stat">
-                <Icon name="star" size="small" color={favoriteIconColor} />
-                <span className="icon-text">{nade.favoriteCount}</span>
+                <TiStarFullOutline color={favoriteIconColor} />
+                <span className="stat-text">{nade.favoriteCount}</span>
               </div>
             )}
 
             <div className="spacer" />
 
-            {nade.tickrate && nade.tickrate !== "any" && (
-              <Popup
-                content="Uses jumpthrow bind"
-                hoverable
-                inverted
-                size="tiny"
-                position="bottom center"
-                mouseEnterDelay={500}
-                openOnTriggerClick={false}
-                trigger={
-                  <div className="stat tick">
-                    <Icon name="terminal" size="small" />
-                    <span className="icon-text">
-                      {tickrateString(nade.tickrate)}
-                    </span>
-                  </div>
-                }
-              />
-            )}
+            <div className="specials">
+              {hasMovement && (
+                <Popup
+                  content="Requires movement"
+                  hoverable
+                  inverted
+                  size="tiny"
+                  position="bottom center"
+                  mouseEnterDelay={300}
+                  openOnTriggerClick={false}
+                  trigger={
+                    <div className="special movement">
+                      <FaRunning />
+                    </div>
+                  }
+                />
+              )}
+
+              {nade.tickrate && (
+                <Popup
+                  content="Uses jumpthrow bind"
+                  hoverable
+                  inverted
+                  size="tiny"
+                  position="bottom center"
+                  mouseEnterDelay={300}
+                  openOnTriggerClick={false}
+                  trigger={
+                    <div className="special tick">
+                      <GoTerminal />
+                      <span className="special-text">
+                        {tickrateString(nade.tickrate)}
+                      </span>
+                    </div>
+                  }
+                />
+              )}
+            </div>
           </div>
         </a>
       </Link>
@@ -139,24 +163,37 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
         .stats {
           display: flex;
-          padding: 3px 6px 3px 9px;
+          padding: 6px 9px;
           color: #444;
           align-items: center;
         }
 
         .stat {
+          display: flex;
           align-items: center;
-          justify-content: center;
           margin-right: 12px;
         }
 
-        .stat .icon-text {
+        .stat-text,
+        .special-text {
           font-size: 0.7em;
+          margin-left: 3px;
+          padding-top: 1px;
         }
 
-        .tick {
-          color: ${colors.PRIMARY};
+        .specials {
+          display: flex;
+        }
+
+        .special:last-child {
           margin-right: 0;
+        }
+
+        .special {
+          color: #690000;
+          display: flex;
+          align-items: center;
+          margin-right: 12px;
         }
 
         .new-badge {

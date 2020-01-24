@@ -57,6 +57,8 @@ export type NadeLight = {
   score: number;
   userAvatar: string;
   isFavorited?: boolean;
+  technique?: Technique;
+  movement?: Movement;
 };
 
 export type NadeBody = {
