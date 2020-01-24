@@ -44,29 +44,34 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
           <div className="video">
             <GfycatThumbnail nade={nade} />
           </div>
-          <div className="stats">
-            {nade.viewCount > 500 && (
-              <div className="stat">
-                <GoEye />
-                <span className="stat-text">{kFormatter(nade.viewCount)}</span>
-              </div>
-            )}
+          <div className="item-bottom">
+            <div className="stats">
+              {nade.viewCount > 500 && (
+                <div className="stat">
+                  <div className="stat-content">
+                    <GoEye style={{ padding: 0, margin: 0 }} />
+                    <span className="stat-text">
+                      {kFormatter(nade.viewCount)}
+                    </span>
+                  </div>
+                </div>
+              )}
 
-            {nade.viewCount <= 500 && (
-              <div className="stat">
-                <span className="new-badge">NEW</span>
-              </div>
-            )}
+              {nade.viewCount <= 500 && (
+                <div className="stat">
+                  <span className="new-badge">NEW</span>
+                </div>
+              )}
 
-            {nade.favoriteCount > 0 && (
-              <div className="stat">
-                <TiStarFullOutline color={favoriteIconColor} />
-                <span className="stat-text">{nade.favoriteCount}</span>
-              </div>
-            )}
-
-            <div className="spacer" />
-
+              {nade.favoriteCount > 0 && (
+                <div className="stat">
+                  <div className="stat-content">
+                    <TiStarFullOutline color={favoriteIconColor} />
+                    <span className="stat-text">{nade.favoriteCount}</span>
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="specials">
               {hasMovement && (
                 <Popup
@@ -161,17 +166,26 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
           background: ${colors.ERROR};
         }
 
-        .stats {
+        .item-bottom {
           display: flex;
           padding: 6px 9px;
-          color: #444;
           align-items: center;
         }
 
-        .stat {
+        .stats {
           display: flex;
           align-items: center;
+          color: #444;
+          flex: 1;
+        }
+
+        .stat {
           margin-right: 12px;
+        }
+
+        .stat-content {
+          display: flex;
+          align-items: center;
         }
 
         .stat-text,
@@ -183,6 +197,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
         .specials {
           display: flex;
+          align-items: center;
         }
 
         .special:last-child {
@@ -197,9 +212,9 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
         }
 
         .new-badge {
-          font-size: 0.6em;
-          border-radius: 4px;
           padding: 3px;
+          font-size: 0.7em;
+          border-radius: 4px;
           border: 1px solid ${colors.SUCCESS};
           color: ${colors.SUCCESS};
         }
