@@ -31,7 +31,7 @@ export const Navigation: FC = () => {
               rel="nofollow"
             >
               <span className="discord-link-text">
-                <FaDiscord style={{ marginRight: 6 }} />
+                <FaDiscord style={{ marginRight: 6, fontSize: "1.5em" }} />
                 Join Discord
               </span>
             </a>
@@ -68,6 +68,7 @@ export const Navigation: FC = () => {
           color: white;
           border-radius: 4px;
           transition: background 0.15s;
+          font-weight: normal;
         }
 
         .discord-link:hover {
