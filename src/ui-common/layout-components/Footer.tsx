@@ -5,10 +5,12 @@ import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 export const Footer: FC = () => {
   const { colors, uiDimensions } = useTheme();
 
+  const year = new Date().getFullYear();
+
   return (
     <>
       <div className="footer">
-        <div className="copyright">© 2019 CSGO Nades</div>
+        <div className="copyright">© {year} CSGO Nades</div>
         <div className="footer-links">
           <Link href="/about" as="/about">
             <a>About</a>
