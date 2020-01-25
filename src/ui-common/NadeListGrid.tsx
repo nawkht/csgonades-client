@@ -52,7 +52,7 @@ export const NadeListGrid: FC<Props> = ({
       <style jsx>{`
         .nadelist {
           display: grid;
-          grid-template-columns: repeat(6, minmax(250px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE};
           grid-row-gap: ${Dimensions.GUTTER_SIZE};
           width: 100%;
@@ -64,18 +64,6 @@ export const NadeListGrid: FC<Props> = ({
           left: 0;
           right: 0;
           padding: 0;
-        }
-
-        @media only screen and (max-width: 1800px) {
-          .nadelist {
-            grid-template-columns: repeat(5, minmax(250px, 1fr));
-          }
-        }
-
-        @media only screen and (max-width: 1460px) {
-          .nadelist {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-          }
         }
       `}</style>
     </>

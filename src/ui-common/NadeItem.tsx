@@ -118,13 +118,13 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
       <style jsx>{`
         .nadebox {
           background: ${colors.UI_BG};
-          width: 100%;
           border: 1px solid ${colors.BORDER};
           border-radius: ${Dimensions.BORDER_RADIUS};
           cursor: pointer;
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
           transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
+          width: 100%;
         }
 
         .nadebox:hover {
