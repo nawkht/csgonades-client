@@ -33,7 +33,7 @@ export const MapPage: FC<Props> = ({ map }) => {
 
       <style jsx>{`
         .map-page-wrapper {
-          margin-left: 18px;
+          margin-left: 36px;
         }
 
         .nade-list {

@@ -176,28 +176,7 @@ export const useNadesForMap = (map: CsgoMap) => {
     if (!nadesForMap) {
       return [];
     }
-    let processedNades: NadeLight[];
-
-    processedNades = nadesForMap.map(n => {
-      const favorited = favoritedNadeIds.includes(n.id);
-      return {
-        ...n,
-        isFavorited: favorited
-      };
-    });
-
-    processedNades = sortNades(nadeFilter.sortingMethod, processedNades);
-    processedNades = applyNadeFilter(nadeFilter, processedNades);
-
-    if (nadeFilter.coords) {
-      processedNades = nadesForCoords(processedNades, nadeFilter.coords);
-    }
-
-    if (nadeFilter.favorites) {
-      processedNades = processedNades.filter(n => n.isFavorited);
-    }
-
-    return processedNades;
+    return filterNades(nadesForMap, nadeFilter, favoritedNadeIds);
   }, [map, nadesForMap, nadeFilter, favoritedNadeIds, nadesAddedAt]);
 
   return {
@@ -213,28 +192,34 @@ type Coord = {
 
 export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
   const nades = useSelector(nadesForMapSelector(map));
+  const favoritedNadeIds = useSelector(favoritedNadeIdsSelector);
+  const nadeFilter = useSelector(filterForMapSelector(map));
 
-  const unqiueNadesForPosition: NadeLight[] = [];
+  const unqiueNadesForPosition = useMemo(() => {
+    const unqiueNades: NadeLight[] = [];
 
-  if (!nades) {
-    return unqiueNadesForPosition;
-  }
+    if (!nades) {
+      return unqiueNades;
+    }
 
-  const unique: any = {};
+    const unique: any = {};
 
-  for (let nade of nades) {
-    if (nade.mapEndCoord && nade.type) {
-      const { x, y } = nade.mapEndCoord;
-      const roundedX = Math.ceil(x / 30) * 30;
-      const roundedY = Math.ceil(y / 30) * 30;
-      const coordKey = `${nade.type}(${roundedX},${roundedY})`;
+    for (let nade of nades) {
+      if (nade.mapEndCoord && nade.type) {
+        const { x, y } = nade.mapEndCoord;
+        const roundedX = Math.ceil(x / 30) * 30;
+        const roundedY = Math.ceil(y / 30) * 30;
+        const coordKey = `${nade.type}(${roundedX},${roundedY})`;
 
-      if (!unique[coordKey]) {
-        unqiueNadesForPosition.push(nade);
-        unique[coordKey] = true;
+        if (!unique[coordKey]) {
+          unqiueNades.push(nade);
+          unique[coordKey] = true;
+        }
       }
     }
-  }
+
+    return filterNades(unqiueNades, nadeFilter, favoritedNadeIds);
+  }, [nades, favoritedNadeIds, , nadeFilter]);
 
   return unqiueNadesForPosition;
 };
@@ -342,3 +327,32 @@ export const useSimilarNades = (nade: Nade) => {
 
   return similarNades;
 };
+
+function filterNades(
+  nades: NadeLight[],
+  nadeFilter: NadeFilters,
+  favoritedNadeIds: string[]
+) {
+  let processedNades: NadeLight[];
+
+  processedNades = nades.map(n => {
+    const favorited = favoritedNadeIds.includes(n.id);
+    return {
+      ...n,
+      isFavorited: favorited
+    };
+  });
+
+  processedNades = sortNades(nadeFilter.sortingMethod, processedNades);
+  processedNades = applyNadeFilter(nadeFilter, processedNades);
+
+  if (nadeFilter.coords) {
+    processedNades = nadesForCoords(processedNades, nadeFilter.coords);
+  }
+
+  if (nadeFilter.favorites) {
+    processedNades = processedNades.filter(n => n.isFavorited);
+  }
+
+  return processedNades;
+}

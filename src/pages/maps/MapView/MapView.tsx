@@ -1,5 +1,11 @@
-import { FC, SyntheticEvent, useMemo, useRef, useState } from "react";
-import { Icon } from "semantic-ui-react";
+import {
+  FC,
+  SyntheticEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import {
@@ -8,6 +14,7 @@ import {
 } from "../../../store/NadeStore/NadeHooks";
 import { useMapViewTip } from "../../../store/TipStore/TipHooks";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
+import { Filters } from "./Filters";
 import { MapPosIcon } from "./MapPosIcon";
 
 type Props = {
@@ -23,6 +30,16 @@ export const MapView: FC<Props> = ({ map }) => {
   const { uiDimensions, colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
   const { hasOpenedMapView, didOpenMapView } = useMapViewTip();
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      if (ref.current) {
+        setMapLoade(true);
+        setMapWidth(ref.current.offsetWidth);
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const wrapperClassName = useMemo(() => {
     const classes = ["mapview-wrapper"];
@@ -45,8 +62,8 @@ export const MapView: FC<Props> = ({ map }) => {
 
   function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
     if (ref.current) {
-      setMapWidth(ref.current.offsetWidth);
       setMapLoade(true);
+      setMapWidth(ref.current.offsetWidth);
     }
   }
 
@@ -66,15 +83,18 @@ export const MapView: FC<Props> = ({ map }) => {
       GoogleAnalytics.event("MapView", "Open mapview");
     }
   }
+
   return (
     <>
       <div className={wrapperClassName}>
         <div ref={ref} className="mapview-map">
           <img
+            className="mapview-img"
             src={`/mapsoverlays/${map}.jpg`}
             alt="Map overview image"
             onLoad={onImageLoad}
           />
+
           {mapLoaded &&
             nades.map(n => (
               <MapPosIcon
@@ -85,24 +105,42 @@ export const MapView: FC<Props> = ({ map }) => {
               />
             ))}
 
-          <div className={tabClassName} onClick={onHandleClick}>
-            <Icon name={visisble ? "cancel" : "map outline"} size="large" />
+          <div className="filter-bar">
+            <Filters
+              onOpenOpen={onHandleClick}
+              map={map}
+              mapViewIsOpen={visisble}
+            />
           </div>
         </div>
       </div>
       <style jsx>{`
         .mapview-wrapper {
           position: fixed;
-          top: ${uiDimensions.HEADER_HEIGHT}px;
+          top: ${uiDimensions.HEADER_HEIGHT + uiDimensions.INNER_GUTTER_SIZE}px;
           left: ${uiDimensions.SIDEBAR_WIDTH}px;
-          bottom: 0;
-          display: flex;
-          align-items: center;
-          width: 80vh;
+          bottom: ${uiDimensions.INNER_GUTTER_SIZE}px;
           transform: translateX(-100%);
           transition: transform 0.3s;
           z-index: 900;
-          pointer-events: none;
+        }}
+
+        .mapview-map {
+          height: 80vh;
+          width: 80vh;
+        }
+
+        .mapview-img {
+          display: block;
+          border-bottom-right-radius: 4px;
+          width: 100%;
+        }
+
+        .filter-bar {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 100%;
         }
 
         .tab-hint-animated {
@@ -143,22 +181,6 @@ export const MapView: FC<Props> = ({ map }) => {
           background: rgba(194, 43, 43, 1);
         }
 
-        .mapview-map {
-          position: relative;
-          width: 100%;
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 4px;
-          pointer-events: all;
-        }
-
-        .mapview-map img {
-          width: 100%;
-          display: block;
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 4px;
-          pointer-events: all;
-        }
-
         @keyframes tabHint {
           0% {
             background: ${colors.PRIMARY_75_PERCENT};
@@ -186,7 +208,9 @@ export const MapView: FC<Props> = ({ map }) => {
           }
         }
 
-        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+        @media only screen and (max-width: ${
+          uiDimensions.MOBILE_THRESHHOLD
+        }px) {
           .mapview-wrapper {
             display: none;
           }
