@@ -122,7 +122,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
       </div>
       <style jsx>{`
         .nadebox {
-          background: #fff;
+          background: ${colors.UI_BG};
           width: 100%;
           overflow: hidden;
           position: relative;
@@ -170,6 +170,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           display: flex;
           align-items: center;
           justify-content: center;
+          border-bottom: 1px solid ${colors.BORDER};
         }
 
         .title-text {
@@ -195,7 +196,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           display: flex;
           padding: 3px;
           justify-content: space-between;
-          color: #444;
+          color: ${colors.TEXT};
         }
 
         .stat {

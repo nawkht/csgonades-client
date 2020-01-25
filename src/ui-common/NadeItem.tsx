@@ -25,6 +25,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
   const favoriteIconColor = nade.isFavorited ? "#fac800" : undefined;
 
   const hasMovement = nade.movement === "running";
+  const isJumpThrow = nade.technique === "jumpthrow";
 
   return (
     <>
@@ -91,7 +92,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
                 />
               )}
 
-              {nade.tickrate && (
+              {isJumpThrow && (
                 <Popup
                   content="Uses jumpthrow bind"
                   hoverable
@@ -104,7 +105,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
                     <div className="special tick">
                       <GoTerminal />
                       <span className="special-text">
-                        {tickrateString(nade.tickrate)}
+                        {tickrateString(nade.tickrate || "any")}
                       </span>
                     </div>
                   }
@@ -199,7 +200,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
         }
 
         .special {
-          color: #690000;
+          color: ${colors.NADE_ITEM_HIGHLIGHT};
           display: flex;
           align-items: center;
           margin-right: 12px;

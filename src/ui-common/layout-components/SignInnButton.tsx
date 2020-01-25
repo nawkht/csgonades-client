@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 const AUTH_URL =
   process.env.NODE_ENV === "production"
@@ -7,6 +8,8 @@ const AUTH_URL =
     : "http://localhost:5000/auth/steam";
 
 export const SignInnButton: FC = () => {
+  const { colors } = useTheme();
+
   return (
     <>
       <div className="steam-login-wrapper">
@@ -38,6 +41,7 @@ export const SignInnButton: FC = () => {
           transition: background 0.15s;
           overflow: hidden;
           opacity: 0.95;
+          border: 1px solid ${colors.BORDER};
         }
 
         .steam-login:hover {
@@ -70,6 +74,7 @@ export const SignInnButton: FC = () => {
         .steam-header {
           background: rgba(34, 34, 34, 1);
           padding: 6px 56px 3px 12px;
+          white-space: nowrap;
         }
 
         .steam-header span {
@@ -81,6 +86,7 @@ export const SignInnButton: FC = () => {
           font-size: 0.6em;
           color: rgba(255, 255, 255, 0.8);
           padding: 0px 0px 3px 12px;
+          white-space: nowrap;
         }
       `}</style>
     </>

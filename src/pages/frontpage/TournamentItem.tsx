@@ -52,6 +52,7 @@ export const TournamentItem: FC<Props> = ({ tournament }) => {
           color: ${colors.TEXT};
           border-radius: 4px;
           overflow: hidden;
+          border: 1px solid ${colors.BORDER};
         }
 
         .tournament-header {

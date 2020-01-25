@@ -58,12 +58,14 @@ const Header: FC = () => {
         .logo-container {
           display: flex;
           align-items: center;
+          max-width: 30vw;
         }
 
         .hamburger {
           margin-right: 18px;
           cursor: pointer;
           display: none;
+          color: ${colors.TEXT};
         }
 
         .header {
@@ -103,6 +105,10 @@ const Header: FC = () => {
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .hamburger {
             display: block;
+          }
+
+          .app-loading {
+            display: none;
           }
         }
       `}</style>

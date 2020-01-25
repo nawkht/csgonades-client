@@ -11,6 +11,7 @@ export type ThemeColors = {
   GREY: string;
   TEXT: string;
   NAV_HOVER: string;
+  NADE_ITEM_HIGHLIGHT: string;
 };
 
 type Themes = {
@@ -31,7 +32,8 @@ export const themes: Themes = {
     WARNING: "#c05b1c",
     GREY: "#bbb",
     TEXT: "white",
-    NAV_HOVER: "rgba(28, 143, 192, 0.1)"
+    NAV_HOVER: "rgba(28, 143, 192, 0.1)",
+    NADE_ITEM_HIGHLIGHT: "#009982"
   },
   light: {
     SITE_BG: "#f3f3f3",
@@ -45,7 +47,8 @@ export const themes: Themes = {
     WARNING: "#c05b1c",
     GREY: "#bbb",
     TEXT: "#262626",
-    NAV_HOVER: "#f7f7f7"
+    NAV_HOVER: "#f7f7f7",
+    NADE_ITEM_HIGHLIGHT: "#690000"
   }
 };
 
