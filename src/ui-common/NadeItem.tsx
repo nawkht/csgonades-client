@@ -168,7 +168,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
         .item-bottom {
           display: flex;
-          padding: 6px 9px;
+          padding: 4px 9px;
           align-items: center;
         }
 

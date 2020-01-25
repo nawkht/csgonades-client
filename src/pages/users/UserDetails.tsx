@@ -5,6 +5,7 @@ import { User } from "../../models/User";
 import { useIsAllowedUserEdit } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { capitalize } from "../../utils/Common";
+import { dateFromNow } from "../../utils/DateUtils";
 
 type Props = {
   isEditing: boolean;
@@ -34,6 +35,12 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
         <div className="member-since">
           <span>Member since</span> {formatDate(user.createdAt)}
         </div>
+
+        {allowEdit && user.lastActive && (
+          <div className="member-since">
+            <span>Last active</span> {dateFromNow(user.lastActive)}
+          </div>
+        )}
 
         {!!user.bio && <div className="bio">{user.bio}</div>}
         {allowEdit && (
