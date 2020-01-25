@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { Button } from "semantic-ui-react";
+import { Dimensions } from "../../constants/Constants";
 import { formatDate } from "../../models/DateFormater";
 import { User } from "../../models/User";
 import { useIsAllowedUserEdit } from "../../store/AuthStore/AuthHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../../utils/Common";
 import { dateFromNow } from "../../utils/DateUtils";
 
@@ -14,7 +15,7 @@ type Props = {
 };
 
 export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
-  const { colors, isMobile, uiDimensions } = useTheme();
+  const { colors } = useTheme();
   const allowEdit = useIsAllowedUserEdit(user);
 
   if (isEditing) {
@@ -52,20 +53,21 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
       <style jsx>{`
         .user-details {
           position: relative;
-          background: white;
-          margin-right: ${isMobile ? "0px" : "18px"};
+          background: ${colors.UI_BG};
+          margin-right: 18px;
           padding: 12px;
-          width: ${isMobile ? "100%" : "400px"};
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          width: 400px;
+          border: 1px solid ${colors.BORDER};
           align-self: flex-start;
-          border-radius: ${uiDimensions.BORDER_RADIUS};
-          margin-bottom: ${isMobile ? uiDimensions.INNER_GUTTER_SIZE : 0}px;
+          border-radius: ${Dimensions.BORDER_RADIUS};
+          margin-bottom: ${Dimensions.GUTTER_SIZE};
         }
 
         .user-details h1 {
           display: flex;
           align-items: center;
           font-size: 1.2em;
+          color: ${colors.TEXT};
         }
 
         .user-details img {
@@ -76,6 +78,7 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
 
         .member-since {
           margin-bottom: 12px;
+          color: ${colors.TEXT};
         }
 
         .member-since span {
@@ -95,7 +98,7 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           color: white;
           font-size: 0.8em;
           padding: 3px 6px;
-          border-radius: ${uiDimensions.BORDER_RADIUS};
+          border-radius: ${Dimensions.BORDER_RADIUS};
         }
       `}</style>
     </>

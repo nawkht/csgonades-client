@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { isMobile } from "react-device-detect";
 import { Message } from "semantic-ui-react";
+import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { NadeItem } from "./NadeItem";
 import { NadeItemMobile } from "./NadeItemMobile";
 
@@ -18,8 +18,6 @@ export const NadeListGrid: FC<Props> = ({
   emptyMessage = "No nades found",
   onItemClick
 }) => {
-  const { uiDimensions } = useTheme();
-
   const hasNades = nades.length > 0;
 
   if (!hasNades) {
@@ -55,8 +53,8 @@ export const NadeListGrid: FC<Props> = ({
         .nadelist {
           display: grid;
           grid-template-columns: repeat(6, minmax(250px, 1fr));
-          grid-column-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
-          grid-row-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          grid-column-gap: ${Dimensions.GUTTER_SIZE};
+          grid-row-gap: ${Dimensions.GUTTER_SIZE};
           width: 100%;
         }
 

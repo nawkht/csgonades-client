@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { FaDiscord } from "react-icons/fa";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { MapLink } from "./MapLink";
+import { ThemeToggler } from "./ThemeToggler";
 export const Navigation: FC = () => {
-  const { colors, uiDimensions, durations, layers } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
 
@@ -22,21 +21,24 @@ export const Navigation: FC = () => {
           <MapLink mapName="vertigo" currentMapPath={currentRoute} />
           <MapLink mapName="cobblestone" currentMapPath={currentRoute} />
         </ul>
-        <ul id="secondary-nav">
-          <li>
-            <a
-              className="discord-link"
-              target="_black"
-              href="https://discord.gg/010h0KFCBNASyMUKv"
-              rel="nofollow"
-            >
-              <span className="discord-link-text">
-                <FaDiscord style={{ marginRight: 6, fontSize: "1.5em" }} />
-                Join Discord
-              </span>
-            </a>
-          </li>
-        </ul>
+        <div>
+          <ThemeToggler />
+          <ul id="secondary-nav">
+            <li>
+              <a
+                className="discord-link"
+                target="_black"
+                href="https://discord.gg/010h0KFCBNASyMUKv"
+                rel="nofollow"
+              >
+                <span className="discord-link-text">
+                  <FaDiscord style={{ marginRight: 6, fontSize: "1.5em" }} />
+                  Join Discord
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </nav>
       <style jsx>{`
         nav {
@@ -54,7 +56,6 @@ export const Navigation: FC = () => {
         }
 
         #secondary-nav {
-          margin-top: 36px;
           padding: 12px;
         }
 

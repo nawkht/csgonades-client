@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
 import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { Layout } from "../../ui-common/Layout";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
@@ -11,7 +11,6 @@ import { AdminUsers } from "./AdminUsers";
 import { ArticleEditor } from "./ArticleEditor";
 
 export const AdminPage: FC = () => {
-  const theme = useTheme();
   const allowedToView = useIsAdminOrModerator();
   const { route } = useAdminPage();
 
@@ -46,12 +45,12 @@ export const AdminPage: FC = () => {
       </div>
       <style jsx>{`
         .admin-container {
-          margin: ${theme.uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin: ${Dimensions.GUTTER_SIZE};
           display: flex;
         }
 
         .admin-nav {
-          margin-right: ${theme.uiDimensions.INNER_GUTTER_SIZE}px;
+          margin-right: ${Dimensions.GUTTER_SIZE};
         }
 
         .admin-content {

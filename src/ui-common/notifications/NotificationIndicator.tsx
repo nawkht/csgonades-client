@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Icon } from "semantic-ui-react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { NotificationList } from "./NotificationList";
 

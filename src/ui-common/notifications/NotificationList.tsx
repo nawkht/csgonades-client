@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NotificationItem } from "./NotificationItem";
 
 type Props = {
@@ -32,7 +32,7 @@ export const NotificationList: FC<Props> = ({ visble }) => {
           position: absolute;
           top: calc(100% + 13px);
           right: 0;
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.BORDER};
           background: white;
           padding: 12px 18px;
           border-bottom-left-radius: 4px;
@@ -43,7 +43,7 @@ export const NotificationList: FC<Props> = ({ visble }) => {
 
         .no-noti {
           white-space: nowrap;
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.BORDER};
           padding: 6px;
           border-radius: 4px;
         }

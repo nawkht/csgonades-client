@@ -1,11 +1,10 @@
 import { FC } from "react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { Dimensions } from "../../constants/Constants";
 import { useTournaments } from "../../store/TournamentStore/TournamentHooks";
 import { TournamentList } from "./TournamentList";
 
 export const TournamentsContainer: FC = () => {
-  const { uiDimensions } = useTheme();
-  const { tournaments, fetchTournaments } = useTournaments();
+  const { tournaments } = useTournaments();
 
   return (
     <>
@@ -14,7 +13,7 @@ export const TournamentsContainer: FC = () => {
       </div>
       <style jsx>{`
         .tournaments {
-          margin: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          margin: ${Dimensions.GUTTER_SIZE};
         }
       `}</style>
     </>

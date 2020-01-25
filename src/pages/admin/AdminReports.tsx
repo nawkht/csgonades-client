@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FC, useEffect } from "react";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 export const AdminReports: FC = () => {
   const { colors } = useTheme();
@@ -24,7 +24,7 @@ export const AdminReports: FC = () => {
       ))}
       <style jsx>{`
         .report {
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.BORDER};
           padding: 12px 18px;
           background: white;
           border-radius: 4px;

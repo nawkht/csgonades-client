@@ -1,8 +1,13 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import { NadeApi } from "../api/NadeApi";
+import {
+  AnimationTimings,
+  Dimensions,
+  LayerPosition
+} from "../constants/Constants";
 import { Nade } from "../models/Nade/Nade";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../store/NadeStore/NadeHooks";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { EditButton } from "./EditButton";
 import { GfycatEditor } from "./GfycatEditor";
 import { GfycatLargePlayer } from "./GfycatLargePlayer";
@@ -15,7 +20,7 @@ type Props = {
 };
 
 export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
-  const { colors, durations, isMobile, layers } = useTheme();
+  const { colors } = useTheme();
 
   const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
@@ -76,9 +81,9 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
         .gfycat-container {
           background: white;
           position: relative;
-          border: 1px solid ${colors.PRIMARY_BORDER};
-          border-top-left-radius: ${isMobile ? 0 : 4}px;
-          border-top-right-radius: ${isMobile ? 0 : 4}px;
+          border: 1px solid ${colors.BORDER};
+          border-top-left-radius: ${Dimensions.BORDER_RADIUS};
+          border-top-right-radius: ${Dimensions.BORDER_RADIUS};
           border-bottom: none;
           overflow: hidden;
         }
@@ -96,8 +101,8 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
           top: 12px;
           right: 12px;
           opacity: 0;
-          transition: opacity ${durations.transition}s;
-          z-index: ${layers.UNDER_UI};
+          transition: opacity ${AnimationTimings.fast}s;
+          z-index: ${LayerPosition.UNDER_UI};
         }
 
         .quality-toggle {
@@ -113,10 +118,10 @@ export const GfycatPlayerContrainer: FC<Props> = ({ nade, allowEdit }) => {
           border-radius: 6px;
           cursor: pointer;
           font-size: 0.8em;
-          background: ${colors.PRIMARY_75_PERCENT};
+          background: ${colors.PRIMARY};
           color: white;
-          z-index: ${layers.UNDER_UI};
-          transition: background ${durations.transition}s;
+          z-index: ${LayerPosition.UNDER_UI};
+          transition: background ${AnimationTimings.fast}s;
           display: flex;
           align-content: center;
         }

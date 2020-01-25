@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Icon } from "semantic-ui-react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { AppToast, ToastSeverity } from "../../store/ToastStore/ToastActions";
 import { useDismissToast } from "../../store/ToastStore/ToastHooks";
 
@@ -9,6 +9,7 @@ type Props = {
 };
 
 export const ToastItem: FC<Props> = ({ notification }) => {
+  const { colors } = useTheme();
   const dismissToast = useDismissToast();
   const [fadingOut, setIsFadingOut] = useState(false);
 
@@ -21,18 +22,16 @@ export const ToastItem: FC<Props> = ({ notification }) => {
     };
   }, []);
 
-  const { colors } = useTheme();
-
   function colorFromSeverity(severity: ToastSeverity) {
     switch (severity) {
       case "info":
-        return colors.PRIMARY_90_PERCENT;
+        return colors.PRIMARY;
       case "error":
-        return colors.ERROR_90;
+        return colors.ERROR;
       case "success":
-        return colors.SUCCESS_90;
+        return colors.SUCCESS;
       case "warning":
-        return colors.WARNING_90;
+        return colors.WARNING;
     }
   }
 

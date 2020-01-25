@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { FC } from "react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { Dimensions } from "../../constants/Constants";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 export const Footer: FC = () => {
-  const { colors, uiDimensions } = useTheme();
+  const { colors } = useTheme();
 
   const year = new Date().getFullYear();
 
@@ -37,17 +38,17 @@ export const Footer: FC = () => {
           color: white;
           display: flex;
           height: 100%;
-          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
+          margin-left: ${Dimensions.SIDEBAR_WIDTH};
         }
 
         .footer .copyright {
-          padding: ${uiDimensions.PADDING_MEDIUM}px;
+          padding: ${Dimensions.PADDING_MEDIUM};
         }
 
         .footer .footer-links {
           flex: 1;
           text-align: center;
-          padding: ${uiDimensions.PADDING_MEDIUM}px;
+          padding: ${Dimensions.PADDING_MEDIUM};
           text-align: center;
         }
 
@@ -61,7 +62,7 @@ export const Footer: FC = () => {
         }
 
         .powered-by {
-          padding: ${uiDimensions.PADDING_MEDIUM}px;
+          padding: ${Dimensions.PADDING_MEDIUM};
         }
 
         .powered-by a {
@@ -72,7 +73,7 @@ export const Footer: FC = () => {
           text-decoration: underline;
         }
 
-        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .footer {
             flex-direction: column;
             margin-left: 0;

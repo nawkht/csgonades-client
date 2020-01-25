@@ -1,7 +1,7 @@
+import { Dimensions } from "../../constants/Constants";
 import { mapString } from "../../models/Nade/CsGoMap";
 import { Nade } from "../../models/Nade/Nade";
 import { nadeTypeString } from "../../models/Nade/NadeType";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
 import { useShowFavoriteTip } from "../../store/TipStore/TipHooks";
 import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
@@ -23,7 +23,6 @@ type Props = {
 
 const NadePage: React.FC<Props> = ({ nade }) => {
   useShowFavoriteTip();
-  const { uiDimensions } = useTheme();
   const allowEdit = useCanEditNade(nade);
 
   let layoutTitle = "New nade";
@@ -108,8 +107,8 @@ const NadePage: React.FC<Props> = ({ nade }) => {
               "video video stats"
               "desc desc stats"
               "sim sim sim";
-            grid-column-gap: ${uiDimensions.INNER_GUTTER_SIZE}px;
-            margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+            grid-column-gap: ${Dimensions.GUTTER_SIZE};
+            margin: ${Dimensions.GUTTER_SIZE};
           }
 
           .n-title {
@@ -138,7 +137,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             margin-top: 18px;
           }
 
-          @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+          @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
             .nade-page {
               grid-template-columns: 50% 50%;
               grid-template-rows: auto auto auto auto auto auto;

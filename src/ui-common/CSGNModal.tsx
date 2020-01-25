@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { Dimensions, LayerPosition } from "../constants/Constants";
 
 type Props = {
   title: string;
@@ -13,7 +13,6 @@ export const CSGNModal: FC<Props> = ({
   visible,
   onDismiss
 }) => {
-  const { uiDimensions, layers } = useTheme();
   if (!visible) {
     return null;
   }
@@ -35,7 +34,7 @@ export const CSGNModal: FC<Props> = ({
           left: 0;
           right: 0;
           bottom: 0;
-          z-index: ${layers.MODAL};
+          z-index: ${LayerPosition.MODAL};
           background: rgba(0, 0, 0, 0.8);
           display: flex;
           justify-content: center;
@@ -45,7 +44,7 @@ export const CSGNModal: FC<Props> = ({
           background: red;
           align-self: center;
           background: #fff;
-          border-radius: ${uiDimensions.BORDER_RADIUS};
+          border-radius: ${Dimensions.BORDER_RADIUS};
           min-width: 50%;
           max-width: 90vw;
           max-height: 90vh;

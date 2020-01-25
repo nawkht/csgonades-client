@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Button, Dropdown, DropdownProps } from "semantic-ui-react";
 import { Status, StatusInfo } from "../../../models/Nade/Nade";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   status: Status;
@@ -60,7 +60,7 @@ export const StatusEditor: FC<Props> = ({ status, statusInfo, onSave }) => {
           resize: none;
           width: 100%;
           outline: none;
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.BORDER};
           padding: 6px 12px;
           margin-top: 12px;
         }

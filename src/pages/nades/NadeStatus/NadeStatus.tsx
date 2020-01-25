@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { Dimensions } from "../../../constants/Constants";
 import { Status, StatusInfo } from "../../../models/Nade/Nade";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
-import { ThemeState } from "../../../store/LayoutStore/LayoutReducer";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
+import { ThemeColors } from "../../../store/SettingsStore/Themes";
 
 type Props = {
   status: Status;
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
-  const theme = useTheme();
+  const { colors } = useTheme();
 
   if (status === "accepted") {
     return null;
@@ -43,7 +44,7 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
     }
   }
 
-  const statusColors = statusColor(status, theme);
+  const statusColors = statusColor(status, colors);
 
   return (
     <>
@@ -51,12 +52,12 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
       <style jsx>{`
         .status-container {
           position: relative;
-          margin-top: ${theme.uiDimensions.INNER_GUTTER_SIZE * 1.5}px;
+          margin-top: calc(${Dimensions.GUTTER_SIZE} * 2);
           background: ${statusColors.background};
           border: 1px solid ${statusColors.border};
           padding: 12px 18px;
           color: ${statusColors.text};
-          border-radius: ${theme.uiDimensions.BORDER_RADIUS};
+          border-radius: ${Dimensions.BORDER_RADIUS};
         }
 
         .status-edit {
@@ -69,31 +70,30 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
   );
 };
 
-function statusColor(status: Status, theme: ThemeState) {
-  const { colors } = theme;
+function statusColor(status: Status, colors: ThemeColors) {
   switch (status) {
     case "accepted":
       return {
-        border: colors.PRIMARY_BORDER,
+        border: colors.BORDER,
         background: "#00f064",
         text: "white"
       };
     case "pending":
       return {
-        border: colors.PRIMARY_BORDER,
+        border: colors.BORDER,
         background: "#f09800",
         text: "white"
       };
     case "declined":
       return {
-        border: colors.PRIMARY_BORDER,
+        border: colors.BORDER,
         background: "#bf0000",
         text: "white"
       };
 
     default:
       return {
-        border: colors.PRIMARY_BORDER,
+        border: colors.BORDER,
         background: "white",
         text: "#222"
       };

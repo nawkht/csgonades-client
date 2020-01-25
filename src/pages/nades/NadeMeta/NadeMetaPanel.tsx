@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
 import { Icon } from "semantic-ui-react";
+import { AnimationTimings } from "../../../constants/Constants";
 import { Nade } from "../../../models/Nade/Nade";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { EditButton } from "../../../ui-common/EditButton";
 import { NadeMapValue } from "./NadeMapValue";
 import { NadeMovementValue } from "./NadeMovementValue";
@@ -17,7 +18,7 @@ type Props = {
 };
 
 export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
-  const { colors, durations, uiDimensions } = useTheme();
+  const { colors } = useTheme();
   const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
   const [map, setMap] = useState(nade.map);
@@ -132,10 +133,11 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
         }
 
         .nade-meta-item {
-          background: white;
+          background: ${colors.UI_BG};
           padding: 12px 18px;
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.BORDER};
           border-bottom: 0;
+          color: ${colors.TEXT};
         }
 
         .nade-meta-item:first-child {
@@ -146,7 +148,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
         .nade-meta-item:last-child {
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
+          border-bottom: 1px solid ${colors.BORDER};
         }
 
         .map-meta-title {
@@ -155,7 +157,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           font-size: 0.9em;
           margin-right: 12px;
           min-width: 75px;
-          border-right: 1px dotted ${colors.PRIMARY_BORDER};
+          border-right: 1px dotted ${colors.BORDER};
         }
 
         .edit-btn-container {
@@ -163,7 +165,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
           top: 6px;
           right: 6px;
           opacity: 0;
-          transition: opacity ${durations.transition}s;
+          transition: opacity ${AnimationTimings.fast}s;
         }
       `}</style>
     </>

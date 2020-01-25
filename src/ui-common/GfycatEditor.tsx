@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, useState } from "react";
 import { Button, Input, Message } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
+import { Dimensions } from "../constants/Constants";
 import { Nade } from "../models/Nade/Nade";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../store/NadeStore/NadeHooks";
 
 type Props = {
@@ -11,7 +11,6 @@ type Props = {
 };
 
 export const GfycatEditor: FC<Props> = ({ nade, onCancel }) => {
-  const { uiDimensions } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentGfyID, updateGfyID] = useState(nade.gfycat.gfyId);
@@ -85,7 +84,7 @@ export const GfycatEditor: FC<Props> = ({ nade, onCancel }) => {
           align-self: center;
           width: 50%;
           background: white;
-          border-radius: ${uiDimensions.BORDER_RADIUS};
+          border-radius: ${Dimensions.BORDER_RADIUS};
           padding: 12px;
         }
 

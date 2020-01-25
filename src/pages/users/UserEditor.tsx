@@ -2,9 +2,10 @@ import { FC, useState } from "react";
 import ReactDatepicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button, Form, TextArea } from "semantic-ui-react";
+import { Dimensions } from "../../constants/Constants";
 import { User, UserUpdateDTO } from "../../models/User";
 import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import {
   useUsersActions,
   useUsersState
@@ -19,7 +20,7 @@ export const UserEditor: FC<Props> = ({ user }) => {
   const { stopEditingUser, updateUser } = useUsersActions();
   const { isEditing, isUpdatingUser } = useUsersState();
 
-  const { colors, isMobile, uiDimensions } = useTheme();
+  const { colors } = useTheme();
   const [nickname, setNickname] = useState(user.nickname);
   const [email, setEmail] = useState(user.email);
   const [bio, setBio] = useState(user.bio);
@@ -91,14 +92,18 @@ export const UserEditor: FC<Props> = ({ user }) => {
       <style jsx>{`
         .user-details {
           position: relative;
-          background: white;
-          margin-right: ${isMobile ? "0px" : "18px"};
+          background: ${colors.UI_BG};
+          margin-right: 18px;
           padding: 12px;
-          width: ${isMobile ? "100%" : "400px"};
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          width: 400px;
+          border: 1px solid ${colors.BORDER};
           align-self: flex-start;
-          border-radius: ${uiDimensions.BORDER_RADIUS};
-          margin-bottom: ${isMobile ? uiDimensions.INNER_GUTTER_SIZE : 0}px;
+          border-radius: ${Dimensions.BORDER_RADIUS};
+          margin-bottom: ${Dimensions.GUTTER_SIZE};
+        }
+
+        label {
+          color: ${colors.TEXT} !important;
         }
 
         .user-input {

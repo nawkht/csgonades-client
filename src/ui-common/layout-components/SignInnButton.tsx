@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 
 const AUTH_URL =
   process.env.NODE_ENV === "production"
@@ -8,7 +7,6 @@ const AUTH_URL =
     : "http://localhost:5000/auth/steam";
 
 export const SignInnButton: FC = () => {
-  const { uiDimensions } = useTheme();
   return (
     <>
       <div className="steam-login-wrapper">

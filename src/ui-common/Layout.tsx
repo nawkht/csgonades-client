@@ -2,8 +2,9 @@ import Head from "next/head";
 import { useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
+import { AnimationTimings, Dimensions } from "../constants/Constants";
 import { useNavigation } from "../store/GlobalStore/GlobalHooks";
-import { useTheme, useThemeSync } from "../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 import { Footer } from "./layout-components/Footer";
 import { Header } from "./layout-components/Header";
@@ -24,9 +25,8 @@ export const Layout: React.FC<Props> = ({
   canonical,
   metaThumbNail
 }) => {
-  useThemeSync();
   const { closeNav, isNavOpen } = useNavigation();
-  const { uiDimensions, colors, durations } = useTheme();
+  const { colors } = useTheme();
 
   const mobileNavClassName = useMemo(() => {
     if (isNavOpen) {
@@ -113,7 +113,7 @@ export const Layout: React.FC<Props> = ({
         }
 
         header {
-          max-height: ${uiDimensions.HEADER_HEIGHT}px;
+          max-height: ${Dimensions.HEADER_HEIGHT};
           position: fixed;
           top: 0;
           left: 0;
@@ -122,31 +122,31 @@ export const Layout: React.FC<Props> = ({
         }
 
         main {
-          background: #f3f3f3;
-          margin-left: ${uiDimensions.SIDEBAR_WIDTH}px;
-          margin-top: ${uiDimensions.HEADER_HEIGHT}px;
+          background: ${colors.SITE_BG};
+          margin-left: ${Dimensions.SIDEBAR_WIDTH};
+          margin-top: ${Dimensions.HEADER_HEIGHT};
           flex: 1;
         }
 
         #navigation,
         #mobile-navigation {
           position: fixed;
-          top: ${uiDimensions.HEADER_HEIGHT}px;
+          top: ${Dimensions.HEADER_HEIGHT};
           left: 0;
           bottom: 0;
           z-index: 999;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
+          border-right: 1px solid ${colors.BORDER};
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           overflow-y: auto;
-          background: white;
-          width: ${uiDimensions.SIDEBAR_WIDTH}px;
+          background: ${colors.UI_BG};
+          width: ${Dimensions.SIDEBAR_WIDTH};
         }
 
         #mobile-navigation {
           transform: translateX(-100%);
-          transition: transform ${durations.transition}s;
+          transition: transform ${AnimationTimings.fast};
         }
 
         #mobile-navigation.open {
@@ -157,7 +157,7 @@ export const Layout: React.FC<Props> = ({
           display: none;
         }
 
-        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           main {
             margin-left: 0;
           }

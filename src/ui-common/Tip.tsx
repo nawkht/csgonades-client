@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { LayerPosition } from "../constants/Constants";
 
 type Props = {
   visisble: boolean;
@@ -7,7 +7,6 @@ type Props = {
 };
 
 export const Tip: FC<Props> = ({ children, visisble, onClick }) => {
-  const { layers } = useTheme();
   return (
     <>
       <div className="tip-container">
@@ -25,7 +24,7 @@ export const Tip: FC<Props> = ({ children, visisble, onClick }) => {
       <style jsx>{`
         .tip-container {
           position: relative;
-          z-index: ${layers.UNDER_UI};
+          z-index: ${LayerPosition.UNDER_UI};
         }
 
         .tip {

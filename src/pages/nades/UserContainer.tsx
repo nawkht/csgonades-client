@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { Nade } from "../../models/Nade/Nade";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { dateFromNow } from "../../utils/DateUtils";
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export const UserContainer: FC<Props> = ({ nade }) => {
-  const { uiDimensions, colors } = useTheme();
+  const { colors } = useTheme();
   const { avatar, nickname } = nade.user;
   return (
     <>
@@ -40,11 +41,11 @@ export const UserContainer: FC<Props> = ({ nade }) => {
           justify-content: flex-end;
           align-items: center;
           font-size: 0.8em;
-          background: white;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
-          border-left: 1px solid ${colors.PRIMARY_BORDER};
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
-          padding: ${uiDimensions.PADDING_LARGE}px;
+          background: ${colors.UI_BG};
+          border-right: 1px solid ${colors.BORDER};
+          border-left: 1px solid ${colors.BORDER};
+          border-bottom: 1px solid ${colors.BORDER};
+          padding: ${Dimensions.PADDING_LARGE};
           padding-top: 0;
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
@@ -57,7 +58,7 @@ export const UserContainer: FC<Props> = ({ nade }) => {
         .user-link {
           display: flex;
           align-items: center;
-          color: #444;
+          color: ${colors.TEXT};
         }
 
         .user-link:hover .user-nickname {

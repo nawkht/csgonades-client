@@ -6,12 +6,13 @@ import {
   useRef,
   useState
 } from "react";
+import { Dimensions } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import {
   useNadeCoordinatesForMap,
   useNadeFilter
 } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { useMapViewTip } from "../../../store/TipStore/TipHooks";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 import { Filters } from "./Filters";
@@ -27,7 +28,7 @@ export const MapView: FC<Props> = ({ map }) => {
   const [mapLoaded, setMapLoade] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadeCoordinatesForMap(map);
-  const { uiDimensions, colors } = useTheme();
+  const { colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
   const { hasOpenedMapView, didOpenMapView } = useMapViewTip();
 
@@ -45,17 +46,6 @@ export const MapView: FC<Props> = ({ map }) => {
     const classes = ["mapview-wrapper"];
     if (visisble) {
       classes.push("visisble");
-    }
-    return classes.join(" ");
-  }, [visisble, hasOpenedMapView]);
-
-  const tabClassName = useMemo(() => {
-    const classes = ["mapview-tab"];
-    if (visisble) {
-      classes.push("active");
-    }
-    if (!hasOpenedMapView) {
-      classes.push("tab-hint-animated");
     }
     return classes.join(" ");
   }, [visisble, hasOpenedMapView]);
@@ -117,9 +107,9 @@ export const MapView: FC<Props> = ({ map }) => {
       <style jsx>{`
         .mapview-wrapper {
           position: fixed;
-          top: ${uiDimensions.HEADER_HEIGHT + uiDimensions.INNER_GUTTER_SIZE}px;
-          left: ${uiDimensions.SIDEBAR_WIDTH}px;
-          bottom: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          top: calc(${Dimensions.HEADER_HEIGHT} + ${Dimensions.GUTTER_SIZE});
+          left: ${Dimensions.SIDEBAR_WIDTH};
+          bottom: ${Dimensions.GUTTER_SIZE};
           transform: translateX(-100%);
           transition: transform 0.3s;
           z-index: 900;
@@ -143,30 +133,8 @@ export const MapView: FC<Props> = ({ map }) => {
           left: 100%;
         }
 
-        .tab-hint-animated {
-          animation-name: tabHint;
-          animation-duration: 20s;
-          animation-delay: 5s;
-          animation-iteration-count: infinite;
-        }
-
         .visisble {
           transform: translateX(0px);
-        }
-
-        .mapview-tab {
-          background: ${colors.PRIMARY_75_PERCENT};
-          padding: 25px 5px;
-          position: absolute;
-          left: 100%;
-          top: calc(50%);
-          color: white;
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 4px;
-          pointer-events: all;
-          transform: translateY(-50%) scale(1);
-          cursor: pointer;
-          transition: background 0.15s;
         }
 
         .mapview-tab:hover {
@@ -181,36 +149,8 @@ export const MapView: FC<Props> = ({ map }) => {
           background: rgba(194, 43, 43, 1);
         }
 
-        @keyframes tabHint {
-          0% {
-            background: ${colors.PRIMARY_75_PERCENT};
-            transform: translateY(-50%) scale(1);
-          }
-          2.5% {
-            background: ${colors.SUCCESS_90};
-            transform: translateY(-50%) scale(1.15);
-          }
-          5% {
-            background: ${colors.PRIMARY_75_PERCENT};
-            transform: translateY(-50%) scale(1.05);
-          }
-          7.5% {
-            background: ${colors.SUCCESS_90};
-            transform: translateY(-50%) scale(1.15);
-          }
-          10% {
-            background: ${colors.PRIMARY_75_PERCENT};
-            transform: translateY(-50%) scale(1);
-          }
-          90% {
-            background: ${colors.PRIMARY_75_PERCENT};
-            transform: translateY(-50%) scale(1);
-          }
-        }
 
-        @media only screen and (max-width: ${
-          uiDimensions.MOBILE_THRESHHOLD
-        }px) {
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .mapview-wrapper {
             display: none;
           }

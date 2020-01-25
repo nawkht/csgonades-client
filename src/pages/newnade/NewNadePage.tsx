@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { Message, Step } from "semantic-ui-react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNewNade } from "../../store/NewNadeStore/NewNadeHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { Layout } from "../../ui-common/Layout";
 import { AddGfycat } from "./AddGfycat";
 import { AddImage } from "./AddImage";
@@ -64,8 +64,8 @@ export const NewNadePage: FC = () => {
           }
 
           .new-nade-step {
-            border: 1px solid ${colors.PRIMARY_BORDER};
-            background: white;
+            border: 1px solid ${colors.BORDER};
+            background: ${colors.UI_BG};
             border-radius: 4px;
             padding: 12px;
           }

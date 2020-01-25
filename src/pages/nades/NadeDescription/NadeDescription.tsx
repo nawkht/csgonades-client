@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
+import { AnimationTimings, Dimensions } from "../../../constants/Constants";
 import { Nade } from "../../../models/Nade/Nade";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useUpdateNade } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { EditButton } from "../../../ui-common/EditButton";
 import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
 import { NadeDescriptionEditor } from "./NadeDescriptionEditor";
@@ -12,7 +13,7 @@ type Props = {
 };
 
 export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
-  const { colors, durations, uiDimensions } = useTheme();
+  const { colors } = useTheme();
   const updateNade = useUpdateNade();
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(nade.description || "");
@@ -56,9 +57,9 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
       <style jsx>{`
         .nade-desc-wrapper {
           position: relative;
-          background: white;
-          border-left: 1px solid ${colors.PRIMARY_BORDER};
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
+          background: ${colors.UI_BG};
+          border-left: 1px solid ${colors.BORDER};
+          border-right: 1px solid ${colors.BORDER};
         }
 
         .nade-desc-wrapper:hover .edit-button {
@@ -66,15 +67,16 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
         }
 
         .nade-desc-body {
-          padding: ${uiDimensions.PADDING_LARGE}px;
+          padding: ${Dimensions.PADDING_LARGE};
+          color: ${colors.TEXT};
         }
 
         .edit-button {
           position: absolute;
           top: calc(100%);
-          left: ${uiDimensions.PADDING_LARGE}px;
+          left: ${Dimensions.PADDING_LARGE};
           opacity: 0;
-          transition: opacity 0 ${durations}s;
+          transition: opacity ${AnimationTimings.fast};
           padding-top: 6px;
         }
       `}</style>

@@ -1,13 +1,13 @@
 import useComponentSize from "@rehooks/component-size";
 import { FC, useMemo, useRef } from "react";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { isMobile } from "react-device-detect";
+
 type Props = {
   gfyUrl: string;
   poster?: string;
 };
 
 export const GfycatLargePlayer: FC<Props> = ({ gfyUrl, poster }) => {
-  const { isMobile } = useTheme();
   const ref = useRef(null);
   const { width } = useComponentSize(ref);
   const height = useMemo(() => width / (16 / 9), [width]);

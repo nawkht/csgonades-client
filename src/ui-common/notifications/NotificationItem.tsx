@@ -2,8 +2,8 @@ import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import { Notification } from "../../models/Notification";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { prettyDate } from "../../utils/DateUtils";
 
 type Props = {
@@ -41,7 +41,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
       <style jsx>{`
         .notification {
           white-space: nowrap;
-          border: 1px solid ${colors.PRIMARY_BORDER};
+          border: 1px solid ${colors.BORDER};
           padding: 6px;
           border-radius: 4px;
           margin-bottom: 6px;

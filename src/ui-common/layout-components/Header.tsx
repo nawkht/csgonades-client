@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { Icon, Loader } from "semantic-ui-react";
+import { Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { UserNav } from "./UserNav";
 
 const Header: FC = () => {
   const [loading, setIsLoading] = useState(false);
-  const { colors, uiDimensions } = useTheme();
+  const { colors, theme } = useTheme();
   const { isNavOpen, toggleNav } = useNavigation();
   const isLoading = useIsLoadingNade();
   let timer: NodeJS.Timer;
@@ -27,6 +28,8 @@ const Header: FC = () => {
     };
   }, [isLoading]);
 
+  const logoUrl = theme === "light" ? "/logo.png" : "/logo-darkmode.png";
+
   return (
     <>
       <div className="header">
@@ -38,7 +41,7 @@ const Header: FC = () => {
 
           <Link href="/" as="/">
             <a className="logo">
-              <img src="/logo.png" alt="CSGO Nades logo" />
+              <img src={logoUrl} alt="CSGO Nades logo" />
             </a>
           </Link>
         </div>
@@ -47,7 +50,9 @@ const Header: FC = () => {
           <Loader active={loading} inline="centered" size="small" />
         </div>
 
-        <UserNav />
+        <div className="header-right">
+          <UserNav />
+        </div>
       </div>
       <style jsx>{`
         .logo-container {
@@ -62,19 +67,23 @@ const Header: FC = () => {
         }
 
         .header {
-          height: ${uiDimensions.HEADER_HEIGHT}px;
+          height: ${Dimensions.HEADER_HEIGHT};
           display: flex;
-          background: #fff;
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
+          background: ${colors.UI_BG};
+          border-bottom: 1px solid ${colors.BORDER};
           justify-content: space-between;
-          padding: 0px ${uiDimensions.INNER_GUTTER_SIZE}px;
+          padding: 0px ${Dimensions.GUTTER_SIZE};
+        }
+
+        .header-right {
+          display: flex;
         }
 
         .app-loading {
           position: fixed;
           left: 0;
           right: 0;
-          height: ${uiDimensions.HEADER_HEIGHT}px;
+          height: ${Dimensions.HEADER_HEIGHT};
           display: flex;
           align-items: center;
           pointer-events: none;
@@ -91,7 +100,7 @@ const Header: FC = () => {
           display: block;
         }
 
-        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .hamburger {
             display: block;
           }

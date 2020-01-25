@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { Button, Pagination } from "semantic-ui-react";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
 import { useSiteStats } from "../../store/GlobalStore/GlobalHooks";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { dateFromNow, prettyDate } from "../../utils/DateUtils";
 
 const USER_LIMIT = 15;
@@ -85,7 +85,7 @@ export const UserList: FC = () => {
         }
 
         tr {
-          border-bottom: 1px solid ${colors.PRIMARY_BORDER};
+          border-bottom: 1px solid ${colors.BORDER};
         }
 
         td {

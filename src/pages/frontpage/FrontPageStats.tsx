@@ -1,39 +1,44 @@
 import { FC } from "react";
-import { Statistic } from "semantic-ui-react";
 import { useSiteStats } from "../../store/GlobalStore/GlobalHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 const FrontPageStats: FC = () => {
+  const { colors } = useTheme();
   const { stats } = useSiteStats();
 
   return (
     <>
       <div id="stats">
         <div id="stats-container">
-          <Statistic.Group size="mini" widths="one">
-            <Statistic>
-              <Statistic.Value>{stats.numNades}</Statistic.Value>
-              <Statistic.Label>Nades</Statistic.Label>
-            </Statistic>
-
-            {false && (
-              <Statistic>
-                <Statistic.Value>{stats.numUsers}</Statistic.Value>
-                <Statistic.Label>Users</Statistic.Label>
-              </Statistic>
-            )}
-          </Statistic.Group>
+          <div className="stat">
+            <div className="stat-number">{stats.numNades}</div>
+            <div className="stat-label">NADES</div>
+          </div>
         </div>
       </div>
       <style jsx>{`
         #stats {
           padding: 16px;
-          background: #fff;
+          background: ${colors.UI_BG};
           display: flex;
           justify-content: space-around;
+          color: ${colors.TEXT};
         }
 
         #stats-container {
-          width: 200px;
+          display: flex;
+          align-items: center;
+        }
+
+        .stat {
+          display: inline-block;
+        }
+
+        .stat-number {
+          font-weight: normal;
+          text-align: center;
+          font-size: 1.3em;
+          margin-bottom: 3px;
         }
       `}</style>
     </>

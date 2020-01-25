@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { Dimensions } from "../../constants/Constants";
 import { recentNadesSelector } from "../../store/NadeStore/NadeSelectors";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { Layout } from "../../ui-common/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { FrontPageJumbo } from "./FrontPageJumbo";
@@ -9,7 +10,7 @@ import { FrontPageStats } from "./FrontPageStats";
 import { TournamentsContainer } from "./Tournaments";
 
 export const FrontPage: FC = () => {
-  const { uiDimensions } = useTheme();
+  const { colors } = useTheme();
   const nades = useSelector(recentNadesSelector);
 
   return (
@@ -23,12 +24,16 @@ export const FrontPage: FC = () => {
       </div>
       <style jsx>{`
         .recent-nades {
-          margin: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          margin: ${Dimensions.GUTTER_SIZE};
         }
 
-        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+        .recent-nades h3 {
+          color: ${colors.TEXT};
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .recent-nades h3 {
-            margin-top: ${uiDimensions.PADDING_HUGE}px;
+            margin-top: ${Dimensions.PADDING_HUGE};
           }
         }
       `}</style>

@@ -1,9 +1,12 @@
 import { FC } from "react";
 import { Message } from "semantic-ui-react";
 import { useNewNade } from "../../store/NewNadeStore/NewNadeHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { ImageUploader } from "./ImageUploader";
 
 export const AddImage: FC = () => {
+  const { colors } = useTheme();
+
   const { addImage, loading } = useNewNade();
 
   return (
@@ -19,7 +22,11 @@ export const AddImage: FC = () => {
         </Message>
         <ImageUploader loading={loading} onImageCropped={addImage} />
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        h2 {
+          color: ${colors.TEXT};
+        }
+      `}</style>
     </>
   );
 };

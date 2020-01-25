@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Button, Input, Message } from "semantic-ui-react";
 import { useNewNade } from "../../store/NewNadeStore/NewNadeHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 export const AddGfycat = () => {
+  const { colors } = useTheme();
   const { addGfycat, loading, gfyData } = useNewNade();
   const [gfyValue, setGfyValue] = useState(gfyData?.gfyId || "");
 
@@ -32,6 +34,10 @@ export const AddGfycat = () => {
         </Button>
       </div>
       <style jsx>{`
+        h2 {
+          color: ${colors.TEXT};
+        }
+
         .input {
           max-width: 500px;
           margin-bottom: 12px;

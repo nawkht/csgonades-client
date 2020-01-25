@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { Dimensions } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useIsSignedIn } from "../../../store/AuthStore/AuthHooks";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { FavFilter } from "./FavFilter";
 import { NadeFilterResetButton } from "./NadeFilterResetButton";
 import { NadeSorter } from "./NadeSorter";
@@ -12,7 +12,6 @@ type Props = {
 };
 
 export const Filters: FC<Props> = ({ map }) => {
-  const { uiDimensions } = useTheme();
   const isSignedIn = useIsSignedIn();
 
   return (
@@ -33,8 +32,8 @@ export const Filters: FC<Props> = ({ map }) => {
       <style jsx>{`
         .nade-filter-container {
           display: none;
-          margin-left: ${uiDimensions.INNER_GUTTER_SIZE}px;
-          margin-right: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          margin-left: ${Dimensions.GUTTER_SIZE};
+          margin-right: ${Dimensions.GUTTER_SIZE};
         }
 
         .nade-filter-bg {
@@ -42,7 +41,7 @@ export const Filters: FC<Props> = ({ map }) => {
           flex: 1;
         }
 
-        @media only screen and (max-width: ${uiDimensions.MOBILE_THRESHHOLD}px) {
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .nade-filter-container {
             display: flex;
           }

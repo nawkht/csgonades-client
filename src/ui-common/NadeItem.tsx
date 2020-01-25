@@ -4,9 +4,10 @@ import { FaRunning } from "react-icons/fa";
 import { GoEye, GoTerminal } from "react-icons/go";
 import { TiStarFullOutline } from "react-icons/ti";
 import { Popup } from "semantic-ui-react";
+import { AnimationTimings, Dimensions } from "../constants/Constants";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { tickrateString } from "../models/Nade/NadeTickrate";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { iconFromType, kFormatter } from "../utils/Common";
 import { GfycatThumbnail } from "./GfycatThumbnail";
 
@@ -16,7 +17,7 @@ interface Props {
 }
 
 export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
-  const { colors, durations, uiDimensions, isMobile } = useTheme();
+  const { colors } = useTheme();
   const title = nade.title || "No title...";
 
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
@@ -115,13 +116,13 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
       </Link>
       <style jsx>{`
         .nadebox {
-          background: #fff;
+          background: ${colors.UI_BG};
           width: 100%;
-          border: ${isMobile ? 0 : 1}px solid ${colors.PRIMARY_BORDER};
-          border-radius: ${uiDimensions.BORDER_RADIUS};
+          border: 1px solid ${colors.BORDER};
+          border-radius: ${Dimensions.BORDER_RADIUS};
           cursor: pointer;
           box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
-          transition: box-shadow ${durations.transition}s;
+          transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
         }
 
@@ -137,6 +138,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
           display: flex;
           align-items: center;
           justify-content: center;
+          border-bottom: 1px solid ${colors.BORDER};
         }
 
         .title-text {
@@ -147,22 +149,14 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
         .nade-type-icon {
           width: 15px;
-          margin-right: ${uiDimensions.PADDING_SMALL}px;
+          margin-right: ${Dimensions.PADDING_SMALL};
         }
 
         .pending-nade .title {
-          background: ${colors.WARNING_90};
-        }
-
-        .pending-nade:hover .title {
           background: ${colors.WARNING};
         }
 
         .declined-nade .title {
-          background: ${colors.ERROR_90};
-        }
-
-        .declined-nade:hover .title {
           background: ${colors.ERROR};
         }
 
@@ -175,7 +169,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
         .stats {
           display: flex;
           align-items: center;
-          color: #444;
+          color: ${colors.TEXT};
           flex: 1;
         }
 

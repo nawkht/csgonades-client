@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Dropdown } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useTheme } from "../../../store/LayoutStore/LayoutHooks";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   map: CsgoMap;
@@ -61,7 +61,7 @@ export const NadeSorter: FC<Props> = ({ map }) => {
           cursor: pointer;
           display: flex;
           padding: 12px;
-          border-right: 1px solid ${colors.PRIMARY_BORDER};
+          border-right: 1px solid ${colors.BORDER};
           opacity: 0.5;
         }
 

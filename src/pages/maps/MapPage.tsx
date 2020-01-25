@@ -1,6 +1,6 @@
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
 import { useNadesForMap } from "../../store/NadeStore/NadeHooks";
 import { Layout } from "../../ui-common/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
@@ -13,7 +13,6 @@ type Props = {
 };
 
 export const MapPage: FC<Props> = ({ map }) => {
-  const { uiDimensions } = useTheme();
   const { nades } = useNadesForMap(map);
 
   return (
@@ -37,7 +36,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         }
 
         .nade-list {
-          padding: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          padding: ${Dimensions.GUTTER_SIZE};
         }
 
         @media only screen and (max-width: 860px) {
@@ -45,14 +44,14 @@ export const MapPage: FC<Props> = ({ map }) => {
             margin-left: 0;
           }
           .nade-list {
-            margin-top: ${uiDimensions.INNER_GUTTER_SIZE * 2.5}px;
+            margin-top: calc(${Dimensions.GUTTER_SIZE} * 2);
           }
         }
 
         @media only screen and (max-width: 460px) {
           .nade-list {
             margin: 0;
-            margin-top: ${uiDimensions.INNER_GUTTER_SIZE}px;
+            margin-top: ${Dimensions.GUTTER_SIZE};
           }
         }
       `}</style>

@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { Dimensions } from "../../constants/Constants";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { UserList } from "./UserList";
 
 export const AdminUsers: FC = () => {
-  const { uiDimensions } = useTheme();
-
+  const { colors } = useTheme();
   return (
     <>
       <div className="users">
@@ -12,8 +12,8 @@ export const AdminUsers: FC = () => {
       </div>
       <style jsx>{`
         .users {
-          background: white;
-          border-radius: ${uiDimensions.BORDER_RADIUS};
+          background: ${colors.UI_BG};
+          border-radius: ${Dimensions.BORDER_RADIUS};
           overflow: hidden;
         }
       `}</style>

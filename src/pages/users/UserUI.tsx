@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { NadeLight } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import {
   useUsersActions,
   useUsersState
@@ -16,7 +17,7 @@ type Props = {
 };
 
 export const UserUI: FC<Props> = ({ user, nades }) => {
-  const { uiDimensions } = useTheme();
+  const { colors } = useTheme();
   const { startEditingUser } = useUsersActions();
   const { isEditing } = useUsersState();
 
@@ -39,13 +40,13 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
       <style jsx>{`
         .user-container {
           position: relative;
-          margin: ${uiDimensions.OUTER_GUTTER_SIZE}px;
+          margin: ${Dimensions.GUTTER_SIZE};
           display: flex;
           flex-direction: column;
         }
 
         .user-details {
-          margin-bottom: ${uiDimensions.INNER_GUTTER_SIZE}px;
+          margin-bottom: ${Dimensions.GUTTER_SIZE};
         }
 
         .user-nades {
@@ -54,6 +55,7 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
 
         .user-nades h2 {
           font-weight: 300;
+          color: ${colors.TEXT};
         }
       `}</style>
     </>

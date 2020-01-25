@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Flag, Icon } from "semantic-ui-react";
 import { Tournament } from "../../models/Tournament";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { prettyDate } from "../../utils/DateUtils";
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
 
 export const TournamentItem: FC<Props> = ({ tournament }) => {
   const { colors } = useTheme();
+
   return (
     <>
       <div className="tournament">
@@ -47,7 +48,8 @@ export const TournamentItem: FC<Props> = ({ tournament }) => {
       </div>
       <style jsx>{`
         .tournament {
-          background: white;
+          background: ${colors.UI_BG};
+          color: ${colors.TEXT};
           border-radius: 4px;
           overflow: hidden;
         }
@@ -59,6 +61,7 @@ export const TournamentItem: FC<Props> = ({ tournament }) => {
           background-repeat: no-repeat;
           background-position: center;
           background-size: 20%;
+          border-bottom: 1px solid ${colors.BORDER};
         }
 
         .tournament-header h3 {
@@ -73,7 +76,7 @@ export const TournamentItem: FC<Props> = ({ tournament }) => {
 
         .tournament-body {
           position: relative;
-          padding: 6px 12px;
+          padding: 12px 12px;
         }
 
         .tournament-btns {
@@ -87,7 +90,7 @@ export const TournamentItem: FC<Props> = ({ tournament }) => {
 
         .tournament-btns a {
           margin-top: 6px;
-          color: black;
+          color: ${colors.TEXT};
         }
 
         .tournament-btns a:hover {

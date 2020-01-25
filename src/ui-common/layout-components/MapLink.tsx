@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { FC } from "react";
+import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
-import { useTheme } from "../../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../../utils/Common";
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
-  const { colors, uiDimensions, durations } = useTheme();
+  const { colors } = useTheme();
 
   const selected = currentMapPath ? currentMapPath.includes(mapName) : false;
   return (
@@ -33,16 +34,14 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           text-decoration: none;
           display: inline-flex;
           align-content: center;
-          color: #444;
+          color: ${colors.TEXT};
           width: 100%;
-          transition: background ${durations.transition}s;
-          padding: ${uiDimensions.PADDING_MEDIUM}px
-            ${uiDimensions.PADDING_LARGE * 2}px ${uiDimensions.PADDING_MEDIUM}px
-            ${uiDimensions.PADDING_LARGE}px;
+          transition: background ${AnimationTimings.fast}s;
+          padding: ${Dimensions.PADDING_MEDIUM} ${Dimensions.PADDING_LARGE};
         }
 
         li a:hover {
-          background: #f7f7f7;
+          background: ${colors.NAV_HOVER};
         }
 
         li a img {
@@ -51,7 +50,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
 
         li a .nav-text {
           align-self: center;
-          margin-left: ${uiDimensions.PADDING_SMALL}px;
+          margin-left: ${Dimensions.PADDING_SMALL};
         }
 
         .image-container {
@@ -63,7 +62,8 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
         }
 
         .nav-selected {
-          background: ${colors.PRIMARY_10_PERCENT};
+          background: ${colors.PRIMARY_10};
+          font-weight: normal;
         }
       `}</style>
     </>

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { AnimationTimings } from "../constants/Constants";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 type Props = {
   isEditing: boolean;
@@ -8,7 +9,7 @@ type Props = {
 };
 
 export const EditButton: FC<Props> = ({ onClick, isEditing }) => {
-  const { colors, durations, layers } = useTheme();
+  const { colors } = useTheme();
 
   if (isEditing) {
     return null;
@@ -26,9 +27,9 @@ export const EditButton: FC<Props> = ({ onClick, isEditing }) => {
           border-radius: 6px;
           cursor: pointer;
           font-size: 0.8em;
-          background: ${colors.PRIMARY_75_PERCENT};
+          background: ${colors.PRIMARY};
           color: white;
-          transition: background ${durations.transition}s;
+          transition: background ${AnimationTimings.fast}s;
           display: flex;
           align-content: center;
         }

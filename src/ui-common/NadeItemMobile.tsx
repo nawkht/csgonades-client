@@ -4,9 +4,10 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Icon } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
+import { AnimationTimings, Dimensions } from "../constants/Constants";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { tickrateString } from "../models/Nade/NadeTickrate";
-import { useTheme } from "../store/LayoutStore/LayoutHooks";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { iconFromType, kFormatter } from "../utils/Common";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 
@@ -19,7 +20,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasSentEvent, setHasSentEvent] = useState(false);
-  const { colors, durations, uiDimensions } = useTheme();
+  const { colors } = useTheme();
   let timer: NodeJS.Timer;
 
   useEffect(() => {
@@ -125,7 +126,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           width: 100%;
           overflow: hidden;
           position: relative;
-          border-radius: ${uiDimensions.BORDER_RADIUS};
+          border-radius: ${Dimensions.BORDER_RADIUS};
         }
 
         .nadebox:hover {
@@ -163,9 +164,9 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
         .title {
           padding: 6px 12px;
           display: block;
-          background: ${colors.PRIMARY_90_PERCENT};
+          background: ${colors.PRIMARY};
           color: white;
-          transition: background ${durations.transition}s;
+          transition: background ${AnimationTimings.fast}s;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -179,22 +180,14 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
 
         .nade-type-icon {
           width: 15px;
-          margin-right: ${uiDimensions.PADDING_SMALL}px;
+          margin-right: ${Dimensions.PADDING_SMALL};
         }
 
         .pending-nade .title {
-          background: ${colors.WARNING_90};
-        }
-
-        .pending-nade:hover .title {
           background: ${colors.WARNING};
         }
 
         .declined-nade .title {
-          background: ${colors.ERROR_90};
-        }
-
-        .declined-nade:hover .title {
           background: ${colors.ERROR};
         }
 
