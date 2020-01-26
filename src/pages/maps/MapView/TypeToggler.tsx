@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Popup } from "semantic-ui-react";
 import { NadeType, nadeTypeString } from "../../../models/Nade/NadeType";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { iconFromType } from "../../../utils/Common";
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
+  const { colors } = useTheme();
   const iconUrl = iconFromType(type);
 
   const className = `type-toggler ${active ? "active" : ""}`;
@@ -40,9 +42,9 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
           padding-right: 3px;
           align-items: center;
           cursor: pointer;
-          background: #292929;
+          background: ${colors.filterBg};
           transition: background 0.2s;
-          border-bottom: 1px solid #000;
+          border-bottom: 1px solid ${colors.BORDER};
         }
 
         .type-toggler:first-child {
@@ -55,11 +57,11 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
         }
 
         .type-toggler:hover {
-          background: #151515;
+          background: ${colors.filterBgHover};
         }
 
         .type-toggler.active {
-          background: #151515;
+          background: ${colors.filterBgHover};
         }
 
         .icon {

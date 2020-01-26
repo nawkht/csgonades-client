@@ -3,6 +3,7 @@ import { FaUndo } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const ResetButton: FC<Props> = ({ map }) => {
+  const { colors } = useTheme();
   const { reset, canReset } = useNadeFilter(map);
 
   function onReset() {
@@ -53,11 +55,11 @@ export const ResetButton: FC<Props> = ({ map }) => {
           transition: all 0.2s;
           margin-top: 12px;
           padding-right: 2px;
+          background: ${colors.filterResetBg};
         }
 
         .disabled {
-          background: #292929;
-          opacity: 0.7;
+          background: ${colors.filterResetDisabledBg};
           cursor: not-allowed;
         }
       `}</style>

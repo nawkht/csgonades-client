@@ -28,7 +28,7 @@ export const MapView: FC<Props> = ({ map }) => {
   const [mapLoaded, setMapLoade] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadeCoordinatesForMap(map);
-  const { colors } = useTheme();
+  const { colors, theme } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
   const { hasOpenedMapView, didOpenMapView } = useMapViewTip();
 
@@ -118,6 +118,9 @@ export const MapView: FC<Props> = ({ map }) => {
         .mapview-map {
           height: 80vh;
           width: 80vh;
+          border: 1px solid ${colors.BORDER};
+          border-left: none;
+          border-bottom-right-radius: 10px;
         }
 
         .mapview-img {
@@ -128,27 +131,14 @@ export const MapView: FC<Props> = ({ map }) => {
 
         .filter-bar {
           position: absolute;
-          top: 0;
+          top: 1px;
           bottom: 0;
-          left: 100%;
+          left: calc(100% - 1px);
         }
 
         .visisble {
           transform: translateX(0px);
         }
-
-        .mapview-tab:hover {
-          background: ${colors.PRIMARY};
-        }
-
-        .mapview-tab.active {
-          background: rgba(194, 43, 43, 0.75);
-        }
-
-        .mapview-tab.active:hover {
-          background: rgba(194, 43, 43, 1);
-        }
-
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .mapview-wrapper {

@@ -2,12 +2,14 @@ import { FC } from "react";
 import { Icon, Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   map: CsgoMap;
 };
 
 export const FavFilter: FC<Props> = ({ map }) => {
+  const { colors } = useTheme();
   const { toggleFilterByFavorites, isShowingFavorites } = useNadeFilter(map);
 
   const active = isShowingFavorites ? "active" : "";
@@ -36,7 +38,7 @@ export const FavFilter: FC<Props> = ({ map }) => {
           display: flex;
           align-items: center;
           justify-content: space-around;
-          background: #e0e1e2;
+          background: ${colors.filterBg};
           border-bottom-left-radius: 3px;
           border-bottom-right-radius: 3px;
           margin-right: 12px;
@@ -50,11 +52,11 @@ export const FavFilter: FC<Props> = ({ map }) => {
         }
 
         .fav-filter:hover {
-          background: #c0c1c2;
+          background: ${colors.filterBgHover};
         }
 
         .active {
-          background: #c0c1c2;
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>

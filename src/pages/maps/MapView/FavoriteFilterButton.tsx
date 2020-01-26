@@ -3,12 +3,14 @@ import { TiStarFullOutline } from "react-icons/ti";
 import { Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   map: CsgoMap;
 };
 
 export const FavoriteFilterButton: FC<Props> = ({ map }) => {
+  const { colors } = useTheme();
   const { toggleFilterByFavorites, isShowingFavorites } = useNadeFilter(map);
 
   const active = isShowingFavorites ? "active" : "";
@@ -39,8 +41,8 @@ export const FavoriteFilterButton: FC<Props> = ({ map }) => {
           justify-content: space-around;
           height: 45px;
           height: 45px;
-          background: #292929;
-          color: #ebda49;
+          background: ${colors.filterBg};
+          color: ${colors.filterFavColor};
           border-top-right-radius: 4px;
           border-bottom-right-radius: 4px;
           transition: background 0.2s;
@@ -52,11 +54,11 @@ export const FavoriteFilterButton: FC<Props> = ({ map }) => {
         }
 
         .fav-filter:hover {
-          background: #151515;
+          background: ${colors.filterBgHover};
         }
 
         .active {
-          background: #151515;
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>

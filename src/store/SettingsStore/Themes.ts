@@ -17,6 +17,12 @@ export type ThemeColors = {
   footerColor: string;
   primaryBtnBg: string;
   primaryBtnHover: string;
+  filterBg: string;
+  filterBgHover: string;
+  filterColor: string;
+  filterFavColor: string;
+  filterResetBg: string;
+  filterResetDisabledBg: string;
 };
 
 type Themes = {
@@ -43,7 +49,13 @@ export const themes: Themes = {
     footerBg: "#212121",
     footerColor: "white",
     primaryBtnBg: "rgba(28, 143, 192, 0.85)",
-    primaryBtnHover: "rgba(28, 143, 192, 1)"
+    primaryBtnHover: "rgba(28, 143, 192, 1)",
+    filterBg: "#292929",
+    filterBgHover: "#151515",
+    filterColor: "white",
+    filterFavColor: "#ebda49",
+    filterResetBg: "#6e0000",
+    filterResetDisabledBg: "#544242"
   },
   light: {
     SITE_BG: "#f3f3f3",
@@ -63,7 +75,13 @@ export const themes: Themes = {
     footerBg: "#1c90c0",
     footerColor: "white",
     primaryBtnBg: "rgba(28, 143, 192, 0.85)",
-    primaryBtnHover: "rgba(28, 143, 192, 1)"
+    primaryBtnHover: "rgba(28, 143, 192, 1)",
+    filterBg: "#e0e1e2",
+    filterBgHover: "#c0c1c2",
+    filterColor: "#262626",
+    filterFavColor: "#ffbb00",
+    filterResetBg: "#6e0000",
+    filterResetDisabledBg: "#ccabab"
   }
 };
 
