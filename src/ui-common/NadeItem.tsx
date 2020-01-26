@@ -125,6 +125,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
           transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
           width: 100%;
+          max-width: 300px;
         }
 
         .nadebox:hover {
@@ -221,6 +222,12 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
         .spacer {
           flex: 1;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .nadebox {
+            max-width: 100%;
+          }
         }
       `}</style>
     </>
