@@ -105,11 +105,10 @@ export const UserList: FC = () => {
 
         .nickname {
           width: 75%;
-          color: black;
         }
 
         .nickname a {
-          color: black;
+          color: ${colors.TEXT};
         }
 
         .nickname a:hover {

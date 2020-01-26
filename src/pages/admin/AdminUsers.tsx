@@ -15,6 +15,7 @@ export const AdminUsers: FC = () => {
           background: ${colors.UI_BG};
           border-radius: ${Dimensions.BORDER_RADIUS};
           overflow: hidden;
+          color: ${colors.TEXT};
         }
       `}</style>
     </>

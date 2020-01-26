@@ -26,8 +26,9 @@ export const AdminReports: FC = () => {
         .report {
           border: 1px solid ${colors.BORDER};
           padding: 12px 18px;
-          background: white;
+          background: ${colors.UI_BG};
           border-radius: 4px;
+          color: ${colors.TEXT};
         }
       `}</style>
     </div>
