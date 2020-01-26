@@ -140,6 +140,7 @@ export const Layout: React.FC<Props> = ({
           flex-direction: column;
           justify-content: space-between;
           overflow-y: auto;
+          overflow-x: hidden;
           background: ${colors.UI_BG};
           width: ${Dimensions.SIDEBAR_WIDTH};
         }
