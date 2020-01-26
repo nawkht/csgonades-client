@@ -12,6 +12,11 @@ export type ThemeColors = {
   TEXT: string;
   NAV_HOVER: string;
   NADE_ITEM_HIGHLIGHT: string;
+  nadeItemHeadingBg: string;
+  footerBg: string;
+  footerColor: string;
+  primaryBtnBg: string;
+  primaryBtnHover: string;
 };
 
 type Themes = {
@@ -33,7 +38,12 @@ export const themes: Themes = {
     GREY: "#bbb",
     TEXT: "white",
     NAV_HOVER: "rgba(28, 143, 192, 0.1)",
-    NADE_ITEM_HIGHLIGHT: "#009982"
+    NADE_ITEM_HIGHLIGHT: "#009982",
+    nadeItemHeadingBg: "rgba(0, 0, 0, 1)",
+    footerBg: "#212121",
+    footerColor: "white",
+    primaryBtnBg: "rgba(28, 143, 192, 0.85)",
+    primaryBtnHover: "rgba(28, 143, 192, 1)"
   },
   light: {
     SITE_BG: "#f3f3f3",
@@ -48,7 +58,12 @@ export const themes: Themes = {
     GREY: "#bbb",
     TEXT: "#262626",
     NAV_HOVER: "#f7f7f7",
-    NADE_ITEM_HIGHLIGHT: "#690000"
+    NADE_ITEM_HIGHLIGHT: "#690000",
+    nadeItemHeadingBg: "rgba(28, 143, 192, 1)",
+    footerBg: "#1c90c0",
+    footerColor: "white",
+    primaryBtnBg: "rgba(28, 143, 192, 0.85)",
+    primaryBtnHover: "rgba(28, 143, 192, 1)"
   }
 };
 

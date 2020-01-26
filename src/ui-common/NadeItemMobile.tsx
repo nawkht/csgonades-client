@@ -164,7 +164,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
         .title {
           padding: 6px 12px;
           display: block;
-          background: ${colors.PRIMARY};
+          background: ${colors.nadeItemHeadingBg};
           color: white;
           transition: background ${AnimationTimings.fast}s;
           display: flex;

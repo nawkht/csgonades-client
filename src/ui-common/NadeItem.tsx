@@ -134,7 +134,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
         .title {
           padding: 6px 12px;
           display: block;
-          background: ${colors.PRIMARY};
+          background: ${colors.nadeItemHeadingBg};
           color: white;
           display: flex;
           align-items: center;

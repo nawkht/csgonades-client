@@ -34,8 +34,8 @@ export const Footer: FC = () => {
       </div>
       <style jsx>{`
         .footer {
-          background: ${colors.PRIMARY};
-          color: white;
+          background: ${colors.footerBg};
+          color: ${colors.footerColor};
           display: flex;
           height: 100%;
           margin-left: ${Dimensions.SIDEBAR_WIDTH};
@@ -53,11 +53,10 @@ export const Footer: FC = () => {
         }
 
         .footer .footer-links a {
-          color: white;
+          color: ${colors.footerColor};
         }
 
         .footer .footer-links a:hover {
-          color: white;
           text-decoration: underline;
         }
 
@@ -66,7 +65,7 @@ export const Footer: FC = () => {
         }
 
         .powered-by a {
-          color: white;
+          color: ${colors.footerColor};
         }
 
         .powered-by a:hover {

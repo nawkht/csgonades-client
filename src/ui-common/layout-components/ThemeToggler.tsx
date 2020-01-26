@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { FiMoon, FiSun } from "react-icons/fi";
-import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { NightDayToggle } from "./NightDayToggle";
 
 type Props = {};
 
@@ -14,14 +13,7 @@ export const ThemeToggler: FC<Props> = ({}) => {
   return (
     <>
       <div className="darkmode-toggle">
-        <Toggle
-          checked={checked}
-          icons={{
-            checked: <FiMoon style={{ color: "white", marginTop: -2 }} />,
-            unchecked: <FiSun style={{ color: "yellow", marginTop: -2 }} />
-          }}
-          onChange={toggleTheme}
-        />
+        <NightDayToggle checked={checked} onChange={toggleTheme} />
       </div>
       <style jsx>{`
         .darkmode-toggle {

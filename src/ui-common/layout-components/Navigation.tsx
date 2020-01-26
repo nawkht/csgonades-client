@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { FaDiscord } from "react-icons/fa";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { MapLink } from "./MapLink";
 import { ThemeToggler } from "./ThemeToggler";
 export const Navigation: FC = () => {
+  const { colors } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
 
@@ -60,12 +62,11 @@ export const Navigation: FC = () => {
         }
 
         .discord-link {
-          background: #768ad4;
+          background: ${colors.primaryBtnBg};
           display: flex;
           justify-content: space-around;
           padding: 12px;
           width: 100%;
-          color: #444;
           color: white;
           border-radius: 4px;
           transition: background 0.15s;
@@ -73,7 +74,7 @@ export const Navigation: FC = () => {
         }
 
         .discord-link:hover {
-          background: #6b7dbf;
+          background: ${colors.primaryBtnHover};
         }
 
         .discord-link-text {
