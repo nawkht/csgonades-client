@@ -1,4 +1,5 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FaVideo } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { NadeApi } from "../api/NadeApi";
@@ -25,6 +26,14 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     }
   });
 
+  const videoIconClassName = useMemo(() => {
+    const classes = ["video-icon-wrapper"];
+    if (isHovering) {
+      classes.push("hidden");
+    }
+    return classes.join(" ");
+  }, [isHovering]);
+
   return (
     <>
       <div className="player" ref={ref}>
@@ -35,6 +44,12 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
             src={nade.images.thumbnailUrl} // use normal <img> attributes as props
             width={"100%"}
           />
+        </div>
+
+        <div className={videoIconClassName}>
+          <div className="video-icon">
+            <FaVideo style={{ display: "block" }} />
+          </div>
         </div>
 
         {isHovering && (
@@ -72,6 +87,29 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           left: 0;
           bottom: 0;
           right: 0;
+        }
+
+        .video-icon-wrapper {
+          position: absolute;
+          top: 0;
+          right: 0;
+          color: #fff;
+          background: rgba(255, 255, 255, 0.5);
+          opacity: 1;
+          padding: 2px 4px;
+          border-radius: 3px;
+          margin: 5px;
+          z-index: 800;
+          transition: opacity 0.15s;
+        }
+
+        .video-icon-wrapper.hidden {
+          opacity: 0;
+        }
+
+        .video-icon {
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 0.7em;
         }
 
         .front img {
