@@ -4,11 +4,16 @@ const IS_BROWSER = typeof window !== "undefined";
 const IS_PROD = process.env.NODE_ENV === "production";
 
 export class GoogleAnalytics {
-  static event(category: string, action: string, label?: string) {
+  static event(
+    category: string,
+    action: string,
+    label?: string,
+    value?: number
+  ) {
     if (IS_BROWSER) {
       try {
         this.init();
-        ReactGA.event({ category, action, label });
+        ReactGA.event({ category, action, label, value });
       } catch (error) {
         // no-op
       }

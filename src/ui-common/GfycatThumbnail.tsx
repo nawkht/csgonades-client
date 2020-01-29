@@ -10,75 +10,20 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
-  const [sentViewedEvent, setSentViewedEvent] = useState(false);
-  const [sentProgressEvent25, setSentProgressEvent25] = useState(false);
-  const [sentProgressEvent50, setSentProgressEvent50] = useState(false);
-  const [sentProgressEvent75, setSentProgressEvent75] = useState(false);
-  const [sentProgressEvent100, setSentProgressEvent100] = useState(false);
-  const [isMountet, setIsMountet] = useState(false);
-  const [seekPercentage, setSeekPercentage] = useState(0);
   const { ref, isHovering } = useHoverEvent();
-
-  useEffect(() => {
-    setIsMountet(true);
-    return () => setIsMountet(false);
-  }, []);
-
-  const measuredRef = useCallback(
-    (node: HTMLVideoElement) => {
-      if (node !== null) {
-        node.playbackRate = 2;
-        node.ontimeupdate = function() {
-          if (isMountet) {
-            const perc = (node.currentTime / node.duration) * 100;
-            setSeekPercentage(perc);
-            if (perc >= 50 && !sentViewedEvent) {
-              onViewEvent();
-            }
-
-            if (perc >= 25 && !sentProgressEvent25) {
-              onProgressEvent(25);
-              setSentProgressEvent25(true);
-            }
-            if (perc >= 50 && !sentProgressEvent50) {
-              onProgressEvent(50);
-              setSentProgressEvent50(true);
-            }
-            if (perc >= 75 && !sentProgressEvent75) {
-              onProgressEvent(75);
-              setSentProgressEvent75(true);
-            }
-            if (perc >= 95 && !sentProgressEvent100) {
-              onProgressEvent(100);
-              setSentProgressEvent100(true);
-            }
-          }
-        };
-        node.onpause = () => {
-          if (isMountet) {
-            setSeekPercentage(0);
-          }
-        };
-      }
+  const { videoRef, progress } = useVideoEvents({
+    onStop: endProgress => {
+      GoogleAnalytics.event(
+        "NadeItem",
+        `Preview viewed`,
+        undefined,
+        endProgress
+      );
     },
-    [
-      isMountet,
-      sentViewedEvent,
-      sentProgressEvent25,
-      sentProgressEvent50,
-      sentProgressEvent75,
-      sentProgressEvent100
-    ]
-  );
-
-  function onViewEvent() {
-    NadeApi.registerView(nade.id);
-    setSentViewedEvent(true);
-  }
-
-  function onProgressEvent(percentage: number) {
-    GoogleAnalytics.event("NadeItem", `Preview viewed ${percentage}%`, nade.id);
-  }
+    onConcideredViewed: () => {
+      NadeApi.registerView(nade.id);
+    }
+  });
 
   return (
     <>
@@ -100,7 +45,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
               loop
               playsInline
               controls={false}
-              ref={measuredRef}
+              ref={videoRef}
               poster={nade.images.thumbnailUrl}
             >
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
@@ -157,7 +102,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
         .seek-progress {
           background: rgba(255, 255, 255, 0.75);
           height: 4px;
-          width: ${seekPercentage}%;
+          width: ${progress}%;
           transition: width 0.5s;
           border-radius: 4px;
         }
@@ -170,6 +115,55 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     </>
   );
 };
+
+type VideoEventCallbacks = {
+  onStop: (pregress: number) => void;
+  onConcideredViewed: () => void;
+};
+
+function useVideoEvents(callbacks: VideoEventCallbacks) {
+  const [hasSentHalfViewed, setHasSentHalfViewed] = useState(false);
+  const [hasSentStoppedWatching, setHasSentStoppedWatching] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [didFinishPreview, setDidFinishPreview] = useState(false);
+  const videoRef = useCallback(
+    (node: HTMLVideoElement) => {
+      if (node) {
+        node.playbackRate = 2;
+        node.ontimeupdate = function() {
+          const perc = Math.round((node.currentTime / node.duration) * 100);
+          setProgress(perc);
+
+          if (perc >= 33 && !hasSentHalfViewed) {
+            setHasSentHalfViewed(true);
+            callbacks.onConcideredViewed();
+          }
+
+          if (perc >= 90) {
+            setDidFinishPreview(true);
+          }
+        };
+        node.onmouseleave = () => {
+          if (!hasSentStoppedWatching) {
+            if (progress < 25 && !didFinishPreview) {
+              return;
+            }
+            setHasSentStoppedWatching(true);
+            if (didFinishPreview) {
+              callbacks.onStop(100);
+            } else {
+              const roundedProgress = Math.ceil(progress / 10) * 10;
+              callbacks.onStop(roundedProgress);
+            }
+          }
+        };
+      }
+    },
+    [progress, hasSentHalfViewed, hasSentStoppedWatching, didFinishPreview]
+  );
+
+  return { videoRef, progress };
+}
 
 function useHoverEvent() {
   const ref = useRef<HTMLDivElement>(null);
