@@ -192,7 +192,6 @@ type Coord = {
 
 export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
   const nades = useSelector(nadesForMapSelector(map));
-  const favoritedNadeIds = useSelector(favoritedNadeIdsSelector);
   const nadeFilter = useSelector(filterForMapSelector(map));
 
   const unqiueNadesForPosition = useMemo(() => {
@@ -218,8 +217,8 @@ export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
       }
     }
 
-    return filterNades(unqiueNades, nadeFilter, favoritedNadeIds);
-  }, [nades, favoritedNadeIds, , nadeFilter]);
+    return filterForMapView(unqiueNades, nadeFilter);
+  }, [nades, nadeFilter]);
 
   return unqiueNadesForPosition;
 };
@@ -353,6 +352,14 @@ function filterNades(
   if (nadeFilter.favorites) {
     processedNades = processedNades.filter(n => n.isFavorited);
   }
+
+  return processedNades;
+}
+
+function filterForMapView(nades: NadeLight[], nadeFilter: NadeFilters) {
+  let processedNades: NadeLight[] = nades;
+
+  processedNades = applyNadeFilter(nadeFilter, processedNades);
 
   return processedNades;
 }

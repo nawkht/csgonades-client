@@ -28,7 +28,7 @@ export const MapView: FC<Props> = ({ map }) => {
   const [mapLoaded, setMapLoade] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadeCoordinatesForMap(map);
-  const { colors, theme } = useTheme();
+  const { colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
   const { hasOpenedMapView, didOpenMapView } = useMapViewTip();
 
