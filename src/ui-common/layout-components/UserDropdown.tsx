@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Router from "next/router";
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { Popup } from "semantic-ui-react";
@@ -9,7 +8,6 @@ import {
   useSignOut
 } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { redirectUserPage } from "../../utils/Common";
 
 type Props = {
   user: User;
@@ -19,13 +17,6 @@ export const UserDropdown: FC<Props> = ({ user }) => {
   const { colors } = useTheme();
   const isAdminOrMod = useIsAdminOrModerator();
   const signOut = useSignOut();
-  function onProfileClick() {
-    redirectUserPage(user.steamId);
-  }
-
-  function onAdminClick() {
-    Router.push(`/admin`);
-  }
 
   return (
     <>
@@ -40,21 +31,21 @@ export const UserDropdown: FC<Props> = ({ user }) => {
               />
             )}
             <div>{user.nickname}</div>
-            <Popup
-              content="Sign out"
-              mouseEnterDelay={200}
-              openOnTriggerClick={false}
-              inverted
-              size="mini"
-              position="bottom center"
-              trigger={
-                <div className="logout-btn">
-                  <FiLogOut />
-                </div>
-              }
-            />
           </a>
         </Link>
+        <Popup
+          content="Sign out"
+          mouseEnterDelay={200}
+          openOnTriggerClick={false}
+          inverted
+          size="mini"
+          position="bottom center"
+          trigger={
+            <button className="logout-btn" onClick={signOut}>
+              <FiLogOut />
+            </button>
+          }
+        />
       </div>
       <style jsx>{`
         .user-nav-user {
@@ -87,6 +78,9 @@ export const UserDropdown: FC<Props> = ({ user }) => {
           align-items: center;
           justify-content: space-around;
           transition: background 0.15s;
+          border: none;
+          outline: none;
+          cursor: pointer;
         }
 
         .logout-btn:hover {
