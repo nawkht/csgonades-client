@@ -51,8 +51,8 @@ export const NotificationIndicator: FC = () => {
         }
 
         .notification-indicator:hover {
-          color: ${colors.PRIMARY_BLACK};
-          border: 1px solid ${colors.PRIMARY_BLACK};
+          color: ${colors.TEXT};
+          border: 1px solid ${colors.TEXT};
         }
       `}</style>
     </>

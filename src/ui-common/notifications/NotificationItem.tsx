@@ -163,6 +163,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
       </Link>
       <style jsx>{`
         .notification {
+          color: ${colors.TEXT};
           white-space: nowrap;
           border-bottom: 1px solid ${colors.BORDER};
           padding: 6px 12px;
@@ -171,14 +172,15 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
           color: black;
         }
 
-        .notification:last-child {
-          border-bottom: none;
+        .noti-msg {
+          color: ${colors.TEXT};
         }
 
         .noti-date {
           font-size: 0.8em;
           margin-top: 4px;
           text-align: right;
+          color: ${colors.TEXT};
         }
 
         .new {
@@ -188,11 +190,12 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
 
         .notification:last-child {
           margin-bottom: 0;
+          border-bottom: none;
         }
 
         @keyframes indicateUnread {
           0% {
-            background-color: white;
+            background-color: ${colors.UI_BG};
           }
           10% {
             background-color: rgb(232, 241, 255);
@@ -201,7 +204,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
             background-color: rgb(232, 241, 255);
           }
           100% {
-            background-color: white;
+            background-color: ${colors.UI_BG};
           }
         }
       `}</style>

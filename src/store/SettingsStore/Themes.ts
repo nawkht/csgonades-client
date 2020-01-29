@@ -41,7 +41,7 @@ export const themes: Themes = {
     SUCCESS: "#8cc01c",
     ERROR: "#c01c1c",
     WARNING: "#c05b1c",
-    GREY: "#bbb",
+    GREY: "#e3e3e3",
     TEXT: "white",
     NAV_HOVER: "rgba(28, 143, 192, 0.1)",
     NADE_ITEM_HIGHLIGHT: "#009982",
