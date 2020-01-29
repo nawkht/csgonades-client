@@ -10,9 +10,12 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
+  const [sentViewedEvent, setSentViewedEvent] = useState(false);
+  const [sentProgressEvent50, setSentProgressEvent50] = useState(false);
+  const [sentProgressEvent100, setSentProgressEvent100] = useState(false);
   const [isMountet, setIsMountet] = useState(false);
   const [seekPercentage, setSeekPercentage] = useState(0);
-  const { ref, isHovering } = useHoverDelayedEvent(onViewEvent, 3000);
+  const { ref, isHovering } = useHoverEvent();
 
   useEffect(() => {
     setIsMountet(true);
@@ -27,6 +30,17 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           if (isMountet) {
             const perc = (node.currentTime / node.duration) * 100;
             setSeekPercentage(perc);
+            if (perc >= 50 && !sentViewedEvent) {
+              onViewEvent();
+            }
+            if (perc >= 50 && !sentProgressEvent50) {
+              onProgressEvent(50);
+              setSentProgressEvent50(true);
+            }
+            if (perc >= 95 && !sentProgressEvent100) {
+              onProgressEvent(100);
+              setSentProgressEvent100(true);
+            }
           }
         };
         node.onpause = () => {
@@ -36,12 +50,16 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
         };
       }
     },
-    [isMountet]
+    [isMountet, sentViewedEvent, sentProgressEvent50, sentProgressEvent100]
   );
 
   function onViewEvent() {
-    GoogleAnalytics.event("NadeItem", "Hover play gfycat", nade.id);
     NadeApi.registerView(nade.id);
+    setSentViewedEvent(true);
+  }
+
+  function onProgressEvent(percentage: number) {
+    GoogleAnalytics.event("NadeItem", `Preview viewed ${percentage}%`, nade.id);
   }
 
   return (
@@ -135,11 +153,9 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   );
 };
 
-function useHoverDelayedEvent(cb: Function, delay: number) {
+function useHoverEvent() {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHover] = useState(false);
-  const [hasFired, setHasFired] = useState(false);
-  let timer: NodeJS.Timeout;
 
   useEffect(() => {
     const div = ref.current;
@@ -148,21 +164,6 @@ function useHoverDelayedEvent(cb: Function, delay: number) {
       div.onmouseleave = onUnHover;
     }
   }, [ref]);
-
-  useEffect(() => {
-    if (!isHovering) {
-      clearTimeout(timer);
-    }
-    if (isHovering && !hasFired) {
-      timer = setTimeout(() => {
-        cb();
-        setHasFired(true);
-      }, delay);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isHovering, hasFired]);
 
   function onHover() {
     setIsHover(true);
