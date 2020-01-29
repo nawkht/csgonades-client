@@ -58,10 +58,10 @@ export const ToastItem: FC<Props> = ({ notification }) => {
       <style jsx>{`
         .notification-item {
           position: relative;
-          background: white;
+          background: ${colors.DP02};
           border: 1px solid rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-          color: #222;
+          color: ${colors.TEXT};
           display: inline-block;
           border-radius: 0.25rem;
           opacity: 1;
@@ -76,13 +76,6 @@ export const ToastItem: FC<Props> = ({ notification }) => {
           animation-fill-mode: forwards;
           overflow: hidden;
           padding-bottom: 5px;
-        }
-
-        .noti-progress {
-          position: absolute;
-          bottom: -20px;
-          left: -5px;
-          right: -5px;
         }
 
         .toast-title {

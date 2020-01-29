@@ -27,7 +27,7 @@ export const useShowFavoriteTip = () => {
       if (!seenFavoriteTip) {
         dispatch(displayToolTipThunk());
       }
-    }, 15000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [seenFavoriteTip]);
