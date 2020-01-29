@@ -134,10 +134,10 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
               background-color: white;
             }
             10% {
-              background-color: rgb(232, 241, 255);
+              background-color: ${colors.HIGHLIGHT_BG};
             }
             90% {
-              background-color: rgb(232, 241, 255);
+              background-color: ${colors.HIGHLIGHT_BG};
             }
             100% {
               background-color: white;

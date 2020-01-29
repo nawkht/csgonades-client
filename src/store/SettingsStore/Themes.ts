@@ -27,6 +27,7 @@ export type ThemeColors = {
   filterFavColor: string;
   filterResetBg: string;
   filterResetDisabledBg: string;
+  HIGHLIGHT_BG: string;
 };
 
 type Themes = {
@@ -63,7 +64,8 @@ export const themes: Themes = {
     filterFavColor: "#ebda49",
     filterResetBg: "#6e0000",
     filterResetDisabledBg: "#544242",
-    FAV_YELLOW: "#bd9700"
+    FAV_YELLOW: "#bd9700",
+    HIGHLIGHT_BG: "#3c4759"
   },
   light: {
     DP00: "#f3f3f3",
@@ -93,7 +95,8 @@ export const themes: Themes = {
     filterFavColor: "#ffbb00",
     filterResetBg: "#6e0000",
     filterResetDisabledBg: "#ccabab",
-    FAV_YELLOW: "#fac800"
+    FAV_YELLOW: "#fac800",
+    HIGHLIGHT_BG: "#e8f1ff"
   }
 };
 
