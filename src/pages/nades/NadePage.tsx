@@ -38,7 +38,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
       title={layoutTitle}
       description={nade.description}
       canonical={`/nades/${nade.id}`}
-      metaThumbNail={nade.images.largeUrl}
+      metaThumbNail={nade.images.thumbnailUrl}
     >
       <div className="nade-page">
         <div className="n-title">
