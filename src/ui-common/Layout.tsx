@@ -172,6 +172,11 @@ export const Layout: React.FC<Props> = ({
           }
         }
       `}</style>
+      <style global jsx>{`
+        body {
+          background: ${colors.DP02};
+        }
+      `}</style>
     </>
   );
 };
