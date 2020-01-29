@@ -167,8 +167,6 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
           white-space: nowrap;
           border-bottom: 1px solid ${colors.BORDER};
           padding: 6px 12px;
-          border-radius: 4px;
-          margin-bottom: 6px;
           color: black;
         }
 
