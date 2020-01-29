@@ -15,12 +15,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   const { ref, isHovering } = useHoverEvent();
   const { videoRef, progress } = useVideoEvents({
     onStop: endProgress => {
-      GoogleAnalytics.event(
-        "NadeItem",
-        `Preview viewed`,
-        `Progress`,
-        endProgress
-      );
+      GoogleAnalytics.event("NadeItem", `Preview viewed`, `${endProgress}%`);
     },
     onConcideredViewed: () => {
       NadeApi.registerView(nade.id);
