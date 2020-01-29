@@ -11,6 +11,7 @@ type Props = {
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   const [sentViewedEvent, setSentViewedEvent] = useState(false);
+  const [sentProgressEvent25, setSentProgressEvent25] = useState(false);
   const [sentProgressEvent50, setSentProgressEvent50] = useState(false);
   const [sentProgressEvent100, setSentProgressEvent100] = useState(false);
   const [isMountet, setIsMountet] = useState(false);
@@ -33,6 +34,11 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
             if (perc >= 50 && !sentViewedEvent) {
               onViewEvent();
             }
+
+            if (perc >= 25 && !sentProgressEvent25) {
+              onProgressEvent(25);
+              setSentProgressEvent25(true);
+            }
             if (perc >= 50 && !sentProgressEvent50) {
               onProgressEvent(50);
               setSentProgressEvent50(true);
@@ -50,7 +56,13 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
         };
       }
     },
-    [isMountet, sentViewedEvent, sentProgressEvent50, sentProgressEvent100]
+    [
+      isMountet,
+      sentViewedEvent,
+      sentProgressEvent25,
+      sentProgressEvent50,
+      sentProgressEvent100
+    ]
   );
 
   function onViewEvent() {
