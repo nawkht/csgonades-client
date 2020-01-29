@@ -23,16 +23,20 @@ export const NotificationReducer: Reducer<
         notifications: action.notifications
       };
     case "@@notification/MARK_SEEN":
-      const notifications: Notification[] = state.notifications.map(n => {
-        const tmp = { ...n };
-        if (n.id === action.notificationId) {
-          tmp.viewed = true;
+      const updatedNotifications: Notification[] = state.notifications.map(
+        noti => {
+          if (noti.id === action.notificationId) {
+            return {
+              ...noti,
+              viewed: true
+            };
+          }
+          return noti;
         }
-        return tmp;
-      });
+      );
       return {
         ...state,
-        notifications
+        notifications: updatedNotifications
       };
     default:
       return state;
