@@ -4,7 +4,6 @@ import { Icon } from "semantic-ui-react";
 import { Notification } from "../../models/Notification";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { assertNever } from "../../utils/Common";
 import { prettyDate } from "../../utils/DateUtils";
 
 type Props = {
@@ -24,76 +23,6 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
       clearTimeout(viewedTimer);
     };
   }, []);
-
-  function renderNotification(noti: Notification) {
-    switch (noti.type) {
-      case "favorite":
-        return (
-          <Link href={`/nades?id=${noti.nadeId}`} as={`/nades/${noti.nadeId}`}>
-            <a className={wasViewed ? "notification" : "notification new"}>
-              <div className="noti-msg">
-                <Icon name="bell" /> Your nade was favorited {noti.count} times.
-              </div>
-              <div className="noti-date">
-                {prettyDate(notification.createdAt)}
-              </div>
-            </a>
-          </Link>
-        );
-      case "accepted-nade":
-        return (
-          <Link href={`/nades?id=${noti.nadeId}`} as={`/nades/${noti.nadeId}`}>
-            <a className={wasViewed ? "notification" : "notification new"}>
-              <div className="noti-msg">
-                <Icon name="bell" /> Your nade was accepted!
-              </div>
-              <div className="noti-date">
-                {prettyDate(notification.createdAt)}
-              </div>
-            </a>
-          </Link>
-        );
-      case "contact-msg":
-        return (
-          <div className={wasViewed ? "notification" : "notification new"}>
-            <div className="noti-msg">
-              <Icon name="bell" /> Someone submitted a contact message.
-            </div>
-            <div className="noti-date">
-              {prettyDate(notification.createdAt)}
-            </div>
-          </div>
-        );
-      case "declined-nade":
-        return (
-          <Link href={`/nades?id=${noti.nadeId}`} as={`/nades/${noti.nadeId}`}>
-            <a className={wasViewed ? "notification" : "notification new"}>
-              <div className="noti-msg">
-                <Icon name="bell" /> Your nade was declined.
-              </div>
-              <div className="noti-date">
-                {prettyDate(notification.createdAt)}
-              </div>
-            </a>
-          </Link>
-        );
-      case "new-nade":
-        return (
-          <Link href={`/nades?id=${noti.nadeId}`} as={`/nades/${noti.nadeId}`}>
-            <a className={wasViewed ? "notification" : "notification new"}>
-              <div className="noti-msg">
-                <Icon name="bell" /> New nade!
-              </div>
-              <div className="noti-date">
-                {prettyDate(notification.createdAt)}
-              </div>
-            </a>
-          </Link>
-        );
-      default:
-        assertNever(noti);
-    }
-  }
 
   if (notification.type === "contact-msg") {
     return (
@@ -196,10 +125,10 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
             background-color: ${colors.UI_BG};
           }
           10% {
-            background-color: rgb(232, 241, 255);
+            background-color: ${colors.HIGHLIGHT_BG};
           }
           90% {
-            background-color: rgb(232, 241, 255);
+            background-color: ${colors.HIGHLIGHT_BG};
           }
           100% {
             background-color: ${colors.UI_BG};
