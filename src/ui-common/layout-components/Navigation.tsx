@@ -1,11 +1,14 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC } from "react";
-import { FaDiscord } from "react-icons/fa";
+import { FaDiscord, FaUserSecret } from "react-icons/fa";
+import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { MapLink } from "./MapLink";
 import { ThemeToggler } from "./ThemeToggler";
 export const Navigation: FC = () => {
   const { colors } = useTheme();
+  const isAdminOrMod = useIsAdminOrModerator();
   const router = useRouter();
   const currentRoute = router.query.name;
 
@@ -39,6 +42,20 @@ export const Navigation: FC = () => {
                 </span>
               </a>
             </li>
+            {isAdminOrMod && (
+              <li>
+                <Link href="/admin" as="/admin">
+                  <a className="admin-btn">
+                    <div className="admin-btn-content">
+                      <FaUserSecret
+                        style={{ marginRight: 6, fontSize: "1.5em" }}
+                      />
+                      <span>Admin</span>
+                    </div>
+                  </a>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
@@ -78,6 +95,30 @@ export const Navigation: FC = () => {
         }
 
         .discord-link-text {
+          display: flex;
+          align-items: center;
+        }
+
+        .admin-btn {
+          display: block;
+          background: ${colors.primaryBtnBg};
+          padding: 12px;
+          width: 100%;
+          color: white;
+          border-radius: 4px;
+          transition: background 0.15s;
+          font-weight: normal;
+          text-align: center;
+          margin-top: 12px;
+          display: flex;
+          justify-content: space-around;
+        }
+
+        .admin-btn:hover {
+          background: ${colors.primaryBtnHover};
+        }
+
+        .admin-btn-content {
           display: flex;
           align-items: center;
         }
