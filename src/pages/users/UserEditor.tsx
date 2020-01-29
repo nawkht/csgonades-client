@@ -92,7 +92,7 @@ export const UserEditor: FC<Props> = ({ user }) => {
       <style jsx>{`
         .user-details {
           position: relative;
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           margin-right: 18px;
           padding: 12px;
           width: 400px;

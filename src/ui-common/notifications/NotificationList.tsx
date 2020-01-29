@@ -33,7 +33,7 @@ export const NotificationList: FC<Props> = ({ visble }) => {
           top: calc(100% + 15px);
           right: 0;
           border: 1px solid ${colors.BORDER};
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
           display: flex;

@@ -122,7 +122,7 @@ export const Layout: React.FC<Props> = ({
         }
 
         main {
-          background: ${colors.SITE_BG};
+          background: ${colors.DP00};
           margin-left: ${Dimensions.SIDEBAR_WIDTH};
           margin-top: ${Dimensions.HEADER_HEIGHT};
           flex: 1;
@@ -141,7 +141,7 @@ export const Layout: React.FC<Props> = ({
           justify-content: space-between;
           overflow-y: auto;
           overflow-x: hidden;
-          background: ${colors.UI_BG};
+          background: ${colors.DP02};
           width: ${Dimensions.SIDEBAR_WIDTH};
         }
 

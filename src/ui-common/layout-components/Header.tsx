@@ -71,7 +71,7 @@ const Header: FC = () => {
         .header {
           height: ${Dimensions.HEADER_HEIGHT};
           display: flex;
-          background: ${colors.UI_BG};
+          background: ${colors.DP02};
           border-bottom: 1px solid ${colors.BORDER};
           justify-content: space-between;
           padding: 0px ${Dimensions.GUTTER_SIZE};

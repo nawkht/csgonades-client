@@ -65,7 +65,7 @@ export const NewNadePage: FC = () => {
 
           .new-nade-step {
             border: 1px solid ${colors.BORDER};
-            background: ${colors.UI_BG};
+            background: ${colors.DP01};
             border-radius: 4px;
             padding: 12px;
           }

@@ -12,7 +12,7 @@ export const AdminUsers: FC = () => {
       </div>
       <style jsx>{`
         .users {
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           border-radius: ${Dimensions.BORDER_RADIUS};
           overflow: hidden;
           color: ${colors.TEXT};

@@ -42,7 +42,7 @@ export const FavoriteFilterButton: FC<Props> = ({ map }) => {
           height: 45px;
           height: 45px;
           background: ${colors.filterBg};
-          color: ${colors.filterFavColor};
+          color: ${colors.FAV_YELLOW};
           border-top-right-radius: 4px;
           border-bottom-right-radius: 4px;
           transition: background 0.2s;

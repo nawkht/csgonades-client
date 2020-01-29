@@ -26,7 +26,7 @@ export const AdminReports: FC = () => {
         .report {
           border: 1px solid ${colors.BORDER};
           padding: 12px 18px;
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           border-radius: 4px;
           color: ${colors.TEXT};
         }

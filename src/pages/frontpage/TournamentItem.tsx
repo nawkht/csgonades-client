@@ -48,7 +48,7 @@ export const TournamentItem: FC<Props> = ({ tournament }) => {
       </div>
       <style jsx>{`
         .tournament {
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           color: ${colors.TEXT};
           border-radius: 4px;
           overflow: hidden;

@@ -133,7 +133,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
         }
 
         .nade-meta-item {
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           padding: 12px 18px;
           border: 1px solid ${colors.BORDER};
           border-bottom: 0;

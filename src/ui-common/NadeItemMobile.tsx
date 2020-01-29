@@ -122,7 +122,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
       </div>
       <style jsx>{`
         .nadebox {
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           width: 100%;
           overflow: hidden;
           position: relative;

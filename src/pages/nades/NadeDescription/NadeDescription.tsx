@@ -57,7 +57,7 @@ export const NadeDescription: FC<Props> = ({ nade, allowEdit }) => {
       <style jsx>{`
         .nade-desc-wrapper {
           position: relative;
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           border-left: 1px solid ${colors.BORDER};
           border-right: 1px solid ${colors.BORDER};
         }

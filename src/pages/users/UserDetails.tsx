@@ -53,7 +53,7 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
       <style jsx>{`
         .user-details {
           position: relative;
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           margin-right: 18px;
           padding: 12px;
           width: 400px;

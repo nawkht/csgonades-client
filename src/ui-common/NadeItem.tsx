@@ -22,7 +22,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
 
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
   const iconUrl = iconFromType(nade.type);
-  const favoriteIconColor = nade.isFavorited ? "#fac800" : undefined;
+  const favoriteIconColor = nade.isFavorited ? colors.FAV_YELLOW : undefined;
 
   const hasMovement = nade.movement === "running";
   const isJumpThrow = nade.technique === "jumpthrow";
@@ -117,7 +117,7 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
       </Link>
       <style jsx>{`
         .nadebox {
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           border: 1px solid ${colors.BORDER};
           border-radius: ${Dimensions.BORDER_RADIUS};
           cursor: pointer;

@@ -19,7 +19,7 @@ const FrontPageStats: FC = () => {
       <style jsx>{`
         #stats {
           padding: 16px;
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           display: flex;
           justify-content: space-around;
           color: ${colors.TEXT};

@@ -41,7 +41,7 @@ export const UserContainer: FC<Props> = ({ nade }) => {
           justify-content: flex-end;
           align-items: center;
           font-size: 0.8em;
-          background: ${colors.UI_BG};
+          background: ${colors.DP01};
           border-right: 1px solid ${colors.BORDER};
           border-left: 1px solid ${colors.BORDER};
           border-bottom: 1px solid ${colors.BORDER};
