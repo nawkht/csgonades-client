@@ -26,7 +26,7 @@ export const NotificationReducer: Reducer<
       const notifications: Notification[] = state.notifications.map(n => {
         const tmp = { ...n };
         if (n.id === action.notificationId) {
-          tmp.hasBeenViewed = true;
+          tmp.viewed = true;
         }
         return tmp;
       });

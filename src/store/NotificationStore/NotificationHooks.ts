@@ -12,13 +12,7 @@ export const useNotifications = () => {
   const notifications = useSelector(notificationsSelector);
 
   const notificationCount = useMemo(() => {
-    return notifications.reduce((acc, item) => {
-      if (!item.hasBeenViewed) {
-        return acc + 1;
-      } else {
-        return acc;
-      }
-    }, 0);
+    return notifications.filter(n => !n.viewed).length;
   }, [notifications]);
 
   const markNotificationAsViewed = useCallback(

@@ -1,17 +1,51 @@
-export type NotificationType =
-  | "accepted-nade"
-  | "favorited-nade"
-  | "declined-nade"
-  | "new-report"
-  | "new-contact-msg"
-  | "new-nade";
-
-export type Notification = {
+type AcceptedNadeNotification = {
   id: string;
-  steamId: string;
-  type: NotificationType;
-  entityId: string;
-  hasBeenViewed: boolean;
+  type: "accepted-nade";
+  nadeId: string;
+  subjectSteamId: string;
+  viewed: boolean;
   createdAt: Date;
-  count?: number;
 };
+
+type DeclinedNadeNotification = {
+  id: string;
+  type: "declined-nade";
+  nadeId: string;
+  subjectSteamId: string;
+  viewed: boolean;
+  createdAt: Date;
+};
+
+type FavoriteNotification = {
+  id: string;
+  type: "favorite";
+  nadeId: string;
+  count: number;
+  subjectSteamId: string;
+  viewed: boolean;
+  createdAt: Date;
+};
+
+type NewContactNotification = {
+  id: string;
+  type: "contact-msg";
+  subjectSteamId: string;
+  viewed: boolean;
+  createdAt: Date;
+};
+
+type NewNadeNotification = {
+  id: string;
+  type: "new-nade";
+  nadeId: string;
+  subjectSteamId: string;
+  viewed: boolean;
+  createdAt: Date;
+};
+
+export type Notification =
+  | AcceptedNadeNotification
+  | DeclinedNadeNotification
+  | FavoriteNotification
+  | NewContactNotification
+  | NewNadeNotification;
