@@ -16,7 +16,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
       GoogleAnalytics.event(
         "NadeItem",
         `Preview viewed`,
-        undefined,
+        `Progress`,
         endProgress
       );
     },
