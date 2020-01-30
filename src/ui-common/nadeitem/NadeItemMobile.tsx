@@ -3,13 +3,14 @@ import { FC, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Icon } from "semantic-ui-react";
-import { NadeApi } from "../api/NadeApi";
-import { AnimationTimings, Dimensions } from "../constants/Constants";
-import { NadeLight, Status } from "../models/Nade/Nade";
-import { tickrateString } from "../models/Nade/NadeTickrate";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { iconFromType, kFormatter } from "../utils/Common";
-import { GoogleAnalytics } from "../utils/GoogleAnalytics";
+import { NadeApi } from "../../api/NadeApi";
+import { Dimensions } from "../../constants/Constants";
+import { NadeLight, Status } from "../../models/Nade/Nade";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { iconFromType } from "../../utils/Common";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { NadeItemTitle } from "./NadeItemTitle";
+import { NadeStats } from "./NadeStats";
 
 interface Props {
   nade: NadeLight;
@@ -82,43 +83,28 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           </div>
         )}
 
-        <div className="title">
-          <img
-            className="nade-type-icon"
-            src={iconUrl}
-            alt={`nade icon ${nade.type}`}
-          />{" "}
-          <span className="title-text">{title}</span>
-        </div>
-        <div className="media-content">
-          <div className="media-image">
-            <LazyLoadImage
-              effect="blur"
-              alt={`nade thumbnail`}
-              src={nade.images.thumbnailUrl} // use normal <img> attributes as props
-              width={"100%"}
-            />
-          </div>
-          {isPlaying && (
-            <div className="media-video">
-              <video autoPlay muted playsInline loop controls={false}>
-                <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
-              </video>
+        <NadeItemTitle nade={nade} />
+        <div className="media-canvas">
+          <div className="media-content">
+            <div className="media-image">
+              <LazyLoadImage
+                effect="blur"
+                alt={`nade thumbnail`}
+                src={nade.images.thumbnailUrl} // use normal <img> attributes as props
+                width={"100%"}
+              />
             </div>
-          )}
-        </div>
-        <div className="stats">
-          <div className="stat">
-            <Icon name="eye" size="small" />
-            <span className="icon-text">{kFormatter(nade.viewCount)}</span>
+            {isPlaying && (
+              <div className="media-video">
+                <video autoPlay muted playsInline loop controls={false}>
+                  <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
+                </video>
+              </div>
+            )}
           </div>
-          {nade.tickrate && nade.tickrate !== "any" && (
-            <div className="stat tick">
-              <Icon name="code" size="small" />
-              <span className="icon-text">{tickrateString(nade.tickrate)}</span>
-            </div>
-          )}
         </div>
+
+        <NadeStats nade={nade} />
       </div>
       <style jsx>{`
         .nadebox {
@@ -129,12 +115,14 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           border-radius: ${Dimensions.BORDER_RADIUS};
         }
 
-        .nadebox:hover {
-          box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
-        }
-
-        .nadebox:hover .title {
-          background: ${colors.PRIMARY};
+        .media-canvas {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          display: block;
+          padding-top: 56.25%;
+          background: black;
+          overflow: hidden;
         }
 
         .context-menu {
@@ -161,62 +149,12 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           margin: 6px;
         }
 
-        .title {
-          padding: 6px 12px;
-          display: block;
-          background: ${colors.nadeItemHeadingBg};
-          color: white;
-          transition: background ${AnimationTimings.fast}s;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-bottom: 1px solid ${colors.BORDER};
-        }
-
-        .title-text {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .nade-type-icon {
-          width: 15px;
-          margin-right: ${Dimensions.PADDING_SMALL};
-        }
-
-        .pending-nade .title {
-          background: ${colors.WARNING};
-        }
-
-        .declined-nade .title {
-          background: ${colors.ERROR};
-        }
-
-        .stats {
-          display: flex;
-          padding: 3px;
-          justify-content: space-between;
-          color: ${colors.TEXT};
-        }
-
-        .stat {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          margin-right: 6px;
-        }
-
-        .stat .icon-text {
-          font-size: 0.75em;
-        }
-
-        .tick {
-          color: ${colors.PRIMARY};
-        }
-
         .media-content {
-          overflow: hidden;
-          position: relative;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
         }
 
         .media-image img {

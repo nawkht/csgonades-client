@@ -44,6 +44,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             margin-left: 0;
           }
           .nade-list {
+            padding: ${Dimensions.PADDING_MEDIUM};
             margin-top: calc(${Dimensions.GUTTER_SIZE} * 2);
           }
         }

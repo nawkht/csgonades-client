@@ -32,6 +32,10 @@ export const FrontPage: FC = () => {
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .recent-nades {
+            margin: ${Dimensions.PADDING_MEDIUM};
+          }
+
           .recent-nades h3 {
             margin-top: ${Dimensions.PADDING_HUGE};
           }

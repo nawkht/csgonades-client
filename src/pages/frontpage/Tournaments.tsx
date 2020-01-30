@@ -15,6 +15,12 @@ export const TournamentsContainer: FC = () => {
         .tournaments {
           margin: ${Dimensions.GUTTER_SIZE};
         }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .tournaments {
+            margin: ${Dimensions.PADDING_MEDIUM};
+          }
+        }
       `}</style>
     </>
   );

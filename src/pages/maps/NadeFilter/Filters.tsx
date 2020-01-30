@@ -44,6 +44,8 @@ export const Filters: FC<Props> = ({ map }) => {
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .nade-filter-container {
             display: flex;
+            margin-left: ${Dimensions.PADDING_MEDIUM};
+            margin-right: ${Dimensions.PADDING_MEDIUM};
           }
           .nade-sorter {
             display: none;

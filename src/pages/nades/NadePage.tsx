@@ -149,7 +149,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
                 "stats stats"
                 "sim sim";
               grid-column-gap: 0;
-              margin: 18px;
+              margin: ${Dimensions.PADDING_MEDIUM};
             }
 
             .n-stats {

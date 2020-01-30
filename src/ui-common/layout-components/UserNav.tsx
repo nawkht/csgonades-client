@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "semantic-ui-react";
+import { Dimensions } from "../../constants/Constants";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import { NotificationIndicator } from "../notifications/NotificationIndicator";
 import { SignInnButton } from "./SignInnButton";
@@ -38,6 +39,11 @@ export const UserNav: FC = () => {
 
           .new-nade-btn {
             margin-right: 18px;
+          }
+          @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+            .new-nade-btn {
+              display: none;
+            }
           }
         `}</style>
       </>

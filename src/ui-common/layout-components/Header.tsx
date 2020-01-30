@@ -58,7 +58,6 @@ const Header: FC = () => {
         .logo-container {
           display: flex;
           align-items: center;
-          max-width: 30vw;
         }
 
         .hamburger {
@@ -93,12 +92,12 @@ const Header: FC = () => {
 
         .logo {
           align-self: center;
-          height: 100%;
-          padding: 12px 0px;
+          display: inline-block;
+          max-width: 65px;
         }
 
         .logo img {
-          height: 100%;
+          width: 100%;
           display: block;
         }
 
@@ -109,6 +108,10 @@ const Header: FC = () => {
 
           .app-loading {
             display: none;
+          }
+
+          .header {
+            padding: 0px ${Dimensions.PADDING_MEDIUM};
           }
         }
       `}</style>

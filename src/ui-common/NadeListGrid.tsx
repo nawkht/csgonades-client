@@ -3,8 +3,8 @@ import { isMobile } from "react-device-detect";
 import { Message } from "semantic-ui-react";
 import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
-import { NadeItem } from "./NadeItem";
-import { NadeItemMobile } from "./NadeItemMobile";
+import { NadeItem } from "./nadeitem/NadeItem";
+import { NadeItemMobile } from "./nadeitem/NadeItemMobile";
 
 type Props = {
   nades: NadeLight[];

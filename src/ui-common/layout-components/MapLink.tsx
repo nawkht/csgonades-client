@@ -65,6 +65,12 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           background: ${colors.PRIMARY_10};
           font-weight: normal;
         }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          li a {
+            padding: ${Dimensions.PADDING_MEDIUM} ${Dimensions.PADDING_MEDIUM};
+          }
+        }
       `}</style>
     </>
   );
