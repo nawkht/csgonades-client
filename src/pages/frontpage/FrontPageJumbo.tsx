@@ -1,11 +1,15 @@
 import { FC } from "react";
+import { LogoHorizontal } from "../../ui-common/svgs/LogoHorizontal";
 
 const FrontPageJumbo: FC = () => {
   return (
     <>
       <div id="jumbo">
         <div id="jumbo-message">
-          <h1>CSGO Nades</h1>
+          <div id="jumpo-title-container">
+            <LogoHorizontal />
+          </div>
+
           <p>
             Find the perfect smoke, flashbang, HE grenade or molotov for all the
             active duty maps in CS:GO.
@@ -15,9 +19,11 @@ const FrontPageJumbo: FC = () => {
             your own nades to the site.
           </p>
         </div>
+        <div className="illustration" />
       </div>
       <style jsx>{`
         #jumbo {
+          position: relative;
           padding: 16px;
           background: linear-gradient(
             rgba(38, 38, 38, 1),
@@ -36,6 +42,23 @@ const FrontPageJumbo: FC = () => {
           align-self: center;
           flex-direction: column;
           align-items: center;
+        }
+
+        #jumpo-title-container {
+          height: 40px;
+          margin-bottom: 12px;
+        }
+
+        .illustration {
+          position: absolute;
+          right: 15%;
+          top: calc(100% - 150px);
+          height: 200px;
+          width: 200px;
+          background: url("/images/ilustration.svg");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
         }
 
         h1 {
