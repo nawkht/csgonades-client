@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { LogoHorizontal } from "../../ui-common/svgs/LogoHorizontal";
 
 const FrontPageJumbo: FC = () => {
@@ -69,6 +70,15 @@ const FrontPageJumbo: FC = () => {
         p {
           color: rgba(255, 255, 255, 0.9);
           font-weight: 300;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .illustration {
+            width: 120px;
+            height: 120px;
+            top: calc(100% - 90px);
+            right: ${Dimensions.PADDING_MEDIUM};
+          }
         }
       `}</style>
     </>
