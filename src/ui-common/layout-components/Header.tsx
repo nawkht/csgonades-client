@@ -5,7 +5,6 @@ import { Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { Logo } from "../svgs/Logo";
 import { UserNav } from "./UserNav";
 
 const Header: FC = () => {
@@ -42,7 +41,7 @@ const Header: FC = () => {
 
           <Link href="/" as="/">
             <a className="logo">
-              <Logo />
+              <img src={logoUrl} alt="CSGO Nades logo" />
             </a>
           </Link>
         </div>
