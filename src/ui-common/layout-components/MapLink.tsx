@@ -4,6 +4,7 @@ import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../../utils/Common";
+import { MapLinkIcon } from "./MapLinkIcon";
 
 type Props = {
   mapName: CsgoMap;
@@ -20,10 +21,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
         <Link as={`/maps/${mapName}`} href={`/maps?name=${mapName}`}>
           <a>
             <div className="image-container">
-              <img
-                src={`/mapicons/${mapName}.png`}
-                alt={`navigation icon for ${mapName}`}
-              />
+              <MapLinkIcon csMap={mapName} />
             </div>
             <span className="nav-text">{capitalize(mapName)}</span>
           </a>
@@ -37,25 +35,21 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           color: ${colors.TEXT};
           width: 100%;
           transition: background ${AnimationTimings.fast}s;
-          padding: ${Dimensions.PADDING_MEDIUM} ${Dimensions.PADDING_LARGE};
+          padding: ${Dimensions.PADDING_LARGE} ${Dimensions.GUTTER_SIZE};
         }
 
         li a:hover {
           background: ${colors.NAV_HOVER};
         }
 
-        li a img {
-          width: 25px;
-        }
-
         li a .nav-text {
           align-self: center;
-          margin-left: ${Dimensions.PADDING_SMALL};
+          margin-left: ${Dimensions.PADDING_MEDIUM};
         }
 
         .image-container {
-          width: 30px;
-          height: 30px;
+          width: 20px;
+          height: 20px;
           display: flex;
           align-items: center;
           justify-content: center;
