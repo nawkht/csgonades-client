@@ -13,9 +13,6 @@ const FrontPageJumbo: FC = () => {
     <>
       <div id="jumbo">
         <div id="jumbo-message">
-          <h1 id="jumpo-title-container">
-            <img src="/logo-horizontal.png" />
-          </h1>
           <h2 className="subtitle">
             Find the perfect smoke, flashbang, HE grenade or molotov!
           </h2>
@@ -31,51 +28,30 @@ const FrontPageJumbo: FC = () => {
       </div>
       <style jsx>{`
         #jumbo {
-          position: relative;
-          padding: 16px;
-          background: linear-gradient(
-            rgba(38, 38, 38, 1),
-            rgba(38, 38, 38, 0.9)
-          );
+          background: url("/images/hero.svg");
           background-position: center;
+          background-repeat: no-repeat;
           background-size: cover;
           display: flex;
-          flex-direction: column;
-          padding-top: 5rem;
-          padding-bottom: 5rem;
+          flex-direction: row;
         }
 
         #jumbo-message {
-          display: inline-flex;
-          align-self: center;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        #jumpo-title-container {
-          height: 50px;
-          margin-bottom: 24px;
-        }
-
-        #jumpo-title-container img {
-          display: block;
-          height: 100%;
-        }
-
-        .jumbo-cta-link {
-          margin-top: 24px;
+          display: inline-block;
+          background: rgba(255, 255, 255, 0.75);
+          padding: 48px 100px 48px ${Dimensions.GUTTER_SIZE};
+          clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
         }
 
         .illustration {
-          position: absolute;
-          right: ${Dimensions.GUTTER_SIZE};
-          top: calc(100% - 240px);
-          height: 300px;
-          width: 300px;
+          position: relative;
+          top: 50px;
+          flex: 1;
           background: url("/images/ilustration.svg");
           background-position: center;
           background-size: contain;
           background-repeat: no-repeat;
+          margin-right: ${Dimensions.GUTTER_SIZE};
         }
 
         .jumbo-cta {
@@ -89,6 +65,7 @@ const FrontPageJumbo: FC = () => {
           font-weight: 300;
           cursor: pointer;
           transition: background 0.15s;
+          margin-top: 24px;
         }
 
         .jumbo-cta:hover {
@@ -96,25 +73,29 @@ const FrontPageJumbo: FC = () => {
         }
 
         h2 {
-          color: rgba(255, 255, 255, 0.9);
+          color: #121212;
           margin: 0;
           padding: 0;
           margin-bottom: 24px;
+          font-size: 2em;
+          font-weight: 300;
         }
 
         p {
-          color: rgba(255, 255, 255, 0.9);
+          color: #121212;
           font-weight: 300;
           font-size: 1.1em;
           margin-bottom: 6px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .illustration {
-            width: 120px;
-            height: 120px;
-            top: calc(100% - 90px);
-            right: ${Dimensions.PADDING_MEDIUM};
+          #jumbo {
+            flex-direction: column;
+          }
+
+          #jumbo-message {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            padding: ${Dimensions.PADDING_MEDIUM};
           }
         }
       `}</style>
