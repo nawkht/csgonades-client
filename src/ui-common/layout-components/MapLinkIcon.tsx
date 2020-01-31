@@ -37,29 +37,21 @@ export const MapLinkIcon: FC<Props> = ({ csMap }) => {
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 89.61 89.61"
+        viewBox="0 0 67 67"
         width="100%"
         height="100%"
         preserveAspectRatio="true"
         style={{ display: "block" }}
       >
-        <rect
-          className="outer"
-          x="15.1"
-          y="14.88"
-          width="70.41"
-          height="70.41"
-          rx="12.03"
-          transform="translate(-26.18 44.95) rotate(-45)"
-        />
+        <circle className="outer" cx="33.5" cy="33.5" r="33.5" />
         <rect
           className="inner"
-          x="28.53"
-          y="28.32"
-          width="43.54"
-          height="43.54"
-          rx="12.03"
-          transform="translate(-26.18 44.95) rotate(-45)"
+          x="32.77"
+          y="32.56"
+          width="35.05"
+          height="35.05"
+          rx="6.47"
+          transform="translate(-37.68 33.24) rotate(-45)"
         />
       </svg>
       <style jsx>{`
