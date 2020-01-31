@@ -17,7 +17,7 @@ const FrontPageJumbo: FC = () => {
             Find the perfect smoke, flashbang, HE grenade or molotov!
           </h2>
           <p>
-            We got something for every active duty maps in CS:GO and some more.
+            We got something for every active duty map in CS:GO and some more.
           </p>
           <p>Are you a nade wizard? Then sign in and add your own.</p>
           <a className="jumbo-cta-link" href={AUTH_URL} rel="nofollow">
