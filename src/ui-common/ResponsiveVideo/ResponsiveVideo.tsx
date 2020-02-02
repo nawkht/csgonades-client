@@ -109,6 +109,7 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
 };
 
 export function useVideo(playing: boolean) {
+  const [videoNode, setNode] = useState<HTMLVideoElement | null>(null);
   const [progress, setProgress] = useState(0);
 
   const videoRef = useCallback(
@@ -116,6 +117,9 @@ export function useVideo(playing: boolean) {
       if (!node) {
         return;
       }
+
+      setNode(node);
+
       node.ontimeupdate = () => {
         const perc = Math.round((node.currentTime / node.duration) * 100);
         setProgress(perc);
@@ -130,5 +134,5 @@ export function useVideo(playing: boolean) {
     [progress, playing]
   );
 
-  return { videoRef, progress };
+  return { videoRef, progress, videoNode };
 }
