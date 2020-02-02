@@ -32,6 +32,8 @@ export const Layout: React.FC<Props> = ({
   const { closeNav, isNavOpen } = useNavigation();
   const { colors } = useTheme();
 
+  const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
+
   const mobileNavClassName = useMemo(() => {
     if (isNavOpen) {
       return "open";
@@ -45,7 +47,11 @@ export const Layout: React.FC<Props> = ({
   useEffect(() => {
     let delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
-      GoogleAnalytics.pageView({ path: location, ignore: isAdmin });
+      GoogleAnalytics.pageView({
+        path: location,
+        title: title,
+        ignore: isAdmin
+      });
       setCurrentRoute(location);
     }, 500);
     return () => {
@@ -55,7 +61,6 @@ export const Layout: React.FC<Props> = ({
     };
   }, []);
 
-  const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
   const pageDescription = description
     ? removeMd(description)
     : "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
