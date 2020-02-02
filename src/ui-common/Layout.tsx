@@ -3,6 +3,7 @@ import { useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../constants/Constants";
+import { useIsAdmin } from "../store/AuthStore/AuthHooks";
 import { useNavigation } from "../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
@@ -26,6 +27,7 @@ export const Layout: React.FC<Props> = ({
   canonical,
   metaThumbNail
 }) => {
+  const isAdmin = useIsAdmin();
   const { setCurrentRoute } = useNavigationState();
   const { closeNav, isNavOpen } = useNavigation();
   const { colors } = useTheme();
@@ -43,7 +45,7 @@ export const Layout: React.FC<Props> = ({
   useEffect(() => {
     let delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
-      GoogleAnalytics.pageView({ path: location });
+      GoogleAnalytics.pageView({ path: location, ignore: isAdmin });
       setCurrentRoute(location);
     }, 500);
     return () => {
