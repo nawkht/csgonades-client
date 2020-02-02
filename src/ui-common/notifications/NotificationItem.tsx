@@ -4,7 +4,7 @@ import { Icon } from "semantic-ui-react";
 import { Notification } from "../../models/Notification";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { prettyDate } from "../../utils/DateUtils";
+import { prettyDateTime } from "../../utils/DateUtils";
 
 type Props = {
   notification: Notification;
@@ -31,7 +31,9 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
           <div className="noti-msg">
             <Icon name="bell" /> {notificationMessage(notification)}
           </div>
-          <div className="noti-date">{prettyDate(notification.createdAt)}</div>
+          <div className="noti-date">
+            {prettyDateTime(notification.createdAt)}
+          </div>
         </div>
         <style jsx>{`
           .notification {
@@ -87,7 +89,9 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
           <div className="noti-msg">
             <Icon name="bell" /> {notificationMessage(notification)}
           </div>
-          <div className="noti-date">{prettyDate(notification.createdAt)}</div>
+          <div className="noti-date">
+            {prettyDateTime(notification.createdAt)}
+          </div>
         </a>
       </Link>
       <style jsx>{`

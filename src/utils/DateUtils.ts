@@ -9,7 +9,7 @@ export function prettyDate(date: Date | string) {
 }
 
 export function prettyDateTime(date: Date | string) {
-  return moment(date).format("MMM Do YY HH:SS");
+  return moment(date).format("MMM Do YY HH:MM");
 }
 
 export function isLessThanDaysAgo(date: Date | string, days: number) {
