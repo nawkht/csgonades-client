@@ -15,9 +15,14 @@ export const AddImage: FC = () => {
         <h2>Result image</h2>
         <Message info>
           <h3>Important</h3>
-          <p>Hide everything for the screenshot:</p>
+          <h4>Hide HUD (Required)</h4>
           <code>
-            sv_cheats 1; r_drawviewmodel 0; cl_draw_only_deathnotices 1
+            sv_cheats 1; r_drawviewmodel 0; cl_draw_only_deathnotices 1;
+            cl_drawhud 0
+          </code>
+          <p>Reset command</p>
+          <code>
+            r_drawviewmodel 1; cl_draw_only_deathnotices 1; cl_drawhud 1
           </code>
         </Message>
         <ImageUploader loading={loading} onImageCropped={addImage} />
