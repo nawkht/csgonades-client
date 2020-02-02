@@ -49,7 +49,7 @@ export const Layout: React.FC<Props> = ({
       const location = window.location.pathname + window.location.search;
       GoogleAnalytics.pageView({
         path: location,
-        title: title,
+        title: title || "CSGO Nades",
         ignore: isAdmin
       });
       setCurrentRoute(location);
