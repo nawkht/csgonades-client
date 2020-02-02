@@ -15,7 +15,7 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
   const [quality, setQuality] = useState<Quality>("hd");
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const { videoRef, progress } = useVideo(isPlaying);
+  const { videoRef, progress, videoNode } = useVideo(isPlaying);
 
   const videoUrl = useMemo(() => {
     if (quality === "hd") {
@@ -31,6 +31,12 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
 
   function qualityChange(q: Quality) {
     setQuality(q);
+  }
+
+  function fullscreen() {
+    if (videoNode) {
+      videoNode.requestFullscreen();
+    }
   }
 
   return (
@@ -58,6 +64,7 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
               quality={quality}
               onQualityChange={qualityChange}
               onPlayPauseClick={togglePlay}
+              onFullscreen={fullscreen}
             />
           </div>
         )}

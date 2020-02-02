@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaCog, FaPause, FaPlay } from "react-icons/fa";
+import { FaCog, FaExpand, FaPause, FaPlay } from "react-icons/fa";
 import { Quality } from "./ResponsiveVideo";
 
 type Props = {
@@ -7,13 +7,15 @@ type Props = {
   playing: boolean;
   onPlayPauseClick: () => void;
   onQualityChange: (quality: Quality) => void;
+  onFullscreen: () => void;
 };
 
 export const VideoControls: FC<Props> = ({
   onPlayPauseClick,
   playing,
   quality,
-  onQualityChange
+  onQualityChange,
+  onFullscreen
 }) => {
   function qualityClick() {
     if (quality === "sd") {
@@ -34,10 +36,22 @@ export const VideoControls: FC<Props> = ({
             {playing && <FaPause className="icon-pos" />}
             {!playing && <FaPlay className="icon-pos" />}
           </button>
-          <button className="video-button video-quality" onClick={qualityClick}>
-            <div className="quality-label">{quality.toUpperCase()}</div>
-            <FaCog className="icon-pos" />
-          </button>
+          <div className="button-group">
+            <button
+              className="video-button video-quality"
+              onClick={qualityClick}
+            >
+              <div className="quality-label">{quality.toUpperCase()}</div>
+              <FaCog className="icon-pos" />
+            </button>
+
+            <button
+              className="video-button video-fullscreen"
+              onClick={onFullscreen}
+            >
+              <FaExpand className="icon-pos" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -81,6 +95,10 @@ export const VideoControls: FC<Props> = ({
           z-index: 900;
           padding: 2px;
           border-radius: 4px;
+        }
+
+        .video-fullscreen {
+          font-size: 1.2rem;
         }
       `}</style>
       <style jsx global>{`
