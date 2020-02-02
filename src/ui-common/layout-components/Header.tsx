@@ -1,32 +1,15 @@
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
-import { Icon, Loader } from "semantic-ui-react";
+import { FC } from "react";
+import { Icon } from "semantic-ui-react";
 import { Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
-import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { UserNav } from "./UserNav";
 
 const Header: FC = () => {
-  const [loading, setIsLoading] = useState(false);
   const { colors, theme } = useTheme();
   const { isNavOpen, toggleNav } = useNavigation();
-  const isLoading = useIsLoadingNade();
   let timer: NodeJS.Timer;
-
-  // If loading takes for than 500ms show loader
-  useEffect(() => {
-    if (isLoading) {
-      timer = setTimeout(() => {
-        setIsLoading(true);
-      }, 500);
-    } else {
-      setIsLoading(false);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isLoading]);
 
   const logoUrl = theme === "light" ? "/logo.png" : "/logo-darkmode.png";
 
@@ -44,10 +27,6 @@ const Header: FC = () => {
               <img src={logoUrl} alt="CSGO Nades logo" />
             </a>
           </Link>
-        </div>
-
-        <div className="app-loading">
-          <Loader active={loading} inline="centered" size="small" />
         </div>
 
         <div className="header-right">
@@ -78,16 +57,6 @@ const Header: FC = () => {
 
         .header-right {
           display: flex;
-        }
-
-        .app-loading {
-          position: fixed;
-          left: 0;
-          right: 0;
-          height: ${Dimensions.HEADER_HEIGHT};
-          display: flex;
-          align-items: center;
-          pointer-events: none;
         }
 
         .logo {

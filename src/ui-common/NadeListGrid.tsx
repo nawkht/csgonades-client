@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { isMobile } from "react-device-detect";
-import { Message } from "semantic-ui-react";
+import { Loader, Message } from "semantic-ui-react";
 import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
 import { NadeItem } from "./nadeitem/NadeItem";
@@ -16,9 +16,18 @@ type Props = {
 export const NadeListGrid: FC<Props> = ({
   nades,
   emptyMessage = "No nades found",
-  onItemClick
+  onItemClick,
+  loading
 }) => {
   const hasNades = nades.length > 0;
+
+  if (loading) {
+    return (
+      <div>
+        <Loader active={loading} inline="centered" size="small" />
+      </div>
+    );
+  }
 
   if (!hasNades) {
     return (

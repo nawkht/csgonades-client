@@ -1,11 +1,13 @@
+import { isMobile } from "react-device-detect";
 import { Dimensions } from "../../constants/Constants";
 import { mapString } from "../../models/Nade/CsGoMap";
 import { Nade } from "../../models/Nade/Nade";
 import { nadeTypeString } from "../../models/Nade/NadeType";
 import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useShowFavoriteTip } from "../../store/TipStore/TipHooks";
-import { GfycatPlayerContrainer } from "../../ui-common/GfycatPlayerContainer";
 import { Layout } from "../../ui-common/Layout";
+import { ResponsiveVideo } from "../../ui-common/ResponsiveVideo/ResponsiveVideo";
 import { AdminEditor } from "./AdminEditor/AdminEditor";
 import { FavoriteButton } from "./FavoriteButton";
 import { MapPositionEditor } from "./MapPositionEditor/MapPositionEditor";
@@ -23,6 +25,7 @@ type Props = {
 
 const NadePage: React.FC<Props> = ({ nade }) => {
   useShowFavoriteTip();
+  const { colors } = useTheme();
   const allowEdit = useCanEditNade(nade);
 
   let layoutTitle = "New nade";
@@ -75,11 +78,16 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         </div>
 
         <div className="n-video">
-          <GfycatPlayerContrainer
+          <ResponsiveVideo
+            hdUrL={nade.gfycat.largeVideoUrl}
+            sdUrl={nade.gfycat.smallVideoUrl}
+            controls={isMobile ? "mobile" : "desktop"}
+          />
+          {/*<GfycatPlayerContrainer
             key={`gfy-${nade.id}`}
             nade={nade}
             allowEdit={allowEdit}
-          />
+          /> */}
         </div>
         <div className="n-description">
           <NadeDescription
@@ -116,6 +124,8 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           }
           .n-video {
             grid-area: video;
+            border: 1px solid ${colors.BORDER};
+            border-bottom: none;
           }
 
           .n-stats {

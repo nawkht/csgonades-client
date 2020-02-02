@@ -40,7 +40,7 @@ export const MapLinkIcon: FC<Props> = ({ csMap }) => {
         viewBox="0 0 67 67"
         width="100%"
         height="100%"
-        preserveAspectRatio="true"
+        preserveAspectRatio="xMidYMid meet"
         style={{ display: "block" }}
       >
         <circle className="outer" cx="33.5" cy="33.5" r="33.5" />

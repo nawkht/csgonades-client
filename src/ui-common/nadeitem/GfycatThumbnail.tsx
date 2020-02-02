@@ -2,10 +2,10 @@ import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { FaVideo } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { NadeApi } from "../api/NadeApi";
-import { NadeLight } from "../models/Nade/Nade";
-import { GoogleAnalytics } from "../utils/GoogleAnalytics";
-import { SeekBar } from "./SeekBar";
+import { NadeApi } from "../../api/NadeApi";
+import { NadeLight } from "../../models/Nade/Nade";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { SeekBar } from "../SeekBar";
 
 type Props = {
   nade: NadeLight;
@@ -146,7 +146,7 @@ type VideoEventCallbacks = {
   onConcideredViewed: () => void;
 };
 
-function useVideoEvents(callbacks: VideoEventCallbacks) {
+export function useVideoEvents(callbacks: VideoEventCallbacks) {
   const [hasSentHalfViewed, setHasSentHalfViewed] = useState(false);
   const [hasSentStoppedWatching, setHasSentStoppedWatching] = useState(false);
   const [progress, setProgress] = useState(0);

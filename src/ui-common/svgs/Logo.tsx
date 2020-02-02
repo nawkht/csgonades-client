@@ -18,7 +18,7 @@ export const Logo: FC<Props> = ({}) => {
         viewBox="0 0 471.44 302.71"
         width="100%"
         height="100%"
-        preserveAspectRatio="true"
+        preserveAspectRatio="xMidYMid meet"
         style={{ display: "block" }}
       >
         <defs>

@@ -3,7 +3,7 @@ import { FC } from "react";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { GfycatThumbnail } from "../GfycatThumbnail";
+import { GfycatThumbnail } from "./GfycatThumbnail";
 import { NadeItemTitle } from "./NadeItemTitle";
 import { NadeStats } from "./NadeStats";
 

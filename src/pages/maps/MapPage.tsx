@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useNadesForMap } from "../../store/NadeStore/NadeHooks";
+import { useIsLoadingNade } from "../../store/NadeStore/NadeSelectors";
 import { Layout } from "../../ui-common/Layout";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
 import { capitalize } from "../../utils/Common";
@@ -14,6 +15,7 @@ type Props = {
 
 export const MapPage: FC<Props> = ({ map }) => {
   const { nades } = useNadesForMap(map);
+  const loading = useIsLoadingNade();
 
   return (
     <Layout title={capitalize(map)} canonical={`/maps/${map}`}>
@@ -22,6 +24,7 @@ export const MapPage: FC<Props> = ({ map }) => {
 
         <div className="nade-list">
           <NadeListGrid
+            loading={loading}
             nades={nades}
             emptyMessage={`No nades found. Sign in and add something! :)`}
           />
