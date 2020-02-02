@@ -7,6 +7,7 @@ import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
+import { NavigationReducer } from "./NavigationStore/NavigationReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   newNadeStore: NewNadeReducer,
   tipStore: PersistedTipReducer,
   notificationStore: NotificationReducer,
-  settingsStore: PersistedSettingsReducer
+  settingsStore: PersistedSettingsReducer,
+  navigationStore: NavigationReducer
 });
 
 function createMiddleware() {

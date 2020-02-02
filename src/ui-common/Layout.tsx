@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../constants/Constants";
 import { useNavigation } from "../store/GlobalStore/GlobalHooks";
+import { useNavigationState } from "../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { GoogleAnalytics } from "../utils/GoogleAnalytics";
 import { Footer } from "./layout-components/Footer";
@@ -25,6 +26,7 @@ export const Layout: React.FC<Props> = ({
   canonical,
   metaThumbNail
 }) => {
+  const { setCurrentRoute } = useNavigationState();
   const { closeNav, isNavOpen } = useNavigation();
   const { colors } = useTheme();
 
@@ -42,6 +44,7 @@ export const Layout: React.FC<Props> = ({
     let delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
       GoogleAnalytics.pageView(location);
+      setCurrentRoute(location);
     }, 500);
     return () => {
       if (delayedAnalytics) {
