@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { FaVideo } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { NadeApi } from "../../api/NadeApi";
 import { NadeLight } from "../../models/Nade/Nade";
+import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { SeekBar } from "../SeekBar";
 
@@ -12,10 +12,17 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
+  const isAdmin = useIsAdmin();
+
   const { ref, isHovering } = useHoverEvent();
   const { videoRef, progress } = useVideoEvents({
     onStop: endProgress => {
-      GoogleAnalytics.event("NadeItem", `Preview viewed`, `${endProgress}%`);
+      GoogleAnalytics.event({
+        category: "NadeItem",
+        action: `Preview viewed`,
+        label: `${endProgress}%`,
+        ignore: isAdmin
+      });
     },
     onConcideredViewed: () => {
       NadeApi.registerView(nade.id);

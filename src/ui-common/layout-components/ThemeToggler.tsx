@@ -1,5 +1,4 @@
 import { FC } from "react";
-import "react-toggle/style.css";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NightDayToggle } from "./NightDayToggle";
 

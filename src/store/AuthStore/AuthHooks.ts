@@ -62,6 +62,19 @@ export const useIsAdminOrModerator = (): boolean => {
   return false;
 };
 
+export const useIsAdmin = (): boolean => {
+  const user = useSelector(userSelector);
+  if (!user) {
+    return false;
+  }
+
+  if (user.role === "administrator") {
+    return true;
+  }
+
+  return false;
+};
+
 export const useSignOut = () => {
   const dispatch = useDispatch();
   return () => dispatch(signOutUserThunk());

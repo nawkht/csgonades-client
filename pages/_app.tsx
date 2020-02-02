@@ -1,8 +1,12 @@
 import withRedux from "next-redux-wrapper";
 import App, { AppContext } from "next/app";
 import React from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import "react-image-crop/dist/ReactCrop.css";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-mde/lib/styles/css/react-mde-all.css";
 import { Provider } from "react-redux";
+import "react-toggle/style.css";
 import { Store } from "redux";
 import { Persistor, persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";

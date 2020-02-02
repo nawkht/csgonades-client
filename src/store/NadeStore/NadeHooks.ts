@@ -12,6 +12,7 @@ import {
 } from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { useIsAdmin } from "../AuthStore/AuthHooks";
 import { userSelector } from "../AuthStore/AuthSelectors";
 import { favoritedNadeIdsSelector } from "../FavoriteStore/FavoriteSelectors";
 import {
@@ -41,6 +42,7 @@ import {
 } from "./NadeThunks";
 
 export const useNadeFilter = (map: CsgoMap) => {
+  const isAdmin = useIsAdmin();
   const dispatch = useDispatch();
   const nadeFilter = useSelector(filterForMapSelector(map));
   const { sortingMethod, coords, favorites } = nadeFilter;
@@ -69,7 +71,11 @@ export const useNadeFilter = (map: CsgoMap) => {
   }, [coords, sortingMethod, nadeFilter]);
 
   function filterByType(nadeType: NadeType) {
-    GoogleAnalytics.event("Nade filter", `Filter by ${nadeType}`);
+    GoogleAnalytics.event({
+      category: "Nade filter",
+      action: `Filter by ${nadeType}`,
+      ignore: isAdmin
+    });
     dispatch(filterByTypeAction(nadeType, map));
   }
 
@@ -78,7 +84,11 @@ export const useNadeFilter = (map: CsgoMap) => {
   }
 
   function setSortingMethod(method: SortingMethod) {
-    GoogleAnalytics.event("Nade filter", `Sort by ${method}`);
+    GoogleAnalytics.event({
+      category: "Nade filter",
+      action: `Sort by ${method}`,
+      ignore: isAdmin
+    });
     dispatch(setSortingMethodAction(method, map));
   }
 
@@ -87,7 +97,11 @@ export const useNadeFilter = (map: CsgoMap) => {
   }
 
   function toggleFilterByFavorites() {
-    GoogleAnalytics.event("Nade filter", `By favorites`);
+    GoogleAnalytics.event({
+      category: "Nade filter",
+      action: "By favorites",
+      ignore: isAdmin
+    });
     dispatch(toggleFilterByFavoritesAction(map));
   }
 

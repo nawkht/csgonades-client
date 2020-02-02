@@ -47,12 +47,15 @@ export const fetchFavoritedNadesThunkAction = (): ReduxThunkAction => {
 
 export const addFavoriteThunkAction = (nade: Nade): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const token = getState().authStore.token;
+    const state = getState();
+    const token = state.authStore.token;
 
     if (!token) {
       console.warn("Trying to fetch favorite when not signed in");
       return;
     }
+
+    const isAdmin = state.authStore.user?.role === "administrator";
 
     const result = await FavoriteApi.favorite(nade.id, token);
 
@@ -63,7 +66,11 @@ export const addFavoriteThunkAction = (nade: Nade): ReduxThunkAction => {
 
     const favorites = result.value;
 
-    GoogleAnalytics.event("Favorite", "Add favorite");
+    GoogleAnalytics.event({
+      category: "Favorite",
+      action: "Add favorite",
+      ignore: isAdmin
+    });
 
     dispatch(addFavoriteAction(favorites));
 
@@ -78,7 +85,9 @@ export const addUnFavoriteThunkAction = (
   nade: Nade
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const token = getState().authStore.token;
+    const state = getState();
+    const isAdmin = state.authStore.user?.role === "administrator";
+    const token = state.authStore.token;
 
     if (!token) {
       console.warn("Trying to remove favorite when not signed in");
@@ -87,7 +96,11 @@ export const addUnFavoriteThunkAction = (
 
     dispatch(removeFavoriteAction(favoriteId));
 
-    GoogleAnalytics.event("Favorite", "Remove favorite");
+    GoogleAnalytics.event({
+      category: "Favorite",
+      action: "Remove favorite",
+      ignore: isAdmin
+    });
 
     const result = await FavoriteApi.unFavorite(favoriteId, token);
     if (result.isErr()) {

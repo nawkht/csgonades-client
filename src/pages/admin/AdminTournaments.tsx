@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { Button, Form } from "semantic-ui-react";
 import { TournamentCreateDTO } from "../../models/Tournament";
 import { useTournaments } from "../../store/TournamentStore/TournamentHooks";

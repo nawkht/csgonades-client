@@ -43,7 +43,7 @@ export const Layout: React.FC<Props> = ({
   useEffect(() => {
     let delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
-      GoogleAnalytics.pageView(location);
+      GoogleAnalytics.pageView({ path: location });
       setCurrentRoute(location);
     }, 500);
     return () => {

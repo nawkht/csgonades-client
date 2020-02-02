@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import ReactDatepicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { Button, Form, TextArea } from "semantic-ui-react";
 import { Dimensions } from "../../constants/Constants";
 import { User, UserUpdateDTO } from "../../models/User";

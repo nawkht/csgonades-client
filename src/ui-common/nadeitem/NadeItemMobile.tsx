@@ -1,11 +1,11 @@
 import Router from "next/router";
 import { FC, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { Icon } from "semantic-ui-react";
 import { NadeApi } from "../../api/NadeApi";
 import { Dimensions } from "../../constants/Constants";
 import { NadeLight, Status } from "../../models/Nade/Nade";
+import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { iconFromType } from "../../utils/Common";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
@@ -18,6 +18,7 @@ interface Props {
 }
 
 export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
+  const isAdmin = useIsAdmin();
   const [showMenu, setShowMenu] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasSentEvent, setHasSentEvent] = useState(false);
@@ -28,7 +29,12 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     if (isPlaying && !hasSentEvent) {
       timer = setTimeout(() => {
         NadeApi.registerView(nade.id);
-        GoogleAnalytics.event("NadeItem", "Mobile play gfycat", nade.id);
+        GoogleAnalytics.event({
+          category: "NadeItem",
+          action: "Mobile play gfycat",
+          label: nade.id,
+          ignore: isAdmin
+        });
         setHasSentEvent(true);
       }, 5000);
     }

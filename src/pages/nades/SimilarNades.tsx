@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Nade } from "../../models/Nade/Nade";
+import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 import { useSimilarNades } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NadeListGrid } from "../../ui-common/NadeListGrid";
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const SimilarNades: FC<Props> = ({ nade }) => {
+  const isAdmin = useIsAdmin();
   const { colors } = useTheme();
   const similarNades = useSimilarNades(nade);
 
@@ -18,7 +20,12 @@ export const SimilarNades: FC<Props> = ({ nade }) => {
   }
 
   function onNadeItemClickInSimilar() {
-    GoogleAnalytics.event("Similar Nades", "Navigated to");
+    GoogleAnalytics.event({
+      category: "Similar Nades",
+      action: "Navigated to",
+      label: nade.id,
+      ignore: isAdmin
+    });
   }
 
   return (

@@ -12,7 +12,8 @@ import {
 } from "./NewNadeActions";
 
 export const tryAddGfycat = (gfyIdOrUrl: string): ReduxThunkAction => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const isAdmin = getState().authStore.user?.role === "administrator";
     dispatch(newNadeStartLoadingAction());
 
     const cleanId = cleanGfycatUrl(gfyIdOrUrl);
@@ -20,7 +21,11 @@ export const tryAddGfycat = (gfyIdOrUrl: string): ReduxThunkAction => {
     const gfyResult = await NadeApi.validateGfycat(cleanId);
 
     if (gfyResult.isErr()) {
-      GoogleAnalytics.event("New Nade Error", "Failed gfycat");
+      GoogleAnalytics.event({
+        category: "New Nade Error",
+        action: "Failed gfycat",
+        ignore: isAdmin
+      });
       return dispatch(
         newNadeErrorAction("Can't find the gfycat or gfycat.com might be down.")
       );
@@ -29,7 +34,11 @@ export const tryAddGfycat = (gfyIdOrUrl: string): ReduxThunkAction => {
     const gfyData = gfyResult.value;
 
     dispatch(newNadeAddGfyDataAction(gfyData));
-    GoogleAnalytics.event("New Nade", "Set gfycat");
+    GoogleAnalytics.event({
+      category: "New Nade",
+      action: "Set gfycat",
+      ignore: isAdmin
+    });
 
     dispatch(newNadeSetStep("result-img"));
   };
@@ -39,18 +48,27 @@ export const tryAddImage = (imgData: string): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const state = getState();
     const token = tokenSelector(state);
+    const isAdmin = state.authStore.user?.role === "administrator";
     if (!token) {
       return dispatch(newNadeErrorAction("You don't seem to be signed in."));
     }
 
-    GoogleAnalytics.event("New Nade", "Set image");
+    GoogleAnalytics.event({
+      category: "New Nade",
+      action: "Set image",
+      ignore: isAdmin
+    });
 
     dispatch(newNadeStartLoadingAction());
 
     const { gfyData } = state.newNadeStore;
 
     if (!gfyData) {
-      GoogleAnalytics.event("New Nade Error", "Missing gfycat video");
+      GoogleAnalytics.event({
+        category: "New Nade Error",
+        action: "Missing gfycat video",
+        ignore: isAdmin
+      });
       return dispatch(
         newNadeErrorAction("Missing gfycat video, you forgot a step.")
       );
@@ -64,7 +82,11 @@ export const tryAddImage = (imgData: string): ReduxThunkAction => {
     const result = await NadeApi.save(nadeBody, token);
 
     if (result.isErr()) {
-      GoogleAnalytics.event("New Nade Error", "Submit error");
+      GoogleAnalytics.event({
+        category: "New Nade Error",
+        action: "Submit error",
+        ignore: isAdmin
+      });
       return dispatch(
         newNadeErrorAction(
           "Failed to submit, try again or the service might be down."
@@ -74,7 +96,11 @@ export const tryAddImage = (imgData: string): ReduxThunkAction => {
 
     const { id } = result.value;
 
-    GoogleAnalytics.event("New Nade", "Submitted");
+    GoogleAnalytics.event({
+      category: "New Nade",
+      action: "Submitted",
+      ignore: isAdmin
+    });
 
     redirectNadePage(id);
   };
