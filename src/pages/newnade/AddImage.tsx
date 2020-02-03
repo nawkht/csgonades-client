@@ -17,8 +17,7 @@ export const AddImage: FC = () => {
           <h3>Important</h3>
           <h4>Hide HUD (Required)</h4>
           <code>
-            sv_cheats 1; r_drawviewmodel 0; cl_draw_only_deathnotices 1;
-            cl_drawhud 0
+            r_drawviewmodel 0; cl_draw_only_deathnotices 1; cl_drawhud 0
           </code>
           <p>Reset command</p>
           <code>

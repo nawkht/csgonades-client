@@ -52,7 +52,7 @@ export const AddGfycat = () => {
               setpos_exact 100.0 -200.0 -300.0
             </span>
             ;<span className="highlight">setang 10.0 -20.0</span>;
-            cl_draw_only_deathnotices 1; cl_drawhud 0;"
+            cl_draw_only_deathnotices 1; cl_drawhud 0; r_drawviewmodel 0;"
           </code>
           <p>
             Clicking 'PAGE DOWN' on your keyboard will now teleport to the
