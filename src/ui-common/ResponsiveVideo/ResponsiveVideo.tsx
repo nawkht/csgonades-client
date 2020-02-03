@@ -5,12 +5,18 @@ import { VideoProgress } from "./VideoProgress";
 type Props = {
   sdUrl: string;
   hdUrL: string;
+  hdUrlWebm?: string;
   controls?: "desktop" | "mobile";
 };
 
 export type Quality = "hd" | "sd";
 
-export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
+export const ResponsiveVideo: FC<Props> = ({
+  sdUrl,
+  hdUrL,
+  hdUrlWebm,
+  controls
+}) => {
   const [quality, setQuality] = useState<Quality>("hd");
   const [isPlaying, setIsPlaying] = useState(true);
 
@@ -52,6 +58,7 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
             controls={controls === "mobile"}
             preload="auto"
           >
+            {hdUrlWebm && <source src={hdUrlWebm} type="video/webm" />}
             <source src={videoUrl} type="video/mp4" />
           </video>
         </div>

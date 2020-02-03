@@ -81,6 +81,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           <ResponsiveVideo
             hdUrL={nade.gfycat.largeVideoUrl}
             sdUrl={nade.gfycat.smallVideoUrl}
+            hdUrlWebm={nade.gfycat.largeVideoWebm}
             controls={isMobile ? "mobile" : "desktop"}
           />
           {/*<GfycatPlayerContrainer
