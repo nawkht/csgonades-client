@@ -154,10 +154,16 @@ type VideoEventCallbacks = {
 };
 
 export function useVideoEvents(callbacks: VideoEventCallbacks) {
+  const [mounted, setMountet] = useState(false);
   const [hasSentHalfViewed, setHasSentHalfViewed] = useState(false);
   const [hasSentStoppedWatching, setHasSentStoppedWatching] = useState(false);
   const [progress, setProgress] = useState(0);
   const [didFinishPreview, setDidFinishPreview] = useState(false);
+
+  useEffect(() => {
+    setMountet(true);
+    return () => setMountet(false);
+  }, []);
 
   const videoRef = useCallback(
     (node: HTMLVideoElement) => {
@@ -167,10 +173,12 @@ export function useVideoEvents(callbacks: VideoEventCallbacks) {
       node.playbackRate = 2;
       node.ontimeupdate = () => {
         const perc = Math.round((node.currentTime / node.duration) * 100);
-        setProgress(perc);
+        if (mounted) {
+          setProgress(perc);
+        }
       };
       node.onmouseleave = () => {
-        if (!hasSentStoppedWatching) {
+        if (!hasSentStoppedWatching && mounted) {
           if (progress < 25 && !didFinishPreview) {
             return;
           }
@@ -184,41 +192,50 @@ export function useVideoEvents(callbacks: VideoEventCallbacks) {
         }
       };
     },
-    [progress, hasSentStoppedWatching, didFinishPreview]
+    [progress, hasSentStoppedWatching, didFinishPreview, mounted]
   );
 
   useEffect(() => {
-    if (progress >= 33 && !hasSentHalfViewed) {
+    if (progress >= 33 && !hasSentHalfViewed && mounted) {
       setHasSentHalfViewed(true);
       callbacks.onConcideredViewed();
     }
 
-    if (progress >= 90) {
+    if (progress >= 90 && mounted) {
       setDidFinishPreview(true);
     }
-  }, [progress, hasSentHalfViewed]);
+  }, [progress, hasSentHalfViewed, mounted]);
 
   return { videoRef, progress };
 }
 
 function useHoverEvent() {
+  const [mounted, setMounted] = useState(false);
   const [isHovering, setIsHover] = useState(false);
 
-  const ref = useCallback((node: HTMLDivElement) => {
-    if (!node) {
-      return;
-    }
-    node.onmouseenter = onHover;
-    node.onmouseleave = onUnHover;
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
   }, []);
 
-  function onHover() {
-    setIsHover(true);
-  }
-
-  function onUnHover() {
-    setIsHover(false);
-  }
+  const ref = useCallback(
+    (node: HTMLDivElement) => {
+      if (!node || !mounted) {
+        return;
+      }
+      node.onmouseenter = () => {
+        if (mounted) {
+          setIsHover(true);
+        }
+      };
+      node.onmouseleave = () => {
+        if (mounted) {
+          setIsHover(false);
+        }
+      };
+    },
+    [mounted]
+  );
 
   return {
     ref,

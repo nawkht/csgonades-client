@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { VideoControls } from "./VideoControls";
 import { VideoProgress } from "./VideoProgress";
 
@@ -116,12 +116,18 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
 };
 
 export function useVideo(playing: boolean) {
+  const [isMounted, setIsMountet] = useState(false);
   const [videoNode, setNode] = useState<HTMLVideoElement | null>(null);
   const [progress, setProgress] = useState(0);
 
+  useEffect(() => {
+    setIsMountet(true);
+    return () => setIsMountet(false);
+  }, []);
+
   const videoRef = useCallback(
     (node: HTMLVideoElement) => {
-      if (!node) {
+      if (!node || !isMounted) {
         return;
       }
 
@@ -129,7 +135,9 @@ export function useVideo(playing: boolean) {
 
       node.ontimeupdate = () => {
         const perc = Math.round((node.currentTime / node.duration) * 100);
-        setProgress(perc);
+        if (isMounted) {
+          setProgress(perc);
+        }
       };
 
       if (playing) {
