@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaVideo } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeApi } from "../../api/NadeApi";
@@ -58,12 +58,12 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
         {isHovering && (
           <div className="back">
             <video
+              ref={videoRef}
               autoPlay
               muted
               loop
               playsInline
               controls={false}
-              ref={videoRef}
               poster={nade.images.thumbnailUrl}
             >
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
@@ -154,88 +154,108 @@ type VideoEventCallbacks = {
 };
 
 export function useVideoEvents(callbacks: VideoEventCallbacks) {
-  const [mounted, setMountet] = useState(false);
+  const [node, setNode] = useState<HTMLVideoElement | null>(null);
   const [hasSentHalfViewed, setHasSentHalfViewed] = useState(false);
   const [hasSentStoppedWatching, setHasSentStoppedWatching] = useState(false);
   const [progress, setProgress] = useState(0);
   const [didFinishPreview, setDidFinishPreview] = useState(false);
 
-  useEffect(() => {
-    setMountet(true);
-    return () => setMountet(false);
+  const videoRef = useCallback((node: HTMLVideoElement) => {
+    setNode(node);
   }, []);
 
-  const videoRef = useCallback(
-    (node: HTMLVideoElement) => {
-      if (!node) {
-        return;
-      }
-      node.playbackRate = 2;
-      node.ontimeupdate = () => {
-        const perc = Math.round((node.currentTime / node.duration) * 100);
-        if (mounted) {
-          setProgress(perc);
-        }
-      };
-      node.onmouseleave = () => {
-        if (!hasSentStoppedWatching && mounted) {
-          if (progress < 25 && !didFinishPreview) {
-            return;
-          }
-          setHasSentStoppedWatching(true);
-          if (didFinishPreview) {
-            callbacks.onStop(100);
-          } else {
-            const roundedProgress = Math.ceil(progress / 10) * 10;
-            callbacks.onStop(roundedProgress);
-          }
-        }
-      };
-    },
-    [progress, hasSentStoppedWatching, didFinishPreview, mounted]
-  );
-
+  // Progress event listener
   useEffect(() => {
-    if (progress >= 33 && !hasSentHalfViewed && mounted) {
+    if (!node) {
+      return;
+    }
+
+    node.playbackRate = 2;
+
+    const onTimeUpdate = () => {
+      const perc = Math.round((node.currentTime / node.duration) * 100);
+      setProgress(perc);
+    };
+
+    node.addEventListener("timeupdate", onTimeUpdate);
+
+    return () => {
+      if (node) {
+        node.removeEventListener("timeupdate", onTimeUpdate);
+      }
+    };
+  }, [node]);
+
+  // Setup event listeners
+  useEffect(() => {
+    if (!node) {
+      return;
+    }
+
+    const onMouseLeave = () => {
+      if (!hasSentStoppedWatching) {
+        if (progress < 25 && !didFinishPreview) {
+          return;
+        }
+        setHasSentStoppedWatching(true);
+        if (didFinishPreview) {
+          console.log("Did finish full preview");
+          callbacks.onStop(100);
+        } else {
+          const roundedProgress = Math.ceil(progress / 10) * 10;
+          console.log("Stopped at", roundedProgress);
+          callbacks.onStop(roundedProgress);
+        }
+      }
+    };
+
+    node.addEventListener("mouseleave", onMouseLeave);
+
+    return () => {
+      if (node) {
+        node.removeEventListener("mouseleave", onMouseLeave);
+      }
+    };
+  }, [node, hasSentStoppedWatching, progress, didFinishPreview]);
+
+  // Progress event trigger
+  useEffect(() => {
+    if (progress >= 33 && !hasSentHalfViewed) {
       setHasSentHalfViewed(true);
       callbacks.onConcideredViewed();
     }
 
-    if (progress >= 90 && mounted) {
+    if (progress >= 90) {
       setDidFinishPreview(true);
     }
-  }, [progress, hasSentHalfViewed, mounted]);
+  }, [progress, hasSentHalfViewed]);
 
   return { videoRef, progress };
 }
 
 function useHoverEvent() {
-  const [mounted, setMounted] = useState(false);
   const [isHovering, setIsHover] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+    const node = ref.current;
+    if (!node) {
+      return;
+    }
 
-  const ref = useCallback(
-    (node: HTMLDivElement) => {
-      if (!node || !mounted) {
-        return;
+    const onMouseEnter = () => setIsHover(true);
+    const onMouseLeave = () => setIsHover(false);
+
+    node.addEventListener("mouseenter", onMouseEnter);
+    node.addEventListener("mouseleave", onMouseLeave);
+
+    return () => {
+      if (node) {
+        node.removeEventListener("mouseenter", onMouseEnter);
+        node.removeEventListener("mouseleave", onMouseLeave);
       }
-      node.onmouseenter = () => {
-        if (mounted) {
-          setIsHover(true);
-        }
-      };
-      node.onmouseleave = () => {
-        if (mounted) {
-          setIsHover(false);
-        }
-      };
-    },
-    [mounted]
-  );
+    };
+  }, []);
 
   return {
     ref,

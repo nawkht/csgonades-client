@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { VideoControls } from "./VideoControls";
 import { VideoProgress } from "./VideoProgress";
 
@@ -11,7 +11,6 @@ type Props = {
 export type Quality = "hd" | "sd";
 
 export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
-  const ref = useRef(null);
   const [quality, setQuality] = useState<Quality>("hd");
   const [isPlaying, setIsPlaying] = useState(true);
 
@@ -41,7 +40,7 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
 
   return (
     <>
-      <div className="video-container" ref={ref}>
+      <div className="video-container">
         <div className="video-content" onClick={togglePlay}>
           <video
             key={videoUrl}
@@ -116,38 +115,51 @@ export const ResponsiveVideo: FC<Props> = ({ sdUrl, hdUrL, controls }) => {
 };
 
 export function useVideo(playing: boolean) {
-  const [isMounted, setIsMountet] = useState(false);
   const [videoNode, setNode] = useState<HTMLVideoElement | null>(null);
   const [progress, setProgress] = useState(0);
 
+  // Event listeners
   useEffect(() => {
-    setIsMountet(true);
-    return () => setIsMountet(false);
+    if (!videoNode) {
+      return;
+    }
+
+    const onTimeUpdate = () => {
+      const perc = Math.round(
+        (videoNode.currentTime / videoNode.duration) * 100
+      );
+      setProgress(perc);
+    };
+
+    videoNode.addEventListener("timeupdate", onTimeUpdate);
+
+    return () => {
+      if (videoNode) {
+        videoNode.removeEventListener("timeupdate", onTimeUpdate);
+      }
+    };
+  }, [videoNode]);
+
+  // Play / pause
+  useEffect(() => {
+    if (!videoNode) {
+      return;
+    }
+
+    if (playing) {
+      videoNode.play();
+    } else {
+      videoNode.pause();
+    }
+  }, [playing]);
+
+  // Ref
+  const videoRef = useCallback((node: HTMLVideoElement) => {
+    if (!node) {
+      return;
+    }
+    setNode(node);
   }, []);
-
-  const videoRef = useCallback(
-    (node: HTMLVideoElement) => {
-      if (!node || !isMounted) {
-        return;
-      }
-
-      setNode(node);
-
-      node.ontimeupdate = () => {
-        const perc = Math.round((node.currentTime / node.duration) * 100);
-        if (isMounted) {
-          setProgress(perc);
-        }
-      };
-
-      if (playing) {
-        node.play();
-      } else {
-        node.pause();
-      }
-    },
-    [progress, playing]
-  );
 
   return { videoRef, progress, videoNode };
 }
