@@ -79,7 +79,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           overflow: hidden;
           display: block;
           padding-top: 56.25%;
-          background: black;
+          background: ${nade.gfycat.avgColor || "black"};
         }
 
         .front {

@@ -3,4 +3,5 @@ export type GfycatData = {
   smallVideoUrl: string;
   largeVideoUrl: string;
   largeVideoWebm?: string;
+  avgColor?: string;
 };
