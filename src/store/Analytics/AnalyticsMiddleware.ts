@@ -88,11 +88,15 @@ export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
   getState
 }) => next => action => {
   if (action.type === "@@analytics/EVENT") {
+    const state = getState();
+    const ignoreEvent = state.authStore.user?.role === "administrator";
+
     const analyticsAction = action as AnalyticsEvent;
     GoogleAnalytics.event({
       category: analyticsAction.category,
       action: analyticsAction.action,
-      label: analyticsAction.label
+      label: analyticsAction.label,
+      ignore: ignoreEvent
     });
   }
 
