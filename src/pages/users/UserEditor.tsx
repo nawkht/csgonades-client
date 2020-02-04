@@ -57,7 +57,7 @@ export const UserEditor: FC<Props> = ({ user }) => {
           <Form.Field>
             <label>E-mail</label>
             <Form.Input
-              laceholder="E-mail"
+              placeholder="E-mail"
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
@@ -65,7 +65,7 @@ export const UserEditor: FC<Props> = ({ user }) => {
           <Form.Field>
             <label>Bio</label>
             <TextArea
-              placeholder="Something about you..."
+              placeholder="Optional"
               value={bio}
               onChange={e => setBio(e.currentTarget.value)}
             />

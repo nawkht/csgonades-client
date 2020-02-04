@@ -82,6 +82,5 @@ export const useSignOut = () => {
 
 export const usePreloadUser = () => {
   const dispatch = useDispatch();
-  return (isFirstSignIn: boolean) =>
-    dispatch(preloadUserThunkAction(isFirstSignIn));
+  return () => dispatch(preloadUserThunkAction());
 };

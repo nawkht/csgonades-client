@@ -11,8 +11,15 @@ export const redirectMapPage = (mapName: CsgoMap) => {
   Router.push(`/maps?mapname=${mapName}`, `/maps/${mapName}`);
 };
 
-export const redirectUserPage = (steamId: string) => {
-  Router.push(`/users?id=${steamId}`, `/users/${steamId}`);
+export const redirectUserPage = (steamId: string, edit?: boolean) => {
+  if (edit) {
+    Router.push(
+      `/users?id=${steamId}&edit=true`,
+      `/users/${steamId}?edit=true`
+    );
+  } else {
+    Router.push(`/users?id=${steamId}`, `/users/${steamId}`);
+  }
 };
 
 export const redirectNadePage = (nadeId: string) => {

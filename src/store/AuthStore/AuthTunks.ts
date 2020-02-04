@@ -1,14 +1,14 @@
+import moment from "moment";
 import Router from "next/router";
 import { FavoriteApi } from "../../api/FavoriteApi";
 import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
+import { User } from "../../models/User";
 import { redirectUserPage } from "../../utils/Common";
 import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
 import { setToken, setUser, signOutUser } from "./AuthActions";
-import { tokenSelector } from "./AuthSelectors";
 
 export const serverSideUserInitThunkAction = (
   cookie?: string
@@ -44,15 +44,12 @@ export const serverSideUserInitThunkAction = (
   };
 };
 
-export const preloadUserThunkAction = (
-  isFirstSignIn: boolean
-): ReduxThunkAction => {
+export const preloadUserThunkAction = (): ReduxThunkAction => {
   return async dispatch => {
     const tokenResult = await AuthApi.refreshToken();
 
     if (tokenResult.isErr()) {
-      console.error(tokenResult.error);
-      return;
+      return Router.push("/");
     }
 
     const token = tokenResult.value;
@@ -62,8 +59,7 @@ export const preloadUserThunkAction = (
     const userResult = await UserApi.fetchSelf(token);
 
     if (userResult.isErr()) {
-      console.error(userResult.error);
-      return;
+      return Router.push("/");
     }
 
     const user = userResult.value;
@@ -76,37 +72,13 @@ export const preloadUserThunkAction = (
       ignore: user.role !== "administrator"
     });
 
+    const isFirstSignIn = checkIsFirstSignIn(user);
+
     if (isFirstSignIn) {
-      redirectUserPage(user.steamId);
+      redirectUserPage(user.steamId, true);
     } else {
       Router.push("/");
     }
-  };
-};
-
-export const fetchSignedInUserThunkAction = (): ReduxThunkAction => {
-  return async (dispatch, getState) => {
-    const authToken = tokenSelector(getState());
-    if (!authToken) {
-      return dispatch(
-        addNotificationActionThunk({
-          message: "Can't fetch user, seems like your not signed in.",
-          severity: "error"
-        })
-      );
-    }
-
-    const userResult = await UserApi.fetchSelf(authToken);
-
-    if (userResult.isErr()) {
-      return dispatch(
-        addNotificationActionThunk({
-          message: userResult.error.message,
-          severity: "error"
-        })
-      );
-    }
-    setUser(dispatch, userResult.value);
   };
 };
 
@@ -116,3 +88,13 @@ export const signOutUserThunk = (): ReduxThunkAction => {
     dispatch(signOutUser());
   };
 };
+
+function checkIsFirstSignIn(user: User): boolean {
+  const minutesAgoCreated = moment().diff(
+    moment(user.createdAt),
+    "minute",
+    false
+  );
+
+  return minutesAgoCreated < 2;
+}

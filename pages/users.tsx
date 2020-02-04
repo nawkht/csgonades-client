@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { UserPage } from "../src/pages/users/UsersPage";
+import { startEditingUserAction } from "../src/store/UsersStore/UsersActions";
 import { userErrorSelector } from "../src/store/UsersStore/UsersSelectors";
 import {
   fetchNadesForUserAction,
@@ -10,9 +11,10 @@ const UserPageComponent: NextPage = () => {
   return <UserPage />;
 };
 
-UserPageComponent.getInitialProps = async context => {
-  const { dispatch, getState } = context.store;
-  const steamId = context.query.id as string;
+UserPageComponent.getInitialProps = async ({ store, query, res }) => {
+  const { dispatch, getState } = store;
+  const steamId = query.id as string;
+  const shouldDisplayEdit = query.edit === "true";
 
   await Promise.all([
     dispatch(fetchUserAction(steamId)),
@@ -21,8 +23,12 @@ UserPageComponent.getInitialProps = async context => {
 
   const error = userErrorSelector(getState());
 
-  if (error && context.res) {
-    context.res.statusCode = 404;
+  if (error && res) {
+    res.statusCode = 404;
+  }
+
+  if (shouldDisplayEdit) {
+    dispatch(startEditingUserAction());
   }
 
   return;

@@ -3,14 +3,10 @@ import React from "react";
 import { Dimmer, Loader } from "semantic-ui-react";
 import { usePreloadUser } from "../src/store/AuthStore/AuthHooks";
 
-interface Props {
-  isFirstSignIn: boolean;
-}
-
-const Auth: NextPage<Props> = ({ isFirstSignIn }) => {
+const Auth: NextPage = () => {
   const preloadUser = usePreloadUser();
   React.useEffect(() => {
-    preloadUser(isFirstSignIn);
+    preloadUser();
   }, []);
 
   return (
@@ -18,13 +14,6 @@ const Auth: NextPage<Props> = ({ isFirstSignIn }) => {
       <Loader>Signing in...</Loader>
     </Dimmer>
   );
-};
-
-Auth.getInitialProps = async ({ query }): Promise<Props> => {
-  const isFirstSignIn = query.isFirstSignIn === "true" ? true : false;
-  return {
-    isFirstSignIn
-  };
 };
 
 export default Auth;
