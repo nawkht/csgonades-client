@@ -3,6 +3,7 @@ import { FavoriteApi } from "../../api/FavoriteApi";
 import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
 import { redirectUserPage } from "../../utils/Common";
+import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
@@ -68,6 +69,12 @@ export const preloadUserThunkAction = (
     const user = userResult.value;
 
     setUser(dispatch, user);
+
+    GoogleAnalytics.event({
+      category: "Login",
+      action: "Signed in",
+      ignore: user.role !== "administrator"
+    });
 
     if (isFirstSignIn) {
       redirectUserPage(user.steamId);
