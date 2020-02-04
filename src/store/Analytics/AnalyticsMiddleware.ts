@@ -94,8 +94,6 @@ export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
       action: analyticsAction.action,
       label: analyticsAction.label
     });
-  } else {
-    next(action);
   }
 
   const meta: Meta = action.meta;
@@ -130,4 +128,5 @@ export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
 
     GoogleAnalytics.pageView(pageView);
   }
+  return next(action);
 };
