@@ -13,7 +13,7 @@ export type AnalyticsEvent = {
   label?: string;
 };
 
-const analyticsEventAction = (event: GaEvent): AnalyticsEvent => ({
+export const analyticsEventAction = (event: GaEvent): AnalyticsEvent => ({
   type: "@@analytics/EVENT",
   category: event.category,
   action: event.action,

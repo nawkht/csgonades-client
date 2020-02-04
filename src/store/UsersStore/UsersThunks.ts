@@ -1,6 +1,7 @@
 import { NadeApi } from "../../api/NadeApi";
 import { UserApi } from "../../api/UserApi";
 import { UserUpdateDTO } from "../../models/User";
+import { analyticsEventAction } from "../Analytics/AnalyticsActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
   setUserNadesAction,
@@ -56,6 +57,13 @@ export const updateUserThunk = (
     if (result.isErr()) {
       return dispatch(setUsersError(result.error));
     }
+
+    dispatch(
+      analyticsEventAction({
+        category: "user",
+        action: "update"
+      })
+    );
 
     dispatch(setViewingUserAction(result.value));
     dispatch(stopEditingUserAction());
