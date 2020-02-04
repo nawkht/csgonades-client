@@ -1,10 +1,17 @@
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  FC,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { FaVideo } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeApi } from "../../api/NadeApi";
 import { NadeLight } from "../../models/Nade/Nade";
-import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
+import { useAnalyticsEvent } from "../../store/Analytics/AnalyticsActions";
 import { SeekBar } from "../SeekBar";
 
 type Props = {
@@ -12,22 +19,19 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
-  const isAdmin = useIsAdmin();
-
+  const analyticsEvent = useAnalyticsEvent();
   const { ref, isHovering } = useHoverEvent();
-  const { videoRef, progress } = useVideoEvents({
-    onStop: endProgress => {
-      GoogleAnalytics.event({
-        category: "NadeItem",
-        action: `Preview viewed`,
-        label: `${endProgress}%`,
-        ignore: isAdmin
-      });
-    },
-    onConcideredViewed: () => {
+  const [progressForEvent, setProgressForEvent] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [hasSentViewedEvent, setHasSentViewedEvent] = useState(false);
+  const [hasSentAnalyticsEvent, setHasSentAnalyticsEvent] = useState(false);
+
+  useEffect(() => {
+    if (!hasSentViewedEvent && progress > 30) {
       NadeApi.registerView(nade.id);
+      setHasSentViewedEvent(true);
     }
-  });
+  }, [progress, hasSentViewedEvent]);
 
   const videoIconClassName = useMemo(() => {
     const classes = ["video-icon-wrapper"];
@@ -36,6 +40,32 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     }
     return classes.join(" ");
   }, [isHovering]);
+
+  function onVideoTimeUpdate({
+    currentTarget
+  }: SyntheticEvent<HTMLVideoElement, Event>) {
+    const { currentTime, duration } = currentTarget;
+    const progressPercentage = Math.round((currentTime / duration) * 100);
+    setProgress(progressPercentage);
+    if (progressPercentage > 30 && progressPercentage > progressForEvent) {
+      setProgressForEvent(progressPercentage);
+    }
+  }
+
+  const onVideoMouseLeave = useCallback(() => {
+    if (hasSentAnalyticsEvent || !progressForEvent) {
+      return;
+    }
+
+    const roundedProgress = Math.ceil(progressForEvent / 10) * 10;
+
+    analyticsEvent({
+      category: "nadeitem",
+      action: "PREVIEW_VIEWED",
+      label: `${roundedProgress}%`
+    });
+    setHasSentAnalyticsEvent(true);
+  }, [hasSentAnalyticsEvent, progressForEvent]);
 
   return (
     <>
@@ -58,13 +88,14 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
         {isHovering && (
           <div className="back">
             <video
-              ref={videoRef}
               autoPlay
               muted
               loop
               playsInline
               controls={false}
               poster={nade.images.thumbnailUrl}
+              onTimeUpdate={onVideoTimeUpdate}
+              onMouseLeave={onVideoMouseLeave}
             >
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
             </video>
@@ -147,91 +178,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     </>
   );
 };
-
-type VideoEventCallbacks = {
-  onStop: (pregress: number) => void;
-  onConcideredViewed: () => void;
-};
-
-export function useVideoEvents(callbacks: VideoEventCallbacks) {
-  const [node, setNode] = useState<HTMLVideoElement | null>(null);
-  const [hasSentHalfViewed, setHasSentHalfViewed] = useState(false);
-  const [hasSentStoppedWatching, setHasSentStoppedWatching] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [didFinishPreview, setDidFinishPreview] = useState(false);
-
-  const videoRef = useCallback((node: HTMLVideoElement) => {
-    setNode(node);
-  }, []);
-
-  // Progress event listener
-  useEffect(() => {
-    if (!node) {
-      return;
-    }
-
-    node.playbackRate = 2;
-
-    const onTimeUpdate = () => {
-      const perc = Math.round((node.currentTime / node.duration) * 100);
-      setProgress(perc);
-    };
-
-    node.addEventListener("timeupdate", onTimeUpdate);
-
-    return () => {
-      if (node) {
-        node.removeEventListener("timeupdate", onTimeUpdate);
-      }
-    };
-  }, [node]);
-
-  // Setup event listeners
-  useEffect(() => {
-    if (!node) {
-      return;
-    }
-
-    const onMouseLeave = () => {
-      if (!hasSentStoppedWatching) {
-        if (progress < 25 && !didFinishPreview) {
-          return;
-        }
-        setHasSentStoppedWatching(true);
-        if (didFinishPreview) {
-          console.log("Did finish full preview");
-          callbacks.onStop(100);
-        } else {
-          const roundedProgress = Math.ceil(progress / 10) * 10;
-          console.log("Stopped at", roundedProgress);
-          callbacks.onStop(roundedProgress);
-        }
-      }
-    };
-
-    node.addEventListener("mouseleave", onMouseLeave);
-
-    return () => {
-      if (node) {
-        node.removeEventListener("mouseleave", onMouseLeave);
-      }
-    };
-  }, [node, hasSentStoppedWatching, progress, didFinishPreview]);
-
-  // Progress event trigger
-  useEffect(() => {
-    if (progress >= 33 && !hasSentHalfViewed) {
-      setHasSentHalfViewed(true);
-      callbacks.onConcideredViewed();
-    }
-
-    if (progress >= 90) {
-      setDidFinishPreview(true);
-    }
-  }, [progress, hasSentHalfViewed]);
-
-  return { videoRef, progress };
-}
 
 function useHoverEvent() {
   const [isHovering, setIsHover] = useState(false);

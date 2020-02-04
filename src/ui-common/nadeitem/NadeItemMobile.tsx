@@ -5,10 +5,8 @@ import { Icon } from "semantic-ui-react";
 import { NadeApi } from "../../api/NadeApi";
 import { Dimensions } from "../../constants/Constants";
 import { NadeLight, Status } from "../../models/Nade/Nade";
-import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
+import { useAnalyticsEvent } from "../../store/Analytics/AnalyticsActions";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { iconFromType } from "../../utils/Common";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { NadeItemTitle } from "./NadeItemTitle";
 import { NadeStats } from "./NadeStats";
 
@@ -18,7 +16,7 @@ interface Props {
 }
 
 export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
-  const isAdmin = useIsAdmin();
+  const analyticsEvent = useAnalyticsEvent();
   const [showMenu, setShowMenu] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasSentEvent, setHasSentEvent] = useState(false);
@@ -29,11 +27,9 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     if (isPlaying && !hasSentEvent) {
       timer = setTimeout(() => {
         NadeApi.registerView(nade.id);
-        GoogleAnalytics.event({
-          category: "NadeItem",
-          action: "Mobile play gfycat",
-          label: nade.id,
-          ignore: isAdmin
+        analyticsEvent({
+          category: "nadeitem",
+          action: "MOBILE_PREVIEW_PLAY"
         });
         setHasSentEvent(true);
       }, 5000);
@@ -56,9 +52,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     Router.push(`/nades?id=${nade.id}`, `/nades/${nade.id}`);
   }
 
-  const title = nade.title || "No title...";
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
-  const iconUrl = iconFromType(nade.type);
 
   return (
     <>

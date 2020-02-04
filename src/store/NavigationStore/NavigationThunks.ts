@@ -9,8 +9,8 @@ export const useNavigationState = () => {
   const dispatch = useDispatch();
   const previousRoute = useSelector(previousRouteSelector);
 
-  function setCurrentRoute(route: string) {
-    dispatch(addCurrentRouteAction(route));
+  function setCurrentRoute(route: string, title: string = "CSGONades") {
+    dispatch(addCurrentRouteAction(route, title));
   }
 
   return {

@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, SyntheticEvent, useMemo, useRef, useState } from "react";
 import { VideoControls } from "./VideoControls";
 import { VideoProgress } from "./VideoProgress";
 
@@ -17,10 +17,10 @@ export const ResponsiveVideo: FC<Props> = ({
   hdUrlWebm,
   controls
 }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [progress, setProgress] = useState(0);
   const [quality, setQuality] = useState<Quality>("hd");
   const [isPlaying, setIsPlaying] = useState(true);
-
-  const { videoRef, progress, videoNode } = useVideo(isPlaying);
 
   const videoUrl = useMemo(() => {
     if (quality === "hd") {
@@ -31,7 +31,13 @@ export const ResponsiveVideo: FC<Props> = ({
   }, [quality]);
 
   function togglePlay() {
-    setIsPlaying(!isPlaying);
+    if (ref.current && ref.current.paused) {
+      ref.current.play();
+      setIsPlaying(true);
+    } else if (ref.current && !ref.current.paused) {
+      ref.current.pause();
+      setIsPlaying(false);
+    }
   }
 
   function qualityChange(q: Quality) {
@@ -39,9 +45,17 @@ export const ResponsiveVideo: FC<Props> = ({
   }
 
   function fullscreen() {
-    if (videoNode) {
-      videoNode.requestFullscreen();
+    if (ref.current) {
+      ref.current.requestFullscreen();
     }
+  }
+
+  function onVideoTimeUpdate({
+    currentTarget
+  }: SyntheticEvent<HTMLVideoElement, Event>) {
+    const { currentTime, duration } = currentTarget;
+    const progressPercentage = Math.round((currentTime / duration) * 100);
+    setProgress(progressPercentage);
   }
 
   return (
@@ -49,14 +63,15 @@ export const ResponsiveVideo: FC<Props> = ({
       <div className="video-container">
         <div className="video-content" onClick={togglePlay}>
           <video
+            ref={ref}
             key={videoUrl}
             muted
             loop
-            ref={videoRef}
             className="video-player"
             autoPlay={true}
             controls={controls === "mobile"}
             preload="auto"
+            onTimeUpdate={onVideoTimeUpdate}
           >
             {hdUrlWebm && <source src={hdUrlWebm} type="video/webm" />}
             <source src={videoUrl} type="video/mp4" />
@@ -120,53 +135,3 @@ export const ResponsiveVideo: FC<Props> = ({
     </>
   );
 };
-
-export function useVideo(playing: boolean) {
-  const [videoNode, setNode] = useState<HTMLVideoElement | null>(null);
-  const [progress, setProgress] = useState(0);
-
-  // Event listeners
-  useEffect(() => {
-    if (!videoNode) {
-      return;
-    }
-
-    const onTimeUpdate = () => {
-      const perc = Math.round(
-        (videoNode.currentTime / videoNode.duration) * 100
-      );
-      setProgress(perc);
-    };
-
-    videoNode.addEventListener("timeupdate", onTimeUpdate);
-
-    return () => {
-      if (videoNode) {
-        videoNode.removeEventListener("timeupdate", onTimeUpdate);
-      }
-    };
-  }, [videoNode]);
-
-  // Play / pause
-  useEffect(() => {
-    if (!videoNode) {
-      return;
-    }
-
-    if (playing) {
-      videoNode.play();
-    } else {
-      videoNode.pause();
-    }
-  }, [playing]);
-
-  // Ref
-  const videoRef = useCallback((node: HTMLVideoElement) => {
-    if (!node) {
-      return;
-    }
-    setNode(node);
-  }, []);
-
-  return { videoRef, progress, videoNode };
-}

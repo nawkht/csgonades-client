@@ -2,27 +2,19 @@ import { FC } from "react";
 import { FaUndo } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useIsAdmin } from "../../../store/AuthStore/AuthHooks";
 import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
-import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 
 type Props = {
   map: CsgoMap;
 };
 
 export const ResetButton: FC<Props> = ({ map }) => {
-  const isAdmin = useIsAdmin();
   const { colors } = useTheme();
   const { reset, canReset } = useNadeFilter(map);
 
   function onReset() {
     if (canReset) {
-      GoogleAnalytics.event({
-        category: "Nade filter",
-        action: "Reset",
-        ignore: isAdmin
-      });
       reset();
     }
   }

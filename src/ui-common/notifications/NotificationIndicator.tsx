@@ -1,27 +1,15 @@
 import { FC, useState } from "react";
 import { Icon } from "semantic-ui-react";
-import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { NotificationList } from "./NotificationList";
 
 export const NotificationIndicator: FC = () => {
-  const isAdmin = useIsAdmin();
   const [notificationTabVisible, setNotificationTabVisible] = useState(false);
   const { colors } = useTheme();
   const { notificationCount } = useNotifications();
 
   function toggleNotificationTab() {
-    if (!notificationTabVisible) {
-      GoogleAnalytics.event({
-        category: "Notification",
-        action: "Open tab",
-        label: `Count(${notificationCount})`,
-        ignore: isAdmin
-      });
-    }
-
     setNotificationTabVisible(!notificationTabVisible);
   }
 

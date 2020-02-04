@@ -1,7 +1,6 @@
 import moment from "moment";
 import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { useIsAdmin } from "../AuthStore/AuthHooks";
 import { notificationsSelector } from "./NotificationSelectors";
 import {
@@ -27,11 +26,6 @@ export const useNotifications = () => {
   const markNotificationAsViewed = useCallback(
     (id: string) => {
       dispatch(markNotifcationAsViewedThunk(id));
-      GoogleAnalytics.event({
-        category: "Notification",
-        action: "Marked as viewed",
-        ignore: isAdmin
-      });
     },
     [dispatch]
   );

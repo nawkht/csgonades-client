@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { User } from "../../models/User";
+import { Meta } from "../Analytics/AnalyticsMiddleware";
 
 type SetTokenAction = {
   type: "@@auth/SET_TOKEN";
@@ -13,6 +14,7 @@ type SetUserAction = {
 
 type SignOutAction = {
   type: "@@auth/SIGN_OUT";
+  meta: Meta;
 };
 
 export type AuthActions = SetTokenAction | SetUserAction | SignOutAction;
@@ -23,7 +25,10 @@ export const setToken = (token: string) => ({
 });
 
 export const signOutUser = (): SignOutAction => ({
-  type: "@@auth/SIGN_OUT"
+  type: "@@auth/SIGN_OUT",
+  meta: {
+    gaEvent: {}
+  }
 });
 
 export function setUser(dispatch: Dispatch, user: User) {

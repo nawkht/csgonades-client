@@ -1,7 +1,6 @@
 import { FavoriteApi } from "../../api/FavoriteApi";
 import { NadeApi } from "../../api/NadeApi";
 import { Nade } from "../../models/Nade/Nade";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { fetchNadesByMapActionThunk } from "../NadeStore/NadeThunks";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
@@ -55,8 +54,6 @@ export const addFavoriteThunkAction = (nade: Nade): ReduxThunkAction => {
       return;
     }
 
-    const isAdmin = state.authStore.user?.role === "administrator";
-
     const result = await FavoriteApi.favorite(nade.id, token);
 
     if (result.isErr()) {
@@ -65,12 +62,6 @@ export const addFavoriteThunkAction = (nade: Nade): ReduxThunkAction => {
     }
 
     const favorites = result.value;
-
-    GoogleAnalytics.event({
-      category: "Favorite",
-      action: "Add favorite",
-      ignore: isAdmin
-    });
 
     dispatch(addFavoriteAction(favorites));
 
@@ -86,7 +77,6 @@ export const addUnFavoriteThunkAction = (
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const state = getState();
-    const isAdmin = state.authStore.user?.role === "administrator";
     const token = state.authStore.token;
 
     if (!token) {
@@ -95,12 +85,6 @@ export const addUnFavoriteThunkAction = (
     }
 
     dispatch(removeFavoriteAction(favoriteId));
-
-    GoogleAnalytics.event({
-      category: "Favorite",
-      action: "Remove favorite",
-      ignore: isAdmin
-    });
 
     const result = await FavoriteApi.unFavorite(favoriteId, token);
     if (result.isErr()) {

@@ -5,7 +5,6 @@ import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
 import { User } from "../../models/User";
 import { redirectUserPage } from "../../utils/Common";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { setToken, setUser, signOutUser } from "./AuthActions";
@@ -65,12 +64,6 @@ export const preloadUserThunkAction = (): ReduxThunkAction => {
     const user = userResult.value;
 
     setUser(dispatch, user);
-
-    GoogleAnalytics.event({
-      category: "Login",
-      action: "Signed in",
-      ignore: user.role !== "administrator"
-    });
 
     const isFirstSignIn = checkIsFirstSignIn(user);
 

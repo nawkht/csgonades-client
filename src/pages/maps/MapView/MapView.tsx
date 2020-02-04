@@ -8,14 +8,12 @@ import {
 } from "react";
 import { Dimensions } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useIsAdmin } from "../../../store/AuthStore/AuthHooks";
 import {
   useNadeCoordinatesForMap,
   useNadeFilter
 } from "../../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { useMapViewTip } from "../../../store/TipStore/TipHooks";
-import { GoogleAnalytics } from "../../../utils/GoogleAnalytics";
 import { Filters } from "./Filters";
 import { MapPosIcon } from "./MapPosIcon";
 
@@ -24,7 +22,6 @@ type Props = {
 };
 
 export const MapView: FC<Props> = ({ map }) => {
-  const isAdmin = useIsAdmin();
   const ref = useRef<HTMLDivElement>(null);
   const [visisble, setVisisble] = useState(false);
   const [mapLoaded, setMapLoade] = useState(false);
@@ -62,29 +59,14 @@ export const MapView: FC<Props> = ({ map }) => {
   function onNadeClick(pos: { x: number; y: number }) {
     filterByMapCoords(pos);
     setVisisble(false);
-    GoogleAnalytics.event({
-      category: "MapView",
-      action: "Click nade",
-      ignore: isAdmin
-    });
   }
 
   function onHandleClick() {
     if (visisble) {
       setVisisble(false);
       didOpenMapView();
-      GoogleAnalytics.event({
-        category: "MapView",
-        action: "Close mapview",
-        ignore: isAdmin
-      });
     } else {
       setVisisble(true);
-      GoogleAnalytics.event({
-        category: "MapView",
-        action: "Open mapview",
-        ignore: isAdmin
-      });
     }
   }
 

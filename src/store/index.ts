@@ -2,6 +2,7 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { AdminReducer } from "./AdminStore/AdminReducer";
+import { analyticsMiddleware } from "./Analytics/AnalyticsMiddleware";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
@@ -34,10 +35,17 @@ const rootReducer = combineReducers({
 
 function createMiddleware() {
   const isProduction = process.env.NODE_ENV === "production";
+
+  const middleware = applyMiddleware(
+    analyticsMiddleware,
+    tokenRefreshMiddleware,
+    thunk
+  );
+
   if (isProduction) {
-    return applyMiddleware(tokenRefreshMiddleware, thunk);
+    return middleware;
   } else {
-    return composeWithDevTools(applyMiddleware(tokenRefreshMiddleware, thunk));
+    return composeWithDevTools(middleware);
   }
 }
 

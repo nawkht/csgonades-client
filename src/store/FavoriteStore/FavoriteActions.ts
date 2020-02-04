@@ -1,5 +1,6 @@
 import { Favorite } from "../../models/Favorite";
 import { NadeLight } from "../../models/Nade/Nade";
+import { Meta } from "../Analytics/AnalyticsMiddleware";
 
 type AddAllFavoritesAction = {
   type: "@@favorites/add_all";
@@ -9,11 +10,13 @@ type AddAllFavoritesAction = {
 type AddFavoriteAction = {
   type: "@@favorites/add";
   favorite: Favorite;
+  meta: Meta;
 };
 
 type RemoveFavoritesAction = {
   type: "@@favorites/remove";
   favoriteId: string;
+  meta: Meta;
 };
 
 type AddFavoritedNades = {
@@ -46,14 +49,16 @@ export const addAllFavoritesAction = (
 
 export const addFavoriteAction = (favorite: Favorite): AddFavoriteAction => ({
   type: "@@favorites/add",
-  favorite
+  favorite,
+  meta: { gaEvent: {} }
 });
 
 export const removeFavoriteAction = (
   favoriteId: string
 ): RemoveFavoritesAction => ({
   type: "@@favorites/remove",
-  favoriteId
+  favoriteId,
+  meta: { gaEvent: {} }
 });
 
 export const addFavoritedNadesAction = (

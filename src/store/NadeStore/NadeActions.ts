@@ -4,6 +4,7 @@ import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { MapCoordinates, Nade, NadeLight } from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
 import { AppError } from "../../utils/ErrorUtil";
+import { Meta } from "../Analytics/AnalyticsMiddleware";
 
 export type AddNadesForMapAction = {
   type: "@@nades/ADD_FOR_MAP";
@@ -14,12 +15,14 @@ export type AddNadesForMapAction = {
 export type ToogleMapPositionModal = {
   type: "@@nades/TOGGLE_MAP_POSITION_MODAL";
   visisble: boolean;
+  meta: Meta;
 };
 
 export type FilterByMapCoordinates = {
   type: "@@nades/FILTER_BY_MAP_COORDINATES";
   coords: MapCoordinates;
   map: CsgoMap;
+  meta: Meta;
 };
 
 type AddRcentNadesAction = {
@@ -44,16 +47,19 @@ export type FilterByNadeType = {
   type: "@@nades/FILTER_BY_TYPE";
   nadeType: NadeType;
   map: CsgoMap;
+  meta: Meta;
 };
 
 export type FilterByFavorites = {
   type: "@@@nades/FILTER_BY_FAVORITES";
   map: CsgoMap;
+  meta: Meta;
 };
 
 export type ResetNadeFilter = {
   type: "@@nades/RESET_NADE_FILTER";
   map: CsgoMap;
+  meta: Meta;
 };
 
 export type AddSiteStats = {
@@ -124,19 +130,26 @@ export const filterByTypeAction = (
 ): FilterByNadeType => ({
   type: "@@nades/FILTER_BY_TYPE",
   nadeType,
-  map
+  map,
+  meta: {
+    gaEvent: {
+      label: nadeType
+    }
+  }
 });
 
 export const toggleFilterByFavoritesAction = (
   map: CsgoMap
 ): FilterByFavorites => ({
   type: "@@@nades/FILTER_BY_FAVORITES",
-  map
+  map,
+  meta: { gaEvent: {} }
 });
 
 export const resetNadeFilterAction = (map: CsgoMap): ResetNadeFilter => ({
   type: "@@nades/RESET_NADE_FILTER",
-  map
+  map,
+  meta: { gaEvent: {} }
 });
 
 export const addSelectedNadeAction = (nade: Nade, dispatch: Dispatch) => {
@@ -158,14 +171,24 @@ export const filterByMapCoordsAction = (
 ): FilterByMapCoordinates => ({
   type: "@@nades/FILTER_BY_MAP_COORDINATES",
   coords,
-  map
+  map,
+  meta: {
+    gaEvent: {
+      label: `(${coords.x}, ${coords.y})`
+    }
+  }
 });
 
 export const toggleMapPositionModalAction = (
   visisble: boolean
 ): ToogleMapPositionModal => ({
   type: "@@nades/TOGGLE_MAP_POSITION_MODAL",
-  visisble
+  visisble,
+  meta: {
+    gaEvent: {
+      label: `${visisble}`
+    }
+  }
 });
 
 export const clearSelectedNadeAction = (): ClearSelectedNadeAction => ({

@@ -11,7 +11,6 @@ import {
   NadeUpdateBody
 } from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
-import { GoogleAnalytics } from "../../utils/GoogleAnalytics";
 import { useIsAdmin } from "../AuthStore/AuthHooks";
 import { userSelector } from "../AuthStore/AuthSelectors";
 import { favoritedNadeIdsSelector } from "../FavoriteStore/FavoriteSelectors";
@@ -71,11 +70,6 @@ export const useNadeFilter = (map: CsgoMap) => {
   }, [coords, sortingMethod, nadeFilter]);
 
   function filterByType(nadeType: NadeType) {
-    GoogleAnalytics.event({
-      category: "Nade filter",
-      action: `Filter by ${nadeType}`,
-      ignore: isAdmin
-    });
     dispatch(filterByTypeAction(nadeType, map));
   }
 
@@ -84,11 +78,6 @@ export const useNadeFilter = (map: CsgoMap) => {
   }
 
   function setSortingMethod(method: SortingMethod) {
-    GoogleAnalytics.event({
-      category: "Nade filter",
-      action: `Sort by ${method}`,
-      ignore: isAdmin
-    });
     dispatch(setSortingMethodAction(method, map));
   }
 
@@ -97,11 +86,6 @@ export const useNadeFilter = (map: CsgoMap) => {
   }
 
   function toggleFilterByFavorites() {
-    GoogleAnalytics.event({
-      category: "Nade filter",
-      action: "By favorites",
-      ignore: isAdmin
-    });
     dispatch(toggleFilterByFavoritesAction(map));
   }
 
