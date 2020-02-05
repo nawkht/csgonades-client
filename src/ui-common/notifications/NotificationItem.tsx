@@ -17,7 +17,9 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
 
   useEffect(() => {
     const viewedTimer = setTimeout(() => {
-      markNotificationAsViewed(notification.id);
+      if (!notification.viewed) {
+        markNotificationAsViewed(notification.id);
+      }
     }, 1000);
     return () => {
       clearTimeout(viewedTimer);
