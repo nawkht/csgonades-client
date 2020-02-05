@@ -1,4 +1,11 @@
-import { FC, SyntheticEvent, useMemo, useRef, useState } from "react";
+import {
+  FC,
+  SyntheticEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { VideoControls } from "./VideoControls";
 import { VideoProgress } from "./VideoProgress";
 
@@ -21,6 +28,20 @@ export const ResponsiveVideo: FC<Props> = ({
   const [progress, setProgress] = useState(0);
   const [quality, setQuality] = useState<Quality>("hd");
   const [isPlaying, setIsPlaying] = useState(true);
+
+  useEffect(() => {
+    const onClick = (e: KeyboardEvent) => {
+      e.preventDefault();
+      if (e.keyCode === 32) {
+        togglePlay();
+      }
+      return;
+    };
+    document.addEventListener("keydown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onClick);
+    };
+  }, []);
 
   const videoUrl = useMemo(() => {
     if (quality === "hd") {
@@ -58,6 +79,14 @@ export const ResponsiveVideo: FC<Props> = ({
     setProgress(progressPercentage);
   }
 
+  function onProgressClick(percentage: number) {
+    if (ref.current) {
+      const totalTime = ref.current.duration;
+      const newTime = (totalTime * percentage) / 100;
+      ref.current.currentTime = newTime;
+    }
+  }
+
   return (
     <>
       <div className="video-container">
@@ -79,7 +108,10 @@ export const ResponsiveVideo: FC<Props> = ({
         </div>
         {controls === "desktop" && (
           <div className="video-controls">
-            <VideoProgress progress={progress} />
+            <VideoProgress
+              progress={progress}
+              onProgressClick={onProgressClick}
+            />
             <VideoControls
               playing={isPlaying}
               quality={quality}
