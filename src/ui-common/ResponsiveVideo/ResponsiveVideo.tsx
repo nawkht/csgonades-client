@@ -13,6 +13,7 @@ type Props = {
   sdUrl: string;
   hdUrL: string;
   hdUrlWebm?: string;
+  poster?: string;
   controls?: "desktop" | "mobile";
 };
 
@@ -23,6 +24,7 @@ export const ResponsiveVideo: FC<Props> = ({
   hdUrL,
   hdUrlWebm,
   controls,
+  poster,
 }) => {
   const ref = useRef<HTMLVideoElement>(null);
   const [progress, setProgress] = useState(0);
@@ -96,6 +98,7 @@ export const ResponsiveVideo: FC<Props> = ({
             key={videoUrl}
             muted
             loop
+            poster={poster}
             className="video-player"
             autoPlay={true}
             controls={controls === "mobile"}

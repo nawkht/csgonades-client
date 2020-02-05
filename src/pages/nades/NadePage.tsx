@@ -93,6 +93,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             hdUrL={nade.gfycat.largeVideoUrl}
             sdUrl={nade.gfycat.smallVideoUrl}
             hdUrlWebm={nade.gfycat.largeVideoWebm}
+            poster={nade.images.thumbnailUrl}
             controls={isMobile ? "mobile" : "desktop"}
           />
         </div>
