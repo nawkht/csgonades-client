@@ -67,6 +67,10 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     setHasSentAnalyticsEvent(true);
   }, [hasSentAnalyticsEvent, progressForEvent]);
 
+  const onLoad = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
+    e.currentTarget.playbackRate = 3;
+  };
+
   return (
     <>
       <div className="player" ref={ref}>
@@ -96,6 +100,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
               poster={nade.images.thumbnailUrl}
               onTimeUpdate={onVideoTimeUpdate}
               onMouseLeave={onVideoMouseLeave}
+              onLoadStart={onLoad}
             >
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
             </video>
