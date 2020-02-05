@@ -25,7 +25,6 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
   const [movement, setMovement] = useState(nade.movement);
   const [tickrate, setTickrate] = useState(nade.tickrate);
   const [technique, setTechnique] = useState(nade.technique);
-  const [mapSite, setMapSite] = useState(nade.mapSite);
   const [type, setType] = useState(nade.type);
 
   function updateNadeMeta() {
@@ -34,7 +33,6 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
       movement,
       tickrate,
       technique,
-      mapSite,
       type
     });
     setIsEditing(false);
@@ -95,10 +93,19 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
             </div>
           )}
 
-          <div className="nade-meta-item">
-            <span className="map-meta-title">Views</span>
-            <NadeViewsValue views={nade.viewCount} />
-          </div>
+          {nade.viewCount > 1 && (
+            <div className="nade-meta-item">
+              <span className="map-meta-title">Views</span>
+              <NadeViewsValue views={nade.viewCount} />
+            </div>
+          )}
+
+          {nade.favoriteCount > 0 && (
+            <div className="nade-meta-item">
+              <span className="map-meta-title">Favorited</span>
+              <NadeViewsValue views={nade.favoriteCount} /> times
+            </div>
+          )}
         </div>
 
         {isEditing && (
