@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { Dimensions } from "../../constants/Constants";
 import { mapString } from "../../models/Nade/CsGoMap";
 import { Nade } from "../../models/Nade/Nade";
 import { nadeTypeString } from "../../models/Nade/NadeType";
-import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
+import {
+  useCanEditNade,
+  useRegisterView,
+} from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useShowFavoriteTip } from "../../store/TipStore/TipHooks";
 import { Layout } from "../../ui-common/Layout";
@@ -24,9 +28,15 @@ type Props = {
 };
 
 const NadePage: React.FC<Props> = ({ nade }) => {
+  const registerView = useRegisterView();
   useShowFavoriteTip();
   const { colors } = useTheme();
   const allowEdit = useCanEditNade(nade);
+
+  useEffect(() => {
+    registerView(nade.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nade.id]);
 
   let layoutTitle = "New nade";
 
