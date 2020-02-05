@@ -5,7 +5,8 @@ import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import {
   useAddFavorite,
   useIsFavorited,
-  useUnfavorite
+  useIsFavoriteInProgress,
+  useUnfavorite,
 } from "../../store/FavoriteStore/FavoriteHooks";
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export const FavoriteButton: FC<Props> = ({ nade }) => {
+  const isFavoriteInProgress = useIsFavoriteInProgress();
   const isSignedIn = useIsSignedIn();
   const favorite = useIsFavorited(nade.id);
   const addFavorite = useAddFavorite();
@@ -68,6 +70,8 @@ export const FavoriteButton: FC<Props> = ({ nade }) => {
         <Button
           fluid
           content={isFavorited ? "Unfavorite" : "Favorite"}
+          disabled={isFavoriteInProgress}
+          loading={isFavoriteInProgress}
           icon="star"
           labelPosition="left"
           color="yellow"

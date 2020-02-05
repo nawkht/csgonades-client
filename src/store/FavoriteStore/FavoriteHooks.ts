@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Favorite } from "../../models/Favorite";
 import { Nade } from "../../models/Nade/Nade";
-import { allFavoritesSelector } from "./FavoriteSelectors";
+import { allFavoritesSelector, favoriteInProgress } from "./FavoriteSelectors";
 import {
   addFavoriteThunkAction,
   addUnFavoriteThunkAction,
@@ -53,4 +53,9 @@ export const useFetchFavoritedNades = () => {
   }, [dispatch]);
 
   return fetchFavoritedNades;
+};
+
+export const useIsFavoriteInProgress = () => {
+  const isInProgress = useSelector(favoriteInProgress);
+  return isInProgress;
 };

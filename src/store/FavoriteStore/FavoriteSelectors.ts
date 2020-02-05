@@ -7,3 +7,6 @@ export const allFavoritesSelector = (state: AppState) => {
 export const favoritedNadeIdsSelector = (state: AppState) => {
   return state.favoriteStore.favorites.map(f => f.nadeId);
 };
+
+export const favoriteInProgress = (state: AppState) =>
+  state.favoriteStore.favoriteInProgress;

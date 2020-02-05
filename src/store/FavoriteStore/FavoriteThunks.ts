@@ -7,6 +7,8 @@ import {
   addAllFavoritesAction,
   addFavoriteAction,
   addFavoritedNadesAction,
+  favoriteInProgressBeginAction,
+  favoriteInProgressEndAction,
   removeFavoriteAction,
   startLoadingFavoritedNadesAction,
   stopLoadingFavoritedNades,
@@ -54,24 +56,26 @@ export const fetchFavoritedNadesThunkAction = (): ReduxThunkAction => {
 
 export const addFavoriteThunkAction = (nade: Nade): ReduxThunkAction => {
   return async (dispatch, getState) => {
+    dispatch(favoriteInProgressBeginAction());
+
     const state = getState();
     const token = state.authStore.token;
 
     if (!token) {
       console.warn("Trying to fetch favorite when not signed in");
-      return;
+      return dispatch(favoriteInProgressEndAction());
     }
 
     const result = await FavoriteApi.favorite(nade.id, token);
 
     if (result.isErr()) {
-      console.warn("Error", result.error);
-      return;
+      return dispatch(favoriteInProgressEndAction());
     }
 
     const favorites = result.value;
 
     dispatch(addFavoriteAction(favorites));
+    dispatch(favoriteInProgressEndAction());
 
     // Allow cache to invalidate server side
     await delay(1);
@@ -84,32 +88,31 @@ export const addUnFavoriteThunkAction = (
   nade: Nade
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
+    dispatch(favoriteInProgressBeginAction());
     const state = getState();
     const token = state.authStore.token;
 
     if (!token) {
-      console.warn("Trying to remove favorite when not signed in");
-      return;
+      return dispatch(favoriteInProgressEndAction());
     }
 
     dispatch(removeFavoriteAction(favoriteId));
 
     const result = await FavoriteApi.unFavorite(favoriteId, token);
     if (result.isErr()) {
-      console.warn("Error", result.error);
-      return;
+      return dispatch(favoriteInProgressEndAction());
     }
 
     const favoritesResult = await FavoriteApi.getUserFavorites(token);
 
     if (favoritesResult.isErr()) {
-      console.warn("Error", favoritesResult.error);
-      return;
+      return dispatch(favoriteInProgressEndAction());
     }
 
     const favorites = favoritesResult.value;
 
     dispatch(addAllFavoritesAction(favorites));
+    dispatch(favoriteInProgressEndAction());
 
     // Allow cache to invalidate server side
     await delay(1);

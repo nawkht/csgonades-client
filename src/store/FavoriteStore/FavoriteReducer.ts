@@ -8,12 +8,14 @@ export type FavoritesState = {
   favorites: Favorite[];
   loadingFavoritedNade: boolean;
   favoritedNades: NadeLight[];
+  favoriteInProgress: boolean;
 };
 
 const initialState: FavoritesState = {
   favorites: [],
   loadingFavoritedNade: false,
   favoritedNades: [],
+  favoriteInProgress: false,
 };
 
 export const FavoriteReducer: Reducer<FavoritesState, FavoriteActions> = (
@@ -55,6 +57,16 @@ export const FavoriteReducer: Reducer<FavoritesState, FavoriteActions> = (
       return {
         ...state,
         favoritedNades: action.nades,
+      };
+    case "@@favorites/FAVORITE_IN_PROGRESS_BEGIN":
+      return {
+        ...state,
+        favoriteInProgress: true,
+      };
+    case "@@favorites/FAVORITE_IN_PROGRESS_END":
+      return {
+        ...state,
+        favoriteInProgress: false,
       };
     default:
       assertNever(action);

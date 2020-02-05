@@ -32,13 +32,31 @@ type StopLoadingFavoritedNades = {
   type: "@@favorites/STOP_LOADING_FAVORITED_NADES";
 };
 
+type FavoriteInProgressBegin = {
+  type: "@@favorites/FAVORITE_IN_PROGRESS_BEGIN";
+};
+
+type FavoriteInProgressEnd = {
+  type: "@@favorites/FAVORITE_IN_PROGRESS_END";
+};
+
 export type FavoriteActions =
   | AddAllFavoritesAction
   | AddFavoriteAction
   | RemoveFavoritesAction
   | AddFavoritedNades
   | StartLoadingFavoritedNades
-  | StopLoadingFavoritedNades;
+  | StopLoadingFavoritedNades
+  | FavoriteInProgressBegin
+  | FavoriteInProgressEnd;
+
+export const favoriteInProgressBeginAction = (): FavoriteInProgressBegin => ({
+  type: "@@favorites/FAVORITE_IN_PROGRESS_BEGIN",
+});
+
+export const favoriteInProgressEndAction = (): FavoriteInProgressEnd => ({
+  type: "@@favorites/FAVORITE_IN_PROGRESS_END",
+});
 
 export const addAllFavoritesAction = (
   favorites: Favorite[]
