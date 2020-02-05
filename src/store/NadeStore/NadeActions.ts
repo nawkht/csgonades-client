@@ -1,5 +1,4 @@
 import { Dispatch } from "redux";
-import { SiteStats } from "../../api/StatsApi";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { MapCoordinates, Nade, NadeLight } from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
@@ -60,11 +59,6 @@ export type ResetNadeFilter = {
   type: "@@nades/RESET_NADE_FILTER";
   map: CsgoMap;
   meta: Meta;
-};
-
-export type AddSiteStats = {
-  type: "@@nades/ADD_SITE_STATS";
-  stats: SiteStats;
 };
 
 export type AddNadeError = {

@@ -11,10 +11,3 @@ export function prettyDate(date: Date | string) {
 export function prettyDateTime(date: Date | string) {
   return moment(date).format("MMM Do YY HH:MM");
 }
-
-export function isLessThanDaysAgo(date: Date | string, days: number) {
-  const daysToHours = days * 24;
-  let hoursAgo = moment().diff(moment(date), "hours", false);
-
-  return hoursAgo < daysToHours;
-}
