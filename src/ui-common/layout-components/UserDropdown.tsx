@@ -3,10 +3,7 @@ import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { Popup } from "semantic-ui-react";
 import { User } from "../../models/User";
-import {
-  useIsAdminOrModerator,
-  useSignOut
-} from "../../store/AuthStore/AuthHooks";
+import { useSignOut } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
@@ -15,7 +12,6 @@ type Props = {
 
 export const UserDropdown: FC<Props> = ({ user }) => {
   const { colors } = useTheme();
-  const isAdminOrMod = useIsAdminOrModerator();
   const signOut = useSignOut();
 
   return (
@@ -79,7 +75,6 @@ export const UserDropdown: FC<Props> = ({ user }) => {
           justify-content: space-around;
           transition: background 0.15s;
           border: none;
-          outline: none;
           cursor: pointer;
         }
 

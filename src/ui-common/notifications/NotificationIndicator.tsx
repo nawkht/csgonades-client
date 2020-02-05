@@ -16,10 +16,13 @@ export const NotificationIndicator: FC = () => {
   return (
     <>
       <div className="notification-wrapper">
-        <div className="notification-indicator" onClick={toggleNotificationTab}>
+        <button
+          className="notification-indicator"
+          onClick={toggleNotificationTab}
+        >
           <Icon name="bell" />
           <span>{notificationCount}</span>
-        </div>
+        </button>
         <NotificationList visble={notificationTabVisible} />
       </div>
       <style jsx>{`
@@ -32,6 +35,7 @@ export const NotificationIndicator: FC = () => {
         }
 
         .notification-indicator {
+          background: transparent;
           border: 1px solid ${colors.GREY};
           padding: 6px;
           border-radius: 4px;
