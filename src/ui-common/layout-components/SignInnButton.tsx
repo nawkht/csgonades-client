@@ -14,10 +14,10 @@ export const SignInnButton: FC = () => {
     <>
       <div className="steam-login-wrapper">
         <a className="steam-login" href={AUTH_URL} rel="nofollow">
-          <div className="steam-text">SIGN IN</div>
           <div className="steam-logo">
             <Icon name="steam" />
           </div>
+          <div className="steam-text">SIGN IN WITH STEAM</div>
         </a>
       </div>
       <style jsx>{`
@@ -34,12 +34,13 @@ export const SignInnButton: FC = () => {
           transition: background 0.15s;
           background: ${colors.primaryBtnBg};
           transition: background 0.2s;
-          padding: 10px 18px;
+          padding: 12px;
         }
 
         .steam-logo {
-          font-size: 1.5em;
+          font-size: 2.2em;
           transition: transform 0.2s;
+          margin-right: 6px;
         }
 
         .steam-text {
@@ -52,9 +53,10 @@ export const SignInnButton: FC = () => {
         .steam-login:hover {
           background: ${colors.primaryBtnHover};
         }
-
-        .steam-login:hover .steam-logo {
-          transform: scale(1.1);
+      `}</style>
+      <style jsx global>{`
+        .steam-logo i {
+          display: inline;
         }
       `}</style>
     </>
