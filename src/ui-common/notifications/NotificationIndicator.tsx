@@ -11,7 +11,8 @@ export const NotificationIndicator: FC = () => {
 
   useEffect(() => {
     fetchNotifications();
-  }, [fetchNotifications]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function toggleNotificationTab() {
     setNotificationTabVisible(!notificationTabVisible);

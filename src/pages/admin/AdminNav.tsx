@@ -10,7 +10,8 @@ export const AdminNav: FC = () => {
 
   useEffect(() => {
     fetchSiteStats();
-  }, [fetchSiteStats]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleItemClick = (e: any, { name }: MenuItemProps) => {
     const newRoute = name as AdminRoutes;

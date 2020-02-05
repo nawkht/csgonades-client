@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FC, MouseEvent, useMemo, useRef, useState } from "react";
 import { Button } from "semantic-ui-react";
 import { LayerPosition } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
@@ -17,25 +17,12 @@ export const MapPositionModal: FC<Props> = ({
   onDismiss,
   map,
   mapEndCoord,
-  onSave
+  onSave,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [elementOffset, setElementOffset] = useState({ left: 0, top: 0 });
   const [mapWidth, setMapWidth] = useState(0);
   const [point, setPoint] = useState<MapCoordinates | undefined>(mapEndCoord);
-
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      if (ref.current) {
-        setElementOffset({
-          top: ref.current.offsetTop,
-          left: ref.current.offsetLeft
-        });
-        setMapWidth(ref.current.offsetWidth);
-      }
-    }, 500);
-    return () => clearTimeout(delay);
-  }, [visible]);
 
   const coords = useMemo(() => {
     const sizeRatio = 1024 / mapWidth;
@@ -46,7 +33,7 @@ export const MapPositionModal: FC<Props> = ({
 
     return {
       x: point.x / sizeRatio,
-      y: point.y / sizeRatio
+      y: point.y / sizeRatio,
     };
   }, [point, mapWidth]);
 
@@ -56,8 +43,8 @@ export const MapPositionModal: FC<Props> = ({
 
   function onMapClick(event: MouseEvent<HTMLImageElement>) {
     const { left, top } = elementOffset;
-    var x = event.clientX - left;
-    var y = event.clientY - top;
+    const x = event.clientX - left;
+    const y = event.clientY - top;
 
     const sizeRatio = 1024 / mapWidth;
 
@@ -70,6 +57,16 @@ export const MapPositionModal: FC<Props> = ({
   function onPosSave() {
     if (point) {
       onSave(point);
+    }
+  }
+
+  function onImageLoad() {
+    if (ref.current) {
+      setElementOffset({
+        top: ref.current.offsetTop,
+        left: ref.current.offsetLeft,
+      });
+      setMapWidth(ref.current.offsetWidth);
     }
   }
 
@@ -91,6 +88,7 @@ export const MapPositionModal: FC<Props> = ({
               src={`/mapsoverlays/${map}.jpg`}
               alt="CSGO Nades logo"
               onClick={onMapClick}
+              onLoad={onImageLoad}
             />
           </div>
 

@@ -10,15 +10,32 @@ export const VideoProgress: FC<Props> = ({ progress }) => {
   return (
     <>
       <div className="video-progress">
-        <div className="progress" style={{ width: `${progress}%` }}></div>
+        <progress max="100" value={progress} />
       </div>
       <style jsx>{`
-        .progress {
+        progress {
+          width: 100%;
           height: 5px;
+          -webkit-appearance: none;
+          appearance: none;
+          display: block;
+          background: transparent;
+        }
+
+        progress[value] {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          border: none;
+        }
+
+        progress[value]::-webkit-progress-bar {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        progress[value]::-webkit-progress-value {
           background: ${colors.PRIMARY};
-          border-top-right-radius: 2px;
-          border-bottom-right-radius: 2px;
-          transition: width 0.5s;
+          border-radius: 2px;
         }
       `}</style>
     </>

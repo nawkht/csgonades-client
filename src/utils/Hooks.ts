@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export function useHoverEvent() {
   const [isHovering, setIsHover] = useState(false);
@@ -13,13 +13,13 @@ export function useHoverEvent() {
     const onMouseEnter = () => setIsHover(true);
     const onMouseLeave = () => setIsHover(false);
 
-    node.addEventListener('mouseenter', onMouseEnter);
-    node.addEventListener('mouseleave', onMouseLeave);
+    node.addEventListener("mouseenter", onMouseEnter);
+    node.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       if (node) {
-        node.removeEventListener('mouseenter', onMouseEnter);
-        node.removeEventListener('mouseleave', onMouseLeave);
+        node.removeEventListener("mouseenter", onMouseEnter);
+        node.removeEventListener("mouseleave", onMouseLeave);
       }
     };
   }, []);

@@ -7,7 +7,8 @@ export const AdminPendingNades: FC = () => {
 
   useEffect(() => {
     fetchPendingNades();
-  }, [fetchPendingNades]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <NadeListGrid nades={pendingNades} emptyMessage="No pending nades!" />;
 };

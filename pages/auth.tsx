@@ -1,13 +1,15 @@
 import { NextPage } from "next";
-import React from "react";
+import { useEffect } from "react";
 import { Dimmer, Loader } from "semantic-ui-react";
 import { usePreloadUser } from "../src/store/AuthStore/AuthHooks";
 
 const Auth: NextPage = () => {
   const preloadUser = usePreloadUser();
-  React.useEffect(() => {
+
+  useEffect(() => {
     preloadUser();
-  }, [preloadUser]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Dimmer active>

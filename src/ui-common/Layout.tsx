@@ -39,7 +39,8 @@ export const Layout: React.FC<Props> = ({
 
   useEffect(() => {
     closeNav();
-  }, [closeNav]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const delayedAnalytics = setTimeout(() => {

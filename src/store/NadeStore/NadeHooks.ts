@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NadeApi } from "../../api/NadeApi";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
   MapCoordinates,
@@ -282,12 +283,6 @@ export const useNadesForMap = (map: CsgoMap) => {
   };
 };
 
-type Coord = {
-  key: string;
-  x: number;
-  y: number;
-};
-
 export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
   const nades = useSelector(nadesForMapSelector(map));
   const nadeFilter = useSelector(filterForMapSelector(map));
@@ -358,4 +353,20 @@ export const useSimilarNades = (nade: Nade) => {
   });
 
   return similarNades;
+};
+
+export const useRegisterView = () => {
+  const user = useSelector(userSelector);
+
+  const registerNadeView = useCallback(
+    (nadeId: string) => {
+      if (user?.role === "administrator") {
+        return;
+      }
+      NadeApi.registerView(nadeId);
+    },
+    [user]
+  );
+
+  return registerNadeView;
 };

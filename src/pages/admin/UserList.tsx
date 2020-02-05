@@ -17,13 +17,12 @@ export const UserList: FC = () => {
   } = useSiteStats();
   const { users, fetchUsers } = useAdminPage();
 
-  const numPages = useMemo(() => {
-    return Math.ceil(numUsers / USER_LIMIT);
-  }, [numUsers]);
+  const numPages = useMemo(() => Math.ceil(numUsers / USER_LIMIT), [numUsers]);
 
   useEffect(() => {
     fetchUsers(page, USER_LIMIT, sortByActivity);
-  }, [page, sortByActivity, fetchUsers]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, sortByActivity]);
 
   return (
     <>

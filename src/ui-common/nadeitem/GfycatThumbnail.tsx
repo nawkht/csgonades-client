@@ -8,10 +8,9 @@ import {
 } from "react";
 import { FaVideo } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { NadeApi } from "../../api/NadeApi";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useAnalyticsEvent } from "../../store/Analytics/AnalyticsActions";
-import { useHoverEvent } from "../../utils/Hooks";
+import { useRegisterView } from "../../store/NadeStore/NadeHooks";
 import { SeekBar } from "../SeekBar";
 
 type Props = {
@@ -20,7 +19,8 @@ type Props = {
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   const analyticsEvent = useAnalyticsEvent();
-  const { ref, isHovering } = useHoverEvent();
+  const registerNadeView = useRegisterView();
+  const [hovering, setHovering] = useState(false);
   const [progressForEvent, setProgressForEvent] = useState(0);
   const [progress, setProgress] = useState(0);
   const [hasSentViewedEvent, setHasSentViewedEvent] = useState(false);
@@ -28,18 +28,18 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
 
   useEffect(() => {
     if (!hasSentViewedEvent && progress > 30) {
-      NadeApi.registerView(nade.id);
+      registerNadeView(nade.id);
       setHasSentViewedEvent(true);
     }
   }, [progress, hasSentViewedEvent, nade]);
 
   const videoIconClassName = useMemo(() => {
     const classes = ["video-icon-wrapper"];
-    if (isHovering) {
+    if (hovering) {
       classes.push("hidden");
     }
     return classes.join(" ");
-  }, [isHovering]);
+  }, [hovering]);
 
   function onVideoTimeUpdate({
     currentTarget,
@@ -71,9 +71,21 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     e.currentTarget.playbackRate = 3;
   };
 
+  function onMouseEnter() {
+    setHovering(true);
+  }
+
+  function onMouseLeave() {
+    setHovering(false);
+  }
+
   return (
     <>
-      <div className="player" ref={ref}>
+      <div
+        className="player"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <div className="front">
           <LazyLoadImage
             effect="blur"
@@ -89,7 +101,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           </div>
         </div>
 
-        {isHovering && (
+        {hovering && (
           <div className="back">
             <video
               autoPlay

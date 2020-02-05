@@ -79,16 +79,12 @@ const NadePage: React.FC<Props> = ({ nade }) => {
 
         <div className="n-video">
           <ResponsiveVideo
+            key={nade.id}
             hdUrL={nade.gfycat.largeVideoUrl}
             sdUrl={nade.gfycat.smallVideoUrl}
             hdUrlWebm={nade.gfycat.largeVideoWebm}
             controls={isMobile ? "mobile" : "desktop"}
           />
-          {/*<GfycatPlayerContrainer
-            key={`gfy-${nade.id}`}
-            nade={nade}
-            allowEdit={allowEdit}
-          /> */}
         </div>
         <div className="n-description">
           <NadeDescription

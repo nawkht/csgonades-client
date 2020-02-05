@@ -22,7 +22,8 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
     return () => {
       clearTimeout(viewedTimer);
     };
-  }, [notification.id, markNotificationAsViewed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notification.id]);
 
   if (notification.type === "contact-msg") {
     return (

@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import { Dimensions } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import {
@@ -17,22 +17,12 @@ type Props = {
 export const MapView: FC<Props> = ({ map }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visisble, setVisisble] = useState(false);
-  const [mapLoaded, setMapLoade] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadeCoordinatesForMap(map);
   const { colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
   const { didOpenMapView } = useMapViewTip();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (ref.current) {
-        setMapLoade(true);
-        setMapWidth(ref.current.offsetWidth);
-      }
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const wrapperClassName = useMemo(() => {
     const classes = ["mapview-wrapper"];
@@ -44,7 +34,7 @@ export const MapView: FC<Props> = ({ map }) => {
 
   function onImageLoad() {
     if (ref.current) {
-      setMapLoade(true);
+      setMapLoaded(true);
       setMapWidth(ref.current.offsetWidth);
     }
   }
