@@ -26,7 +26,6 @@ export const useAdminPage = () => {
   );
 
   const fetchPendingNades = useCallback(() => {
-    console.log("Fetching pending nades");
     dispatch(fetchPendingNadeThunk());
   }, [dispatch]);
 

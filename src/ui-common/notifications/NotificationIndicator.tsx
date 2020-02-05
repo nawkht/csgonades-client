@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -7,12 +7,7 @@ import { NotificationList } from "./NotificationList";
 export const NotificationIndicator: FC = () => {
   const [notificationTabVisible, setNotificationTabVisible] = useState(false);
   const { colors } = useTheme();
-  const { notificationCount, fetchNotifications } = useNotifications();
-
-  useEffect(() => {
-    fetchNotifications();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { notificationCount } = useNotifications();
 
   function toggleNotificationTab() {
     setNotificationTabVisible(!notificationTabVisible);

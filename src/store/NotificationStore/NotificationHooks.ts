@@ -2,10 +2,7 @@ import moment from "moment";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { notificationsSelector } from "./NotificationSelectors";
-import {
-  fetchNotificationsThunk,
-  markNotifcationAsViewedThunk,
-} from "./NotificationThunks";
+import { markNotifcationAsViewedThunk } from "./NotificationThunks";
 
 export const useNotifications = () => {
   const dispatch = useDispatch();
@@ -28,14 +25,9 @@ export const useNotifications = () => {
     [dispatch]
   );
 
-  const fetchNotifications = useCallback(() => {
-    dispatch(fetchNotificationsThunk());
-  }, [dispatch]);
-
   return {
     notifications,
     notificationCount,
     markNotificationAsViewed,
-    fetchNotifications,
   };
 };

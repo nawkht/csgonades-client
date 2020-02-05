@@ -1,11 +1,13 @@
 import moment from "moment";
 import Router from "next/router";
 import { FavoriteApi } from "../../api/FavoriteApi";
+import { NotificationApi } from "../../api/NotificationApi";
 import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
 import { User } from "../../models/User";
 import { redirectUserPage } from "../../utils/Common";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
+import { addUnreadNotificationsAction } from "../NotificationStore/NotificationActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { setToken, setUser, signOutUser } from "./AuthActions";
 
@@ -34,22 +36,27 @@ export const serverSideUserInitThunkAction = (
 
     dispatch(setToken(authToken));
 
-    // Preload state
-    const [userResult, favoriteResult] = await Promise.all([
-      UserApi.fetchSelf(authToken),
-      FavoriteApi.getUserFavorites(authToken),
-    ]);
+    const userResult = await UserApi.fetchSelf(authToken);
 
-    if (userResult.isErr() || favoriteResult.isErr()) {
+    if (userResult.isErr()) {
       return dispatch(signOutUser());
     }
 
-    const user = userResult.value;
-    const favorites = favoriteResult.value;
+    setUser(dispatch, userResult.value);
 
-    setUser(dispatch, user);
-    dispatch(addAllFavoritesAction(favorites));
-    return;
+    // Preload user state
+    const [favoriteResult, notificationsResult] = await Promise.all([
+      FavoriteApi.getUserFavorites(authToken),
+      NotificationApi.getNotifications(authToken),
+    ]);
+
+    if (notificationsResult.isOk()) {
+      dispatch(addUnreadNotificationsAction(notificationsResult.value));
+    }
+
+    if (favoriteResult.isOk()) {
+      dispatch(addAllFavoritesAction(favoriteResult.value));
+    }
   };
 };
 
