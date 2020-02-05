@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Favorite } from "../../models/Favorite";
 import { Nade } from "../../models/Nade/Nade";
@@ -5,33 +6,51 @@ import { allFavoritesSelector } from "./FavoriteSelectors";
 import {
   addFavoriteThunkAction,
   addUnFavoriteThunkAction,
-  fetchFavoritedNadesThunkAction
+  fetchFavoritedNadesThunkAction,
 } from "./FavoriteThunks";
 
 export const useAddFavorite = () => {
   const dispatch = useDispatch();
-  return (nade: Nade) => {
-    dispatch(addFavoriteThunkAction(nade));
-  };
+
+  const addFavorite = useCallback(
+    (nade: Nade) => {
+      dispatch(addFavoriteThunkAction(nade));
+    },
+    [dispatch]
+  );
+
+  return addFavorite;
 };
 
 export const useUnfavorite = () => {
   const dispatch = useDispatch();
-  return (favoriteId: string, nade: Nade) => {
-    dispatch(addUnFavoriteThunkAction(favoriteId, nade));
-  };
+
+  const unFavorite = useCallback(
+    (favoriteId: string, nade: Nade) => {
+      dispatch(addUnFavoriteThunkAction(favoriteId, nade));
+    },
+    [dispatch]
+  );
+
+  return unFavorite;
 };
 
-export const useIsFavorited = (nadeId: string): Favorite | null => {
+export const useIsFavorited = (nadeId: string): Favorite | undefined => {
   const favories = useSelector(allFavoritesSelector);
-  const result = favories.find(favorite => favorite.nadeId === nadeId);
-  if (result) {
-    return result;
-  }
-  return null;
+
+  const result = useMemo(() => {
+    return favories.find(favorite => favorite.nadeId === nadeId);
+  }, [favories, nadeId]);
+
+  return result;
 };
 
 export const useFetchFavoritedNades = () => {
   const dispatch = useDispatch();
-  return () => dispatch(fetchFavoritedNadesThunkAction());
+
+  const fetchFavoritedNades = useCallback(() => {
+    dispatch(fetchFavoritedNadesThunkAction());
+  }, [dispatch]);
+
+  return fetchFavoritedNades;
 };

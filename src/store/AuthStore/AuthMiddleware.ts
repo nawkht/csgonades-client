@@ -6,7 +6,7 @@ import { setToken, signOutUser } from "./AuthActions";
 
 export const tokenRefreshMiddleware: Middleware<any, AppState> = ({
   dispatch,
-  getState
+  getState,
 }) => next => action => {
   if (typeof action === "function") {
     const token = getState().authStore.token;

@@ -23,7 +23,7 @@ export const Layout: React.FC<Props> = ({
   description,
   children,
   canonical,
-  metaThumbNail
+  metaThumbNail,
 }) => {
   const { setCurrentRoute } = useNavigationState();
   const { closeNav, isNavOpen } = useNavigation();
@@ -39,10 +39,10 @@ export const Layout: React.FC<Props> = ({
 
   useEffect(() => {
     closeNav();
-  }, []);
+  }, [closeNav]);
 
   useEffect(() => {
-    let delayedAnalytics = setTimeout(() => {
+    const delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
       setCurrentRoute(location, title);
     }, 500);
@@ -51,7 +51,7 @@ export const Layout: React.FC<Props> = ({
         clearTimeout(delayedAnalytics);
       }
     };
-  }, []);
+  }, [setCurrentRoute, title]);
 
   const pageDescription = description
     ? removeMd(description)

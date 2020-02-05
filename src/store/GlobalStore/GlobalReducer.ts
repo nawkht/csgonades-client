@@ -12,9 +12,9 @@ const initialState: GlobalState = {
   stats: {
     numNades: 0,
     numUsers: 0,
-    numPending: 0
+    numPending: 0,
   },
-  isNavOpen: false
+  isNavOpen: false,
 };
 
 export const GlobalReducer: Reducer<GlobalState, GlobalActions> = (
@@ -25,17 +25,17 @@ export const GlobalReducer: Reducer<GlobalState, GlobalActions> = (
     case "@@global/ADD_SITE_STATS":
       return {
         ...state,
-        stats: action.stats
+        stats: action.stats,
       };
     case "@@global/TOGGLE_NAVIGATION":
       return {
         ...state,
-        isNavOpen: !state.isNavOpen
+        isNavOpen: !state.isNavOpen,
       };
     case "@@global/CLOSE_NAVIGATION":
       return {
         ...state,
-        isNavOpen: false
+        isNavOpen: false,
       };
     default:
       assertNever(action);

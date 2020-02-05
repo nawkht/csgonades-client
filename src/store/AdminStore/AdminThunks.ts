@@ -7,7 +7,7 @@ import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
 import {
   addPendingNadesAction,
   addReportsAction,
-  addUsersAction
+  addUsersAction,
 } from "./AdminActions";
 
 export const fetchPendingNadeThunk = (): ReduxThunkAction => {
@@ -17,7 +17,7 @@ export const fetchPendingNadeThunk = (): ReduxThunkAction => {
       return dispatch(
         addNotificationActionThunk({
           message: "Can't fetch user, seems like your not signed in.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -46,7 +46,7 @@ export const fetchUsersThunk = (
       return dispatch(
         addNotificationActionThunk({
           message: "Can't fetch users, seems like your not signed in.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -74,7 +74,7 @@ export const fetchReportsThunk = (): ReduxThunkAction => {
       return dispatch(
         addNotificationActionThunk({
           message: "Can't fetch reports, seems like your not signed in.",
-          severity: "error"
+          severity: "error",
         })
       );
     }

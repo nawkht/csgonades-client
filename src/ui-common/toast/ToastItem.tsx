@@ -20,7 +20,7 @@ export const ToastItem: FC<Props> = ({ notification }) => {
     return () => {
       clearTimeout(fadeOutTimer);
     };
-  }, []);
+  }, [notification]);
 
   function colorFromSeverity(severity: ToastSeverity) {
     switch (severity) {

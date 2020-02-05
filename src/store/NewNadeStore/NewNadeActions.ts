@@ -6,7 +6,7 @@ type NewNadeStartLoading = {
 };
 
 export const newNadeStartLoadingAction = (): NewNadeStartLoading => ({
-  type: "@@newnade/START_LOADING"
+  type: "@@newnade/START_LOADING",
 });
 
 type NewNadeError = {
@@ -16,7 +16,7 @@ type NewNadeError = {
 
 export const newNadeErrorAction = (error: string): NewNadeError => ({
   type: "@@newnade/ERROR",
-  error
+  error,
 });
 
 type NewNadeClearAction = {
@@ -24,7 +24,7 @@ type NewNadeClearAction = {
 };
 
 export const nadeNadeClearAction = (): NewNadeClearAction => ({
-  type: "@@newnade/CLEAR_ALL"
+  type: "@@newnade/CLEAR_ALL",
 });
 
 type NewNadeAddGfycat = {
@@ -36,7 +36,7 @@ export const newNadeAddGfyDataAction = (
   gfyData: GfycatData
 ): NewNadeAddGfycat => ({
   type: "@@newnade/ADD_GFYCAT",
-  gfyData
+  gfyData,
 });
 
 type NewNadeSetStep = {
@@ -46,7 +46,7 @@ type NewNadeSetStep = {
 
 export const newNadeSetStep = (step: NewNadeStep): NewNadeSetStep => ({
   type: "@@nednade/SET_STEP",
-  step
+  step,
 });
 
 export type NewNadeActions =

@@ -94,19 +94,19 @@ export const setSortingMethodAction = (
 ): SetSortingNameAction => ({
   type: "@@nades/SET_SORTING_METHOD",
   sortingMethod,
-  map
+  map,
 });
 
 export const addNadeError = (error: AppError): AddNadeError => ({
   type: "@@nades/ADD_NADE_ERROR",
-  error
+  error,
 });
 
 export const addRecentNadesAction = (
   nades: NadeLight[]
 ): AddRcentNadesAction => ({
   type: "@@nades/ADD_RECENT",
-  nades
+  nades,
 });
 
 export const addNadesForMapAction = (
@@ -115,7 +115,7 @@ export const addNadesForMapAction = (
 ): AddNadesForMapAction => ({
   type: "@@nades/ADD_FOR_MAP",
   map,
-  nades
+  nades,
 });
 
 export const filterByTypeAction = (
@@ -127,9 +127,9 @@ export const filterByTypeAction = (
   map,
   meta: {
     gaEvent: {
-      label: nadeType
-    }
-  }
+      label: nadeType,
+    },
+  },
 });
 
 export const toggleFilterByFavoritesAction = (
@@ -137,25 +137,25 @@ export const toggleFilterByFavoritesAction = (
 ): FilterByFavorites => ({
   type: "@@@nades/FILTER_BY_FAVORITES",
   map,
-  meta: { gaEvent: {} }
+  meta: { gaEvent: {} },
 });
 
 export const resetNadeFilterAction = (map: CsgoMap): ResetNadeFilter => ({
   type: "@@nades/RESET_NADE_FILTER",
   map,
-  meta: { gaEvent: {} }
+  meta: { gaEvent: {} },
 });
 
 export const addSelectedNadeAction = (nade: Nade, dispatch: Dispatch) => {
   dispatch({
     type: "@@nades/add_selected",
-    nade
+    nade,
   });
 };
 
 export const startLoadingNadeAction = (dispatch: Dispatch) => {
   dispatch({
-    type: "@@nades/START_LOADING"
+    type: "@@nades/START_LOADING",
   });
 };
 
@@ -168,9 +168,9 @@ export const filterByMapCoordsAction = (
   map,
   meta: {
     gaEvent: {
-      label: `(${coords.x}, ${coords.y})`
-    }
-  }
+      label: `(${coords.x}, ${coords.y})`,
+    },
+  },
 });
 
 export const toggleMapPositionModalAction = (
@@ -180,11 +180,11 @@ export const toggleMapPositionModalAction = (
   visisble,
   meta: {
     gaEvent: {
-      label: `${visisble}`
-    }
-  }
+      label: `${visisble}`,
+    },
+  },
 });
 
 export const clearSelectedNadeAction = (): ClearSelectedNadeAction => ({
-  type: "@@nades/CLEAR_SELECTED"
+  type: "@@nades/CLEAR_SELECTED",
 });

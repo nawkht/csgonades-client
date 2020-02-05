@@ -65,7 +65,7 @@ export const themes: Themes = {
     filterResetBg: "#6e0000",
     filterResetDisabledBg: "#544242",
     FAV_YELLOW: "#bd9700",
-    HIGHLIGHT_BG: "#3c4759"
+    HIGHLIGHT_BG: "#3c4759",
   },
   light: {
     DP00: "#f3f3f3",
@@ -96,8 +96,8 @@ export const themes: Themes = {
     filterResetBg: "#6e0000",
     filterResetDisabledBg: "#ccabab",
     FAV_YELLOW: "#fac800",
-    HIGHLIGHT_BG: "#e8f1ff"
-  }
+    HIGHLIGHT_BG: "#e8f1ff",
+  },
 };
 
 export type ThemeKeys = keyof typeof themes;

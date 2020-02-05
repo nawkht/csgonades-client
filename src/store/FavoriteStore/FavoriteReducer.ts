@@ -13,7 +13,7 @@ export type FavoritesState = {
 const initialState: FavoritesState = {
   favorites: [],
   loadingFavoritedNade: false,
-  favoritedNades: []
+  favoritedNades: [],
 };
 
 export const FavoriteReducer: Reducer<FavoritesState, FavoriteActions> = (
@@ -24,12 +24,12 @@ export const FavoriteReducer: Reducer<FavoritesState, FavoriteActions> = (
     case "@@favorites/add":
       return {
         ...state,
-        favorites: [...state.favorites, action.favorite]
+        favorites: [...state.favorites, action.favorite],
       };
     case "@@favorites/add_all":
       return {
         ...state,
-        favorites: action.favorites
+        favorites: action.favorites,
       };
     case "@@favorites/remove":
       return {
@@ -39,22 +39,22 @@ export const FavoriteReducer: Reducer<FavoritesState, FavoriteActions> = (
         ),
         favoritedNades: state.favoritedNades.filter(
           fav => fav.id !== action.favoriteId
-        )
+        ),
       };
     case "@@favorites/START_LOADING_FAVORITED_NADES":
       return {
         ...state,
-        loadingFavoritedNade: true
+        loadingFavoritedNade: true,
       };
     case "@@favorites/STOP_LOADING_FAVORITED_NADES":
       return {
         ...state,
-        loadingFavoritedNade: false
+        loadingFavoritedNade: false,
       };
     case "@@favorites/ADD_FAVORITED_NADES":
       return {
         ...state,
-        favoritedNades: action.nades
+        favoritedNades: action.nades,
       };
     default:
       assertNever(action);

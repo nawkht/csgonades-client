@@ -44,13 +44,13 @@ export const addAllFavoritesAction = (
   favorites: Favorite[]
 ): AddAllFavoritesAction => ({
   type: "@@favorites/add_all",
-  favorites
+  favorites,
 });
 
 export const addFavoriteAction = (favorite: Favorite): AddFavoriteAction => ({
   type: "@@favorites/add",
   favorite,
-  meta: { gaEvent: {} }
+  meta: { gaEvent: {} },
 });
 
 export const removeFavoriteAction = (
@@ -58,20 +58,20 @@ export const removeFavoriteAction = (
 ): RemoveFavoritesAction => ({
   type: "@@favorites/remove",
   favoriteId,
-  meta: { gaEvent: {} }
+  meta: { gaEvent: {} },
 });
 
 export const addFavoritedNadesAction = (
   nades: NadeLight[]
 ): AddFavoritedNades => ({
   type: "@@favorites/ADD_FAVORITED_NADES",
-  nades
+  nades,
 });
 
 export const startLoadingFavoritedNadesAction = (): StartLoadingFavoritedNades => ({
-  type: "@@favorites/START_LOADING_FAVORITED_NADES"
+  type: "@@favorites/START_LOADING_FAVORITED_NADES",
 });
 
 export const stopLoadingFavoritedNades = (): StopLoadingFavoritedNades => ({
-  type: "@@favorites/STOP_LOADING_FAVORITED_NADES"
+  type: "@@favorites/STOP_LOADING_FAVORITED_NADES",
 });

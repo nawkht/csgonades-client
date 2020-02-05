@@ -39,15 +39,15 @@ export const addNotificationAction = (
     ...notification,
     id,
     durationSeconds: notification.durationSeconds || 8,
-    title: notification.title || capitalize(notification.severity)
+    title: notification.title || capitalize(notification.severity),
   };
   return {
     type: "@@notification/ADD",
-    notification: noti
+    notification: noti,
   };
 };
 
 export const removeNotificationAction = (id: string): RemoveToastAction => ({
   type: "@@notification/REMOVE",
-  id
+  id,
 });

@@ -14,7 +14,7 @@ export const useMapViewTip = () => {
 
   return {
     hasOpenedMapView,
-    didOpenMapView
+    didOpenMapView,
   };
 };
 
@@ -30,5 +30,5 @@ export const useShowFavoriteTip = () => {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [seenFavoriteTip]);
+  }, [dispatch, seenFavoriteTip]);
 };

@@ -5,7 +5,7 @@ import { CsgoMap } from "../../models/Nade/CsGoMap";
 import {
   NadeBody,
   NadeStatusDTO,
-  NadeUpdateBody
+  NadeUpdateBody,
 } from "../../models/Nade/Nade";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
@@ -15,11 +15,11 @@ import {
   addNadesForMapAction,
   addRecentNadesAction,
   addSelectedNadeAction,
-  startLoadingNadeAction
+  startLoadingNadeAction,
 } from "./NadeActions";
 import { nadesForMapTimeSinceFetchSelector } from "./NadeSelectors";
 
-export const fetchNewestNadesAction = (limit?: number): ReduxThunkAction => {
+export const fetchNewestNadesAction = (): ReduxThunkAction => {
   return async dispatch => {
     const nadesResult = await NadeApi.getAll();
 
@@ -105,7 +105,7 @@ export const createNadeAction = (nadeBody: NadeBody): ReduxThunkAction => {
       return dispatch(
         addNotificationActionThunk({
           message: result.error.message,
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -130,7 +130,7 @@ export const updateNadeAction = (
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to update nade.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -140,7 +140,7 @@ export const updateNadeAction = (
     dispatch(
       addNotificationActionThunk({
         message: "Updated nade details!",
-        severity: "success"
+        severity: "success",
       })
     );
   };
@@ -156,7 +156,7 @@ export const updateNadeGfycatAction = (
       return dispatch(
         addNotificationActionThunk({
           message: "Can't update, seems like your not signed in.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -164,7 +164,7 @@ export const updateNadeGfycatAction = (
     const result = await NadeApi.update(
       nadeId,
       {
-        gfycatIdOrUrl: newGfyId
+        gfycatIdOrUrl: newGfyId,
       },
       authToken
     );
@@ -173,7 +173,7 @@ export const updateNadeGfycatAction = (
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to update nade.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -183,7 +183,7 @@ export const updateNadeGfycatAction = (
     dispatch(
       addNotificationActionThunk({
         message: "Updated nade details!",
-        severity: "success"
+        severity: "success",
       })
     );
   };
@@ -196,7 +196,7 @@ export const deleteNadeAction = (nadeId: string): ReduxThunkAction => {
       return dispatch(
         addNotificationActionThunk({
           message: "Can't update, seems like your not signed in.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -207,7 +207,7 @@ export const deleteNadeAction = (nadeId: string): ReduxThunkAction => {
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to delete nade.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -226,7 +226,7 @@ export const updateNadeUserAction = (
       return dispatch(
         addNotificationActionThunk({
           message: "Can't update, seems like your not signed in.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -237,7 +237,7 @@ export const updateNadeUserAction = (
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to update user.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -256,7 +256,7 @@ export const updateNadeStatusAction = (
       return dispatch(
         addNotificationActionThunk({
           message: "Can't update, seems like your not signed in.",
-          severity: "error"
+          severity: "error",
         })
       );
     }
@@ -267,7 +267,7 @@ export const updateNadeStatusAction = (
       return dispatch(
         addNotificationActionThunk({
           message: "Failed to update nade.",
-          severity: "error"
+          severity: "error",
         })
       );
     }

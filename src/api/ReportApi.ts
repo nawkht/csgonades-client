@@ -12,7 +12,7 @@ export class ReportApi {
   static async getAll(token: string): AppResult<Report[]> {
     try {
       const res = await axios.get<Report[]>(`${BASE_URL}/reports`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       const reports = res.data;
 
@@ -35,7 +35,7 @@ export class ReportApi {
   static async delete(id: string, token: string): AppResult<boolean> {
     try {
       await axios.delete(`${BASE_URL}/reports/${id}`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       return ok(true);
     } catch (error) {

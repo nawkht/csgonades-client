@@ -1,16 +1,9 @@
-import {
-  FC,
-  SyntheticEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { Dimensions } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import {
   useNadeCoordinatesForMap,
-  useNadeFilter
+  useNadeFilter,
 } from "../../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { useMapViewTip } from "../../../store/TipStore/TipHooks";
@@ -29,10 +22,10 @@ export const MapView: FC<Props> = ({ map }) => {
   const nades = useNadeCoordinatesForMap(map);
   const { colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter(map);
-  const { hasOpenedMapView, didOpenMapView } = useMapViewTip();
+  const { didOpenMapView } = useMapViewTip();
 
   useEffect(() => {
-    let timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       if (ref.current) {
         setMapLoade(true);
         setMapWidth(ref.current.offsetWidth);
@@ -47,9 +40,9 @@ export const MapView: FC<Props> = ({ map }) => {
       classes.push("visisble");
     }
     return classes.join(" ");
-  }, [visisble, hasOpenedMapView]);
+  }, [visisble]);
 
-  function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
+  function onImageLoad() {
     if (ref.current) {
       setMapLoade(true);
       setMapWidth(ref.current.offsetWidth);

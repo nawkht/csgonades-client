@@ -7,7 +7,7 @@ export const AdminPendingNades: FC = () => {
 
   useEffect(() => {
     fetchPendingNades();
-  }, []);
+  }, [fetchPendingNades]);
 
   return <NadeListGrid nades={pendingNades} emptyMessage="No pending nades!" />;
 };

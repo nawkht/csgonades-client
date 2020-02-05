@@ -7,7 +7,7 @@ import {
   NadeBody,
   NadeLight,
   NadeStatusDTO,
-  NadeUpdateBody
+  NadeUpdateBody,
 } from "../models/Nade/Nade";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
@@ -31,7 +31,7 @@ export class NadeApi {
   static async getPending(token: string): AppResult<NadeLight[]> {
     try {
       const res = await axios.get<NadeLight[]>(`${BASE_URL}/nades/pending`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       const nades = res.data;
 
@@ -55,7 +55,7 @@ export class NadeApi {
   static async byId(id: string): AppResult<Nade> {
     try {
       const res = await axios.get(`${BASE_URL}/nades/${id}`, {
-        withCredentials: true
+        withCredentials: true,
       });
 
       const nades = res.data as Nade;
@@ -78,7 +78,7 @@ export class NadeApi {
   static async byNadeIdList(nadeIds: string[]): AppResult<NadeLight[]> {
     try {
       const res = await axios.post(`${BASE_URL}/nades/list`, {
-        nadeIds
+        nadeIds,
       });
       const nades = res.data as NadeLight[];
       return ok(nades);
@@ -90,7 +90,7 @@ export class NadeApi {
   static async save(nadeBody: NadeBody, token: string): AppResult<Nade> {
     try {
       const res = await axios.post(`${BASE_URL}/nades`, nadeBody, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       const nade = res.data as Nade;
       return ok(nade);
@@ -106,7 +106,7 @@ export class NadeApi {
   ): AppResult<Nade> {
     try {
       const res = await axios.put(`${BASE_URL}/nades/${nadeId}`, updateFields, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
 
       const updatedNade = res.data as Nade;
@@ -120,7 +120,7 @@ export class NadeApi {
   static async delete(nadeId: string, token: string): AppResult<boolean> {
     try {
       await axios.delete(`${BASE_URL}/nades/${nadeId}`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
 
       return ok(true);
@@ -136,7 +136,7 @@ export class NadeApi {
       `${BASE_URL}/nades/${id}/countView`,
       {},
       {
-        withCredentials: true
+        withCredentials: true,
       }
     );
   }
@@ -151,7 +151,7 @@ export class NadeApi {
         `${BASE_URL}/nades/${nadeId}/status`,
         updates,
         {
-          headers: { Authorization: token }
+          headers: { Authorization: token },
         }
       );
       const updatedNade = res.data as Nade;
@@ -173,8 +173,8 @@ export class NadeApi {
         undefined,
         {
           headers: {
-            Authorization: token
-          }
+            Authorization: token,
+          },
         }
       );
 
@@ -197,8 +197,8 @@ export class NadeApi {
         {},
         {
           headers: {
-            Authorization: token
-          }
+            Authorization: token,
+          },
         }
       );
 
@@ -213,7 +213,7 @@ export class NadeApi {
   static async validateGfycat(gfyIdOrUrl: string): AppResult<GfycatData> {
     try {
       const res = await axios.post(`${BASE_URL}/nades/validateGfycat`, {
-        gfycatIdOrUrl: gfyIdOrUrl
+        gfycatIdOrUrl: gfyIdOrUrl,
       });
       const gfycatData = res.data as GfycatData;
       return ok(gfycatData);

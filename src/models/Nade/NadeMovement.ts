@@ -3,17 +3,25 @@ export const NadeMovements = {
   crouching: "Crouching",
   walking: "Walking",
   running: "Running",
-  crouchwalking: "Crouchwalking"
+  crouchwalking: "Crouchwalking",
+};
+
+export type MovementKeys = keyof typeof NadeMovements;
+
+type MovementOption = {
+  key: MovementKeys;
+  text: string;
+  value: MovementKeys;
 };
 
 export function nadeMovementOptions() {
-  let options = [];
-  for (let key in NadeMovements) {
+  const options: MovementOption[] = [];
+  for (const key in NadeMovements) {
+    const movement = key as MovementKeys;
     options.push({
-      key,
-      //@ts-ignore
-      text: NadeMovements[key],
-      value: key
+      key: movement,
+      text: NadeMovements[movement],
+      value: movement,
     });
   }
   return options;

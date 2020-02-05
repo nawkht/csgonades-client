@@ -17,7 +17,7 @@ export const NavigationReducer: Reducer<NavigationState, NavigationActions> = (
       return {
         ...state,
         currentRoute: action.route,
-        previousRoute: state.currentRoute
+        previousRoute: state.currentRoute,
       };
     default:
       return state;

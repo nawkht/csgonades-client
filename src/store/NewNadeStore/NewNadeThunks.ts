@@ -7,7 +7,7 @@ import {
   newNadeAddGfyDataAction,
   newNadeErrorAction,
   newNadeSetStep,
-  newNadeStartLoadingAction
+  newNadeStartLoadingAction,
 } from "./NewNadeActions";
 
 export const tryAddGfycat = (gfyIdOrUrl: string): ReduxThunkAction => {
@@ -52,7 +52,7 @@ export const tryAddImage = (imgData: string): ReduxThunkAction => {
 
     const nadeBody: NadeBody = {
       imageBase64: imgData,
-      gfycatIdOrUrl: gfyData.gfyId
+      gfycatIdOrUrl: gfyData.gfyId,
     };
 
     const result = await NadeApi.save(nadeBody, token);

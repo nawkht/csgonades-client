@@ -20,7 +20,9 @@ export const NotificationList: FC<Props> = ({ visble }) => {
     <>
       <div className="notification-list">
         {!hasNotifications && (
-          <div className="no-noti">You don't have any notifications yet.</div>
+          <div className="no-noti">
+            You don&apos;t have any notifications yet.
+          </div>
         )}
         {hasNotifications &&
           notifications.map(n => (

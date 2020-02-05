@@ -39,22 +39,22 @@ export const changeAdminRouteAction = (
   route: AdminRoutes
 ): ChangeAdminRouterAction => ({
   type: "@@admin/CHANGE_ROUTE",
-  route
+  route,
 });
 
 export const addPendingNadesAction = (
   nades: NadeLight[]
 ): AddPendingNadesAction => ({
   type: "@@admin/ADD_PENDING_NADES",
-  nades
+  nades,
 });
 
 export const addUsersAction = (users: User[]): AddUsersAction => ({
   type: "@@admin/ADD_USERS",
-  users
+  users,
 });
 
 export const addReportsAction = (reports: Report[]): AddReportsAction => ({
   type: "@@admin/ADD_REPORTS",
-  reports
+  reports,
 });

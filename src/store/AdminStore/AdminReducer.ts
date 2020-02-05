@@ -16,7 +16,7 @@ const initialState: AdminState = {
   route: "pending-nades",
   pendingNades: [],
   users: [],
-  reports: []
+  reports: [],
 };
 
 export const AdminReducer: Reducer<AdminState, AdminActions> = (
@@ -27,22 +27,22 @@ export const AdminReducer: Reducer<AdminState, AdminActions> = (
     case "@@admin/CHANGE_ROUTE":
       return {
         ...state,
-        route: action.route
+        route: action.route,
       };
     case "@@admin/ADD_PENDING_NADES":
       return {
         ...state,
-        pendingNades: action.nades
+        pendingNades: action.nades,
       };
     case "@@admin/ADD_USERS":
       return {
         ...state,
-        users: action.users
+        users: action.users,
       };
     case "@@admin/ADD_REPORTS":
       return {
         ...state,
-        reports: action.reports
+        reports: action.reports,
       };
     default:
       assertNever(action);

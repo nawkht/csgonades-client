@@ -2,6 +2,7 @@ import { NadeApi } from "../../api/NadeApi";
 import { UserApi } from "../../api/UserApi";
 import { UserUpdateDTO } from "../../models/User";
 import { analyticsEventAction } from "../Analytics/AnalyticsActions";
+import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
   setUserNadesAction,
@@ -9,12 +10,14 @@ import {
   setViewingUserAction,
   startLoadingUserUpdateAction,
   stopEditingUserAction,
-  stopLoadingUserUpdateAction
+  stopLoadingUserUpdateAction,
 } from "./UsersActions";
 
 export const fetchUserAction = (steamId: string): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const token = getState().authStore.token;
+    const state = getState();
+    const token = tokenSelector(state);
+
     const userResult = await UserApi.fetchUser(steamId, token);
 
     if (userResult.isErr()) {
@@ -42,8 +45,9 @@ export const updateUserThunk = (
   updatedField: UserUpdateDTO
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
-    const steamId = getState().usersStore.viewingUser?.steamId;
-    const token = getState().authStore.token;
+    const state = getState();
+    const steamId = state.usersStore.viewingUser?.steamId;
+    const token = tokenSelector(state);
 
     if (!steamId || !token) {
       console.warn("Not viewing a user or missing token, cant update.");
@@ -61,7 +65,7 @@ export const updateUserThunk = (
     dispatch(
       analyticsEventAction({
         category: "user",
-        action: "update"
+        action: "update",
       })
     );
 

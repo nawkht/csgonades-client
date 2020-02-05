@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TournamentCreateDTO } from "../../models/Tournament";
 import { tournamentSelector } from "./TournamentSelectors";
@@ -7,17 +8,20 @@ export const useTournaments = () => {
   const dispatch = useDispatch();
   const tournaments = useSelector(tournamentSelector);
 
-  function fetchTournaments() {
+  const fetchTournaments = useCallback(() => {
     dispatch(fetchTournamentsThunk());
-  }
+  }, [dispatch]);
 
-  function saveTournament(tournament: TournamentCreateDTO) {
-    dispatch(saveTournamentThunk(tournament));
-  }
+  const saveTournament = useCallback(
+    (tournament: TournamentCreateDTO) => {
+      dispatch(saveTournamentThunk(tournament));
+    },
+    [dispatch]
+  );
 
   return {
     tournaments,
     fetchTournaments,
-    saveTournament
+    saveTournament,
   };
 };

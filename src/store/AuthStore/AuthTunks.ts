@@ -9,6 +9,16 @@ import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { setToken, setUser, signOutUser } from "./AuthActions";
 
+function checkIsFirstSignIn(user: User): boolean {
+  const minutesAgoCreated = moment().diff(
+    moment(user.createdAt),
+    "minute",
+    false
+  );
+
+  return minutesAgoCreated < 2;
+}
+
 export const serverSideUserInitThunkAction = (
   cookie?: string
 ): ReduxThunkAction => {
@@ -27,7 +37,7 @@ export const serverSideUserInitThunkAction = (
     // Preload state
     const [userResult, favoriteResult] = await Promise.all([
       UserApi.fetchSelf(authToken),
-      FavoriteApi.getUserFavorites(authToken)
+      FavoriteApi.getUserFavorites(authToken),
     ]);
 
     if (userResult.isErr() || favoriteResult.isErr()) {
@@ -81,13 +91,3 @@ export const signOutUserThunk = (): ReduxThunkAction => {
     dispatch(signOutUser());
   };
 };
-
-function checkIsFirstSignIn(user: User): boolean {
-  const minutesAgoCreated = moment().diff(
-    moment(user.createdAt),
-    "minute",
-    false
-  );
-
-  return minutesAgoCreated < 2;
-}

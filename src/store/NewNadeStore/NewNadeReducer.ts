@@ -14,7 +14,7 @@ export type NewNadeState = {
 
 const initialState: NewNadeState = {
   step: "gfycat",
-  loading: false
+  loading: false,
 };
 
 export const NewNadeReducer: Reducer<NewNadeState, NewNadeActions> = (
@@ -29,24 +29,24 @@ export const NewNadeReducer: Reducer<NewNadeState, NewNadeActions> = (
         ...state,
         gfyData: action.gfyData,
         loading: false,
-        error: undefined
+        error: undefined,
       };
     case "@@nednade/SET_STEP":
       return {
         ...state,
-        step: action.step
+        step: action.step,
       };
     case "@@newnade/ERROR":
       return {
         ...state,
         loading: false,
-        error: action.error
+        error: action.error,
       };
     case "@@newnade/START_LOADING":
       return {
         ...state,
         loading: true,
-        error: undefined
+        error: undefined,
       };
     default:
       assertNever(action);

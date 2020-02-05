@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeNavigationAction, toggleNavigationAction } from "./GlobalActions";
 import { isNavOpenSelector, siteStatsSelector } from "./GlobalSelectors";
@@ -7,9 +8,9 @@ export const useSiteStats = () => {
   const dispatch = useDispatch();
   const stats = useSelector(siteStatsSelector);
 
-  function fetchSiteStats() {
+  const fetchSiteStats = useCallback(() => {
     dispatch(fetchSiteStatsThunk());
-  }
+  }, [dispatch]);
 
   return { fetchSiteStats, stats };
 };
@@ -18,17 +19,17 @@ export const useNavigation = () => {
   const dispatch = useDispatch();
   const isNavOpen = useSelector(isNavOpenSelector);
 
-  function toggleNav() {
+  const toggleNav = useCallback(() => {
     dispatch(toggleNavigationAction());
-  }
+  }, [dispatch]);
 
-  function closeNav() {
+  const closeNav = useCallback(() => {
     dispatch(closeNavigationAction());
-  }
+  }, [dispatch]);
 
   return {
     isNavOpen,
     toggleNav,
-    closeNav
+    closeNav,
   };
 };

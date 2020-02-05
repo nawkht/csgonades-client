@@ -7,17 +7,17 @@ export const Dimensions = {
   PADDING_HUGE: "24px",
   GUTTER_SIZE: "24px",
   MOBILE_THRESHHOLD: "850px",
-  BORDER_RADIUS: "4px"
+  BORDER_RADIUS: "4px",
 };
 
 export const AnimationTimings = {
   fast: "0.15s",
   medium: "0.3s",
-  slow: "0.5s"
+  slow: "0.5s",
 };
 
 export const LayerPosition = {
   MODAL: 999,
   UNDER_UI: 900,
-  UI: 950
+  UI: 950,
 };

@@ -7,7 +7,7 @@ export interface ToastState {
 }
 
 const initialState: ToastState = {
-  toasts: []
+  toasts: [],
 };
 
 export const ToastReducer: Reducer<ToastState, ToastActions> = (
@@ -18,13 +18,13 @@ export const ToastReducer: Reducer<ToastState, ToastActions> = (
     case "@@notification/ADD":
       return {
         ...state,
-        toasts: [...state.toasts, action.notification]
+        toasts: [...state.toasts, action.notification],
       };
     case "@@notification/REMOVE":
       const removed = state.toasts.filter(n => n.id !== action.id);
       return {
         ...state,
-        toasts: removed
+        toasts: removed,
       };
     default:
       assertNever(action);

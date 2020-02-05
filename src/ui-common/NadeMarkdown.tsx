@@ -15,7 +15,7 @@ export const NadeMarkdown: FC<Props> = ({ nadeId }) => {
         setNade(res.value);
       }
     });
-  }, []);
+  }, [nadeId]);
 
   if (!nade) {
     return <div>Loading...</div>;

@@ -9,12 +9,12 @@ const CsGoMaps = {
   overpass: "Overpass",
   vertigo: "Vertigo",
   train: "Train",
-  cobblestone: "Cobblestone"
+  cobblestone: "Cobblestone",
 };
 
 function mapsList() {
-  let maps: string[] = [];
-  for (let key in CsGoMaps) {
+  const maps: string[] = [];
+  for (const key in CsGoMaps) {
     maps.push(key);
   }
   return maps;
@@ -25,7 +25,7 @@ const API_SOURCE = "https://api.csgonades.com";
 
 const createSitemap = async () => {
   const now = new Date();
-  let lastMod = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(
+  const lastMod = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(
     -2
   )}-${("0" + now.getDate()).slice(-2)}`;
 
@@ -66,10 +66,10 @@ const createSitemap = async () => {
   });
 
   try {
-    const result = await axios.get<any[]>(`${API_SOURCE}/nades?limit=all`);
+    const result = await axios.get(`${API_SOURCE}/nades?limit=all`);
     const nades = result.data;
 
-    for (let nade of nades) {
+    for (const nade of nades) {
       xml += "<url><loc>";
       xml += `${SITE_ROOT}/nades/${nade.id}`;
       xml +=

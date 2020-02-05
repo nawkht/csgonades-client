@@ -20,12 +20,12 @@ export type GlobalActions =
 
 export const addSiteStatsActon = (stats: SiteStats): AddSiteStatsAction => ({
   type: "@@global/ADD_SITE_STATS",
-  stats
+  stats,
 });
 export const toggleNavigationAction = (): ToggleNavigation => ({
-  type: "@@global/TOGGLE_NAVIGATION"
+  type: "@@global/TOGGLE_NAVIGATION",
 });
 
 export const closeNavigationAction = (): CloseNavigation => ({
-  type: "@@global/CLOSE_NAVIGATION"
+  type: "@@global/CLOSE_NAVIGATION",
 });

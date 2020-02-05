@@ -10,7 +10,7 @@ type TipState = {
 
 const INITIAL_STATE: TipState = {
   hasOpenedMapView: false,
-  seenFavoriteTip: false
+  seenFavoriteTip: false,
 };
 
 export type TipKeys = keyof typeof INITIAL_STATE;
@@ -23,7 +23,7 @@ const TipReducer: Reducer<TipState, TipActions> = (
     case "@@tip/SEEN_TIP":
       return {
         ...state,
-        [action.tip]: true
+        [action.tip]: true,
       };
     default:
       return state;
@@ -32,7 +32,7 @@ const TipReducer: Reducer<TipState, TipActions> = (
 
 const persistConfig: PersistConfig<TipState> = {
   key: "tipStore",
-  storage
+  storage,
 };
 
 export const PersistedTipReducer = persistReducer(persistConfig, TipReducer);

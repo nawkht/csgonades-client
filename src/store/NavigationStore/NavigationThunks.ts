@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "..";
 import { addCurrentRouteAction } from "./NavigationActions";
@@ -9,12 +10,15 @@ export const useNavigationState = () => {
   const dispatch = useDispatch();
   const previousRoute = useSelector(previousRouteSelector);
 
-  function setCurrentRoute(route: string, title: string = "CSGONades") {
-    dispatch(addCurrentRouteAction(route, title));
-  }
+  const setCurrentRoute = useCallback(
+    (route: string, title = "CSGONades") => {
+      dispatch(addCurrentRouteAction(route, title));
+    },
+    [dispatch]
+  );
 
   return {
     setCurrentRoute,
-    previousRoute
+    previousRoute,
   };
 };

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { Button, Pagination } from "semantic-ui-react";
 import { useAdminPage } from "../../store/AdminStore/AdminHooks";
 import { useSiteStats } from "../../store/GlobalStore/GlobalHooks";
@@ -14,20 +14,16 @@ export const UserList: FC = () => {
   const [sortByActivity, setSortByActivity] = useState(false);
   const {
     stats: { numUsers },
-    fetchSiteStats
   } = useSiteStats();
   const { users, fetchUsers } = useAdminPage();
 
-  const pages = Math.ceil(numUsers / USER_LIMIT);
-
-  useEffect(() => {
-    fetchSiteStats();
-    fetchUsers(page, USER_LIMIT, sortByActivity);
-  }, []);
+  const numPages = useMemo(() => {
+    return Math.ceil(numUsers / USER_LIMIT);
+  }, [numUsers]);
 
   useEffect(() => {
     fetchUsers(page, USER_LIMIT, sortByActivity);
-  }, [page, sortByActivity]);
+  }, [page, sortByActivity, fetchUsers]);
 
   return (
     <>
@@ -45,7 +41,7 @@ export const UserList: FC = () => {
           </thead>
           <tbody>
             {users.map(user => (
-              <tr>
+              <tr key={user.steamId}>
                 <td className="avatar">
                   <img src={user.avatar} />
                 </td>
@@ -67,9 +63,9 @@ export const UserList: FC = () => {
 
         <Pagination
           defaultActivePage={1}
-          totalPages={pages}
+          totalPages={numPages}
           onPageChange={(_, pageProps) => {
-            let activePage = pageProps.activePage as number;
+            const activePage = pageProps.activePage as number;
             setPage(activePage);
           }}
         />

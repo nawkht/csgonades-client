@@ -27,7 +27,7 @@ export class TournamentApi {
   ): AppResult<boolean> {
     try {
       await axios.post(`${BASE_URL}/tournaments`, tournament, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       return ok(true);
     } catch (error) {

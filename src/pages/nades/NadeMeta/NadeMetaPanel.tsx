@@ -33,7 +33,7 @@ export const NadeMetaPanel: FC<Props> = ({ nade, allowEdit }) => {
       movement,
       tickrate,
       technique,
-      type
+      type,
     });
     setIsEditing(false);
   }

@@ -21,7 +21,7 @@ const ContactPageContainer: NextPage = () => {
     const contactMessage: ConctactDTO = {
       name,
       email,
-      message
+      message,
     };
 
     const result = await ContactApi.sendMessage(contactMessage);

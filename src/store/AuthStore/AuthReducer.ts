@@ -18,17 +18,17 @@ export const AuthReducer: Reducer<AuthState, AuthActions> = (
     case "@@auth/SET_TOKEN":
       return {
         ...state,
-        token: action.payload
+        token: action.payload,
       };
     case "@@auth/SET_USER":
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
     case "@@auth/SIGN_OUT":
       return {
         user: undefined,
-        token: undefined
+        token: undefined,
       };
     default:
       assertNever(action);

@@ -7,7 +7,7 @@ const Auth: NextPage = () => {
   const preloadUser = usePreloadUser();
   React.useEffect(() => {
     preloadUser();
-  }, []);
+  }, [preloadUser]);
 
   return (
     <Dimmer active>

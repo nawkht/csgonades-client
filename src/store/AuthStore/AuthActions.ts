@@ -21,19 +21,19 @@ export type AuthActions = SetTokenAction | SetUserAction | SignOutAction;
 
 export const setToken = (token: string) => ({
   type: "@@auth/SET_TOKEN",
-  payload: token
+  payload: token,
 });
 
 export const signOutUser = (): SignOutAction => ({
   type: "@@auth/SIGN_OUT",
   meta: {
-    gaEvent: {}
-  }
+    gaEvent: {},
+  },
 });
 
 export function setUser(dispatch: Dispatch, user: User) {
   dispatch({
     type: "@@auth/SET_USER",
-    payload: user
+    payload: user,
   });
 }

@@ -10,7 +10,7 @@ export const ArticleEditor: FC = () => {
   const [content, setContent] = useState("");
 
   const components = {
-    NadeMarkdown
+    NadeMarkdown,
   };
 
   return (
@@ -40,7 +40,7 @@ export const ArticleEditor: FC = () => {
                 value
               );
               return React.createElement("pre", {}, code);
-            }
+            },
           }}
         />
       </div>

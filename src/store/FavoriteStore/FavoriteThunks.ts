@@ -9,8 +9,16 @@ import {
   addFavoritedNadesAction,
   removeFavoriteAction,
   startLoadingFavoritedNadesAction,
-  stopLoadingFavoritedNades
+  stopLoadingFavoritedNades,
 } from "./FavoriteActions";
+
+const delay = (seconds: number) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, seconds * 1000);
+  });
+};
 
 export const fetchFavoritedNadesThunkAction = (): ReduxThunkAction => {
   return async (dispatch, getState) => {
@@ -107,12 +115,4 @@ export const addUnFavoriteThunkAction = (
     await delay(1);
     dispatch(fetchNadesByMapActionThunk(nade.map, true));
   };
-};
-
-const delay = (seconds: number) => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, seconds * 1000);
-  });
 };

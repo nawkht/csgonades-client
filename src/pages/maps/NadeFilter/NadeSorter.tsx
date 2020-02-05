@@ -21,18 +21,18 @@ export const NadeSorter: FC<Props> = ({ map }) => {
             {
               key: "score",
               text: "By Hot",
-              value: "score"
+              value: "score",
             },
             {
               key: "date",
               text: "By Date",
-              value: "date"
+              value: "date",
             },
             {
               key: "name",
               text: "By Name",
-              value: "name"
-            }
+              value: "name",
+            },
           ]}
           direction="left"
           onChange={(_, data) => {

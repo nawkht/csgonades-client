@@ -8,10 +8,9 @@ import {
   NadeBody,
   NadeLight,
   NadeStatusDTO,
-  NadeUpdateBody
+  NadeUpdateBody,
 } from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
-import { useIsAdmin } from "../AuthStore/AuthHooks";
 import { userSelector } from "../AuthStore/AuthSelectors";
 import { favoritedNadeIdsSelector } from "../FavoriteStore/FavoriteSelectors";
 import {
@@ -21,14 +20,14 @@ import {
   setSortingMethodAction,
   SortingMethod,
   toggleFilterByFavoritesAction,
-  toggleMapPositionModalAction
+  toggleMapPositionModalAction,
 } from "./NadeActions";
 import { NadeFilters } from "./NadeReducer";
 import {
   filterForMapSelector,
   nadeForMapLastUpdateSelector,
   nadesForMapSelector,
-  postionModalOpenSelector
+  postionModalOpenSelector,
 } from "./NadeSelectors";
 import {
   createNadeAction,
@@ -37,11 +36,98 @@ import {
   updateNadeAction,
   updateNadeGfycatAction,
   updateNadeStatusAction,
-  updateNadeUserAction
+  updateNadeUserAction,
 } from "./NadeThunks";
 
+function applyNadeFilter(nadeFilter: NadeFilters, nades: NadeLight[]) {
+  if (nadeFilter.flash) {
+    return nades.filter(n => n.type === "flash");
+  } else if (nadeFilter.smoke) {
+    return nades.filter(n => n.type === "smoke");
+  } else if (nadeFilter.molotov) {
+    return nades.filter(n => n.type === "molotov");
+  } else if (nadeFilter.hegrenade) {
+    return nades.filter(n => n.type === "hegrenade");
+  } else {
+    return nades;
+  }
+}
+
+function nadesForCoords(nades: NadeLight[], coords: MapCoordinates) {
+  const MIN_DISTANCE = 20;
+  return nades.filter(n => {
+    if (!n.mapEndCoord) {
+      return false;
+    }
+    const dist = Math.sqrt(
+      Math.pow(n.mapEndCoord.x - coords.x, 2) +
+        Math.pow(n.mapEndCoord.y - coords.y, 2)
+    );
+
+    if (dist < MIN_DISTANCE) {
+      return true;
+    }
+  });
+}
+
+function sortNades(method: SortingMethod, nades: NadeLight[]) {
+  const nadeCopy = [...nades];
+  switch (method) {
+    case "name":
+      nadeCopy.sort((a, b) => {
+        return (a.title || "").localeCompare(b.title || "");
+      });
+      return nadeCopy;
+    case "score": {
+      nadeCopy.sort((a, b) => b.score - a.score);
+      return nadeCopy;
+    }
+    default:
+      nadeCopy.sort((a, b) => {
+        return moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf();
+      });
+      return nadeCopy;
+  }
+}
+
+function filterNades(
+  nades: NadeLight[],
+  nadeFilter: NadeFilters,
+  favoritedNadeIds: string[]
+) {
+  let processedNades: NadeLight[];
+
+  processedNades = nades.map(n => {
+    const favorited = favoritedNadeIds.includes(n.id);
+    return {
+      ...n,
+      isFavorited: favorited,
+    };
+  });
+
+  processedNades = sortNades(nadeFilter.sortingMethod, processedNades);
+  processedNades = applyNadeFilter(nadeFilter, processedNades);
+
+  if (nadeFilter.coords) {
+    processedNades = nadesForCoords(processedNades, nadeFilter.coords);
+  }
+
+  if (nadeFilter.favorites) {
+    processedNades = processedNades.filter(n => n.isFavorited);
+  }
+
+  return processedNades;
+}
+
+function filterForMapView(nades: NadeLight[], nadeFilter: NadeFilters) {
+  let processedNades: NadeLight[] = nades;
+
+  processedNades = applyNadeFilter(nadeFilter, processedNades);
+
+  return processedNades;
+}
+
 export const useNadeFilter = (map: CsgoMap) => {
-  const isAdmin = useIsAdmin();
   const dispatch = useDispatch();
   const nadeFilter = useSelector(filterForMapSelector(map));
   const { sortingMethod, coords, favorites } = nadeFilter;
@@ -67,27 +153,36 @@ export const useNadeFilter = (map: CsgoMap) => {
     } else {
       return false;
     }
-  }, [coords, sortingMethod, nadeFilter]);
+  }, [coords, sortingMethod, nadeFilter, favorites]);
 
-  function filterByType(nadeType: NadeType) {
-    dispatch(filterByTypeAction(nadeType, map));
-  }
+  const filterByType = useCallback(
+    (nadeType: NadeType) => {
+      dispatch(filterByTypeAction(nadeType, map));
+    },
+    [dispatch, map]
+  );
 
-  function reset() {
+  const reset = useCallback(() => {
     dispatch(resetNadeFilterAction(map));
-  }
+  }, [dispatch, map]);
 
-  function setSortingMethod(method: SortingMethod) {
-    dispatch(setSortingMethodAction(method, map));
-  }
+  const setSortingMethod = useCallback(
+    (method: SortingMethod) => {
+      dispatch(setSortingMethodAction(method, map));
+    },
+    [dispatch, map]
+  );
 
-  function filterByMapCoords(coords: MapCoordinates) {
-    dispatch(filterByMapCoordsAction(coords, map));
-  }
+  const filterByMapCoords = useCallback(
+    (coords: MapCoordinates) => {
+      dispatch(filterByMapCoordsAction(coords, map));
+    },
+    [dispatch, map]
+  );
 
-  function toggleFilterByFavorites() {
+  const toggleFilterByFavorites = useCallback(() => {
     dispatch(toggleFilterByFavoritesAction(map));
-  }
+  }, [dispatch, map]);
 
   const toggleMapPositionModal = useCallback(
     (visible: boolean) => {
@@ -108,21 +203,26 @@ export const useNadeFilter = (map: CsgoMap) => {
     toggleMapPositionModal,
     postionModalOpen,
     toggleFilterByFavorites,
-    isShowingFavorites: favorites
+    isShowingFavorites: favorites,
   };
 };
 
 export const useCanEditNade = (nade: Nade): boolean => {
   const user = useSelector(userSelector);
-  if (!user) {
-    return false;
-  } else if (user.role === "administrator" || user.role === "moderator") {
-    return true;
-  } else if (user.steamId === nade.steamId) {
-    return true;
-  } else {
-    return false;
-  }
+
+  const canEdit = useMemo(() => {
+    if (!user) {
+      return false;
+    } else if (user.role === "administrator" || user.role === "moderator") {
+      return true;
+    } else if (user.steamId === nade.steamId) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [user, nade.steamId]);
+
+  return canEdit;
 };
 
 export const useCreateNade = () => {
@@ -178,7 +278,7 @@ export const useNadesForMap = (map: CsgoMap) => {
   }, [map, nadesForMap, nadeFilter, favoritedNadeIds, nadesAddedAt]);
 
   return {
-    nades
+    nades,
   };
 };
 
@@ -201,7 +301,7 @@ export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
 
     const unique: any = {};
 
-    for (let nade of nades) {
+    for (const nade of nades) {
       if (nade.mapEndCoord && nade.type) {
         const { x, y } = nade.mapEndCoord;
         const roundedX = Math.ceil(x / 30) * 30;
@@ -221,71 +321,6 @@ export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
   return unqiueNadesForPosition;
 };
 
-export const useRawNadesForMap = (map: CsgoMap) => {
-  const nades = useSelector(nadesForMapSelector(map));
-
-  if (!nades) {
-    return {
-      nades: []
-    };
-  }
-
-  return {
-    nades
-  };
-};
-
-function sortNades(method: SortingMethod, nades: NadeLight[]) {
-  const nadeCopy = [...nades];
-  switch (method) {
-    case "name":
-      nadeCopy.sort((a, b) => {
-        return (a.title || "").localeCompare(b.title || "");
-      });
-      return nadeCopy;
-    case "score": {
-      nadeCopy.sort((a, b) => b.score - a.score);
-      return nadeCopy;
-    }
-    default:
-      nadeCopy.sort((a, b) => {
-        return moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf();
-      });
-      return nadeCopy;
-  }
-}
-
-function applyNadeFilter(nadeFilter: NadeFilters, nades: NadeLight[]) {
-  if (nadeFilter.flash) {
-    return nades.filter(n => n.type === "flash");
-  } else if (nadeFilter.smoke) {
-    return nades.filter(n => n.type === "smoke");
-  } else if (nadeFilter.molotov) {
-    return nades.filter(n => n.type === "molotov");
-  } else if (nadeFilter.hegrenade) {
-    return nades.filter(n => n.type === "hegrenade");
-  } else {
-    return nades;
-  }
-}
-
-function nadesForCoords(nades: NadeLight[], coords: MapCoordinates) {
-  const MIN_DISTANCE = 20;
-  return nades.filter(n => {
-    if (!n.mapEndCoord) {
-      return false;
-    }
-    const dist = Math.sqrt(
-      Math.pow(n.mapEndCoord.x - coords.x, 2) +
-        Math.pow(n.mapEndCoord.y - coords.y, 2)
-    );
-
-    if (dist < MIN_DISTANCE) {
-      return true;
-    }
-  });
-}
-
 export const useSimilarNades = (nade: Nade) => {
   const dispatch = useDispatch();
   const nadesForMap = useSelector(nadesForMapSelector(nade.map));
@@ -294,7 +329,7 @@ export const useSimilarNades = (nade: Nade) => {
     if (!nadesForMap && nade.map) {
       dispatch(fetchNadesByMapActionThunk(nade.map));
     }
-  }, [nadesForMap, nade]);
+  }, [nadesForMap, nade, dispatch]);
 
   if (!nade.map || !nade.type || !nade.mapEndCoord || !nadesForMap) {
     return [];
@@ -324,40 +359,3 @@ export const useSimilarNades = (nade: Nade) => {
 
   return similarNades;
 };
-
-function filterNades(
-  nades: NadeLight[],
-  nadeFilter: NadeFilters,
-  favoritedNadeIds: string[]
-) {
-  let processedNades: NadeLight[];
-
-  processedNades = nades.map(n => {
-    const favorited = favoritedNadeIds.includes(n.id);
-    return {
-      ...n,
-      isFavorited: favorited
-    };
-  });
-
-  processedNades = sortNades(nadeFilter.sortingMethod, processedNades);
-  processedNades = applyNadeFilter(nadeFilter, processedNades);
-
-  if (nadeFilter.coords) {
-    processedNades = nadesForCoords(processedNades, nadeFilter.coords);
-  }
-
-  if (nadeFilter.favorites) {
-    processedNades = processedNades.filter(n => n.isFavorited);
-  }
-
-  return processedNades;
-}
-
-function filterForMapView(nades: NadeLight[], nadeFilter: NadeFilters) {
-  let processedNades: NadeLight[] = nades;
-
-  processedNades = applyNadeFilter(nadeFilter, processedNades);
-
-  return processedNades;
-}

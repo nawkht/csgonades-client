@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Nade } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
@@ -77,10 +78,18 @@ export const useIsAdmin = (): boolean => {
 
 export const useSignOut = () => {
   const dispatch = useDispatch();
-  return () => dispatch(signOutUserThunk());
+  const signOut = useCallback(() => {
+    dispatch(signOutUserThunk());
+  }, [dispatch]);
+  return signOut;
 };
 
 export const usePreloadUser = () => {
   const dispatch = useDispatch();
-  return () => dispatch(preloadUserThunkAction());
+
+  const preloadUser = useCallback(() => {
+    dispatch(preloadUserThunkAction());
+  }, [dispatch]);
+
+  return preloadUser;
 };

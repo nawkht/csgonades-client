@@ -15,7 +15,7 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
     const { mapEndCoord } = nade;
     return {
       x: mapEndCoord ? mapEndCoord.x / sizeRatio : 0,
-      y: mapEndCoord ? mapEndCoord.y / sizeRatio : 0
+      y: mapEndCoord ? mapEndCoord.y / sizeRatio : 0,
     };
   }, [nade, mapWidth]);
 
@@ -23,7 +23,7 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
     if (nade.mapEndCoord) {
       onPress({
         x: nade.mapEndCoord.x,
-        y: nade.mapEndCoord.y
+        y: nade.mapEndCoord.y,
       });
     }
   }
@@ -34,7 +34,7 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
         className="point"
         style={{
           top: position.y - ICON_SIZE / 2,
-          left: position.x - ICON_SIZE / 2
+          left: position.x - ICON_SIZE / 2,
         }}
         onClick={onClick}
       >

@@ -4,7 +4,7 @@ import { NadePage } from "../src/pages/nades/NadePage";
 import {
   nadeErrorSelector,
   useNadeError,
-  useSelectedNade
+  useSelectedNade,
 } from "../src/store/NadeStore/NadeSelectors";
 import { fetchNadeByIdAction } from "../src/store/NadeStore/NadeThunks";
 

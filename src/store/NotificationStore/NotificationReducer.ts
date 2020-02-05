@@ -9,7 +9,7 @@ type NotificationState = {
 
 const INITIAL_STATE: NotificationState = {
   notifications: [],
-  loading: false
+  loading: false,
 };
 
 export const NotificationReducer: Reducer<
@@ -20,7 +20,7 @@ export const NotificationReducer: Reducer<
     case "@@notification/ADD_UNREAD":
       return {
         ...state,
-        notifications: action.notifications
+        notifications: action.notifications,
       };
     case "@@notification/MARK_SEEN":
       const updatedNotifications: Notification[] = state.notifications.map(
@@ -28,7 +28,7 @@ export const NotificationReducer: Reducer<
           if (noti.id === action.notificationId) {
             return {
               ...noti,
-              viewed: true
+              viewed: true,
             };
           }
           return noti;
@@ -36,7 +36,7 @@ export const NotificationReducer: Reducer<
       );
       return {
         ...state,
-        notifications: updatedNotifications
+        notifications: updatedNotifications,
       };
     default:
       return state;

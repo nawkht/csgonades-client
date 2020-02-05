@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
   Movement,
-  nadeMovementOptions
+  nadeMovementOptions,
 } from "../../../models/Nade/NadeMovement";
 import { capitalize } from "../../../utils/Common";
 
@@ -15,7 +15,7 @@ type Props = {
 export const NadeMovementValue: FC<Props> = ({
   isEditing,
   movement,
-  onChange
+  onChange,
 }) => {
   const options = nadeMovementOptions();
 

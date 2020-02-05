@@ -12,7 +12,7 @@ export class FavoriteApi {
   static async getUserFavorites(token: string): AppResult<Favorite[]> {
     try {
       const res = await axios.get<Favorite[]>(`${BASE_URL}/favorites`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       const favoritedNades = res.data;
       return ok(favoritedNades);
@@ -27,7 +27,7 @@ export class FavoriteApi {
         `${BASE_URL}/favorites/${nadeId}`,
         undefined,
         {
-          headers: { Authorization: token }
+          headers: { Authorization: token },
         }
       );
       const favorite = res.data as Favorite;
@@ -43,7 +43,7 @@ export class FavoriteApi {
   ): AppResult<boolean> {
     try {
       await axios.delete(`${BASE_URL}/favorites/${favoriteId}`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       return ok(true);
     } catch (error) {

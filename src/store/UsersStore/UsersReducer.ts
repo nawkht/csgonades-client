@@ -16,7 +16,7 @@ export type UsersState = {
 const initialState: UsersState = {
   isEditing: false,
   userNades: [],
-  isLoading: false
+  isLoading: false,
 };
 
 export const UsersReducer: Reducer<UsersState, UsersActions> = (
@@ -27,39 +27,39 @@ export const UsersReducer: Reducer<UsersState, UsersActions> = (
     case "@@users/SET_VIEWING_USER":
       return {
         ...state,
-        viewingUser: action.user
+        viewingUser: action.user,
       };
     case "@@users/START_EDITING_USER":
       return {
         ...state,
-        isEditing: true
+        isEditing: true,
       };
     case "@@users/STOP_EDITING_USER":
       return {
         ...state,
-        isEditing: false
+        isEditing: false,
       };
     case "@@users/SET_USER_NADES":
       return {
         ...state,
-        userNades: action.nades
+        userNades: action.nades,
       };
     case "@@users/START_LOADING_UPDATE_USER":
       return {
         ...state,
         error: undefined,
-        isLoading: true
+        isLoading: true,
       };
     case "@@users/SET_ERROR": {
       return {
         ...state,
-        error: action.error
+        error: action.error,
       };
     }
     case "@@users/STOP_LOADING_UPDATE_USER":
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
       };
     default:
       assertNever(action);

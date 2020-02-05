@@ -9,8 +9,6 @@ import { UserNav } from "./UserNav";
 const Header: FC = () => {
   const { colors, theme } = useTheme();
   const { isNavOpen, toggleNav } = useNavigation();
-  let timer: NodeJS.Timer;
-
   const logoUrl = theme === "light" ? "/logo.png" : "/logo-darkmode.png";
 
   return (

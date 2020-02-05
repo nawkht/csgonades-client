@@ -21,15 +21,15 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasSentEvent, setHasSentEvent] = useState(false);
   const { colors } = useTheme();
-  let timer: NodeJS.Timer;
 
   useEffect(() => {
+    let timer: NodeJS.Timer;
     if (isPlaying && !hasSentEvent) {
       timer = setTimeout(() => {
         NadeApi.registerView(nade.id);
         analyticsEvent({
           category: "nadeitem",
-          action: "MOBILE_PREVIEW_PLAY"
+          action: "MOBILE_PREVIEW_PLAY",
         });
         setHasSentEvent(true);
       }, 5000);
@@ -37,7 +37,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [isPlaying, hasSentEvent]);
+  }, [isPlaying, hasSentEvent, nade.id, analyticsEvent]);
 
   function onNadeItemClick() {
     onItemClick && onItemClick();

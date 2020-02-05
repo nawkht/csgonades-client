@@ -4,14 +4,14 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
-  useState
+  useState,
 } from "react";
 import { FaVideo } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeApi } from "../../api/NadeApi";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useAnalyticsEvent } from "../../store/Analytics/AnalyticsActions";
+import { useHoverEvent } from "../../utils/Hooks";
 import { SeekBar } from "../SeekBar";
 
 type Props = {
@@ -31,7 +31,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
       NadeApi.registerView(nade.id);
       setHasSentViewedEvent(true);
     }
-  }, [progress, hasSentViewedEvent]);
+  }, [progress, hasSentViewedEvent, nade]);
 
   const videoIconClassName = useMemo(() => {
     const classes = ["video-icon-wrapper"];
@@ -42,7 +42,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   }, [isHovering]);
 
   function onVideoTimeUpdate({
-    currentTarget
+    currentTarget,
   }: SyntheticEvent<HTMLVideoElement, Event>) {
     const { currentTime, duration } = currentTarget;
     const progressPercentage = Math.round((currentTime / duration) * 100);
@@ -62,10 +62,10 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     analyticsEvent({
       category: "nadeitem",
       action: "PREVIEW_VIEWED",
-      label: `${roundedProgress}%`
+      label: `${roundedProgress}%`,
     });
     setHasSentAnalyticsEvent(true);
-  }, [hasSentAnalyticsEvent, progressForEvent]);
+  }, [hasSentAnalyticsEvent, progressForEvent, analyticsEvent]);
 
   const onLoad = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
     e.currentTarget.playbackRate = 3;
@@ -183,33 +183,3 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     </>
   );
 };
-
-function useHoverEvent() {
-  const [isHovering, setIsHover] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) {
-      return;
-    }
-
-    const onMouseEnter = () => setIsHover(true);
-    const onMouseLeave = () => setIsHover(false);
-
-    node.addEventListener("mouseenter", onMouseEnter);
-    node.addEventListener("mouseleave", onMouseLeave);
-
-    return () => {
-      if (node) {
-        node.removeEventListener("mouseenter", onMouseEnter);
-        node.removeEventListener("mouseleave", onMouseLeave);
-      }
-    };
-  }, []);
-
-  return {
-    ref,
-    isHovering
-  };
-}

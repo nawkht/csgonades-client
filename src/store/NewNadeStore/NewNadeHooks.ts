@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nadeNadeClearAction, newNadeSetStep } from "./NewNadeActions";
 import { NewNadeStep } from "./NewNadeReducer";
@@ -5,7 +6,7 @@ import {
   newNadeGfyData,
   newNadeGfyError,
   newNadeLoadingSelector,
-  newNadeStepSelector
+  newNadeStepSelector,
 } from "./NewNadeSelectors";
 import { tryAddGfycat, tryAddImage } from "./NewNadeThunks";
 
@@ -16,21 +17,22 @@ export const useNewNade = () => {
   const error = useSelector(newNadeGfyError);
   const gfyData = useSelector(newNadeGfyData);
 
-  function addGfycat(gfyIdOrUrl: string) {
-    dispatch(tryAddGfycat(gfyIdOrUrl));
-  }
+  const addGfycat = useCallback(
+    (gfyIdOrUrl: string) => dispatch(tryAddGfycat(gfyIdOrUrl)),
+    [dispatch]
+  );
 
-  function addImage(imgData: string) {
-    dispatch(tryAddImage(imgData));
-  }
+  const addImage = useCallback(
+    (imgData: string) => dispatch(tryAddImage(imgData)),
+    [dispatch]
+  );
 
-  function setStep(step: NewNadeStep) {
-    dispatch(newNadeSetStep(step));
-  }
+  const setStep = useCallback(
+    (step: NewNadeStep) => dispatch(newNadeSetStep(step)),
+    [dispatch]
+  );
 
-  function reset() {
-    dispatch(nadeNadeClearAction());
-  }
+  const reset = useCallback(() => dispatch(nadeNadeClearAction()), [dispatch]);
 
   return {
     currentStep,
@@ -40,6 +42,6 @@ export const useNewNade = () => {
     addGfycat,
     addImage,
     loading,
-    reset
+    reset,
   };
 };

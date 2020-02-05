@@ -15,7 +15,7 @@ export const ResponsiveVideo: FC<Props> = ({
   sdUrl,
   hdUrL,
   hdUrlWebm,
-  controls
+  controls,
 }) => {
   const ref = useRef<HTMLVideoElement>(null);
   const [progress, setProgress] = useState(0);
@@ -28,7 +28,7 @@ export const ResponsiveVideo: FC<Props> = ({
     } else {
       return sdUrl;
     }
-  }, [quality]);
+  }, [quality, hdUrL, sdUrl]);
 
   function togglePlay() {
     if (ref.current && ref.current.paused) {
@@ -51,7 +51,7 @@ export const ResponsiveVideo: FC<Props> = ({
   }
 
   function onVideoTimeUpdate({
-    currentTarget
+    currentTarget,
   }: SyntheticEvent<HTMLVideoElement, Event>) {
     const { currentTime, duration } = currentTarget;
     const progressPercentage = Math.round((currentTime / duration) * 100);

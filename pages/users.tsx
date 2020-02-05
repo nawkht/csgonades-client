@@ -4,7 +4,7 @@ import { startEditingUserAction } from "../src/store/UsersStore/UsersActions";
 import { userErrorSelector } from "../src/store/UsersStore/UsersSelectors";
 import {
   fetchNadesForUserAction,
-  fetchUserAction
+  fetchUserAction,
 } from "../src/store/UsersStore/UsersThunks";
 
 const UserPageComponent: NextPage = () => {
@@ -18,7 +18,7 @@ UserPageComponent.getInitialProps = async ({ store, query, res }) => {
 
   await Promise.all([
     dispatch(fetchUserAction(steamId)),
-    dispatch(fetchNadesForUserAction(steamId))
+    dispatch(fetchNadesForUserAction(steamId)),
   ]);
 
   const error = userErrorSelector(getState());

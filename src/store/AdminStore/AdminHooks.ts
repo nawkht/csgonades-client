@@ -1,15 +1,16 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminRoutes, changeAdminRouteAction } from "./AdminActions";
 import {
   adminRouteSelector,
   adminUsersSelector,
   pendingNadesSelector,
-  reportsSelector
+  reportsSelector,
 } from "./AdminSelectors";
 import {
   fetchPendingNadeThunk,
   fetchReportsThunk,
-  fetchUsersThunk
+  fetchUsersThunk,
 } from "./AdminThunks";
 
 export const useAdminPage = () => {
@@ -19,21 +20,25 @@ export const useAdminPage = () => {
   const users = useSelector(adminUsersSelector);
   const reports = useSelector(reportsSelector);
 
-  function changeAdminRoute(route: AdminRoutes) {
-    dispatch(changeAdminRouteAction(route));
-  }
+  const changeAdminRoute = useCallback(
+    (route: AdminRoutes) => dispatch(changeAdminRouteAction(route)),
+    [dispatch]
+  );
 
-  function fetchPendingNades() {
+  const fetchPendingNades = useCallback(() => {
+    console.log("Fetching pending nades");
     dispatch(fetchPendingNadeThunk());
-  }
+  }, [dispatch]);
 
-  function fetchReports() {
-    dispatch(fetchReportsThunk());
-  }
+  const fetchReports = useCallback(() => dispatch(fetchReportsThunk()), [
+    dispatch,
+  ]);
 
-  function fetchUsers(page: number, limit: number, sortByActivity: boolean) {
-    dispatch(fetchUsersThunk(page, limit, sortByActivity));
-  }
+  const fetchUsers = useCallback(
+    (page: number, limit: number, sortByActivity: boolean) =>
+      dispatch(fetchUsersThunk(page, limit, sortByActivity)),
+    [dispatch]
+  );
 
   return {
     route,
@@ -44,6 +49,6 @@ export const useAdminPage = () => {
     fetchPendingNades,
     fetchUsers,
     fetchReportsThunk,
-    fetchReports
+    fetchReports,
   };
 };

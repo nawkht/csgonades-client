@@ -14,10 +14,10 @@ app
     if (!dev) {
       // Enforce SSL & HSTS in production
       server.use(function(req, res, next) {
-        var proto = req.headers["x-forwarded-proto"];
+        const proto = req.headers["x-forwarded-proto"];
         if (proto === "https") {
           res.set({
-            "Strict-Transport-Security": "max-age=31557600" // one-year
+            "Strict-Transport-Security": "max-age=31557600", // one-year
           });
           return next();
         }
@@ -27,7 +27,7 @@ app
 
     server.get("/sitemap.xml", async function(req, res) {
       res.header("Content-Type", "application/xml");
-      let xmlFile = await createSitemap();
+      const xmlFile = await createSitemap();
       // Send it to the browser
       res.send(xmlFile);
     });

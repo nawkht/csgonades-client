@@ -14,14 +14,14 @@ export const addUnreadNotificationsAction = (
   notifications: Notification[]
 ): AddUnreadNotificationsAction => ({
   type: "@@notification/ADD_UNREAD",
-  notifications
+  notifications,
 });
 
 export const markNotificationAsSeenAction = (
   notificationId: string
 ): MarkAsSeenNotificationAction => ({
   type: "@@notification/MARK_SEEN",
-  notificationId
+  notificationId,
 });
 
 export type NotificationActions =

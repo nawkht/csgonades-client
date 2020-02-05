@@ -29,7 +29,7 @@ export const AdminTournaments: FC = () => {
       twitchUrl,
       eventUrl,
       startDate,
-      endDate
+      endDate,
     };
 
     saveTournament(tournament);

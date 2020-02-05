@@ -7,7 +7,7 @@ export type TournamentState = {
 };
 
 const initialState: TournamentState = {
-  tournaments: []
+  tournaments: [],
 };
 
 export const TournamentReducer: Reducer<TournamentState, TournamentActions> = (
@@ -18,7 +18,7 @@ export const TournamentReducer: Reducer<TournamentState, TournamentActions> = (
     case "@@tournament/ADD_LIST":
       return {
         ...state,
-        tournaments: action.tournaments
+        tournaments: action.tournaments,
       };
     default:
       return state;

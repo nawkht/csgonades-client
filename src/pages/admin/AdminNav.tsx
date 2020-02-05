@@ -10,7 +10,7 @@ export const AdminNav: FC = () => {
 
   useEffect(() => {
     fetchSiteStats();
-  }, []);
+  }, [fetchSiteStats]);
 
   const handleItemClick = (e: any, { name }: MenuItemProps) => {
     const newRoute = name as AdminRoutes;

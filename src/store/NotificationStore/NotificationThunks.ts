@@ -3,10 +3,10 @@ import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
   addUnreadNotificationsAction,
-  markNotificationAsSeenAction
+  markNotificationAsSeenAction,
 } from "./NotificationActions";
 
-export const fetchNotifications = (): ReduxThunkAction => {
+export const fetchNotificationsThunk = (): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const authToken = tokenSelector(getState());
 

@@ -3,7 +3,7 @@ import { seenTipAction } from "../TipStore/TipActions";
 import {
   addNotificationAction,
   AppToastCreate,
-  removeNotificationAction
+  removeNotificationAction,
 } from "./ToastActions";
 
 export const addNotificationActionThunk = (
@@ -26,7 +26,7 @@ export const displayToolTipThunk = (): ReduxThunkAction => {
         message:
           "Sign in and favorite some nades\nto find them quicker next time!",
         severity: "info",
-        durationSeconds: 20
+        durationSeconds: 20,
       })
     );
     dispatch(seenTipAction("seenFavoriteTip"));

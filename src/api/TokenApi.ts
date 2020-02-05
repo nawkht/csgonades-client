@@ -15,15 +15,15 @@ export class AuthApi {
   static async refreshToken(cookie?: string): AppResult<string> {
     try {
       let config: AxiosRequestConfig = {
-        withCredentials: true
+        withCredentials: true,
       };
 
       if (cookie) {
         config = {
           ...config,
           headers: {
-            cookie: cookie
-          }
+            cookie: cookie,
+          },
         };
       }
 
@@ -44,7 +44,7 @@ export class AuthApi {
         `${BASE_URL}/auth/signout`,
         {},
         {
-          withCredentials: true
+          withCredentials: true,
         }
       );
     } catch (error) {

@@ -12,7 +12,7 @@ export class NotificationApi {
   static async getNotifications(token: string): AppResult<Notification[]> {
     try {
       const res = await axios.get<Notification[]>(`${BASE_URL}/notifications`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       return ok(res.data);
     } catch (error) {
@@ -26,7 +26,7 @@ export class NotificationApi {
         `${BASE_URL}/notifications/${id}/viewed`,
         {},
         {
-          headers: { Authorization: token }
+          headers: { Authorization: token },
         }
       );
     } catch (error) {

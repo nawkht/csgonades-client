@@ -8,7 +8,7 @@ import {
   FilterByFavorites,
   FilterByNadeType,
   NadeActions,
-  SortingMethod
+  SortingMethod,
 } from "./NadeActions";
 
 export type NadeFilters = {
@@ -46,7 +46,7 @@ const defaultFilter: NadeFilters = {
   molotov: false,
   smoke: false,
   favorites: false,
-  sortingMethod: "score"
+  sortingMethod: "score",
 };
 
 const initialState: NadeState = {
@@ -60,11 +60,11 @@ const initialState: NadeState = {
     nuke: defaultFilter,
     overpass: defaultFilter,
     train: defaultFilter,
-    vertigo: defaultFilter
+    vertigo: defaultFilter,
   },
   recentNades: [],
   loadingNadesForMap: false,
-  positionModalOpen: false
+  positionModalOpen: false,
 };
 
 export const NadeReducer: Reducer<NadeState, NadeActions> = (
@@ -82,20 +82,20 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         filterByMap: {
           ...state.filterByMap,
-          [action.map]: filterForMap
-        }
+          [action.map]: filterForMap,
+        },
       };
     case "@@nades/add_selected":
       return {
         ...state,
         selectedNade: action.nade,
-        error: undefined
+        error: undefined,
       };
     case "@@nades/START_LOADING":
       return {
         ...state,
         loadingNadesForMap: true,
-        error: undefined
+        error: undefined,
       };
     case "@@nades/FILTER_BY_TYPE":
       return handleFilterByType(action, state);
@@ -104,20 +104,20 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         filterByMap: {
           ...state.filterByMap,
-          [action.map]: defaultFilter
-        }
+          [action.map]: defaultFilter,
+        },
       };
 
     case "@@nades/ADD_RECENT":
       return {
         ...state,
         recentNades: action.nades,
-        error: undefined
+        error: undefined,
       };
     case "@@nades/ADD_NADE_ERROR":
       return {
         ...state,
-        error: action.error
+        error: action.error,
       };
     case "@@nades/SET_SORTING_METHOD":
       const filter = { ...state.filterByMap[action.map] };
@@ -127,20 +127,20 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         filterByMap: {
           ...state.filterByMap,
-          [action.map]: filter
-        }
+          [action.map]: filter,
+        },
       };
     case "@@nades/TOGGLE_MAP_POSITION_MODAL":
       return {
         ...state,
-        positionModalOpen: action.visisble
+        positionModalOpen: action.visisble,
       };
     case "@@@nades/FILTER_BY_FAVORITES":
       return handleFavoriteFilterToggle(state, action);
     case "@@nades/CLEAR_SELECTED":
       return {
         ...state,
-        selectedNade: undefined
+        selectedNade: undefined,
       };
     default:
       assertNever(action);
@@ -159,8 +159,8 @@ function handleFavoriteFilterToggle(
     ...state,
     filterByMap: {
       ...state.filterByMap,
-      [action.map]: filter
-    }
+      [action.map]: filter,
+    },
   };
 }
 
@@ -171,13 +171,13 @@ function handleAddNade(
   const nadesByMap = { ...state.nadesByMap };
   nadesByMap[action.map] = {
     nades: action.nades,
-    addedAt: new Date()
+    addedAt: new Date(),
   };
   return {
     ...state,
     nadesByMap,
     loadingNadesForMap: false,
-    error: undefined
+    error: undefined,
   };
 }
 
@@ -185,11 +185,11 @@ function handleFilterByType(
   action: FilterByNadeType,
   prevState: NadeState
 ): NadeState {
-  let defaults = {
+  const defaults = {
     flash: false,
     hegrenade: false,
     molotov: false,
-    smoke: false
+    smoke: false,
   };
 
   const filter = { ...prevState.filterByMap[action.map] };
@@ -204,9 +204,9 @@ function handleFilterByType(
           flash: false,
           hegrenade: false,
           molotov: false,
-          smoke: false
-        }
-      }
+          smoke: false,
+        },
+      },
     };
   } else {
     defaults[action.nadeType] = true;
@@ -216,9 +216,9 @@ function handleFilterByType(
         ...prevState.filterByMap,
         [action.map]: {
           ...filter,
-          ...defaults
-        }
-      }
+          ...defaults,
+        },
+      },
     };
   }
 }

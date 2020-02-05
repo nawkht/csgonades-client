@@ -11,5 +11,5 @@ export const addTournamentsAction = (
   tournaments: Tournament[]
 ): AddTournaments => ({
   type: "@@tournament/ADD_LIST",
-  tournaments
+  tournaments,
 });

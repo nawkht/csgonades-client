@@ -7,7 +7,7 @@ type SetSeenTipAction = {
 
 export const seenTipAction = (tip: TipKeys): SetSeenTipAction => ({
   type: "@@tip/SEEN_TIP",
-  tip
+  tip,
 });
 
 export type TipActions = SetSeenTipAction;

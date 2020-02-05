@@ -22,7 +22,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
     return () => {
       clearTimeout(viewedTimer);
     };
-  }, []);
+  }, [notification.id, markNotificationAsViewed]);
 
   if (notification.type === "contact-msg") {
     return (

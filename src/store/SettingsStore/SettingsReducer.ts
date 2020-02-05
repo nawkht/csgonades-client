@@ -9,7 +9,7 @@ export type SettingsState = {
 };
 
 const initialState: SettingsState = {
-  theme: "light"
+  theme: "light",
 };
 
 const SettingsReducer: Reducer<SettingsState, SettingsActions> = (
@@ -20,7 +20,7 @@ const SettingsReducer: Reducer<SettingsState, SettingsActions> = (
     case "@@settings/SET_THEME":
       return {
         ...state,
-        theme: action.theme
+        theme: action.theme,
       };
     default:
       return state;
@@ -29,7 +29,7 @@ const SettingsReducer: Reducer<SettingsState, SettingsActions> = (
 
 const persistConfig: PersistConfig<SettingsState> = {
   key: "settingStore",
-  storage
+  storage,
 };
 
 export const PersistedSettingsReducer = persistReducer(

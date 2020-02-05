@@ -52,9 +52,9 @@ const PrivacyPolicyPageContainer: NextPage = () => {
             You should consult the respective privacy policies of these
             third-party ad servers for more detailed information on their
             practices as well as for instructions about how to opt-out of
-            certain practices. csgonades.com's privacy policy does not apply to,
-            and we cannot control the activities of, such other advertisers or
-            web sites.
+            certain practices. csgonades.com&apos;s privacy policy does not
+            apply to, and we cannot control the activities of, such other
+            advertisers or web sites.
           </p>
           <h2>Security</h2>
           <p>

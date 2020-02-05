@@ -15,9 +15,9 @@ export const addCurrentRouteAction = (
   meta: {
     gaPageView: {
       path: route,
-      title: title
-    }
-  }
+      title: title,
+    },
+  },
 });
 
 export type NavigationActions = AddCurrentRoute;

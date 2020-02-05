@@ -15,7 +15,7 @@ Index.getInitialProps = async ({ store }) => {
   await Promise.all([
     dispatch(fetchTournamentsThunk()),
     dispatch(fetchNewestNadesAction()),
-    dispatch(fetchSiteStatsThunk())
+    dispatch(fetchSiteStatsThunk()),
   ]);
 
   return;

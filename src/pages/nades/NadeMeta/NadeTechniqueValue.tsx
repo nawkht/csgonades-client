@@ -3,7 +3,7 @@ import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
   nadeTechniqueOptions,
   Technique,
-  techniqueString
+  techniqueString,
 } from "../../../models/Nade/Technique";
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 export const NadeTechniqueValue: FC<Props> = ({
   isEditing,
   technique,
-  onChange
+  onChange,
 }) => {
   const options = nadeTechniqueOptions();
 

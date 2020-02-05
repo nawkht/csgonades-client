@@ -30,7 +30,7 @@ const rootReducer = combineReducers({
   tipStore: PersistedTipReducer,
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
-  navigationStore: NavigationReducer
+  navigationStore: NavigationReducer,
 });
 
 function createMiddleware() {

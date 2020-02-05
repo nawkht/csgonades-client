@@ -7,20 +7,26 @@ const CsGoMaps = {
   overpass: "Overpass",
   vertigo: "Vertigo",
   train: "Train",
-  cobblestone: "Cobblestone"
+  cobblestone: "Cobblestone",
 };
 
 export type CsgoMap = keyof typeof CsGoMaps;
-export type CsgoMapKeys = keyof typeof CsGoMaps | undefined;
+export type CsgoMapKeys = keyof typeof CsGoMaps;
+
+type MapOption = {
+  key: CsgoMapKeys;
+  text: string;
+  value: CsgoMapKeys;
+};
 
 export function nadeMapOptions() {
-  let options = [];
-  for (let key in CsGoMaps) {
+  const options: MapOption[] = [];
+  for (const key in CsGoMaps) {
+    const map = key as CsgoMapKeys;
     options.push({
-      key,
-      //@ts-ignore
-      text: CsGoMaps[key],
-      value: key
+      key: map,
+      text: CsGoMaps[map],
+      value: map,
     });
   }
   return options;

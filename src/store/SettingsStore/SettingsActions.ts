@@ -12,9 +12,9 @@ export const setThemeAction = (theme: ThemeKeys): SetTheme => ({
   theme,
   meta: {
     gaEvent: {
-      label: theme
-    }
-  }
+      label: theme,
+    },
+  },
 });
 
 export type SettingsActions = SetTheme;

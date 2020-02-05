@@ -3,7 +3,7 @@ import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
   nadeTickrateOptions,
   Tickrate,
-  tickrateString
+  tickrateString,
 } from "../../../models/Nade/NadeTickrate";
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 export const NadeTickrateValue: FC<Props> = ({
   isEditing,
   tickrate,
-  onChange
+  onChange,
 }) => {
   const options = nadeTickrateOptions();
 

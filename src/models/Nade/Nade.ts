@@ -1,7 +1,6 @@
 import { UserLight } from "../User";
 import { CsgoMap } from "./CsGoMap";
 import { GfycatData } from "./GfycatData";
-import { MapSite } from "./MapSite";
 import { NadeImages } from "./NadeImages";
 import { Movement } from "./NadeMovement";
 import { Tickrate } from "./NadeTickrate";
@@ -34,7 +33,6 @@ export type Nade = {
   updatedAt: string;
   status: Status;
   statusInfo?: StatusInfo;
-  mapSite?: MapSite;
   viewCount: number;
   favoriteCount: number;
   mapEndCoord?: MapCoordinates;
@@ -48,7 +46,6 @@ export type NadeLight = {
   gfycat: GfycatData;
   images: NadeImages;
   type?: NadeType;
-  mapSite?: MapSite;
   tickrate?: Tickrate;
   createdAt: Date;
   viewCount: number;
@@ -78,7 +75,6 @@ export type NadeUpdateBody = {
   steamId?: string;
   status?: Status;
   statusInfo?: StatusInfo;
-  mapSite?: MapSite;
   createdAt?: Date;
   mapEndCoord?: MapCoordinates;
 };

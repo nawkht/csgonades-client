@@ -44,31 +44,31 @@ export type UsersActions =
 
 export const setViewingUserAction = (user: User): SetViewingUserAction => ({
   type: "@@users/SET_VIEWING_USER",
-  user
+  user,
 });
 
 export const setUserNadesAction = (nades: NadeLight[]): SetUserNadesAction => ({
   type: "@@users/SET_USER_NADES",
-  nades
+  nades,
 });
 
 export const setUsersError = (error: AppError): SetUsersErrorAction => ({
   type: "@@users/SET_ERROR",
-  error
+  error,
 });
 
 export const startEditingUserAction = (): StartEditingUserAction => ({
-  type: "@@users/START_EDITING_USER"
+  type: "@@users/START_EDITING_USER",
 });
 
 export const stopEditingUserAction = (): StopEditingUserAction => ({
-  type: "@@users/STOP_EDITING_USER"
+  type: "@@users/STOP_EDITING_USER",
 });
 
 export const startLoadingUserUpdateAction = (): StartLoadingUserUpdate => ({
-  type: "@@users/START_LOADING_UPDATE_USER"
+  type: "@@users/START_LOADING_UPDATE_USER",
 });
 
 export const stopLoadingUserUpdateAction = (): StopLoadingUserUpdate => ({
-  type: "@@users/STOP_LOADING_UPDATE_USER"
+  type: "@@users/STOP_LOADING_UPDATE_USER",
 });

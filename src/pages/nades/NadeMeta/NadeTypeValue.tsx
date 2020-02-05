@@ -3,7 +3,7 @@ import { Dropdown, DropdownProps } from "semantic-ui-react";
 import {
   NadeType,
   nadeTypeOptions,
-  nadeTypeString
+  nadeTypeString,
 } from "../../../models/Nade/NadeType";
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 export const NadeTypeValue: FC<Props> = ({
   isEditing,
   nadeType,
-  onNadeTypeChange
+  onNadeTypeChange,
 }) => {
   function onChange(_: any, data: DropdownProps) {
     const newNadeType = data.value as NadeType;

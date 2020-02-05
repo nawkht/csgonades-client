@@ -12,7 +12,7 @@ export class UserApi {
   static fetchSelf = async (token: string): AppResult<User> => {
     try {
       const res = await axios.get(`${BASE_URL}/users/self`, {
-        headers: { Authorization: token }
+        headers: { Authorization: token },
       });
       const user = res.data as User;
       return ok(user);
@@ -50,7 +50,7 @@ export class UserApi {
       const res = await axios.get(
         `${BASE_URL}/users?page=${page}&limit=${limit}&sortActive=${sortByActivity}`,
         {
-          headers: { Authorization: token }
+          headers: { Authorization: token },
         }
       );
       const users = res.data as User[];
@@ -70,7 +70,7 @@ export class UserApi {
         `${BASE_URL}/users/${steamId}`,
         updatedUser,
         {
-          headers: { Authorization: token }
+          headers: { Authorization: token },
         }
       );
 

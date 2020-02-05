@@ -9,7 +9,7 @@ export const AdminReports: FC = () => {
 
   useEffect(() => {
     fetchReports();
-  }, []);
+  }, [fetchReports]);
 
   return (
     <div>

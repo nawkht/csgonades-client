@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 type GaEvent = {
@@ -17,15 +18,18 @@ export const analyticsEventAction = (event: GaEvent): AnalyticsEvent => ({
   type: "@@analytics/EVENT",
   category: event.category,
   action: event.action,
-  label: event.label
+  label: event.label,
 });
 
 export const useAnalyticsEvent = () => {
   const dispatch = useDispatch();
 
-  function analyticsEvent(event: GaEvent) {
-    dispatch(analyticsEventAction(event));
-  }
+  const analyticsEvent = useCallback(
+    (event: GaEvent) => {
+      dispatch(analyticsEventAction(event));
+    },
+    [dispatch]
+  );
 
   return analyticsEvent;
 };
