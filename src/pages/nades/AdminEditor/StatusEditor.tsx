@@ -25,7 +25,6 @@ export const StatusEditor: FC<Props> = ({ status, statusInfo, onSave }) => {
   }
 
   function onStatusInfoChange(e: ChangeEvent<HTMLTextAreaElement>) {
-    console.log("Change");
     setCurStatusInfo(e.target.value);
   }
 

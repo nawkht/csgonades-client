@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -13,11 +13,19 @@ export const NotificationIndicator: FC = () => {
     setNotificationTabVisible(!notificationTabVisible);
   }
 
+  const notificationBtnClassNames = useMemo(() => {
+    const classes = ["notification-indicator"];
+    if (notificationCount) {
+      classes.push("active");
+    }
+    return classes.join(" ");
+  }, [notificationCount]);
+
   return (
     <>
       <div className="notification-wrapper">
         <button
-          className="notification-indicator"
+          className={notificationBtnClassNames}
           onClick={toggleNotificationTab}
         >
           <Icon name="bell" />
@@ -43,6 +51,11 @@ export const NotificationIndicator: FC = () => {
           cursor: pointer;
           font-weight: bold;
           transition: border 0.2s, color 0.2s;
+        }
+
+        .notification-indicator.active {
+          border: 1px solid ${colors.PRIMARY};
+          color: ${colors.PRIMARY};
         }
 
         .notification-indicator:hover {
