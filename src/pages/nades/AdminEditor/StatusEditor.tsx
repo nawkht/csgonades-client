@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { Button, Dropdown, DropdownProps } from "semantic-ui-react";
 import { Status, StatusInfo } from "../../../models/Nade/Nade";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
@@ -24,6 +24,11 @@ export const StatusEditor: FC<Props> = ({ status, statusInfo, onSave }) => {
     onSave(curStatus, curStatusInfo);
   }
 
+  function onStatusInfoChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    console.log("Change");
+    setCurStatusInfo(e.target.value);
+  }
+
   return (
     <>
       <div className="status-editor">
@@ -32,7 +37,7 @@ export const StatusEditor: FC<Props> = ({ status, statusInfo, onSave }) => {
           options={[
             { key: "pending", value: "pending", text: "Pending" },
             { key: "accepted", value: "accepted", text: "Accepted" },
-            { key: "declined", value: "declined", text: "Declined" }
+            { key: "declined", value: "declined", text: "Declined" },
           ]}
           value={curStatus}
         />
@@ -40,9 +45,9 @@ export const StatusEditor: FC<Props> = ({ status, statusInfo, onSave }) => {
         <br />
         {shouldDisplayInfo && (
           <textarea
-            onChange={e => setCurStatusInfo(e.target.value)}
-            placeholder={"Reason..."}
+            onChange={onStatusInfoChange}
             value={curStatusInfo}
+            placeholder={"Reason..."}
           />
         )}
 

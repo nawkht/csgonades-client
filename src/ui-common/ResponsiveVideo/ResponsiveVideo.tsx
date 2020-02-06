@@ -1,11 +1,4 @@
-import {
-  FC,
-  SyntheticEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { FC, SyntheticEvent, useMemo, useRef, useState } from "react";
 import { VideoControls } from "./VideoControls";
 import { VideoProgress } from "./VideoProgress";
 
@@ -30,20 +23,6 @@ export const ResponsiveVideo: FC<Props> = ({
   const [progress, setProgress] = useState(0);
   const [quality, setQuality] = useState<Quality>("hd");
   const [isPlaying, setIsPlaying] = useState(true);
-
-  useEffect(() => {
-    const onClick = (e: KeyboardEvent) => {
-      e.preventDefault();
-      if (e.keyCode === 32) {
-        togglePlay();
-      }
-      return;
-    };
-    document.addEventListener("keydown", onClick);
-    return () => {
-      document.removeEventListener("keydown", onClick);
-    };
-  }, []);
 
   const videoUrl = useMemo(() => {
     if (quality === "hd") {

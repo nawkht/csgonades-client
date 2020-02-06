@@ -5,7 +5,7 @@ import { Nade, Status, StatusInfo } from "../../../models/Nade/Nade";
 import {
   useDeleteNade,
   useUpdateNade,
-  useUpdateNadeStatus
+  useUpdateNadeStatus,
 } from "../../../store/NadeStore/NadeHooks";
 import { ForceUserSettings } from "./ForceUserSettings";
 import { StatusEditor } from "./StatusEditor";
@@ -63,7 +63,7 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
       <br />
       <Button onClick={onUpdateCreatedAt}>UPDATE YEAR</Button>
       <h3>Delete</h3>
-      <p>Write "DELETE":</p>
+      <p>Write &quot;DELETE&quot;:</p>
       <Input
         value={deleteConfimMessage}
         onChange={(_, text) => {
