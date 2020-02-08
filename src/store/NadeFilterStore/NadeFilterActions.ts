@@ -27,7 +27,7 @@ export type ToggleFilterByFavorites = {
 
 export type ResetNadeFilter = {
   type: "@@nadefilter/RESET_NADE_FILTER";
-  meta: Meta;
+  meta?: Meta;
 };
 
 type SwitchTickrateFilter = {
@@ -57,9 +57,11 @@ export const toggleFilterByFavoritesAction = (): ToggleFilterByFavorites => ({
   meta: { gaEvent: {} },
 });
 
-export const resetNadeFilterAction = (): ResetNadeFilter => ({
+export const resetNadeFilterAction = (
+  ignoreAnalytics = false
+): ResetNadeFilter => ({
   type: "@@nadefilter/RESET_NADE_FILTER",
-  meta: { gaEvent: {} },
+  meta: ignoreAnalytics ? undefined : { gaEvent: {} },
 });
 
 export const filterByMapCoordsAction = (

@@ -23,7 +23,7 @@ export const Filters: FC<Props> = ({ map, onOpenOpen, mapViewIsOpen }) => {
   const { resetFilter } = useNadeFilter();
 
   useEffect(() => {
-    resetFilter();
+    resetFilter(true);
   }, [map, resetFilter]);
 
   return (

@@ -32,9 +32,12 @@ export const useNadeFilter = () => {
     );
   }, [nadeFilters]);
 
-  const resetFilter = useCallback(() => {
-    dispatch(resetNadeFilterAction());
-  }, [dispatch]);
+  const resetFilter = useCallback(
+    (ignoreAnalytics = false) => {
+      dispatch(resetNadeFilterAction(ignoreAnalytics));
+    },
+    [dispatch]
+  );
 
   const filterByType = useCallback(
     (nadeType: NadeType) => {
