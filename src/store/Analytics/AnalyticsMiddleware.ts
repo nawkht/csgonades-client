@@ -78,14 +78,14 @@ class GoogleAnalytics {
     }
     ReactGA.initialize("UA-71896446-6", {
       testMode: IS_PROD ? false : true,
-      debug: IS_PROD ? false : false
+      debug: IS_PROD ? false : false,
     });
     window.GA_INITIALIZED = true;
   }
 }
 
 export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
-  getState
+  getState,
 }) => next => action => {
   if (action.type === "@@analytics/EVENT") {
     const state = getState();
@@ -96,7 +96,7 @@ export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
       category: analyticsAction.category,
       action: analyticsAction.action,
       label: analyticsAction.label,
-      ignore: ignoreEvent
+      ignore: ignoreEvent,
     });
   }
 
@@ -109,13 +109,14 @@ export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
     const [gaCategory, gaAction] = action.type.split("/");
 
     const cleanCategory = gaCategory.replace(/@/g, "");
+    const cleanAction = gaAction.toLowerCase().replace(/_/g, " ");
 
     const event = {
       category: cleanCategory,
-      action: gaAction,
+      action: cleanAction,
       label: gaEvent.label,
       value: gaEvent.value,
-      ignore: ignoreEvent
+      ignore: ignoreEvent,
     };
 
     GoogleAnalytics.event(event);
@@ -127,7 +128,7 @@ export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
     const pageView = {
       path: meta.gaPageView.path,
       title: meta.gaPageView.title,
-      ignore: ignoreEvent
+      ignore: ignoreEvent,
     };
 
     GoogleAnalytics.pageView(pageView);
