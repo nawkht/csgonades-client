@@ -2,18 +2,18 @@ import { FC } from "react";
 import { TiStarFullOutline } from "react-icons/ti";
 import { Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   map: CsgoMap;
 };
 
-export const FavoriteFilterButton: FC<Props> = ({ map }) => {
+export const FavoriteFilterButton: FC<Props> = () => {
   const { colors } = useTheme();
-  const { toggleFilterByFavorites, isShowingFavorites } = useNadeFilter(map);
+  const { toggleFilterByFavorites, byFavorites } = useNadeFilter();
 
-  const active = isShowingFavorites ? "active" : "";
+  const active = byFavorites ? "active" : "";
 
   return (
     <>

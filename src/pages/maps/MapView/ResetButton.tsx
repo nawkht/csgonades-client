@@ -2,24 +2,24 @@ import { FC } from "react";
 import { FaUndo } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   map: CsgoMap;
 };
 
-export const ResetButton: FC<Props> = ({ map }) => {
+export const ResetButton: FC<Props> = () => {
   const { colors } = useTheme();
-  const { reset, canReset } = useNadeFilter(map);
+  const { isDefault, resetFilter } = useNadeFilter();
 
   function onReset() {
-    if (canReset) {
-      reset();
+    if (!isDefault) {
+      resetFilter();
     }
   }
 
-  const className = canReset ? "reset" : "reset disabled";
+  const className = isDefault ? "reset disabled" : "reset";
 
   return (
     <>

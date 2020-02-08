@@ -1,15 +1,14 @@
 import { FC } from "react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
 import { TypeToggler } from "./TypeToggler";
 
 type Props = {
   map: CsgoMap;
 };
 
-export const NadeTypeFilters: FC<Props> = ({ map }) => {
-  const { filterByType, nadeFilter } = useNadeFilter(map);
-  const { flash, hegrenade, molotov, smoke } = nadeFilter;
+export const NadeTypeFilters: FC<Props> = () => {
+  const { filterByType, byType } = useNadeFilter();
 
   function onSmokeClick() {
     filterByType("smoke");
@@ -30,11 +29,23 @@ export const NadeTypeFilters: FC<Props> = ({ map }) => {
   return (
     <>
       <div className="nade-filter">
-        <TypeToggler active={smoke} type="smoke" onClick={onSmokeClick} />
-        <TypeToggler active={flash} type="flash" onClick={onFlashClick} />
-        <TypeToggler active={molotov} type="molotov" onClick={onMolotovClick} />
         <TypeToggler
-          active={hegrenade}
+          active={byType === "smoke"}
+          type="smoke"
+          onClick={onSmokeClick}
+        />
+        <TypeToggler
+          active={byType === "flash"}
+          type="flash"
+          onClick={onFlashClick}
+        />
+        <TypeToggler
+          active={byType === "molotov"}
+          type="molotov"
+          onClick={onMolotovClick}
+        />
+        <TypeToggler
+          active={byType === "hegrenade"}
           type="hegrenade"
           onClick={onHeGrenadeClick}
         />

@@ -4,7 +4,6 @@ import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useIsSignedIn } from "../../../store/AuthStore/AuthHooks";
 import { FavFilter } from "./FavFilter";
 import { NadeFilterResetButton } from "./NadeFilterResetButton";
-import { NadeSorter } from "./NadeSorter";
 import { NadeTypeFilters } from "./NadeTypeFilters";
 
 type Props = {
@@ -21,10 +20,6 @@ export const Filters: FC<Props> = ({ map }) => {
           <NadeTypeFilters map={map} />
 
           {isSignedIn && <FavFilter map={map} />}
-
-          <div className="nade-sorter">
-            <NadeSorter map={map} />
-          </div>
 
           <NadeFilterResetButton map={map} />
         </div>
@@ -46,9 +41,6 @@ export const Filters: FC<Props> = ({ map }) => {
             display: flex;
             margin-left: ${Dimensions.PADDING_MEDIUM};
             margin-right: ${Dimensions.PADDING_MEDIUM};
-          }
-          .nade-sorter {
-            display: none;
           }
 
           .nade-filter {

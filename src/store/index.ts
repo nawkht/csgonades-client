@@ -7,6 +7,7 @@ import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
+import { NadeFilterReducer } from "./NadeFilterStore/NadeFilterReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
 import { NavigationReducer } from "./NavigationStore/NavigationReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
   navigationStore: NavigationReducer,
+  nadeFilterStore: NadeFilterReducer,
 });
 
 function createMiddleware() {

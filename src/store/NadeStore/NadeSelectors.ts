@@ -20,12 +20,6 @@ export const nadeForMapLastUpdateSelector = (map?: CsgoMap) => {
   };
 };
 
-export const filterForMapSelector = (map: CsgoMap) => {
-  return (state: AppState) => {
-    return state.nadeStore.filterByMap[map];
-  };
-};
-
 export const nadesForMapTimeSinceFetchSelector = (map: CsgoMap) => {
   return (state: AppState) => {
     return state.nadeStore.nadesByMap[map]?.addedAt;
@@ -46,9 +40,6 @@ const nadeLoadingSelector = (state: AppState) =>
 export const nadeErrorSelector = (state: AppState) => {
   return state.nadeStore.error;
 };
-
-export const postionModalOpenSelector = (state: AppState) =>
-  state.nadeStore.positionModalOpen;
 
 export const useIsLoadingNade = () => {
   const isLoading = useSelector(nadeLoadingSelector);

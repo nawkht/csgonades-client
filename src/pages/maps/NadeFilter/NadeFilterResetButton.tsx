@@ -1,22 +1,22 @@
 import { FC } from "react";
 import { Icon, Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { useNadeFilter } from "../../../store/NadeStore/NadeHooks";
+import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
 
 type Props = {
   map: CsgoMap;
 };
 
-export const NadeFilterResetButton: FC<Props> = ({ map }) => {
-  const { reset, canReset } = useNadeFilter(map);
+export const NadeFilterResetButton: FC<Props> = () => {
+  const { isDefault, resetFilter } = useNadeFilter();
 
   function onReset() {
-    if (canReset) {
-      reset();
+    if (!isDefault) {
+      resetFilter();
     }
   }
 
-  const className = canReset ? "reset" : "reset disabled";
+  const className = !isDefault ? "reset" : "reset disabled";
 
   return (
     <>

@@ -1,13 +1,15 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { Popup } from "semantic-ui-react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useIsSignedIn } from "../../../store/AuthStore/AuthHooks";
+import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { FavoriteFilterButton } from "./FavoriteFilterButton";
 import { NadeTypeFilters } from "./NadeTypeFilters";
 import { ResetButton } from "./ResetButton";
+import { TickrateFilter } from "./TickrateFilter";
 
 type Props = {
   map: CsgoMap;
@@ -18,6 +20,11 @@ type Props = {
 export const Filters: FC<Props> = ({ map, onOpenOpen, mapViewIsOpen }) => {
   const { colors } = useTheme();
   const isSignedIn = useIsSignedIn();
+  const { resetFilter } = useNadeFilter();
+
+  useEffect(() => {
+    resetFilter();
+  }, [map, resetFilter]);
 
   return (
     <>
@@ -46,6 +53,7 @@ export const Filters: FC<Props> = ({ map, onOpenOpen, mapViewIsOpen }) => {
         )}
 
         <NadeTypeFilters map={map} />
+        <TickrateFilter />
         {isSignedIn && <FavoriteFilterButton map={map} />}
         <ResetButton map={map} />
       </div>

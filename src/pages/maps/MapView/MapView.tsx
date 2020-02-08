@@ -1,10 +1,8 @@
 import { FC, useMemo, useRef, useState } from "react";
 import { Dimensions } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import {
-  useNadeCoordinatesForMap,
-  useNadeFilter,
-} from "../../../store/NadeStore/NadeHooks";
+import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
+import { useNadeCoordinatesForMap } from "../../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { useMapViewTip } from "../../../store/TipStore/TipHooks";
 import { Filters } from "./Filters";
@@ -21,7 +19,7 @@ export const MapView: FC<Props> = ({ map }) => {
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadeCoordinatesForMap(map);
   const { colors } = useTheme();
-  const { filterByMapCoords } = useNadeFilter(map);
+  const { filterByMapCoords } = useNadeFilter();
   const { didOpenMapView } = useMapViewTip();
 
   const wrapperClassName = useMemo(() => {
