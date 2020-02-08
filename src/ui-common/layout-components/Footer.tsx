@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
-import { Dimensions } from "../../constants/Constants";
+import { APP_VERSION, Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 export const Footer: FC = () => {
@@ -11,7 +11,9 @@ export const Footer: FC = () => {
   return (
     <>
       <div className="footer">
-        <div className="copyright">© {year} CSGO Nades</div>
+        <div className="copyright">
+          © {year} CSGO Nades <span className="version">{APP_VERSION}</span>
+        </div>
         <div className="footer-links">
           <Link href="/about" as="/about">
             <a>About</a>
@@ -70,6 +72,12 @@ export const Footer: FC = () => {
 
         .powered-by a:hover {
           text-decoration: underline;
+        }
+
+        .version {
+          opacity: 0.2;
+          font-size: 0.75rem;
+          margin-left: 6px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

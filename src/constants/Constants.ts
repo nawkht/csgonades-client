@@ -1,3 +1,5 @@
+import packageJson from "../../package.json";
+
 export const Dimensions = {
   SIDEBAR_WIDTH: "180px",
   HEADER_HEIGHT: "65px",
@@ -21,3 +23,5 @@ export const LayerPosition = {
   UNDER_UI: 900,
   UI: 950,
 };
+
+export const APP_VERSION = packageJson.version;
