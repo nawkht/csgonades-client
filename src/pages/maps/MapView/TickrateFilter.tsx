@@ -31,7 +31,7 @@ export const TickrateFilter: FC<Props> = ({}) => {
     } else if (byTickrate === "tick64") {
       return "64";
     } else {
-      return "Any";
+      return "Both";
     }
   }, [byTickrate]);
 
