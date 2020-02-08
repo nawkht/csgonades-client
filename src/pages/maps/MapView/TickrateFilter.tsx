@@ -1,12 +1,29 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
+import { useAnalyticsEvent } from "../../../store/Analytics/AnalyticsActions";
 import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
 export const TickrateFilter: FC<Props> = ({}) => {
+  const analyticsEvent = useAnalyticsEvent();
   const { byTickrate, switchTickrate } = useNadeFilter();
   const { colors } = useTheme();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (byTickrate !== "any") {
+        analyticsEvent({
+          category: "Nadefilter",
+          action: "Tickrate",
+          label: byTickrate,
+        });
+      }
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [byTickrate, analyticsEvent]);
 
   const tickrateString = useMemo(() => {
     if (byTickrate === "tick128") {
