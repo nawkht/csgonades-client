@@ -10,6 +10,7 @@ import {
   NadeUpdateBody,
 } from "../../models/Nade/Nade";
 import { userSelector } from "../AuthStore/AuthSelectors";
+import { favoritedNadeIdsSelector } from "../FavoriteStore/FavoriteSelectors";
 import { useNadeSorter } from "../NadeFilterStore/NadeFilterHooks";
 import {
   nadeForMapLastUpdateSelector,
@@ -86,14 +87,27 @@ export const useNadesForMap = (map: CsgoMap) => {
   const nadesAddedAt = useSelector(nadeForMapLastUpdateSelector(map));
   const nadesForMap = useSelector(nadesForMapSelector(map));
   const nadeSorter = useNadeSorter();
+  const favoritedNades = useSelector(favoritedNadeIdsSelector);
 
   const nades = useMemo(() => {
     if (!nadesForMap) {
       return [];
     }
-    return nadeSorter(nadesForMap);
+
+    const nadesWithFavs = nadesForMap.map(n => {
+      if (favoritedNades.includes(n.id)) {
+        return {
+          ...n,
+          isFavorited: true,
+        };
+      } else {
+        return n;
+      }
+    });
+
+    return nadeSorter(nadesWithFavs);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nadesForMap, nadesAddedAt, nadeSorter]);
+  }, [nadesForMap, nadesAddedAt, nadeSorter, favoritedNades]);
 
   return {
     nades,

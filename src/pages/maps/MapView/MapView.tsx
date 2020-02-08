@@ -1,10 +1,9 @@
-import { FC, useMemo, useRef, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { Dimensions } from "../../../constants/Constants";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../../store/NadeFilterStore/NadeFilterHooks";
 import { useNadeCoordinatesForMap } from "../../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
-import { useMapViewTip } from "../../../store/TipStore/TipHooks";
 import { Filters } from "./Filters";
 import { MapPosIcon } from "./MapPosIcon";
 
@@ -20,7 +19,13 @@ export const MapView: FC<Props> = ({ map }) => {
   const nades = useNadeCoordinatesForMap(map);
   const { colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter();
-  const { didOpenMapView } = useMapViewTip();
+
+  useEffect(() => {
+    if (ref.current) {
+      setMapLoaded(true);
+      setMapWidth(ref.current.offsetWidth);
+    }
+  }, [map]);
 
   const wrapperClassName = useMemo(() => {
     const classes = ["mapview-wrapper"];
@@ -30,13 +35,6 @@ export const MapView: FC<Props> = ({ map }) => {
     return classes.join(" ");
   }, [visisble]);
 
-  function onImageLoad() {
-    if (ref.current) {
-      setMapLoaded(true);
-      setMapWidth(ref.current.offsetWidth);
-    }
-  }
-
   function onNadeClick(pos: { x: number; y: number }) {
     filterByMapCoords(pos);
     setVisisble(false);
@@ -45,7 +43,6 @@ export const MapView: FC<Props> = ({ map }) => {
   function onHandleClick() {
     if (visisble) {
       setVisisble(false);
-      didOpenMapView();
     } else {
       setVisisble(true);
     }
@@ -59,7 +56,6 @@ export const MapView: FC<Props> = ({ map }) => {
             className="mapview-img"
             src={`/mapsoverlays/${map}.jpg`}
             alt="Map overview image"
-            onLoad={onImageLoad}
           />
 
           {mapLoaded &&
