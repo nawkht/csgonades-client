@@ -92,9 +92,13 @@ export const analyticsMiddleware: Middleware<any, AppState, Dispatch> = ({
     const ignoreEvent = state.authStore.user?.role === "administrator";
 
     const analyticsAction = action as AnalyticsEvent;
+
+    const cleanCategory = analyticsAction.category.replace(/@/g, "");
+    const cleanAction = analyticsAction.action.toLowerCase().replace(/_/g, " ");
+
     GoogleAnalytics.event({
-      category: analyticsAction.category,
-      action: analyticsAction.action,
+      category: cleanCategory,
+      action: cleanAction,
       label: analyticsAction.label,
       ignore: ignoreEvent,
     });
