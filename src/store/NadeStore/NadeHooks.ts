@@ -86,7 +86,7 @@ export const useUpdateNadeStatus = () => {
 export const useNadesForMap = (map: CsgoMap) => {
   const nadesAddedAt = useSelector(nadeForMapLastUpdateSelector(map));
   const nadesForMap = useSelector(nadesForMapSelector(map));
-  const nadeSorter = useNadeSorter();
+  const nadeFilter = useNadeSorter();
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
 
   const nades = useMemo(() => {
@@ -105,9 +105,13 @@ export const useNadesForMap = (map: CsgoMap) => {
       }
     });
 
-    return nadeSorter(nadesWithFavs);
+    nadesWithFavs.sort((a, b) => {
+      return b.score - a.score;
+    });
+
+    return nadeFilter(nadesWithFavs);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nadesForMap, nadesAddedAt, nadeSorter, favoritedNades]);
+  }, [nadesForMap, nadesAddedAt, nadeFilter, favoritedNades]);
 
   return {
     nades,
