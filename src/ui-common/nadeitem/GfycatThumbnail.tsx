@@ -1,17 +1,10 @@
-import {
-  FC,
-  SyntheticEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { FaVideo } from "react-icons/fa";
+import { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useAnalyticsEvent } from "../../store/Analytics/AnalyticsActions";
 import { useRegisterView } from "../../store/NadeStore/NadeHooks";
 import { SeekBar } from "../SeekBar";
+import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
 
 type Props = {
   nade: NadeLight;
@@ -32,14 +25,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
       setHasSentViewedEvent(true);
     }
   }, [progress, hasSentViewedEvent, nade]);
-
-  const videoIconClassName = useMemo(() => {
-    const classes = ["video-icon-wrapper"];
-    if (hovering) {
-      classes.push("hidden");
-    }
-    return classes.join(" ");
-  }, [hovering]);
 
   function onVideoTimeUpdate({
     currentTarget,
@@ -95,12 +80,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           />
         </div>
 
-        <div className={videoIconClassName}>
-          <div className="video-icon">
-            <FaVideo style={{ display: "block" }} />
-          </div>
-        </div>
-
         {hovering && (
           <div className="back">
             <video
@@ -117,6 +96,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
             </video>
             <SeekBar progress={progress} />
+            <GfycatThumbnailControls />
           </div>
         )}
       </div>

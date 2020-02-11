@@ -89,9 +89,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
         as={`/nades/${notification.nadeId}`}
       >
         <a className={wasViewed ? "notification" : "notification new"}>
-          <div className="noti-msg">
-            <Icon name="bell" /> {notificationMessage(notification)}
-          </div>
+          <div className="noti-msg">{notificationMessage(notification)}</div>
           <div className="noti-date">
             {prettyDateTime(notification.createdAt)}
           </div>
@@ -108,6 +106,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
 
         .noti-msg {
           color: ${colors.TEXT};
+          display: flex;
         }
 
         .noti-date {
@@ -146,18 +145,36 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
   );
 };
 
-function notificationMessage(notification: Notification) {
+function notificationMessage(
+  notification: Notification
+): JSX.Element | undefined {
   switch (notification.type) {
     case "accepted-nade":
-      return `Your nade was accepted!`;
+      return <div>Your nade was accepted!</div>;
     case "contact-msg":
-      return "New contact message.";
+      return <div>New contact message.</div>;
     case "declined-nade":
-      return "Your nade was declined";
+      return <div>Your nade was declined.</div>;
     case "favorite":
-      return `Your nade was favorited ${notification.count} times.`;
+      const favCount = notification.favoritedBy.length;
+      if (favCount === 1) {
+        return (
+          <div>
+            Your nade was favorited by
+            <br />
+            {notification.favoritedBy[0]}.
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            Your nade was favorited by
+            <br />${notification.favoritedBy[0]} and {favCount - 1} others.
+          </div>
+        );
+      }
     case "new-nade":
-      return "New nade!";
+      return <div>New nade!</div>;
     default:
       break;
   }

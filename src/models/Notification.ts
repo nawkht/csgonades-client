@@ -20,7 +20,7 @@ type FavoriteNotification = {
   id: string;
   type: "favorite";
   nadeId: string;
-  count: number;
+  favoritedBy: string[];
   subjectSteamId: string;
   viewed: boolean;
   createdAt: Date;
