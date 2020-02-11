@@ -3,7 +3,12 @@ import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { Nade, NadeLight } from "../../models/Nade/Nade";
 import { assertNever } from "../../utils/Common";
 import { AppError } from "../../utils/ErrorUtil";
-import { AddNadesForMapAction, NadeActions } from "./NadeActions";
+import {
+  AddNadesForMapAction,
+  NadeActions,
+  OnFavoriteNadeAction,
+  OnUnFavoriteNadeAction,
+} from "./NadeActions";
 
 type MapNadeDate = {
   nades: NadeLight[];
@@ -61,11 +66,77 @@ export const NadeReducer: Reducer<NadeState, NadeActions> = (
         ...state,
         selectedNade: undefined,
       };
+    case "@@nades/ON_FAVORITE_NADE":
+      return handleOnAddFavorite(action, state);
+    case "@@nades/ON_UNFAVORITE_NADE":
+      return handleOnUnFavorite(action, state);
     default:
       assertNever(action);
       return state;
   }
 };
+
+function handleOnAddFavorite(
+  action: OnFavoriteNadeAction,
+  state: NadeState
+): NadeState {
+  const updateSelected = state.selectedNade
+    ? { ...state.selectedNade }
+    : undefined;
+  const nadesByMap = {
+    ...state.nadesByMap,
+  };
+
+  if (updateSelected) {
+    updateSelected.favoriteCount += 1;
+  }
+
+  if (action.nade.map) {
+    // Update nade count if we find it in the nadesForMap dict
+    nadesByMap[action.nade.map]?.nades.forEach(n => {
+      if (n.id === action.nade.id) {
+        n.favoriteCount += 1;
+      }
+    });
+  }
+
+  return {
+    ...state,
+    selectedNade: updateSelected,
+    nadesByMap: nadesByMap,
+  };
+}
+
+function handleOnUnFavorite(
+  action: OnUnFavoriteNadeAction,
+  state: NadeState
+): NadeState {
+  const updateSelected = state.selectedNade
+    ? { ...state.selectedNade }
+    : undefined;
+  const nadesByMap = {
+    ...state.nadesByMap,
+  };
+
+  if (updateSelected) {
+    updateSelected.favoriteCount -= 1;
+  }
+
+  if (action.nade.map) {
+    // Update nade count if we find it in the nadesForMap dict
+    nadesByMap[action.nade.map]?.nades.forEach(n => {
+      if (n.id === action.nade.id) {
+        n.favoriteCount -= 1;
+      }
+    });
+  }
+
+  return {
+    ...state,
+    selectedNade: updateSelected,
+    nadesByMap: nadesByMap,
+  };
+}
 
 function handleAddNade(
   action: AddNadesForMapAction,

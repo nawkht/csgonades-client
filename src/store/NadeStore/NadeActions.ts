@@ -32,13 +32,35 @@ export type AddNadeError = {
   error: AppError;
 };
 
+export type OnFavoriteNadeAction = {
+  type: "@@nades/ON_FAVORITE_NADE";
+  nade: Nade;
+};
+
+export type OnUnFavoriteNadeAction = {
+  type: "@@nades/ON_UNFAVORITE_NADE";
+  nade: Nade;
+};
+
 export type NadeActions =
   | AddNadesForMapAction
   | AddRcentNadesAction
   | AddSelectedNadeAction
   | StartLoadingNadeAction
   | AddNadeError
-  | ClearSelectedNadeAction;
+  | ClearSelectedNadeAction
+  | OnFavoriteNadeAction
+  | OnUnFavoriteNadeAction;
+
+export const onFavoriteNadeAction = (nade: Nade): OnFavoriteNadeAction => ({
+  type: "@@nades/ON_FAVORITE_NADE",
+  nade,
+});
+
+export const onUnFavoriteNadeAction = (nade: Nade): OnUnFavoriteNadeAction => ({
+  type: "@@nades/ON_UNFAVORITE_NADE",
+  nade,
+});
 
 export const addNadeError = (error: AppError): AddNadeError => ({
   type: "@@nades/ADD_NADE_ERROR",

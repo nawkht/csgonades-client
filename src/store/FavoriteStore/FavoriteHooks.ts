@@ -6,7 +6,6 @@ import { allFavoritesSelector, favoriteInProgress } from "./FavoriteSelectors";
 import {
   addFavoriteThunkAction,
   addUnFavoriteThunkAction,
-  fetchFavoritedNadesThunkAction,
 } from "./FavoriteThunks";
 
 export const useAddFavorite = () => {
@@ -43,16 +42,6 @@ export const useIsFavorited = (nadeId: string): Favorite | undefined => {
   }, [favories, nadeId]);
 
   return result;
-};
-
-export const useFetchFavoritedNades = () => {
-  const dispatch = useDispatch();
-
-  const fetchFavoritedNades = useCallback(() => {
-    dispatch(fetchFavoritedNadesThunkAction());
-  }, [dispatch]);
-
-  return fetchFavoritedNades;
 };
 
 export const useIsFavoriteInProgress = () => {

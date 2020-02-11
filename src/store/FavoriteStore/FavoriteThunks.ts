@@ -1,58 +1,17 @@
 import { FavoriteApi } from "../../api/FavoriteApi";
-import { NadeApi } from "../../api/NadeApi";
 import { Nade } from "../../models/Nade/Nade";
-import { fetchNadesByMapActionThunk } from "../NadeStore/NadeThunks";
+import {
+  onFavoriteNadeAction,
+  onUnFavoriteNadeAction,
+} from "../NadeStore/NadeActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
   addAllFavoritesAction,
   addFavoriteAction,
-  addFavoritedNadesAction,
   favoriteInProgressBeginAction,
   favoriteInProgressEndAction,
   removeFavoriteAction,
-  startLoadingFavoritedNadesAction,
-  stopLoadingFavoritedNades,
 } from "./FavoriteActions";
-
-const delay = (seconds: number) => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, seconds * 1000);
-  });
-};
-
-export const fetchFavoritedNadesThunkAction = (): ReduxThunkAction => {
-  return async (dispatch, getState) => {
-    const token = getState().authStore.token;
-
-    if (!token) {
-      return;
-    }
-
-    dispatch(startLoadingFavoritedNadesAction());
-    const favoritesResult = await FavoriteApi.getUserFavorites(token);
-
-    if (favoritesResult.isErr()) {
-      console.warn("Error", favoritesResult.error);
-      return;
-    }
-
-    const favorites = favoritesResult.value;
-    dispatch(addAllFavoritesAction(favorites));
-    const nadeIds = favorites.map(favorite => favorite.nadeId);
-    const nadesResult = await NadeApi.byNadeIdList(nadeIds);
-    dispatch(stopLoadingFavoritedNades());
-
-    if (nadesResult.isErr()) {
-      console.error(nadesResult.error);
-      return;
-    }
-
-    const nades = nadesResult.value;
-    return dispatch(addFavoritedNadesAction(nades));
-  };
-};
 
 export const addFavoriteThunkAction = (nade: Nade): ReduxThunkAction => {
   return async (dispatch, getState) => {
@@ -72,14 +31,11 @@ export const addFavoriteThunkAction = (nade: Nade): ReduxThunkAction => {
       return dispatch(favoriteInProgressEndAction());
     }
 
-    const favorites = result.value;
+    const favorite = result.value;
 
-    dispatch(addFavoriteAction(favorites));
+    dispatch(addFavoriteAction(favorite));
     dispatch(favoriteInProgressEndAction());
-
-    // Allow cache to invalidate server side
-    await delay(1);
-    dispatch(fetchNadesByMapActionThunk(nade.map, true));
+    dispatch(onFavoriteNadeAction(nade));
   };
 };
 
@@ -113,9 +69,6 @@ export const addUnFavoriteThunkAction = (
 
     dispatch(addAllFavoritesAction(favorites));
     dispatch(favoriteInProgressEndAction());
-
-    // Allow cache to invalidate server side
-    await delay(1);
-    dispatch(fetchNadesByMapActionThunk(nade.map, true));
+    dispatch(onUnFavoriteNadeAction(nade));
   };
 };
