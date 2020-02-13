@@ -169,7 +169,8 @@ function notificationMessage(
         return (
           <div>
             Your nade was favorited by
-            <br />${notification.favoritedBy[0]} and {favCount - 1} others.
+            <br />
+            {notification.favoritedBy[0]} and {favCount - 1} others.
           </div>
         );
       }
