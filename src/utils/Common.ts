@@ -60,4 +60,8 @@ export function cleanGfycatUrl(gfycatIdOrUrl: string): string {
   return gfyId[0];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export function assertNever(never: never) {}
+
+export const pluralize = (count: number, noun: string, suffix = "s") =>
+  `${count} ${noun}${count !== 1 ? suffix : ""}`;

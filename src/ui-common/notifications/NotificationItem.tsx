@@ -4,6 +4,7 @@ import { Icon } from "semantic-ui-react";
 import { Notification } from "../../models/Notification";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { pluralize } from "../../utils/Common";
 import { prettyDateTime } from "../../utils/DateUtils";
 
 type Props = {
@@ -170,7 +171,8 @@ function notificationMessage(
           <div>
             Your nade was favorited by
             <br />
-            {notification.favoritedBy[0]} and {favCount - 1} others.
+            {notification.favoritedBy[0]} and {pluralize(favCount - 1, "other")}
+            .
           </div>
         );
       }
