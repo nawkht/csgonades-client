@@ -27,8 +27,14 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
       <div className="user-details">
         <h1>
           <img src={user.avatar || ""} alt={`avatar for ${user.nickname}`} />{" "}
-          {user.nickname}
+          <a
+            href={`https://steamcommunity.com/profiles/${user.steamId}`}
+            rel="nofollow"
+          >
+            {user.nickname}
+          </a>
         </h1>
+
         {user.role !== "user" && (
           <span className="user-role-badge">{capitalize(user.role)}</span>
         )}
@@ -61,6 +67,10 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           align-self: flex-start;
           border-radius: ${Dimensions.BORDER_RADIUS};
           margin-bottom: ${Dimensions.GUTTER_SIZE};
+        }
+
+        .user-details a {
+          color: ${colors.TEXT};
         }
 
         .user-details h1 {
