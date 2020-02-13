@@ -29,7 +29,8 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           <img src={user.avatar || ""} alt={`avatar for ${user.nickname}`} />{" "}
           <a
             href={`https://steamcommunity.com/profiles/${user.steamId}`}
-            rel="nofollow"
+            rel="noopener noreferrer nofollow"
+            target="_blank"
           >
             {user.nickname}
           </a>
