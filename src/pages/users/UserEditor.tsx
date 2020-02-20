@@ -7,7 +7,7 @@ import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import {
   useUsersActions,
-  useUsersState
+  useUsersState,
 } from "../../store/UsersStore/UsersHooks";
 
 type Props = {
@@ -36,10 +36,15 @@ export const UserEditor: FC<Props> = ({ user }) => {
       bio,
       email,
       nickname,
-      createdAt: createdAt || undefined
+      createdAt: createdAt || undefined,
     };
 
     updateUser(updatedUserFields);
+  }
+
+  function updateNickname(e: any) {
+    const clean = e.target.value.replace(/[^A-Za-z0-9]/g, "");
+    setNickname(clean);
   }
 
   return (
@@ -48,10 +53,10 @@ export const UserEditor: FC<Props> = ({ user }) => {
         <Form onSubmit={onSubmit} loading={isUpdatingUser}>
           <Form.Field>
             <label>Nickname</label>
-            <Form.Input
+            <input
               placeholder="Nickname"
               value={nickname}
-              onChange={e => setNickname(e.target.value)}
+              onChange={updateNickname}
             />
           </Form.Field>
           <Form.Field>
