@@ -1,11 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { ok } from "neverthrow";
+import { Config } from "../constants/Constants";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
-
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.csgonades.com"
-    : "http://localhost:5000";
 
 type TokenRes = {
   accessToken: string;
@@ -27,7 +23,10 @@ export class AuthApi {
         };
       }
 
-      const res = await axios.get<TokenRes>(`${BASE_URL}/auth/refresh`, config);
+      const res = await axios.get<TokenRes>(
+        `${Config.API_URL}/auth/refresh`,
+        config
+      );
       return ok(res.data.accessToken);
     } catch (error) {
       return extractApiError(error);
@@ -35,13 +34,17 @@ export class AuthApi {
   }
 
   static async setSessionCookie(): Promise<void> {
-    await axios.post(`${BASE_URL}/initSession`, {}, { withCredentials: true });
+    await axios.post(
+      `${Config.API_URL}/initSession`,
+      {},
+      { withCredentials: true }
+    );
   }
 
   static async signOut(): Promise<void> {
     try {
       await axios.post(
-        `${BASE_URL}/auth/signout`,
+        `${Config.API_URL}/auth/signout`,
         {},
         {
           withCredentials: true,

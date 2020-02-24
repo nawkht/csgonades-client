@@ -1,17 +1,13 @@
 import axios from "axios";
 import { ok } from "neverthrow";
+import { Config } from "../constants/Constants";
 import { User, UserUpdateDTO } from "../models/User";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
-
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.csgonades.com"
-    : "http://localhost:5000";
 
 export class UserApi {
   static fetchSelf = async (token: string): AppResult<User> => {
     try {
-      const res = await axios.get(`${BASE_URL}/users/self`, {
+      const res = await axios.get(`${Config.API_URL}/users/self`, {
         headers: { Authorization: token },
       });
       const user = res.data as User;
@@ -32,7 +28,7 @@ export class UserApi {
         config = { headers: { Authorization: token } };
       }
 
-      const res = await axios.get(`${BASE_URL}/users/${steamId}`, config);
+      const res = await axios.get(`${Config.API_URL}/users/${steamId}`, config);
       const user = res.data as User;
       return ok(user);
     } catch (error) {
@@ -48,7 +44,7 @@ export class UserApi {
   ): AppResult<User[]> => {
     try {
       const res = await axios.get(
-        `${BASE_URL}/users?page=${page}&limit=${limit}&sortActive=${sortByActivity}`,
+        `${Config.API_URL}/users?page=${page}&limit=${limit}&sortActive=${sortByActivity}`,
         {
           headers: { Authorization: token },
         }
@@ -67,7 +63,7 @@ export class UserApi {
   ): AppResult<User> => {
     try {
       const res = await axios.patch(
-        `${BASE_URL}/users/${steamId}`,
+        `${Config.API_URL}/users/${steamId}`,
         updatedUser,
         {
           headers: { Authorization: token },

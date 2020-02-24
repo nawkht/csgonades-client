@@ -1,11 +1,7 @@
 import axios from "axios";
 import { ok } from "neverthrow";
+import { Config } from "../constants/Constants";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
-
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.csgonades.com"
-    : "http://localhost:5000";
 
 export type SiteStats = {
   numUsers: number;
@@ -16,7 +12,7 @@ export type SiteStats = {
 export class StatsApi {
   static async getStats(): AppResult<SiteStats> {
     try {
-      const result = await axios.get<SiteStats>(`${BASE_URL}/stats`);
+      const result = await axios.get<SiteStats>(`${Config.API_URL}/stats`);
 
       return ok(result.data);
     } catch (error) {

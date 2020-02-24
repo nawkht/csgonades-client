@@ -3,6 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { AdminReducer } from "./AdminStore/AdminReducer";
 import { analyticsMiddleware } from "./Analytics/AnalyticsMiddleware";
+import { ArticleReducer } from "./ArticleStore/ArticleReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   settingsStore: PersistedSettingsReducer,
   navigationStore: NavigationReducer,
   nadeFilterStore: NadeFilterReducer,
+  articleStore: ArticleReducer,
 });
 
 function createMiddleware() {

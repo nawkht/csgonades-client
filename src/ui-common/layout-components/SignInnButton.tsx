@@ -1,11 +1,7 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
+import { Config } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-
-const AUTH_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.csgonades.com/auth/steam"
-    : "http://localhost:5000/auth/steam";
 
 export const SignInnButton: FC = () => {
   const { colors } = useTheme();
@@ -13,7 +9,7 @@ export const SignInnButton: FC = () => {
   return (
     <>
       <div className="steam-login-wrapper">
-        <a className="steam-login" href={AUTH_URL} rel="nofollow">
+        <a className="steam-login" href={Config.SIGN_IN_URL} rel="nofollow">
           <div className="steam-logo">
             <Icon name="steam" />
           </div>

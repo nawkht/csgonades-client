@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ok } from "neverthrow";
+import { Config } from "../constants/Constants";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { GfycatData } from "../models/Nade/GfycatData";
 import {
@@ -11,15 +12,10 @@ import {
 } from "../models/Nade/Nade";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.csgonades.com"
-    : "http://localhost:5000";
-
 export class NadeApi {
   static async getAll(): AppResult<NadeLight[]> {
     try {
-      const res = await axios.get(`${BASE_URL}/nades`);
+      const res = await axios.get(`${Config.API_URL}/nades`);
       const nades = res.data as NadeLight[];
 
       return ok(nades);
@@ -30,9 +26,12 @@ export class NadeApi {
 
   static async getPending(token: string): AppResult<NadeLight[]> {
     try {
-      const res = await axios.get<NadeLight[]>(`${BASE_URL}/nades/pending`, {
-        headers: { Authorization: token },
-      });
+      const res = await axios.get<NadeLight[]>(
+        `${Config.API_URL}/nades/pending`,
+        {
+          headers: { Authorization: token },
+        }
+      );
       const nades = res.data;
 
       return ok(nades);
@@ -43,7 +42,7 @@ export class NadeApi {
 
   static async getByMap(mapName: CsgoMap): AppResult<NadeLight[]> {
     try {
-      const res = await axios.get(`${BASE_URL}/nades/map/${mapName}`);
+      const res = await axios.get(`${Config.API_URL}/nades/map/${mapName}`);
       const nades = res.data as NadeLight[];
 
       return ok(nades);
@@ -54,7 +53,7 @@ export class NadeApi {
 
   static async byId(id: string): AppResult<Nade> {
     try {
-      const res = await axios.get(`${BASE_URL}/nades/${id}`, {
+      const res = await axios.get(`${Config.API_URL}/nades/${id}`, {
         withCredentials: true,
       });
 
@@ -67,7 +66,7 @@ export class NadeApi {
 
   static async byUser(steamId: string): AppResult<NadeLight[]> {
     try {
-      const res = await axios.get(`${BASE_URL}/nades/user/${steamId}`);
+      const res = await axios.get(`${Config.API_URL}/nades/user/${steamId}`);
       const nades = res.data as NadeLight[];
       return ok(nades);
     } catch (error) {
@@ -77,7 +76,7 @@ export class NadeApi {
 
   static async byNadeIdList(nadeIds: string[]): AppResult<NadeLight[]> {
     try {
-      const res = await axios.post(`${BASE_URL}/nades/list`, {
+      const res = await axios.post(`${Config.API_URL}/nades/list`, {
         nadeIds,
       });
       const nades = res.data as NadeLight[];
@@ -89,7 +88,7 @@ export class NadeApi {
 
   static async save(nadeBody: NadeBody, token: string): AppResult<Nade> {
     try {
-      const res = await axios.post(`${BASE_URL}/nades`, nadeBody, {
+      const res = await axios.post(`${Config.API_URL}/nades`, nadeBody, {
         headers: { Authorization: token },
       });
       const nade = res.data as Nade;
@@ -105,9 +104,13 @@ export class NadeApi {
     token: string
   ): AppResult<Nade> {
     try {
-      const res = await axios.put(`${BASE_URL}/nades/${nadeId}`, updateFields, {
-        headers: { Authorization: token },
-      });
+      const res = await axios.put(
+        `${Config.API_URL}/nades/${nadeId}`,
+        updateFields,
+        {
+          headers: { Authorization: token },
+        }
+      );
 
       const updatedNade = res.data as Nade;
 
@@ -119,7 +122,7 @@ export class NadeApi {
 
   static async delete(nadeId: string, token: string): AppResult<boolean> {
     try {
-      await axios.delete(`${BASE_URL}/nades/${nadeId}`, {
+      await axios.delete(`${Config.API_URL}/nades/${nadeId}`, {
         headers: { Authorization: token },
       });
 
@@ -133,7 +136,7 @@ export class NadeApi {
     try {
     } catch (error) {}
     await axios.post(
-      `${BASE_URL}/nades/${id}/countView`,
+      `${Config.API_URL}/nades/${id}/countView`,
       {},
       {
         withCredentials: true,
@@ -148,7 +151,7 @@ export class NadeApi {
   ): AppResult<Nade> {
     try {
       const res = await axios.patch(
-        `${BASE_URL}/nades/${nadeId}/status`,
+        `${Config.API_URL}/nades/${nadeId}/status`,
         updates,
         {
           headers: { Authorization: token },
@@ -169,7 +172,7 @@ export class NadeApi {
   ): AppResult<Nade> {
     try {
       const res = await axios.patch(
-        `${BASE_URL}/nades/${nadeId}/setuser/${steamId}`,
+        `${Config.API_URL}/nades/${nadeId}/setuser/${steamId}`,
         undefined,
         {
           headers: {
@@ -193,7 +196,7 @@ export class NadeApi {
   ): AppResult<Nade> {
     try {
       const result = await axios.patch(
-        `${BASE_URL}/nades/${nadeId}/year/${year}`,
+        `${Config.API_URL}/nades/${nadeId}/year/${year}`,
         {},
         {
           headers: {
@@ -212,7 +215,7 @@ export class NadeApi {
 
   static async validateGfycat(gfyIdOrUrl: string): AppResult<GfycatData> {
     try {
-      const res = await axios.post(`${BASE_URL}/nades/validateGfycat`, {
+      const res = await axios.post(`${Config.API_URL}/nades/validateGfycat`, {
         gfycatIdOrUrl: gfyIdOrUrl,
       });
       const gfycatData = res.data as GfycatData;

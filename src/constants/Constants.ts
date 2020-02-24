@@ -1,5 +1,14 @@
 import packageJson from "../../package.json";
 
+const IS_PROD = process.env.NODE_ENV === "production";
+
+export const Config = {
+  API_URL: IS_PROD ? "https://api.csgonades.com" : "http://localhost:5000",
+  SIGN_IN_URL: IS_PROD
+    ? "https://api.csgonades.com/auth/steam"
+    : "http://localhost:5000/auth/steam",
+};
+
 export const Dimensions = {
   SIDEBAR_WIDTH: "180px",
   HEADER_HEIGHT: "65px",
