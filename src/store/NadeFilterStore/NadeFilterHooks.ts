@@ -2,6 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MapCoordinates, NadeLight } from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
+import { favoritedNadeIdsSelector } from "../FavoriteStore/FavoriteSelectors";
 import {
   filterByMapCoordsAction,
   filterByTypeAction,
@@ -88,16 +89,19 @@ export const useNadeSorter = (onlyByType = false) => {
   const { byFavorites, byCoords, byType, byTickrate } = useSelector(
     nadeFilterState
   );
+  const favoritedNades = useSelector(favoritedNadeIdsSelector);
 
   const nadeSorter = useCallback(
     (nades: NadeLight[]) => {
       let filteredNades = [...nades];
 
+      filteredNades = addFavoriteToNades(filteredNades, favoritedNades);
+
       if (byType) {
         filteredNades = filteredNades.filter(n => n.type === byType);
       }
 
-      if (byFavorites && !onlyByType) {
+      if (byFavorites) {
         filteredNades = filteredNades.filter(n => n.isFavorited);
       }
 
@@ -113,7 +117,7 @@ export const useNadeSorter = (onlyByType = false) => {
 
       return filteredNades;
     },
-    [byType, byFavorites, byCoords, onlyByType, byTickrate]
+    [byType, byFavorites, byCoords, onlyByType, byTickrate, favoritedNades]
   );
 
   return nadeSorter;
@@ -132,6 +136,19 @@ function nadesForCoords(nades: NadeLight[], coords: MapCoordinates) {
 
     if (dist < MIN_DISTANCE) {
       return true;
+    }
+  });
+}
+
+function addFavoriteToNades(nades: NadeLight[], favIds: string[]) {
+  return nades.map(n => {
+    if (favIds.includes(n.id)) {
+      return {
+        ...n,
+        isFavorited: true,
+      };
+    } else {
+      return n;
     }
   });
 }
