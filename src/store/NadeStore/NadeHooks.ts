@@ -129,9 +129,11 @@ export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
       return unqiueNades;
     }
 
+    const filteredNades = nadeSorter(nades);
+
     const unique: any = {};
 
-    for (const nade of nades) {
+    for (const nade of filteredNades) {
       if (nade.mapEndCoord && nade.type) {
         const { x, y } = nade.mapEndCoord;
         const roundedX = Math.ceil(x / 30) * 30;
@@ -145,7 +147,7 @@ export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
       }
     }
 
-    return nadeSorter(unqiueNades);
+    return unqiueNades;
   }, [nades, nadeSorter]);
 
   return unqiueNadesForPosition;
