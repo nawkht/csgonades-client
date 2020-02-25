@@ -131,18 +131,10 @@ export const useNadeCoordinatesForMap = (map: CsgoMap): NadeLight[] => {
 
     const filteredNades = nadeSorter(nades);
 
-    const unique: any = {};
-
     for (const nade of filteredNades) {
       if (nade.mapEndCoord && nade.type) {
-        const { x, y } = nade.mapEndCoord;
-        const roundedX = Math.ceil(x / 30) * 30;
-        const roundedY = Math.ceil(y / 30) * 30;
-        const coordKey = `${nade.type}(${roundedX},${roundedY})`;
-
-        if (!unique[coordKey]) {
+        if (!containsSimilarNade(nade, unqiueNades)) {
           unqiueNades.push(nade);
-          unique[coordKey] = true;
         }
       }
     }
@@ -207,3 +199,28 @@ export const useRegisterView = () => {
 
   return registerNadeView;
 };
+
+function containsSimilarNade(nade: NadeLight, nades: NadeLight[]): boolean {
+  const containsSimilar = nades.find(n => {
+    if (!n.mapEndCoord || !n.type || !nade.mapEndCoord || !nade.type) {
+      return false;
+    }
+
+    if (nade.type !== n.type) {
+      return false;
+    }
+
+    const dist = Math.sqrt(
+      Math.pow(n.mapEndCoord.x - nade.mapEndCoord.x, 2) +
+        Math.pow(n.mapEndCoord.y - nade.mapEndCoord.y, 2)
+    );
+
+    if (dist < 20) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  return !!containsSimilar;
+}
