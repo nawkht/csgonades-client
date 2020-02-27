@@ -16,11 +16,8 @@ export const AmazonShopAd: FC<Props> = ({}) => {
   return (
     <>
       <div className="amazon-shop">
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `<div id="amzn-assoc-ad-2efdafa8-6a9e-43d3-857b-c601be6e3bd0"></div><script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=2efdafa8-6a9e-43d3-857b-c601be6e3bd0"></script>`,
-          }}
-        ></div>
+        <div id="amzn-assoc-ad-2efdafa8-6a9e-43d3-857b-c601be6e3bd0"></div>
+        <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=2efdafa8-6a9e-43d3-857b-c601be6e3bd0"></script>
       </div>
 
       <style jsx>{`
