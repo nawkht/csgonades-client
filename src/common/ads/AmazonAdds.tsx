@@ -8,6 +8,7 @@ export const AmazonAdd: FC<Props> = ({}) => {
   return (
     <>
       <iframe
+        className="amazon-ad"
         src={addSrc}
         width="300"
         height="250"
@@ -16,7 +17,7 @@ export const AmazonAdd: FC<Props> = ({}) => {
         frameBorder={0}
       ></iframe>
       <style jsx>{`
-        #amzn-assoc-ad-2efdafa8-6a9e-43d3-857b-c601be6e3bd0 {
+        .amazon-ad {
           margin-top: 16px;
         }
       `}</style>
