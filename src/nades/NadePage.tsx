@@ -89,7 +89,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           </div>
 
           <div className="n-ad">
-            <TestAd key={nade.id} />
+            <TestAd grid={true} key={nade.id} />
           </div>
         </div>
 

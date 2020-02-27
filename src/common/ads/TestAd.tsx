@@ -1,24 +1,68 @@
 // @ts-ignore
 import * as postscribe from "postscribe";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useMemo, useRef } from "react";
 
-const TestAd: FC = () => {
+type Props = {
+  grid?: boolean;
+};
+
+const products = [
+  "B07R4Q8FQY",
+  "B078LJ6RPK",
+  "B01LVTI3TO",
+  "B082G5SPR5",
+  "B07GCKQD77",
+  "B077ZGRY9V",
+  "B07YPC3BQC",
+  "B07RHBLV7F",
+  "B074G96MPM",
+  "B0772BK7BV",
+];
+
+const TestAd: FC<Props> = ({ grid }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (divRef.current) {
-        const div = document.createElement("div");
-        div.id = "test";
-        divRef.current.append(div);
+  const adScript = useMemo(() => {
+    const prods = getRandom(products, 4).join(",");
+    return grid
+      ? `<script type="text/javascript">
+    amzn_assoc_placement = "adunit0";
+    amzn_assoc_tracking_id = "csgonadesweb-20";
+    amzn_assoc_ad_mode = "search";
+    amzn_assoc_ad_type = "smart";
+    amzn_assoc_marketplace = "amazon";
+    amzn_assoc_region = "US";
+    amzn_assoc_default_search_phrase = "gaming";
+    amzn_assoc_default_category = "All";
+    amzn_assoc_linkid = "c0647e55be7c25cf659400748bb8322b";
+    amzn_assoc_title = "";
+    amzn_assoc_search_bar = "false";
+    amzn_assoc_search_bar_position = "top";
+    </script>
+    <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`
+      : `<script type="text/javascript">
+    amzn_assoc_placement = "adunit0";
+    amzn_assoc_tracking_id = "csgonadesweb-20";
+    amzn_assoc_ad_mode = "manual";
+    amzn_assoc_ad_type = "smart";
+    amzn_assoc_marketplace = "amazon";
+    amzn_assoc_region = "US";
+    amzn_assoc_linkid = "2517e9ee6a1a6efe45b6b198805da5ae";
+    amzn_assoc_design = "in_content";
+    amzn_assoc_asins = "${prods}";
+    amzn_assoc_title = "";
+    </script>
+    <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`;
+  }, []);
 
-        postscribe(
-          "#test",
-          `<div id="amzn-assoc-ad-2efdafa8-6a9e-43d3-857b-c601be6e3bd0"></div>
-      <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=2efdafa8-6a9e-43d3-857b-c601be6e3bd0"></script>`
-        );
-      }
-    }, 100);
+  useEffect(() => {
+    if (divRef.current) {
+      const div = document.createElement("div");
+      div.id = "test";
+      divRef.current.append(div);
+
+      postscribe("#test", adScript);
+    }
   }, []);
 
   return (
@@ -34,3 +78,18 @@ const TestAd: FC = () => {
 };
 
 export default TestAd;
+
+function getRandom(arr: string[], n: number): string[] {
+  const result = new Array(n);
+  let len = arr.length;
+  const taken = new Array(len);
+
+  if (n > len)
+    throw new RangeError("getRandom: more elements taken than available");
+  while (n--) {
+    const x = Math.floor(Math.random() * len);
+    result[n] = arr[x in taken ? taken[x] : x];
+    taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
+}

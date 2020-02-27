@@ -34,10 +34,10 @@ export const MapPage: FC<Props> = ({ map }) => {
             emptyMessage={`No nades found. Sign in and add something! :)`}
           />
         </div>
+      </div>
 
-        <div className="ad-container">
-          <TestAd key={map} />
-        </div>
+      <div className="ad-container">
+        <TestAd key={map} />
       </div>
 
       <MapView map={map} />
