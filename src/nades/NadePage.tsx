@@ -84,7 +84,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             </div>
           </div>
 
-          <AmazonAdd />
+          <AmazonAdd key={nade.id} />
         </div>
 
         <div className="n-video">
