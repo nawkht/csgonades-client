@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
+import { AmazonAdd } from "../common/ads/AmazonAdds";
 import { Layout } from "../common/Layout";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -82,6 +83,8 @@ const NadePage: React.FC<Props> = ({ nade }) => {
               <AdminEditor key={`admin-${nade.id}`} nade={nade} />
             </div>
           </div>
+
+          <AmazonAdd />
         </div>
 
         <div className="n-video">

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { AmazonAdd } from "../common/ads/AmazonAdds";
 import { Layout } from "../common/Layout";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
@@ -21,6 +22,8 @@ export const MapPage: FC<Props> = ({ map }) => {
     <Layout title={capitalize(map)} canonical={`/maps/${map}`}>
       <div className="map-page-wrapper">
         <Filters map={map} />
+
+        <AmazonAdd />
 
         <div className="nade-list">
           <NadeListGrid
