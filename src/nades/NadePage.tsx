@@ -88,7 +88,9 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             </div>
           </div>
 
-          <TestAd key={nade.id} />
+          <div className="n-ad">
+            <TestAd key={nade.id} />
+          </div>
         </div>
 
         <div className="n-video">
@@ -126,7 +128,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
               "video video stats"
               "video video stats"
               "desc desc stats"
-              "sim sim sim";
+              "sim sim stats";
             grid-column-gap: ${Dimensions.GUTTER_SIZE};
             margin: ${Dimensions.GUTTER_SIZE};
           }
@@ -146,6 +148,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
 
           .n-description {
             grid-area: desc;
+            margin-bottom: 100px;
           }
 
           .n-similar {

@@ -34,7 +34,10 @@ export const MapPage: FC<Props> = ({ map }) => {
             emptyMessage={`No nades found. Sign in and add something! :)`}
           />
         </div>
-        <TestAd key={map} />
+
+        <div className="ad-container">
+          <TestAd key={map} />
+        </div>
       </div>
 
       <MapView map={map} />
@@ -46,6 +49,12 @@ export const MapPage: FC<Props> = ({ map }) => {
 
         .nade-list {
           padding: ${Dimensions.GUTTER_SIZE};
+        }
+
+        .ad-container {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 24px;
         }
 
         @media only screen and (max-width: 860px) {

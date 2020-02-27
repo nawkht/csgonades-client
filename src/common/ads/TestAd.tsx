@@ -27,8 +27,6 @@ const TestAd: FC = () => {
 
       <style jsx>{`
         #container {
-          max-width: 1000px;
-          margin: 24px auto;
         }
       `}</style>
     </>
