@@ -36,6 +36,13 @@ const adSearchTerms = [
   "sony headphones",
   "ASUS ROG monitor",
   "razer laptop",
+  "headphone stand",
+  "nintendo switch",
+  "Oculus",
+  "Gaming Mouse Bungee",
+  "Gaming Desk",
+  "Webcam",
+  "mirrorless",
 ];
 
 const TestAd: FC<Props> = ({ grid }) => {
