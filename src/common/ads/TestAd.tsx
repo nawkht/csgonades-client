@@ -30,6 +30,11 @@ const adSearchTerms = [
   "hyperx",
   "GTracing",
   "gfuel",
+  "bose",
+  "senheiser",
+  "sony headphones",
+  "ASUS ROG monitor",
+  "razer laptop",
 ];
 
 const TestAd: FC<Props> = ({ grid }) => {
