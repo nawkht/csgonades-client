@@ -163,6 +163,10 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             margin-top: 18px;
           }
 
+          .n-ad {
+            margin-top: 18px;
+          }
+
           @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
             .nade-page {
               grid-template-columns: 50% 50%;

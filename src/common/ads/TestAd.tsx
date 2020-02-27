@@ -19,11 +19,20 @@ const products = [
   "B0772BK7BV",
 ];
 
+const adSearchTerms = [
+  "gaming",
+  "gaming headset",
+  "gaming mouse",
+  "gaming pc",
+  "gaming accessories",
+];
+
 const TestAd: FC<Props> = ({ grid }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
   const adScript = useMemo(() => {
     const prods = getRandom(products, 4).join(",");
+    const searchTerm = getRandom(adSearchTerms, 1)[0];
     return grid
       ? `<script type="text/javascript">
     amzn_assoc_placement = "adunit0";
@@ -32,7 +41,7 @@ const TestAd: FC<Props> = ({ grid }) => {
     amzn_assoc_ad_type = "smart";
     amzn_assoc_marketplace = "amazon";
     amzn_assoc_region = "US";
-    amzn_assoc_default_search_phrase = "gaming";
+    amzn_assoc_default_search_phrase = "${searchTerm}";
     amzn_assoc_default_category = "All";
     amzn_assoc_linkid = "c0647e55be7c25cf659400748bb8322b";
     amzn_assoc_title = "";
