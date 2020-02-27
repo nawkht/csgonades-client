@@ -25,6 +25,11 @@ const adSearchTerms = [
   "gaming mouse",
   "gaming pc",
   "gaming accessories",
+  "SteelSeries",
+  "razer",
+  "hyperx",
+  "GTracing",
+  "gfuel",
 ];
 
 const TestAd: FC<Props> = ({ grid }) => {
@@ -62,7 +67,7 @@ const TestAd: FC<Props> = ({ grid }) => {
     amzn_assoc_title = "";
     </script>
     <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`;
-  }, []);
+  }, [grid]);
 
   useEffect(() => {
     if (divRef.current) {
