@@ -1,6 +1,6 @@
+import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
-import { AmazonAdd } from "../common/ads/AmazonAdds";
 import { Layout } from "../common/Layout";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -20,6 +20,10 @@ import { NadeTitlebar } from "./NadeTitlebar";
 import { ReportButton } from "./ReportButton";
 import { SimilarNades } from "./SimilarNades";
 import { UserContainer } from "./UserContainer";
+
+const TestAd = dynamic(() => import("../common/ads/TestAd"), {
+  ssr: false,
+});
 
 type Props = {
   nade: Nade;
@@ -84,7 +88,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
             </div>
           </div>
 
-          <AmazonAdd key={nade.id} />
+          <TestAd key={nade.id} />
         </div>
 
         <div className="n-video">

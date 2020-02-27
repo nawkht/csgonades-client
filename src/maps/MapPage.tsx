@@ -1,5 +1,5 @@
+import dynamic from "next/dynamic";
 import { FC } from "react";
-import { AmazonShopAd } from "../common/ads/AmazonShopAd";
 import { Layout } from "../common/Layout";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
@@ -9,6 +9,10 @@ import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
 import { capitalize } from "../utils/Common";
 import { MapView } from "./MapView/MapView";
 import { Filters } from "./NadeFilter/Filters";
+
+const TestAd = dynamic(() => import("../common/ads/TestAd"), {
+  ssr: false,
+});
 
 type Props = {
   map: CsgoMap;
@@ -30,8 +34,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             emptyMessage={`No nades found. Sign in and add something! :)`}
           />
         </div>
-
-        <AmazonShopAd />
+        <TestAd key={map} />
       </div>
 
       <MapView map={map} />
