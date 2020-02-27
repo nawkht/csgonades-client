@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { AmazonShopAd } from "../common/ads/AmazonShopAd";
 import { Layout } from "../common/Layout";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
@@ -29,6 +30,8 @@ export const MapPage: FC<Props> = ({ map }) => {
             emptyMessage={`No nades found. Sign in and add something! :)`}
           />
         </div>
+
+        <AmazonShopAd />
       </div>
 
       <MapView map={map} />
