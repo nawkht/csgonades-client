@@ -128,6 +128,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
               "video video stats"
               "video video stats"
               "desc desc stats"
+              "desc desc stats"
               "sim sim stats";
             grid-column-gap: ${Dimensions.GUTTER_SIZE};
             margin: ${Dimensions.GUTTER_SIZE};
@@ -148,7 +149,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
 
           .n-description {
             grid-area: desc;
-            margin-bottom: 100px;
+            margin-bottom: 200px;
           }
 
           .n-similar {
@@ -179,6 +180,10 @@ const NadePage: React.FC<Props> = ({ nade }) => {
 
             .n-stats {
               margin-top: 18px;
+            }
+
+            .n-description {
+              margin-bottom: 0px;
             }
           }
         `}
