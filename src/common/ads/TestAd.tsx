@@ -1,6 +1,7 @@
 // @ts-ignore
 import * as postscribe from "postscribe";
 import React, { FC, useEffect, useMemo, useRef } from "react";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   grid?: boolean;
@@ -38,6 +39,7 @@ const adSearchTerms = [
 ];
 
 const TestAd: FC<Props> = ({ grid }) => {
+  const { colors } = useTheme();
   const divRef = useRef<HTMLDivElement>(null);
 
   const adScript = useMemo(() => {
@@ -90,6 +92,10 @@ const TestAd: FC<Props> = ({ grid }) => {
 
       <style jsx>{`
         #container {
+          border: 1px solid ${colors.BORDER};
+          padding: 12px;
+          background: ${colors.DP01};
+          border-radius: 3px;
         }
       `}</style>
     </>
