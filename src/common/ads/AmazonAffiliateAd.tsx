@@ -100,7 +100,7 @@ function adCreator() {
       amzn_assoc_linkid = "e5c917d93c3274713703f809eedbb8e5";
       amzn_assoc_asins = "${prods}";
       </script>
-      <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+      <script src="https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
       </body>
     </html>
   `;
