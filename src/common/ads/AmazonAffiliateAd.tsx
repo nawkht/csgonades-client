@@ -109,12 +109,13 @@ function adCreator() {
 const AmazonAffiliateAdd: FC<Props> = ({ height }) => {
   return (
     <>
-      <iframe frameBorder={0} scrolling="no" srcDoc={adCreator()}></iframe>
+      <iframe frameBorder={0} scrolling="no" src="/ads/ad.html"></iframe>
 
       <style jsx>{`
         iframe {
           width: 100%;
           height: ${height ? height : 500}px;
+          border: none;
         }
       `}</style>
     </>
