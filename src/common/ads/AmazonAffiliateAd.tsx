@@ -45,6 +45,19 @@ const products = [
   "B07GXBYYWN", // Insta360 ONE X
   "B07Q9MJKBV", // Bose Noise Cancelling
   "B07PC7JKSB", // Bose Frames
+  "B06XT1ZNQF", // SteelSeries QcK Prism
+  "B000UVRU6G", // SteelSeries QcK
+  "B082G5SPR5", // Razer DeathAdder v2
+  "B01IOO4SGK", // Dell S2417DG
+  "B06XDY3SJF", // LG 24MP59G-P
+  "B079FV8S5M", // Acer Predator Gaming X34
+  "B07R1P4DQG", // Razer Blade 15
+  "B07PHNZBDV", // MSI GS65 Stealth
+  "B07HNW68ZC", // Oculus Quest
+  "B01LZN7MLE", // Redragon K552
+  "B07B3XWDP9", // AKRacing Core
+  "B01N2RJ0HI", // GTRACING Gaming Chair
+  "B07GFRPR2D", // SteelSeries Arctis 7
 ];
 
 const AmazonAffiliateAdd: FC<Props> = ({ single }) => {
