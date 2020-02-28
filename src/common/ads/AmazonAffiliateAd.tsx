@@ -58,6 +58,14 @@ const products = [
   "B07B3XWDP9", // AKRacing Core
   "B01N2RJ0HI", // GTRACING Gaming Chair
   "B07GFRPR2D", // SteelSeries Arctis 7
+  "B07FL2LSBH", // Razer Gaming Mouse Bungee v2
+  "B074ZQJW9R", // CORSAIR ST100 RGB Premium Headset Stand
+  "B07VGRJDFY", // Nintendo Switch
+  "B07DHNX18W", // Razer Huntsman Elite
+  "B07RQJHG8M", // DJI Mavic Mini
+  "B07ZQRWTDB", // G Fuel Hype Sauce
+  "B009KML5PS", // G Fuel Blue Ice Tub
+  "B019AKA6YU", // Monster Energy Drink
 ];
 
 const AmazonAffiliateAdd: FC<Props> = ({ single }) => {
