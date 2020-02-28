@@ -1,9 +1,8 @@
 // @ts-ignore
-import * as postscribe from "postscribe";
-import React, { FC, useEffect, useMemo, useRef } from "react";
+import React, { FC } from "react";
 
 type Props = {
-  single?: boolean;
+  height?: number;
 };
 
 const products = [
@@ -71,27 +70,25 @@ const products = [
   "B00SAYCXWG", // HyperX Cloud II
 ];
 
-const AmazonAffiliateAdd: FC<Props> = ({ single }) => {
-  const divRef = useRef<HTMLDivElement>(null);
+function adCreator() {
+  const prods = getRandom(products, 4).join(",");
 
-  const adScript = useMemo(() => {
-    if (single) {
-      const prod = getRandom(products, 1)[0];
-      return `<script type="text/javascript">
-      amzn_assoc_tracking_id = "csgonadesweb-20";
-      amzn_assoc_ad_mode = "manual";
-      amzn_assoc_ad_type = "smart";
-      amzn_assoc_marketplace = "amazon";
-      amzn_assoc_region = "US";
-      amzn_assoc_design = "enhanced_links";
-      amzn_assoc_asins = "${prod}";
-      amzn_assoc_placement = "adunit";
-      amzn_assoc_linkid = "140772d6dd6e5e07de7d36eb8f762903";
-      </script>
-      <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`;
-    } else {
-      const prods = getRandom(products, 4).join(",");
-      return `<script type="text/javascript">
+  return `
+  <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+      </head>
+      <body>
+     
+      <script type="text/javascript">
       amzn_assoc_placement = "adunit0";
       amzn_assoc_search_bar = "false";
       amzn_assoc_tracking_id = "csgonadesweb-20";
@@ -100,44 +97,24 @@ const AmazonAffiliateAdd: FC<Props> = ({ single }) => {
       amzn_assoc_marketplace = "amazon";
       amzn_assoc_region = "US";
       amzn_assoc_title = "";
-      amzn_assoc_linkid = "97380945e3d9736412d91069840090c5";
+      amzn_assoc_linkid = "e5c917d93c3274713703f809eedbb8e5";
       amzn_assoc_asins = "${prods}";
       </script>
       <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
-    <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`;
-    }
-  }, [single]);
+      </body>
+    </html>
+  `;
+}
 
-  useEffect(() => {
-    const delayedAdd = setTimeout(() => {
-      if (divRef.current) {
-        const div = document.createElement("div");
-        div.id = "af-container";
-        divRef.current.append(div);
-        postscribe("#af-container", adScript);
-      }
-    }, 500);
-
-    if (document !== null) {
-      const adInBody = document.querySelector('[id^="amzn_assoc_ad"]');
-
-      if (adInBody) {
-        const parent = adInBody.parentNode;
-        if (parent && parent.nodeName === "BODY") {
-          adInBody.remove();
-        }
-      }
-    }
-
-    return () => clearTimeout(delayedAdd);
-  }, [adScript]);
-
+const AmazonAffiliateAdd: FC<Props> = ({ height }) => {
   return (
     <>
-      <div id="container" ref={divRef}></div>
+      <iframe frameBorder={0} scrolling="no" srcDoc={adCreator()}></iframe>
 
       <style jsx>{`
-        #container {
+        iframe {
+          width: 100%;
+          height: ${height ? height : 500}px;
         }
       `}</style>
     </>

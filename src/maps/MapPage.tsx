@@ -1,5 +1,5 @@
-import dynamic from "next/dynamic";
 import { FC } from "react";
+import AmazonAffiliateAdd from "../common/ads/AmazonAffiliateAd";
 import { Layout } from "../common/Layout";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
@@ -9,13 +9,6 @@ import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
 import { capitalize } from "../utils/Common";
 import { MapView } from "./MapView/MapView";
 import { Filters } from "./NadeFilter/Filters";
-
-const AmazonAffiliateAd = dynamic(
-  () => import("../common/ads/AmazonAffiliateAd"),
-  {
-    ssr: false,
-  }
-);
 
 type Props = {
   map: CsgoMap;
@@ -39,8 +32,8 @@ export const MapPage: FC<Props> = ({ map }) => {
         </div>
       </div>
 
-      <div className="ad-container">
-        <AmazonAffiliateAd key={map} />
+      <div className="ad-container" key={map}>
+        <AmazonAffiliateAdd />
       </div>
 
       <MapView map={map} />

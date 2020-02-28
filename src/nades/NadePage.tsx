@@ -1,6 +1,6 @@
-import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
+import AmazonAffiliateAdd from "../common/ads/AmazonAffiliateAd";
 import { Layout } from "../common/Layout";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -20,13 +20,6 @@ import { NadeTitlebar } from "./NadeTitlebar";
 import { ReportButton } from "./ReportButton";
 import { SimilarNades } from "./SimilarNades";
 import { UserContainer } from "./UserContainer";
-
-const AmazonAffiliateAd = dynamic(
-  () => import("../common/ads/AmazonAffiliateAd"),
-  {
-    ssr: false,
-  }
-);
 
 type Props = {
   nade: Nade;
@@ -92,8 +85,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           </div>
 
           <div className="n-ad" key={nade.id}>
-            <AmazonAffiliateAd single={true} />
-            <AmazonAffiliateAd single={true} />
+            <AmazonAffiliateAdd />
           </div>
         </div>
 
