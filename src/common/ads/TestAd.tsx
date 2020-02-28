@@ -93,14 +93,16 @@ const TestAd: FC<Props> = ({ grid }) => {
       postscribe("#ad-container", adScript);
     }
 
-    return () => {
-      if (document !== null) {
-        const adInBody = document.querySelector('[id^="amzn_assoc_ad"]');
-        if (adInBody) {
+    if (document !== null) {
+      const adInBody = document.querySelector('[id^="amzn_assoc_ad"]');
+
+      if (adInBody) {
+        const parent = adInBody.parentNode;
+        if (parent && parent.nodeName === "BODY") {
           adInBody.remove();
         }
       }
-    };
+    }
   }, []);
 
   return (
