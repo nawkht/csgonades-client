@@ -57,7 +57,7 @@ const products = [
   "B01LZN7MLE", // Redragon K552
   "B07B3XWDP9", // AKRacing Core
   "B01N2RJ0HI", // GTRACING Gaming Chair
-  "B07GFRPR2D", // SteelSeries Arctis 7
+  "B07FZVXS8H", // SteelSeries Arctis 7
   "B07FL2LSBH", // Razer Gaming Mouse Bungee v2
   "B074ZQJW9R", // CORSAIR ST100 RGB Premium Headset Stand
   "B07VGRJDFY", // Nintendo Switch
