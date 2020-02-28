@@ -21,28 +21,29 @@ const products = [
 ];
 
 const adSearchTerms = [
-  "gaming",
+  "gaming glasses",
   "gaming headset",
   "gaming mouse",
   "gaming pc",
   "gaming accessories",
-  "SteelSeries",
+  "steelseries",
   "razer",
   "hyperx",
-  "GTracing",
+  "gtracing",
   "gfuel",
   "bose",
   "senheiser",
   "sony headphones",
-  "ASUS ROG monitor",
+  "asus rog monitor",
   "razer laptop",
   "headphone stand",
   "nintendo switch",
-  "Oculus",
-  "Gaming Mouse Bungee",
-  "Gaming Desk",
-  "Webcam",
+  "oculus quest",
+  "mouse bungee",
+  "gaming desk",
+  "webcam",
   "mirrorless",
+  "mechanical keyboard",
 ];
 
 const TestAd: FC<Props> = ({ grid }) => {
@@ -86,12 +87,19 @@ const TestAd: FC<Props> = ({ grid }) => {
   useEffect(() => {
     if (divRef.current) {
       const div = document.createElement("div");
-      div.id = "test";
+      div.id = "ad-container";
+      div.style.padding = "12px";
       divRef.current.append(div);
-
-      postscribe("#test", adScript);
+      postscribe("#ad-container", adScript);
     }
-  }, []);
+
+    if (document !== null) {
+      const adInBody = document.querySelector('[id^="amzn_assoc_ad"]');
+      if (adInBody) {
+        adInBody.remove();
+      }
+    }
+  }, [adScript]);
 
   return (
     <>
@@ -100,7 +108,6 @@ const TestAd: FC<Props> = ({ grid }) => {
       <style jsx>{`
         #container {
           border: 1px solid ${colors.BORDER};
-          padding: 12px;
           background: ${colors.DP01};
           border-radius: 3px;
         }

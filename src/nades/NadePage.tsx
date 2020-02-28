@@ -121,8 +121,8 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         {`
           .nade-page {
             display: grid;
-            grid-template-columns: auto auto 300px;
-            grid-template-rows: auto auto auto auto auto;
+            grid-template-columns: auto auto 350px;
+            grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
             grid-template-areas:
               "title title title"
               "video video stats"
@@ -140,7 +140,6 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           .n-video {
             grid-area: video;
             border: 1px solid ${colors.BORDER};
-            border-bottom: none;
           }
 
           .n-stats {
@@ -149,7 +148,6 @@ const NadePage: React.FC<Props> = ({ nade }) => {
 
           .n-description {
             grid-area: desc;
-            margin-bottom: 200px;
           }
 
           .n-similar {

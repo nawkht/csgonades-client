@@ -17,7 +17,7 @@ export const NadeListGrid: FC<Props> = ({
   nades,
   emptyMessage = "No nades found",
   onItemClick,
-  loading
+  loading,
 }) => {
   const hasNades = nades.length > 0;
 
