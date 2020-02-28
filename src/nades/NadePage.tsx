@@ -21,9 +21,12 @@ import { ReportButton } from "./ReportButton";
 import { SimilarNades } from "./SimilarNades";
 import { UserContainer } from "./UserContainer";
 
-const TestAd = dynamic(() => import("../common/ads/TestAd"), {
-  ssr: false,
-});
+const AmazonAffiliateAd = dynamic(
+  () => import("../common/ads/AmazonAffiliateAd"),
+  {
+    ssr: false,
+  }
+);
 
 type Props = {
   nade: Nade;
@@ -89,7 +92,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           </div>
 
           <div className="n-ad">
-            <TestAd grid={true} key={nade.id} />
+            <AmazonAffiliateAd grid={true} key={nade.id} />
           </div>
         </div>
 

@@ -10,9 +10,12 @@ import { capitalize } from "../utils/Common";
 import { MapView } from "./MapView/MapView";
 import { Filters } from "./NadeFilter/Filters";
 
-const TestAd = dynamic(() => import("../common/ads/TestAd"), {
-  ssr: false,
-});
+const AmazonAffiliateAd = dynamic(
+  () => import("../common/ads/AmazonAffiliateAd"),
+  {
+    ssr: false,
+  }
+);
 
 type Props = {
   map: CsgoMap;
@@ -37,7 +40,7 @@ export const MapPage: FC<Props> = ({ map }) => {
       </div>
 
       <div className="ad-container">
-        <TestAd key={map} />
+        <AmazonAffiliateAd key={map} />
       </div>
 
       <MapView map={map} />

@@ -46,7 +46,7 @@ const adSearchTerms = [
   "mechanical keyboard",
 ];
 
-const TestAd: FC<Props> = ({ grid }) => {
+const AmazonAffiliateAdd: FC<Props> = ({ grid }) => {
   const { colors } = useTheme();
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -85,13 +85,15 @@ const TestAd: FC<Props> = ({ grid }) => {
   }, [grid]);
 
   useEffect(() => {
-    if (divRef.current) {
-      const div = document.createElement("div");
-      div.id = "ad-container";
-      div.style.padding = "12px";
-      divRef.current.append(div);
-      postscribe("#ad-container", adScript);
-    }
+    const delayedAdd = setTimeout(() => {
+      if (divRef.current) {
+        const div = document.createElement("div");
+        div.id = "af-container";
+        div.style.padding = "12px";
+        divRef.current.append(div);
+        postscribe("#af-container", adScript);
+      }
+    }, 500);
 
     if (document !== null) {
       const adInBody = document.querySelector('[id^="amzn_assoc_ad"]');
@@ -103,7 +105,9 @@ const TestAd: FC<Props> = ({ grid }) => {
         }
       }
     }
-  }, []);
+
+    return () => clearTimeout(delayedAdd);
+  }, [adScript]);
 
   return (
     <>
@@ -120,7 +124,7 @@ const TestAd: FC<Props> = ({ grid }) => {
   );
 };
 
-export default TestAd;
+export default AmazonAffiliateAdd;
 
 function getRandom(arr: string[], n: number): string[] {
   const result = new Array(n);
