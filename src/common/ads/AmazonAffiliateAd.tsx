@@ -31,7 +31,7 @@ const products = [
   "B079YBKT3H", // SteelSeries Arctis Pro
   "B07XPWD4WW", // mophie 3 in 1 Wireless Charge Pad
   "B07KQCH5DT", // ZenPod
-  "B07ZTQ8J8C", // Peak Design Everyday Backpack
+  "B07ZTQ7VJ9", // Peak Design Everyday Backpack
   "B07G9Y3ZMC", // Echo Studio
   "B01FXC7JWQ", // Furbo Dog Camera
   "B07XR5TRSZ", // Apple Watch Series 5
