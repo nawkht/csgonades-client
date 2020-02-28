@@ -66,6 +66,9 @@ const products = [
   "B07ZQRWTDB", // G Fuel Hype Sauce
   "B009KML5PS", // G Fuel Blue Ice Tub
   "B019AKA6YU", // Monster Energy Drink
+  "B08225BSZ6", // MTN DEW AMP GAME FUEL ZERO
+  "B07NZZZ746", // HyperX QuadCast
+  "B00SAYCXWG", // HyperX Cloud II
 ];
 
 const AmazonAffiliateAdd: FC<Props> = ({ single }) => {
