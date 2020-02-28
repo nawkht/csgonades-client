@@ -1,10 +1,9 @@
 // @ts-ignore
 import * as postscribe from "postscribe";
 import React, { FC, useEffect, useMemo, useRef } from "react";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
-  grid?: boolean;
+  single?: boolean;
 };
 
 const products = [
@@ -48,56 +47,27 @@ const products = [
   "B07PC7JKSB", // Bose Frames
 ];
 
-const adSearchTerms = [
-  "gaming glasses",
-  "gaming headset",
-  "gaming mouse",
-  "gaming pc",
-  "gaming accessories",
-  "steelseries",
-  "razer",
-  "hyperx",
-  "gtracing",
-  "gfuel",
-  "bose",
-  "senheiser",
-  "sony headphones",
-  "asus rog monitor",
-  "razer laptop",
-  "headphone stand",
-  "nintendo switch",
-  "oculus quest",
-  "mouse bungee",
-  "gaming desk",
-  "webcam",
-  "mirrorless",
-  "mechanical keyboard",
-];
-
-const AmazonAffiliateAdd: FC<Props> = ({ grid }) => {
-  const { colors } = useTheme();
+const AmazonAffiliateAdd: FC<Props> = ({ single }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
   const adScript = useMemo(() => {
-    const prods = getRandom(products, 4).join(",");
-    const searchTerm = getRandom(adSearchTerms, 1)[0];
-    return grid
-      ? `<script type="text/javascript">
-    amzn_assoc_placement = "adunit0";
-    amzn_assoc_tracking_id = "csgonadesweb-20";
-    amzn_assoc_ad_mode = "search";
-    amzn_assoc_ad_type = "smart";
-    amzn_assoc_marketplace = "amazon";
-    amzn_assoc_region = "US";
-    amzn_assoc_default_search_phrase = "${searchTerm}";
-    amzn_assoc_default_category = "All";
-    amzn_assoc_linkid = "c0647e55be7c25cf659400748bb8322b";
-    amzn_assoc_title = "";
-    amzn_assoc_search_bar = "false";
-    amzn_assoc_search_bar_position = "top";
-    </script>
-    <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`
-      : `<script type="text/javascript">
+    if (single) {
+      const prod = getRandom(products, 1)[0];
+      return `<script type="text/javascript">
+      amzn_assoc_tracking_id = "csgonadesweb-20";
+      amzn_assoc_ad_mode = "manual";
+      amzn_assoc_ad_type = "smart";
+      amzn_assoc_marketplace = "amazon";
+      amzn_assoc_region = "US";
+      amzn_assoc_design = "enhanced_links";
+      amzn_assoc_asins = "${prod}";
+      amzn_assoc_placement = "adunit";
+      amzn_assoc_linkid = "140772d6dd6e5e07de7d36eb8f762903";
+      </script>
+      <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`;
+    } else {
+      const prods = getRandom(products, 4).join(",");
+      return `<script type="text/javascript">
       amzn_assoc_placement = "adunit0";
       amzn_assoc_search_bar = "false";
       amzn_assoc_tracking_id = "csgonadesweb-20";
@@ -111,14 +81,14 @@ const AmazonAffiliateAdd: FC<Props> = ({ grid }) => {
       </script>
       <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
     <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>`;
-  }, [grid]);
+    }
+  }, [single]);
 
   useEffect(() => {
     const delayedAdd = setTimeout(() => {
       if (divRef.current) {
         const div = document.createElement("div");
         div.id = "af-container";
-        div.style.padding = "12px";
         divRef.current.append(div);
         postscribe("#af-container", adScript);
       }
@@ -144,9 +114,6 @@ const AmazonAffiliateAdd: FC<Props> = ({ grid }) => {
 
       <style jsx>{`
         #container {
-          border: 1px solid ${colors.BORDER};
-          background: ${colors.DP01};
-          border-radius: 3px;
         }
       `}</style>
     </>

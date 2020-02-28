@@ -92,7 +92,8 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           </div>
 
           <div className="n-ad">
-            <AmazonAffiliateAd grid={true} key={nade.id} />
+            <AmazonAffiliateAd single={true} key={nade.id} />
+            <AmazonAffiliateAd single={true} key={nade.id} />
           </div>
         </div>
 
