@@ -55,9 +55,10 @@ export const MapPage: FC<Props> = ({ map }) => {
         }
 
         .ad-container {
-          max-width: 1000px;
+          max-width: 100%;
           margin: 0 auto;
           padding: 24px;
+          padding-left: calc(36px + 24px);
         }
 
         @media only screen and (max-width: 860px) {
