@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
-import AmazonAffiliateAdd from "../common/ads/AmazonAffiliateAd";
+import { AdSelector } from "../common/ads/AdSelectors";
 import { Layout } from "../common/Layout";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -85,7 +85,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
           </div>
 
           <div className="n-ad" key={nade.id}>
-            <AmazonAffiliateAdd />
+            <AdSelector />
           </div>
         </div>
 
