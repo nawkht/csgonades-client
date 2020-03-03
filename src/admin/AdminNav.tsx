@@ -59,6 +59,13 @@ export const AdminNav: FC = () => {
         >
           New article
         </Menu.Item>
+        <Menu.Item
+          name="gallery"
+          active={route === "gallery"}
+          onClick={handleItemClick}
+        >
+          Gallery
+        </Menu.Item>
       </Menu>
     </div>
   );

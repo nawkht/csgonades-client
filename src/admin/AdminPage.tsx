@@ -3,6 +3,8 @@ import { Layout } from "../common/Layout";
 import { Dimensions } from "../constants/Constants";
 import { useAdminPage } from "../store/AdminStore/AdminHooks";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
+import { assertNever } from "../utils/Common";
+import { AdminGallery } from "./AdminGallery/AdminGallery";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminReports } from "./AdminReports";
@@ -30,7 +32,10 @@ export const AdminPage: FC = () => {
         return <AdminReports />;
       case "write-article":
         return <ArticleEditor />;
+      case "gallery":
+        return <AdminGallery />;
       default:
+        assertNever(route);
         return null;
     }
   }

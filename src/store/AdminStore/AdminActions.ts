@@ -7,7 +7,8 @@ export type AdminRoutes =
   | "user"
   | "tournaments"
   | "reports"
-  | "write-article";
+  | "write-article"
+  | "gallery";
 
 type ChangeAdminRouterAction = {
   type: "@@admin/CHANGE_ROUTE";

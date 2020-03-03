@@ -7,6 +7,7 @@ import { ArticleReducer } from "./ArticleStore/ArticleReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
+import { GalleryReducer } from "./GalleryStore/GalleryReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 import { NadeFilterReducer } from "./NadeFilterStore/NadeFilterReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   navigationStore: NavigationReducer,
   nadeFilterStore: NadeFilterReducer,
   articleStore: ArticleReducer,
+  galleryStore: GalleryReducer,
 });
 
 function createMiddleware() {
