@@ -83,7 +83,7 @@ export const MapPage: FC<Props> = ({ map }) => {
           max-width: 200px;
           display: flex;
           flex-direction: column;
-          align-items: flex-end;
+          align-items: center;
           overflow-y: auto;
           overflow-x: hidden;
         }

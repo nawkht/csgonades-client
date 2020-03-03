@@ -3,10 +3,29 @@ import AmazonAffiliateAdd from "./AmazonAffiliateAd";
 
 const ads = {
   amazon: <AmazonAffiliateAdd />,
+  amazon2: <AmazonAffiliateAdd />,
   nordVpn: (
-    <a href="https://www.jdoqocy.com/click-8411954-12814547" target="_top">
+    <a
+      href="https://www.jdoqocy.com/click-8411954-12814547"
+      target="_top"
+      rel="nofollow"
+    >
       <img
         src="https://www.tqlkg.com/image-8411954-12814547"
+        width="160"
+        height="600"
+        alt=""
+      />
+    </a>
+  ),
+  kinguin: (
+    <a
+      href="https://www.anrdoezrs.net/click-8411954-12193127"
+      target="_top"
+      rel="nofollow"
+    >
+      <img
+        src="https://www.awltovhc.com/image-8411954-12193127"
         width="160"
         height="600"
         alt=""
