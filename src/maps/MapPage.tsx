@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { WideBanner } from "../common/ads/WideBanner";
+import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { Layout } from "../common/Layout";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
@@ -20,9 +20,9 @@ export const MapPage: FC<Props> = ({ map }) => {
 
   return (
     <Layout title={capitalize(map)} canonical={`/maps/${map}`}>
-      <div className="map-page-wrapper">
-        <Filters map={map} />
+      <Filters map={map} />
 
+      <div className="map-page-wrapper">
         <div className="nade-list">
           <NadeListGrid
             loading={loading}
@@ -30,10 +30,10 @@ export const MapPage: FC<Props> = ({ map }) => {
             emptyMessage={`No nades found. Sign in and add something! :)`}
           />
         </div>
-      </div>
 
-      <div className="a-container">
-        <WideBanner />
+        <div className="a-browser">
+          <SidebarBanner />
+        </div>
       </div>
 
       <MapView map={map} />
@@ -41,6 +41,15 @@ export const MapPage: FC<Props> = ({ map }) => {
       <style jsx>{`
         .map-page-wrapper {
           margin-left: 36px;
+          margin-right: calc(${Dimensions.GUTTER_SIZE} + 160px);
+        }
+
+        .a-browser {
+          position: fixed;
+          top: calc(${Dimensions.HEADER_HEIGHT} + ${Dimensions.GUTTER_SIZE});
+          right: ${Dimensions.GUTTER_SIZE};
+          bottom: 50px;
+          max-width: 160px;
         }
 
         .nade-list {
@@ -50,12 +59,19 @@ export const MapPage: FC<Props> = ({ map }) => {
         .a-container {
           margin: 24px auto;
           max-width: 1000px;
+          border: 1px solid orange;
         }
 
         @media only screen and (max-width: 860px) {
           .map-page-wrapper {
             margin-left: 0;
+            margin-right: 0;
           }
+
+          .a-browser {
+            display: none;
+          }
+
           .nade-list {
             padding: ${Dimensions.PADDING_MEDIUM};
             margin-top: calc(${Dimensions.GUTTER_SIZE} * 2);
