@@ -33,7 +33,7 @@ export const MapPage: FC<Props> = ({ map }) => {
           />
         </div>
 
-        <div className="a-browser" key={map}>
+        <div className="a-browser">
           <div className="map-description">
             <h3>{capitalize(map)}</h3>
             <p>

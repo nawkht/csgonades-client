@@ -1,7 +1,5 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import AmazonAffiliateAdd from "./AmazonAffiliateAd";
-
-type Props = {};
 
 const ads = {
   amazon: <AmazonAffiliateAdd />,
@@ -18,7 +16,7 @@ const ads = {
   ),
 };
 
-export const SidebarBanner: FC<Props> = ({}) => {
+export const SidebarBanner: FC = memo(() => {
   const currentAd = randomAd(ads);
 
   return (
@@ -27,7 +25,7 @@ export const SidebarBanner: FC<Props> = ({}) => {
       <style jsx>{``}</style>
     </>
   );
-};
+});
 
 function randomAd(obj: Record<string, JSX.Element>) {
   const keys = Object.keys(obj);
