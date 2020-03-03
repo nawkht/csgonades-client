@@ -31,7 +31,7 @@ export const MapPage: FC<Props> = ({ map }) => {
           />
         </div>
 
-        <div className="a-browser">
+        <div className="a-browser" key={map}>
           <SidebarBanner />
         </div>
       </div>

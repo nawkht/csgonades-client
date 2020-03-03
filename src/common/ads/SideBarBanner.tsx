@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import AmazonAffiliateAdd from "./AmazonAffiliateAd";
 
 type Props = {};
 
 const ads = {
   amazon: <AmazonAffiliateAdd />,
+  amazon2: <AmazonAffiliateAdd />,
   nordVpn: (
     <a href="https://www.jdoqocy.com/click-8411954-12814547" target="_top">
       <img
@@ -18,37 +19,11 @@ const ads = {
 };
 
 export const SidebarBanner: FC<Props> = ({}) => {
-  const [currentAd, setCurrentAd] = useState(randomAd(ads));
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    const rotateTimer = setInterval(() => {
-      const nextAd = randomAd(ads);
-      if (!paused) {
-        setCurrentAd(nextAd);
-      }
-    }, 30000);
-    return () => {
-      clearInterval(rotateTimer);
-    };
-  }, [paused]);
-
-  function pauseRotate() {
-    setPaused(true);
-  }
-
-  function playRotate() {
-    setPaused(false);
-  }
+  const currentAd = randomAd(ads);
 
   return (
     <>
-      <div
-        className="carusel"
-        onMouseEnter={pauseRotate}
-        onMouseLeave={playRotate}
-      >
-        {currentAd}
-      </div>
+      <div className="sidebar-a">{currentAd}</div>
       <style jsx>{``}</style>
     </>
   );
