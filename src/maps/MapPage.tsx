@@ -37,8 +37,9 @@ export const MapPage: FC<Props> = ({ map }) => {
           <div className="map-description">
             <h3>{capitalize(map)}</h3>
             <p>
-              Find the best smokes, molotovs, flashbangs and he-grenade for{" "}
-              {map}. If you know a nade that is missing, sign in and add it! 🎉
+              Find the best smokes, molotovs, flashbangs and he-grenades for{" "}
+              {capitalize(map)}.<br /> If you know a nade that is missing, sign
+              in and add it! 🎉😎💯
             </p>
           </div>
           <SidebarBanner />
