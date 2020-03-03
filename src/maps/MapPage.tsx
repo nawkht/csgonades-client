@@ -1,5 +1,5 @@
 import { FC } from "react";
-import AmazonAffiliateAdd from "../common/ads/AmazonAffiliateAd";
+import { WideBanner } from "../common/ads/WideBanner";
 import { Layout } from "../common/Layout";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
@@ -32,8 +32,8 @@ export const MapPage: FC<Props> = ({ map }) => {
         </div>
       </div>
 
-      <div className="ad-container" key={map}>
-        <AmazonAffiliateAdd />
+      <div className="a-container">
+        <WideBanner />
       </div>
 
       <MapView map={map} />
@@ -47,7 +47,7 @@ export const MapPage: FC<Props> = ({ map }) => {
           padding: ${Dimensions.GUTTER_SIZE};
         }
 
-        .ad-container {
+        .a-container {
           margin: 24px auto;
           max-width: 1000px;
         }

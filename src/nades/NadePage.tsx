@@ -117,7 +117,7 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         {`
           .nade-page {
             display: grid;
-            grid-template-columns: auto auto 350px;
+            grid-template-columns: auto auto 300px;
             grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
             grid-template-areas:
               "title title title"
