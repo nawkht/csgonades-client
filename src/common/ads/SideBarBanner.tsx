@@ -3,7 +3,6 @@ import AmazonAffiliateAdd from "./AmazonAffiliateAd";
 
 const ads = {
   amazon: <AmazonAffiliateAdd />,
-  amazon2: <AmazonAffiliateAdd />,
   nordVpn: (
     <a href="https://www.jdoqocy.com/click-8411954-12814547" target="_top">
       <img
