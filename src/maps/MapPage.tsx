@@ -6,6 +6,7 @@ import { Dimensions } from "../constants/Constants";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { useNadesForMap } from "../store/NadeStore/NadeHooks";
 import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
 import { MapView } from "./MapView/MapView";
 import { Filters } from "./NadeFilter/Filters";
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export const MapPage: FC<Props> = ({ map }) => {
+  const { colors } = useTheme();
   const { nades } = useNadesForMap(map);
   const loading = useIsLoadingNade();
 
@@ -32,6 +34,13 @@ export const MapPage: FC<Props> = ({ map }) => {
         </div>
 
         <div className="a-browser" key={map}>
+          <div className="map-description">
+            <h3>{capitalize(map)}</h3>
+            <p>
+              Find the best smokes, molotovs, flashbangs and he-grenade for{" "}
+              {map}. If you know a nade that is missing, sign in and add it! 🎉
+            </p>
+          </div>
           <SidebarBanner />
         </div>
       </div>
@@ -41,7 +50,28 @@ export const MapPage: FC<Props> = ({ map }) => {
       <style jsx>{`
         .map-page-wrapper {
           margin-left: 36px;
-          margin-right: calc(${Dimensions.GUTTER_SIZE} + 160px);
+          margin-right: calc(${Dimensions.GUTTER_SIZE} + 200px);
+        }
+
+        .map-description {
+          background: ${colors.DP01};
+          border-radius: 3px;
+          margin-bottom: 12px;
+          border: 1px solid ${colors.BORDER};
+        }
+
+        .map-description h3 {
+          background: ${colors.DP02};
+          color: ${colors.TEXT};
+          border-bottom: 1px solid ${colors.BORDER};
+          padding: 6px 12px;
+          font-size: 1.2em;
+        }
+
+        .map-description p {
+          padding: 12px;
+          padding-top: 0;
+          color: ${colors.TEXT};
         }
 
         .a-browser {
@@ -49,7 +79,12 @@ export const MapPage: FC<Props> = ({ map }) => {
           top: calc(${Dimensions.HEADER_HEIGHT} + ${Dimensions.GUTTER_SIZE});
           right: ${Dimensions.GUTTER_SIZE};
           bottom: 50px;
-          max-width: 160px;
+          max-width: 200px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          overflow-y: auto;
+          overflow-x: hidden;
         }
 
         .nade-list {
