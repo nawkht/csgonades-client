@@ -40,8 +40,7 @@ export const UserEditor: FC<Props> = ({ user }) => {
   }
 
   function updateNickname(e: any) {
-    const clean = e.target.value.replace(/[^A-Za-z0-9]/g, "");
-    setNickname(clean);
+    setNickname(e.target.value);
   }
 
   return (
