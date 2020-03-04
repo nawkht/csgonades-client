@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Popup } from "semantic-ui-react";
 import { NadeType, nadeTypeString } from "../../models/Nade/NadeType";
 import { iconFromType } from "../../utils/Common";
@@ -9,7 +9,7 @@ type Props = {
   onClick: () => void;
 };
 
-export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
+export const TypeToggler: FC<Props> = memo(({ type, onClick, active }) => {
   const iconUrl = iconFromType(type);
 
   const className = `type-toggler ${active ? "active" : ""}`;
@@ -66,4 +66,4 @@ export const TypeToggler: FC<Props> = ({ type, onClick, active }) => {
       `}</style>
     </>
   );
-};
+});

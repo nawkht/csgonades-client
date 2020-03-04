@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useSelector } from "react-redux";
 import { Dimensions, LayerPosition } from "../../constants/Constants";
 import { toastSelector } from "../../store/ToastStore/ToastSelectors";
 import { ToastItem } from "./ToastItem";
-export const ToastList: FC = () => {
+export const ToastList: FC = memo(() => {
   const toasts = useSelector(toastSelector);
 
   return (
@@ -27,4 +27,4 @@ export const ToastList: FC = () => {
       `}</style>
     </>
   );
-};
+});

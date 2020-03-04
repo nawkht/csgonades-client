@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
@@ -10,7 +10,7 @@ type Props = {
   map: CsgoMap;
 };
 
-export const Filters: FC<Props> = ({ map }) => {
+export const Filters: FC<Props> = memo(({ map }) => {
   const isSignedIn = useIsSignedIn();
 
   return (
@@ -50,4 +50,4 @@ export const Filters: FC<Props> = ({ map }) => {
       `}</style>
     </>
   );
-};
+});

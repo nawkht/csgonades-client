@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -12,7 +12,7 @@ interface Props {
   onItemClick?: () => void;
 }
 
-export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
+export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
   const { colors } = useTheme();
 
   return (
@@ -59,4 +59,4 @@ export const NadeItem: FC<Props> = ({ nade, onItemClick }) => {
       `}</style>
     </>
   );
-};
+});

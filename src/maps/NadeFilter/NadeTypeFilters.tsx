@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
 import { TypeToggler } from "./TypeToggler";
@@ -7,7 +7,7 @@ type Props = {
   map: CsgoMap;
 };
 
-export const NadeTypeFilters: FC<Props> = () => {
+export const NadeTypeFilters: FC<Props> = memo(() => {
   const { filterByType, byType } = useNadeFilter();
 
   function onSmokeClick() {
@@ -61,4 +61,4 @@ export const NadeTypeFilters: FC<Props> = () => {
       `}</style>
     </>
   );
-};
+});

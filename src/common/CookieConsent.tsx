@@ -1,9 +1,9 @@
-import { FC, useMemo } from "react";
+import { FC, memo, useMemo } from "react";
 import { FaCookieBite } from "react-icons/fa";
 import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
-export const CookieConsent: FC = () => {
+export const CookieConsent: FC = memo(() => {
   const { colors } = useTheme();
   const { acceptCookieConcent, acceptedCookieConsent } = useCookieConcent();
 
@@ -104,4 +104,4 @@ export const CookieConsent: FC = () => {
       `}</style>
     </>
   );
-};
+});
