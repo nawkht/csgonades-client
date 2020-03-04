@@ -4,6 +4,7 @@ import AmazonAffiliateAdd from "./AmazonAffiliateAd";
 const ads = {
   amazon: <AmazonAffiliateAdd />,
   amazon2: <AmazonAffiliateAdd />,
+  amazon3: <AmazonAffiliateAdd />,
   nordVpn: (
     <a
       href="https://www.jdoqocy.com/click-8411954-12814547"
@@ -20,15 +21,29 @@ const ads = {
   ),
   kinguin: (
     <a
-      href="https://www.anrdoezrs.net/click-8411954-12193127"
+      href="https://www.anrdoezrs.net/click-8411954-13652649"
       target="_top"
       rel="nofollow"
     >
       <img
-        src="https://www.awltovhc.com/image-8411954-12193127"
+        src="https://www.awltovhc.com/image-8411954-13652649"
         width="160"
         height="600"
-        alt=""
+        alt="Get New Games Cheaper Hottest Deals"
+      />
+    </a>
+  ),
+  lootbox: (
+    <a
+      href="https://www.anrdoezrs.net/click-8411954-13902092"
+      target="_top"
+      rel="nofollow"
+    >
+      <img
+        src="https://www.awltovhc.com/image-8411954-13902092"
+        width="160"
+        height="600"
+        alt="#1 Mystery Box For Geeks & Gamers"
       />
     </a>
   ),
