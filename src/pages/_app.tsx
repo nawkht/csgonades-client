@@ -89,6 +89,10 @@ class MyApp extends App<Props> {
           h5 {
             font-weight: 400;
           }
+
+          input {
+            font-family: "Roboto", sans-serif;
+          }
         `}</style>
       </Provider>
     );

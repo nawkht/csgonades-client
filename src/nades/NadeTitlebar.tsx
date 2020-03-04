@@ -1,5 +1,5 @@
 import { FC, useMemo, useState } from "react";
-import { Icon, Input } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 import { EditButton } from "../common/EditButton";
 import { Nade } from "../models/Nade/Nade";
 import { useUpdateNade } from "../store/NadeStore/NadeHooks";
@@ -54,13 +54,13 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
       <div className="nade-title">
         {allowEdit && isEditing && (
           <div className="title-edit-container">
-            <Input
-              transparent
-              placeholder="Search..."
-              size="massive"
+            <input
+              className="nade-edit-input"
               value={nadeTitle}
               onChange={e => setNadeTitle(e.target.value)}
+              placeholder="Add a title.."
             />
+
             <div className="nade-edit-container">
               <span onClick={onCancel}>
                 <Icon circular link color="grey" name="cancel" />
@@ -132,6 +132,17 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
         .title-edit-container {
           display: flex;
           align-items: center;
+        }
+
+        .nade-edit-input {
+          font-size: 1.5em;
+          font-weight: 300;
+          color: ${colors.TEXT};
+          min-width: 500px;
+          background: transparent;
+          border: none;
+          margin-right: 6px;
+          outline: none;
         }
       `}</style>
     </>
