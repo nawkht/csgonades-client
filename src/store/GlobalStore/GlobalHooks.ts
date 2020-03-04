@@ -1,7 +1,15 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeNavigationAction, toggleNavigationAction } from "./GlobalActions";
-import { isNavOpenSelector, siteStatsSelector } from "./GlobalSelectors";
+import {
+  acceptCookieConcentAction,
+  closeNavigationAction,
+  toggleNavigationAction,
+} from "./GlobalActions";
+import {
+  acceptedCookieConsentSelector,
+  isNavOpenSelector,
+  siteStatsSelector,
+} from "./GlobalSelectors";
 import { fetchSiteStatsThunk } from "./GlobalThunks";
 
 export const useSiteStats = () => {
@@ -31,5 +39,19 @@ export const useNavigation = () => {
     isNavOpen,
     toggleNav,
     closeNav,
+  };
+};
+
+export const useCookieConcent = () => {
+  const dispatch = useDispatch();
+  const acceptedCookieConsent = useSelector(acceptedCookieConsentSelector);
+
+  const acceptCookieConcent = useCallback(() => {
+    dispatch(acceptCookieConcentAction());
+  }, [dispatch]);
+
+  return {
+    acceptedCookieConsent,
+    acceptCookieConcent,
   };
 };

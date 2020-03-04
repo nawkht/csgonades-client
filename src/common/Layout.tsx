@@ -6,6 +6,7 @@ import { AnimationTimings, Dimensions } from "../constants/Constants";
 import { useNavigation } from "../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { CookieConsent } from "./CookieConsent";
 import { Footer } from "./layout-components/Footer";
 import { Header } from "./layout-components/Header";
 import { Navigation } from "./layout-components/Navigation";
@@ -107,6 +108,8 @@ export const Layout: React.FC<Props> = ({
       </div>
 
       <ToastList />
+
+      <CookieConsent />
 
       <style jsx>{`
         #layout {
