@@ -51,7 +51,12 @@ const NadePage: React.FC<Props> = ({ nade }) => {
       canonical={`/nades/${nade.id}`}
       metaThumbNail={nade.images.thumbnailUrl}
     >
-      <div className="nade-page">
+      <div
+        className="nade-page"
+        itemScope
+        itemProp="video"
+        itemType="http://schema.org/VideoObject"
+      >
         <div className="n-title">
           <NadeTitlebar
             key={`title-${nade.id}`}
@@ -111,6 +116,10 @@ const NadePage: React.FC<Props> = ({ nade }) => {
         <div className="n-similar">
           <SimilarNades key={`sim-${nade.id}`} nade={nade} />
         </div>
+
+        <meta itemProp="url" content={nade.gfycat.largeVideoUrl} />
+        <meta itemProp="thumbnailUrl" content={nade.images.thumbnailUrl} />
+        <meta itemProp="description" content={nade.description} />
       </div>
 
       <style jsx>

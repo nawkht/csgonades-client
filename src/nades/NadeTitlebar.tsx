@@ -76,7 +76,7 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
           <div className="title-contrainer">
             {nade.map && (
               <div className="title">
-                <h1>{theTitle}</h1>
+                <h1 itemProp="name">{theTitle}</h1>
               </div>
             )}
 
