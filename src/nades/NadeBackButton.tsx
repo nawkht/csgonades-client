@@ -3,7 +3,6 @@ import { FC, useMemo } from "react";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { useNavigationState } from "../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { capitalize } from "../utils/Common";
 
 type Props = {
   map?: CsgoMap;
@@ -32,12 +31,12 @@ export const NadeBackButton: FC<Props> = ({ map }) => {
     <>
       {previousIsToOwnMap && (
         <button className="back" onClick={() => history.back()}>
-          {capitalize(map)}
+          Back
         </button>
       )}
       {!previousIsToOwnMap && (
         <Link href={`/maps?name=${map}`} as={`/maps/${map}`}>
-          <a className="back">{capitalize(map)}</a>
+          <a className="back">Back</a>
         </Link>
       )}
       <style jsx>{`

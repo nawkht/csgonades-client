@@ -1,10 +1,11 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { MdChevronRight } from "react-icons/md";
 import { Icon, Input } from "semantic-ui-react";
 import { EditButton } from "../common/EditButton";
 import { Nade } from "../models/Nade/Nade";
 import { useUpdateNade } from "../store/NadeStore/NadeHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { capitalize } from "../utils/Common";
 import { NadeBackButton } from "./NadeBackButton";
 type Props = {
   nade: Nade;
@@ -17,7 +18,28 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [nadeTitle, setNadeTitle] = useState(nade.title || "");
 
-  const theTitle = nadeTitle.length > 0 ? nadeTitle : "No title";
+  const theTitle = useMemo(() => {
+    const titleBuilder = [];
+
+    if (nade.map) {
+      titleBuilder.push(capitalize(nade.map));
+    }
+
+    if (nade.type) {
+      titleBuilder.push(nade.type);
+      titleBuilder.push("for");
+    }
+
+    if (nadeTitle.length) {
+      titleBuilder.push(nadeTitle);
+    }
+
+    if (titleBuilder.length === 0) {
+      return "No title";
+    }
+
+    return titleBuilder.join(" ");
+  }, [nade, nadeTitle]);
 
   function onTitleSave() {
     setIsEditing(false);
