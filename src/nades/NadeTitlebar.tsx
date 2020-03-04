@@ -1,12 +1,10 @@
 import { FC, useMemo, useState } from "react";
-import { MdChevronRight } from "react-icons/md";
 import { Icon, Input } from "semantic-ui-react";
 import { EditButton } from "../common/EditButton";
 import { Nade } from "../models/Nade/Nade";
 import { useUpdateNade } from "../store/NadeStore/NadeHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
-import { NadeBackButton } from "./NadeBackButton";
 type Props = {
   nade: Nade;
   allowEdit: boolean;
@@ -78,13 +76,7 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
           <div className="title-contrainer">
             {nade.map && (
               <div className="title">
-                <h1>
-                  <NadeBackButton map={nade.map} />
-                  <span className="icon">
-                    <MdChevronRight />
-                  </span>
-                  {theTitle}
-                </h1>
+                <h1>{theTitle}</h1>
               </div>
             )}
 
@@ -107,18 +99,10 @@ export const NadeTitlebar: FC<Props> = ({ nade, allowEdit }) => {
           margin-bottom: 18px;
         }
 
-        .title .icon {
-          position: relative;
-          top: 0.23em;
-          font-size: 1.25em;
-          padding: 0;
-          margin: 0;
-        }
-
         .title h1 {
           padding: 0;
           margin: 0;
-          font-size: 1.45em;
+          font-size: 1.5em;
           font-weight: 300;
           color: ${colors.TEXT};
         }
