@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -52,7 +51,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             />
           </div>
           <div className="map-page-aside">
-            <SidebarBanner />
+            <div id="ezoic-pub-ad-placeholder-101"></div>
           </div>
         </div>
         <MapView
