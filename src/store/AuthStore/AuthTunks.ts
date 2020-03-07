@@ -29,7 +29,6 @@ export const serverSideUserInitThunkAction = (
 
     // User not signed in, make sure store auth store is empty
     if (tokenResult.isErr()) {
-      console.warn("> No token cookie");
       return dispatch(signOutUser());
     }
 
@@ -40,12 +39,10 @@ export const serverSideUserInitThunkAction = (
     const userResult = await UserApi.fetchSelf(authToken);
 
     if (userResult.isErr()) {
-      console.warn("> serverSideUserInitThunkAction > Failed to load self");
       return dispatch(signOutUser());
     }
 
     setUser(dispatch, userResult.value);
-    console.log("> Set user");
 
     // Preload user state
     const [favoriteResult, notificationsResult] = await Promise.all([
