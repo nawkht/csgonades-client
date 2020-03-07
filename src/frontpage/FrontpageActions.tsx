@@ -72,6 +72,11 @@ export const FrontpageActions: FC<Props> = ({}) => {
           color: white;
           border-radius: 5px;
           margin: 20px;
+          transition: transform 0.2s;
+        }
+
+        .action:hover {
+          transform: scale(1.02);
         }
 
         .discord-msg {
