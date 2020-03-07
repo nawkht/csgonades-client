@@ -76,10 +76,9 @@ class MyApp extends App<Props> {
           }
 
           body {
-            font-family: "Roboto", sans-serif;
+            font-family: "Roboto", Helvetica, sans-serif;
             font-weight: 300;
             color: #212529;
-            overflow-y: scroll;
             font-size: 16px;
           }
 
@@ -88,7 +87,8 @@ class MyApp extends App<Props> {
           h3,
           h4,
           h5 {
-            font-weight: 400;
+            font-family: "Roboto", Helvetica, sans-serif;
+            font-weight: 300;
           }
 
           h1 {

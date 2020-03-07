@@ -11,8 +11,6 @@ import { Navigation } from "../layout-components/Navigation";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
-const isBrowser = typeof window !== "undefined";
-
 type Props = {
   title?: string;
   description?: string;
