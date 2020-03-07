@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Message } from "semantic-ui-react";
-import { Layout } from "../common/Layout";
+import { Layout2 } from "../common/layout/Layout2";
 
 export const NadeNotFound: FC = () => {
   return (
-    <Layout title="Not found">
+    <Layout2 title="Not found">
       <div className="not-found">
         <Message negative size="large">
           <Message.Header>404 NOT FOUND</Message.Header>
@@ -17,13 +17,12 @@ export const NadeNotFound: FC = () => {
       </div>
       <style jsx>{`
         .not-found {
-          min-height: 50vh;
-          margin: 18px;
+          min-height: 82vh;
           display: flex;
           align-items: center;
           justify-content: space-around;
         }
       `}</style>
-    </Layout>
+    </Layout2>
   );
 };
