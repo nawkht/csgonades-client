@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
+import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { Layout2 } from "../common/layout/Layout2";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -85,7 +86,9 @@ export const NadePage: FC<Props> = ({ nade }) => {
               <SimilarNades nade={nade} />
             </div>
           </div>
-          <aside className="nade-page-aside2" key={nade.id}></aside>
+          <aside className="nade-page-aside2" key={nade.id}>
+            <SidebarBanner />
+          </aside>
         </div>
 
         <SignInWarning

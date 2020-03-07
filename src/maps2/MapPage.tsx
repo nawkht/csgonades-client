@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -50,7 +51,9 @@ export const MapPage: FC<Props> = ({ map }) => {
               emptyMessage={`No nades found. Sign in and add something! :)`}
             />
           </div>
-          <div className="map-page-aside"></div>
+          <div className="map-page-aside">
+            <SidebarBanner />
+          </div>
         </div>
         <MapView
           closeMapView={() => setMapViewVisisble(false)}
