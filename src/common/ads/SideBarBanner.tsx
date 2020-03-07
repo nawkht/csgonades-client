@@ -55,7 +55,13 @@ export const SidebarBanner: FC = memo(() => {
   return (
     <>
       <div className="sidebar-a">{currentAd}</div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .sidebar-a {
+          position: sticky;
+          top: 50px;
+          max-width: 160px;
+        }
+      `}</style>
     </>
   );
 });

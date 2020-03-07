@@ -1,22 +1,29 @@
 import axios from "axios";
 import { ok } from "neverthrow";
 import { Config } from "../constants/Constants";
-import { Article, ArticleCreateDto, ArticleUpdateDto } from "../models/Article";
+import {
+  BlogPost,
+  BlogPostCreateDto,
+  BlogPostLight,
+  BlogPostUpdateDto,
+} from "../models/BlogPost";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
-export class ArticleApi {
-  static async getArticles(): AppResult<Article[]> {
+export class BlogApi {
+  static async getBlogPosts(): AppResult<BlogPostLight[]> {
     try {
-      const result = await axios.get<Article[]>(`${Config.API_URL}/articles`);
+      const result = await axios.get<BlogPostLight[]>(
+        `${Config.API_URL}/articles`
+      );
       return ok(result.data);
     } catch (error) {
       return extractApiError(error);
     }
   }
 
-  static async articleById(id: string): AppResult<Article> {
+  static async blogPostById(id: string): AppResult<BlogPost> {
     try {
-      const result = await axios.get<Article>(
+      const result = await axios.get<BlogPost>(
         `${Config.API_URL}/articles/${id}`
       );
       return ok(result.data);
@@ -25,15 +32,13 @@ export class ArticleApi {
     }
   }
 
-  static async createArticle(articleDto: ArticleCreateDto, token: string) {
+  static async createBlogPost(articleDto: BlogPostCreateDto, token: string) {
     try {
-      const result = await axios.post<Article>(
+      const result = await axios.post<BlogPost>(
         `${Config.API_URL}/articles`,
         articleDto,
         {
-          headers: {
-            headers: { Authorization: token },
-          },
+          headers: { Authorization: token },
         }
       );
       return ok(result.data);
@@ -42,18 +47,16 @@ export class ArticleApi {
     }
   }
 
-  static async updateArticle(
-    data: ArticleUpdateDto,
+  static async updateBlogPost(
+    data: BlogPostUpdateDto,
     token: string
-  ): AppResult<Article> {
+  ): AppResult<BlogPost> {
     try {
-      const result = await axios.patch<Article>(
+      const result = await axios.patch<BlogPost>(
         `${Config.API_URL}/articles`,
         data,
         {
-          headers: {
-            headers: { Authorization: token },
-          },
+          headers: { Authorization: token },
         }
       );
       return ok(result.data);

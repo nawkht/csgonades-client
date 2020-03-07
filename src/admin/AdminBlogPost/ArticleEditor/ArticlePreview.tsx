@@ -1,29 +1,30 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 // @ts-ignore
 import JsxParser from "react-jsx-parser";
 import ReactMarkdown from "react-markdown";
 // @ts-ignore
 import breaks from "remark-breaks";
-import { NadeMarkdown } from "../common/NadeMarkdown";
+import { NadeMarkdown } from "../../../common/NadeMarkdown";
+import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 
-export const ArticleEditor: FC = () => {
-  const [content, setContent] = useState("");
+const components = {
+  NadeMarkdown,
+};
 
-  const components = {
-    NadeMarkdown,
-  };
+type Props = {
+  title: string;
+  body: string;
+};
+
+export const ArticlePreview: FC<Props> = ({ title, body }) => {
+  const { colors } = useTheme();
 
   return (
     <>
-      <textarea
-        className="markdown-editor"
-        onBlur={e => {
-          setContent(e.target.value);
-        }}
-      />
-      <div className="react-markdown">
+      <div className="article-preview">
+        <h1>{title}</h1>
         <ReactMarkdown
-          source={content}
+          source={body}
           plugins={[breaks]}
           escapeHtml={false}
           renderers={{
@@ -45,13 +46,16 @@ export const ArticleEditor: FC = () => {
         />
       </div>
       <style jsx>{`
-        .markdown-editor {
-          width: 100%;
-          min-height: 50vh;
-          outline: none;
+        .article-preview {
+          background: ${colors.DP01};
+          padding: 12px;
+          border-radius: 4px;
+          border: 1px solid ${colors.BORDER};
+          color: ${colors.TEXT};
         }
-        .react-markdown {
-          border: 1px solid red;
+
+        .article-preview h1 {
+          font-size: 1.5em;
         }
       `}</style>
     </>

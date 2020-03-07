@@ -1,11 +1,11 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import { Layout } from "../common/Layout";
+import { Layout2 } from "../common/layout/Layout2";
 
 const PrivacyPolicyPageContainer: NextPage = () => {
   return (
     <>
-      <Layout title="Privacy Policy" canonical="/privacypolicy">
+      <Layout2 title="Privacy Policy" canonical="/privacypolicy">
         <div className="privacy-policy">
           <h1>Privacy Policy</h1>
           <p>
@@ -101,12 +101,18 @@ const PrivacyPolicyPageContainer: NextPage = () => {
             .
           </p>
         </div>
-      </Layout>
+      </Layout2>
       <style jsx>{`
         .privacy-policy {
-          margin: 18px;
-          background: white;
-          padding: 18px;
+          max-width: 900px;
+          padding: 40px;
+          padding-top: 100px;
+          padding-bottom: 100px;
+          margin: 0 auto;
+        }
+
+        h1 {
+          text-align: center;
         }
       `}</style>
     </>

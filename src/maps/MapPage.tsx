@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { SidebarBanner } from "../common/ads/SideBarBanner";
-import { Layout } from "../common/Layout";
+import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
 import { CsgoMap } from "../models/Nade/CsGoMap";
@@ -21,7 +21,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   const loading = useIsLoadingNade();
 
   return (
-    <Layout title={capitalize(map)} canonical={`/maps/${map}`}>
+    <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
       <Filters map={map} />
 
       <div className="map-page-wrapper">
@@ -121,6 +121,6 @@ export const MapPage: FC<Props> = ({ map }) => {
           }
         }
       `}</style>
-    </Layout>
+    </Layout2>
   );
 };

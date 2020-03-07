@@ -1,6 +1,7 @@
 import { NextPage } from "next";
-import { MapPage } from "../maps/MapPage";
+import { MapPage } from "../maps2/MapPage";
 import { CsgoMap } from "../models/Nade/CsGoMap";
+import { resetNadeFilterAction } from "../store/NadeFilterStore/NadeFilterActions";
 import { fetchNadesByMapActionThunk } from "../store/NadeStore/NadeThunks";
 
 interface Props {
@@ -17,6 +18,7 @@ Map.getInitialProps = async context => {
 
   //@ts-ignore
   await dispatch(fetchNadesByMapActionThunk(map));
+  dispatch(resetNadeFilterAction(true));
 
   return { map };
 };

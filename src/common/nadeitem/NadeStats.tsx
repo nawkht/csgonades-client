@@ -95,7 +95,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
         .stats {
           display: flex;
           align-items: center;
-          color: ${colors.TEXT};
+          color: #707070;
           flex: 1;
         }
 
@@ -110,7 +110,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
 
         .stat-text,
         .special-text {
-          font-size: 0.7em;
+          font-size: 11px;
           margin-left: 3px;
           padding-top: 1px;
         }

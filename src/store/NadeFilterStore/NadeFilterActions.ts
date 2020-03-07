@@ -34,13 +34,23 @@ type SwitchTickrateFilter = {
   type: "@@nadefilter/SWITCH_TICKRATE";
 };
 
+type ClickTickrate64 = {
+  type: "@@nadefilter/CLICK_TICKRATE_64";
+};
+
+type ClickTickrate128 = {
+  type: "@@nadefilter/CLICK_TICKRATE_128";
+};
+
 export type NadeFilterActions =
   | ToogleMapPositionModal
   | FilterByMapCoordinates
   | FilterByNadeType
   | ToggleFilterByFavorites
   | ResetNadeFilter
-  | SwitchTickrateFilter;
+  | SwitchTickrateFilter
+  | ClickTickrate64
+  | ClickTickrate128;
 
 export const filterByTypeAction = (nadeType: NadeType): FilterByNadeType => ({
   type: "@@nadefilter/FILTER_BY_TYPE",
@@ -90,4 +100,12 @@ export const toggleMapPositionModalAction = (
 
 export const switchTickrateAction = (): SwitchTickrateFilter => ({
   type: "@@nadefilter/SWITCH_TICKRATE",
+});
+
+export const selectTickrate64 = (): ClickTickrate64 => ({
+  type: "@@nadefilter/CLICK_TICKRATE_64",
+});
+
+export const selectTickrate128 = (): ClickTickrate128 => ({
+  type: "@@nadefilter/CLICK_TICKRATE_128",
 });

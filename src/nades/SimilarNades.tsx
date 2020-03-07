@@ -24,13 +24,14 @@ export const SimilarNades: FC<Props> = ({ nade }) => {
       </div>
       <style jsx>{`
         .similar {
-          margin-top: 18px;
-          padding-top: 18px;
+          margin-top: 100px;
         }
 
         h3 {
-          font-weight: normal;
+          font-weight: 300;
           color: ${colors.TEXT};
+          margin-bottom: 30px;
+          font-size: 24px;
         }
       `}</style>
     </>

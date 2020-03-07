@@ -1,16 +1,18 @@
 import { FC } from "react";
-import { Layout } from "../common/Layout";
+import { Layout2 } from "../common/layout/Layout2";
+import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { useAdminPage } from "../store/AdminStore/AdminHooks";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { assertNever } from "../utils/Common";
+import { AdminBlogPostList } from "./AdminBlogPost/AdminBlogPostList";
+import { ArticleEditor } from "./AdminBlogPost/ArticleEditor/ArticleEditor";
 import { AdminGallery } from "./AdminGallery/AdminGallery";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminReports } from "./AdminReports";
 import { AdminTournaments } from "./AdminTournaments";
 import { AdminUsers } from "./AdminUsers";
-import { ArticleEditor } from "./ArticleEditor";
 
 export const AdminPage: FC = () => {
   const allowedToView = useIsAdminOrModerator();
@@ -30,10 +32,12 @@ export const AdminPage: FC = () => {
         return <AdminTournaments />;
       case "reports":
         return <AdminReports />;
-      case "write-article":
+      case "write-blogpost":
         return <ArticleEditor />;
       case "gallery":
         return <AdminGallery />;
+      case "blog":
+        return <AdminBlogPostList />;
       default:
         assertNever(route);
         return null;
@@ -41,16 +45,20 @@ export const AdminPage: FC = () => {
   }
 
   return (
-    <Layout title="Admin" canonical="/admin">
-      <div className="admin-container">
-        <div className="admin-nav">
-          <AdminNav />
+    <Layout2 title="Admin" canonical="/admin">
+      <PageCentralize>
+        <div className="admin-container">
+          <div className="admin-nav">
+            <AdminNav />
+          </div>
+          <div className="admin-content">{pageContent()}</div>
         </div>
-        <div className="admin-content">{pageContent()}</div>
-      </div>
+      </PageCentralize>
       <style jsx>{`
         .admin-container {
-          margin: ${Dimensions.GUTTER_SIZE};
+          min-height: 80vh;
+          margin-top: 50px;
+          margin-bottom: 100px;
           display: flex;
         }
 
@@ -62,6 +70,6 @@ export const AdminPage: FC = () => {
           flex: 1;
         }
       `}</style>
-    </Layout>
+    </Layout2>
   );
 };

@@ -80,6 +80,7 @@ class MyApp extends App<Props> {
             font-weight: 300;
             color: #212529;
             overflow-y: scroll;
+            font-size: 16px;
           }
 
           h1,
@@ -88,6 +89,24 @@ class MyApp extends App<Props> {
           h4,
           h5 {
             font-weight: 400;
+          }
+
+          h1 {
+            font-size: 2rem;
+          }
+
+          h2 {
+            font-size: 1.8rem;
+          }
+
+          h3,
+          h4,
+          h5 {
+            font-size: 1.6rem;
+          }
+
+          p {
+            font-size: 1.2rem;
           }
 
           input {

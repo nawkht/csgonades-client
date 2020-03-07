@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { useArticles } from "../store/ArticleStore/ArticleHooks";
+import { useBlog } from "../store/BlogStore/BlogHooks";
 
 type Props = {};
 
 export const AdminArticleList: FC<Props> = ({}) => {
-  const {} = useArticles();
+  const {} = useBlog();
   return (
     <>
       <div></div>

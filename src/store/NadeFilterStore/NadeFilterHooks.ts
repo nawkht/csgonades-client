@@ -7,6 +7,8 @@ import {
   filterByMapCoordsAction,
   filterByTypeAction,
   resetNadeFilterAction,
+  selectTickrate128,
+  selectTickrate64,
   switchTickrateAction,
   toggleFilterByFavoritesAction,
   toggleMapPositionModalAction,
@@ -69,6 +71,14 @@ export const useNadeFilter = () => {
     dispatch(switchTickrateAction());
   }, [dispatch]);
 
+  const useTickrate64 = useCallback(() => {
+    dispatch(selectTickrate64());
+  }, [dispatch]);
+
+  const useTickrate128 = useCallback(() => {
+    dispatch(selectTickrate128());
+  }, [dispatch]);
+
   return {
     isDefault,
     positionModalOpen,
@@ -82,6 +92,8 @@ export const useNadeFilter = () => {
     toggleFilterByFavorites,
     toggleMapPositionModal,
     switchTickrate,
+    useTickrate64,
+    useTickrate128,
   };
 };
 

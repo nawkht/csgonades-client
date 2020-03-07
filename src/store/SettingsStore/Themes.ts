@@ -27,7 +27,12 @@ export type ThemeColors = {
   filterFavColor: string;
   filterResetBg: string;
   filterResetDisabledBg: string;
+  filterBorder: string;
   HIGHLIGHT_BG: string;
+  boxBg: string;
+  boxTitleBg: string;
+  jumboGradientStart: string;
+  jumboGradientEnd: string;
 };
 
 type Themes = {
@@ -42,7 +47,7 @@ export const themes: Themes = {
     DP02: "#232323",
     SITE_BG: "#121212",
     UI_BG: "#212121",
-    PRIMARY: "rgba(28, 143, 192, 1)",
+    PRIMARY: "#0d516e",
     PRIMARY_10: "rgba(28, 143, 192, 0.1)",
     PRIMARY_BLACK: "#262626",
     BORDER: "rgba(0, 0, 0, 1)",
@@ -56,21 +61,26 @@ export const themes: Themes = {
     nadeItemHeadingBg: "#232323",
     footerBg: "#212121",
     footerColor: "white",
-    primaryBtnBg: "rgba(28, 143, 192, 0.85)",
+    primaryBtnBg: "#0d516e",
     primaryBtnHover: "rgba(28, 143, 192, 1)",
-    filterBg: "#292929",
+    filterBg: "#0d516e",
     filterBgHover: "#151515",
     filterColor: "white",
     filterFavColor: "#ebda49",
     filterResetBg: "#6e0000",
     filterResetDisabledBg: "#544242",
+    filterBorder: "#121212",
     FAV_YELLOW: "#bd9700",
     HIGHLIGHT_BG: "#3c4759",
+    boxBg: "#1e1e1e",
+    boxTitleBg: "#232323",
+    jumboGradientStart: "#1e1e1e",
+    jumboGradientEnd: "#232323",
   },
   light: {
-    DP00: "#f3f3f3",
-    DP01: "#fff",
-    DP02: "#fff",
+    DP00: "#fff",
+    DP01: "#f9f9f9",
+    DP02: "#f3f3f3",
     SITE_BG: "#f3f3f3",
     UI_BG: "white",
     PRIMARY: "#1c90c0",
@@ -81,22 +91,27 @@ export const themes: Themes = {
     ERROR: "#c01c1c",
     WARNING: "#c05b1c",
     GREY: "#bbb",
-    TEXT: "#262626",
+    TEXT: "#525252",
     NAV_HOVER: "#f7f7f7",
     NADE_ITEM_HIGHLIGHT: "#00c9ab",
-    nadeItemHeadingBg: "rgba(28, 143, 192, 1)",
+    nadeItemHeadingBg: "#eee",
     footerBg: "#1c90c0",
     footerColor: "white",
-    primaryBtnBg: "rgba(28, 143, 192, 0.85)",
+    primaryBtnBg: "#f9f9f9",
     primaryBtnHover: "rgba(28, 143, 192, 1)",
-    filterBg: "rgba(28, 144, 192, 1)",
+    filterBg: "#f9f9f9",
     filterBgHover: "#197da6",
-    filterColor: "#262626",
+    filterColor: "#525252",
     filterFavColor: "#ffbb00",
     filterResetBg: "#6e0000",
     filterResetDisabledBg: "#ccabab",
+    filterBorder: "#e9e9e9",
     FAV_YELLOW: "#fac800",
     HIGHLIGHT_BG: "#e8f1ff",
+    boxBg: "#fff",
+    boxTitleBg: "#f9f9f9",
+    jumboGradientStart: "#f9f9f9",
+    jumboGradientEnd: "#eeeeee",
   },
 };
 

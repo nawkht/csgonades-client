@@ -3,9 +3,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { AdminReducer } from "./AdminStore/AdminReducer";
 import { analyticsMiddleware } from "./Analytics/AnalyticsMiddleware";
-import { ArticleReducer } from "./ArticleStore/ArticleReducer";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
+import { BlogReducer } from "./BlogStore/BlogReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GalleryReducer } from "./GalleryStore/GalleryReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
@@ -35,7 +35,7 @@ const rootReducer = combineReducers({
   settingsStore: PersistedSettingsReducer,
   navigationStore: NavigationReducer,
   nadeFilterStore: NadeFilterReducer,
-  articleStore: ArticleReducer,
+  blogStore: BlogReducer,
   galleryStore: GalleryReducer,
 });
 

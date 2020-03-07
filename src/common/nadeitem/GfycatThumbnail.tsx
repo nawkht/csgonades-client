@@ -103,7 +103,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
       <style jsx>{`
         .player {
           position: relative;
-          width: 100%;
+          width: 101%;
           overflow: hidden;
           display: block;
           padding-top: 56.25%;

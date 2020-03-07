@@ -23,6 +23,7 @@ const FrontPageStats: FC = () => {
           display: flex;
           justify-content: space-around;
           color: ${colors.TEXT};
+          border-bottom: 1px solid ${colors.BORDER};
         }
 
         #stats-container {
@@ -37,8 +38,12 @@ const FrontPageStats: FC = () => {
         .stat-number {
           font-weight: normal;
           text-align: center;
-          font-size: 1.3em;
-          margin-bottom: 3px;
+          font-size: 1.6rem;
+          margin-bottom: 6px;
+        }
+
+        .stat-label {
+          font-size: 1rem;
         }
       `}</style>
     </>

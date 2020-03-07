@@ -28,26 +28,27 @@ export const SignInnButton: FC = () => {
           align-items: center;
           color: white;
           transition: background 0.15s;
-          background: ${colors.primaryBtnBg};
+          background: #444;
           transition: background 0.2s;
-          padding: 12px;
+          padding: 15px 30px;
         }
 
         .steam-logo {
-          font-size: 2.2em;
           transition: transform 0.2s;
-          margin-right: 6px;
+          margin-right: 10px;
+          font-size: 24px;
         }
 
         .steam-text {
-          font-weight: normal;
+          font-weight: 300;
+          font-size: 16px;
           white-space: nowrap;
           margin-right: 6px;
           align-self: center;
         }
 
         .steam-login:hover {
-          background: ${colors.primaryBtnHover};
+          background: #222;
         }
       `}</style>
       <style jsx global>{`

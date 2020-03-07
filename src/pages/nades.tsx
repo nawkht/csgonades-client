@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { NadeNotFound } from "../nades/NadeNotFound";
-import { NadePage } from "../nades/NadePage";
+import { NadePage } from "../nades2/NadePage";
 import {
   nadeErrorSelector,
   useNadeError,

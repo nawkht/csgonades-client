@@ -33,10 +33,9 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
       <style jsx>{`
         .nadebox {
           background: ${colors.DP01};
-          border: 1px solid ${colors.BORDER};
           border-radius: ${Dimensions.BORDER_RADIUS};
           cursor: pointer;
-          box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
           transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
           width: 100%;
@@ -44,7 +43,7 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
         }
 
         .nadebox:hover {
-          box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
         }
 
         .video {

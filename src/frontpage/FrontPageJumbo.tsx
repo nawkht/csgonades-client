@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
@@ -12,80 +13,56 @@ const FrontPageJumbo: FC = () => {
   return (
     <>
       <div id="jumbo">
-        <div id="jumbo-message">
-          <h2 className="subtitle">
-            Find the perfect smoke, flashbang, HE grenade or molotov!
-          </h2>
-          <p>
-            We got something for every active duty map in CS:GO and some more.
-          </p>
-          <p>Are you a nade wizard? Then sign in and add your own.</p>
-          <a className="jumbo-cta-link" href={AUTH_URL} rel="nofollow">
-            <button className="jumbo-cta">Sign In</button>
-          </a>
-        </div>
-        <div className="illustration" />
+        <PageCentralize>
+          <div id="jumbo-message">
+            <h1>
+              Hi, welcome to CSGO Nades.
+              <br /> A community to learn and share
+              <br /> nades for Counter-Strike Global Offensive.
+            </h1>
+            <div className="illustration" />
+          </div>
+        </PageCentralize>
       </div>
       <style jsx>{`
         #jumbo {
-          background: url("/images/hero.svg");
+          background: linear-gradient(
+            252.84deg,
+            ${colors.jumboGradientStart} 33.44%,
+            ${colors.jumboGradientEnd} 66.89%
+          );
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
-          display: flex;
-          flex-direction: row;
+          overflow: hidden;
         }
 
         #jumbo-message {
-          display: inline-block;
-          background: rgba(255, 255, 255, 0.75);
-          padding: 48px 100px 48px ${Dimensions.GUTTER_SIZE};
-          clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+          position: relative;
+          display: block;
+          padding-top: 100px;
+          padding-bottom: 100px;
         }
 
         .illustration {
-          position: relative;
-          top: 50px;
-          flex: 1;
+          position: absolute;
+          bottom: -75px;
+          right: 0;
+          width: 350px;
+          height: 350px;
           background: url("/images/ilustration.svg");
           background-position: center;
           background-size: contain;
           background-repeat: no-repeat;
-          margin-right: ${Dimensions.GUTTER_SIZE};
+          opacity: 0.9;
         }
 
-        .jumbo-cta {
-          outline: none;
-          background: ${colors.primaryBtnBg};
-          border: none;
-          padding: 12px 18px;
-          font-size: 1.2em;
-          border-radius: 8px;
-          color: white;
-          font-weight: 300;
-          cursor: pointer;
-          transition: background 0.15s;
-          margin-top: 24px;
-        }
-
-        .jumbo-cta:hover {
-          background: ${colors.primaryBtnHover};
-        }
-
-        h2 {
-          color: #121212;
+        h1 {
+          color: ${colors.TEXT};
           margin: 0;
           padding: 0;
-          margin-bottom: 24px;
-          font-size: 2em;
           font-weight: 300;
-        }
-
-        p {
-          color: #121212;
-          font-weight: 300;
-          font-size: 1.1em;
-          margin-bottom: 6px;
+          font-size: 2.2rem;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

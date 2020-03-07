@@ -70,6 +70,30 @@ export const NadeFilterReducer: Reducer<NadeFilterState, NadeFilterActions> = (
           byTickrate: "any",
         };
       }
+    case "@@nadefilter/CLICK_TICKRATE_64":
+      if (state.byTickrate === "tick64") {
+        return {
+          ...state,
+          byTickrate: "any",
+        };
+      } else {
+        return {
+          ...state,
+          byTickrate: "tick64",
+        };
+      }
+    case "@@nadefilter/CLICK_TICKRATE_128":
+      if (state.byTickrate === "tick128") {
+        return {
+          ...state,
+          byTickrate: "any",
+        };
+      } else {
+        return {
+          ...state,
+          byTickrate: "tick128",
+        };
+      }
     default:
       assertNever(action);
       return state;

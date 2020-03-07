@@ -1,12 +1,14 @@
 import { NextPage } from "next";
-import { Layout } from "../common/Layout";
+import { Layout2 } from "../common/layout/Layout2";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 const AboutPageContainer: NextPage = () => {
+  const { colors } = useTheme();
   return (
     <>
-      <Layout canonical="/about">
+      <Layout2 canonical="/about">
         <div className="about">
-          <h1>About</h1>
+          <h1>About CSGO Nades</h1>
           <h2>The story</h2>
           <p>
             CSGONades was created in 2016 to collect a large collection of
@@ -43,12 +45,18 @@ const AboutPageContainer: NextPage = () => {
             the use of some of the grenades you can find on this website.
           </p>
         </div>
-      </Layout>
+      </Layout2>
       <style jsx>{`
         .about {
-          margin: 18px;
-          background: white;
-          padding: 18px;
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 40px;
+          min-height: 90vh;
+          color: ${colors.TEXT};
+        }
+
+        h1 {
+          text-align: center;
         }
       `}</style>
     </>

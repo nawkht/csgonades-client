@@ -39,7 +39,7 @@ export const NadeItemTitle: FC<Props> = ({ nade }) => {
           padding: 6px 12px;
           display: block;
           background: ${colors.nadeItemHeadingBg};
-          color: white;
+          color: ${colors.TEXT};
           display: flex;
           align-items: center;
           justify-content: center;

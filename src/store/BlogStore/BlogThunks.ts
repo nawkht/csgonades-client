@@ -1,13 +1,13 @@
-import { ArticleApi } from "../../api/ArticleApi";
-import { ArticleCreateDto, ArticleUpdateDto } from "../../models/Article";
+import { BlogApi } from "../../api/BlogApi";
+import { BlogPostCreateDto, BlogPostUpdateDto } from "../../models/BlogPost";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import { addNotificationActionThunk } from "../ToastStore/ToastThunks";
-import { replaceArticlesAction } from "./ArticleActions";
+import { replaceArticlesAction } from "./BlogActions";
 
 export const fetchArticlesThunk = (): ReduxThunkAction => {
   return async dispatch => {
-    const result = await ArticleApi.getArticles();
+    const result = await BlogApi.getBlogPosts();
 
     if (result.isErr()) {
       console.error(result.error);
@@ -19,7 +19,7 @@ export const fetchArticlesThunk = (): ReduxThunkAction => {
 };
 
 export const createArticleThunk = (
-  data: ArticleCreateDto
+  data: BlogPostCreateDto
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const authToken = tokenSelector(getState());
@@ -32,12 +32,12 @@ export const createArticleThunk = (
       );
     }
 
-    await ArticleApi.createArticle(data, authToken);
+    await BlogApi.createBlogPost(data, authToken);
   };
 };
 
 export const updateArticleThunk = (
-  data: ArticleUpdateDto
+  data: BlogPostUpdateDto
 ): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const authToken = tokenSelector(getState());
@@ -50,6 +50,6 @@ export const updateArticleThunk = (
       );
     }
 
-    await ArticleApi.updateArticle(data, authToken);
+    await BlogApi.updateBlogPost(data, authToken);
   };
 };

@@ -37,7 +37,8 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
       <style jsx>{`
         .user-container {
           position: relative;
-          margin: ${Dimensions.GUTTER_SIZE};
+          margin-top: 50px;
+          margin-bottom: 100px;
           display: flex;
           flex-direction: column;
         }

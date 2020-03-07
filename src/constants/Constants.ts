@@ -18,7 +18,7 @@ export const Dimensions = {
   PADDING_HUGE: "24px",
   GUTTER_SIZE: "24px",
   MOBILE_THRESHHOLD: "850px",
-  BORDER_RADIUS: "4px",
+  BORDER_RADIUS: "5px",
 };
 
 export const AnimationTimings = {

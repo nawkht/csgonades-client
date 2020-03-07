@@ -34,10 +34,11 @@ export const NightDayToggle: FC<Props> = ({ checked, onChange }) => {
       </div>
       <style jsx>{`
         .container {
+          display: block;
           position: relative;
-          border: 1px solid red;
-          top: -20px;
-          transform: scale(0.6);
+          top: 25px;
+          right: 25px;
+          transform: scale(0.5);
         }
 
         .toggleWrapper {
@@ -62,21 +63,6 @@ export const NightDayToggle: FC<Props> = ({ checked, onChange }) => {
           border-radius: 84px;
           transition: background-color 200ms
             cubic-bezier(0.445, 0.05, 0.55, 0.95);
-        }
-        .toggle:before {
-          content: "Light";
-          position: absolute;
-          left: -50px;
-          top: 15px;
-          font-size: 18px;
-        }
-        .toggle:after {
-          content: "Dark";
-          position: absolute;
-          right: -48px;
-          top: 15px;
-          font-size: 18px;
-          color: #749ed7;
         }
 
         .toggle__handler {
