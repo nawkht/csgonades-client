@@ -36,6 +36,9 @@ export const MapPage: FC<Props> = ({ map }) => {
             </h1>
           </PageCentralize>
         </div>
+        <PageCentralize>
+          <div id="ezoic-pub-ad-placeholder-102"></div>
+        </PageCentralize>
         <div className="map-page">
           <div className="filter">
             <NadeFilter
