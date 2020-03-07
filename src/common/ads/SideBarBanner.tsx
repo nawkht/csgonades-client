@@ -51,14 +51,14 @@ const ads = {
 };
 
 export const SidebarBanner: FC = memo(() => {
-  const { countryCode } = useCountryCode();
+  const { isFromAmerica } = useCountryCode();
 
   const currentAd = useMemo(() => {
     const allAds = { ...ads };
     const adKeys = Object.keys(allAds);
 
     // Remove amazon ads if user is not from US
-    if (countryCode && !countryCode.includes("US")) {
+    if (!isFromAmerica) {
       for (const currentAd of adKeys) {
         if (currentAd.includes("amazon")) {
           // @ts-ignore
@@ -68,7 +68,7 @@ export const SidebarBanner: FC = memo(() => {
     }
 
     return randomAd(allAds);
-  }, [countryCode]);
+  }, [isFromAmerica]);
 
   return (
     <>

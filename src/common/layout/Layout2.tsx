@@ -3,10 +3,7 @@ import { FC, memo, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
-import {
-  useCountryCode,
-  useNavigation,
-} from "../../store/GlobalStore/GlobalHooks";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { CookieConsent } from "../CookieConsent";
@@ -25,7 +22,6 @@ type Props = {
 
 export const Layout2: FC<Props> = memo(
   ({ title, description, canonical, metaThumbNail, children }) => {
-    const { fetchUserCountry } = useCountryCode();
     const { setCurrentRoute } = useNavigationState();
     const { colors } = useTheme();
     const { closeNav, isNavOpen } = useNavigation();
@@ -34,7 +30,6 @@ export const Layout2: FC<Props> = memo(
 
     useEffect(() => {
       closeNav();
-      fetchUserCountry();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

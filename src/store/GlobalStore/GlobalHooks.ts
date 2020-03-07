@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   acceptCookieConcentAction,
@@ -7,11 +7,10 @@ import {
 } from "./GlobalActions";
 import {
   acceptedCookieConsentSelector,
-  countryCodeSelector,
   isNavOpenSelector,
   siteStatsSelector,
 } from "./GlobalSelectors";
-import { fetchSiteStatsThunk, fetchUserCountryCodeThunk } from "./GlobalThunks";
+import { fetchSiteStatsThunk } from "./GlobalThunks";
 
 export const useSiteStats = () => {
   const dispatch = useDispatch();
@@ -58,15 +57,15 @@ export const useCookieConcent = () => {
 };
 
 export const useCountryCode = () => {
-  const dispatch = useDispatch();
-  const countryCode = useSelector(countryCodeSelector);
+  const countryCode = navigator ? navigator.language : "";
 
-  const fetchUserCountry = useCallback(() => {
-    dispatch(fetchUserCountryCodeThunk());
-  }, [dispatch]);
+  const isFromAmerica = useMemo(() => {
+    const simpleCountryCode = countryCode.toLowerCase();
+    return simpleCountryCode.includes("us");
+  }, [countryCode]);
 
   return {
-    fetchUserCountry,
     countryCode,
+    isFromAmerica,
   };
 };

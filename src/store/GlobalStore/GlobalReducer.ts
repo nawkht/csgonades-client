@@ -49,16 +49,6 @@ export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
         ...state,
         acceptedCookieConcent: true,
       };
-    case "@@global/ADD_COUNTRY_CODE":
-      return {
-        ...state,
-        countryCode: action.countryCode,
-      };
-    case "@@global/DID_TRY_FETCHING_COUNTRY_CODE":
-      return {
-        ...state,
-        didTryFetchingCountryCode: true,
-      };
     default:
       assertNever(action);
       return state;
