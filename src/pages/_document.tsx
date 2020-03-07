@@ -37,6 +37,15 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
           />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `let ezoicId = 179726;`,
+            }}
+          ></script>
+          <script
+            type="text/javascript"
+            src="//go.ezoic.net/ezoic/ezoic.js"
+          ></script>
         </Head>
         <body>
           <Main />

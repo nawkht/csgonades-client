@@ -60,17 +60,6 @@ export const Layout2: FC<Props> = ({
   return (
     <>
       <Head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `const ezoicId = 179726;`,
-          }}
-        ></script>
-        <script
-          type="text/javascript"
-          src="//go.ezoic.net/ezoic/ezoic.js"
-        ></script>
-      </Head>
-      <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
 
@@ -139,6 +128,10 @@ export const Layout2: FC<Props> = ({
 
         #mobile-navigation {
           display: none;
+        }
+
+        a {
+          text-decoration: none;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
