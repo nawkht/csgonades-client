@@ -1,10 +1,10 @@
 import { FC, memo } from "react";
-import AmazonAffiliateAdd from "./AmazonAffiliateAd";
+import { Amazon240Monitor } from "./AmazonProds/Amazon240Monitor";
+import AmazonMice from "./AmazonProds/AmazonMice";
 
 const ads = {
-  amazon: <AmazonAffiliateAdd />,
-  amazon2: <AmazonAffiliateAdd />,
-  amazon3: <AmazonAffiliateAdd />,
+  amazonMice: <AmazonMice />,
+  amazonMonitor: <Amazon240Monitor />,
   nordVpn: (
     <a
       href="https://www.jdoqocy.com/click-8411954-12814547"

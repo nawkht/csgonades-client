@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+      </head>
+      <body>
+        <script type="text/javascript">
+          const products = [
+            "B078LJ6RPK", // SteelSeries Rival 600
+            "B08176SM7C", // SteelSeries Rival 3
+            "B07L4BM851", // Logitech G502
+            "B07YPBX9Y7", // Razer Basilisk Ultimate
+          ];
+
+          function getRandom(arr, n) {
+            const result = new Array(n);
+            let len = arr.length;
+            const taken = new Array(len);
+
+            if (n > len)
+              throw new RangeError(
+                "getRandom: more elements taken than available"
+              );
+            while (n--) {
+              const x = Math.floor(Math.random() * len);
+              result[n] = arr[x in taken ? taken[x] : x];
+              taken[x] = --len in taken ? taken[len] : len;
+            }
+            return result;
+          }
+
+          const prods = getRandom(products, 2).join(",");
+
+          amzn_assoc_placement = "adunit0";
+          amzn_assoc_search_bar = "false";
+          amzn_assoc_tracking_id = "csgonadesweb-20";
+          amzn_assoc_ad_mode = "manual";
+          amzn_assoc_ad_type = "smart";
+          amzn_assoc_marketplace = "amazon";
+          amzn_assoc_region = "US";
+          amzn_assoc_title = "Sick gaming mice";
+          amzn_assoc_linkid = "e5c917d93c3274713703f809eedbb8e5";
+          amzn_assoc_asins = `${prods}`;
+        </script>
+        <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+      </body>
+    </html>
+  </body>
+</html>
