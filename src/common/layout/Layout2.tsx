@@ -3,13 +3,13 @@ import { FC, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
-import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { CookieConsent } from "../CookieConsent";
 import { Navigation } from "../layout-components/Navigation";
 import { ToastList } from "../toast/ToastList";
+import { AdminLink } from "./components/AdminLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
@@ -30,13 +30,11 @@ export const Layout2: FC<Props> = ({
   const { setCurrentRoute } = useNavigationState();
   const { colors } = useTheme();
   const { closeNav, isNavOpen } = useNavigation();
-  const trySignIn = useTrySignIn();
 
   const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
 
   useEffect(() => {
     closeNav();
-    trySignIn();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -118,6 +116,8 @@ export const Layout2: FC<Props> = ({
       <ToastList />
 
       <CookieConsent />
+
+      <AdminLink />
 
       <style jsx global>{`
         body {
