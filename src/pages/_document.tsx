@@ -39,7 +39,7 @@ class MyDocument extends Document {
           />
           <script
             dangerouslySetInnerHTML={{
-              __html: `let ezoicId = 179726;`,
+              __html: `var ezoicId = 179726;`,
             }}
           ></script>
           <script
