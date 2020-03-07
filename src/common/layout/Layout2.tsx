@@ -11,6 +11,8 @@ import { Navigation } from "../layout-components/Navigation";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
+const isBrowser = typeof window !== "undefined";
+
 type Props = {
   title?: string;
   description?: string;
@@ -88,6 +90,19 @@ export const Layout2: FC<Props> = ({
           />
         )}
         {metaThumbNail && <meta property="og:image" content={metaThumbNail} />}
+        {isBrowser && (
+          <>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `var ezoicId = 179726;`,
+              }}
+            ></script>
+            <script
+              type="text/javascript"
+              src="//go.ezoic.net/ezoic/ezoic.js"
+            ></script>
+          </>
+        )}
       </Head>
 
       <Header />
