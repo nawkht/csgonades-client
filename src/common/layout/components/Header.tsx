@@ -58,9 +58,6 @@ export const Header: FC<Props> = ({}) => {
           .hamburger {
             display: block;
           }
-
-          .header {
-          }
         }
       `}</style>
     </>

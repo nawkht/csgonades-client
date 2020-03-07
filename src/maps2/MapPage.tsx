@@ -8,6 +8,7 @@ import { useNadesForMap } from "../store/NadeStore/NadeHooks";
 import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
+import { SignInWarning } from "./components/SignInWarning";
 import { MapView } from "./mapview/MapView";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 
@@ -18,6 +19,7 @@ type Props = {
 export const MapPage: FC<Props> = ({ map }) => {
   const { colors } = useTheme();
   const [mapViewVisible, setMapViewVisisble] = useState(false);
+  const [showLoginWarning, setShowLoginWarning] = useState(false);
   const { nades } = useNadesForMap(map);
   const loading = useIsLoadingNade();
 
@@ -36,7 +38,10 @@ export const MapPage: FC<Props> = ({ map }) => {
         </div>
         <div className="map-page">
           <div className="filter">
-            <NadeFilter showMapView={() => setMapViewVisisble(true)} />
+            <NadeFilter
+              showSingInWarning={() => setShowLoginWarning(true)}
+              showMapView={() => setMapViewVisisble(true)}
+            />
           </div>
           <div className="nade-list">
             <NadeListGrid
@@ -51,6 +56,11 @@ export const MapPage: FC<Props> = ({ map }) => {
           closeMapView={() => setMapViewVisisble(false)}
           visible={mapViewVisible}
           map={map}
+        />
+        <SignInWarning
+          visible={showLoginWarning}
+          onDismiss={() => setShowLoginWarning(false)}
+          message="filter"
         />
       </Layout2>
       <style jsx>{`

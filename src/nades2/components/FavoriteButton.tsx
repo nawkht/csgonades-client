@@ -12,9 +12,10 @@ import {
 
 type Props = {
   nade: Nade;
+  showSignInWarning: () => void;
 };
 
-export const FavoriteButton: FC<Props> = ({ nade }) => {
+export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
   const isFavoriteInProgress = useIsFavoriteInProgress();
   const isSignedIn = useIsSignedIn();
   const favorite = useIsFavorited(nade.id);
@@ -23,6 +24,11 @@ export const FavoriteButton: FC<Props> = ({ nade }) => {
   const isFavorited = favorite;
 
   function onFavoriteClick() {
+    if (!isSignedIn) {
+      showSignInWarning();
+      return;
+    }
+
     if (isFavoriteInProgress) {
       return;
     }

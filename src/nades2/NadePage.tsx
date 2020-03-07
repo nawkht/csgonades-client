@@ -3,6 +3,7 @@ import { isMobile } from "react-device-detect";
 import { Layout2 } from "../common/layout/Layout2";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
+import { SignInWarning } from "../maps2/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
 import { Nade } from "../models/Nade/Nade";
 import { nadeTypeString } from "../models/Nade/NadeType";
@@ -28,6 +29,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
   const [editTitleVisisble, setEditTitleVisisble] = useState(false);
   const [editDescVisisble, setEditDescisisble] = useState(false);
   const [editMetaVisible, setEditMetaVisible] = useState(false);
+  const [showSignInWarning, setShowSignInWarning] = useState(false);
 
   useEffect(() => {
     registerView(nade.id);
@@ -70,7 +72,10 @@ export const NadePage: FC<Props> = ({ nade }) => {
               poster={nade.images.thumbnailUrl}
               controls={isMobile ? "mobile" : "desktop"}
             />
-            <FavoriteButton nade={nade} />
+            <FavoriteButton
+              showSignInWarning={() => setShowSignInWarning(true)}
+              nade={nade}
+            />
             <NadeInfo
               nade={nade}
               onEditTitle={() => setEditDescisisble(true)}
@@ -82,6 +87,12 @@ export const NadePage: FC<Props> = ({ nade }) => {
           </div>
           <aside className="nade-page-aside2" key={nade.id}></aside>
         </div>
+
+        <SignInWarning
+          visible={showSignInWarning}
+          onDismiss={() => setShowSignInWarning(false)}
+          message="favorite"
+        />
 
         <TitleEditor
           nadeId={nade.id}

@@ -31,6 +31,11 @@ export const Layout2: FC<Props> = ({
   const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
 
   useEffect(() => {
+    closeNav();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     const delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
       setCurrentRoute(location, title);

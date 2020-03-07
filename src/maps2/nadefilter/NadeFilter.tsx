@@ -9,9 +9,10 @@ import { TickrateSelector } from "./TickrateSelector";
 
 type Props = {
   showMapView: () => void;
+  showSingInWarning: () => void;
 };
 
-export const NadeFilter: FC<Props> = ({ showMapView }) => {
+export const NadeFilter: FC<Props> = ({ showMapView, showSingInWarning }) => {
   const { colors } = useTheme();
 
   return (
@@ -36,7 +37,7 @@ export const NadeFilter: FC<Props> = ({ showMapView }) => {
 
         <div className="favorite-container">
           <FilterBg>
-            <FavFilterButton />
+            <FavFilterButton showSingInWarning={showSingInWarning} />
           </FilterBg>
         </div>
 

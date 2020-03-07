@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
-import { Config } from "../../constants/Constants";
+import { Config, Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 export const SignInnButton: FC = () => {
@@ -24,13 +24,13 @@ export const SignInnButton: FC = () => {
 
         .steam-login {
           display: flex;
-          border-radius: 8px;
+          border-radius: 15px;
           align-items: center;
           color: white;
           transition: background 0.15s;
           background: #444;
           transition: background 0.2s;
-          padding: 15px 30px;
+          padding: 15px 20px;
         }
 
         .steam-logo {
@@ -49,6 +49,15 @@ export const SignInnButton: FC = () => {
 
         .steam-login:hover {
           background: #222;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .steam-login {
+            padding: 10px 10px;
+          }
+          .steam-text {
+            font-size: 14px;
+          }
         }
       `}</style>
       <style jsx global>{`

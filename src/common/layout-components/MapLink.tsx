@@ -31,7 +31,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           color: ${colors.TEXT};
           width: 100%;
           transition: background ${AnimationTimings.fast}s;
-          padding: 15px 40px;
+          padding: 15px 50px 15px 30px;
         }
 
         li a:hover {

@@ -40,6 +40,7 @@ export const UserNav: FC = () => {
           .new-nade-btn {
             margin-right: 18px;
           }
+
           @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
             .new-nade-btn {
               display: none;

@@ -34,7 +34,7 @@ export const Navigation: FC = () => {
       </nav>
       <style jsx>{`
         .exit-nav {
-          padding: 20px 50px;
+          padding: 25px 35px;
           color: ${colors.TEXT};
         }
 
