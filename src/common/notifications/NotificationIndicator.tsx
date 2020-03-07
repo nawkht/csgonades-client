@@ -44,13 +44,14 @@ export const NotificationIndicator: FC = () => {
 
         .notification-indicator {
           background: transparent;
-          border: 1px solid ${colors.GREY};
+          border: 1px solid ${colors.BORDER};
           padding: 6px;
           border-radius: 4px;
           color: ${colors.GREY};
           cursor: pointer;
           font-weight: bold;
           transition: border 0.2s, color 0.2s;
+          outline: none;
         }
 
         .notification-indicator.active {

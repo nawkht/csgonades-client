@@ -32,14 +32,15 @@ export const NotificationList: FC<Props> = ({ visble }) => {
       <style jsx>{`
         .notification-list {
           position: absolute;
-          top: calc(100% + 15px);
+          top: calc(100% + 19px);
           right: 0;
           border: 1px solid ${colors.BORDER};
-          background: ${colors.DP01};
+          background: ${colors.DP00};
           border-bottom-left-radius: 4px;
           border-bottom-right-radius: 4px;
           display: flex;
           flex-direction: column;
+          z-index: 999;
         }
 
         .no-noti {

@@ -43,7 +43,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
           .notification {
             white-space: nowrap;
             border: 1px solid ${colors.BORDER};
-            padding: 6px;
+            padding: 10px 15px;
             border-radius: 4px;
             margin-bottom: 6px;
             color: black;
@@ -101,7 +101,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
           color: ${colors.TEXT};
           white-space: nowrap;
           border-bottom: 1px solid ${colors.BORDER};
-          padding: 6px 12px;
+          padding: 15px 30px;
           color: black;
         }
 
