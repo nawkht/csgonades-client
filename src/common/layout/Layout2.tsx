@@ -3,6 +3,7 @@ import { FC, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
+import { usePreloadUser } from "../../store/AuthStore/AuthHooks";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -27,11 +28,13 @@ export const Layout2: FC<Props> = ({
   const { setCurrentRoute } = useNavigationState();
   const { colors } = useTheme();
   const { closeNav, isNavOpen } = useNavigation();
+  const preloadUser = usePreloadUser();
 
   const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
 
   useEffect(() => {
     closeNav();
+    preloadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

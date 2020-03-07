@@ -86,6 +86,7 @@ export const preloadUserThunkAction = (): ReduxThunkAction => {
     const user = userResult.value;
 
     setUser(dispatch, user);
+    console.log("> preloadUserThunkAction >Preloaded user");
 
     const isFirstSignIn = checkIsFirstSignIn(user);
 
