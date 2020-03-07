@@ -19,11 +19,22 @@ type AcceptCookieConcent = {
   readonly meta: Meta;
 };
 
+type AddCountryCode = {
+  readonly type: "@@global/ADD_COUNTRY_CODE";
+  readonly countryCode: string;
+};
+
+type DidTryFetchingCountryCode = {
+  readonly type: "@@global/DID_TRY_FETCHING_COUNTRY_CODE";
+};
+
 export type GlobalActions =
   | AddSiteStatsAction
   | ToggleNavigation
   | CloseNavigation
-  | AcceptCookieConcent;
+  | AcceptCookieConcent
+  | AddCountryCode
+  | DidTryFetchingCountryCode;
 
 export const addSiteStatsActon = (stats: SiteStats): AddSiteStatsAction => ({
   type: "@@global/ADD_SITE_STATS",
@@ -43,4 +54,13 @@ export const toggleNavigationAction = (): ToggleNavigation => ({
 
 export const closeNavigationAction = (): CloseNavigation => ({
   type: "@@global/CLOSE_NAVIGATION",
+});
+
+export const addCountryCodeAction = (countryCode: string): AddCountryCode => ({
+  type: "@@global/ADD_COUNTRY_CODE",
+  countryCode,
+});
+
+export const didTryFetchingCountryCodeAction = (): DidTryFetchingCountryCode => ({
+  type: "@@global/DID_TRY_FETCHING_COUNTRY_CODE",
 });

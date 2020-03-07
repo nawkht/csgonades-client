@@ -7,10 +7,11 @@ import {
 } from "./GlobalActions";
 import {
   acceptedCookieConsentSelector,
+  countryCodeSelector,
   isNavOpenSelector,
   siteStatsSelector,
 } from "./GlobalSelectors";
-import { fetchSiteStatsThunk } from "./GlobalThunks";
+import { fetchSiteStatsThunk, fetchUserCountryCodeThunk } from "./GlobalThunks";
 
 export const useSiteStats = () => {
   const dispatch = useDispatch();
@@ -53,5 +54,19 @@ export const useCookieConcent = () => {
   return {
     acceptedCookieConsent,
     acceptCookieConcent,
+  };
+};
+
+export const useCountryCode = () => {
+  const dispatch = useDispatch();
+  const countryCode = useSelector(countryCodeSelector);
+
+  const fetchUserCountry = useCallback(() => {
+    dispatch(fetchUserCountryCodeThunk());
+  }, [dispatch]);
+
+  return {
+    fetchUserCountry,
+    countryCode,
   };
 };

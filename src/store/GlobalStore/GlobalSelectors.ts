@@ -7,3 +7,9 @@ export const isNavOpenSelector = (state: AppState) =>
 
 export const acceptedCookieConsentSelector = (state: AppState) =>
   state.globalStore.acceptedCookieConcent;
+
+export const countryCodeSelector = (state: AppState) =>
+  state.globalStore.countryCode;
+
+export const didTryFetchingCountryCodeSelector = (state: AppState) =>
+  state.globalStore.didTryFetchingCountryCode;

@@ -9,6 +9,8 @@ export type GlobalState = {
   readonly stats: SiteStats;
   readonly isNavOpen: boolean;
   readonly acceptedCookieConcent: boolean;
+  readonly didTryFetchingCountryCode: boolean;
+  readonly countryCode?: string;
 };
 
 const initialState: GlobalState = {
@@ -19,6 +21,7 @@ const initialState: GlobalState = {
   },
   isNavOpen: false,
   acceptedCookieConcent: false,
+  didTryFetchingCountryCode: false,
 };
 
 export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
@@ -45,6 +48,16 @@ export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
       return {
         ...state,
         acceptedCookieConcent: true,
+      };
+    case "@@global/ADD_COUNTRY_CODE":
+      return {
+        ...state,
+        countryCode: action.countryCode,
+      };
+    case "@@global/DID_TRY_FETCHING_COUNTRY_CODE":
+      return {
+        ...state,
+        didTryFetchingCountryCode: true,
       };
     default:
       assertNever(action);

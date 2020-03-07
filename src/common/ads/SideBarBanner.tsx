@@ -1,4 +1,5 @@
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
+import { useCountryCode } from "../../store/GlobalStore/GlobalHooks";
 import { Amazon240Monitor } from "./AmazonProds/Amazon240Monitor";
 import AmazonMice from "./AmazonProds/AmazonMice";
 
@@ -50,7 +51,24 @@ const ads = {
 };
 
 export const SidebarBanner: FC = memo(() => {
-  const currentAd = randomAd(ads);
+  const { countryCode } = useCountryCode();
+
+  const currentAd = useMemo(() => {
+    const allAds = { ...ads };
+    const adKeys = Object.keys(allAds);
+
+    // Remove amazon ads if user is not from US
+    if (countryCode && !countryCode.includes("US")) {
+      for (const currentAd of adKeys) {
+        if (currentAd.includes("amazon")) {
+          // @ts-ignore
+          delete allAds[currentAd];
+        }
+      }
+    }
+
+    return randomAd(allAds);
+  }, [countryCode]);
 
   return (
     <>
