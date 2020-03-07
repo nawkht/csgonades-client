@@ -1,17 +1,21 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { Layout2 } from "../common/layout/Layout2";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { mapString } from "../models/Nade/CsGoMap";
 import { Nade } from "../models/Nade/Nade";
 import { nadeTypeString } from "../models/Nade/NadeType";
+import { AdminEditor } from "../nades/AdminEditor/AdminEditor";
+import { NadeStatus } from "../nades/NadeStatus/NadeStatus";
 import { SimilarNades } from "../nades/SimilarNades";
-import { useRegisterView } from "../store/NadeStore/NadeHooks";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { useCanEditNade, useRegisterView } from "../store/NadeStore/NadeHooks";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
 import { NadeInfo } from "./components/NadeInfo";
 import { NadeTitle } from "./components/NadeTitle";
+import { DecriptionEditor } from "./editcontainers/DescriptionEditor";
+import { MetaEditor } from "./editcontainers/MetaEditor";
+import { TitleEditor } from "./editcontainers/TitleEditor";
 
 type Props = {
   nade: Nade;
@@ -19,7 +23,10 @@ type Props = {
 
 export const NadePage: FC<Props> = ({ nade }) => {
   const registerView = useRegisterView();
-  const { colors } = useTheme();
+  const allowEdit = useCanEditNade(nade);
+  const [editTitleVisisble, setEditTitleVisisble] = useState(false);
+  const [editDescVisisble, setEditDescisisble] = useState(false);
+  const [editMetaVisible, setEditMetaVisible] = useState(false);
 
   useEffect(() => {
     registerView(nade.id);
@@ -42,8 +49,15 @@ export const NadePage: FC<Props> = ({ nade }) => {
         canonical={`/nades/${nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
       >
+        <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
         <NadeBreadcrumb nade={nade} />
-        <NadeTitle title={nade.title} map={nade.map} type={nade.type} />
+        <NadeTitle
+          title={nade.title}
+          map={nade.map}
+          type={nade.type}
+          onEditNade={() => setEditTitleVisisble(true)}
+          allowEdit={allowEdit}
+        />
         <div className="nade-page">
           <aside className="nade-page-aside"></aside>
           <div className="nade-page-content">
@@ -56,13 +70,38 @@ export const NadePage: FC<Props> = ({ nade }) => {
               controls={isMobile ? "mobile" : "desktop"}
             />
             <FavoriteButton nade={nade} />
-            <NadeInfo nade={nade} />
+            <NadeInfo
+              nade={nade}
+              onEditTitle={() => setEditDescisisble(true)}
+              onEditMeta={() => setEditMetaVisible(true)}
+            />
             <div className="similar-nades">
               <SimilarNades nade={nade} />
             </div>
           </div>
           <aside className="nade-page-aside2" key={nade.id}></aside>
         </div>
+
+        <TitleEditor
+          nadeId={nade.id}
+          title={nade.title}
+          visisble={editTitleVisisble}
+          onClose={() => setEditTitleVisisble(false)}
+        />
+
+        <DecriptionEditor
+          visisble={editDescVisisble}
+          nade={nade}
+          onDismiss={() => setEditDescisisble(false)}
+        />
+
+        <MetaEditor
+          visisble={editMetaVisible}
+          nade={nade}
+          onDismiss={() => setEditMetaVisible(false)}
+        />
+
+        <AdminEditor nade={nade} />
       </Layout2>
       <style jsx>{`
         .nade-page {

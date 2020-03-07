@@ -30,6 +30,14 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
               To make the process go fast add a title, description and other
               fields on this page.
             </p>
+            <style jsx>{`
+              h3 {
+                font-size: 18px;
+              }
+              p {
+                font-size: 14px;
+              }
+            `}</style>
           </div>
         );
       case "declined":
@@ -37,6 +45,14 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
           <div>
             <h3>Declined</h3>
             <p>{statusInfo}</p>
+            <style jsx>{`
+              h3 {
+                font-size: 18px;
+              }
+              p {
+                font-size: 14px;
+              }
+            `}</style>
           </div>
         );
       default:
@@ -51,19 +67,14 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
       <div className="status-container">{statusText()}</div>
       <style jsx>{`
         .status-container {
-          position: relative;
-          margin-top: calc(${Dimensions.GUTTER_SIZE} * 2);
+          max-width: 600px;
+          margin: 0 auto;
           background: ${statusColors.background};
           border: 1px solid ${statusColors.border};
           padding: 12px 18px;
           color: ${statusColors.text};
           border-radius: ${Dimensions.BORDER_RADIUS};
-        }
-
-        .status-edit {
-          position: absolute;
-          top: 5px;
-          right: 5px;
+          margin-top: 20px;
         }
       `}</style>
     </>

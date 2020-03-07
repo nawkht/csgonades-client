@@ -1,15 +1,20 @@
 import { FC } from "react";
 import { Nade } from "../../models/Nade/Nade";
 import { NadeDescriptionDisplay } from "../../nades/NadeDescription/NadeDescriptionDisplay";
+import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { EditButton } from "./EditButton";
 import { NadeDetails } from "./NadeDetails";
 import { NadeMeta } from "./NadeMeta";
 
 type Props = {
   nade: Nade;
+  onEditTitle: () => void;
+  onEditMeta: () => void;
 };
 
-export const NadeInfo: FC<Props> = ({ nade }) => {
+export const NadeInfo: FC<Props> = ({ nade, onEditTitle, onEditMeta }) => {
+  const allowEdit = useCanEditNade(nade);
   const { colors } = useTheme();
 
   return (
@@ -18,11 +23,25 @@ export const NadeInfo: FC<Props> = ({ nade }) => {
         <NadeDetails nade={nade} />
         <div className="nade-desc-meta">
           <div className="nade-desc">
-            <NadeDescriptionDisplay value={nade.description} />
+            <EditButton
+              allowEdit={allowEdit}
+              onClick={onEditTitle}
+              offsetTop={0}
+              offsetRight={0}
+            >
+              <NadeDescriptionDisplay value={nade.description} />
+            </EditButton>
           </div>
-          <div className="nade-meta">
-            <NadeMeta nade={nade} />
-          </div>
+          <EditButton
+            allowEdit={allowEdit}
+            onClick={onEditMeta}
+            offsetTop={30}
+            offsetRight={40}
+          >
+            <div className="nade-meta">
+              <NadeMeta nade={nade} />
+            </div>
+          </EditButton>
         </div>
       </div>
       <style jsx>{`

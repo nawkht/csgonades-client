@@ -65,7 +65,7 @@ export const FavoriteButton: FC<Props> = ({ nade }) => {
         }
 
         .favorite-btn {
-          width: 170px;
+          width: 150px;
           cursor: pointer;
           display: inline-block;
           border: none;
@@ -83,7 +83,7 @@ export const FavoriteButton: FC<Props> = ({ nade }) => {
 
         .icon {
           display: block;
-          font-size: 20px;
+          font-size: 18px;
           color: white;
           padding-top: 10px;
           padding-bottom: 10px;
@@ -97,7 +97,7 @@ export const FavoriteButton: FC<Props> = ({ nade }) => {
           display: block;
           color: white;
           padding-left: 10px;
-          font-size: 18px;
+          font-size: 16px;
           text-align: center;
           width: 100%;
           padding-right: 5px;

@@ -43,7 +43,9 @@ export const AdminEditor: FC<Props> = ({ nade }) => {
       />
       <style jsx>{`
         .admin-editor {
-          width: 48%;
+          max-width: 150px;
+          margin: 0 auto;
+          padding-bottom: 100px;
         }
       `}</style>
     </>

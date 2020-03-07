@@ -13,11 +13,20 @@ export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
   }
 
   return (
-    <ReactMarkdown
-      linkTarget="_blank"
-      disallowedTypes={["heading"]}
-      source={value}
-      plugins={[breaks]}
-    />
+    <>
+      <div className="desc-wrap">
+        <ReactMarkdown
+          linkTarget="_blank"
+          disallowedTypes={["heading"]}
+          source={value}
+          plugins={[breaks]}
+        />
+      </div>
+      <style jsx>{`
+        .desc-wrap {
+          min-height: 200px;
+        }
+      `}</style>
+    </>
   );
 };
