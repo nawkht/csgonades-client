@@ -64,32 +64,34 @@ export const serverSideUserInitThunkAction = (
 };
 
 export const preloadUserThunkAction = (): ReduxThunkAction => {
-  return async dispatch => {
-    console.log("> preloadUserThunkAction > refreshToken");
+  return async (dispatch, getState) => {
+    const curToken = getState().authStore.token;
+    const curUser = getState().authStore.user;
+
+    if (curToken && curUser) {
+      console.log("> Had user and token, not refetching");
+      return;
+    }
+
     const tokenResult = await AuthApi.refreshToken();
 
     if (tokenResult.isErr()) {
-      console.log("> preloadUserThunkAction > tokenResult err");
       return Router.push("/");
     }
 
     const token = tokenResult.value;
 
-    console.log("> preloadUserThunkAction > setToken");
     dispatch(setToken(token));
 
-    console.log("> preloadUserThunkAction > fetchSelf");
     const userResult = await UserApi.fetchSelf(token);
 
     if (userResult.isErr()) {
-      console.warn("> preloadUserThunkAction > userResult err");
       return Router.push("/");
     }
 
     const user = userResult.value;
 
     setUser(dispatch, user);
-    console.log("> preloadUserThunkAction > setUser");
 
     const isFirstSignIn = checkIsFirstSignIn(user);
 

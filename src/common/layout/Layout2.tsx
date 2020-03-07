@@ -34,7 +34,6 @@ export const Layout2: FC<Props> = ({
 
   useEffect(() => {
     closeNav();
-    console.log("> Layout2 mounted");
     preloadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
