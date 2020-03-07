@@ -31,23 +31,29 @@ export const FrontpageActions: FC<Props> = ({}) => {
           </div>
         </a>
 
-        <div className="action paypal">
-          <p className="paypal-msg">
-            Consider donating
-            <br />
-            through <span>Paypal</span>
-          </p>
+        <a
+          href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=XHPRF8RJZKBHS&item_name=CSGO+Nades&currency_code=USD&source=url"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >
+          <div className="action paypal">
+            <p className="paypal-msg">
+              Consider donating
+              <br />
+              through <span>Paypal</span>
+            </p>
 
-          <p className="paypal-sub-msg">
-            <em>*glub* *glub*</em>
-            <br />
-            I&apos;m running out of energy drink&apos;s.
-          </p>
+            <p className="paypal-sub-msg">
+              <em>*glub* *glub*</em>
+              <br />
+              I&apos;m running out of energy drink&apos;s.
+            </p>
 
-          <div className="paypal-logo">
-            <FaPaypal />
+            <div className="paypal-logo">
+              <FaPaypal />
+            </div>
           </div>
-        </div>
+        </a>
       </div>
       <style jsx>{`
         .actions-wrapper {
