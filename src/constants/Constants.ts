@@ -16,7 +16,7 @@ export const Dimensions = {
   PADDING_MEDIUM: "12px",
   PADDING_LARGE: "18px",
   PADDING_HUGE: "24px",
-  GUTTER_SIZE: "24px",
+  GUTTER_SIZE: "30px",
   MOBILE_THRESHHOLD: "850px",
   BORDER_RADIUS: "5px",
 };
