@@ -60,6 +60,37 @@ export const serverSideUserInitThunkAction = (
   };
 };
 
+export const trySignInThunk = (): ReduxThunkAction => {
+  return async (dispatch, getState) => {
+    const curToken = getState().authStore.token;
+    const curUser = getState().authStore.user;
+
+    if (curToken && curUser) {
+      return;
+    }
+
+    const tokenResult = await AuthApi.refreshToken();
+
+    if (tokenResult.isErr()) {
+      return;
+    }
+
+    const token = tokenResult.value;
+
+    dispatch(setToken(token));
+
+    const userResult = await UserApi.fetchSelf(token);
+
+    if (userResult.isErr()) {
+      return;
+    }
+
+    const user = userResult.value;
+
+    setUser(dispatch, user);
+  };
+};
+
 export const preloadUserThunkAction = (): ReduxThunkAction => {
   return async (dispatch, getState) => {
     const curToken = getState().authStore.token;

@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Nade } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
 import { userSelector } from "./AuthSelectors";
-import { preloadUserThunkAction, signOutUserThunk } from "./AuthTunks";
+import {
+  preloadUserThunkAction,
+  signOutUserThunk,
+  trySignInThunk,
+} from "./AuthTunks";
 
 export const useIsSignedIn = (): boolean => {
   const user = useSelector(userSelector);
@@ -92,4 +96,14 @@ export const usePreloadUser = () => {
   }, [dispatch]);
 
   return preloadUser;
+};
+
+export const useTrySignIn = () => {
+  const dispatch = useDispatch();
+
+  const trySignIn = useCallback(() => {
+    dispatch(trySignInThunk());
+  }, [dispatch]);
+
+  return trySignIn;
 };
