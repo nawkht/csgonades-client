@@ -65,28 +65,31 @@ export const serverSideUserInitThunkAction = (
 
 export const preloadUserThunkAction = (): ReduxThunkAction => {
   return async dispatch => {
+    console.log("> preloadUserThunkAction > refreshToken");
     const tokenResult = await AuthApi.refreshToken();
 
     if (tokenResult.isErr()) {
-      console.warn("> No cookie for sign in awailable");
+      console.log("> preloadUserThunkAction > tokenResult err");
       return Router.push("/");
     }
 
     const token = tokenResult.value;
 
+    console.log("> preloadUserThunkAction > setToken");
     dispatch(setToken(token));
 
+    console.log("> preloadUserThunkAction > fetchSelf");
     const userResult = await UserApi.fetchSelf(token);
 
     if (userResult.isErr()) {
-      console.warn("> preloadUserThunkAction > Failed to load self");
+      console.warn("> preloadUserThunkAction > userResult err");
       return Router.push("/");
     }
 
     const user = userResult.value;
 
     setUser(dispatch, user);
-    console.log("> preloadUserThunkAction >Preloaded user");
+    console.log("> preloadUserThunkAction > setUser");
 
     const isFirstSignIn = checkIsFirstSignIn(user);
 
