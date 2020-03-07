@@ -90,7 +90,7 @@ export const Layout2: FC<Props> = ({
           />
         )}
         {metaThumbNail && <meta property="og:image" content={metaThumbNail} />}
-        {isBrowser && (
+        {false && (
           <>
             <script
               dangerouslySetInnerHTML={{
