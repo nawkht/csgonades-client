@@ -100,6 +100,8 @@ export const Layout2: FC<Props> = ({
       <style jsx global>{`
         body {
           background: ${colors.DP00};
+          margin: 0;
+          padding: 0;
         }
 
         #mobile-navigation {
