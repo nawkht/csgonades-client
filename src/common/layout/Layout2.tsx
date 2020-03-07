@@ -7,7 +7,9 @@ import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { CookieConsent } from "../CookieConsent";
 import { Navigation } from "../layout-components/Navigation";
+import { ToastList } from "../toast/ToastList";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
@@ -112,6 +114,10 @@ export const Layout2: FC<Props> = ({
       <main>{children}</main>
 
       <Footer />
+
+      <ToastList />
+
+      <CookieConsent />
 
       <style jsx global>{`
         body {

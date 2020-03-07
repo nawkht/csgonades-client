@@ -40,14 +40,14 @@ export const CookieConsent: FC = memo(() => {
       <style jsx>{`
         .cookie-consent-wrapper {
           position: fixed;
-          bottom: 0;
+          bottom: 50px;
           left: 0;
           right: 0;
           z-index: 999;
           display: flex;
           justify-content: space-around;
-          transform: translateY(100%);
-          transition: all 0.2s;
+          transform: translateY(200%);
+          transition: all 0.1s;
         }
 
         .visible {
@@ -56,13 +56,11 @@ export const CookieConsent: FC = memo(() => {
 
         .cookie-consent {
           max-width: 600px;
-          border: 1px solid ${colors.BORDER};
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
-          background: ${colors.DP01};
-          color: ${colors.TEXT};
-          padding: 6px;
-          font-size: 0.75em;
+          border: 2px solid ${colors.BORDER};
+          border-radius: 5px;
+          background: rgba(255, 255, 255, 0.97);
+          color: #333;
+          padding: 20px 30px;
           display: flex;
         }
 
@@ -70,11 +68,11 @@ export const CookieConsent: FC = memo(() => {
           display: flex;
           align-items: center;
           font-size: 2em;
-          margin-right: 6px;
+          margin-right: 20px;
         }
 
         .consent-txt {
-          margin-right: 6px;
+          margin-right: 20px;
         }
 
         .close-button {
@@ -87,13 +85,13 @@ export const CookieConsent: FC = memo(() => {
           border: none;
           background: transparent;
           white-space: nowrap;
-          padding: 6px;
+          padding: 10px 20px;
           color: ${colors.TEXT};
-          border-radius: 4px;
+          border-radius: 5px;
           font-weight: 300;
           border: 1px solid ${colors.TEXT};
           cursor: pointer;
-          font-size: 1.2em;
+          font-size: 1em;
           outline: none;
         }
 
