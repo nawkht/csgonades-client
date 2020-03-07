@@ -52,6 +52,8 @@ export const MapPage: FC<Props> = ({ map }) => {
               nades={nades}
               emptyMessage={`No nades found. Sign in and add something! :)`}
             />
+
+            <div id="ezoic-pub-ad-placeholder-104" />
           </div>
           <div className="map-page-aside">
             <div id="ezoic-pub-ad-placeholder-101"></div>
