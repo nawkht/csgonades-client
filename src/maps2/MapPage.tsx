@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
+import { Dimensions } from "../constants/Constants";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { useNadesForMap } from "../store/NadeStore/NadeHooks";
 import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
@@ -95,6 +96,18 @@ export const MapPage: FC<Props> = ({ map }) => {
           flex: 1;
           position: relative;
           max-width: 1200px;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .filter,
+          .map-page-aside {
+            display: none;
+          }
+
+          .map-page {
+            padding-left: 20px;
+            padding-right: 20px;
+          }
         }
       `}</style>
     </>

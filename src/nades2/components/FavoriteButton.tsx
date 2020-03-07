@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { FaSpinner, FaStar } from "react-icons/fa";
+import { Dimensions } from "../../constants/Constants";
 import { Nade } from "../../models/Nade/Nade";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import {
@@ -46,7 +47,6 @@ export const FavoriteButton: FC<Props> = ({ nade }) => {
 
           {!isFavoriteInProgress && (
             <>
-              {" "}
               <span className="icon">
                 <FaStar style={{ position: "relative", top: 2 }} />
               </span>
@@ -115,6 +115,12 @@ export const FavoriteButton: FC<Props> = ({ nade }) => {
         @keyframes spin {
           100% {
             transform: rotate(360deg);
+          }
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .favorite-wrapper {
+            padding-right: 20px;
           }
         }
       `}</style>

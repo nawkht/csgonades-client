@@ -1,9 +1,12 @@
 import Head from "next/head";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
+import { AnimationTimings, Dimensions } from "../../constants/Constants";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { Navigation } from "../layout-components/Navigation";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
@@ -23,6 +26,7 @@ export const Layout2: FC<Props> = ({
 }) => {
   const { setCurrentRoute } = useNavigationState();
   const { colors } = useTheme();
+  const { closeNav, isNavOpen } = useNavigation();
 
   const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
 
@@ -37,6 +41,12 @@ export const Layout2: FC<Props> = ({
       }
     };
   }, [setCurrentRoute, title]);
+
+  const mobileNavClassName = useMemo(() => {
+    if (isNavOpen) {
+      return "open";
+    }
+  }, [isNavOpen]);
 
   const pageDescription = description
     ? removeMd(description)
@@ -74,6 +84,10 @@ export const Layout2: FC<Props> = ({
 
       <Header />
 
+      <aside id="mobile-navigation" className={mobileNavClassName}>
+        <Navigation />
+      </aside>
+
       <main>{children}</main>
 
       <Footer />
@@ -81,6 +95,40 @@ export const Layout2: FC<Props> = ({
       <style jsx global>{`
         body {
           background: ${colors.DP00};
+        }
+
+        #mobile-navigation {
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          z-index: 999;
+          border-right: 1px solid ${colors.BORDER};
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow-y: auto;
+          overflow-x: hidden;
+          background: ${colors.DP01};
+        }
+
+        #mobile-navigation {
+          transform: translateX(-100%);
+          transition: transform ${AnimationTimings.fast};
+        }
+
+        #mobile-navigation.open {
+          transform: translateX(0);
+        }
+
+        #mobile-navigation {
+          display: none;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          #mobile-navigation {
+            display: block;
+          }
         }
       `}</style>
     </>

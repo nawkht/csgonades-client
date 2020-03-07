@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { FaDiscord, FaPaypal } from "react-icons/fa";
+import { Dimensions } from "../constants/Constants";
 
 type Props = {};
 
@@ -62,6 +63,7 @@ export const FrontpageActions: FC<Props> = ({}) => {
           margin-bottom: 100px;
           display: flex;
           justify-content: space-between;
+          align-items: center;
         }
 
         .action {
@@ -69,6 +71,7 @@ export const FrontpageActions: FC<Props> = ({}) => {
           width: 300px;
           color: white;
           border-radius: 5px;
+          margin: 20px;
         }
 
         .discord-msg {
@@ -132,6 +135,12 @@ export const FrontpageActions: FC<Props> = ({}) => {
 
         .invis {
           opacity: 0;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .actions-wrapper {
+            flex-direction: column;
+          }
         }
       `}</style>
     </>

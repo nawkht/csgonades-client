@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { Layout2 } from "../common/layout/Layout2";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
+import { Dimensions } from "../constants/Constants";
 import { mapString } from "../models/Nade/CsGoMap";
 import { Nade } from "../models/Nade/Nade";
 import { nadeTypeString } from "../models/Nade/NadeType";
@@ -125,6 +126,16 @@ export const NadePage: FC<Props> = ({ nade }) => {
         .nade-page-content {
           flex: 1;
           max-width: 1000px;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .nade-page {
+          }
+
+          .nade-page-aside,
+          .nade-page-aside2 {
+            display: none;
+          }
         }
       `}</style>
     </>

@@ -54,7 +54,6 @@ export const Footer: FC = () => {
         .footer .footer-links {
           flex: 2;
           text-align: center;
-          text-align: center;
         }
 
         .footer .footer-links a {
@@ -85,16 +84,14 @@ export const Footer: FC = () => {
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .footer {
+          .footer-content {
             flex-direction: column;
-            margin-left: 0;
-          }
-          .footer .copyright {
-            text-align: center;
+            align-items: center;
           }
 
-          .powered-by {
-            text-align: center;
+          .copyright,
+          .footer-links {
+            margin-bottom: 20px;
           }
         }
       `}</style>

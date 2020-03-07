@@ -4,7 +4,6 @@ import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../../utils/Common";
-import { MapLinkIcon } from "./MapLinkIcon";
 
 type Props = {
   mapName: CsgoMap;
@@ -20,9 +19,6 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
       <li className={selected ? "nav-selected" : ""}>
         <Link as={`/maps/${mapName}`} href={`/maps?name=${mapName}`}>
           <a>
-            <div className="image-container">
-              <MapLinkIcon csMap={mapName} />
-            </div>
             <span className="nav-text">{capitalize(mapName)}</span>
           </a>
         </Link>
@@ -35,7 +31,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           color: ${colors.TEXT};
           width: 100%;
           transition: background ${AnimationTimings.fast}s;
-          padding: ${Dimensions.PADDING_LARGE} ${Dimensions.GUTTER_SIZE};
+          padding: 15px 40px;
         }
 
         li a:hover {
@@ -47,23 +43,9 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           margin-left: ${Dimensions.PADDING_MEDIUM};
         }
 
-        .image-container {
-          width: 20px;
-          height: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
         .nav-selected {
           background: ${colors.PRIMARY_10};
           font-weight: normal;
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          li a {
-            padding: ${Dimensions.PADDING_MEDIUM} ${Dimensions.PADDING_MEDIUM};
-          }
         }
       `}</style>
     </>

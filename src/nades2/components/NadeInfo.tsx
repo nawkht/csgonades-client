@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { Nade } from "../../models/Nade/Nade";
 import { NadeDescriptionDisplay } from "../../nades/NadeDescription/NadeDescriptionDisplay";
 import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
@@ -60,6 +61,16 @@ export const NadeInfo: FC<Props> = ({ nade, onEditTitle, onEditMeta }) => {
           padding: 30px 40px;
           flex: 1;
           color: ${colors.TEXT};
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .nade-desc-meta {
+            flex-direction: column;
+          }
+
+          .nade-meta {
+            margin-left: 40px;
+          }
         }
       `}</style>
     </>

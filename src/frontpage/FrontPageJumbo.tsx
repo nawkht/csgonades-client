@@ -66,13 +66,10 @@ const FrontPageJumbo: FC = () => {
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          #jumbo {
-            flex-direction: column;
-          }
-
-          #jumbo-message {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            padding: ${Dimensions.PADDING_MEDIUM};
+          .illustration {
+            width: 150px;
+            height: 150px;
+            bottom: -40px;
           }
         }
       `}</style>

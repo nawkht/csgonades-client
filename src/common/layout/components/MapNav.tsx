@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
+import { Dimensions } from "../../../constants/Constants";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { ThemeToggler } from "../../layout-components/ThemeToggler";
 import { PageCentralize } from "../../PageCentralize";
@@ -47,6 +48,12 @@ export const MapNav: FC<Props> = ({}) => {
           padding: 0;
           margin: 0;
           display: flex;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          #map-nav {
+            display: none;
+          }
         }
       `}</style>
     </>
