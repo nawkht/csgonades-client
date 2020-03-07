@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 import { Nade } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -13,7 +14,13 @@ export const NadeDetails: FC<Props> = ({ nade }) => {
     <>
       <div className="nade-details">
         <div className="nade-user">
-          <img src={nade.user.avatar} /> <span>{nade.user.nickname}</span>
+          <img src={nade.user.avatar} />{" "}
+          <Link
+            href={`/users?id=${nade.user.steamId}`}
+            as={`/users/${nade.user.steamId}`}
+          >
+            <a className="user-nickname">{nade.user.nickname}</a>
+          </Link>
         </div>
 
         <div className="nade-stats">
@@ -43,6 +50,14 @@ export const NadeDetails: FC<Props> = ({ nade }) => {
           display: flex;
           align-items: center;
           color: ${colors.TEXT};
+        }
+
+        .user-nickname {
+          color: ${colors.TEXT};
+        }
+
+        .user-nickname:hover {
+          text-decoration: underline;
         }
 
         .nade-user img {
