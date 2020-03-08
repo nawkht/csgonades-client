@@ -63,6 +63,7 @@ export const Layout2: FC<Props> = memo(
             dangerouslySetInnerHTML={{ __html: `var ezoicId = 179726;` }}
           ></script>
           <script
+            async
             type="text/javascript"
             src="//go.ezoic.net/ezoic/ezoic.js"
           ></script>
