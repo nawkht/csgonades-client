@@ -3,11 +3,7 @@ import { FC, memo, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
-import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
-import {
-  useNavigation,
-  useSiteStats,
-} from "../../store/GlobalStore/GlobalHooks";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { CookieConsent } from "../CookieConsent";
@@ -26,22 +22,11 @@ type Props = {
 
 export const Layout2: FC<Props> = memo(
   ({ title, description, canonical, metaThumbNail, children }) => {
-    const isAdminOrMod = useIsAdminOrModerator();
     const { setCurrentRoute } = useNavigationState();
-    const { stats, fetchSiteStats } = useSiteStats();
     const { colors } = useTheme();
     const { closeNav, isNavOpen } = useNavigation();
 
-    const enableEzoic = isAdminOrMod && stats.ezoicEnabled;
-
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
-
-    useEffect(() => {
-      if (isAdminOrMod) {
-        console.log("> Fetching config");
-        fetchSiteStats();
-      }
-    }, [isAdminOrMod]);
 
     useEffect(() => {
       closeNav();
@@ -75,18 +60,6 @@ export const Layout2: FC<Props> = memo(
         <Head>
           <title>{pageTitle}</title>
           <meta name="description" content={pageDescription} />
-          {enableEzoic && (
-            <>
-              <script
-                dangerouslySetInnerHTML={{ __html: `var ezoicId = 179726;` }}
-              />
-              <script
-                type="text/javascript"
-                src="//go.ezoic.net/ezoic/ezoic.js"
-              ></script>
-            </>
-          )}
-
           <meta
             name="keywords"
             content="dust2 train mirage inferno cobblestone overpass cache nades flashbang smoke incendiary molotov he grenade csgo cs:go counter-strike global offensive"

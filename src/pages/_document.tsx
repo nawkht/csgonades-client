@@ -9,13 +9,29 @@ import Document, {
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const stats = ctx.store.getState().globalStore.stats;
+
+    return { ...initialProps, stats };
   }
 
   render() {
+    // @ts-ignore
+    const ezoicEnabled = this.props.stats.ezoicEnabled as boolean;
+
     return (
       <Html lang="en">
         <Head>
+          {ezoicEnabled && (
+            <>
+              <script
+                dangerouslySetInnerHTML={{ __html: `var ezoicId = 179726;` }}
+              />
+              <script
+                type="text/javascript"
+                src="//go.ezoic.net/ezoic/ezoic.js"
+              ></script>
+            </>
+          )}
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"

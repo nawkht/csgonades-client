@@ -13,6 +13,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { AuthApi } from "../api/TokenApi";
 import { AppState, initReduxStore } from "../store";
 import { serverSideUserInitThunkAction } from "../store/AuthStore/AuthTunks";
+import { fetchSiteStatsThunk } from "../store/GlobalStore/GlobalThunks";
 
 type Props = {
   store: Store<AppState>;
@@ -36,6 +37,8 @@ class MyApp extends App<Props> {
     if (isServer) {
       // @ts-ignore
       await store.dispatch(serverSideUserInitThunkAction(req?.headers.cookie));
+      // @ts-ignore
+      await store.dispatch(fetchSiteStatsThunk());
     }
 
     if (Component.getInitialProps) {
