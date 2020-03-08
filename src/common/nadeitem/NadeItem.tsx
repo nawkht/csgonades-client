@@ -17,7 +17,7 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
 
   return (
     <>
-      <Link href={`/nades?id=${nade.id}`} as={`/nades/${nade.id}`}>
+      <Link href={`/nades/[nade]`} as={`/nades/${nade.id}`}>
         <a
           className={"nadebox"}
           style={{ display: "inline-block" }}

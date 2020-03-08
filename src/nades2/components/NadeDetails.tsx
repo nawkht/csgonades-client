@@ -15,10 +15,7 @@ export const NadeDetails: FC<Props> = ({ nade }) => {
       <div className="nade-details">
         <div className="nade-user">
           <img src={nade.user.avatar} />{" "}
-          <Link
-            href={`/users?id=${nade.user.steamId}`}
-            as={`/users/${nade.user.steamId}`}
-          >
+          <Link href={`/users/[user]`} as={`/users/${nade.user.steamId}`}>
             <a className="user-nickname">{nade.user.nickname}</a>
           </Link>
         </div>

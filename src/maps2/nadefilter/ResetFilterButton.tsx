@@ -1,12 +1,10 @@
 import { FC } from "react";
 import { FaUndo } from "react-icons/fa";
 import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
 export const ResetFilterButton: FC<Props> = ({}) => {
-  const { colors } = useTheme();
   const { isDefault, resetFilter } = useNadeFilter();
 
   function onReset() {

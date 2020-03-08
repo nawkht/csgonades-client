@@ -47,17 +47,17 @@ export const AddGfycat = () => {
 
           <br />
           <code>
-            bind pgdn "
+            bind pgdn &quot;
             <span className="highlight-2">
               setpos_exact 100.0 -200.0 -300.0
             </span>
             ;<span className="highlight">setang 10.0 -20.0</span>;
-            cl_draw_only_deathnotices 1; cl_drawhud 0; r_drawviewmodel 0;"
+            cl_draw_only_deathnotices 1; cl_drawhud 0; r_drawviewmodel 0;&quot;
           </code>
           <p>
-            Clicking 'PAGE DOWN' on your keyboard will now teleport to the
-            location you choose and hide everything for a clean recording of the
-            nade landing.
+            Clicking &apos;PAGE DOWN&apos; on your keyboard will now teleport to
+            the location you choose and hide everything for a clean recording of
+            the nade landing.
           </p>
 
           <h4>Reset command</h4>

@@ -20,7 +20,7 @@ export const fetchTournamentsThunk = (): ReduxThunkAction => {
 export const saveTournamentThunk = (
   tournament: TournamentCreateDTO
 ): ReduxThunkAction => {
-  return async (dispatch, getState) => {
+  return async (_, getState) => {
     const authToken = tokenSelector(getState());
 
     if (!authToken) {

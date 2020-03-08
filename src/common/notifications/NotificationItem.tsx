@@ -85,10 +85,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
 
   return (
     <>
-      <Link
-        href={`/nades?id=${notification.nadeId}`}
-        as={`/nades/${notification.nadeId}`}
-      >
+      <Link href={`/nades/[nade]`} as={`/nades/${notification.nadeId}`}>
         <a className={wasViewed ? "notification" : "notification new"}>
           <div className="noti-msg">{notificationMessage(notification)}</div>
           <div className="noti-date">

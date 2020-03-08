@@ -20,6 +20,7 @@ export const AdminGallery: FC<Props> = ({}) => {
 
   useEffect(() => {
     fetchGalleryImages("articles");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function hideImageAdder() {

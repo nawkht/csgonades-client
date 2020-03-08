@@ -11,9 +11,7 @@ const Blog: NextPage<Props> = ({}) => {
   );
 };
 
-Blog.getInitialProps = async ({ store }) => {
-  const { dispatch } = store;
-
+Blog.getInitialProps = async () => {
   return;
 };
 

@@ -18,7 +18,7 @@ export const AdminReports: FC = () => {
       {reports.map(r => (
         <div key={r.id} className="report">
           <p>{r.message}</p>
-          <Link href={`/nades?id=${r.nadeId}`} as={`/nades/${r.nadeId}`}>
+          <Link href={`/nades/[nade]`} as={`/nades/${r.nadeId}`}>
             <a>NADE</a>
           </Link>
         </div>

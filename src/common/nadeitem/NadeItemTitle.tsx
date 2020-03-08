@@ -15,11 +15,11 @@ export const NadeItemTitle: FC<Props> = ({ nade }) => {
 
   const titleClassName = useMemo(() => {
     const classNames = ["title"];
-    switch (nade.status) {
-      case "pending":
-        classNames.push("pending");
-      case "declined":
-        classNames.push("declined");
+    if (nade.status === "pending") {
+      classNames.push("pending");
+    }
+    if (nade.status === "declined") {
+      classNames.push("declined");
     }
     return classNames.join(" ");
   }, [nade.status]);

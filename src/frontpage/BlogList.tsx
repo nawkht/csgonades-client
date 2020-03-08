@@ -1,16 +1,11 @@
 import { FC } from "react";
 import { Dimensions } from "../constants/Constants";
 import { BlogPostLight } from "../models/BlogPost";
-import { useBlog } from "../store/BlogStore/BlogHooks";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { BlogPostPreview } from "./BlogPostPreview";
 
 type Props = {};
 
 export const BlogList: FC<Props> = ({}) => {
-  const { colors } = useTheme();
-  const { blogActions, blogState } = useBlog();
-
   const blogPosts: BlogPostLight[] = [
     {
       id: "",

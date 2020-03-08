@@ -24,6 +24,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
       registerNadeView(nade.id);
       setHasSentViewedEvent(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progress, hasSentViewedEvent, nade]);
 
   function onVideoTimeUpdate({

@@ -13,7 +13,7 @@ export const AdminNav: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleItemClick = (e: any, { name }: MenuItemProps) => {
+  const handleItemClick = (_: any, { name }: MenuItemProps) => {
     const newRoute = name as AdminRoutes;
     changeAdminRoute(newRoute);
   };

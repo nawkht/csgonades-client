@@ -1,12 +1,12 @@
 import { NextPage } from "next";
-import { NadeNotFound } from "../nades/NadeNotFound";
-import { NadePage } from "../nades2/NadePage";
+import { NadeNotFound } from "../../nades/NadeNotFound";
+import { NadePage } from "../../nades2/NadePage";
 import {
   nadeErrorSelector,
   useNadeError,
   useSelectedNade,
-} from "../store/NadeStore/NadeSelectors";
-import { fetchNadeByIdAction } from "../store/NadeStore/NadeThunks";
+} from "../../store/NadeStore/NadeSelectors";
+import { fetchNadeByIdAction } from "../../store/NadeStore/NadeThunks";
 
 const NadePageComponent: NextPage = () => {
   const error = useNadeError();
@@ -25,7 +25,7 @@ const NadePageComponent: NextPage = () => {
 
 NadePageComponent.getInitialProps = async context => {
   const { dispatch, getState } = context.store;
-  const nadeId = context.query.id as string;
+  const nadeId = context.query.nade as string;
 
   //@ts-ignore
   await dispatch(fetchNadeByIdAction(nadeId));

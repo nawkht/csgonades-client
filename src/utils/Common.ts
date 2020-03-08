@@ -8,17 +8,14 @@ export const capitalize = (s: string) => {
 
 export const redirectUserPage = (steamId: string, edit?: boolean) => {
   if (edit) {
-    Router.push(
-      `/users?id=${steamId}&edit=true`,
-      `/users/${steamId}?edit=true`
-    );
+    Router.push(`/users/[user]`, `/users/${steamId}?edit=true`);
   } else {
-    Router.push(`/users?id=${steamId}`, `/users/${steamId}`);
+    Router.push(`/users/[user]`, `/users/${steamId}`);
   }
 };
 
 export const redirectNadePage = (nadeId: string) => {
-  Router.push(`/nades?id=${nadeId}`, `/nades/${nadeId}`);
+  Router.push(`/nades/[nade]`, `/nades/${nadeId}`);
 };
 
 export function iconFromType(type?: NadeType) {
@@ -60,8 +57,10 @@ export function cleanGfycatUrl(gfycatIdOrUrl: string): string {
   return gfyId[0];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export function assertNever(never: never) {}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function assertNever(_: any) {
+  // no-op
+}
 
 export const pluralize = (count: number, noun: string, suffix = "s") =>
   `${count} ${noun}${count !== 1 ? suffix : ""}`;

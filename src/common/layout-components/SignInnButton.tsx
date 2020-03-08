@@ -1,11 +1,8 @@
 import { FC } from "react";
 import { Icon } from "semantic-ui-react";
 import { Config, Dimensions } from "../../constants/Constants";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 export const SignInnButton: FC = () => {
-  const { colors } = useTheme();
-
   return (
     <>
       <div className="steam-login-wrapper">

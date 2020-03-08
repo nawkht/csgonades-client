@@ -42,6 +42,7 @@ const ContactPageContainer: NextPage = () => {
       <Layout title="Contact" canonical="/contact">
         <div className="contact">
           <h1>Contact</h1>
+          {!!error && <p>{error}</p>}
           <Form widths="equal" onSubmit={onSubmit}>
             <Form.Input
               required

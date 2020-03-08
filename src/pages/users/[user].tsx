@@ -1,11 +1,11 @@
 import { NextPage } from "next";
-import { startEditingUserAction } from "../store/UsersStore/UsersActions";
-import { userErrorSelector } from "../store/UsersStore/UsersSelectors";
+import { startEditingUserAction } from "../../store/UsersStore/UsersActions";
+import { userErrorSelector } from "../../store/UsersStore/UsersSelectors";
 import {
   fetchNadesForUserAction,
   fetchUserAction,
-} from "../store/UsersStore/UsersThunks";
-import { UserPage } from "../users/UsersPage";
+} from "../../store/UsersStore/UsersThunks";
+import { UserPage } from "../../users/UsersPage";
 
 const UserPageComponent: NextPage = () => {
   return <UserPage />;
@@ -13,7 +13,7 @@ const UserPageComponent: NextPage = () => {
 
 UserPageComponent.getInitialProps = async ({ store, query, res }) => {
   const { dispatch, getState } = store;
-  const steamId = query.id as string;
+  const steamId = query.user as string;
   const shouldDisplayEdit = query.edit === "true";
 
   await Promise.all([

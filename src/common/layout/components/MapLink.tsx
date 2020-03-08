@@ -14,7 +14,7 @@ export const MapLink: FC<Props> = ({ map, currentPath }) => {
   return (
     <>
       <li className={selected ? "nav-selected" : ""}>
-        <Link as={`/maps/${map}`} href={`/maps?name=${map}`}>
+        <Link href={`/maps/[map]`} as={`/maps/${map}`}>
           <a>{capitalize(map)}</a>
         </Link>
       </li>

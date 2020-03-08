@@ -3,11 +3,6 @@ import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
-const AUTH_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.csgonades.com/auth/steam"
-    : "http://localhost:5000/auth/steam";
-
 const FrontPageJumbo: FC = () => {
   const { colors } = useTheme();
   return (

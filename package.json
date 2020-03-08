@@ -4,9 +4,9 @@
   "author": "Mellet Solbakk",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon",
-    "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node dist/index.js"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "engines": {
     "node": "13.x"

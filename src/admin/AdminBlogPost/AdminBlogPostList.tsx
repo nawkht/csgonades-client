@@ -11,6 +11,7 @@ export const AdminBlogPostList: FC<Props> = ({}) => {
 
   useEffect(() => {
     blogActions.fetchBlogPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
