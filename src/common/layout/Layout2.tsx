@@ -9,6 +9,7 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { CookieConsent } from "../CookieConsent";
 import { Navigation } from "../layout-components/Navigation";
 import { ToastList } from "../toast/ToastList";
+import { Azoic } from "./Azoic";
 import { AdminLink } from "./components/AdminLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -84,20 +85,9 @@ export const Layout2: FC<Props> = memo(
           {metaThumbNail && (
             <meta property="og:image" content={metaThumbNail} />
           )}
-          {false && (
-            <>
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `var ezoicId = 179726;`,
-                }}
-              ></script>
-              <script
-                type="text/javascript"
-                src="//go.ezoic.net/ezoic/ezoic.js"
-              ></script>
-            </>
-          )}
         </Head>
+
+        <Azoic />
 
         <Header />
 
