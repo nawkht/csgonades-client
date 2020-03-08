@@ -29,13 +29,19 @@ export const Layout2: FC<Props> = memo(
   ({ title, description, canonical, metaThumbNail, children }) => {
     const isAdminOrMod = useIsAdminOrModerator();
     const { setCurrentRoute } = useNavigationState();
-    const { stats } = useSiteStats();
+    const { stats, fetchSiteStats } = useSiteStats();
     const { colors } = useTheme();
     const { closeNav, isNavOpen } = useNavigation();
 
     const enableEzoic = isAdminOrMod && stats.ezoicEnabled;
 
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
+
+    useEffect(() => {
+      if (isAdminOrMod) {
+        fetchSiteStats();
+      }
+    }, [isAdminOrMod]);
 
     useEffect(() => {
       closeNav();
