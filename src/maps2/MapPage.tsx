@@ -36,9 +36,11 @@ export const MapPage: FC<Props> = ({ map }) => {
             </h1>
           </PageCentralize>
         </div>
-        <PageCentralize>
+
+        <div className="top-placement">
           <div id="ezoic-pub-ad-placeholder-102"></div>
-        </PageCentralize>
+        </div>
+
         <div className="map-page">
           <div className="filter">
             <NadeFilter
@@ -53,7 +55,9 @@ export const MapPage: FC<Props> = ({ map }) => {
               emptyMessage={`No nades found. Sign in and add something! :)`}
             />
 
-            <div id="ezoic-pub-ad-placeholder-104" />
+            <div className="placement-bottom">
+              <div id="ezoic-pub-ad-placeholder-104" />
+            </div>
           </div>
           <div className="map-page-aside">
             <div id="ezoic-pub-ad-placeholder-101"></div>
@@ -79,7 +83,11 @@ export const MapPage: FC<Props> = ({ map }) => {
           );
           padding-top: 50px;
           padding-bottom: 50px;
-          margin-bottom: 50px;
+        }
+
+        .top-placement {
+          margin-top: 30px;
+          margin-bottom: 30px;
         }
 
         .map-welcome h1 {
@@ -89,7 +97,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         }
 
         .map-page {
-          max-width: 1580px;
+          max-width: 1660px;
           display: flex;
           margin: 0 auto;
           padding-bottom: 100px;
@@ -97,7 +105,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         }
 
         .filter {
-          width: 160px;
+          width: 200px;
           margin-right: 30px;
           display: flex;
           flex-direction: column;
@@ -105,7 +113,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         }
 
         .map-page-aside {
-          width: 160px;
+          width: 200px;
           margin-left: 30px;
         }
 
@@ -113,6 +121,11 @@ export const MapPage: FC<Props> = ({ map }) => {
           flex: 1;
           position: relative;
           max-width: 1200px;
+        }
+
+        .placement-bottom {
+          margin-top: 30px;
+          margin-bottom: 30px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
