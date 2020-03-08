@@ -9,7 +9,7 @@
     "start": "next start -p $PORT"
   },
   "engines": {
-    "node": "13.x"
+    "node": "12.x"
   },
   "dependencies": {
     "@n8tb1t/use-scroll-position": "^1.0.43",
