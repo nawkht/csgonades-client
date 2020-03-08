@@ -39,6 +39,7 @@ export const Layout2: FC<Props> = memo(
 
     useEffect(() => {
       if (isAdminOrMod) {
+        console.log("> Fetching config");
         fetchSiteStats();
       }
     }, [isAdminOrMod]);
