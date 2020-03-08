@@ -27,6 +27,8 @@ class MyDocument extends Document {
                 dangerouslySetInnerHTML={{ __html: `var ezoicId = 179726;` }}
               />
               <script
+                async={false}
+                defer={false}
                 type="text/javascript"
                 src="//go.ezoic.net/ezoic/ezoic.js"
               ></script>
