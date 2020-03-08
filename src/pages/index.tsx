@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import { FrontPage } from "../frontpage/FrontPage";
+import { fetchSiteStatsThunk } from "../store/GlobalStore/GlobalThunks";
 import { fetchNewestNadesAction } from "../store/NadeStore/NadeThunks";
 
 const Index: NextPage = () => {
@@ -13,6 +14,8 @@ Index.getInitialProps = async ({ store }) => {
   await Promise.all([
     //@ts-ignore
     dispatch(fetchNewestNadesAction()),
+    //@ts-ignore
+    dispatch(fetchSiteStatsThunk()),
   ]);
 
   return;

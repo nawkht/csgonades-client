@@ -7,6 +7,7 @@ export type SiteStats = {
   numUsers: number;
   numNades: number;
   numPending: number;
+  ezoicEnabled: boolean;
 };
 
 export class StatsApi {

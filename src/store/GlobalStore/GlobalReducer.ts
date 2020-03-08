@@ -18,6 +18,7 @@ const initialState: GlobalState = {
     numNades: 0,
     numUsers: 0,
     numPending: 0,
+    ezoicEnabled: false,
   },
   isNavOpen: false,
   acceptedCookieConcent: false,
