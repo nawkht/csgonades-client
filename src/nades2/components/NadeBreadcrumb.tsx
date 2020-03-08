@@ -33,7 +33,6 @@ export const NadeBreadcrumb: FC<Props> = ({ nade }) => {
         .nade-breadcrumb-wrap {
           display: flex;
           justify-content: space-around;
-          margin-top: 50px;
           margin-bottom: 5px;
         }
 

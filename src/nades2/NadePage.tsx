@@ -52,6 +52,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
         canonical={`/nades/${nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
       >
+        <div className="nade-page-header-placeholder"></div>
         <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
         <NadeBreadcrumb nade={nade} />
         <NadeTitle
@@ -61,8 +62,6 @@ export const NadePage: FC<Props> = ({ nade }) => {
           onEditNade={() => setEditTitleVisisble(true)}
           allowEdit={allowEdit}
         />
-
-        <div id="ezoic-pub-ad-placeholder-105"></div>
 
         <div className="nade-page">
           <aside className="nade-page-aside">
@@ -78,9 +77,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
               controls={isMobile ? "mobile" : "desktop"}
             />
             <div className="action-container">
-              <div className="empty-container">
-                <div id="ezoic-pub-ad-placeholder-108"> </div>
-              </div>
+              <div className="empty-container"></div>
               <div className="nade-actions">
                 <FavoriteButton
                   showSignInWarning={() => setShowSignInWarning(true)}
@@ -133,9 +130,14 @@ export const NadePage: FC<Props> = ({ nade }) => {
         <AdminEditor nade={nade} />
       </Layout2>
       <style jsx>{`
+        .nade-page-header-placeholder {
+          margin-top: 20px;
+          margin-bottom: 30px;
+        }
+
         .nade-page {
           margin: 0 auto;
-          max-width: calc(1000px + 160px + 160px + 40px + 40px);
+          max-width: calc(1000px + 200px + 200px + 40px + 40px);
           display: flex;
           padding-bottom: 50px;
           min-height: 85vh;
