@@ -98,7 +98,9 @@ export const NadePage: FC<Props> = ({ nade }) => {
             <div id="ezoic-pub-ad-placeholder-107"> </div>
           </div>
           <aside className="nade-page-aside2" key={nade.id}>
-            <div id="ezoic-pub-ad-placeholder-109"> </div>
+            <div className="sticky">
+              <div id="ezoic-pub-ad-placeholder-109"> </div>
+            </div>
           </aside>
         </div>
 
@@ -130,6 +132,11 @@ export const NadePage: FC<Props> = ({ nade }) => {
         <AdminEditor nade={nade} />
       </Layout2>
       <style jsx>{`
+        .sticky {
+          position: sticky;
+          top: 50px;
+        }
+
         .nade-page-header-placeholder {
           margin-top: 20px;
           margin-bottom: 30px;

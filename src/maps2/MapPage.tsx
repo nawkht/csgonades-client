@@ -60,7 +60,9 @@ export const MapPage: FC<Props> = ({ map }) => {
             </div>
           </div>
           <div className="map-page-aside">
-            <div id="ezoic-pub-ad-placeholder-101"></div>
+            <div className="sticky">
+              <div id="ezoic-pub-ad-placeholder-101"></div>
+            </div>
           </div>
         </div>
         <MapView
@@ -75,6 +77,11 @@ export const MapPage: FC<Props> = ({ map }) => {
         />
       </Layout2>
       <style jsx>{`
+        .sticky {
+          position: sticky;
+          top: 50px;
+        }
+
         .map-welcome {
           background: linear-gradient(
             236.51deg,
