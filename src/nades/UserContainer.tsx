@@ -16,10 +16,7 @@ export const UserContainer: FC<Props> = ({ nade }) => {
     <>
       <div className="user-container">
         <span className="user-label">Created by</span>
-        <Link
-          href={`/users?id=${nade.user.steamId}`}
-          as={`/users/${nade.user.steamId}`}
-        >
+        <Link href={`/users/[user]`} as={`/users/${nade.user.steamId}`}>
           <a className="user-link">
             <img
               className="user-avatar"

@@ -46,7 +46,7 @@ export const UserList: FC = () => {
                 </td>
                 <td className="nickname">
                   <Link
-                    href={`/users?id=${user.steamId}`}
+                    href={`/users/[user]`}
                     as={`/users/${user.steamId}`}
                     key={user.steamId}
                   >

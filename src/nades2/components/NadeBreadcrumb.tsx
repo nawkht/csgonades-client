@@ -21,7 +21,7 @@ export const NadeBreadcrumb: FC<Props> = ({ nade }) => {
             <a className="bc-item">Home</a>
           </Link>
           <FaChevronRight size={10} />
-          <Link as={`/maps/${nade.map}`} href={`/maps?name=${nade.map}`}>
+          <Link as={`/maps/${nade.map}`} href={`/maps/[map]`}>
             <a className="bc-item">{capitalize(nade.map)}</a>
           </Link>
           <FaChevronRight size={10} />

@@ -97,8 +97,7 @@ export const preloadUserThunkAction = (): ReduxThunkAction => {
     const curUser = getState().authStore.user;
 
     if (curToken && curUser) {
-      console.log("> Had user and token, not refetching");
-      return;
+      return Router.push("/");
     }
 
     const tokenResult = await AuthApi.refreshToken();

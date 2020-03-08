@@ -36,7 +36,7 @@ export const NadeBackButton: FC<Props> = ({ map }) => {
         </button>
       )}
       {!previousIsToOwnMap && (
-        <Link href={`/maps?name=${map}`} as={`/maps/${map}`}>
+        <Link href={`/maps/[map]`} as={`/maps/${map}`}>
           <a className="back">
             <MdChevronLeft />
             <span>Back</span>
