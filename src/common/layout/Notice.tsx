@@ -8,7 +8,7 @@ export const Notice: FC<Props> = ({}) => {
       <div className="notice">
         <div className="notice-msg">
           <p>
-            We are currently expecting some issues with our Content Delivery
+            We are currently experiencing some issues with our Content Delivery
             Service.
             <br />
             Affected system: Login, image loading, button interaction.
