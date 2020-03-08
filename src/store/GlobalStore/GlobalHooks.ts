@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   acceptCookieConcentAction,
   closeNavigationAction,
+  firstRenderCompleteAction,
   toggleNavigationAction,
 } from "./GlobalActions";
 import {
   acceptedCookieConsentSelector,
+  firstRenderSelector,
   isNavOpenSelector,
   siteStatsSelector,
 } from "./GlobalSelectors";
@@ -67,5 +69,19 @@ export const useCountryCode = () => {
   return {
     countryCode,
     isFromAmerica,
+  };
+};
+
+export const useFirstRender = () => {
+  const dispatch = useDispatch();
+  const firstRender = useSelector(firstRenderSelector);
+
+  const firstRenderCompleted = useCallback(() => {
+    dispatch(firstRenderCompleteAction());
+  }, []);
+
+  return {
+    firstRender,
+    firstRenderCompleted,
   };
 };

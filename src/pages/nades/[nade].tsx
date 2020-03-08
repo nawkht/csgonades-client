@@ -1,6 +1,9 @@
 import { NextPage } from "next";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { NadeNotFound } from "../../nades/NadeNotFound";
 import { NadePage } from "../../nades2/NadePage";
+import { useFirstRender } from "../../store/GlobalStore/GlobalHooks";
 import {
   nadeErrorSelector,
   useNadeError,
@@ -8,7 +11,21 @@ import {
 } from "../../store/NadeStore/NadeSelectors";
 import { fetchNadeByIdAction } from "../../store/NadeStore/NadeThunks";
 
-const NadePageComponent: NextPage = () => {
+type Props = {
+  nadeId: string;
+};
+
+const NadePageComponent: NextPage<Props> = ({ nadeId }) => {
+  const dispatch = useDispatch();
+  const { firstRender, firstRenderCompleted } = useFirstRender();
+
+  useEffect(() => {
+    if (firstRender) {
+      dispatch(fetchNadeByIdAction(nadeId));
+      firstRenderCompleted();
+    }
+  }, [firstRender]);
+
   const error = useNadeError();
   const nade = useSelectedNade();
 
@@ -36,7 +53,9 @@ NadePageComponent.getInitialProps = async context => {
     context.res.statusCode = 404;
   }
 
-  return;
+  return {
+    nadeId,
+  };
 };
 
 export default NadePageComponent;

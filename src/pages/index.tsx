@@ -1,10 +1,23 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { FrontPage } from "../frontpage/FrontPage";
+import { useFirstRender } from "../store/GlobalStore/GlobalHooks";
 import { fetchSiteStatsThunk } from "../store/GlobalStore/GlobalThunks";
 import { fetchNewestNadesAction } from "../store/NadeStore/NadeThunks";
 
 const Index: NextPage = () => {
+  const dispatch = useDispatch();
+  const { firstRender, firstRenderCompleted } = useFirstRender();
+
+  useEffect(() => {
+    if (firstRender) {
+      firstRenderCompleted();
+      dispatch(fetchNewestNadesAction());
+      dispatch(fetchSiteStatsThunk());
+    }
+  }, [firstRender]);
+
   return <FrontPage />;
 };
 

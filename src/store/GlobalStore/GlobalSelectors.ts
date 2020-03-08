@@ -13,3 +13,6 @@ export const countryCodeSelector = (state: AppState) =>
 
 export const didTryFetchingCountryCodeSelector = (state: AppState) =>
   state.globalStore.didTryFetchingCountryCode;
+
+export const firstRenderSelector = (state: AppState) =>
+  state.globalStore.firstRender;

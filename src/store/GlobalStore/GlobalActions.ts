@@ -19,11 +19,16 @@ type AcceptCookieConcent = {
   readonly meta: Meta;
 };
 
+type FirstRenderComplete = {
+  readonly type: "@@global/FIRST_RENDER_COMPLETE";
+};
+
 export type GlobalActions =
   | AddSiteStatsAction
   | ToggleNavigation
   | CloseNavigation
-  | AcceptCookieConcent;
+  | AcceptCookieConcent
+  | FirstRenderComplete;
 
 export const addSiteStatsActon = (stats: SiteStats): AddSiteStatsAction => ({
   type: "@@global/ADD_SITE_STATS",
@@ -43,4 +48,8 @@ export const toggleNavigationAction = (): ToggleNavigation => ({
 
 export const closeNavigationAction = (): CloseNavigation => ({
   type: "@@global/CLOSE_NAVIGATION",
+});
+
+export const firstRenderCompleteAction = (): FirstRenderComplete => ({
+  type: "@@global/FIRST_RENDER_COMPLETE",
 });

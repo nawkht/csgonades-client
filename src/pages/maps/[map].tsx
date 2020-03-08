@@ -1,6 +1,9 @@
 import { NextPage } from "next";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { MapPage } from "../../maps2/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { useFirstRender } from "../../store/GlobalStore/GlobalHooks";
 import { resetNadeFilterAction } from "../../store/NadeFilterStore/NadeFilterActions";
 import { fetchNadesByMapActionThunk } from "../../store/NadeStore/NadeThunks";
 
@@ -9,6 +12,16 @@ interface Props {
 }
 
 const Map: NextPage<Props> = ({ map }) => {
+  const dispatch = useDispatch();
+  const { firstRender, firstRenderCompleted } = useFirstRender();
+
+  useEffect(() => {
+    if (firstRender) {
+      dispatch(fetchNadesByMapActionThunk(map));
+      firstRenderCompleted();
+    }
+  }, [firstRender]);
+
   return <MapPage key={map} map={map} />;
 };
 

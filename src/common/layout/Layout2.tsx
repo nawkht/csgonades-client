@@ -3,13 +3,16 @@ import { FC, memo, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
-import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
+import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
+import {
+  useFirstRender,
+  useNavigation,
+} from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { CookieConsent } from "../CookieConsent";
 import { Navigation } from "../layout-components/Navigation";
 import { ToastList } from "../toast/ToastList";
-import { Azoic } from "./Azoic";
 import { AdminLink } from "./components/AdminLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -26,8 +29,17 @@ export const Layout2: FC<Props> = memo(
     const { setCurrentRoute } = useNavigationState();
     const { colors } = useTheme();
     const { closeNav, isNavOpen } = useNavigation();
+    const trySignIn = useTrySignIn();
+    const { firstRender } = useFirstRender();
 
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
+
+    useEffect(() => {
+      if (firstRender) {
+        console.log(">Trying to sign in");
+        trySignIn();
+      }
+    }, [firstRender]);
 
     useEffect(() => {
       closeNav();
@@ -86,8 +98,6 @@ export const Layout2: FC<Props> = memo(
             <meta property="og:image" content={metaThumbNail} />
           )}
         </Head>
-
-        <Azoic />
 
         <Header />
 
