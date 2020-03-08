@@ -12,7 +12,6 @@ import { ToastList } from "../toast/ToastList";
 import { AdminLink } from "./components/AdminLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { Notice } from "./Notice";
 
 type Props = {
   title?: string;
@@ -100,8 +99,6 @@ export const Layout2: FC<Props> = memo(
             </>
           )}
         </Head>
-
-        <Notice />
 
         <Header />
 
