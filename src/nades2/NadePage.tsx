@@ -153,13 +153,11 @@ export const NadePage: FC<Props> = ({ nade }) => {
         .nade-page-aside {
           margin-right: 20px;
           width: 300px;
-          background: #fcfcfc;
         }
 
         .nade-page-aside2 {
           margin-left: 20px;
           width: 300px;
-          background: #fcfcfc;
         }
 
         .nade-page-content {
