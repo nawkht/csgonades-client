@@ -59,14 +59,6 @@ export const Layout2: FC<Props> = memo(
     return (
       <>
         <Head>
-          <script
-            dangerouslySetInnerHTML={{ __html: `var ezoicId = 179726;` }}
-          ></script>
-          <script
-            async
-            type="text/javascript"
-            src="//go.ezoic.net/ezoic/ezoic.js"
-          ></script>
           <title>{pageTitle}</title>
           <meta name="description" content={pageDescription} />
 
