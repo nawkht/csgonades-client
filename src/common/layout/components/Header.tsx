@@ -35,6 +35,8 @@ export const Header: FC<Props> = ({}) => {
       <style jsx>{`
         header {
           padding: 10px;
+          padding-left: 0;
+          padding-right: 0;
           background: ${colors.DP01};
         }
 

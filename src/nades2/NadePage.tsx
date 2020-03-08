@@ -144,12 +144,12 @@ export const NadePage: FC<Props> = ({ nade }) => {
 
         .nade-page-aside {
           margin-right: 40px;
-          width: 160px;
+          width: 200px;
         }
 
         .nade-page-aside2 {
           margin-left: 40px;
-          width: 160px;
+          width: 200px;
         }
 
         .nade-page-content {
