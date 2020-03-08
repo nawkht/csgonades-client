@@ -63,8 +63,6 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
       </div>
       <style jsx>{`
         .favorite-wrapper {
-          margin-top: 20px;
-          margin-bottom: 20px;
           display: flex;
           flex-direction: column;
           align-items: flex-end;

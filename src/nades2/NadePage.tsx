@@ -62,8 +62,13 @@ export const NadePage: FC<Props> = ({ nade }) => {
           onEditNade={() => setEditTitleVisisble(true)}
           allowEdit={allowEdit}
         />
+
+        <div id="ezoic-pub-ad-placeholder-105"></div>
+
         <div className="nade-page">
-          <aside className="nade-page-aside"></aside>
+          <aside className="nade-page-aside">
+            <div id="ezoic-pub-ad-placeholder-106"></div>
+          </aside>
           <div className="nade-page-content">
             <ResponsiveVideo
               key={nade.id}
@@ -73,10 +78,18 @@ export const NadePage: FC<Props> = ({ nade }) => {
               poster={nade.images.thumbnailUrl}
               controls={isMobile ? "mobile" : "desktop"}
             />
-            <FavoriteButton
-              showSignInWarning={() => setShowSignInWarning(true)}
-              nade={nade}
-            />
+            <div className="action-container">
+              <div className="empty-container">
+                <div id="ezoic-pub-ad-placeholder-108"> </div>
+              </div>
+              <div className="nade-actions">
+                <FavoriteButton
+                  showSignInWarning={() => setShowSignInWarning(true)}
+                  nade={nade}
+                />
+              </div>
+            </div>
+
             <NadeInfo
               nade={nade}
               onEditTitle={() => setEditDescisisble(true)}
@@ -85,6 +98,8 @@ export const NadePage: FC<Props> = ({ nade }) => {
             <div className="similar-nades">
               <SimilarNades nade={nade} />
             </div>
+
+            <div id="ezoic-pub-ad-placeholder-107"> </div>
           </div>
           <aside className="nade-page-aside2" key={nade.id}>
             <SidebarBanner />
@@ -140,6 +155,17 @@ export const NadePage: FC<Props> = ({ nade }) => {
         .nade-page-content {
           flex: 1;
           max-width: 1000px;
+        }
+
+        .action-container {
+          margin-top: 20px;
+          margin-bottom: 20px;
+          display: flex;
+        }
+
+        .empty-container {
+          flex: 1;
+          margin-right: 20px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
