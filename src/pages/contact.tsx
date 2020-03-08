@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import { ContactApi } from "../api/ContactApi";
-import { Layout } from "../common/Layout";
+import { Layout2 } from "../common/layout/Layout2";
 import { ConctactDTO } from "../models/Contact";
 
 const ContactPageContainer: NextPage = () => {
@@ -39,7 +39,7 @@ const ContactPageContainer: NextPage = () => {
 
   return (
     <>
-      <Layout title="Contact" canonical="/contact">
+      <Layout2 title="Contact" canonical="/contact">
         <div className="contact">
           <h1>Contact</h1>
           {!!error && <p>{error}</p>}
@@ -81,12 +81,13 @@ const ContactPageContainer: NextPage = () => {
             </Message>
           )}
         </div>
-      </Layout>
+      </Layout2>
       <style jsx>{`
         .contact {
-          margin: 18px;
-          background: white;
-          padding: 18px;
+          max-width: 900px;
+          padding: 50px;
+          margin: 0 auto;
+          min-height: 82vh;
         }
       `}</style>
     </>
