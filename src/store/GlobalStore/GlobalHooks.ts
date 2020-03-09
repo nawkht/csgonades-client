@@ -59,7 +59,11 @@ export const useCookieConcent = () => {
 };
 
 export const useCountryCode = () => {
-  const countryCode = navigator ? navigator.language : "";
+  let countryCode = "";
+
+  if (navigator) {
+    countryCode = navigator.language;
+  }
 
   const isFromAmerica = useMemo(() => {
     const simpleCountryCode = countryCode.toLowerCase();
