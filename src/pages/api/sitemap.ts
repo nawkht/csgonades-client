@@ -21,14 +21,24 @@ function mapsList() {
   return maps;
 }
 
+function createLastMode(date) {
+  let modDate = date;
+  if (typeof modDate === "string") {
+    modDate = new Date(date);
+  }
+
+  const lastMod = `${modDate.getFullYear()}-${(
+    "0" +
+    (modDate.getMonth() + 1)
+  ).slice(-2)}-${("0" + modDate.getDate()).slice(-2)}`;
+  return lastMod;
+}
+
 const SITE_ROOT = "https://www.csgonades.com";
 const API_SOURCE = "https://api.csgonades.com";
 
 const createSitemap = async () => {
   const now = new Date();
-  const lastMod = `${now.getFullYear()}-${("0" + (now.getMonth() + 1)).slice(
-    -2
-  )}-${("0" + now.getDate()).slice(-2)}`;
 
   let xml = "";
   xml += '<?xml version="1.0" encoding="UTF-8"?>';
@@ -58,7 +68,7 @@ const createSitemap = async () => {
     const page = `${SITE_ROOT}/maps/${map}`;
     xml += "<url>";
     xml += `<loc>${page}</loc>`;
-    xml += `<lastmod>${lastMod}</lastmod>`;
+    xml += `<lastmod>${createLastMode(now)}</lastmod>`;
     xml += `<changefreq>always</changefreq>`;
     xml += `<priority>0.5</priority>`;
     xml += "</url>";
@@ -73,7 +83,7 @@ const createSitemap = async () => {
       xml += `${SITE_ROOT}/nades/${nade.id}`;
       xml +=
         "</loc><changefreq>always</changefreq><priority>0.5</priority></url>";
-      xml += `<lastmod>${nade.updatedAt}</lastmod>`;
+      xml += `<lastmod>${createLastMode(nade.updatedAt)}</lastmod>`;
     }
   } catch (error) {
     console.error(error);
