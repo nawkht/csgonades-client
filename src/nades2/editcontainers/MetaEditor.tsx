@@ -66,80 +66,88 @@ export const MetaEditor: FC<Props> = ({ nade, onDismiss, visisble }) => {
   return (
     <>
       <CSGNModal title="Edit metadata" onDismiss={onDismiss} visible={visisble}>
-        <div className="meta">
-          <span>Map</span>
-          <Dropdown
-            selection
-            placeholder="Select..."
-            value={map}
-            onChange={onMapChange}
-            options={nadeMapOptions()}
-          />
-        </div>
-
-        <div className="meta">
-          <span>Type</span>
-          <Dropdown
-            selection
-            placeholder="Select..."
-            value={type}
-            onChange={onNadeTypeChange}
-            options={nadeTypeOptions()}
-          />
-        </div>
-
-        <div className="meta">
-          <span>Movement</span>
-          <Dropdown
-            selection
-            placeholder="Select..."
-            value={movement}
-            onChange={onMovementChange}
-            options={nadeMovementOptions()}
-          />
-        </div>
-
-        <div className="meta">
-          <span>Technique</span>
-          <Dropdown
-            selection
-            placeholder="Select..."
-            value={technique}
-            onChange={onTechniqueChange}
-            options={nadeTechniqueOptions()}
-          />
-        </div>
-
-        {showTickrate && (
+        <div className="meta-editor">
           <div className="meta">
-            <span>Tickrate</span>
+            <span>Map</span>
             <Dropdown
               selection
               placeholder="Select..."
-              value={tickrate}
-              onChange={onNadeTickrateChange}
-              options={nadeTickrateOptions()}
+              value={map}
+              onChange={onMapChange}
+              options={nadeMapOptions()}
             />
           </div>
-        )}
 
-        <button className="submit-btn" onClick={onSave}>
-          Save
-        </button>
+          <div className="meta">
+            <span>Type</span>
+            <Dropdown
+              selection
+              placeholder="Select..."
+              value={type}
+              onChange={onNadeTypeChange}
+              options={nadeTypeOptions()}
+            />
+          </div>
+
+          <div className="meta">
+            <span>Movement</span>
+            <Dropdown
+              selection
+              placeholder="Select..."
+              value={movement}
+              onChange={onMovementChange}
+              options={nadeMovementOptions()}
+            />
+          </div>
+
+          <div className="meta">
+            <span>Technique</span>
+            <Dropdown
+              selection
+              placeholder="Select..."
+              value={technique}
+              onChange={onTechniqueChange}
+              options={nadeTechniqueOptions()}
+            />
+          </div>
+
+          {showTickrate && (
+            <div className="meta">
+              <span>Tickrate</span>
+              <Dropdown
+                selection
+                placeholder="Select..."
+                value={tickrate}
+                onChange={onNadeTickrateChange}
+                options={nadeTickrateOptions()}
+              />
+            </div>
+          )}
+
+          <button className="submit-btn" onClick={onSave}>
+            Save
+          </button>
+        </div>
       </CSGNModal>
       <style jsx>{`
+        .meta-editor {
+          min-width: 300px;
+        }
+
         .submit-btn {
           border: none;
           background: ${colors.PRIMARY};
           color: white;
-          margin-bottom: 15px;
           margin-top: 15px;
           padding: 10px 20px;
           border-radius: 5px;
+          width: 100%;
+          cursor: pointer;
         }
 
         .meta {
           margin-bottom: 10px;
+          padding-bottom: 10px;
         }
 
         .meta span {
