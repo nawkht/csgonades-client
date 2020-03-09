@@ -7,9 +7,10 @@ import { iconFromType } from "../../utils/Common";
 
 type Props = {
   type: NadeType;
+  mobile?: boolean;
 };
 
-export const NadeTypeButton: FC<Props> = ({ type }) => {
+export const NadeTypeButton: FC<Props> = ({ type, mobile }) => {
   const { colors } = useTheme();
   const { filterByType, byType } = useNadeFilter();
   const iconUrl = iconFromType(type);
@@ -50,9 +51,11 @@ export const NadeTypeButton: FC<Props> = ({ type }) => {
           border: none;
           background: transparent;
           outline: none;
-          border-bottom: 1px solid ${colors.filterBorder};
-          width: 45px;
-          height: 45px;
+          border-bottom: ${mobile
+            ? `none`
+            : `1px solid ${colors.filterBorder}`};
+          width: ${mobile ? "60px" : "45px"};
+          height: ${mobile ? "60px" : "45px"};
         }
 
         .nade-type-btn:last-child {
@@ -63,7 +66,7 @@ export const NadeTypeButton: FC<Props> = ({ type }) => {
           width: 100%;
           height: 100%;
           background: url(${iconUrl});
-          background-size: 26px;
+          background-size: ${mobile ? "35px" : "26px"};
           background-repeat: no-repeat;
           background-position: 45% 50%;
         }

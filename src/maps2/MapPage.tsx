@@ -11,6 +11,7 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
 import { MapView } from "./mapview/MapView";
+import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 
 type Props = {
@@ -62,6 +63,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             </div>
           </div>
         </div>
+        <MobileFilter />
         <MapView
           closeMapView={() => setMapViewVisisble(false)}
           visible={mapViewVisible}
