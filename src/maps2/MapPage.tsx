@@ -58,9 +58,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             <div className="placement-bottom"></div>
           </div>
           <div className="map-page-aside">
-            <div className="sticky">
-              <SidebarBanner />
-            </div>
+            <SidebarBanner />
           </div>
         </div>
         <MobileFilter />
@@ -76,11 +74,6 @@ export const MapPage: FC<Props> = ({ map }) => {
         />
       </Layout2>
       <style jsx>{`
-        .sticky {
-          position: sticky;
-          top: 50px;
-        }
-
         .map-welcome {
           background: linear-gradient(
             236.51deg,

@@ -77,7 +77,7 @@ export const SidebarBanner: FC = memo(() => {
         .sidebar-a {
           position: sticky;
           top: 50px;
-          max-width: 160px;
+          max-width: 200px;
         }
       `}</style>
     </>
