@@ -17,7 +17,7 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
   return (
     <>
       <li className={selected ? "nav-selected" : ""}>
-        <Link as={`/maps/[map]`} href={`/maps?name=${mapName}`}>
+        <Link href={`/maps/[map]`} as={`/maps/${mapName}`}>
           <a>
             <span className="nav-text">{capitalize(mapName)}</span>
           </a>
