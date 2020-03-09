@@ -1,7 +1,4 @@
 import { NextPage } from "next";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useFirstRender } from "../../store/GlobalStore/GlobalHooks";
 import { startEditingUserAction } from "../../store/UsersStore/UsersActions";
 import { userErrorSelector } from "../../store/UsersStore/UsersSelectors";
 import {
@@ -10,22 +7,7 @@ import {
 } from "../../store/UsersStore/UsersThunks";
 import { UserPage } from "../../users/UsersPage";
 
-type Props = {
-  steamId: string;
-};
-
-const UserPageComponent: NextPage<Props> = ({ steamId }) => {
-  const dispatch = useDispatch();
-  const { firstRender, firstRenderCompleted } = useFirstRender();
-
-  useEffect(() => {
-    if (firstRender) {
-      dispatch(fetchUserAction(steamId));
-      dispatch(fetchNadesForUserAction(steamId));
-      firstRenderCompleted();
-    }
-  }, [firstRender]);
-
+const UserPageComponent: NextPage = () => {
   return <UserPage />;
 };
 
@@ -51,9 +33,7 @@ UserPageComponent.getInitialProps = async ({ store, query, res }) => {
     dispatch(startEditingUserAction());
   }
 
-  return {
-    steamId,
-  };
+  return;
 };
 
 export default UserPageComponent;

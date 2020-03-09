@@ -3,11 +3,7 @@ import { FC, memo, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
-import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
-import {
-  useFirstRender,
-  useNavigation,
-} from "../../store/GlobalStore/GlobalHooks";
+import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { CookieConsent } from "../CookieConsent";
@@ -29,16 +25,8 @@ export const Layout2: FC<Props> = memo(
     const { setCurrentRoute } = useNavigationState();
     const { colors } = useTheme();
     const { closeNav, isNavOpen } = useNavigation();
-    const trySignIn = useTrySignIn();
-    const { firstRender } = useFirstRender();
 
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
-
-    useEffect(() => {
-      if (firstRender) {
-        trySignIn();
-      }
-    }, [firstRender]);
 
     useEffect(() => {
       closeNav();
