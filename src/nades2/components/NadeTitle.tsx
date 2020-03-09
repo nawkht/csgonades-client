@@ -34,7 +34,7 @@ export const NadeTitle: FC<Props> = ({
       titleBuilder.push("for");
     }
 
-    if (title.length) {
+    if (title && title.length) {
       titleBuilder.push(title);
     }
 
