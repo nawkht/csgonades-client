@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -37,9 +38,7 @@ export const MapPage: FC<Props> = ({ map }) => {
           </PageCentralize>
         </div>
 
-        <div className="top-placement">
-          <div id="ezoic-pub-ad-placeholder-102"></div>
-        </div>
+        <div className="top-placement"></div>
 
         <div className="map-page">
           <div className="filter">
@@ -55,13 +54,11 @@ export const MapPage: FC<Props> = ({ map }) => {
               emptyMessage={`No nades found. Sign in and add something! :)`}
             />
 
-            <div className="placement-bottom">
-              <div id="ezoic-pub-ad-placeholder-104" />
-            </div>
+            <div className="placement-bottom"></div>
           </div>
           <div className="map-page-aside">
             <div className="sticky">
-              <div id="ezoic-pub-ad-placeholder-101"></div>
+              <SidebarBanner />
             </div>
           </div>
         </div>
@@ -122,6 +119,8 @@ export const MapPage: FC<Props> = ({ map }) => {
         .map-page-aside {
           width: 200px;
           margin-left: 30px;
+          max-height: 1200px;
+          min-height: 600px;
         }
 
         .nade-list {

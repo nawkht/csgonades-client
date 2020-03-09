@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
+import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { Layout2 } from "../common/layout/Layout2";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -64,9 +65,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
         />
 
         <div className="nade-page">
-          <aside className="nade-page-aside">
-            <div id="ezoic-pub-ad-placeholder-106"></div>
-          </aside>
+          <aside className="nade-page-aside"></aside>
           <div className="nade-page-content">
             <ResponsiveVideo
               key={nade.id}
@@ -94,12 +93,10 @@ export const NadePage: FC<Props> = ({ nade }) => {
             <div className="similar-nades">
               <SimilarNades nade={nade} />
             </div>
-
-            <div id="ezoic-pub-ad-placeholder-107"> </div>
           </div>
           <aside className="nade-page-aside2" key={nade.id}>
             <div className="sticky">
-              <div id="ezoic-pub-ad-placeholder-109"> </div>
+              <SidebarBanner />
             </div>
           </aside>
         </div>
@@ -135,6 +132,8 @@ export const NadePage: FC<Props> = ({ nade }) => {
         .sticky {
           position: sticky;
           top: 50px;
+          max-height: 1200px;
+          min-height: 600px;
         }
 
         .nade-page-header-placeholder {
