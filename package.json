@@ -8,9 +8,6 @@
     "build": "next build",
     "start": "next start -p $PORT"
   },
-  "engines": {
-    "node": "13.x"
-  },
   "dependencies": {
     "@n8tb1t/use-scroll-position": "^1.0.43",
     "@rehooks/window-scroll-position": "^1.0.1",

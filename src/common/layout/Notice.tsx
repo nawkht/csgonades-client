@@ -8,12 +8,9 @@ export const Notice: FC<Props> = ({}) => {
       <div className="notice">
         <div className="notice-msg">
           <p>
-            We are currently experiencing some issues with our Content Delivery
-            Service.
+            We are currently moving DNS.
             <br />
-            Affected system: Login, image loading, button interaction.
-            <br />
-            We are working on a fix, but it might take a while to take effect.
+            The website might not be working as intended during this period.
           </p>
         </div>
       </div>
