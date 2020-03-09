@@ -1,5 +1,6 @@
 import { FC, memo, useMemo } from "react";
 import { FaCookieBite } from "react-icons/fa";
+import { Dimensions } from "../constants/Constants";
 import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
@@ -40,39 +41,42 @@ export const CookieConsent: FC = memo(() => {
       <style jsx>{`
         .cookie-consent-wrapper {
           position: fixed;
-          bottom: 50px;
+          bottom: 20px;
           left: 0;
           right: 0;
           z-index: 999;
           display: flex;
           justify-content: space-around;
-          transform: translateY(200%);
-          transition: all 0.1s;
+          display: none;
+          margin-left: 20px;
+          margin-right: 20px;
         }
 
         .visible {
-          transform: translateY(0);
+          display: flex;
         }
 
         .cookie-consent {
-          max-width: 600px;
+          max-width: 500px;
           border: 2px solid ${colors.BORDER};
           border-radius: 5px;
           background: rgba(255, 255, 255, 0.97);
           color: #333;
           padding: 20px 30px;
           display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .cookie-icon {
           display: flex;
           align-items: center;
           font-size: 2em;
-          margin-right: 20px;
+          margin-bottom: 10px;
         }
 
         .consent-txt {
-          margin-right: 20px;
+          margin-bottom: 20px;
         }
 
         .close-button {
@@ -98,6 +102,9 @@ export const CookieConsent: FC = memo(() => {
         .accept-btn:hover {
           border: 1px solid ${colors.PRIMARY};
           color: ${colors.PRIMARY};
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
         }
       `}</style>
     </>
