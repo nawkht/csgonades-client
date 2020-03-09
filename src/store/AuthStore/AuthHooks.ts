@@ -9,6 +9,11 @@ import {
   trySignInThunk,
 } from "./AuthTunks";
 
+export const useSignedInUser = () => {
+  const user = useSelector(userSelector);
+  return user;
+};
+
 export const useIsSignedIn = (): boolean => {
   const user = useSelector(userSelector);
   if (!user) {

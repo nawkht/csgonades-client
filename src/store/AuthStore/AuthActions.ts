@@ -31,7 +31,7 @@ export const signOutUser = (): SignOutAction => ({
   },
 });
 
-export function setUser(dispatch: Dispatch, user: User) {
+export function setUserAction(dispatch: Dispatch, user: User) {
   dispatch({
     type: "@@auth/SET_USER",
     payload: user,

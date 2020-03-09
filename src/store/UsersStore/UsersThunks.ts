@@ -2,6 +2,7 @@ import { NadeApi } from "../../api/NadeApi";
 import { UserApi } from "../../api/UserApi";
 import { UserUpdateDTO } from "../../models/User";
 import { analyticsEventAction } from "../Analytics/AnalyticsActions";
+import { setUserAction } from "../AuthStore/AuthActions";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
 import {
@@ -41,6 +42,36 @@ export const fetchNadesForUserAction = (steamId: string): ReduxThunkAction => {
   };
 };
 
+export const finishProfileThunk = (
+  steamId: string,
+  updatedField: UserUpdateDTO
+) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const token = tokenSelector(state);
+
+    const result = await UserApi.updateUser(steamId, updatedField, token);
+
+    if (!token) {
+      console.error("Missing token, cant update.");
+      return;
+    }
+
+    if (result.isErr()) {
+      return dispatch(setUsersError(result.error));
+    }
+
+    dispatch(
+      analyticsEventAction({
+        category: "user",
+        action: "finishprofile",
+      })
+    );
+
+    setUserAction(dispatch, result.value);
+  };
+};
+
 export const updateUserThunk = (
   updatedField: UserUpdateDTO
 ): ReduxThunkAction => {
@@ -68,6 +99,8 @@ export const updateUserThunk = (
         action: "update",
       })
     );
+
+    setUserAction(dispatch, result.value);
 
     dispatch(setViewingUserAction(result.value));
     dispatch(stopEditingUserAction());

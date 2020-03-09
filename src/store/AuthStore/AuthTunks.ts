@@ -5,11 +5,10 @@ import { NotificationApi } from "../../api/NotificationApi";
 import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
 import { User } from "../../models/User";
-import { redirectUserPage } from "../../utils/Common";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
 import { addUnreadNotificationsAction } from "../NotificationStore/NotificationActions";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { setToken, setUser, signOutUser } from "./AuthActions";
+import { setToken, setUserAction, signOutUser } from "./AuthActions";
 
 function checkIsFirstSignIn(user: User): boolean {
   const minutesAgoCreated = moment().diff(
@@ -42,7 +41,7 @@ export const serverSideUserInitThunkAction = (
       return dispatch(signOutUser());
     }
 
-    setUser(dispatch, userResult.value);
+    setUserAction(dispatch, userResult.value);
 
     // Preload user state
     const [favoriteResult, notificationsResult] = await Promise.all([
@@ -87,7 +86,7 @@ export const trySignInThunk = (): ReduxThunkAction => {
 
     const user = userResult.value;
 
-    setUser(dispatch, user);
+    setUserAction(dispatch, user);
   };
 };
 
@@ -98,7 +97,7 @@ export const preloadUserThunkAction = (): ReduxThunkAction => {
 
     // Always redirect my alt account as new user for testing purposes
     if (curUser.steamId === "76561198199195838") {
-      return redirectUserPage(curUser.steamId, true);
+      return Router.push(`/finishprofile`);
     }
 
     if (curToken && curUser) {
@@ -123,12 +122,12 @@ export const preloadUserThunkAction = (): ReduxThunkAction => {
 
     const user = userResult.value;
 
-    setUser(dispatch, user);
+    setUserAction(dispatch, user);
 
     const isFirstSignIn = checkIsFirstSignIn(user);
 
     if (isFirstSignIn) {
-      redirectUserPage(user.steamId, true);
+      Router.push(`/finishprofile`);
     } else {
       Router.push("/");
     }

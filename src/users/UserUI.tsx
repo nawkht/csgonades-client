@@ -41,6 +41,7 @@ export const UserUI: FC<Props> = ({ user, nades }) => {
           margin-bottom: 100px;
           display: flex;
           flex-direction: column;
+          min-height: 80vh;
         }
 
         .user-details {

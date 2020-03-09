@@ -13,7 +13,7 @@ import {
   userNadesSelector,
   viewingUserSelector,
 } from "./UsersSelectors";
-import { updateUserThunk } from "./UsersThunks";
+import { finishProfileThunk, updateUserThunk } from "./UsersThunks";
 
 export const useUsersActions = () => {
   const dispatch = useDispatch();
@@ -56,4 +56,15 @@ export const useUsersState = () => {
   const isUpdatingUser = useSelector(isUpdatingUserSelector);
 
   return { user, isEditing, nades, error, isUpdatingUser };
+};
+
+export const useFinishProfile = () => {
+  const dispatch = useDispatch();
+  const finishProfile = useCallback(
+    (steamId: string, updatedField: UserUpdateDTO) => {
+      dispatch(finishProfileThunk(steamId, updatedField));
+    },
+    [dispatch]
+  );
+  return finishProfile;
 };
