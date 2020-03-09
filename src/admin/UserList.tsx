@@ -26,7 +26,7 @@ export const UserList: FC = () => {
 
   return (
     <>
-      <div>
+      <div className="user-list">
         <Button onClick={() => setSortByActivity(false)}>By created at</Button>
         <Button onClick={() => setSortByActivity(true)}>By last active</Button>
         <table id="users">
@@ -54,9 +54,7 @@ export const UserList: FC = () => {
                   </Link>
                 </td>
                 <td className="last-active">{dateFromNow(user.lastActive)}</td>
-                <td className="-created-at">
-                  {prettyDateTime(user.createdAt)}
-                </td>
+                <td className="created-at">{prettyDateTime(user.createdAt)}</td>
               </tr>
             ))}
           </tbody>
@@ -72,6 +70,12 @@ export const UserList: FC = () => {
         />
       </div>
       <style jsx>{`
+        .user-list {
+          border: 1px solid ${colors.BORDER};
+          border-radius: 5px;
+          overflow: hidden;
+        }
+
         #users {
           width: 100%;
           border-collapse: collapse;
@@ -86,12 +90,12 @@ export const UserList: FC = () => {
         }
 
         td {
-          padding: 6px;
+          padding: 12px;
           vertical-align: center;
         }
 
         .avatar {
-          width: 40px;
+          width: 50px;
         }
 
         .avatar img {
@@ -101,7 +105,6 @@ export const UserList: FC = () => {
         }
 
         .nickname {
-          width: 75%;
         }
 
         .nickname a {
@@ -113,9 +116,13 @@ export const UserList: FC = () => {
         }
 
         .last-active {
+          width: 80px;
+          white-space: nowrap;
         }
 
         .created-at {
+          width: 80px;
+          white-space: nowrap;
         }
       `}</style>
     </>
