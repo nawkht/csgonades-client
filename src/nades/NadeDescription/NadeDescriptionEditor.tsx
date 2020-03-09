@@ -14,13 +14,13 @@ const converter = new Showdown.Converter({
   simplifiedAutoLink: true,
   strikethrough: true,
   tasklists: true,
-  simpleLineBreaks: true
+  simpleLineBreaks: true,
 });
 
 export const NadeDescriptionEditor: FC<Props> = ({
   description,
   onCancel,
-  onSave
+  onSave,
 }) => {
   const [descValue, setDescValue] = useState(description);
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
@@ -31,27 +31,36 @@ export const NadeDescriptionEditor: FC<Props> = ({
 
   return (
     <>
-      <ReactMde
-        value={descValue}
-        onChange={setDescValue}
-        selectedTab={selectedTab}
-        onTabChange={setSelectedTab}
-        commands={[
-          {
-            commands: [
-              commands.boldCommand,
-              commands.italicCommand,
-              commands.linkCommand,
-              commands.unorderedListCommand
-            ]
+      <div className="desc-editor">
+        <ReactMde
+          value={descValue}
+          onChange={setDescValue}
+          selectedTab={selectedTab}
+          onTabChange={setSelectedTab}
+          minEditorHeight={400}
+          commands={[
+            {
+              commands: [
+                commands.boldCommand,
+                commands.italicCommand,
+                commands.linkCommand,
+                commands.unorderedListCommand,
+              ],
+            },
+          ]}
+          generateMarkdownPreview={markdown =>
+            Promise.resolve(converter.makeHtml(markdown))
           }
-        ]}
-        generateMarkdownPreview={markdown =>
-          Promise.resolve(converter.makeHtml(markdown))
+        />
+        <Button onClick={onCancel}>Cancel</Button>
+        <Button onClick={onSaveDescription}>Save</Button>
+      </div>
+      <style jsx>{`
+        .desc-editor {
+          width: 50vw;
+          min-height: 500px;
         }
-      />
-      <Button onClick={onCancel}>Cancel</Button>
-      <Button onClick={onSaveDescription}>Save</Button>
+      `}</style>
     </>
   );
 };
