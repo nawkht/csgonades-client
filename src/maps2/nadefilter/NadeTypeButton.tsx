@@ -30,20 +30,27 @@ export const NadeTypeButton: FC<Props> = ({ type, mobile }) => {
 
   return (
     <>
-      <Popup
-        content={nadeTypeString(type)}
-        hoverable
-        position="right center"
-        inverted
-        size="tiny"
-        mouseEnterDelay={300}
-        openOnTriggerClick={false}
-        trigger={
-          <button className={classNameBuilder} onClick={onClick}>
-            <div className="type-icon"></div>
-          </button>
-        }
-      />
+      {mobile && (
+        <button className={classNameBuilder} onClick={onClick}>
+          <div className="type-icon"></div>
+        </button>
+      )}
+      {!mobile && (
+        <Popup
+          content={nadeTypeString(type)}
+          hoverable
+          position="right center"
+          inverted
+          size="tiny"
+          mouseEnterDelay={300}
+          openOnTriggerClick={false}
+          trigger={
+            <button className={classNameBuilder} onClick={onClick}>
+              <div className="type-icon"></div>
+            </button>
+          }
+        />
+      )}
 
       <style jsx>{`
         .nade-type-btn {
