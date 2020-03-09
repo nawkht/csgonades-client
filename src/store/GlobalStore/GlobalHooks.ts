@@ -14,6 +14,8 @@ import {
 } from "./GlobalSelectors";
 import { fetchSiteStatsThunk } from "./GlobalThunks";
 
+const isBrowser = typeof window != "undefined";
+
 export const useSiteStats = () => {
   const dispatch = useDispatch();
   const stats = useSelector(siteStatsSelector);
@@ -61,7 +63,7 @@ export const useCookieConcent = () => {
 export const useCountryCode = () => {
   let countryCode = "";
 
-  if (navigator) {
+  if (isBrowser) {
     countryCode = navigator.language;
   }
 
