@@ -1,20 +1,28 @@
-import { FC, memo, useMemo } from "react";
+import { FC, memo, useEffect, useMemo, useState } from "react";
 import { FaCookieBite } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 export const CookieConsent: FC = memo(() => {
+  const [render, setRender] = useState(false);
   const { colors } = useTheme();
   const { acceptCookieConcent, acceptedCookieConsent } = useCookieConcent();
 
+  useEffect(() => {
+    const renderTimer = setTimeout(() => {
+      setRender(true);
+    }, 1000);
+    return () => clearTimeout(renderTimer);
+  }, []);
+
   const wrapperClassName = useMemo(() => {
     const classNames = ["cookie-consent-wrapper"];
-    if (!acceptedCookieConsent) {
+    if (!acceptedCookieConsent && render) {
       classNames.push("visible");
     }
     return classNames.join(" ");
-  }, [acceptedCookieConsent]);
+  }, [acceptedCookieConsent, render]);
 
   return (
     <>
@@ -47,13 +55,15 @@ export const CookieConsent: FC = memo(() => {
           z-index: 999;
           display: flex;
           justify-content: space-around;
-          display: none;
+          display: flex;
+          transform: translateY(200%);
+          transition: transform 0.15s;
           margin-left: 20px;
           margin-right: 20px;
         }
 
         .visible {
-          display: flex;
+          transform: translateY(0);
         }
 
         .cookie-consent {
