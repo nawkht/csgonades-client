@@ -9,6 +9,7 @@ import { mapString } from "../models/Nade/CsGoMap";
 import { Nade } from "../models/Nade/Nade";
 import { nadeTypeString } from "../models/Nade/NadeType";
 import { AdminEditor } from "../nades/AdminEditor/AdminEditor";
+import { MapPositionEditor } from "../nades/MapPositionEditor/MapPositionEditor";
 import { NadeStatus } from "../nades/NadeStatus/NadeStatus";
 import { SimilarNades } from "../nades/SimilarNades";
 import { useCanEditNade, useRegisterView } from "../store/NadeStore/NadeHooks";
@@ -125,6 +126,8 @@ export const NadePage: FC<Props> = ({ nade }) => {
           nade={nade}
           onDismiss={() => setEditMetaVisible(false)}
         />
+
+        <MapPositionEditor key={nade.id} nade={nade} />
 
         <AdminEditor nade={nade} />
       </Layout2>

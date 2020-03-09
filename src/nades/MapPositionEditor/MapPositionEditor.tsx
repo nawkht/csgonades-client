@@ -50,7 +50,9 @@ export const MapPositionEditor: FC<Props> = ({ nade }) => {
       />
       <style jsx>{`
         .position-btn {
-          width: 48%;
+          max-width: 150px;
+          margin: 0 auto;
+          padding-bottom: 100px;
         }
       `}</style>
     </>
