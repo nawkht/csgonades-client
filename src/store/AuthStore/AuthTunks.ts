@@ -91,19 +91,7 @@ export const trySignInThunk = (): ReduxThunkAction => {
 };
 
 export const preloadUserThunkAction = (): ReduxThunkAction => {
-  return async (dispatch, getState) => {
-    const curToken = getState().authStore.token;
-    const curUser = getState().authStore.user;
-
-    // Always redirect my alt account as new user for testing purposes
-    if (curUser.steamId === "76561198199195838") {
-      return Router.push(`/finishprofile`);
-    }
-
-    if (curToken && curUser) {
-      return Router.push("/");
-    }
-
+  return async dispatch => {
     const tokenResult = await AuthApi.refreshToken();
 
     if (tokenResult.isErr()) {
@@ -126,7 +114,7 @@ export const preloadUserThunkAction = (): ReduxThunkAction => {
 
     const isFirstSignIn = checkIsFirstSignIn(user);
 
-    if (isFirstSignIn) {
+    if (isFirstSignIn || user.steamId === "76561198199195838") {
       Router.push(`/finishprofile`);
     } else {
       Router.push("/");
