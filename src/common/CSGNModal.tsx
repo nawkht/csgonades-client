@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { FaTimes } from "react-icons/fa";
 import { Dimensions, LayerPosition } from "../constants/Constants";
 
 type Props = {
@@ -58,7 +59,13 @@ export const CSGNModal: FC<Props> = ({
         <div className="modal" onClick={e => e.stopPropagation()}>
           {!!title && (
             <div className="modal-title">
+              <div className="spacer" />
               <h3>{title}</h3>
+              <div className="spacer">
+                <button className="close-btn" onClick={onDismiss}>
+                  <FaTimes />
+                </button>
+              </div>
             </div>
           )}
           <div className="modal-content">{children}</div>
@@ -89,6 +96,32 @@ export const CSGNModal: FC<Props> = ({
         .modal-title {
           padding: 18px;
           border-bottom: 1px solid #e6e6e6;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .spacer {
+          width: 20%;
+          display: flex;
+          align-items: flex-end;
+          flex-direction: column;
+        }
+
+        .modal-title h3 {
+          margin: 0;
+          font-size: 24px;
+          text-align: center;
+          flex: 1;
+        }
+
+        .close-btn {
+          border: none;
+          outline: none;
+          appearance: none;
+          font-size: 24px;
+          cursor: pointer;
+          padding-top: 7px;
         }
 
         .modal-content {

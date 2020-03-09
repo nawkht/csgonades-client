@@ -24,9 +24,8 @@ export const SignInWarning: FC<Props> = ({ visible, onDismiss, message }) => {
 
   return (
     <>
-      <CSGNModal visible={visible} onDismiss={onDismiss}>
+      <CSGNModal title="Woops!" visible={visible} onDismiss={onDismiss}>
         <div className="sign-in-warning">
-          <h2>Woops!</h2>
           <p>{warningMessage}</p>
           <a className="sign-in-btn" href={Config.SIGN_IN_URL}>
             Sign in with steam
