@@ -96,6 +96,11 @@ export const preloadUserThunkAction = (): ReduxThunkAction => {
     const curToken = getState().authStore.token;
     const curUser = getState().authStore.user;
 
+    // Always redirect my alt account as new user for testing purposes
+    if (curUser.steamId === "76561198199195838") {
+      return redirectUserPage(curUser.steamId, true);
+    }
+
     if (curToken && curUser) {
       return Router.push("/");
     }
