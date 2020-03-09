@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Popup } from "semantic-ui-react";
 import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { FilterBg } from "./FilterBg";
@@ -17,18 +18,41 @@ export const TickrateSelector: FC<Props> = ({}) => {
       <div className="filter-tick">
         <div className="filter-tick-label">TICK</div>
         <FilterBg>
-          <button
-            className={`filter-btn tickrate-btn ${tick64active}`}
-            onClick={useTickrate64}
-          >
-            64
-          </button>
-          <button
-            className={`filter-btn tickrate-btn ${tick128active}`}
-            onClick={useTickrate128}
-          >
-            128
-          </button>
+          <Popup
+            content={"Only 64 tick"}
+            hoverable
+            position="right center"
+            inverted
+            size="tiny"
+            mouseEnterDelay={300}
+            openOnTriggerClick={false}
+            trigger={
+              <button
+                className={`filter-btn tickrate-btn ${tick64active}`}
+                onClick={useTickrate64}
+              >
+                64
+              </button>
+            }
+          />
+
+          <Popup
+            content={"Only 128 tick"}
+            hoverable
+            position="right center"
+            inverted
+            size="tiny"
+            mouseEnterDelay={300}
+            openOnTriggerClick={false}
+            trigger={
+              <button
+                className={`filter-btn tickrate-btn ${tick128active}`}
+                onClick={useTickrate128}
+              >
+                128
+              </button>
+            }
+          />
         </FilterBg>
       </div>
       <style jsx>{`

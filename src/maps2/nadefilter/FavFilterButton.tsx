@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { FaStar } from "react-icons/fa";
+import { Popup } from "semantic-ui-react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
 
@@ -23,12 +24,23 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
 
   return (
     <>
-      <button
-        className={`filter-btn favorite ${active}`}
-        onClick={onFilterByFavorite}
-      >
-        <FaStar style={{ marginLeft: -1 }} />
-      </button>
+      <Popup
+        content={"Your favorites"}
+        hoverable
+        position="right center"
+        inverted
+        size="tiny"
+        mouseEnterDelay={300}
+        openOnTriggerClick={false}
+        trigger={
+          <button
+            className={`filter-btn favorite ${active}`}
+            onClick={onFilterByFavorite}
+          >
+            <FaStar style={{ marginLeft: -1 }} />
+          </button>
+        }
+      />
 
       <style jsx>{`
         .filter-btn {

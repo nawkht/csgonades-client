@@ -1,5 +1,6 @@
 import { FC, useMemo } from "react";
-import { NadeType } from "../../models/Nade/NadeType";
+import { Popup } from "semantic-ui-react";
+import { NadeType, nadeTypeString } from "../../models/Nade/NadeType";
 import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { iconFromType } from "../../utils/Common";
@@ -28,9 +29,21 @@ export const NadeTypeButton: FC<Props> = ({ type }) => {
 
   return (
     <>
-      <button className={classNameBuilder} onClick={onClick}>
-        <div className="type-icon"></div>
-      </button>
+      <Popup
+        content={nadeTypeString(type)}
+        hoverable
+        position="right center"
+        inverted
+        size="tiny"
+        mouseEnterDelay={300}
+        openOnTriggerClick={false}
+        trigger={
+          <button className={classNameBuilder} onClick={onClick}>
+            <div className="type-icon"></div>
+          </button>
+        }
+      />
+
       <style jsx>{`
         .nade-type-btn {
           cursor: pointer;
