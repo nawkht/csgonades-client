@@ -68,7 +68,6 @@ const createSitemap = async () => {
     const page = `${SITE_ROOT}/maps/${map}`;
     xml += "<url>";
     xml += `<loc>${page}</loc>`;
-    xml += `<lastmod>${createLastMode(now)}</lastmod>`;
     xml += `<changefreq>always</changefreq>`;
     xml += `<priority>0.5</priority>`;
     xml += "</url>";
@@ -83,7 +82,6 @@ const createSitemap = async () => {
       xml += `${SITE_ROOT}/nades/${nade.id}`;
       xml +=
         "</loc><changefreq>always</changefreq><priority>0.5</priority></url>";
-      xml += `<lastmod>${createLastMode(nade.updatedAt)}</lastmod>`;
     }
   } catch (error) {
     console.error(error);
