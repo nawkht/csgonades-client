@@ -69,7 +69,6 @@ const createSitemap = async () => {
     const nades = result.data;
 
     for (const nade of nades) {
-      console.log(nade);
       xml += "<url><loc>";
       xml += `${SITE_ROOT}/nades/${nade.id}`;
       xml +=
