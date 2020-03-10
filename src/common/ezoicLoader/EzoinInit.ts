@@ -3,6 +3,7 @@ const isBrowser = typeof window !== "undefined";
 export function ezoicInit(codes: number[]) {
   if (isBrowser && ezstandalone && !ezstandalone.enabled) {
     console.log("> Ezoic enable");
+    ezstandalone.DEBUG = true;
     ezstandalone.define(...codes);
     ezstandalone.enable();
     ezstandalone.display();
