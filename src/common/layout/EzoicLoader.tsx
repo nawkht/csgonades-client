@@ -9,8 +9,6 @@ export const EzoicLoader: FC<Props> = memo(({}) => {
   const isAdmin = useIsAdmin();
   useEffect(() => {
     // @ts-ignore
-    console.log(ezstandalone);
-    // @ts-ignore
     if (isAdmin && isBrowser && ezstandalone) {
       // @ts-ignore
       ezstandalone.define(102, 101);
