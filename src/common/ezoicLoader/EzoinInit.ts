@@ -19,6 +19,7 @@ export function ezoicInit(codes: number[]) {
       try {
         // @ts-ignore
         ezoic.cmd.push(function() {
+          ezstandalone.define(...codes);
           ezstandalone.refresh();
           console.log("> ezstandalone refresh");
         });
