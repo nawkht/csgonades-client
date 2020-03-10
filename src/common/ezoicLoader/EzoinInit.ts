@@ -2,19 +2,19 @@ const isBrowser = typeof window !== "undefined";
 
 export function ezoicInit(codes: number[]) {
   if (isBrowser && ezstandalone && !ezstandalone.enabled) {
-    console.log("> Ezoic enable");
-    ezstandalone.setIsPWA();
+    ezstandalone.DEBUG = true;
+    ezstandalone.init();
     ezstandalone.define(...codes);
     ezstandalone.enable();
     ezstandalone.display();
+    console.log("> ezstandalone enabled");
   } else if (isBrowser && ezstandalone && ezstandalone.enabled) {
     setTimeout(() => {
       // @ts-ignore
       ezstandalone.cmd.push(function() {
-        console.log("> Executing refresh");
-        ezstandalone.init();
         ezstandalone.refresh();
+        console.log("> ezstandalone refresh");
       });
-    }, 2000);
+    }, 1000);
   }
 }
