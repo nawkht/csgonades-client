@@ -6,27 +6,31 @@ type Props = {};
 
 export const EzoicLoader: FC<Props> = memo(({}) => {
   useEffect(() => {
-    const executeEzoic = setTimeout(() => {
+    // @ts-ignore
+    if (isBrowser && ezstandalone) {
       // @ts-ignore
-      if (isBrowser && ezstandalone) {
+      if (!ezstandalone.enabled) {
+        console.log("> Ezoic enable");
         // @ts-ignore
-        if (!ezstandalone.enabled) {
-          console.log("> Ezoic enable");
-          // @ts-ignore
-          ezstandalone.define(102, 101, 104);
-          // @ts-ignore
-          ezstandalone.enable();
-          // @ts-ignore
-          ezstandalone.display();
-        } else {
-          console.log("> Ezoic refresh");
-          // @ts-ignore
-          ezstandalone.refresh();
-        }
+        ezstandalone.define(102, 101, 104);
+        // @ts-ignore
+        ezstandalone.enable();
+        // @ts-ignore
+        ezstandalone.display();
+      } else {
+        console.log("> Ezoic refresh");
+        // @ts-ignore
+        ezstandalone.define(102, 101, 104);
+        // @ts-ignore
+        ezstandalone.display();
+        // @ts-ignore
+        ezstandalone.refresh();
       }
-    }, 2000);
+    }
     return () => {
-      clearTimeout(executeEzoic);
+      // @ts-ignore
+      ezstandalone.destroy();
+      console.log("> Ez destroy");
     };
   }, []);
 
