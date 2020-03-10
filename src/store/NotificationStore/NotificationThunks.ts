@@ -1,7 +1,10 @@
 import { NotificationApi } from "../../api/NotificationApi";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
-import { markNotificationAsSeenAction } from "./NotificationActions";
+import {
+  addUnreadNotificationsAction,
+  markNotificationAsSeenAction,
+} from "./NotificationActions";
 
 export const markNotifcationAsViewedThunk = (id: string): ReduxThunkAction => {
   return async (dispatch, getState) => {
@@ -15,5 +18,26 @@ export const markNotifcationAsViewedThunk = (id: string): ReduxThunkAction => {
     dispatch(markNotificationAsSeenAction(id));
 
     await NotificationApi.markAsViewed(id, authToken);
+  };
+};
+
+export const fetchNotificationThunk = (): ReduxThunkAction => {
+  return async (dispatch, getState) => {
+    const authToken = tokenSelector(getState());
+
+    if (!authToken) {
+      return;
+    }
+
+    const result = await NotificationApi.getNotifications(authToken);
+
+    if (result.isErr()) {
+      console.error(result.error);
+      return;
+    }
+
+    console.log("> Fetched notifications");
+
+    return dispatch(addUnreadNotificationsAction(result.value));
   };
 };
