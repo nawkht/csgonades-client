@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { EzoicLoader } from "../common/layout/EzoicLoader";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
@@ -43,7 +42,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         </div>
 
         <div className="top-placement">
-          <div id="ezoic-pub-ad-placeholder-102"> </div>
+          <div id="ezoic-pub-ad-placeholder-102"></div>
         </div>
 
         <div className="map-page">
@@ -63,7 +62,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             <div className="placement-bottom"></div>
           </div>
           <div className="map-page-aside">
-            <SidebarBanner />
+            <div id="ezoic-pub-ad-placeholder-101"> </div>
           </div>
         </div>
         <MobileFilter />

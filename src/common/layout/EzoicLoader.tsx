@@ -8,23 +8,20 @@ type Props = {};
 export const EzoicLoader: FC<Props> = memo(({}) => {
   const isAdmin = useIsAdmin();
   useEffect(() => {
-    setTimeout(() => {
+    // @ts-ignore
+    console.log(ezstandalone);
+    // @ts-ignore
+    if (isAdmin && isBrowser && ezstandalone) {
       // @ts-ignore
-      if (isAdmin && isBrowser && ezstandalone) {
-        // @ts-ignore
-        console.log("> Ezoic init", ezstandalone);
-        // @ts-ignore
-        console.log("> Ezoic defines", 102);
-        // @ts-ignore
-        ezstandalone.define(102);
-        // @ts-ignore
-        console.log("> Ezoic enable", 102);
+      ezstandalone.define(102, 101);
+      // @ts-ignore
+      if (!ezstandalone.initialized) {
         // @ts-ignore
         ezstandalone.enable();
-        // @ts-ignore
-        ezstandalone.display();
       }
-    }, 2000);
+      // @ts-ignore
+      ezstandalone.display();
+    }
   }, []);
 
   return (
