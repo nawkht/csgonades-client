@@ -22,19 +22,13 @@ export const EzoicLoader: FC<Props> = memo(({}) => {
         } else {
           console.log("> Ezoic refresh");
           // @ts-ignore
+          ezstandalone.display();
+          // @ts-ignore
           ezstandalone.refresh();
         }
       }
     }, 1000);
-
-    return () => {
-      // @ts-ignore
-      if (ezstandalone) {
-        // @ts-ignore
-        ezstandalone.destroy();
-        clearTimeout(executeEzoic);
-      }
-    };
+    return () => clearTimeout(executeEzoic);
   }, []);
 
   return (
