@@ -1,12 +1,12 @@
 const isBrowser = typeof window !== "undefined";
 
 const hasEzoic = typeof ezstandalone !== "undefined";
-export function ezoicInit(codes: number[]) {
+export function ezoicInit() {
   if (isBrowser && hasEzoic && !ezstandalone.enabled) {
     try {
       ezstandalone.DEBUG = false;
       ezstandalone.init();
-      ezstandalone.define(...codes);
+      ezstandalone.define(108, 109, 104, 101, 102);
       ezstandalone.enable();
       ezstandalone.display();
       console.log("> Ez init");
@@ -16,7 +16,6 @@ export function ezoicInit(codes: number[]) {
   } else if (isBrowser && hasEzoic && ezstandalone.enabled) {
     setTimeout(() => {
       try {
-        ezstandalone.define(...codes);
         ezstandalone.refresh();
         console.log("> Ez refresh");
       } catch (error) {
