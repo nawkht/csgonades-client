@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
+import { SidebarAmazon } from "../common/ads/SidebarAmazon";
 import { SidebarBanner } from "../common/ads/SideBarBanner";
 import { Layout2 } from "../common/layout/Layout2";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
@@ -67,7 +68,9 @@ export const NadePage: FC<Props> = ({ nade }) => {
           />
 
           <div className="nade-page">
-            <aside className="nade-page-aside"></aside>
+            <aside className="nade-page-aside">
+              <SidebarAmazon />
+            </aside>
             <div className="nade-page-content">
               <ResponsiveVideo
                 hdUrL={nade.gfycat.largeVideoUrl}
@@ -91,14 +94,13 @@ export const NadePage: FC<Props> = ({ nade }) => {
                 onEditTitle={() => setEditDescisisble(true)}
                 onEditMeta={() => setEditMetaVisible(true)}
               />
+
               <div className="similar-nades">
                 <SimilarNades nade={nade} />
               </div>
             </div>
             <aside className="nade-page-aside2">
-              <div className="sticky">
-                <SidebarBanner />
-              </div>
+              <SidebarBanner removeAmazon={true} />
             </aside>
           </div>
 
@@ -136,8 +138,6 @@ export const NadePage: FC<Props> = ({ nade }) => {
       </Layout2>
       <style jsx>{`
         .sticky {
-          position: sticky;
-          top: 50px;
           max-height: 1200px;
           min-height: 600px;
         }
@@ -155,14 +155,26 @@ export const NadePage: FC<Props> = ({ nade }) => {
           min-height: 85vh;
         }
 
+        .nade-page-aside,
+        .nade-page-aside2 {
+          min-height: 600px;
+          max-height: 1200px;
+        }
+
         .nade-page-aside {
           margin-right: 20px;
           width: 300px;
+          display: flex;
+          align-items: flex-end;
+          flex-direction: column;
         }
 
         .nade-page-aside2 {
           margin-left: 20px;
           width: 300px;
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
         }
 
         .nade-page-content {
