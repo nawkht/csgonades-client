@@ -1,19 +1,28 @@
-import { FC, useEffect } from "react";
+import { FC, memo, useEffect } from "react";
 import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 
 const isBrowser = typeof window !== "undefined";
 
 type Props = {};
 
-export const EzoicLoader: FC<Props> = ({}) => {
+export const EzoicLoader: FC<Props> = memo(({}) => {
   const isAdmin = useIsAdmin();
   useEffect(() => {
     setTimeout(() => {
       // @ts-ignore
-      if (isAdmin && isBrowser && window.startEzoic) {
-        console.log("> Ezoic init");
+      if (isAdmin && isBrowser && ezstandalone) {
         // @ts-ignore
-        window.startEzoic();
+        console.log("> Ezoic init", ezstandalone);
+        // @ts-ignore
+        console.log("> Ezoic defines", 102);
+        // @ts-ignore
+        ezstandalone.define(102);
+        // @ts-ignore
+        console.log("> Ezoic enable", 102);
+        // @ts-ignore
+        ezstandalone.enable();
+        // @ts-ignore
+        ezstandalone.display();
       }
     }, 2000);
   }, []);
@@ -24,4 +33,4 @@ export const EzoicLoader: FC<Props> = ({}) => {
       <style jsx>{``}</style>
     </>
   );
-};
+});
