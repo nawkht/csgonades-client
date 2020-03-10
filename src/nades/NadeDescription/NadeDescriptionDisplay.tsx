@@ -9,7 +9,18 @@ type Props = {
 
 export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
   if (!value || value.length === 0) {
-    return <div>No description</div>;
+    return (
+      <>
+        <div className="no-desc">
+          <em>No description. Mouse over me and click edit.</em>
+        </div>
+        <style jsx>{`
+          .no-desc {
+            min-height: 250px;
+          }
+        `}</style>
+      </>
+    );
   }
 
   return (
@@ -25,6 +36,7 @@ export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
       <style jsx>{`
         .desc-wrap {
           min-height: 200px;
+          border: 1px solid red;
         }
       `}</style>
     </>
