@@ -36,7 +36,6 @@ export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
       <style jsx>{`
         .desc-wrap {
           min-height: 200px;
-          border: 1px solid red;
         }
       `}</style>
     </>
