@@ -21,9 +21,16 @@ export const EzoicLoader: FC<Props> = memo(({ codes }) => {
         // @ts-ignore
         ezstandalone.display();
       } else {
+        // @ts-ignore
         console.log("> Ezoic refresh");
         // @ts-ignore
+        ezstandalone.define(...codes);
+        // @ts-ignore
+        ezstandalone.display();
+        // @ts-ignore
         ezstandalone.refresh();
+        // @ts-ignore
+        console.log("> Ezoic refreshed");
       }
       setHasRun(true);
     }
