@@ -14,11 +14,16 @@ export const EzoicLoader: FC<Props> = memo(({}) => {
         ezstandalone.define(102, 101);
         // @ts-ignore
         if (!ezstandalone.enabled) {
+          console.log("> Ezoic enable");
           // @ts-ignore
           ezstandalone.enable();
+          // @ts-ignore
+          ezstandalone.display();
+        } else {
+          console.log("> Ezoic refresh");
+          // @ts-ignore
+          ezstandalone.refresh();
         }
-        // @ts-ignore
-        ezstandalone.display();
       }
     }, 1000);
 
