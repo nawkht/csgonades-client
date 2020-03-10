@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
-import { SidebarAmazon } from "../common/ads/SidebarAmazon";
-import { SidebarBanner } from "../common/ads/SideBarBanner";
+import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
+import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../common/layout/Layout2";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -55,8 +55,11 @@ export const NadePage: FC<Props> = ({ nade }) => {
         canonical={`/nades/${nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
       >
+        <EzoicLoader codes={[108, 109]} />
         <div key={`nadepage-${nade.id}`}>
-          <div className="nade-page-header-placeholder"></div>
+          <div className="nade-page-header-placeholder">
+            <EzoicPlaceHolder id={108} />
+          </div>
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           <NadeBreadcrumb nade={nade} />
           <NadeTitle
@@ -68,9 +71,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
           />
 
           <div className="nade-page">
-            <aside className="nade-page-aside">
-              <SidebarAmazon />
-            </aside>
+            <aside className="nade-page-aside"></aside>
             <div className="nade-page-content">
               <ResponsiveVideo
                 hdUrL={nade.gfycat.largeVideoUrl}
@@ -100,7 +101,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
               </div>
             </div>
             <aside className="nade-page-aside2">
-              <SidebarBanner removeAmazon={true} />
+              <EzoicPlaceHolder id={109} />
             </aside>
           </div>
 

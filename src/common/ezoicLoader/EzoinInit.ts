@@ -4,25 +4,21 @@ const hasEzoic = typeof ezstandalone !== "undefined";
 export function ezoicInit(codes: number[]) {
   if (isBrowser && hasEzoic && !ezstandalone.enabled) {
     try {
-      ezstandalone.DEBUG = true;
+      ezstandalone.DEBUG = false;
       ezstandalone.init();
       ezstandalone.define(...codes);
       ezstandalone.enable();
       ezstandalone.display();
+      console.log("> Ez init");
     } catch (error) {
       // no-op
     }
-
-    console.log("> ezstandalone enabled");
   } else if (isBrowser && hasEzoic && ezstandalone.enabled) {
     setTimeout(() => {
       try {
-        // @ts-ignore
-        ezoic.cmd.push(function() {
-          ezstandalone.define(...codes);
-          ezstandalone.refresh();
-          console.log("> ezstandalone refresh");
-        });
+        ezstandalone.define(...codes);
+        ezstandalone.refresh();
+        console.log("> Ez refresh");
       } catch (error) {
         // no-op
       }
