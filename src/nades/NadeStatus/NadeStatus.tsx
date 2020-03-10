@@ -23,19 +23,19 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
           <div>
             <h3>Waiting for approval</h3>
             <p>
-              This nade is going through approval. Come back later to see if it
-              has been approved.
-            </p>
-            <p>
-              To make the process go fast add a title, description and other
-              fields on this page.
+              To make the process go fast,
+              <br /> hold your mouse over the <strong>title</strong>,{" "}
+              <strong>description</strong>
+              <br /> and the <strong>meta panel</strong> to edit them.
             </p>
             <style jsx>{`
               h3 {
-                font-size: 18px;
+                font-size: 24px;
+                text-align: center;
               }
               p {
-                font-size: 14px;
+                font-size: 16px;
+                text-align: center;
               }
             `}</style>
           </div>
@@ -47,10 +47,12 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
             <p>{statusInfo}</p>
             <style jsx>{`
               h3 {
-                font-size: 18px;
+                font-size: 24px;
+                text-align: center;
               }
               p {
-                font-size: 14px;
+                font-size: 16px;
+                text-align: center;
               }
             `}</style>
           </div>
@@ -67,7 +69,7 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
       <div className="status-container">{statusText()}</div>
       <style jsx>{`
         .status-container {
-          max-width: 600px;
+          max-width: 400px;
           margin: 0 auto;
           background: ${statusColors.background};
           border: 1px solid ${statusColors.border};
@@ -75,6 +77,7 @@ export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
           color: ${statusColors.text};
           border-radius: ${Dimensions.BORDER_RADIUS};
           margin-top: 20px;
+          margin-bottom: 20px;
         }
       `}</style>
     </>
