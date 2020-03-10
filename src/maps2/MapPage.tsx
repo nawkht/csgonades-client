@@ -98,6 +98,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         .top-placement {
           margin-top: 30px;
           margin-bottom: 30px;
+          height: 90px;
         }
 
         .map-welcome h1 {
