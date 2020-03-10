@@ -27,11 +27,14 @@ export const NadeItemTitle: FC<Props> = ({ nade }) => {
   return (
     <>
       <div className={titleClassName}>
-        <img
-          className="nade-type-icon"
-          src={iconUrl}
-          alt={`nade icon ${nade.type}`}
-        />
+        {iconUrl && (
+          <img
+            className="nade-type-icon"
+            src={iconUrl}
+            alt={`nade icon ${nade.type}`}
+          />
+        )}
+
         <span className="title-text">{title}</span>
       </div>
       <style jsx>{`
@@ -58,11 +61,15 @@ export const NadeItemTitle: FC<Props> = ({ nade }) => {
         }
 
         .title.pending {
-          background: ${colors.WARNING};
+          border: 1px solid ${colors.WARNING};
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
         }
 
         .title.declined {
-          background: ${colors.ERROR};
+          border: 1px solid ${colors.ERROR};
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
         }
       `}</style>
     </>

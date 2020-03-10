@@ -29,8 +29,7 @@ export function iconFromType(type?: NadeType) {
     case "smoke":
       return "/icons/grenades/smoke.png";
     default:
-      console.warn("Provided unsupported type", type);
-      return "";
+      return null;
   }
 }
 
