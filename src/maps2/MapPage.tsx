@@ -62,7 +62,9 @@ export const MapPage: FC<Props> = ({ map }) => {
             <div className="placement-bottom"></div>
           </div>
           <div className="map-page-aside">
-            <div id="ezoic-pub-ad-placeholder-101"> </div>
+            <div className="sticky">
+              <div id="ezoic-pub-ad-placeholder-101"> </div>
+            </div>
           </div>
         </div>
         <MobileFilter />
@@ -86,6 +88,11 @@ export const MapPage: FC<Props> = ({ map }) => {
           );
           padding-top: 50px;
           padding-bottom: 50px;
+        }
+
+        .sticky {
+          position: sticky;
+          top: 50px;
         }
 
         .top-placement {
