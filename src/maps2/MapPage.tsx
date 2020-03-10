@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
-import { ezoicRefresh } from "../common/ezoicLoader/EzoinInit";
+import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -26,10 +26,6 @@ export const MapPage: FC<Props> = ({ map }) => {
   const { nades } = useNadesForMap(map);
   const loading = useIsLoadingNade();
 
-  useEffect(() => {
-    ezoicRefresh();
-  }, [map]);
-
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
@@ -46,7 +42,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         </div>
 
         <div className="top-placement">
-          <div id="ezoic-pub-ad-placeholder-102"></div>
+          <EzoicPlaceHolder id={102} />
         </div>
 
         <div className="map-page">
