@@ -1,20 +1,33 @@
 const isBrowser = typeof window !== "undefined";
 
+type Ezoic = typeof ezstandalone | null;
+
+const ezoic: Ezoic = ezstandalone;
+
 export function ezoicInit(codes: number[]) {
-  if (isBrowser && ezstandalone && !ezstandalone.enabled) {
-    ezstandalone.DEBUG = true;
-    ezstandalone.init();
-    ezstandalone.define(...codes);
-    ezstandalone.enable();
-    ezstandalone.display();
+  if (isBrowser && ezoic && !ezoic.enabled) {
+    try {
+      ezoic.DEBUG = true;
+      ezoic.init();
+      ezoic.define(...codes);
+      ezoic.enable();
+      ezoic.display();
+    } catch (error) {
+      // no-op
+    }
+
     console.log("> ezstandalone enabled");
-  } else if (isBrowser && ezstandalone && ezstandalone.enabled) {
+  } else if (isBrowser && ezoic && ezstandalone.enabled) {
     setTimeout(() => {
-      // @ts-ignore
-      ezstandalone.cmd.push(function() {
-        ezstandalone.refresh();
-        console.log("> ezstandalone refresh");
-      });
+      try {
+        // @ts-ignore
+        ezoic.cmd.push(function() {
+          ezoic.refresh();
+          console.log("> ezstandalone refresh");
+        });
+      } catch (error) {
+        // no-op
+      }
     }, 1000);
   }
 }
