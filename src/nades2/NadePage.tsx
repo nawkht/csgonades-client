@@ -54,82 +54,85 @@ export const NadePage: FC<Props> = ({ nade }) => {
         canonical={`/nades/${nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
       >
-        <div className="nade-page-header-placeholder"></div>
-        <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
-        <NadeBreadcrumb nade={nade} />
-        <NadeTitle
-          title={nade.title}
-          map={nade.map}
-          type={nade.type}
-          onEditNade={() => setEditTitleVisisble(true)}
-          allowEdit={allowEdit}
-        />
+        <div key={`nadepage-${nade.id}`}>
+          <div className="nade-page-header-placeholder"></div>
+          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+          <NadeBreadcrumb nade={nade} />
+          <NadeTitle
+            title={nade.title}
+            map={nade.map}
+            type={nade.type}
+            onEditNade={() => setEditTitleVisisble(true)}
+            allowEdit={allowEdit}
+          />
 
-        <div className="nade-page">
-          <aside className="nade-page-aside"></aside>
-          <div className="nade-page-content">
-            <ResponsiveVideo
-              key={nade.id}
-              hdUrL={nade.gfycat.largeVideoUrl}
-              sdUrl={nade.gfycat.smallVideoUrl}
-              hdUrlWebm={nade.gfycat.largeVideoWebm}
-              poster={nade.images.thumbnailUrl}
-              controls={isMobile ? "mobile" : "desktop"}
-            />
-            <div className="action-container">
-              <div className="empty-container"></div>
-              <div className="nade-actions">
-                <FavoriteButton
-                  showSignInWarning={() => setShowSignInWarning(true)}
-                  nade={nade}
-                />
+          <div className="nade-page">
+            <aside className="nade-page-aside"></aside>
+            <div className="nade-page-content">
+              <ResponsiveVideo
+                hdUrL={nade.gfycat.largeVideoUrl}
+                sdUrl={nade.gfycat.smallVideoUrl}
+                hdUrlWebm={nade.gfycat.largeVideoWebm}
+                poster={nade.images.thumbnailUrl}
+                controls={isMobile ? "mobile" : "desktop"}
+              />
+              <div className="action-container">
+                <div className="empty-container"></div>
+                <div className="nade-actions">
+                  <FavoriteButton
+                    showSignInWarning={() => setShowSignInWarning(true)}
+                    nade={nade}
+                  />
+                </div>
+              </div>
+
+              <NadeInfo
+                nade={nade}
+                onEditTitle={() => setEditDescisisble(true)}
+                onEditMeta={() => setEditMetaVisible(true)}
+              />
+              <div className="similar-nades">
+                <SimilarNades nade={nade} />
               </div>
             </div>
-
-            <NadeInfo
-              nade={nade}
-              onEditTitle={() => setEditDescisisble(true)}
-              onEditMeta={() => setEditMetaVisible(true)}
-            />
-            <div className="similar-nades">
-              <SimilarNades nade={nade} />
-            </div>
+            <aside className="nade-page-aside2">
+              <div className="sticky">
+                <SidebarBanner />
+              </div>
+            </aside>
           </div>
-          <aside className="nade-page-aside2" key={nade.id}>
-            <div className="sticky">
-              <SidebarBanner />
-            </div>
-          </aside>
+
+          <div key={`hidden-${nade.id}`}>
+            <SignInWarning
+              visible={showSignInWarning}
+              onDismiss={() => setShowSignInWarning(false)}
+              message="favorite"
+            />
+
+            <TitleEditor
+              nadeId={nade.id}
+              title={nade.title}
+              visisble={editTitleVisisble}
+              onClose={() => setEditTitleVisisble(false)}
+            />
+
+            <DecriptionEditor
+              visisble={editDescVisisble}
+              nade={nade}
+              onDismiss={() => setEditDescisisble(false)}
+            />
+
+            <MetaEditor
+              visisble={editMetaVisible}
+              nade={nade}
+              onDismiss={() => setEditMetaVisible(false)}
+            />
+
+            <MapPositionEditor nade={nade} />
+
+            <AdminEditor nade={nade} />
+          </div>
         </div>
-
-        <SignInWarning
-          visible={showSignInWarning}
-          onDismiss={() => setShowSignInWarning(false)}
-          message="favorite"
-        />
-
-        <TitleEditor
-          nadeId={nade.id}
-          title={nade.title}
-          visisble={editTitleVisisble}
-          onClose={() => setEditTitleVisisble(false)}
-        />
-
-        <DecriptionEditor
-          visisble={editDescVisisble}
-          nade={nade}
-          onDismiss={() => setEditDescisisble(false)}
-        />
-
-        <MetaEditor
-          visisble={editMetaVisible}
-          nade={nade}
-          onDismiss={() => setEditMetaVisible(false)}
-        />
-
-        <MapPositionEditor key={nade.id} nade={nade} />
-
-        <AdminEditor nade={nade} />
       </Layout2>
       <style jsx>{`
         .sticky {
