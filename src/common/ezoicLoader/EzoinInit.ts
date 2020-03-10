@@ -13,3 +13,10 @@ export function ezoicInit(codes: number[]) {
     }, 1000);
   }
 }
+
+export function ezoicRefresh() {
+  if (isBrowser && ezstandalone) {
+    ezstandalone.refresh();
+    console.log("> Ezoic refresh");
+  }
+}

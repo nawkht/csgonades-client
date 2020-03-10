@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
+import { ezoicRefresh } from "../common/ezoicLoader/EzoinInit";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -24,6 +25,10 @@ export const MapPage: FC<Props> = ({ map }) => {
   const [showLoginWarning, setShowLoginWarning] = useState(false);
   const { nades } = useNadesForMap(map);
   const loading = useIsLoadingNade();
+
+  useEffect(() => {
+    ezoicRefresh();
+  }, [map]);
 
   return (
     <>
