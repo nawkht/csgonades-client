@@ -13,7 +13,7 @@ export const EzoicLoader: FC<Props> = memo(({}) => {
         if (!ezstandalone.enabled) {
           console.log("> Ezoic enable");
           // @ts-ignore
-          ezstandalone.define(102, 101);
+          ezstandalone.define(102, 101, 104);
           // @ts-ignore
           ezstandalone.enable();
           // @ts-ignore

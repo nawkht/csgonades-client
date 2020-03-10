@@ -56,7 +56,9 @@ export const MapPage: FC<Props> = ({ map }) => {
               emptyMessage={`No nades found. Sign in and add something! :)`}
             />
 
-            <div className="placement-bottom"></div>
+            <div className="placement-bottom">
+              <div id="ezoic-pub-ad-placeholder-104"> </div>
+            </div>
           </div>
           <div className="map-page-aside">
             <div className="sticky">
