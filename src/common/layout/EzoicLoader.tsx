@@ -18,21 +18,13 @@ export const EzoicLoader: FC<Props> = memo(({}) => {
           ezstandalone.enable();
           // @ts-ignore
           ezstandalone.display();
-          console.log({
-            // @ts-ignore
-            ezstandalone,
-          });
         } else {
           console.log("> Ezoic refresh");
           // @ts-ignore
           ezstandalone.refresh();
-          console.log({
-            // @ts-ignore
-            ezstandalone,
-          });
         }
       }
-    }, 1000);
+    }, 2000);
     return () => {
       clearTimeout(executeEzoic);
     };
