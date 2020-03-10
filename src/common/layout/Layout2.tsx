@@ -3,6 +3,7 @@ import { FC, memo, useEffect, useMemo } from "react";
 // @ts-ignore
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
+import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -13,6 +14,8 @@ import { AdminLink } from "./components/AdminLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
+const isBrowser = typeof window !== "undefined";
+
 type Props = {
   title?: string;
   description?: string;
@@ -22,6 +25,7 @@ type Props = {
 
 export const Layout2: FC<Props> = memo(
   ({ title, description, canonical, metaThumbNail, children }) => {
+    const isAdmin = useIsAdmin();
     const { setCurrentRoute } = useNavigationState();
     const { colors } = useTheme();
     const { closeNav, isNavOpen } = useNavigation();
@@ -58,6 +62,10 @@ export const Layout2: FC<Props> = memo(
     return (
       <>
         <Head>
+          {isAdmin && isBrowser && (
+            <script type="text/javascript" src="/scripts/ezoic.js"></script>
+          )}
+
           <title>{pageTitle}</title>
           <meta name="description" content={pageDescription} />
           <meta
