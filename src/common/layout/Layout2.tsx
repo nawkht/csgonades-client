@@ -42,7 +42,8 @@ export const Layout2: FC<Props> = memo(
         const location = window.location.pathname + window.location.search;
         setCurrentRoute(location, title);
         // @ts-ignore
-        if (ezstandalone) {
+        if (ezstandalone && ezstandalone.enabled) {
+          // Only refresh ads if not first init
           // @ts-ignore
           ezstandalone.refresh();
         }
