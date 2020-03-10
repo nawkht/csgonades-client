@@ -39,7 +39,9 @@ export const MapPage: FC<Props> = ({ map }) => {
           </PageCentralize>
         </div>
 
-        <div className="top-placement"></div>
+        <div className="top-placement">
+          <div id="ezoic-pub-ad-placeholder-102"> </div>
+        </div>
 
         <div className="map-page">
           <div className="filter">
