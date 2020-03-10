@@ -1,28 +1,24 @@
 const isBrowser = typeof window !== "undefined";
 
-type Ezoic = typeof ezstandalone | null;
-
-const ezoic: Ezoic = ezstandalone;
-
 export function ezoicInit(codes: number[]) {
-  if (isBrowser && ezoic && !ezoic.enabled) {
+  if (isBrowser && ezstandalone && !ezstandalone.enabled) {
     try {
-      ezoic.DEBUG = true;
-      ezoic.init();
-      ezoic.define(...codes);
-      ezoic.enable();
-      ezoic.display();
+      ezstandalone.DEBUG = true;
+      ezstandalone.init();
+      ezstandalone.define(...codes);
+      ezstandalone.enable();
+      ezstandalone.display();
     } catch (error) {
       // no-op
     }
 
     console.log("> ezstandalone enabled");
-  } else if (isBrowser && ezoic && ezstandalone.enabled) {
+  } else if (isBrowser && ezstandalone && ezstandalone.enabled) {
     setTimeout(() => {
       try {
         // @ts-ignore
         ezoic.cmd.push(function() {
-          ezoic.refresh();
+          ezstandalone.refresh();
           console.log("> ezstandalone refresh");
         });
       } catch (error) {
