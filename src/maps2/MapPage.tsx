@@ -28,7 +28,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        {map === "cobblestone" && <EzoicLoader />}
+        <EzoicLoader />
 
         <div className="map-welcome">
           <PageCentralize>
