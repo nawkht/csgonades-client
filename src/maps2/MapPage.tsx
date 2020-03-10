@@ -60,12 +60,12 @@ export const MapPage: FC<Props> = ({ map }) => {
             />
 
             <div className="placement-bottom">
-              <div id="ezoic-pub-ad-placeholder-104"> </div>
+              <EzoicPlaceHolder id={104} />
             </div>
           </div>
           <div className="map-page-aside">
             <div className="sticky">
-              <div id="ezoic-pub-ad-placeholder-101"> </div>
+              <EzoicPlaceHolder id={101} />
             </div>
           </div>
         </div>
