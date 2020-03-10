@@ -19,8 +19,6 @@ export const EzoicLoader: FC<Props> = memo(({}) => {
         }
         // @ts-ignore
         ezstandalone.display();
-        // @ts-ignore
-        ezstandalone.refresh();
       }
     }, 1000);
 
