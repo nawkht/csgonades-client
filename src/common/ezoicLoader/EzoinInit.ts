@@ -9,14 +9,8 @@ export function ezoicInit(codes: number[]) {
   } else if (isBrowser && ezstandalone && ezstandalone.enabled) {
     setTimeout(() => {
       console.log("> Ezoic refresh");
+      //ezstandalone.loadMore();
       ezstandalone.refresh();
     }, 1000);
-  }
-}
-
-export function ezoicRefresh() {
-  if (isBrowser && ezstandalone) {
-    ezstandalone.refresh();
-    console.log("> Ezoic refresh");
   }
 }
