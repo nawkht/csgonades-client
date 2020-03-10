@@ -2,8 +2,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 declare namespace ezstandalone {
+  let useHost: boolean;
   let enabled: boolean;
+  let scriptsLoaded: boolean;
   let DEBUG: boolean;
+  let hasDisplayedAds: boolean;
+  let initialized: boolean;
+
   function define(...args: any): void;
   function enable(): void;
   function display(): void;
