@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { EzoicLoader } from "../common/layout/EzoicLoader";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -28,8 +27,6 @@ export const MapPage: FC<Props> = ({ map }) => {
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        <EzoicLoader />
-
         <div className="map-welcome">
           <PageCentralize>
             <h1>

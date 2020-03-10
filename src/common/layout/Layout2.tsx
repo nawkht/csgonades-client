@@ -12,6 +12,7 @@ import { ToastList } from "../toast/ToastList";
 import { AdminLink } from "./components/AdminLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { EzoicLoader } from "./EzoicLoader";
 
 type Props = {
   title?: string;
@@ -37,12 +38,6 @@ export const Layout2: FC<Props> = memo(
       const delayedAnalytics = setTimeout(() => {
         const location = window.location.pathname + window.location.search;
         setCurrentRoute(location, title);
-        // @ts-ignore
-        if (ezstandalone && ezstandalone.enabled) {
-          // Only refresh ads if not first init
-          // @ts-ignore
-          ezstandalone.refresh();
-        }
       }, 500);
       return () => {
         if (delayedAnalytics) {
@@ -91,6 +86,8 @@ export const Layout2: FC<Props> = memo(
             <meta property="og:image" content={metaThumbNail} />
           )}
         </Head>
+
+        <EzoicLoader />
 
         <Header />
 
