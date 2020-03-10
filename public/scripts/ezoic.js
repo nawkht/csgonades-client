@@ -3,6 +3,8 @@
 //catch errors and do nothing.
 window.onerror = function() {};
 
+var ezpaq = new EzPaq();
+
 function EzPaq() {
   this.content_hash = "";
   this.content_orig = "";
@@ -301,39 +303,43 @@ function EzPaq() {
   };
 }
 
-try {
-  if (typeof ezpaq == "undefined") {
-    //console.log('loading css');
+function startEzoic() {
+  try {
+    if (typeof ezpaq == "undefined") {
+      //console.log('loading css');
 
-    css = "";
-    if (document.addEventListener) {
-      css = "body{display:none}";
-    }
-
-    var ezoTempStyle = document.createElement("style");
-    ezoTempStyle.setAttribute("type", "text/css");
-    if (ezoTempStyle.styleSheet && !ezoTempStyle.sheet)
-      ezoTempStyle.styleSheet.cssText = css;
-    else ezoTempStyle.appendChild(document.createTextNode(css));
-    document.getElementsByTagName("head")[0].appendChild(ezoTempStyle);
-
-    var ezpaq = new EzPaq();
-    ezpaq.DoWork();
-
-    //wait for this original page to load
-    var readyStateCheckInterval = setInterval(function() {
-      if (document.readyState === "complete") {
-        clearInterval(readyStateCheckInterval);
-        //var ezpaq = new EzPaq();
-        //ezpaq.DoWork();
-        //console.log('leave alone: '+ezpaq.leave_alone);
-        if (ezpaq.leave_alone != true) {
-          ezpaq.get_content();
-        } else {
-          //console.log('showing page');
-          ezpaq.unhide_page();
-        }
+      css = "";
+      if (document.addEventListener) {
+        css = "body{display:none}";
       }
-    }, 10);
-  }
-} catch (err) {}
+
+      var ezoTempStyle = document.createElement("style");
+      ezoTempStyle.setAttribute("type", "text/css");
+      if (ezoTempStyle.styleSheet && !ezoTempStyle.sheet)
+        ezoTempStyle.styleSheet.cssText = css;
+      else ezoTempStyle.appendChild(document.createTextNode(css));
+      document.getElementsByTagName("head")[0].appendChild(ezoTempStyle);
+
+      var ezpaq = new EzPaq();
+      ezpaq.DoWork();
+
+      //wait for this original page to load
+      var readyStateCheckInterval = setInterval(function() {
+        if (document.readyState === "complete") {
+          clearInterval(readyStateCheckInterval);
+          //var ezpaq = new EzPaq();
+          //ezpaq.DoWork();
+          //console.log('leave alone: '+ezpaq.leave_alone);
+          if (ezpaq.leave_alone != true) {
+            ezpaq.get_content();
+          } else {
+            //console.log('showing page');
+            ezpaq.unhide_page();
+          }
+        }
+      }, 10);
+    }
+  } catch (err) {}
+}
+
+window.startEzoic = startEzoic;
