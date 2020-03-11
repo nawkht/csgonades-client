@@ -29,20 +29,20 @@ export const MapPage: FC<Props> = ({ map }) => {
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        <EzoicLoader codes={[102, 104, 101, 111]} />
+        <EzoicLoader codes={[112, 104, 101, 111]} />
         <div className="map-welcome">
           <PageCentralize>
-            <h1>
-              Find the best smokes, flashbangs, molotovs and grenades for{" "}
-              {capitalize(map)}.
-              <br />
-              Something missing? Sign in, and add a nade to help everyone out.
-            </h1>
+            <div className="map-welcome-wrap">
+              <h1>
+                Find the best smokes, flashbangs, molotovs
+                <br /> and grenades for {capitalize(map)}. Something missing?
+                <br /> Sign in, and add a nade to help everyone out.
+              </h1>
+              <div className="top-placement">
+                <EzoicPlaceHolder id={112} />
+              </div>
+            </div>
           </PageCentralize>
-        </div>
-
-        <div className="top-placement">
-          <EzoicPlaceHolder id={102} />
         </div>
 
         <div className="map-page">
@@ -93,12 +93,16 @@ export const MapPage: FC<Props> = ({ map }) => {
             ${colors.jumboGradientEnd} 66.89%
           );
           padding-top: 40px;
+          padding-bottom: 40px;
+          margin-bottom: 40px;
         }
 
         .map-welcome h1 {
           font-size: 24px;
           color: ${colors.TEXT};
           font-weight: 300;
+          flex: 1;
+          margin: 0;
         }
 
         .map-page {
@@ -141,10 +145,15 @@ export const MapPage: FC<Props> = ({ map }) => {
           top: 50px;
         }
 
+        .map-welcome-wrap {
+          display: flex;
+          align-items: center;
+        }
+
         .top-placement {
-          margin-top: 10px;
-          margin-bottom: 20px;
-          height: 90px;
+          width: 500px;
+          display: flex;
+          justify-content: space-around;
         }
 
         .placement-bottom {
@@ -162,6 +171,14 @@ export const MapPage: FC<Props> = ({ map }) => {
           .map-page {
             padding-left: 20px;
             padding-right: 20px;
+          }
+
+          .map-welcome-wrap {
+            flex-direction: column;
+          }
+
+          .top-placement {
+            width: 100%;
           }
         }
       `}</style>
