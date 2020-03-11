@@ -201,9 +201,11 @@ export const NadePage: FC<Props> = ({ nade }) => {
         }
 
         .action-container {
-          margin-top: 20px;
-          margin-bottom: 20px;
           display: flex;
+          max-width: 850px;
+          margin: 0 auto;
+          padding-top: 20px;
+          padding-bottom: 10px;
         }
 
         .empty-container {

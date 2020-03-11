@@ -51,6 +51,8 @@ export const NadeInfo: FC<Props> = ({ nade, onEditTitle, onEditMeta }) => {
           background: ${colors.boxBg};
           border-radius: 5px;
           overflow: hidden;
+          max-width: 850px;
+          margin: 0 auto;
         }
 
         .nade-desc-meta {
