@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC, memo } from "react";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { NadeLight } from "../../models/Nade/Nade";
@@ -16,20 +17,19 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
 
   return (
     <>
-      {/*<Link href={`/nades/[nade]`} as={`/nades/${nade.id}`}>*/}
-      <a
-        href={`/nades/${nade.id}`}
-        className={"nadebox"}
-        style={{ display: "inline-block" }}
-        onClick={onItemClick}
-      >
-        <NadeItemTitle nade={nade} />
-        <div className="video">
-          <GfycatThumbnail nade={nade} />
-        </div>
-        <NadeStats nade={nade} />
-      </a>
-      {/*</Link>*/}
+      <Link href={`/nades/[nade]`} as={`/nades/${nade.id}`}>
+        <a
+          className={"nadebox"}
+          style={{ display: "inline-block" }}
+          onClick={onItemClick}
+        >
+          <NadeItemTitle nade={nade} />
+          <div className="video">
+            <GfycatThumbnail nade={nade} />
+          </div>
+          <NadeStats nade={nade} />
+        </a>
+      </Link>
       <style jsx>{`
         .nadebox {
           background: ${colors.DP01};
