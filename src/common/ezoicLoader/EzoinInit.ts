@@ -5,7 +5,7 @@ export function ezoicInit() {
   if (isBrowser && hasEzoic && !ezstandalone.enabled) {
     try {
       ezstandalone.DEBUG = false;
-      ezstandalone.define(104, 101, 102, 108, 109);
+      ezstandalone.define(104, 101, 102, 108, 109, 106);
       ezstandalone.enable();
       ezstandalone.display();
       console.log("> Ez init");

@@ -88,8 +88,8 @@ export const MapPage: FC<Props> = ({ map }) => {
             ${colors.jumboGradientStart} 33.44%,
             ${colors.jumboGradientEnd} 66.89%
           );
-          padding-top: 50px;
-          padding-bottom: 50px;
+          padding-top: 40px;
+          padding-bottom: 40px;
         }
 
         .sticky {
@@ -98,8 +98,8 @@ export const MapPage: FC<Props> = ({ map }) => {
         }
 
         .top-placement {
-          margin-top: 30px;
-          margin-bottom: 30px;
+          margin-top: 10px;
+          margin-bottom: 20px;
           height: 90px;
         }
 
@@ -113,7 +113,6 @@ export const MapPage: FC<Props> = ({ map }) => {
           max-width: 1660px;
           display: flex;
           margin: 0 auto;
-          padding-bottom: 100px;
           min-height: 80vh;
         }
 
@@ -128,7 +127,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         .map-page-aside {
           width: 200px;
           margin-left: 30px;
-          max-height: 1200px;
+          max-height: 150vh;
           min-height: 600px;
         }
 
@@ -141,6 +140,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         .placement-bottom {
           margin-top: 30px;
           margin-bottom: 30px;
+          min-height: 200px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

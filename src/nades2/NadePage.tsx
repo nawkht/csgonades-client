@@ -71,7 +71,9 @@ export const NadePage: FC<Props> = ({ nade }) => {
           />
 
           <div className="nade-page">
-            <aside className="nade-page-aside"></aside>
+            <aside className="nade-page-aside">
+              <EzoicPlaceHolder id={106} />
+            </aside>
             <div className="nade-page-content">
               <ResponsiveVideo
                 hdUrL={nade.gfycat.largeVideoUrl}
@@ -143,9 +145,16 @@ export const NadePage: FC<Props> = ({ nade }) => {
           min-height: 600px;
         }
 
+        .nade-page-aside,
+        .nade-page-aside2,
         .nade-page-header-placeholder {
-          margin-top: 20px;
-          margin-bottom: 30px;
+          background: #f9f9f9;
+        }
+
+        .nade-page-header-placeholder {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          height: 50px;
         }
 
         .nade-page {
