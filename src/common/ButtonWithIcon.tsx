@@ -29,15 +29,24 @@ export const ButtonWithIcon: FC<Props> = memo(
             cursor: pointer;
             border: none;
             outline: none;
+            appearance: none;
             background: ${backgroundColor};
             border-radius: 5px;
             display: flex;
-            transition: background 0.15s;
+            transition: background 0.15s, transform 0.15s;
             align-items: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
           }
 
           .btn:hover {
             background: ${LightenDarkenColor(backgroundColor, -10)};
+            transform: scale(1.02);
+          }
+
+          .btn:hover .btn-icon {
+            background: ${LightenDarkenColor(backgroundColor, -20)};
           }
 
           .loading {
@@ -59,12 +68,13 @@ export const ButtonWithIcon: FC<Props> = memo(
             width: 40px;
             height: 40px;
             border-right: 1px solid ${LightenDarkenColor(backgroundColor, -20)};
+            background: ${LightenDarkenColor(backgroundColor, -10)};
+            transition: background 0.15s;
           }
 
           .btn-icon-fa {
             position: relative;
             top: 2px;
-            left: -4px;
           }
 
           .btn-label {
@@ -74,6 +84,7 @@ export const ButtonWithIcon: FC<Props> = memo(
             font-size: 16px;
             text-align: center;
             width: 100%;
+            font-weight: 400;
           }
         `}</style>
       </>

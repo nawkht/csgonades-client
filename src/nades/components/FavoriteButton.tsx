@@ -46,7 +46,7 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
       <div className="favorite-wrapper">
         <ButtonWithIcon
           icon={<FaStar />}
-          backgroundColor="#fac800"
+          backgroundColor="#d4a900"
           value={favoriteText}
           onClick={onFavoriteClick}
           loading={isFavoriteInProgress}
