@@ -58,9 +58,6 @@ export const NadePage: FC<Props> = ({ nade }) => {
       >
         <EzoicLoader codes={[108, 106, 107, 109]} />
         <div key={`nadepage-${nade.id}`}>
-          <div className="nade-page-header-placeholder">
-            <EzoicPlaceHolder id={108} />
-          </div>
           <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           <NadeBreadcrumb nade={nade} />
           <NadeTitle
@@ -83,6 +80,10 @@ export const NadePage: FC<Props> = ({ nade }) => {
                 poster={nade.images.thumbnailUrl}
                 controls={isMobile ? "mobile" : "desktop"}
               />
+
+              <div className="nade-page-header-placeholder">
+                <EzoicPlaceHolder id={108} />
+              </div>
 
               <div className="nade-info-container">
                 <div className="nade-info-empty"></div>
@@ -150,7 +151,6 @@ export const NadePage: FC<Props> = ({ nade }) => {
       <style jsx>{`
         .nade-info-container {
           display: flex;
-          margin-top: 30px;
         }
 
         .nade-info-actions {
@@ -180,8 +180,8 @@ export const NadePage: FC<Props> = ({ nade }) => {
         }
 
         .nade-page-header-placeholder {
-          margin-top: 10px;
-          margin-bottom: 10px;
+          margin-top: 20px;
+          margin-bottom: 20px;
           height: 60px;
         }
 
