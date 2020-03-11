@@ -60,7 +60,6 @@ export const FrontpageActions: FC<Props> = ({}) => {
         .actions-wrapper {
           margin: 0 auto;
           max-width: 700px;
-          margin-bottom: 100px;
           display: flex;
           justify-content: space-between;
           align-items: center;

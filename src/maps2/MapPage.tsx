@@ -29,7 +29,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        <EzoicLoader codes={[102, 104, 101]} />
+        <EzoicLoader codes={[102, 104, 101, 111]} />
         <div className="map-welcome">
           <PageCentralize>
             <h1>
@@ -58,16 +58,20 @@ export const MapPage: FC<Props> = ({ map }) => {
               nades={nades}
               emptyMessage={`No nades found. Sign in and add something! :)`}
             />
-
-            <div className="placement-bottom">
-              <EzoicPlaceHolder id={104} />
-            </div>
           </div>
           <div className="map-page-aside">
-            <div className="sticky">
+            <div className="placement-top-sidebar">
               <EzoicPlaceHolder id={101} />
             </div>
+
+            <div className="placement-sticky-siderbar">
+              <EzoicPlaceHolder id={111} />
+            </div>
+            <div className="placement-empty"></div>
           </div>
+        </div>
+        <div className="placement-bottom">
+          <EzoicPlaceHolder id={104} />
         </div>
         <MobileFilter />
         <MapView
@@ -89,18 +93,6 @@ export const MapPage: FC<Props> = ({ map }) => {
             ${colors.jumboGradientEnd} 66.89%
           );
           padding-top: 40px;
-          padding-bottom: 40px;
-        }
-
-        .sticky {
-          position: sticky;
-          top: 50px;
-        }
-
-        .top-placement {
-          margin-top: 10px;
-          margin-bottom: 20px;
-          height: 90px;
         }
 
         .map-welcome h1 {
@@ -113,7 +105,7 @@ export const MapPage: FC<Props> = ({ map }) => {
           max-width: 1660px;
           display: flex;
           margin: 0 auto;
-          min-height: 80vh;
+          min-height: 70vh;
         }
 
         .filter {
@@ -124,22 +116,40 @@ export const MapPage: FC<Props> = ({ map }) => {
           align-items: flex-end;
         }
 
-        .map-page-aside {
-          width: 200px;
-          margin-left: 30px;
-          max-height: 150vh;
-          min-height: 600px;
-        }
-
         .nade-list {
           flex: 1;
           position: relative;
           max-width: 1200px;
         }
 
+        .map-page-aside {
+          width: 200px;
+          margin-left: 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .placement-top-sidebar {
+          min-height: 600px;
+        }
+
+        .placement-sticky-siderbar {
+          margin-top: 50%;
+          min-height: 600px;
+          position: sticky;
+          top: 50px;
+        }
+
+        .top-placement {
+          margin-top: 10px;
+          margin-bottom: 20px;
+          height: 90px;
+        }
+
         .placement-bottom {
           margin-top: 30px;
-          margin-bottom: 30px;
+          margin-bottom: 100px;
           min-height: 200px;
         }
 
