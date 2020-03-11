@@ -11,7 +11,7 @@ import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
-import { MapView } from "./mapview/MapView";
+import { MapView } from "./mapview2/MapView";
 import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 

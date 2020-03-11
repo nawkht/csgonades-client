@@ -162,7 +162,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
         .nade-page-header-placeholder {
           margin-top: 10px;
           margin-bottom: 10px;
-          height: 50px;
+          height: 60px;
         }
 
         .nade-page {
