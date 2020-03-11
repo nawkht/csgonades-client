@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { FaSpinner, FaStar } from "react-icons/fa";
-import { Dimensions } from "../../constants/Constants";
+import { FaStar } from "react-icons/fa";
+import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { Nade } from "../../models/Nade/Nade";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import {
@@ -44,88 +44,17 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
   return (
     <>
       <div className="favorite-wrapper">
-        <button className="favorite-btn" onClick={onFavoriteClick}>
-          {isFavoriteInProgress && (
-            <div className="loading">
-              <FaSpinner style={{ position: "relative", top: 2 }} />
-            </div>
-          )}
-
-          {!isFavoriteInProgress && (
-            <>
-              <span className="icon">
-                <FaStar style={{ position: "relative", top: 2 }} />
-              </span>
-              <span className="label">{favoriteText}</span>
-            </>
-          )}
-        </button>
+        <ButtonWithIcon
+          icon={<FaStar />}
+          backgroundColor="#fac800"
+          value={favoriteText}
+          onClick={onFavoriteClick}
+          loading={isFavoriteInProgress}
+        />
       </div>
       <style jsx>{`
         .favorite-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-        }
-
-        .favorite-btn {
-          width: 150px;
-          cursor: pointer;
-          display: inline-block;
-          border: none;
-          outline: none;
-          background: #fac800;
-          border-radius: 5px;
-          display: flex;
-          align-items: center;
-          transition: background 0.15s;
-        }
-
-        .favorite-btn:hover {
-          background: #e3b600;
-        }
-
-        .icon {
-          display: block;
-          font-size: 18px;
-          color: white;
-          padding-top: 10px;
-          padding-bottom: 10px;
-          padding-left: 10px;
-          padding-right: 15px;
-          height: 100%;
-          border-right: 1px solid #f0c000;
-        }
-
-        .label {
-          display: block;
-          color: white;
-          padding-left: 10px;
-          font-size: 16px;
-          text-align: center;
-          width: 100%;
-          padding-right: 5px;
-        }
-
-        .loading {
-          display: block;
-          width: 100%;
-          color: white;
-          padding: 10px 50px;
-          font-size: 20px;
-          animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .favorite-wrapper {
-            padding-right: 20px;
-          }
+          margin-bottom: 20px;
         }
       `}</style>
     </>

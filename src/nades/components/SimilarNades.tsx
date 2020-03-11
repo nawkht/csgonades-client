@@ -23,9 +23,6 @@ export const SimilarNades: FC<Props> = ({ nade }) => {
         <NadeListGrid nades={similarNades} />
       </div>
       <style jsx>{`
-        .similar {
-        }
-
         h3 {
           font-weight: 300;
           color: ${colors.TEXT};

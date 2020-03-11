@@ -17,6 +17,7 @@ import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
 import { NadeInfo } from "./components/NadeInfo";
 import { NadeStatus } from "./components/NadeStatus";
 import { NadeTitle } from "./components/NadeTitle";
+import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { SimilarNades } from "./components/SimilarNades";
 import { DecriptionEditor } from "./editcontainers/DescriptionEditor";
 import { MetaEditor } from "./editcontainers/MetaEditor";
@@ -82,21 +83,24 @@ export const NadePage: FC<Props> = ({ nade }) => {
                 poster={nade.images.thumbnailUrl}
                 controls={isMobile ? "mobile" : "desktop"}
               />
-              <div className="action-container">
-                <div className="empty-container"></div>
-                <div className="nade-actions">
+
+              <div className="nade-info-container">
+                <div className="nade-info-empty"></div>
+                <div className="nade-info-description">
+                  <NadeInfo
+                    nade={nade}
+                    onEditTitle={() => setEditDescisisble(true)}
+                    onEditMeta={() => setEditMetaVisible(true)}
+                  />
+                </div>
+                <div className="nade-info-actions">
                   <FavoriteButton
                     showSignInWarning={() => setShowSignInWarning(true)}
                     nade={nade}
                   />
+                  <ReportNadeButton nadeId={nade.id} />
                 </div>
               </div>
-
-              <NadeInfo
-                nade={nade}
-                onEditTitle={() => setEditDescisisble(true)}
-                onEditMeta={() => setEditMetaVisible(true)}
-              />
 
               <div className="placement-under-desc">
                 <EzoicPlaceHolder id={107} />
@@ -144,6 +148,22 @@ export const NadePage: FC<Props> = ({ nade }) => {
         </div>
       </Layout2>
       <style jsx>{`
+        .nade-info-container {
+          display: flex;
+          margin-top: 30px;
+        }
+
+        .nade-info-actions {
+          width: 160px;
+        }
+
+        .nade-info-description {
+          margin-left: 160px;
+          padding-left: 30px;
+          padding-right: 30px;
+          flex: 1;
+        }
+
         .sticky {
           max-height: 1200px;
           min-height: 600px;
@@ -214,17 +234,28 @@ export const NadePage: FC<Props> = ({ nade }) => {
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .nade-page {
-          }
-
           .nade-page-aside,
           .nade-page-aside2 {
             display: none;
           }
 
           .similar-nades {
-            margin-left: 20px;
-            margin-right: 20px;
+            margin-left: 30px;
+            margin-right: 30px;
+          }
+
+          .nade-info-container {
+            flex-direction: column;
+          }
+
+          .nade-info-description {
+            margin-left: 0;
+          }
+
+          .nade-info-actions {
+            flex-direction: column;
+            width: 100%;
+            padding: 30px;
           }
         }
       `}</style>

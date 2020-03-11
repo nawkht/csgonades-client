@@ -1,7 +1,9 @@
 import { FC, useState } from "react";
+import { FaFlag } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Button, Form, TextArea } from "semantic-ui-react";
 import { ReportApi } from "../../api/ReportApi";
+import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { CSGNModal } from "../../common/CSGNModal";
 import { ReportAddDto } from "../../models/Report";
 import { addNotificationActionThunk } from "../../store/ToastStore/ToastThunks";
@@ -10,7 +12,7 @@ type Props = {
   nadeId: string;
 };
 
-export const ReportButton: FC<Props> = ({ nadeId }) => {
+export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
   const dispatch = useDispatch();
   const [showReportForm, setShowReportForm] = useState(false);
   const [reportMsg, setReportMsg] = useState("");
@@ -38,14 +40,12 @@ export const ReportButton: FC<Props> = ({ nadeId }) => {
 
   return (
     <>
-      <div className="report-btn-container">
-        <Button
-          fluid
+      <div className="report-button-wrapper">
+        <ButtonWithIcon
+          icon={<FaFlag />}
+          backgroundColor="#ab1309"
+          value={"Report"}
           onClick={onToggle}
-          content="Report"
-          icon="flag"
-          labelPosition="left"
-          color="red"
         />
       </div>
       <CSGNModal
@@ -53,25 +53,27 @@ export const ReportButton: FC<Props> = ({ nadeId }) => {
         onDismiss={onToggle}
         title="Report nade"
       >
-        <p>Explain why you are reporting this nade.</p>
-        <Form onSubmit={onSendReport}>
-          <Form.Field>
-            <label>Reason</label>
-            <TextArea
-              placeholder="Report reason..."
-              value={reportMsg}
-              rows={10}
-              onChange={e => setReportMsg(e.currentTarget.value)}
-            />
-          </Form.Field>
-          <Button positive type="submit">
-            Send
-          </Button>
-        </Form>
+        <div className="report-nade">
+          <p>Explain why you are reporting this nade.</p>
+          <Form onSubmit={onSendReport}>
+            <Form.Field>
+              <label>Reason</label>
+              <TextArea
+                placeholder="Report reason..."
+                value={reportMsg}
+                rows={10}
+                onChange={e => setReportMsg(e.currentTarget.value)}
+              />
+            </Form.Field>
+            <Button positive type="submit">
+              Send
+            </Button>
+          </Form>
+        </div>
       </CSGNModal>
       <style jsx>{`
-        .report-btn-container {
-          width: 48%;
+        .report-nade {
+          min-width: 40vw;
         }
       `}</style>
     </>
