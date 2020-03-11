@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FC } from "react";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
@@ -17,11 +16,9 @@ export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
   return (
     <>
       <li className={selected ? "nav-selected" : ""}>
-        <Link href={`/maps/[map]`} as={`/maps/${mapName}`}>
-          <a>
-            <span className="nav-text">{capitalize(mapName)}</span>
-          </a>
-        </Link>
+        <a href={`/maps/${mapName}`}>
+          <span className="nav-text">{capitalize(mapName)}</span>
+        </a>
       </li>
       <style jsx>{`
         li a {
