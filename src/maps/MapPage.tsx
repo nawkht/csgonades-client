@@ -1,15 +1,19 @@
-import { FC } from "react";
-import { SidebarBanner } from "../common/ads/SideBarBanner";
+import { FC, useState } from "react";
+import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
+import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../common/layout/Layout2";
 import { NadeListGrid } from "../common/NadeListGrid";
+import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { useNadesForMap } from "../store/NadeStore/NadeHooks";
 import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
-import { MapView } from "./MapView/MapView";
-import { Filters } from "./NadeFilter/Filters";
+import { SignInWarning } from "./components/SignInWarning";
+import { MapView } from "./mapview/MapView";
+import { MobileFilter } from "./mobilefilter/MobilteFilter";
+import { NadeFilter } from "./nadefilter/NadeFilter";
 
 type Props = {
   map: CsgoMap;
@@ -17,110 +21,167 @@ type Props = {
 
 export const MapPage: FC<Props> = ({ map }) => {
   const { colors } = useTheme();
+  const [mapViewVisible, setMapViewVisisble] = useState(false);
+  const [showLoginWarning, setShowLoginWarning] = useState(false);
   const { nades } = useNadesForMap(map);
   const loading = useIsLoadingNade();
 
   return (
-    <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-      <Filters map={map} />
-
-      <div className="map-page-wrapper">
-        <div className="nade-list">
-          <NadeListGrid
-            loading={loading}
-            nades={nades}
-            emptyMessage={`No nades found. Sign in and add something! :)`}
-          />
+    <>
+      <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
+        <EzoicLoader codes={[112, 104, 101, 111]} />
+        <div className="map-welcome">
+          <PageCentralize>
+            <div className="map-welcome-wrap">
+              <h1>
+                Find the best smokes, flashbangs, molotovs
+                <br /> and grenades for {capitalize(map)}. Something missing?
+                <br /> Sign in, and add a nade to help everyone out.
+              </h1>
+              <div className="top-placement">
+                <EzoicPlaceHolder id={112} />
+              </div>
+            </div>
+          </PageCentralize>
         </div>
 
-        <div className="a-browser">
-          <div className="map-description">
-            <h3>{capitalize(map)}</h3>
-            <p>
-              Find the best smokes, molotovs, flashbangs and he-grenades for{" "}
-              {capitalize(map)}.<br /> If you know a nade that is missing, sign
-              in and add it! 🎉😎💯
-            </p>
+        <div className="map-page">
+          <div className="filter">
+            <NadeFilter
+              showSingInWarning={() => setShowLoginWarning(true)}
+              showMapView={() => setMapViewVisisble(true)}
+            />
           </div>
-          <SidebarBanner />
+          <div className="nade-list">
+            <NadeListGrid
+              loading={loading}
+              nades={nades}
+              emptyMessage={`No nades found. Sign in and add something! :)`}
+            />
+          </div>
+          <div className="map-page-aside">
+            <div className="placement-top-sidebar">
+              <EzoicPlaceHolder id={101} />
+            </div>
+
+            <div className="placement-sticky-siderbar">
+              <EzoicPlaceHolder id={111} />
+            </div>
+            <div className="placement-empty"></div>
+          </div>
         </div>
-      </div>
-
-      <MapView map={map} />
-
+        <div className="placement-bottom">
+          <EzoicPlaceHolder id={104} />
+        </div>
+        <MobileFilter />
+        <MapView
+          closeMapView={() => setMapViewVisisble(false)}
+          visible={mapViewVisible}
+          map={map}
+        />
+        <SignInWarning
+          visible={showLoginWarning}
+          onDismiss={() => setShowLoginWarning(false)}
+          message="filter"
+        />
+      </Layout2>
       <style jsx>{`
-        .map-page-wrapper {
-          margin-left: 36px;
-          margin-right: calc(${Dimensions.GUTTER_SIZE} + 200px);
+        .map-welcome {
+          background: linear-gradient(
+            236.51deg,
+            ${colors.jumboGradientStart} 33.44%,
+            ${colors.jumboGradientEnd} 66.89%
+          );
+          padding-top: 40px;
+          padding-bottom: 40px;
+          margin-bottom: 40px;
         }
 
-        .map-description {
-          background: ${colors.DP01};
-          border-radius: 3px;
-          margin-bottom: 12px;
-          border: 1px solid ${colors.BORDER};
-        }
-
-        .map-description h3 {
-          background: ${colors.DP02};
+        .map-welcome h1 {
+          font-size: 24px;
           color: ${colors.TEXT};
-          border-bottom: 1px solid ${colors.BORDER};
-          padding: 6px 12px;
-          font-size: 1.2em;
+          font-weight: 300;
+          flex: 1;
+          margin: 0;
         }
 
-        .map-description p {
-          padding: 12px;
-          padding-top: 0;
-          color: ${colors.TEXT};
+        .map-page {
+          max-width: 1660px;
+          display: flex;
+          margin: 0 auto;
+          min-height: 70vh;
         }
 
-        .a-browser {
-          position: fixed;
-          top: calc(${Dimensions.HEADER_HEIGHT} + ${Dimensions.GUTTER_SIZE});
-          right: ${Dimensions.GUTTER_SIZE};
-          bottom: 50px;
-          max-width: 200px;
+        .filter {
+          width: 200px;
+          margin-right: 30px;
           display: flex;
           flex-direction: column;
-          align-items: center;
-          overflow-y: auto;
-          overflow-x: hidden;
+          align-items: flex-end;
         }
 
         .nade-list {
-          padding: ${Dimensions.GUTTER_SIZE};
+          flex: 1;
+          position: relative;
+          max-width: 1200px;
         }
 
-        .a-container {
-          margin: 24px auto;
-          max-width: 1000px;
-          border: 1px solid orange;
+        .map-page-aside {
+          width: 200px;
+          margin-left: 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
 
-        @media only screen and (max-width: 860px) {
-          .map-page-wrapper {
-            margin-left: 0;
-            margin-right: 0;
-          }
+        .placement-top-sidebar {
+          min-height: 600px;
+        }
 
-          .a-browser {
+        .placement-sticky-siderbar {
+          margin-top: 50%;
+          min-height: 600px;
+          position: sticky;
+          top: 50px;
+        }
+
+        .map-welcome-wrap {
+          display: flex;
+          align-items: center;
+        }
+
+        .top-placement {
+          width: 500px;
+          display: flex;
+          justify-content: space-around;
+        }
+
+        .placement-bottom {
+          margin-top: 30px;
+          margin-bottom: 100px;
+          min-height: 200px;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .filter,
+          .map-page-aside {
             display: none;
           }
 
-          .nade-list {
-            padding: ${Dimensions.PADDING_MEDIUM};
-            margin-top: calc(${Dimensions.GUTTER_SIZE} * 2);
+          .map-page {
+            padding-left: 20px;
+            padding-right: 20px;
           }
-        }
 
-        @media only screen and (max-width: 460px) {
-          .nade-list {
-            margin: 0;
-            margin-top: ${Dimensions.GUTTER_SIZE};
+          .map-welcome-wrap {
+            flex-direction: column;
+          }
+
+          .top-placement {
+            width: 100%;
           }
         }
       `}</style>
-    </Layout2>
+    </>
   );
 };

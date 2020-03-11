@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, TextArea } from "semantic-ui-react";
-import { ReportApi } from "../api/ReportApi";
-import { CSGNModal } from "../common/CSGNModal";
-import { ReportAddDto } from "../models/Report";
-import { addNotificationActionThunk } from "../store/ToastStore/ToastThunks";
+import { ReportApi } from "../../api/ReportApi";
+import { CSGNModal } from "../../common/CSGNModal";
+import { ReportAddDto } from "../../models/Report";
+import { addNotificationActionThunk } from "../../store/ToastStore/ToastThunks";
 
 type Props = {
   nadeId: string;

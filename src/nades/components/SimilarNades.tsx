@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { NadeListGrid } from "../common/NadeListGrid";
-import { Nade } from "../models/Nade/Nade";
-import { useSimilarNades } from "../store/NadeStore/NadeHooks";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { NadeListGrid } from "../../common/NadeListGrid";
+import { Nade } from "../../models/Nade/Nade";
+import { useSimilarNades } from "../../store/NadeStore/NadeHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   nade: Nade;

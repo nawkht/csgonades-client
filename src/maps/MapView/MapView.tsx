@@ -1,63 +1,49 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { Dimensions } from "../../constants/Constants";
+import { FC, useRef, useState } from "react";
+import { CSGNModal } from "../../common/CSGNModal";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
 import { useNadeCoordinatesForMap } from "../../store/NadeStore/NadeHooks";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { Filters } from "./Filters";
 import { MapPosIcon } from "./MapPosIcon";
 
 type Props = {
   map: CsgoMap;
+  visible: boolean;
+  closeMapView: () => void;
 };
 
-export const MapView: FC<Props> = ({ map }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visisble, setVisisble] = useState(false);
+export const MapView: FC<Props> = ({ visible, map, closeMapView }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadeCoordinatesForMap(map);
-  const { colors } = useTheme();
   const { filterByMapCoords } = useNadeFilter();
-
-  useEffect(() => {
-    if (ref.current) {
-      setMapLoaded(true);
-      setMapWidth(ref.current.offsetWidth);
-    }
-  }, [map]);
-
-  const wrapperClassName = useMemo(() => {
-    const classes = ["mapview-wrapper"];
-    if (visisble) {
-      classes.push("visisble");
-    }
-    return classes.join(" ");
-  }, [visisble]);
+  const mapViewRef = useRef<HTMLDivElement>(null);
 
   function onNadeClick(pos: { x: number; y: number }) {
     filterByMapCoords(pos);
-    setVisisble(false);
+    closeMapView();
   }
 
-  function onHandleClick() {
-    if (visisble) {
-      setVisisble(false);
-    } else {
-      setVisisble(true);
+  if (!visible) {
+    return null;
+  }
+
+  function onMapViewImageLoaded() {
+    if (mapViewRef.current) {
+      setMapWidth(mapViewRef.current.offsetHeight);
+      setMapLoaded(true);
     }
   }
 
   return (
     <>
-      <div className={wrapperClassName}>
-        <div ref={ref} className="mapview-map">
+      <CSGNModal onDismiss={closeMapView} visible={true} empty={true}>
+        <div ref={mapViewRef} className="mapview">
           <img
             className="mapview-img"
             src={`/mapsoverlays/${map}.jpg`}
             alt="Map overview image"
+            onLoad={onMapViewImageLoaded}
           />
-
           {mapLoaded &&
             nades.map(n => (
               <MapPosIcon
@@ -67,56 +53,16 @@ export const MapView: FC<Props> = ({ map }) => {
                 onPress={onNadeClick}
               />
             ))}
-
-          <div className="filter-bar">
-            <Filters
-              onOpenOpen={onHandleClick}
-              map={map}
-              mapViewIsOpen={visisble}
-            />
-          </div>
         </div>
-      </div>
+      </CSGNModal>
       <style jsx>{`
-        .mapview-wrapper {
-          position: fixed;
-          top: calc(${Dimensions.HEADER_HEIGHT} + ${Dimensions.GUTTER_SIZE});
-          left: ${Dimensions.SIDEBAR_WIDTH};
-          bottom: ${Dimensions.GUTTER_SIZE};
-          transform: translateX(-100%);
-          transition: transform 0.3s;
-          z-index: 900;
-        }}
-
-        .mapview-map {
-          height: 80vh;
-          width: 80vh;
-          border: 1px solid ${colors.BORDER};
-          border-left: none;
-          border-bottom-right-radius: 10px;
+        .mapview {
+          position: relative;
         }
 
         .mapview-img {
-          display: block;
-          border-bottom-right-radius: 4px;
-          width: 100%;
-        }
-
-        .filter-bar {
-          position: absolute;
-          top: 1px;
-          bottom: 0;
-          left: calc(100% - 1px);
-        }
-
-        .visisble {
-          transform: translateX(0px);
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .mapview-wrapper {
-            display: none;
-          }
+          max-height: 80vh;
+          border-radius: 5px;
         }
       `}</style>
     </>

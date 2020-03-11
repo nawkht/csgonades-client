@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
 import { Nade } from "../../models/Nade/Nade";
-import { NadeDescriptionEditor } from "../../nades/NadeDescription/NadeDescriptionEditor";
 import { useCanEditNade, useUpdateNade } from "../../store/NadeStore/NadeHooks";
+import { NadeDescriptionEditor } from "../components/NadeDescriptionEditor";
 
 type Props = {
   visisble: boolean;

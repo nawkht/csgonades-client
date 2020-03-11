@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { Nade } from "../../models/Nade/Nade";
-import { NadeDescriptionDisplay } from "../../nades/NadeDescription/NadeDescriptionDisplay";
 import { useCanEditNade } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { EditButton } from "./EditButton";
+import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
 import { NadeDetails } from "./NadeDetails";
 import { NadeMeta } from "./NadeMeta";
 
