@@ -10,7 +10,7 @@ import { mapString } from "../models/Nade/CsGoMap";
 import { Nade } from "../models/Nade/Nade";
 import { nadeTypeString } from "../models/Nade/NadeType";
 import { useCanEditNade, useRegisterView } from "../store/NadeStore/NadeHooks";
-import { AdminEditor } from "./admineditor/AdminEditor";
+import { AdminEditor } from "./admineditor2/AdminEditor";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { MapPositionEditor } from "./components/MapPositionEditor";
 import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
