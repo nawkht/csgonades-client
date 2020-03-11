@@ -148,7 +148,6 @@ export const NadePage: FC<Props> = ({ nade }) => {
         .nade-page-aside,
         .nade-page-aside2,
         .nade-page-header-placeholder {
-          background: #f9f9f9;
         }
 
         .nade-page-header-placeholder {
