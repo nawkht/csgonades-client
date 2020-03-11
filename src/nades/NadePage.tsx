@@ -167,7 +167,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
 
         .nade-page {
           margin: 0 auto;
-          max-width: calc(1000px + 300px + 300px + 30px + 30px);
+          max-width: calc(1100px + 200px + 200px + 40px + 40px);
           display: flex;
           padding-bottom: 50px;
           min-height: 85vh;
@@ -180,18 +180,16 @@ export const NadePage: FC<Props> = ({ nade }) => {
         }
 
         .nade-page-aside {
-          margin-right: 20px;
-          margin-left: 10px;
-          width: 300px;
+          margin-right: 40px;
+          width: 200px;
           display: flex;
           align-items: flex-end;
           flex-direction: column;
         }
 
         .nade-page-aside2 {
-          margin-left: 20px;
-          margin-right: 10px;
-          width: 300px;
+          margin-left: 40px;
+          width: 200px;
           display: flex;
           align-items: flex-start;
           flex-direction: column;
@@ -199,7 +197,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
 
         .nade-page-content {
           flex: 1;
-          max-width: 1000px;
+          max-width: 1100px;
         }
 
         .action-container {
