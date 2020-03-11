@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { Nade } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { prettyDate } from "../../utils/DateUtils";
@@ -61,6 +62,16 @@ export const NadeDetails: FC<Props> = ({ nade }) => {
           width: 30px;
           border-radius: 50%;
           margin-right: 10px;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .nade-details {
+            flex-direction: column;
+          }
+
+          .nade-stats {
+            margin-top: 10px;
+          }
         }
       `}</style>
     </>
