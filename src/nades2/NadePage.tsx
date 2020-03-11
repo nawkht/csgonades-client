@@ -98,6 +98,10 @@ export const NadePage: FC<Props> = ({ nade }) => {
                 onEditMeta={() => setEditMetaVisible(true)}
               />
 
+              <div className="placement-under-desc">
+                <EzoicPlaceHolder id={107} />
+              </div>
+
               <div className="similar-nades">
                 <SimilarNades nade={nade} />
               </div>
@@ -145,6 +149,11 @@ export const NadePage: FC<Props> = ({ nade }) => {
           min-height: 600px;
         }
 
+        .placement-under-desc {
+          margin-top: 30px;
+          margin-bottom: 30px;
+        }
+
         .nade-page-aside,
         .nade-page-aside2,
         .nade-page-header-placeholder {
@@ -158,7 +167,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
 
         .nade-page {
           margin: 0 auto;
-          max-width: calc(1000px + 300px + 300px + 20px + 20px);
+          max-width: calc(1000px + 300px + 300px + 30px + 30px);
           display: flex;
           padding-bottom: 50px;
           min-height: 85vh;
@@ -172,6 +181,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
 
         .nade-page-aside {
           margin-right: 20px;
+          margin-left: 10px;
           width: 300px;
           display: flex;
           align-items: flex-end;
@@ -180,6 +190,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
 
         .nade-page-aside2 {
           margin-left: 20px;
+          margin-right: 10px;
           width: 300px;
           display: flex;
           align-items: flex-start;

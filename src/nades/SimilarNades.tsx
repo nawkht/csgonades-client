@@ -24,7 +24,6 @@ export const SimilarNades: FC<Props> = ({ nade }) => {
       </div>
       <style jsx>{`
         .similar {
-          margin-top: 100px;
         }
 
         h3 {
