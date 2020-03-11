@@ -55,7 +55,7 @@ export const NadePage: FC<Props> = ({ nade }) => {
         canonical={`/nades/${nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
       >
-        <EzoicLoader />
+        <EzoicLoader codes={[108, 106, 107, 109]} />
         <div key={`nadepage-${nade.id}`}>
           <div className="nade-page-header-placeholder">
             <EzoicPlaceHolder id={108} />
