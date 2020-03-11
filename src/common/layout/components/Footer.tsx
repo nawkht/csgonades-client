@@ -18,11 +18,11 @@ export const Footer: FC = () => {
               © {year} CSGO Nades <span className="version">{APP_VERSION}</span>
             </div>
             <div className="footer-links">
-              <Link href="/privacypolicy" as="/privacypolicy">
+              <Link href="/privacypolicy" as="/privacypolicy" prefetch={false}>
                 <a>Privacy Policy</a>
               </Link>{" "}
               |{" "}
-              <Link href="/contact" as="/contact">
+              <Link href="/contact" as="/contact" prefetch={false}>
                 <a>Contact</a>
               </Link>
             </div>

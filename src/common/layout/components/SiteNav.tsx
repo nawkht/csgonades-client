@@ -12,12 +12,12 @@ export const SiteNav: FC<Props> = ({}) => {
     <>
       <div className="site-nav">
         {false && (
-          <Link href="/blog">
+          <Link href="/blog" prefetch={false}>
             <a className="nav-item">Blog</a>
           </Link>
         )}
 
-        <Link href="/about">
+        <Link href="/about" prefetch={false}>
           <a className="nav-item">About</a>
         </Link>
       </div>
