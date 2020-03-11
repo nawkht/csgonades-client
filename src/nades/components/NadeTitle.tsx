@@ -1,4 +1,5 @@
 import { FC, useMemo } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeType } from "../../models/Nade/NadeType";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -68,6 +69,15 @@ export const NadeTitle: FC<Props> = ({
           font-weight: 300;
           color: ${colors.TEXT};
           display: inline-block;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          h1 {
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+          }
         }
       `}</style>
     </>

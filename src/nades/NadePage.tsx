@@ -221,6 +221,11 @@ export const NadePage: FC<Props> = ({ nade }) => {
           .nade-page-aside2 {
             display: none;
           }
+
+          .similar-nades {
+            margin-left: 20px;
+            margin-right: 20px;
+          }
         }
       `}</style>
     </>
