@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /users/
+
+Sitemap: https://www.csgonades.com/api/sitemap
