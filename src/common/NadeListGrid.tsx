@@ -1,5 +1,5 @@
 import { FC, memo, useMemo } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
 import { Loader, Message } from "semantic-ui-react";
 import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
@@ -31,7 +31,7 @@ export const NadeListGrid: FC<Props> = memo(
         );
       });
 
-      if (!isMobile) {
+      if (!isMobileOnly) {
         return nadesWithAds;
       }
 
@@ -96,26 +96,12 @@ export const NadeListGrid: FC<Props> = memo(
       <>
         <div className="nadelist">{nadesForList}</div>
         <style jsx>{`
-          .placeholder-in-content-ad {
-            border: 1px solid red;
-            min-height: 50px;
-            background: orange;
-          }
-
           .nadelist {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             grid-column-gap: ${Dimensions.GUTTER_SIZE};
             grid-row-gap: ${Dimensions.GUTTER_SIZE};
             width: 100%;
-          }
-
-          .nadelist-loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 0;
           }
         `}</style>
       </>
