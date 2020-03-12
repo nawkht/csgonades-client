@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../common/layout/Layout2";
@@ -26,10 +26,29 @@ export const MapPage: FC<Props> = ({ map }) => {
   const { nades } = useNadesForMap(map);
   const loading = useIsLoadingNade();
 
+  const { codes, showAllAds } = useMemo(() => {
+    if (
+      map === "nuke" ||
+      map === "cobblestone" ||
+      map === "vertigo" ||
+      map === "cache"
+    ) {
+      return {
+        showAllAds: false,
+        codes: [112, 104, 101],
+      };
+    } else {
+      return {
+        showAllAds: true,
+        codes: [112, 104, 101, 111, 113],
+      };
+    }
+  }, [map]);
+
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        <EzoicLoader codes={[112, 104, 101, 111]} />
+        <EzoicLoader codes={codes} />
         <div className="map-welcome">
           <PageCentralize>
             <div className="map-welcome-wrap">
@@ -38,7 +57,7 @@ export const MapPage: FC<Props> = ({ map }) => {
                 <br /> and grenades for {capitalize(map)}. Something missing?
                 <br /> Sign in, and add a nade to help everyone out.
               </h1>
-              <div className="top-placement">
+              <div className="ez top-placement">
                 <EzoicPlaceHolder id={112} />
               </div>
             </div>
@@ -60,17 +79,24 @@ export const MapPage: FC<Props> = ({ map }) => {
             />
           </div>
           <div className="map-page-aside">
-            <div className="placement-top-sidebar">
+            <div className="ez placement-siderbar-top">
               <EzoicPlaceHolder id={101} />
             </div>
 
-            <div className="placement-sticky-siderbar">
-              <EzoicPlaceHolder id={111} />
-            </div>
-            <div className="placement-empty"></div>
+            {showAllAds && (
+              <div className="ez placement-sidebar-middle">
+                <EzoicPlaceHolder id={113} />
+              </div>
+            )}
+
+            {showAllAds && (
+              <div className="ez placement-siderbar-bottom">
+                <EzoicPlaceHolder id={111} />
+              </div>
+            )}
           </div>
         </div>
-        <div className="placement-bottom">
+        <div className="ez placement-bottom">
           <EzoicPlaceHolder id={104} />
         </div>
         <MobileFilter />
@@ -134,32 +160,39 @@ export const MapPage: FC<Props> = ({ map }) => {
           justify-content: space-between;
         }
 
-        .placement-top-sidebar {
-          min-height: 600px;
-        }
-
-        .placement-sticky-siderbar {
-          margin-top: 50%;
-          min-height: 600px;
-          position: sticky;
-          top: 50px;
-        }
-
         .map-welcome-wrap {
           display: flex;
           align-items: center;
+        }
+
+        .ez {
         }
 
         .top-placement {
           width: 500px;
           display: flex;
           justify-content: space-around;
+          min-height: 50px;
         }
 
         .placement-bottom {
           margin-top: 30px;
-          margin-bottom: 100px;
+          margin-bottom: 50px;
           min-height: 200px;
+        }
+
+        .placement-sidebar-middle {
+          min-height: 200px;
+        }
+
+        .placement-siderbar-top {
+          min-height: 600px;
+          margin-bottom: 20px;
+        }
+
+        .placement-siderbar-bottom {
+          min-height: 600px;
+          margin-top: 20px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
