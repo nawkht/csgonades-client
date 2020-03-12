@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react";
-import { useBlog } from "../../../store/BlogStore/BlogHooks";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { ArticlePreview } from "./ArticlePreview";
 import { ArticleWrite } from "./ArticleWrite";
@@ -7,7 +6,6 @@ import { ArticleWrite } from "./ArticleWrite";
 type ArticleEditorTab = "write" | "preview";
 
 export const ArticleEditor: FC = () => {
-  const { blogActions } = useBlog();
   const { colors } = useTheme();
   const [tab, setTab] = useState<ArticleEditorTab>("write");
   const [title, setTitle] = useState("");
@@ -16,12 +14,7 @@ export const ArticleEditor: FC = () => {
   const [largeImageUrl, setLargeImageUrl] = useState("");
 
   function onSave() {
-    blogActions.createBlogPost({
-      title,
-      body,
-      thumbnailImagelUrl,
-      largeImageUrl,
-    });
+    // no-op
   }
 
   return (

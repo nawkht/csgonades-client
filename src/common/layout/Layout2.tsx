@@ -4,8 +4,8 @@ import { FC, memo, useEffect, useMemo } from "react";
 import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
-import { useNavigationState } from "../../store/NavigationStore/NavigationThunks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { useAnalytics } from "../../utils/Analytics";
 import { CookieConsent } from "../CookieConsent";
 import { Navigation } from "../layout-components/Navigation";
 import { ToastList } from "../toast/ToastList";
@@ -22,28 +22,31 @@ type Props = {
 
 export const Layout2: FC<Props> = memo(
   ({ title, description, canonical, metaThumbNail, children }) => {
-    const { setCurrentRoute } = useNavigationState();
     const { colors } = useTheme();
     const { closeNav, isNavOpen } = useNavigation();
+    const { pageView } = useAnalytics();
 
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
 
     useEffect(() => {
-      closeNav();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useEffect(() => {
       const delayedAnalytics = setTimeout(() => {
         const location = window.location.pathname + window.location.search;
-        setCurrentRoute(location, title);
+        pageView({
+          path: location,
+          title,
+        });
       }, 500);
       return () => {
         if (delayedAnalytics) {
           clearTimeout(delayedAnalytics);
         }
       };
-    }, [setCurrentRoute, title]);
+    }, [title, pageView]);
+
+    useEffect(() => {
+      closeNav();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const mobileNavClassName = useMemo(() => {
       if (isNavOpen) {

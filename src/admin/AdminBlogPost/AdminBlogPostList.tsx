@@ -1,5 +1,4 @@
-import { FC, useEffect } from "react";
-import { useBlog } from "../../store/BlogStore/BlogHooks";
+import { FC } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { BlogListItem } from "./BlogListItem";
 
@@ -7,19 +6,15 @@ type Props = {};
 
 export const AdminBlogPostList: FC<Props> = ({}) => {
   const { colors } = useTheme();
-  const { blogActions, blogState } = useBlog();
 
-  useEffect(() => {
-    blogActions.fetchBlogPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const blogPosts = [];
 
   return (
     <>
       <div className="blog-list-wrapper">
         <h1>Blog</h1>
         <div>
-          {blogState.blogPosts.map(a => (
+          {blogPosts.map(a => (
             <BlogListItem key={a.id} article={a} />
           ))}
         </div>

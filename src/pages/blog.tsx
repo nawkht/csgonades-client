@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { withRedux } from "../utils/WithRedux";
 
 type Props = {};
 
@@ -12,8 +11,4 @@ const Blog: NextPage<Props> = ({}) => {
   );
 };
 
-Blog.getInitialProps = async () => {
-  return;
-};
-
-export default withRedux(Blog);
+export default Blog;

@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
 import { ImageUploader } from "../../newnade/ImageUploader";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import {
   useFetchImagesInFolder,
   useGalleryImages,
   useGalleryUpload,
-} from "../../store/GalleryStore/GalleryHooks";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+} from "../../store2/GalleryStore/hooks";
 import { GalleryImageGrid } from "./GalleryImageGrid";
 
 type Props = {};

@@ -1,5 +1,5 @@
 import { ImageRes } from "../../api/GalleryApi";
-import { ImageCollection } from "./GalleryReducer";
+import { ImageCollection } from "./reducer";
 
 type ReplaceFolderImages = {
   type: "@@gallery/REPLACE_FOLDER_IMAGE";

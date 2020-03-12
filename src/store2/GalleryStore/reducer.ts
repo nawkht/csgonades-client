@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { ImageRes } from "../../api/GalleryApi";
 import { assertNever } from "../../utils/Common";
-import { GalleryActions } from "./GalleryActions";
+import { GalleryActions } from "./actions";
 
 export type ImageCollection = "nades" | "articles";
 
@@ -11,12 +11,12 @@ export type GalleryState = {
   folders: FolderImages;
 };
 
-const initialState: GalleryState = {
+export const galleryInitialState: GalleryState = {
   folders: {},
 };
 
 export const GalleryReducer: Reducer<GalleryState, GalleryActions> = (
-  state = initialState,
+  state = galleryInitialState,
   action
 ): GalleryState => {
   switch (action.type) {

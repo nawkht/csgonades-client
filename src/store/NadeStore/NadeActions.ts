@@ -95,7 +95,3 @@ export const startLoadingNadeAction = (dispatch: Dispatch) => {
     type: "@@nades/START_LOADING",
   });
 };
-
-export const clearSelectedNadeAction = (): ClearSelectedNadeAction => ({
-  type: "@@nades/CLEAR_SELECTED",
-});
