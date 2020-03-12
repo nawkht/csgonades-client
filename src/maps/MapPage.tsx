@@ -1,4 +1,5 @@
 import { FC, useMemo, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../common/layout/Layout2";
@@ -19,6 +20,8 @@ type Props = {
   map: CsgoMap;
 };
 
+const mobileInContentAds = isMobile ? [114, 115, 116, 117, 118] : [];
+
 export const MapPage: FC<Props> = ({ map }) => {
   const { colors } = useTheme();
   const [mapViewVisible, setMapViewVisisble] = useState(false);
@@ -35,12 +38,12 @@ export const MapPage: FC<Props> = ({ map }) => {
     ) {
       return {
         showAllAds: false,
-        codes: [112, 104, 101],
+        codes: [112, 104, 101, ...mobileInContentAds],
       };
     } else {
       return {
         showAllAds: true,
-        codes: [112, 104, 101, 111, 113],
+        codes: [112, 104, 101, 111, 113, ...mobileInContentAds],
       };
     }
   }, [map]);
