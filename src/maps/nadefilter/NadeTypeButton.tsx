@@ -1,32 +1,37 @@
 import { FC, useMemo } from "react";
 import { Popup } from "semantic-ui-react";
 import { NadeType, nadeTypeString } from "../../models/Nade/NadeType";
-import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { iconFromType } from "../../utils/Common";
 
 type Props = {
   type: NadeType;
+  currentType: NadeType;
   mobile?: boolean;
+  onFilterByType: (type: NadeType) => void;
 };
 
-export const NadeTypeButton: FC<Props> = ({ type, mobile }) => {
+export const NadeTypeButton: FC<Props> = ({
+  type,
+  currentType,
+  mobile,
+  onFilterByType,
+}) => {
   const { colors } = useTheme();
-  const { filterByType, byType } = useNadeFilter();
   const iconUrl = iconFromType(type);
-
-  function onClick() {
-    filterByType(type);
-  }
 
   const classNameBuilder = useMemo(() => {
     const base = ["nade-type-btn", "icon"];
 
-    if (byType === type) {
+    if (currentType === type) {
       base.push("active");
     }
     return base.join(" ");
-  }, [byType, type]);
+  }, [currentType, type]);
+
+  function onClick() {
+    onFilterByType(type);
+  }
 
   return (
     <>

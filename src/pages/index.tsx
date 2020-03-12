@@ -3,11 +3,12 @@ import React from "react";
 import { FrontPage } from "../frontpage/FrontPage";
 import { fetchSiteStatsThunk } from "../store/GlobalStore/GlobalThunks";
 import { fetchNewestNadesAction } from "../store/NadeStore/NadeThunks";
+import { withRedux } from "../utils/WithRedux";
 
 const Index: NextPage = () => <FrontPage />;
 
-Index.getInitialProps = async ({ store }) => {
-  const { dispatch } = store;
+Index.getInitialProps = async ({ reduxStore }) => {
+  const { dispatch } = reduxStore;
 
   await Promise.all([
     //@ts-ignore
@@ -19,4 +20,4 @@ Index.getInitialProps = async ({ store }) => {
   return;
 };
 
-export default Index;
+export default withRedux(Index);

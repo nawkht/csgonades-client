@@ -6,6 +6,7 @@ import { PageCentralize } from "../common/PageCentralize";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useFinishProfile } from "../store/UsersStore/UsersHooks";
+import { withRedux } from "../utils/WithRedux";
 
 type Props = {};
 
@@ -128,4 +129,4 @@ const FinishProfile: NextPage<Props> = ({}) => {
   );
 };
 
-export default FinishProfile;
+export default withRedux(FinishProfile);

@@ -2,6 +2,7 @@ import { FC } from "react";
 import { FaMap } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { useNewNadeFilter } from "../../store2/NadeFilter/hooks";
 import { FavFilterButton } from "./FavFilterButton";
 import { FilterBg } from "./FilterBg";
 import { NadeTypeButton } from "./NadeTypeButton";
@@ -15,6 +16,7 @@ type Props = {
 
 export const NadeFilter: FC<Props> = ({ showMapView, showSingInWarning }) => {
   const { colors } = useTheme();
+  const { filterByType, byType } = useNewNadeFilter();
 
   return (
     <>
@@ -40,10 +42,26 @@ export const NadeFilter: FC<Props> = ({ showMapView, showSingInWarning }) => {
 
         <div className="types">
           <FilterBg>
-            <NadeTypeButton type="smoke" />
-            <NadeTypeButton type="flash" />
-            <NadeTypeButton type="molotov" />
-            <NadeTypeButton type="hegrenade" />
+            <NadeTypeButton
+              type="smoke"
+              currentType={byType}
+              onFilterByType={filterByType}
+            />
+            <NadeTypeButton
+              type="flash"
+              currentType={byType}
+              onFilterByType={filterByType}
+            />
+            <NadeTypeButton
+              type="molotov"
+              currentType={byType}
+              onFilterByType={filterByType}
+            />
+            <NadeTypeButton
+              type="hegrenade"
+              currentType={byType}
+              onFilterByType={filterByType}
+            />
           </FilterBg>
         </div>
 

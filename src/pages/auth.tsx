@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 import { Dimmer, Loader } from "semantic-ui-react";
 import { usePreloadUser } from "../store/AuthStore/AuthHooks";
+import { withRedux } from "../utils/WithRedux";
 
 const Auth: NextPage = () => {
   const preloadUser = usePreloadUser();
@@ -18,4 +19,4 @@ const Auth: NextPage = () => {
   );
 };
 
-export default Auth;
+export default withRedux(Auth);

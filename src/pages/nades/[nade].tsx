@@ -7,6 +7,7 @@ import {
   useSelectedNade,
 } from "../../store/NadeStore/NadeSelectors";
 import { fetchNadeByIdAction } from "../../store/NadeStore/NadeThunks";
+import { withRedux } from "../../utils/WithRedux";
 
 const NadePageComponent: NextPage = () => {
   const error = useNadeError();
@@ -24,10 +25,9 @@ const NadePageComponent: NextPage = () => {
 };
 
 NadePageComponent.getInitialProps = async context => {
-  const { dispatch, getState } = context.store;
+  const { dispatch, getState } = context.reduxStore;
   const nadeId = context.query.nade as string;
 
-  //@ts-ignore
   await dispatch(fetchNadeByIdAction(nadeId));
 
   const error = nadeErrorSelector(getState());
@@ -39,4 +39,4 @@ NadePageComponent.getInitialProps = async context => {
   return;
 };
 
-export default NadePageComponent;
+export default withRedux(NadePageComponent);

@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore, Store } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { AdminReducer } from "./AdminStore/AdminReducer";
@@ -57,7 +57,7 @@ function createMiddleware() {
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export const initReduxStore = (initialState: AppState) => {
+export const initReduxStore = (initialState: AppState): Store<AppState> => {
   let store: any;
   const isClient = typeof window !== "undefined";
 

@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { Layout2 } from "../common/layout/Layout2";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { withRedux } from "../utils/WithRedux";
 
 const AboutPageContainer: NextPage = () => {
   const { colors } = useTheme();
@@ -63,4 +64,4 @@ const AboutPageContainer: NextPage = () => {
   );
 };
 
-export default AboutPageContainer;
+export default withRedux(AboutPageContainer);

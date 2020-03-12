@@ -1,10 +1,10 @@
 import "next";
-import { Store, AnyAction } from "redux";
+import { AnyAction, Store } from "redux";
 import { AppState } from "../store";
-import { ThunkAction } from "redux-thunk";
+import { ReduxThunkAction } from "../store/StoreUtils/ThunkActionType";
 
 declare module "next" {
   export interface NextPageContext {
-    store: Store<AppState, AnyAction | ThunkAction>;
+    reduxStore: Store<AppState, AnyAction | ReduxThunkAction>;
   }
 }

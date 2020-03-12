@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import { Layout2 } from "../common/layout/Layout2";
+import { withRedux } from "../utils/WithRedux";
 
 const PrivacyPolicyPageContainer: NextPage = () => {
   return (
@@ -119,4 +120,4 @@ const PrivacyPolicyPageContainer: NextPage = () => {
   );
 };
 
-export default PrivacyPolicyPageContainer;
+export default withRedux(PrivacyPolicyPageContainer);

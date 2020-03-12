@@ -7,9 +7,8 @@ import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { CsgoMap } from "../models/Nade/CsGoMap";
-import { useNadesForMap } from "../store/NadeStore/NadeHooks";
-import { useIsLoadingNade } from "../store/NadeStore/NadeSelectors";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { useNewNadeFilter } from "../store2/NadeFilter/hooks";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
 import { MapView } from "./mapview2/MapView";
@@ -26,8 +25,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   const { colors } = useTheme();
   const [mapViewVisible, setMapViewVisisble] = useState(false);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
-  const { nades } = useNadesForMap(map);
-  const loading = useIsLoadingNade();
+  const { nades, filterByType, byType } = useNewNadeFilter();
 
   const { codes, showAllAds } = useMemo(() => {
     if (
@@ -75,11 +73,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             />
           </div>
           <div className="nade-list">
-            <NadeListGrid
-              loading={loading}
-              nades={nades}
-              emptyMessage={`No nades found. Sign in and add something! :)`}
-            />
+            <NadeListGrid nades={nades} emptyMessage={`No nades found.`} />
           </div>
           <div className="map-page-aside">
             <div className="ez placement-siderbar-top">
@@ -102,7 +96,7 @@ export const MapPage: FC<Props> = ({ map }) => {
         <div className="ez placement-bottom">
           <EzoicPlaceHolder id={104} />
         </div>
-        <MobileFilter />
+        <MobileFilter byType={byType} onFilterByType={filterByType} />
         <MapView
           closeMapView={() => setMapViewVisisble(false)}
           visible={mapViewVisible}

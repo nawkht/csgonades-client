@@ -6,13 +6,14 @@ import {
   fetchUserAction,
 } from "../../store/UsersStore/UsersThunks";
 import { UserPage } from "../../users/UsersPage";
+import { withRedux } from "../../utils/WithRedux";
 
 const UserPageComponent: NextPage = () => {
   return <UserPage />;
 };
 
-UserPageComponent.getInitialProps = async ({ store, query, res }) => {
-  const { dispatch, getState } = store;
+UserPageComponent.getInitialProps = async ({ reduxStore, query, res }) => {
+  const { dispatch, getState } = reduxStore;
   const steamId = query.user as string;
   const shouldDisplayEdit = query.edit === "true";
 
@@ -36,4 +37,4 @@ UserPageComponent.getInitialProps = async ({ store, query, res }) => {
   return;
 };
 
-export default UserPageComponent;
+export default withRedux(UserPageComponent);
