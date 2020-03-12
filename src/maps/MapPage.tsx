@@ -168,31 +168,53 @@ export const MapPage: FC<Props> = ({ map }) => {
         .ez {
         }
 
+        .ad-test {
+          width: 125px;
+          height: 20px;
+          background: red;
+        }
+
         .top-placement {
           width: 500px;
           display: flex;
           justify-content: space-around;
           min-height: 50px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-end;
         }
 
         .placement-bottom {
           margin-top: 30px;
           margin-bottom: 50px;
           min-height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .placement-sidebar-middle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           min-height: 200px;
         }
 
         .placement-siderbar-top {
           min-height: 600px;
           margin-bottom: 20px;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
         }
 
         .placement-siderbar-bottom {
           min-height: 600px;
           margin-top: 20px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
         }
 
         @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
