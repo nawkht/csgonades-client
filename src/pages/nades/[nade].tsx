@@ -1,42 +1,41 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import { NadeApi } from "../../api/NadeApi";
+import { Nade } from "../../models/Nade/Nade";
 import { NadeNotFound } from "../../nades/NadeNotFound";
 import { NadePage } from "../../nades/NadePage";
-import {
-  nadeErrorSelector,
-  useNadeError,
-  useSelectedNade,
-} from "../../store/NadeStore/NadeSelectors";
-import { fetchNadeByIdAction } from "../../store/NadeStore/NadeThunks";
 import { withRedux } from "../../utils/WithRedux";
 
-const NadePageComponent: NextPage = () => {
-  const error = useNadeError();
-  const nade = useSelectedNade();
+type Props = {
+  nade: Nade;
+};
 
-  if (error) {
+const NadePageComponent: NextPage<Props> = ({ nade }) => {
+  if (!nade) {
     return <NadeNotFound />;
-  }
-
-  if (nade && !error) {
+  } else {
     return <NadePage nade={nade} />;
   }
-
-  return null;
 };
 
-NadePageComponent.getInitialProps = async context => {
-  const { dispatch, getState } = context.reduxStore;
+export const getServerSideProps: GetServerSideProps = async context => {
   const nadeId = context.query.nade as string;
 
-  await dispatch(fetchNadeByIdAction(nadeId));
+  const result = await NadeApi.byId(nadeId);
 
-  const error = nadeErrorSelector(getState());
-
-  if (error && context.res) {
+  if (result.isErr()) {
     context.res.statusCode = 404;
+    return {
+      props: {
+        nade: null,
+      },
+    };
   }
 
-  return;
+  return {
+    props: {
+      nade: result.value,
+    },
+  };
 };
 
-export default withRedux(NadePageComponent);
+export default withRedux(NadePageComponent, { ssr: false });

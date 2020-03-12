@@ -4,7 +4,6 @@ import thunk from "redux-thunk";
 import { analyticsMiddleware } from "./Analytics/AnalyticsMiddleware";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
-import { BlogReducer } from "./BlogStore/BlogReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GalleryReducer } from "./GalleryStore/GalleryReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
@@ -29,7 +28,6 @@ const rootReducer = combineReducers({
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
   navigationStore: NavigationReducer,
-  blogStore: BlogReducer,
   galleryStore: GalleryReducer,
 });
 
