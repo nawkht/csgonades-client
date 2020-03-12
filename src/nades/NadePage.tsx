@@ -233,6 +233,23 @@ export const NadePage: FC<Props> = ({ nade }) => {
           margin-right: 20px;
         }
 
+        @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
+          .nade-page-aside,
+          .nade-page-aside2 {
+            display: none;
+          }
+
+          .similar-nades {
+            margin-left: 30px;
+            margin-right: 30px;
+          }
+
+          .nade-info-container {
+            margin-left: 30px;
+            margin-right: 30px;
+          }
+        }
+
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .nade-page-aside,
           .nade-page-aside2 {

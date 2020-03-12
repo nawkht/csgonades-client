@@ -195,6 +195,12 @@ export const MapPage: FC<Props> = ({ map }) => {
           margin-top: 20px;
         }
 
+        @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
+          .filter {
+            width: 70px;
+          }
+        }
+
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .filter,
           .map-page-aside {

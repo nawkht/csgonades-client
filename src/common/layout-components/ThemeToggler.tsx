@@ -17,6 +17,8 @@ export const ThemeToggler: FC<Props> = ({}) => {
       <style jsx>{`
         .darkmode-toggle {
           display: block;
+          overflow: hidden;
+          width: 45px;
         }
       `}</style>
       <style jsx global>{`
