@@ -232,6 +232,10 @@ export const MapPage: FC<Props> = ({ map }) => {
             display: none;
           }
 
+          .top-placement {
+            display: none;
+          }
+
           .map-page {
             padding-left: 20px;
             padding-right: 20px;
