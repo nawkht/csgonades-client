@@ -48,8 +48,8 @@ export const NadeListGrid: FC<Props> = memo(
         nadesWithAds.splice(
           pos,
           0,
-          <>
-            <div key={`ez-${nextId}`} className="placeholder-in-content-ad">
+          <div key={`ez-${nextId}`}>
+            <div className="placeholder-in-content-ad">
               <EzoicPlaceHolder id={nextId} />
             </div>
             <style jsx>{`
@@ -60,7 +60,7 @@ export const NadeListGrid: FC<Props> = memo(
                 justify-content: center;
               }
             `}</style>
-          </>
+          </div>
         );
         pos += adInterval;
       }
