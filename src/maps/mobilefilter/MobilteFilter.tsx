@@ -1,15 +1,12 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
-import { NadeType } from "../../models/Nade/NadeType";
+import { useFilterByType } from "../../store2/FilterStore/hooks";
 import { NadeTypeButton } from "../nadefilter/NadeTypeButton";
 import { FilterBgMobile } from "./FilterBgMobile";
 
-type Props = {
-  byType: NadeType;
-  onFilterByType: (type: NadeType) => void;
-};
+export const MobileFilter: FC = memo(() => {
+  const { byType, filterByType } = useFilterByType();
 
-export const MobileFilter: FC<Props> = ({ byType, onFilterByType }) => {
   return (
     <>
       <div className="mobile-filter">
@@ -19,25 +16,25 @@ export const MobileFilter: FC<Props> = ({ byType, onFilterByType }) => {
               mobile={true}
               type="smoke"
               currentType={byType}
-              onFilterByType={onFilterByType}
+              onFilterByType={filterByType}
             />
             <NadeTypeButton
               mobile={true}
               type="flash"
               currentType={byType}
-              onFilterByType={onFilterByType}
+              onFilterByType={filterByType}
             />
             <NadeTypeButton
               mobile={true}
               type="molotov"
               currentType={byType}
-              onFilterByType={onFilterByType}
+              onFilterByType={filterByType}
             />
             <NadeTypeButton
               mobile={true}
               type="hegrenade"
               currentType={byType}
-              onFilterByType={onFilterByType}
+              onFilterByType={filterByType}
             />
           </FilterBgMobile>
         </div>
@@ -60,4 +57,4 @@ export const MobileFilter: FC<Props> = ({ byType, onFilterByType }) => {
       `}</style>
     </>
   );
-};
+});

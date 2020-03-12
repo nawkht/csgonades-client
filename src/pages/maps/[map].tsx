@@ -3,7 +3,7 @@ import { NadeApi } from "../../api/NadeApi";
 import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeLight } from "../../models/Nade/Nade";
-import { NadeFilterProvider } from "../../store2/NadeFilter/context";
+import { NadeFilterProvider } from "../../store2/FilterStore/context";
 import { withRedux } from "../../utils/WithRedux";
 
 interface Props {

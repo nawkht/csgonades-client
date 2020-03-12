@@ -2,8 +2,8 @@ import { FC } from "react";
 import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
-import { useAdminPage } from "../store/AdminStore/AdminHooks";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
+import { useAdminRoute } from "../store2/AdminStore/hooks";
 import { assertNever } from "../utils/Common";
 import { AdminBlogPostList } from "./AdminBlogPost/AdminBlogPostList";
 import { ArticleEditor } from "./AdminBlogPost/ArticleEditor/ArticleEditor";
@@ -11,12 +11,11 @@ import { AdminGallery } from "./AdminGallery/AdminGallery";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminReports } from "./AdminReports";
-import { AdminTournaments } from "./AdminTournaments";
 import { AdminUsers } from "./AdminUsers";
 
 export const AdminPage: FC = () => {
   const allowedToView = useIsAdminOrModerator();
-  const { route } = useAdminPage();
+  const { route } = useAdminRoute();
 
   if (!allowedToView) {
     return <p>Your not allowed to view this page :(</p>;
@@ -28,8 +27,6 @@ export const AdminPage: FC = () => {
         return <AdminPendingNades />;
       case "user":
         return <AdminUsers />;
-      case "tournaments":
-        return <AdminTournaments />;
       case "reports":
         return <AdminReports />;
       case "write-blogpost":

@@ -8,7 +8,6 @@ export type ReplaceNades = {
 
 export type ToogleMapPositionModal = {
   type: "@@nadefilter/TOGGLE_MAP_POSITION_MODAL";
-  payload: boolean;
 };
 
 export type FilterByMapCoordinates = {

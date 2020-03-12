@@ -2,7 +2,10 @@ import { FC } from "react";
 import { FaMap } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { useNewNadeFilter } from "../../store2/NadeFilter/hooks";
+import {
+  useFilterByType,
+  useToggleMapview,
+} from "../../store2/FilterStore/hooks";
 import { FavFilterButton } from "./FavFilterButton";
 import { FilterBg } from "./FilterBg";
 import { NadeTypeButton } from "./NadeTypeButton";
@@ -10,13 +13,13 @@ import { ResetFilterButton } from "./ResetFilterButton";
 import { TickrateSelector } from "./TickrateSelector";
 
 type Props = {
-  showMapView: () => void;
   showSingInWarning: () => void;
 };
 
-export const NadeFilter: FC<Props> = ({ showMapView, showSingInWarning }) => {
+export const NadeFilter: FC<Props> = ({ showSingInWarning }) => {
   const { colors } = useTheme();
-  const { filterByType, byType } = useNewNadeFilter();
+  const { byType, filterByType } = useFilterByType();
+  const { toggleMapViewVisibility } = useToggleMapview();
 
   return (
     <>
@@ -32,7 +35,10 @@ export const NadeFilter: FC<Props> = ({ showMapView, showSingInWarning }) => {
               mouseEnterDelay={300}
               openOnTriggerClick={false}
               trigger={
-                <button className="filter-btn" onClick={showMapView}>
+                <button
+                  className="filter-btn"
+                  onClick={toggleMapViewVisibility}
+                >
                   <FaMap />
                 </button>
               }

@@ -1,30 +1,28 @@
 import { FC, useRef, useState } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
-import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
-import { useNadeCoordinatesForMap } from "../../store/NadeStore/NadeHooks";
+import {
+  useFilterByCoords,
+  useNadesForMapView,
+  useToggleMapview,
+} from "../../store2/FilterStore/hooks";
 import { MapPosIcon } from "./MapPosIcon";
 
 type Props = {
   map: CsgoMap;
-  visible: boolean;
-  closeMapView: () => void;
 };
 
-export const MapView: FC<Props> = ({ visible, map, closeMapView }) => {
+export const MapView: FC<Props> = ({ map }) => {
+  const { mapViewVisisble, toggleMapViewVisibility } = useToggleMapview();
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
-  const nades = useNadeCoordinatesForMap(map);
-  const { filterByMapCoords } = useNadeFilter();
+  const nades = useNadesForMapView();
+  const filterByCoords = useFilterByCoords();
   const mapViewRef = useRef<HTMLDivElement>(null);
 
   function onNadeClick(pos: { x: number; y: number }) {
-    filterByMapCoords(pos);
-    closeMapView();
-  }
-
-  if (!visible) {
-    return null;
+    filterByCoords(pos);
+    toggleMapViewVisibility();
   }
 
   function onMapViewImageLoaded() {
@@ -36,7 +34,11 @@ export const MapView: FC<Props> = ({ visible, map, closeMapView }) => {
 
   return (
     <>
-      <CSGNModal onDismiss={closeMapView} visible={true} empty={true}>
+      <CSGNModal
+        onDismiss={toggleMapViewVisibility}
+        visible={mapViewVisisble}
+        empty={true}
+      >
         <div ref={mapViewRef} className="mapview">
           <img
             className="mapview-img"

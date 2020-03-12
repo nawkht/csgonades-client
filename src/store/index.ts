@@ -1,7 +1,6 @@
 import { applyMiddleware, combineReducers, createStore, Store } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { AdminReducer } from "./AdminStore/AdminReducer";
 import { analyticsMiddleware } from "./Analytics/AnalyticsMiddleware";
 import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
@@ -9,7 +8,6 @@ import { BlogReducer } from "./BlogStore/BlogReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GalleryReducer } from "./GalleryStore/GalleryReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
-import { NadeFilterReducer } from "./NadeFilterStore/NadeFilterReducer";
 import { NadeReducer } from "./NadeStore/NadeReducer";
 import { NavigationReducer } from "./NavigationStore/NavigationReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
@@ -17,7 +15,6 @@ import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
 import { PersistedTipReducer } from "./TipStore/TipReducer";
 import { ToastReducer } from "./ToastStore/ToastReducer";
-import { TournamentReducer } from "./TournamentStore/TournamentReducer";
 import { UsersReducer } from "./UsersStore/UsersReducer";
 
 const rootReducer = combineReducers({
@@ -26,15 +23,12 @@ const rootReducer = combineReducers({
   nadeStore: NadeReducer,
   favoriteStore: FavoriteReducer,
   usersStore: UsersReducer,
-  adminStore: AdminReducer,
   globalStore: GlobalReducer,
-  tournamentStore: TournamentReducer,
   newNadeStore: NewNadeReducer,
   tipStore: PersistedTipReducer,
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
   navigationStore: NavigationReducer,
-  nadeFilterStore: NadeFilterReducer,
   blogStore: BlogReducer,
   galleryStore: GalleryReducer,
 });

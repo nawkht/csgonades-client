@@ -1,14 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { NadeListGrid } from "../common/NadeListGrid";
-import { useAdminPage } from "../store/AdminStore/AdminHooks";
+import { useAdminPendingNades } from "../store2/AdminStore/hooks";
 
 export const AdminPendingNades: FC = () => {
-  const { fetchPendingNades, pendingNades } = useAdminPage();
-
-  useEffect(() => {
-    fetchPendingNades();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { pendingNades } = useAdminPendingNades();
 
   return <NadeListGrid nades={pendingNades} emptyMessage="No pending nades!" />;
 };

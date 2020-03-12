@@ -1,19 +1,19 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { FaUndo } from "react-icons/fa";
-import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
+import { useFilterReset } from "../../store2/FilterStore/hooks";
 
 type Props = {};
 
-export const ResetFilterButton: FC<Props> = ({}) => {
-  const { isDefault, resetFilter } = useNadeFilter();
+export const ResetFilterButton: FC<Props> = memo(({}) => {
+  const { canReset, resetFilter } = useFilterReset();
 
   function onReset() {
-    if (!isDefault) {
+    if (canReset) {
       resetFilter();
     }
   }
 
-  const visible = isDefault ? "" : "visible";
+  const visible = canReset ? "visible" : "";
 
   return (
     <>
@@ -46,4 +46,4 @@ export const ResetFilterButton: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});

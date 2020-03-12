@@ -1,14 +1,18 @@
 import { FC } from "react";
 import { Popup } from "semantic-ui-react";
-import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { useFilterByTickrate } from "../../store2/FilterStore/hooks";
 import { FilterBg } from "./FilterBg";
 
 type Props = {};
 
 export const TickrateSelector: FC<Props> = ({}) => {
   const { colors } = useTheme();
-  const { byTickrate, useTickrate128, useTickrate64 } = useNadeFilter();
+  const {
+    byTickrate,
+    filterByTickrate128,
+    filterByTickrate64,
+  } = useFilterByTickrate();
 
   const tick64active = byTickrate === "tick64" ? "active" : "";
   const tick128active = byTickrate === "tick128" ? "active" : "";
@@ -29,7 +33,7 @@ export const TickrateSelector: FC<Props> = ({}) => {
             trigger={
               <button
                 className={`filter-btn tickrate-btn ${tick64active}`}
-                onClick={useTickrate64}
+                onClick={filterByTickrate64}
               >
                 64
               </button>
@@ -47,7 +51,7 @@ export const TickrateSelector: FC<Props> = ({}) => {
             trigger={
               <button
                 className={`filter-btn tickrate-btn ${tick128active}`}
-                onClick={useTickrate128}
+                onClick={filterByTickrate128}
               >
                 128
               </button>

@@ -1,22 +1,22 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
-import { recentNadesSelector } from "../store/NadeStore/NadeSelectors";
+import { NadeLight } from "../models/Nade/Nade";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
-type Props = {};
+type Props = {
+  recentNades: NadeLight[];
+};
 
-export const RecentNades: FC<Props> = ({}) => {
+export const RecentNades: FC<Props> = ({ recentNades }) => {
   const { colors } = useTheme();
-  const nades = useSelector(recentNadesSelector);
 
   return (
     <>
       <PageCentralize>
         <div className="recent-nades">
           <h3>Recent nades</h3>
-          <NadeListGrid nades={nades} />
+          <NadeListGrid nades={recentNades} />
         </div>
       </PageCentralize>
       <style jsx>{`

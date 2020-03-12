@@ -1,23 +1,35 @@
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import React from "react";
+import { NadeApi } from "../api/NadeApi";
 import { FrontPage } from "../frontpage/FrontPage";
-import { fetchSiteStatsThunk } from "../store/GlobalStore/GlobalThunks";
-import { fetchNewestNadesAction } from "../store/NadeStore/NadeThunks";
+import { NadeLight } from "../models/Nade/Nade";
 import { withRedux } from "../utils/WithRedux";
 
-const Index: NextPage = () => <FrontPage />;
-
-Index.getInitialProps = async ({ reduxStore }) => {
-  const { dispatch } = reduxStore;
-
-  await Promise.all([
-    //@ts-ignore
-    dispatch(fetchNewestNadesAction()),
-    //@ts-ignore
-    dispatch(fetchSiteStatsThunk()),
-  ]);
-
-  return;
+type Props = {
+  recentNades: NadeLight[];
 };
 
-export default withRedux(Index);
+const Index: NextPage<Props> = ({ recentNades }) => (
+  <FrontPage recentNades={recentNades} />
+);
+
+export const getStaticProps: GetStaticProps = async () => {
+  const result = await NadeApi.getAll();
+
+  if (result.isErr()) {
+    console.error(result.error);
+    return {
+      props: {
+        recentNades: [],
+      },
+    };
+  }
+
+  return {
+    props: {
+      recentNades: result.value,
+    },
+  };
+};
+
+export default withRedux(Index, { ssr: false });

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { FC, useEffect, useMemo, useState } from "react";
 import { Button, Pagination } from "semantic-ui-react";
-import { useAdminPage } from "../store/AdminStore/AdminHooks";
 import { useSiteStats } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { useAdminUsers } from "../store2/AdminStore/hooks";
 import { dateFromNow, prettyDateTime } from "../utils/DateUtils";
 
 const USER_LIMIT = 15;
@@ -15,7 +15,7 @@ export const UserList: FC = () => {
   const {
     stats: { numUsers },
   } = useSiteStats();
-  const { users, fetchUsers } = useAdminPage();
+  const { users, fetchUsers } = useAdminUsers();
 
   const numPages = useMemo(() => Math.ceil(numUsers / USER_LIMIT), [numUsers]);
 

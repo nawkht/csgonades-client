@@ -3,7 +3,7 @@ import { NadeLight } from "../../models/Nade/Nade";
 import { Report } from "../../models/Report";
 import { User } from "../../models/User";
 import { assertNever } from "../../utils/Common";
-import { AdminActions, AdminRoutes } from "./AdminActions";
+import { AdminActions, AdminRoutes } from "./actions";
 
 export type AdminState = {
   route: AdminRoutes;
@@ -12,7 +12,7 @@ export type AdminState = {
   reports: Report[];
 };
 
-const initialState: AdminState = {
+export const initialState: AdminState = {
   route: "pending-nades",
   pendingNades: [],
   users: [],

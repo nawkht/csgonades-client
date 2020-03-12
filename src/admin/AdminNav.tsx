@@ -1,11 +1,11 @@
 import { FC, useEffect } from "react";
 import { Label, Menu, MenuItemProps } from "semantic-ui-react";
-import { AdminRoutes } from "../store/AdminStore/AdminActions";
-import { useAdminPage } from "../store/AdminStore/AdminHooks";
 import { useSiteStats } from "../store/GlobalStore/GlobalHooks";
+import { AdminRoutes } from "../store2/AdminStore/actions";
+import { useAdminRoute } from "../store2/AdminStore/hooks";
 
 export const AdminNav: FC = () => {
-  const { route, changeAdminRoute } = useAdminPage();
+  const { changeAdminRoute, route } = useAdminRoute();
   const { fetchSiteStats, stats } = useSiteStats();
 
   useEffect(() => {

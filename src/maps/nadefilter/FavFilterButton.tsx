@@ -2,7 +2,7 @@ import { FC } from "react";
 import { FaStar } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
-import { useNadeFilter } from "../../store/NadeFilterStore/NadeFilterHooks";
+import { useFilterByFavorites } from "../../store2/FilterStore/hooks";
 
 type Props = {
   showSingInWarning: () => void;
@@ -10,13 +10,13 @@ type Props = {
 
 export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
   const isSignedIn = useIsSignedIn();
-  const { toggleFilterByFavorites, byFavorites } = useNadeFilter();
+  const { byFavorite, filterByFavorites } = useFilterByFavorites();
 
-  const active = byFavorites ? "active" : "";
+  const active = byFavorite ? "active" : "";
 
   function onFilterByFavorite() {
     if (isSignedIn) {
-      toggleFilterByFavorites();
+      filterByFavorites();
     } else {
       showSingInWarning();
     }

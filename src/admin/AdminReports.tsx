@@ -1,16 +1,11 @@
 import Link from "next/link";
-import { FC, useEffect } from "react";
-import { useAdminPage } from "../store/AdminStore/AdminHooks";
+import { FC } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { useAdminReports } from "../store2/AdminStore/hooks";
 
 export const AdminReports: FC = () => {
   const { colors } = useTheme();
-  const { fetchReports, reports } = useAdminPage();
-
-  useEffect(() => {
-    fetchReports();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { reports } = useAdminReports();
 
   return (
     <div>
