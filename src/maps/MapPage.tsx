@@ -1,16 +1,15 @@
-import { FC, useMemo, useState } from "react";
+import { FC, memo, useMemo, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
-import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { Layout2 } from "../layout/Layout2";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { useFilteredNades } from "../store2/FilterStore/hooks/useFilteredNades";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
+import { MapPageNades } from "./MapPageNades";
 import { MapView } from "./mapview2/MapView";
 import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { NadeFilter } from "./nadefilter/NadeFilter";
@@ -21,10 +20,9 @@ type Props = {
 
 const mobileInContentAds = isMobile ? [114, 115, 116, 117, 118] : [];
 
-export const MapPage: FC<Props> = ({ map }) => {
+export const MapPage: FC<Props> = memo(({ map }) => {
   const { colors } = useTheme();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
-  const filteredNades = useFilteredNades();
 
   const { showAllAds, codes } = useMemo(() => {
     if (
@@ -69,10 +67,7 @@ export const MapPage: FC<Props> = ({ map }) => {
             <NadeFilter showSingInWarning={() => setShowLoginWarning(true)} />
           </div>
           <div className="nade-list">
-            <NadeListGrid
-              nades={filteredNades}
-              emptyMessage={`No nades found.`}
-            />
+            <MapPageNades />
           </div>
           <div className="map-page-aside">
             <div className="ez placement-siderbar-top">
@@ -241,4 +236,4 @@ export const MapPage: FC<Props> = ({ map }) => {
       `}</style>
     </>
   );
-};
+});

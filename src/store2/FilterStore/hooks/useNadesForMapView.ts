@@ -38,7 +38,7 @@ export const useNadesForMapView = (): NadeLight[] => {
       }
     }
     return unqiueNades;
-  }, [nades, byType, byTickrate, byFavorites]);
+  }, [nades, byType, byTickrate, byFavorites, favoritedNades]);
 
   return unqiueNadesForPosition;
 };

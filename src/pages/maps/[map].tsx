@@ -13,18 +13,20 @@ interface Props {
 
 const Map: NextPage<Props> = ({ map, nades }) => {
   return (
-    <NadeFilterProvider nades={nades}>
-      <MapPage key={map} map={map} />
+    <NadeFilterProvider key={map} nades={nades}>
+      <MapPage map={map} />
     </NadeFilterProvider>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
+  console.log("Getting server side props");
   const map = context.query.map as CsgoMap;
 
   const results = await NadeApi.getByMap(map);
 
   if (results.isOk()) {
+    console.log("Got nades", { nades: results.value });
     return {
       props: {
         map,
@@ -32,6 +34,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
       },
     };
   } else {
+    console.log("Failed to get nades");
     return {
       props: {
         map,
