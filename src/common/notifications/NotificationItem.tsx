@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC, memo, useState } from "react";
-import { Icon } from "semantic-ui-react";
+import { FaBell } from "react-icons/fa";
 import { Notification } from "../../models/Notification";
 import { useSetNotificationViewed } from "../../store/NotificationStore/hooks/useSetNotificationViewed";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -22,7 +22,7 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
       <>
         <div className={wasViewed ? "notification" : "notification new"}>
           <div className="noti-msg">
-            <Icon name="bell" /> {notificationMessage(notification)}
+            <FaBell /> {notificationMessage(notification)}
           </div>
           <div className="noti-date">
             {prettyDateTime(notification.createdAt)}

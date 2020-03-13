@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FavoriteApi } from "../../../api/FavoriteApi";
+import { getUserFavorites } from "../../../api/FavoriteApi";
 import { userSelector } from "../../AuthStore/AuthSelectors";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
 import { addAllFavoritesAction } from "../FavoriteActions";
@@ -22,7 +22,7 @@ export const useFetchFavorites = () => {
         return;
       }
 
-      const result = await FavoriteApi.getUserFavorites(token);
+      const result = await getUserFavorites(token);
 
       if (result.isOk()) {
         dispatch(addAllFavoritesAction(result.value));

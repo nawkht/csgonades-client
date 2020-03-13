@@ -1,5 +1,5 @@
 import { FC, memo, useMemo, useState } from "react";
-import { Icon } from "semantic-ui-react";
+import { FaBell } from "react-icons/fa";
 import { useFetchNotifications } from "../../store/NotificationStore/hooks/useFetchNotifications";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -30,7 +30,7 @@ export const NotificationIndicator: FC = memo(() => {
           className={notificationBtnClassNames}
           onClick={toggleNotificationTab}
         >
-          <Icon name="bell" />
+          <FaBell />
           <span>{notificationCount}</span>
         </button>
         <NotificationList visble={notificationTabVisible} />

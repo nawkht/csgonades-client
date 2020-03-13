@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
-import { useIsAdminOrModerator } from "../../../store/AuthStore/AuthHooks";
+import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 
 type Props = {};
 

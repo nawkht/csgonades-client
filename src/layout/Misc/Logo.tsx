@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
-import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 

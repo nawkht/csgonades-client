@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Layout2 } from "../common/layout/Layout2";
+import { Layout2 } from "../layout/Layout2";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { withRedux } from "../utils/WithRedux";
 

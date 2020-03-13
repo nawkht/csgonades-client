@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
-import { Layout2 } from "../common/layout/Layout2";
+import { Layout2 } from "../layout/Layout2";
 import { NadeLight } from "../models/Nade/Nade";
 import { BlogList } from "./BlogList";
 import { FrontpageActions } from "./FrontpageActions";

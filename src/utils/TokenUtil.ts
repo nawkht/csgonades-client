@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import { Role } from "../models/User";
 
 type DecodedToken = {
@@ -8,9 +7,19 @@ type DecodedToken = {
   exp: number;
 };
 
-function decodeToken(token: string): DecodedToken {
-  const decodedToken = jwt.decode(token) as DecodedToken;
-  return decodedToken;
+function parseJwt(token: string): DecodedToken {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(function(c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
 }
 
 export function tokenExpiredOrAboutTo(token: string): boolean {
@@ -25,7 +34,7 @@ export function tokenExpiredOrAboutTo(token: string): boolean {
 }
 
 export function timeToExpire(token: string) {
-  const { exp } = decodeToken(token);
+  const { exp } = parseJwt(token);
   const now = Date.now();
   const timeLeft = Math.round(exp - now / 1000);
 

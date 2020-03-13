@@ -1,16 +1,18 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC, memo, useEffect } from "react";
+import { FaPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Button } from "semantic-ui-react";
+import { ButtonWithIcon } from "../../common/ButtonWithIcon";
+import { NotificationIndicator } from "../../common/notifications/NotificationIndicator";
 import { Dimensions } from "../../constants/Constants";
 import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import { useFetchFavorites } from "../../store/FavoriteStore/hooks/useFetchFavorites";
-import { NotificationIndicator } from "../notifications/NotificationIndicator";
-import { SignInnButton } from "./SignInnButton";
-import { UserDropdown } from "./UserDropdown";
+import { SignInnButton } from "../Misc/SignInnButton";
+import { UserDropdown } from "../Misc/UserDropdown";
 
 export const UserNav: FC = memo(() => {
+  const router = useRouter();
   const trySignIn = useTrySignIn();
   const user = useSelector(userSelector);
   useFetchFavorites();
@@ -26,16 +28,17 @@ export const UserNav: FC = memo(() => {
       <>
         <div className="user-nav">
           <NotificationIndicator />
-          <Link href="/newnade">
-            <a className="new-nade-btn">
-              <Button
-                content="Add nade"
-                icon="plus"
-                labelPosition="left"
-                color="olive"
-              />
-            </a>
-          </Link>
+          <div className="user-new-nade">
+            <ButtonWithIcon
+              onClick={() => {
+                router.push("/newnades", "/newnade");
+              }}
+              small
+              icon={<FaPlus />}
+              value="Add nade"
+              backgroundColor="#56a100"
+            />
+          </div>
           <UserDropdown user={user} />
         </div>
         <style jsx>{`
@@ -45,8 +48,8 @@ export const UserNav: FC = memo(() => {
             align-items: center;
           }
 
-          .new-nade-btn {
-            margin-right: 18px;
+          .user-new-nade {
+            margin-right: 20px;
           }
 
           @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

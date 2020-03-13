@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { CsgoMap } from "../../../models/Nade/CsGoMap";
-import { capitalize } from "../../../utils/Common";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { capitalize } from "../../utils/Common";
 
 type Props = {
   map: CsgoMap;

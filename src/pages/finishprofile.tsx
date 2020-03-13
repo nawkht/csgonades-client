@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import Router from "next/router";
 import { useState } from "react";
-import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
+import { Layout2 } from "../layout/Layout2";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useFinishProfile } from "../store/UsersStore/hooks/useFinishProfile";

@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import { Message, Step } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
-import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
+import { Layout2 } from "../layout/Layout2";
 import { GfycatData } from "../models/Nade/GfycatData";
 import { NadeBody } from "../models/Nade/Nade";
 import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";

@@ -1,18 +1,27 @@
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 
 type Props = {
   icon: any;
-  onClick: () => void;
+  onClick?: () => void;
   value: string;
   backgroundColor: string;
   loading?: boolean;
+  small?: boolean;
 };
 
 export const ButtonWithIcon: FC<Props> = memo(
-  ({ icon, onClick, value, backgroundColor, loading }) => {
+  ({ icon, onClick, value, backgroundColor, loading, small }) => {
+    const classNameBuild = useMemo(() => {
+      const base = ["btn"];
+      if (small) {
+        base.push("small");
+      }
+      return base.join(" ");
+    }, [small]);
+
     return (
       <>
-        <button className="btn" onClick={onClick}>
+        <button className={classNameBuild} onClick={onClick}>
           {loading && <span className="loading">Loading...</span>}
           {!loading && (
             <>
@@ -33,7 +42,7 @@ export const ButtonWithIcon: FC<Props> = memo(
             background: ${backgroundColor};
             border-radius: 5px;
             display: flex;
-            transition: background 0.15s, transform 0.15s;
+            transition: background 0.15s;
             align-items: center;
             overflow: hidden;
             margin: 0;
@@ -42,7 +51,6 @@ export const ButtonWithIcon: FC<Props> = memo(
 
           .btn:hover {
             background: ${LightenDarkenColor(backgroundColor, -10)};
-            transform: scale(1.02);
           }
 
           .btn:hover .btn-icon {
@@ -85,6 +93,24 @@ export const ButtonWithIcon: FC<Props> = memo(
             text-align: center;
             width: 100%;
             font-weight: 400;
+          }
+
+          .small .btn-label {
+            font-size: 14px;
+            padding-left: 4px;
+            padding-right: 4px;
+          }
+
+          .small .btn-icon {
+            height: 30px;
+            width: 30px;
+            font-size: 14px;
+          }
+
+          .small .btn-icon-fa {
+            position: relative;
+            top: 1px;
+            left: 1px;
           }
         `}</style>
       </>

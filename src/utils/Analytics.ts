@@ -1,9 +1,29 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import ReactGA from "react-ga";
 import { useIsAdmin } from "../store/AuthStore/AuthHooks";
 
 const IS_BROWSER = typeof window !== "undefined";
 const IS_PROD = process.env.NODE_ENV === "production";
+
+export const usePageView = (title: string) => {
+  const { pageView } = useAnalytics();
+
+  useEffect(() => {
+    const delayedAnalytics = setTimeout(() => {
+      const location = window.location.pathname + window.location.search;
+      console.log("> Pageview", location, title);
+      pageView({
+        path: location,
+        title,
+      });
+    }, 500);
+    return () => {
+      if (delayedAnalytics) {
+        clearTimeout(delayedAnalytics);
+      }
+    };
+  }, [title, pageView]);
+};
 
 export const useAnalytics = () => {
   const isAdmin = useIsAdmin();

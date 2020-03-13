@@ -1,5 +1,5 @@
-import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
+import { Layout2 } from "../layout/Layout2";
 import { User } from "../models/User";
 import { UserNotFound } from "./UserNotFound";
 import { UserUI } from "./UserUI";

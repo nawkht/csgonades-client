@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FC } from "react";
-import { APP_VERSION, Dimensions } from "../../../constants/Constants";
-import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
-import { PageCentralize } from "../../PageCentralize";
+import { PageCentralize } from "../common/PageCentralize";
+import { APP_VERSION, Dimensions } from "../constants/Constants";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 export const Footer: FC = () => {
   const { colors } = useTheme();

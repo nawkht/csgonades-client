@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
-import { Dimensions } from "../../../constants/Constants";
-import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
-import { ThemeToggler } from "../../layout-components/ThemeToggler";
-import { PageCentralize } from "../../PageCentralize";
+import { PageCentralize } from "../../common/PageCentralize";
+import { Dimensions } from "../../constants/Constants";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { ThemeToggler } from "../Misc/ThemeToggler";
 import { MapLink } from "./MapLink";
 
 type Props = {};

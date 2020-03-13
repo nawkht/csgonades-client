@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import { ContactApi } from "../api/ContactApi";
-import { Layout2 } from "../common/layout/Layout2";
+import { Layout2 } from "../layout/Layout2";
 import { ConctactDTO } from "../models/Contact";
 import { withRedux } from "../utils/WithRedux";
 

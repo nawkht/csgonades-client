@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
+import { Layout2 } from "../layout/Layout2";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useAdminRoute } from "../store2/AdminStore/hooks";
 import { assertNever } from "../utils/Common";

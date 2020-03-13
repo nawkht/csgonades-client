@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { Popup } from "semantic-ui-react";
 import { User } from "../../models/User";
 import { useSignOut } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -29,19 +28,10 @@ export const UserDropdown: FC<Props> = ({ user }) => {
             <div>{user.nickname}</div>
           </a>
         </Link>
-        <Popup
-          content="Sign out"
-          mouseEnterDelay={200}
-          openOnTriggerClick={false}
-          inverted
-          size="mini"
-          position="bottom center"
-          trigger={
-            <button className="logout-btn" onClick={signOut}>
-              <FiLogOut />
-            </button>
-          }
-        />
+
+        <button className="logout-btn" onClick={signOut}>
+          <FiLogOut />
+        </button>
       </div>
       <style jsx>{`
         .user-nav-user {

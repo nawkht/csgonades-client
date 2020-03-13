@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Icon } from "semantic-ui-react";
+import { FaSteam } from "react-icons/fa";
 import { Config, Dimensions } from "../../constants/Constants";
 
 export const SignInnButton: FC = () => {
@@ -8,7 +8,7 @@ export const SignInnButton: FC = () => {
       <div className="steam-login-wrapper">
         <a className="steam-login" href={Config.SIGN_IN_URL} rel="nofollow">
           <div className="steam-logo">
-            <Icon name="steam" />
+            <FaSteam />
           </div>
           <div className="steam-text">SIGN IN WITH STEAM</div>
         </a>

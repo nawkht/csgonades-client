@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
-import { Dimensions } from "../../../constants/Constants";
-import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
+import { Dimensions } from "../../constants/Constants";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
@@ -11,12 +11,6 @@ export const SiteNav: FC<Props> = ({}) => {
   return (
     <>
       <div className="site-nav">
-        {false && (
-          <Link href="/blog" prefetch={false}>
-            <a className="nav-item">Blog</a>
-          </Link>
-        )}
-
         <Link href="/about" prefetch={false}>
           <a className="nav-item">About</a>
         </Link>

@@ -9,7 +9,7 @@ type Props = {
   currentMapPath?: string | string[];
 };
 
-export const MapLink: FC<Props> = ({ mapName, currentMapPath }) => {
+export const MobileMapLink: FC<Props> = ({ mapName, currentMapPath }) => {
   const { colors } = useTheme();
 
   const selected = currentMapPath ? currentMapPath.includes(mapName) : false;

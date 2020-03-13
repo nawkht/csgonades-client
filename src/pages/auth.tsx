@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { Dimmer, Loader } from "semantic-ui-react";
 import { useOnSignIn } from "../store/AuthStore/AuthHooks";
 import { withRedux } from "../utils/WithRedux";
 
@@ -7,9 +6,27 @@ const Auth: NextPage = () => {
   useOnSignIn();
 
   return (
-    <Dimmer active>
-      <Loader>Signing in...</Loader>
-    </Dimmer>
+    <>
+      <div className="loading">
+        <p>Signing in... Please wait.</p>
+      </div>
+      <style jsx>{`
+        .loading {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .loading {
+          text-align: center;
+        }
+      `}</style>
+    </>
   );
 };
 
