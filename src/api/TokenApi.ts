@@ -30,7 +30,6 @@ export class AuthApi {
 
       return ok(res.data.accessToken);
     } catch (error) {
-      console.log("> Failed to get token");
       return extractApiError(error);
     }
   }

@@ -105,8 +105,6 @@ export const useTrySignIn = () => {
       return;
     }
 
-    console.log(user);
-
     (async () => {
       const { userDetails, userToken } = await trySignInFunc();
 

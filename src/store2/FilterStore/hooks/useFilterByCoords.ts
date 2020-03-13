@@ -3,6 +3,7 @@ import { MapCoordinates } from "../../../models/Nade/Nade";
 import { NadeFilterContext } from "../context";
 export const useFilterByCoords = () => {
   const { dispatch } = useContext(NadeFilterContext);
+
   const filterByCoords = useCallback(
     (coords: MapCoordinates) => {
       dispatch({
@@ -12,5 +13,6 @@ export const useFilterByCoords = () => {
     },
     [dispatch]
   );
+
   return filterByCoords;
 };

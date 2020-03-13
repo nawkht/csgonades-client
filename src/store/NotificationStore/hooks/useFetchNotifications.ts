@@ -15,23 +15,27 @@ export const useFetchNotifications = () => {
       return;
     }
 
-    (async () => {
-      const authToken = await getToken();
+    const delay = setTimeout(() => {
+      (async () => {
+        const authToken = await getToken();
 
-      if (!authToken) {
-        return;
-      }
+        if (!authToken) {
+          return;
+        }
 
-      const result = await NotificationApi.getNotifications(authToken);
+        const result = await NotificationApi.getNotifications(authToken);
 
-      if (result.isErr()) {
-        console.error(result.error);
-        return;
-      }
+        if (result.isErr()) {
+          console.error(result.error);
+          return;
+        }
 
-      console.log("> Fetched notifications");
+        console.log("> Fetched notifications");
 
-      dispatch(addUnreadNotificationsAction(result.value));
-    })();
+        dispatch(addUnreadNotificationsAction(result.value));
+      })();
+    }, 1000);
+
+    return () => clearTimeout(delay);
   }, [user, dispatch, getToken]);
 };

@@ -3,6 +3,7 @@ import { CookieConsent } from "../common/CookieConsent";
 import { ToastList } from "../common/toast/ToastList";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { usePageView } from "../utils/Analytics";
+import { useSetupSession } from "./DataFetchers/useSetupSession";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { AdminLink } from "./Misc/AdminLink";
@@ -21,6 +22,7 @@ export const Layout2: FC<Props> = memo(
     const { colors } = useTheme();
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
     usePageView(title);
+    useSetupSession();
 
     return (
       <>

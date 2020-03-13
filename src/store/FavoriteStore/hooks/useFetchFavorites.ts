@@ -15,18 +15,23 @@ export const useFetchFavorites = () => {
       return;
     }
 
-    (async () => {
-      const token = await getToken();
+    const delay = setTimeout(() => {
+      console.log("Fetching favs");
+      (async () => {
+        const token = await getToken();
 
-      if (!token) {
-        return;
-      }
+        if (!token) {
+          return;
+        }
 
-      const result = await getUserFavorites(token);
+        const result = await getUserFavorites(token);
 
-      if (result.isOk()) {
-        dispatch(addAllFavoritesAction(result.value));
-      }
-    })();
+        if (result.isOk()) {
+          dispatch(addAllFavoritesAction(result.value));
+        }
+      })();
+    }, 1000);
+
+    return () => clearTimeout(delay);
   }, [user, dispatch, getToken]);
 };
