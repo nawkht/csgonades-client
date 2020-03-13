@@ -1,6 +1,5 @@
 import { FC, useMemo, useState } from "react";
 import { isMobile } from "react-device-detect";
-import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -28,7 +27,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   const filteredNades = useFilteredNades();
   useLoadLatestsNades(map);
 
-  const { codes, showAllAds } = useMemo(() => {
+  const { showAllAds } = useMemo(() => {
     if (
       map === "nuke" ||
       map === "cobblestone" ||
@@ -50,7 +49,6 @@ export const MapPage: FC<Props> = ({ map }) => {
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        <EzoicLoader codes={codes} />
         <div className="map-welcome">
           <PageCentralize>
             <div className="map-welcome-wrap">

@@ -1,6 +1,5 @@
 import { FC, lazy, memo, Suspense, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
-import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
@@ -59,7 +58,6 @@ export const NadePage: FC = memo(() => {
         canonical={`/nades/${nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
       >
-        <EzoicLoader codes={[108, 106, 107, 109]} />
         <div key={`nadepage-${nade.id}`}>
           {allowEdit && (
             <Suspense fallback={<div />}>
