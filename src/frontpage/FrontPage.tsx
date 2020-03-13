@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { EzoicHead } from "../common/ezoicLoader/EzoicHead";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../layout/Layout2";
 import { NadeLight } from "../models/Nade/Nade";
@@ -14,6 +15,7 @@ type Props = {
 export const FrontPage: FC<Props> = ({ recentNades }) => {
   return (
     <Layout2 canonical="">
+      <EzoicHead codes={[110]} />
       <FrontPageJumbo />
       {false && <BlogList />}
       <RecentNades recentNades={recentNades} />
