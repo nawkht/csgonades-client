@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { FaTimes } from "react-icons/fa";
 import { Dimensions, LayerPosition } from "../constants/Constants";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 type Props = {
   title?: string;
@@ -16,6 +17,8 @@ export const CSGNModal: FC<Props> = ({
   onDismiss,
   empty,
 }) => {
+  const { colors } = useTheme();
+
   if (!visible) {
     return null;
   }
@@ -87,15 +90,16 @@ export const CSGNModal: FC<Props> = ({
         .modal {
           background: red;
           align-self: center;
-          background: #fff;
           border-radius: ${Dimensions.BORDER_RADIUS};
           max-width: 90vw;
           max-height: 90vh;
+          background: ${colors.DP01};
+          color: ${colors.TEXT};
         }
 
         .modal-title {
           padding: 18px;
-          border-bottom: 1px solid #e6e6e6;
+          border-bottom: 1px solid ${colors.BORDER};
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -122,6 +126,8 @@ export const CSGNModal: FC<Props> = ({
           font-size: 24px;
           cursor: pointer;
           padding-top: 7px;
+          background: transparent;
+          color: ${colors.TEXT};
         }
 
         .modal-content {
