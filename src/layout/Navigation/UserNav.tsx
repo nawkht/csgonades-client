@@ -31,7 +31,7 @@ export const UserNav: FC = memo(() => {
           <div className="user-new-nade">
             <ButtonWithIcon
               onClick={() => {
-                router.push("/newnades", "/newnade");
+                router.push("/newnade", "/newnade");
               }}
               small
               icon={<FaPlus />}

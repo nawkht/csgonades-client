@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserFavorites } from "../../../api/FavoriteApi";
 import { userSelector } from "../../AuthStore/AuthSelectors";
@@ -6,32 +6,31 @@ import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
 import { addAllFavoritesAction } from "../FavoriteActions";
 
 export const useFetchFavorites = () => {
+  const [hasCalled, setHasCalled] = useState(false);
   const user = useSelector(userSelector);
   const dispatch = useDispatch();
   const getToken = useGetOrUpdateToken();
 
   useEffect(() => {
-    if (!user) {
+    if (!user || hasCalled) {
       return;
     }
 
-    const delay = setTimeout(() => {
-      console.log("Fetching favs");
-      (async () => {
-        const token = await getToken();
+    console.log("Fetching favs");
+    (async () => {
+      const token = await getToken();
 
-        if (!token) {
-          return;
-        }
+      if (!token) {
+        return;
+      }
 
-        const result = await getUserFavorites(token);
+      setHasCalled(true);
 
-        if (result.isOk()) {
-          dispatch(addAllFavoritesAction(result.value));
-        }
-      })();
-    }, 1000);
+      const result = await getUserFavorites(token);
 
-    return () => clearTimeout(delay);
-  }, [user, dispatch, getToken]);
+      if (result.isOk()) {
+        dispatch(addAllFavoritesAction(result.value));
+      }
+    })();
+  }, [user, dispatch, getToken, hasCalled]);
 };
