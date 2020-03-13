@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { NadeApi } from "../../api/NadeApi";
 import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
@@ -14,42 +14,24 @@ interface Props {
 const Map: NextPage<Props> = ({ map, nades }) => {
   return (
     <NadeFilterProvider nades={nades}>
-      <MapPage key={map} map={map} />
+      <MapPage map={map} />
     </NadeFilterProvider>
   );
 };
 
-type MapParams = {
-  params: {
-    map: CsgoMap;
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths: MapParams[] = [
-    { params: { map: "dust2" } },
-    { params: { map: "mirage" } },
-    { params: { map: "inferno" } },
-    { params: { map: "overpass" } },
-    { params: { map: "train" } },
-    { params: { map: "cache" } },
-    { params: { map: "nuke" } },
-    { params: { map: "vertigo" } },
-    { params: { map: "cobblestone" } },
-  ];
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const map = params.map as CsgoMap;
+export const getServerSideProps: GetServerSideProps = async context => {
+  const map = context.query.map as CsgoMap;
 
   const results = await NadeApi.getByMap(map);
 
-  if (results.isErr()) {
+  if (results.isOk()) {
+    return {
+      props: {
+        map,
+        nades: results.value,
+      },
+    };
+  } else {
     return {
       props: {
         map,
@@ -57,13 +39,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     };
   }
-
-  return {
-    props: {
-      map,
-      nades: results.value,
-    },
-  };
 };
 
 export default withRedux(Map, { ssr: false });
