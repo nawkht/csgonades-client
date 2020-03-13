@@ -18,6 +18,7 @@ export const useLoadLatestsNades = (map: CsgoMap) => {
       const result = await NadeApi.getByMap(map);
 
       if (result.isOk()) {
+        console.log("> Fetched newest nades", map);
         dispatch({
           type: "@@nadefilter/REPLACE_NADES",
           payload: result.value,
