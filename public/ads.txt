@@ -1,4 +1,5 @@
 #Ads.txt csgonades.com
+#Ads.txt managed by AdsTxtManager.com - the free ads.txt management tool for publishers
 
 districtm.io, 100604, DIRECT
 appnexus.com, 1908, RESELLER
