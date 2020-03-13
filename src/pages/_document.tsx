@@ -100,7 +100,6 @@ class MyDocument extends Document {
           body {
             font-family: "Roboto", Helvetica, sans-serif;
             font-weight: 300;
-            color: #212529;
             font-size: 16px;
           }
 

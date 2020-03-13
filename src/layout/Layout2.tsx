@@ -52,6 +52,9 @@ export const Layout2: FC<Props> = memo(
             background: ${colors.DP00};
             margin: 0;
             padding: 0;
+            font-family: "Roboto", Helvetica, sans-serif;
+            font-weight: 300;
+            font-size: 16px;
           }
 
           a {
