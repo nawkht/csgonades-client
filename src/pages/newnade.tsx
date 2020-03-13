@@ -6,4 +6,4 @@ const NewNadeContainer: NextPage = () => {
   return <NewNadePage />;
 };
 
-export default withRedux(NewNadeContainer);
+export default withRedux(NewNadeContainer, { ssr: false });

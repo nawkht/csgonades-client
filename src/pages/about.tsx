@@ -64,4 +64,4 @@ const AboutPageContainer: NextPage = () => {
   );
 };
 
-export default withRedux(AboutPageContainer);
+export default withRedux(AboutPageContainer, { ssr: false });

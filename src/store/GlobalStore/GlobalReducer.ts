@@ -9,9 +9,6 @@ export type GlobalState = {
   readonly stats: SiteStats;
   readonly isNavOpen: boolean;
   readonly acceptedCookieConcent: boolean;
-  readonly didTryFetchingCountryCode: boolean;
-  readonly countryCode?: string;
-  readonly firstRender: boolean;
 };
 
 const initialState: GlobalState = {
@@ -23,8 +20,6 @@ const initialState: GlobalState = {
   },
   isNavOpen: false,
   acceptedCookieConcent: false,
-  didTryFetchingCountryCode: false,
-  firstRender: true,
 };
 
 export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
@@ -51,11 +46,6 @@ export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
       return {
         ...state,
         acceptedCookieConcent: true,
-      };
-    case "@@global/FIRST_RENDER_COMPLETE":
-      return {
-        ...state,
-        firstRender: false,
       };
     default:
       assertNever(action);

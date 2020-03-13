@@ -1,7 +1,6 @@
 import { NadeApi } from "../../api/NadeApi";
 import { UserApi } from "../../api/UserApi";
 import { UserUpdateDTO } from "../../models/User";
-import { analyticsEventAction } from "../Analytics/AnalyticsActions";
 import { setUserAction } from "../AuthStore/AuthActions";
 import { tokenSelector } from "../AuthStore/AuthSelectors";
 import { ReduxThunkAction } from "../StoreUtils/ThunkActionType";
@@ -61,13 +60,6 @@ export const finishProfileThunk = (
       return dispatch(setUsersError(result.error));
     }
 
-    dispatch(
-      analyticsEventAction({
-        category: "user",
-        action: "finishprofile",
-      })
-    );
-
     setUserAction(dispatch, result.value);
   };
 };
@@ -92,13 +84,6 @@ export const updateUserThunk = (
     if (result.isErr()) {
       return dispatch(setUsersError(result.error));
     }
-
-    dispatch(
-      analyticsEventAction({
-        category: "user",
-        action: "update",
-      })
-    );
 
     setUserAction(dispatch, result.value);
 

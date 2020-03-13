@@ -3,6 +3,7 @@ import { NadeApi } from "../../api/NadeApi";
 import { Nade } from "../../models/Nade/Nade";
 import { NadeNotFound } from "../../nades/NadeNotFound";
 import { NadePage } from "../../nades/NadePage";
+import { NadePageStoreProvider } from "../../store2/NadePageStore/context";
 import { withRedux } from "../../utils/WithRedux";
 
 type Props = {
@@ -10,11 +11,12 @@ type Props = {
 };
 
 const NadePageComponent: NextPage<Props> = ({ nade }) => {
-  if (!nade) {
-    return <NadeNotFound />;
-  } else {
-    return <NadePage nade={nade} />;
-  }
+  return (
+    <NadePageStoreProvider nade={nade}>
+      {nade && <NadePage />}
+      {!nade && <NadeNotFound />}
+    </NadePageStoreProvider>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {

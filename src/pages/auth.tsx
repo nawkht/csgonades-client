@@ -19,4 +19,4 @@ const Auth: NextPage = () => {
   );
 };
 
-export default withRedux(Auth);
+export default withRedux(Auth, { ssr: false });

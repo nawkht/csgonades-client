@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ok } from "neverthrow";
 import { Config } from "../constants/Constants";
-import { ImageCollection } from "../store/GalleryStore/GalleryReducer";
+import { ImageCollection } from "../store2/GalleryStore/reducer";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
 export type ImageRes = {

@@ -1,7 +1,6 @@
-import { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeLight } from "../../models/Nade/Nade";
-import { useAnalyticsEvent } from "../../store/Analytics/AnalyticsActions";
 import { useRegisterView } from "../../store/NadeStore/NadeHooks";
 import { SeekBar } from "../SeekBar";
 import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
@@ -11,13 +10,11 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
-  const analyticsEvent = useAnalyticsEvent();
   const registerNadeView = useRegisterView();
   const [hovering, setHovering] = useState(false);
   const [progressForEvent, setProgressForEvent] = useState(0);
   const [progress, setProgress] = useState(0);
   const [hasSentViewedEvent, setHasSentViewedEvent] = useState(false);
-  const [hasSentAnalyticsEvent, setHasSentAnalyticsEvent] = useState(false);
 
   useEffect(() => {
     if (!hasSentViewedEvent && progress > 30) {
@@ -37,21 +34,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
       setProgressForEvent(progressPercentage);
     }
   }
-
-  const onVideoMouseLeave = useCallback(() => {
-    if (hasSentAnalyticsEvent || !progressForEvent) {
-      return;
-    }
-
-    const roundedProgress = Math.ceil(progressForEvent / 10) * 10;
-
-    analyticsEvent({
-      category: "nadeitem",
-      action: "PREVIEW_VIEWED",
-      label: `${roundedProgress}%`,
-    });
-    setHasSentAnalyticsEvent(true);
-  }, [hasSentAnalyticsEvent, progressForEvent, analyticsEvent]);
 
   const onLoad = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
     e.currentTarget.playbackRate = 3;
@@ -91,7 +73,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
               controls={false}
               poster={nade.images.thumbnailUrl}
               onTimeUpdate={onVideoTimeUpdate}
-              onMouseLeave={onVideoMouseLeave}
               onLoadStart={onLoad}
             >
               <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />

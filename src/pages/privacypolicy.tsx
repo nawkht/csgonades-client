@@ -120,4 +120,4 @@ const PrivacyPolicyPageContainer: NextPage = () => {
   );
 };
 
-export default withRedux(PrivacyPolicyPageContainer);
+export default withRedux(PrivacyPolicyPageContainer, { ssr: false });

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Dimensions } from "../constants/Constants";
+
 export const PageCentralize: FC = ({ children }) => {
   return (
     <>

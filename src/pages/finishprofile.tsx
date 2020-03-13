@@ -129,4 +129,4 @@ const FinishProfile: NextPage<Props> = ({}) => {
   );
 };
 
-export default withRedux(FinishProfile);
+export default withRedux(FinishProfile, { ssr: false });

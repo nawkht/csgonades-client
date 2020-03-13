@@ -1,5 +1,4 @@
 import { Favorite } from "../../models/Favorite";
-import { Meta } from "../Analytics/AnalyticsMiddleware";
 
 type AddAllFavoritesAction = {
   type: "@@favorites/ADD_ALL";
@@ -9,13 +8,11 @@ type AddAllFavoritesAction = {
 export type AddFavoriteAction = {
   type: "@@favorites/ADD";
   favorite: Favorite;
-  meta: Meta;
 };
 
 type RemoveFavoritesAction = {
   type: "@@favorites/REMOVE";
   favoriteId: string;
-  meta: Meta;
 };
 
 type FavoriteInProgressBegin = {
@@ -51,7 +48,6 @@ export const addAllFavoritesAction = (
 export const addFavoriteAction = (favorite: Favorite): AddFavoriteAction => ({
   type: "@@favorites/ADD",
   favorite,
-  meta: { gaEvent: {} },
 });
 
 export const removeFavoriteAction = (
@@ -59,5 +55,4 @@ export const removeFavoriteAction = (
 ): RemoveFavoritesAction => ({
   type: "@@favorites/REMOVE",
   favoriteId,
-  meta: { gaEvent: {} },
 });

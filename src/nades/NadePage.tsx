@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
@@ -7,9 +7,9 @@ import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
 import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
-import { Nade } from "../models/Nade/Nade";
 import { nadeTypeString } from "../models/Nade/NadeType";
-import { useCanEditNade, useRegisterView } from "../store/NadeStore/NadeHooks";
+import { useCanEditNade } from "../store/NadeStore/NadeHooks";
+import { useNade, useNadeRegisterView } from "../store2/NadePageStore/hooks";
 import { AdminEditor } from "./admineditor2/AdminEditor";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { MapPositionEditor } from "./components/MapPositionEditor";
@@ -23,12 +23,9 @@ import { DecriptionEditor } from "./editcontainers/DescriptionEditor";
 import { MetaEditor } from "./editcontainers/MetaEditor";
 import { TitleEditor } from "./editcontainers/TitleEditor";
 
-type Props = {
-  nade: Nade;
-};
-
-export const NadePage: FC<Props> = ({ nade }) => {
-  const registerView = useRegisterView();
+export const NadePage: FC = memo(() => {
+  const nade = useNade();
+  const registerView = useNadeRegisterView();
   const allowEdit = useCanEditNade(nade);
   const [editTitleVisisble, setEditTitleVisisble] = useState(false);
   const [editDescVisisble, setEditDescisisble] = useState(false);
@@ -278,4 +275,4 @@ export const NadePage: FC<Props> = ({ nade }) => {
       `}</style>
     </>
   );
-};
+});

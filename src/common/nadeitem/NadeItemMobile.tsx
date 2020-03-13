@@ -4,7 +4,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Icon } from "semantic-ui-react";
 import { Dimensions } from "../../constants/Constants";
 import { NadeLight, Status } from "../../models/Nade/Nade";
-import { useAnalyticsEvent } from "../../store/Analytics/AnalyticsActions";
 import { useRegisterView } from "../../store/NadeStore/NadeHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "./NadeItemTitle";
@@ -16,7 +15,6 @@ interface Props {
 }
 
 export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
-  const analyticsEvent = useAnalyticsEvent();
   const registerNadeView = useRegisterView();
   const [showMenu, setShowMenu] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -28,10 +26,6 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     if (isPlaying && !hasSentEvent) {
       timer = setTimeout(() => {
         registerNadeView(nade.id);
-        analyticsEvent({
-          category: "nadeitem",
-          action: "MOBILE_PREVIEW_PLAY",
-        });
         setHasSentEvent(true);
       }, 5000);
     }

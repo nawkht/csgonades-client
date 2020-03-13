@@ -95,4 +95,4 @@ const ContactPageContainer: NextPage = () => {
   );
 };
 
-export default withRedux(ContactPageContainer);
+export default withRedux(ContactPageContainer, { ssr: false });
