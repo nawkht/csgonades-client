@@ -1,26 +1,29 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, memo, useMemo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
-export const Logo: FC<Props> = ({}) => {
+export const Logo: FC<Props> = memo(({}) => {
   const { theme } = useTheme();
-  const logoUrl = theme === "light" ? "/logo.png" : "/logo-darkmode.png";
+
+  const logoUrl = useMemo(() => {
+    return theme === "light" ? "/logo.png" : "/logo-darkmode.png";
+  }, [theme]);
 
   return (
     <>
       <Link href="/" as="/">
         <a className="logo">
-          <img src={logoUrl} alt="CSGO Nades logo" />
+          <img key={logoUrl} src={logoUrl} alt="CSGO Nades logo" />
         </a>
       </Link>
       <style jsx>{`
         .logo img {
           max-height: 45px;
-          display: inline-block;
+          display: block;
         }
       `}</style>
     </>
   );
-};
+});

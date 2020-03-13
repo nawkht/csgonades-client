@@ -1,11 +1,9 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
-type Props = {};
-
-export const SiteNav: FC<Props> = ({}) => {
+export const SiteNav: FC = memo(({}) => {
   const { colors } = useTheme();
 
   return (
@@ -32,4 +30,4 @@ export const SiteNav: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});

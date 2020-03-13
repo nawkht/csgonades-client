@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { PageCentralize } from "../common/PageCentralize";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { Hamburger } from "./Misc/Hamburger";
@@ -9,7 +9,7 @@ import { UserNav } from "./Navigation/UserNav";
 
 type Props = {};
 
-export const Header: FC<Props> = ({}) => {
+export const Header: FC<Props> = memo(({}) => {
   const { colors } = useTheme();
 
   return (
@@ -32,11 +32,14 @@ export const Header: FC<Props> = ({}) => {
           padding-left: 0;
           padding-right: 0;
           background: ${colors.DP01};
+          min-height: 65px;
         }
 
         .header-wrap {
           display: flex;
           align-items: center;
+          height: 100%;
+          min-height: 47px;
         }
 
         .spacer {
@@ -45,4 +48,4 @@ export const Header: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});
