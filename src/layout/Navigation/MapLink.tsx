@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";
@@ -13,9 +14,9 @@ export const MapLink: FC<Props> = ({ map, currentPath }) => {
   return (
     <>
       <li className={selected ? "nav-selected" : ""}>
-        {/*<Link href={`/maps/[map]`} as={`/maps/${map}`}>*/}
-        <a href={`/maps/${map}`}>{capitalize(map)}</a>
-        {/*</Link>*/}
+        <Link href={`/maps/[map]`} as={`/maps/${map}`}>
+          <a>{capitalize(map)}</a>
+        </Link>
       </li>
       <style jsx>{`
         li {
