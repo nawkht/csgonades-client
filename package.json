@@ -7,13 +7,13 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "start-dev": "next start"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^9.3.0",
     "axios": "^0.19.2",
     "cross-env": "^7.0.2",
-    "jsonwebtoken": "^8.5.1",
     "nanoid": "^2.1.11",
     "neverthrow": "^2.2.0",
     "next": "^9.3.0",
@@ -28,14 +28,12 @@
     "react-jsx-parser": "^1.21.0",
     "react-lazy-load-image-component": "^1.4.1",
     "react-markdown": "^4.3.1",
-    "react-mde": "^8.1.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "remark-breaks": "^1.0.3",
-    "semantic-ui-react": "^0.88.2",
-    "showdown": "^1.9.1"
+    "semantic-ui-react": "^0.88.2"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.3.8",
@@ -46,7 +44,6 @@
     "@types/react-image-crop": "^8.1.2",
     "@types/react-lazy-load-image-component": "^1.3.0",
     "@types/react-redux": "^7.1.7",
-    "@types/showdown": "^1.9.3",
     "@types/styled-jsx": "^2.2.8",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",

@@ -1,13 +1,13 @@
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
 import { NadeApi } from "../../../api/NadeApi";
 import { NadeUpdateBody } from "../../../models/Nade/Nade";
+import { useReplaceNade } from "../../../store2/NadePageStore/hooks/useReplaceNade";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
 import { useDisplayToast } from "../../ToastStore/hooks/useDisplayToast";
 
 export const useUpdateNade = () => {
+  const replaceNade = useReplaceNade();
   const getToken = useGetOrUpdateToken();
-  const dispatch = useDispatch();
   const displayToast = useDisplayToast();
 
   const updateNade = useCallback(
@@ -29,14 +29,14 @@ export const useUpdateNade = () => {
         return;
       }
 
-      console.warn("> Should replace nade");
+      replaceNade(result.value);
 
       displayToast({
         message: "Updated nade details!",
         severity: "success",
       });
     },
-    [dispatch, getToken]
+    [getToken, replaceNade, displayToast]
   );
 
   return updateNade;

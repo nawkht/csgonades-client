@@ -1,9 +1,11 @@
 import { useCallback } from "react";
 import { NadeApi } from "../../../api/NadeApi";
+import { useReplaceNade } from "../../../store2/NadePageStore/hooks/useReplaceNade";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
 import { useDisplayToast } from "../../ToastStore/hooks/useDisplayToast";
 
 export const useUpdateNadeUser = () => {
+  const replaceNade = useReplaceNade();
   const getToken = useGetOrUpdateToken();
   const displayToast = useDisplayToast();
 
@@ -28,9 +30,9 @@ export const useUpdateNadeUser = () => {
         return;
       }
 
-      console.warn("> Should replace nade");
+      replaceNade(result.value);
     },
-    [getToken, displayToast]
+    [getToken, displayToast, replaceNade]
   );
 
   return updateNadeUser;

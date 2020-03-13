@@ -26,6 +26,8 @@ export const CsgnTextArea: FC<Props> = ({ value, onChange, label }) => {
           outline: none;
           min-height: 250px;
           resize: none;
+          padding: 15px;
+          border-radius: 5px;
         }
       `}</style>
     </>

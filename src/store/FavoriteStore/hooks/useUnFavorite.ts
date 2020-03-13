@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { FavoriteApi } from "../../../api/FavoriteApi";
-import { Nade } from "../../../models/Nade/Nade";
+import { useDescrementNadeFavCount } from "../../../store2/NadePageStore/hooks/useDecrementNadeFavCount";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
 import {
   addAllFavoritesAction,
@@ -11,11 +11,12 @@ import {
 } from "../FavoriteActions";
 
 export const useUnfavorite = () => {
+  const decrementNadeFavCount = useDescrementNadeFavCount();
   const getToken = useGetOrUpdateToken();
   const dispatch = useDispatch();
 
   const unFavorite = useCallback(
-    async (favoriteId: string, _: Nade) => {
+    async (favoriteId: string) => {
       dispatch(favoriteInProgressBeginAction());
 
       const token = await getToken();
@@ -41,9 +42,9 @@ export const useUnfavorite = () => {
 
       dispatch(addAllFavoritesAction(favorites));
       dispatch(favoriteInProgressEndAction());
-      console.warn("> Should reduce nade fav count");
+      decrementNadeFavCount();
     },
-    [dispatch, getToken]
+    [dispatch, getToken, decrementNadeFavCount]
   );
 
   return unFavorite;

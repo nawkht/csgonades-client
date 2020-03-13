@@ -31,7 +31,7 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
       return;
     }
     if (favorite) {
-      unFavorite(favorite.id, nade);
+      unFavorite(favorite.id);
     } else {
       addFavorite(nade);
     }

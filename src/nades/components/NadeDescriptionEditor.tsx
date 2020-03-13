@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
-import ReactMde, { commands } from "react-mde";
-import { Button } from "semantic-ui-react";
-import Showdown from "showdown";
+import { CsgnSaveButton } from "../../common/inputs/CsgnSaveButton";
+import { CsgnTextArea } from "../../common/inputs/CsgnTextArea";
 
 type Props = {
   onSave: (description: string) => void;
@@ -9,21 +8,8 @@ type Props = {
   description: string;
 };
 
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true,
-  simpleLineBreaks: true,
-});
-
-export const NadeDescriptionEditor: FC<Props> = ({
-  description,
-  onCancel,
-  onSave,
-}) => {
+export const NadeDescriptionEditor: FC<Props> = ({ description, onSave }) => {
   const [descValue, setDescValue] = useState(description);
-  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
   function onSaveDescription() {
     onSave(descValue);
@@ -32,33 +18,17 @@ export const NadeDescriptionEditor: FC<Props> = ({
   return (
     <>
       <div className="desc-editor">
-        <ReactMde
-          value={descValue}
+        <CsgnTextArea
+          label="Description"
           onChange={setDescValue}
-          selectedTab={selectedTab}
-          onTabChange={setSelectedTab}
-          minEditorHeight={400}
-          commands={[
-            {
-              commands: [
-                commands.boldCommand,
-                commands.italicCommand,
-                commands.linkCommand,
-                commands.unorderedListCommand,
-              ],
-            },
-          ]}
-          generateMarkdownPreview={markdown =>
-            Promise.resolve(converter.makeHtml(markdown))
-          }
+          value={descValue}
         />
-        <Button onClick={onCancel}>Cancel</Button>
-        <Button onClick={onSaveDescription}>Save</Button>
+
+        <CsgnSaveButton onClick={onSaveDescription} />
       </div>
       <style jsx>{`
         .desc-editor {
           width: 50vw;
-          min-height: 500px;
         }
       `}</style>
     </>
