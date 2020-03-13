@@ -9,6 +9,7 @@ import { Layout2 } from "../layout/Layout2";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useFilteredNades } from "../store2/FilterStore/hooks/useFilteredNades";
+import { useLoadLatestsNades } from "../store2/FilterStore/hooks/useLoadLatestsNades";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
 import { MapView } from "./mapview2/MapView";
@@ -25,6 +26,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   const { colors } = useTheme();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
   const filteredNades = useFilteredNades();
+  useLoadLatestsNades(map);
 
   const { codes, showAllAds } = useMemo(() => {
     if (

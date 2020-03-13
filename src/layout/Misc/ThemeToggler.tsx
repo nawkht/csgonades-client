@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NightDayToggle } from "./NightDayToggle";
 
@@ -19,6 +20,12 @@ export const ThemeToggler: FC<Props> = ({}) => {
           display: block;
           overflow: hidden;
           width: 45px;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .darkmode-toggle {
+            overflow: visible;
+          }
         }
       `}</style>
       <style jsx global>{`

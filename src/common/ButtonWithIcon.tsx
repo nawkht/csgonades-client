@@ -97,13 +97,13 @@ export const ButtonWithIcon: FC<Props> = memo(
 
           .small .btn-label {
             font-size: 14px;
-            padding-left: 4px;
-            padding-right: 4px;
+            padding-left: 15px;
+            padding-right: 15px;
           }
 
           .small .btn-icon {
-            height: 30px;
-            width: 30px;
+            height: 35px;
+            width: 35px;
             font-size: 14px;
           }
 

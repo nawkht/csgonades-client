@@ -30,7 +30,7 @@ export const NotificationIndicator: FC = memo(() => {
           className={notificationBtnClassNames}
           onClick={toggleNotificationTab}
         >
-          <FaBell />
+          <FaBell style={{ position: "relative", top: 1, left: -2 }} />
           <span>{notificationCount}</span>
         </button>
         <NotificationList visble={notificationTabVisible} />

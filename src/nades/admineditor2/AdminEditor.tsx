@@ -23,8 +23,6 @@ const AdminEditor: FC<Props> = ({ nade }) => {
     setIsEditing(true);
   }
 
-  console.log("Rendered admin editor");
-
   return (
     <>
       <div className="admin-editor">

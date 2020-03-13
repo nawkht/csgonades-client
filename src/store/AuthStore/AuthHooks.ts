@@ -176,7 +176,6 @@ export const useOnSignIn = () => {
 
 function checkIsFirstSignIn(user: User): boolean {
   const minsAgo = dateMinutesAgo(user.createdAt);
-  console.log("> Minutes ago first sign in", minsAgo);
 
   return minsAgo < 2;
 }

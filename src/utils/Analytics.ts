@@ -11,7 +11,6 @@ export const usePageView = (title: string) => {
   useEffect(() => {
     const delayedAnalytics = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
-      console.log("> Pageview", location, title);
       pageView({
         path: location,
         title,

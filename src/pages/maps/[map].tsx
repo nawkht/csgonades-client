@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { NadeApi } from "../../api/NadeApi";
 import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
@@ -19,8 +19,33 @@ const Map: NextPage<Props> = ({ map, nades }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const map = context.query.map as CsgoMap;
+type MapParams = {
+  params: {
+    map: CsgoMap;
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: MapParams[] = [
+    { params: { map: "dust2" } },
+    { params: { map: "mirage" } },
+    { params: { map: "inferno" } },
+    { params: { map: "overpass" } },
+    { params: { map: "train" } },
+    { params: { map: "cache" } },
+    { params: { map: "nuke" } },
+    { params: { map: "vertigo" } },
+    { params: { map: "cobblestone" } },
+  ];
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const map = params.map as CsgoMap;
 
   const results = await NadeApi.getByMap(map);
 

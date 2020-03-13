@@ -83,8 +83,11 @@ export const MobileNav: FC<Props> = memo(({}) => {
         }
 
         .exit-nav {
-          padding: 25px 35px;
+          padding-left: 16px;
+          padding-top: 18px;
+          padding-bottom: 16px;
           color: ${colors.TEXT};
+          font-size: 30px;
         }
 
         nav {
@@ -101,7 +104,8 @@ export const MobileNav: FC<Props> = memo(({}) => {
 
         .theme-toggle {
           position: relative;
-          left: 25px;
+          top: 20px;
+          left: 55px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

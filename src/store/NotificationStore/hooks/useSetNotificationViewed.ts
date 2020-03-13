@@ -17,8 +17,6 @@ export const useSetNotificationViewed = (id: string) => {
         return;
       }
 
-      console.log("> Marking notification as viewed");
-
       dispatch(markNotificationAsSeenAction(id));
 
       await NotificationApi.markAsViewed(id, authToken);

@@ -30,8 +30,6 @@ export const useFetchNotifications = () => {
           return;
         }
 
-        console.log("> Fetched notifications");
-
         dispatch(addUnreadNotificationsAction(result.value));
       })();
     }, 1000);

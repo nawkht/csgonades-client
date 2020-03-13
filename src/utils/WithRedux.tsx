@@ -36,7 +36,6 @@ export const withRedux = (PageComponent: NextPage, { ssr = true } = {}) => {
   }
 
   if (ssr || PageComponent.getInitialProps) {
-    console.log("> With redux running getInitProps");
     WithRedux.getInitialProps = async context => {
       // Get or Create the store with `undefined` as initialState
       // This allows you to set a custom default initialState

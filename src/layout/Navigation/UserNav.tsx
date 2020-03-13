@@ -35,7 +35,7 @@ export const UserNav: FC = memo(() => {
               }}
               small
               icon={<FaPlus />}
-              value="Add nade"
+              value="ADD NADE"
               backgroundColor="#56a100"
             />
           </div>

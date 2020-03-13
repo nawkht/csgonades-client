@@ -16,7 +16,6 @@ export const useFetchFavorites = () => {
       return;
     }
 
-    console.log("Fetching favs");
     (async () => {
       const token = await getToken();
 

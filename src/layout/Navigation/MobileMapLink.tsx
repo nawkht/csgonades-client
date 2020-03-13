@@ -28,7 +28,8 @@ export const MobileMapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           color: ${colors.TEXT};
           width: 100%;
           transition: background ${AnimationTimings.fast}s;
-          padding: 15px 50px 15px 30px;
+          padding: 15px 50px 15px 10px;
+          border-top: 1px solid ${colors.BORDER};
         }
 
         li a:hover {
