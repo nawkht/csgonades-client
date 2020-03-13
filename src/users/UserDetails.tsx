@@ -1,11 +1,10 @@
 import { FC } from "react";
 import { Dimensions } from "../constants/Constants";
-import { formatDate } from "../models/DateFormater";
 import { User } from "../models/User";
 import { useIsAllowedUserEdit } from "../store/AuthStore/AuthHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
-import { dateFromNow } from "../utils/DateUtils";
+import { prettyDate, prettyDateTime } from "../utils/DateUtils";
 import { UserEditorModal } from "./UserEditor/UserEditorModal";
 
 type Props = {
@@ -35,12 +34,12 @@ export const UserDetails: FC<Props> = ({ user }) => {
         )}
 
         <div className="member-since">
-          <span>Member since</span> {formatDate(user.createdAt)}
+          <span>Member since</span> {prettyDate(user.createdAt)}
         </div>
 
         {allowEdit && user.lastActive && (
           <div className="member-since">
-            <span>Last active</span> {dateFromNow(user.lastActive)}
+            <span>Last active</span> {prettyDateTime(user.lastActive)}
           </div>
         )}
 

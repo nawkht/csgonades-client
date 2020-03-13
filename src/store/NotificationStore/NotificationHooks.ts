@@ -1,4 +1,3 @@
-import moment from "moment";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { notificationsSelector } from "./NotificationSelectors";
@@ -11,9 +10,7 @@ export const useNotifications = () => {
   }, [rawNotifications]);
 
   const notifications = useMemo(() => {
-    return rawNotifications.sort(
-      (a, b) => moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf()
-    );
+    return rawNotifications.sort((a, b) => dateSort(b.createdAt, a.createdAt));
   }, [rawNotifications]);
 
   return {
@@ -21,3 +18,10 @@ export const useNotifications = () => {
     notificationCount,
   };
 };
+
+function dateSort(a: Date | string, b: Date | string) {
+  const aDate = typeof a === "string" ? new Date(a) : a;
+  const bDate = typeof b === "string" ? new Date(b) : b;
+
+  return bDate.getTime() - aDate.getTime();
+}

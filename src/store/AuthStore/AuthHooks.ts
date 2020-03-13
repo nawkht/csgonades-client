@@ -1,4 +1,3 @@
-import moment from "moment";
 import Router from "next/router";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +5,7 @@ import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
 import { Nade } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
+import { dateMinutesAgo } from "../../utils/DateUtils";
 import { setToken, setUserAction, signOutUser } from "./AuthActions";
 import { tokenSelector, userSelector } from "./AuthSelectors";
 
@@ -163,11 +163,8 @@ export const useOnSignIn = () => {
 };
 
 function checkIsFirstSignIn(user: User): boolean {
-  const minutesAgoCreated = moment().diff(
-    moment(user.createdAt),
-    "minute",
-    false
-  );
+  const minsAgo = dateMinutesAgo(user.createdAt);
+  console.log("> Minutes ago first sign in", minsAgo);
 
-  return minutesAgoCreated < 2;
+  return minsAgo < 2;
 }

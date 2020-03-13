@@ -4,7 +4,7 @@ import { Button, Pagination } from "semantic-ui-react";
 import { useSiteStats } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useAdminUsers } from "../store2/AdminStore/hooks";
-import { dateFromNow, prettyDateTime } from "../utils/DateUtils";
+import { prettyDateTime } from "../utils/DateUtils";
 
 const USER_LIMIT = 15;
 
@@ -53,7 +53,9 @@ export const UserList: FC = () => {
                     <a>{user.nickname}</a>
                   </Link>
                 </td>
-                <td className="last-active">{dateFromNow(user.lastActive)}</td>
+                <td className="last-active">
+                  {prettyDateTime(user.lastActive)}
+                </td>
                 <td className="created-at">{prettyDateTime(user.createdAt)}</td>
               </tr>
             ))}

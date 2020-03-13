@@ -4,13 +4,6 @@ import { UserApi } from "../../../api/UserApi";
 import { UserUpdateDTO } from "../../../models/User";
 import { setUserAction } from "../../AuthStore/AuthActions";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
-import {
-  setUsersError,
-  setViewingUserAction,
-  startLoadingUserUpdateAction,
-  stopEditingUserAction,
-  stopLoadingUserUpdateAction,
-} from "../UsersActions";
 
 export const useUpdateUser = () => {
   const getToken = useGetOrUpdateToken();
@@ -25,18 +18,13 @@ export const useUpdateUser = () => {
         return;
       }
 
-      dispatch(startLoadingUserUpdateAction());
       const result = await UserApi.updateUser(steamId, updatedFields, token);
-      dispatch(stopLoadingUserUpdateAction());
 
       if (result.isErr()) {
-        return dispatch(setUsersError(result.error));
+        return;
       }
 
       setUserAction(dispatch, result.value);
-
-      dispatch(setViewingUserAction(result.value));
-      dispatch(stopEditingUserAction());
     },
     [dispatch, getToken]
   );

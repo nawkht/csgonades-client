@@ -5,6 +5,7 @@ import { withRedux } from "../utils/WithRedux";
 
 const AboutPageContainer: NextPage = () => {
   const { colors } = useTheme();
+
   return (
     <>
       <Layout2 canonical="/about">

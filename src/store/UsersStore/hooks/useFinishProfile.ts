@@ -4,7 +4,6 @@ import { UserApi } from "../../../api/UserApi";
 import { UserUpdateDTO } from "../../../models/User";
 import { setUserAction } from "../../AuthStore/AuthActions";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
-import { setUsersError } from "../UsersActions";
 
 export const useFinishProfile = () => {
   const getToken = useGetOrUpdateToken();
@@ -21,7 +20,7 @@ export const useFinishProfile = () => {
       }
 
       if (result.isErr()) {
-        return dispatch(setUsersError(result.error));
+        return;
       }
 
       setUserAction(dispatch, result.value);

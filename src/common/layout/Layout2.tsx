@@ -1,7 +1,5 @@
 import Head from "next/head";
 import { FC, memo, useEffect, useMemo } from "react";
-// @ts-ignore
-import removeMd from "remove-markdown";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -55,7 +53,7 @@ export const Layout2: FC<Props> = memo(
     }, [isNavOpen]);
 
     const pageDescription = description
-      ? removeMd(description)
+      ? description
       : "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
 
     return (
