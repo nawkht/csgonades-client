@@ -16,7 +16,7 @@ type Props = {
   onDismiss: () => void;
 };
 
-export const MetaEditor: FC<Props> = ({ nade, onDismiss, visisble }) => {
+const MetaEditor: FC<Props> = ({ nade, onDismiss, visisble }) => {
   const { colors } = useTheme();
   const updateNade = useUpdateNade();
   const [type, setType] = useState(nade.type);
@@ -159,3 +159,5 @@ export const MetaEditor: FC<Props> = ({ nade, onDismiss, visisble }) => {
     </>
   );
 };
+
+export default MetaEditor;

@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, lazy, memo, Suspense, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
@@ -8,23 +8,28 @@ import { Layout2 } from "../layout/Layout2";
 import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
 import { nadeTypeString } from "../models/Nade/NadeType";
+import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
 import { useNadeRegisterView } from "../store2/NadePageStore/hooks/useNadeRegisterView";
-import { AdminEditor } from "./admineditor2/AdminEditor";
 import { FavoriteButton } from "./components/FavoriteButton";
-import { MapPositionEditor } from "./components/MapPositionEditor";
 import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
 import { NadeInfo } from "./components/NadeInfo";
-import { NadeStatus } from "./components/NadeStatus";
 import { NadeTitle } from "./components/NadeTitle";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { SimilarNades } from "./components/SimilarNades";
-import { DecriptionEditor } from "./editcontainers/DescriptionEditor";
-import { MetaEditor } from "./editcontainers/MetaEditor";
-import { TitleEditor } from "./editcontainers/TitleEditor";
+
+const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
+const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
+const DecriptionEditor = lazy(() =>
+  import("./editcontainers/DescriptionEditor")
+);
+const MetaEditor = lazy(() => import("./editcontainers/MetaEditor"));
+const MapPositionEditor = lazy(() => import("./components/MapPositionEditor"));
+const NadeStatus = lazy(() => import("./components/NadeStatus"));
 
 export const NadePage: FC = memo(() => {
+  const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
   const registerView = useNadeRegisterView();
   const allowEdit = useCanEditNade(nade);
@@ -56,7 +61,11 @@ export const NadePage: FC = memo(() => {
       >
         <EzoicLoader codes={[108, 106, 107, 109]} />
         <div key={`nadepage-${nade.id}`}>
-          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+          {allowEdit && (
+            <Suspense fallback={<div />}>
+              <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+            </Suspense>
+          )}
           <NadeBreadcrumb nade={nade} />
           <NadeTitle
             title={nade.title}
@@ -121,28 +130,48 @@ export const NadePage: FC = memo(() => {
               message="favorite"
             />
 
-            <TitleEditor
-              nadeId={nade.id}
-              title={nade.title}
-              visisble={editTitleVisisble}
-              onClose={() => setEditTitleVisisble(false)}
-            />
+            {allowEdit && (
+              <Suspense fallback={<div />}>
+                <TitleEditor
+                  nadeId={nade.id}
+                  title={nade.title}
+                  visisble={editTitleVisisble}
+                  onClose={() => setEditTitleVisisble(false)}
+                />
+              </Suspense>
+            )}
 
-            <DecriptionEditor
-              visisble={editDescVisisble}
-              nade={nade}
-              onDismiss={() => setEditDescisisble(false)}
-            />
+            {allowEdit && (
+              <Suspense fallback={<div />}>
+                <DecriptionEditor
+                  visisble={editDescVisisble}
+                  nade={nade}
+                  onDismiss={() => setEditDescisisble(false)}
+                />
+              </Suspense>
+            )}
 
-            <MetaEditor
-              visisble={editMetaVisible}
-              nade={nade}
-              onDismiss={() => setEditMetaVisible(false)}
-            />
+            {allowEdit && (
+              <Suspense fallback={<div />}>
+                <MetaEditor
+                  visisble={editMetaVisible}
+                  nade={nade}
+                  onDismiss={() => setEditMetaVisible(false)}
+                />
+              </Suspense>
+            )}
 
-            <MapPositionEditor nade={nade} />
+            {allowEdit && (
+              <Suspense fallback={<div />}>
+                <MapPositionEditor nade={nade} />
+              </Suspense>
+            )}
 
-            <AdminEditor nade={nade} />
+            {isAdminOrMod && (
+              <Suspense fallback={<div />}>
+                <AdminEditor nade={nade} />
+              </Suspense>
+            )}
           </div>
         </div>
       </Layout2>

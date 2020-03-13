@@ -1,6 +1,5 @@
 import { FC, useMemo } from "react";
-import { Popup } from "semantic-ui-react";
-import { NadeType, nadeTypeString } from "../../models/Nade/NadeType";
+import { NadeType } from "../../models/Nade/NadeType";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { iconFromType } from "../../utils/Common";
 
@@ -41,20 +40,9 @@ export const NadeTypeButton: FC<Props> = ({
         </button>
       )}
       {!mobile && (
-        <Popup
-          content={nadeTypeString(type)}
-          hoverable
-          position="right center"
-          inverted
-          size="tiny"
-          mouseEnterDelay={300}
-          openOnTriggerClick={false}
-          trigger={
-            <button className={classNameBuilder} onClick={onClick}>
-              <div className="type-icon"></div>
-            </button>
-          }
-        />
+        <button className={classNameBuilder} onClick={onClick}>
+          <div className="type-icon"></div>
+        </button>
       )}
 
       <style jsx>{`

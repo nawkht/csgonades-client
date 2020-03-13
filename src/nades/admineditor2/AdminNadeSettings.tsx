@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import { Button, Input } from "semantic-ui-react";
+import { CsgnInput } from "../../common/inputs/CsgnInput";
 import { Nade, Status, StatusInfo } from "../../models/Nade/Nade";
 import { useDeleteNade } from "../../store/NadeStore/hooks/useDeleteNade";
 import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
@@ -59,16 +59,14 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
         onChange={newDate => setCreatedAt(newDate)}
       />
       <br />
-      <Button onClick={onUpdateCreatedAt}>UPDATE YEAR</Button>
+      <button onClick={onUpdateCreatedAt}>UPDATE YEAR</button>
       <h3>Delete</h3>
-      <p>Write &quot;DELETE&quot;:</p>
-      <Input
+      <CsgnInput
+        label={`Write "DELETE"`}
         value={deleteConfimMessage}
-        onChange={(_, text) => {
-          setDeleteConfimMessage(text.value);
-        }}
+        onChange={setDeleteConfimMessage}
       />
-      <Button onClick={onDelete}>DELETE</Button>
+      <button onClick={onDelete}>Delete</button>
     </div>
   );
 };

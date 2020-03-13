@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { FC, useEffect, useMemo, useState } from "react";
-import { Button, Pagination } from "semantic-ui-react";
-import { useSiteStats } from "../store/GlobalStore/GlobalHooks";
+import { FC, useEffect, useState } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useAdminUsers } from "../store2/AdminStore/hooks";
 import { prettyDateTime } from "../utils/DateUtils";
@@ -10,14 +8,9 @@ const USER_LIMIT = 15;
 
 export const UserList: FC = () => {
   const { colors } = useTheme();
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const [sortByActivity, setSortByActivity] = useState(false);
-  const {
-    stats: { numUsers },
-  } = useSiteStats();
   const { users, fetchUsers } = useAdminUsers();
-
-  const numPages = useMemo(() => Math.ceil(numUsers / USER_LIMIT), [numUsers]);
 
   useEffect(() => {
     fetchUsers(page, USER_LIMIT, sortByActivity);
@@ -27,8 +20,8 @@ export const UserList: FC = () => {
   return (
     <>
       <div className="user-list">
-        <Button onClick={() => setSortByActivity(false)}>By created at</Button>
-        <Button onClick={() => setSortByActivity(true)}>By last active</Button>
+        <button onClick={() => setSortByActivity(false)}>By created at</button>
+        <button onClick={() => setSortByActivity(true)}>By last active</button>
         <table id="users">
           <thead>
             <tr>
@@ -61,15 +54,6 @@ export const UserList: FC = () => {
             ))}
           </tbody>
         </table>
-
-        <Pagination
-          defaultActivePage={1}
-          totalPages={numPages}
-          onPageChange={(_, pageProps) => {
-            const activePage = pageProps.activePage as number;
-            setPage(activePage);
-          }}
-        />
       </div>
       <style jsx>{`
         .user-list {

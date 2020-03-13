@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Popup } from "semantic-ui-react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useFilterByTickrate } from "../../store2/FilterStore/hooks";
 import { FilterBg } from "./FilterBg";
@@ -22,41 +21,19 @@ export const TickrateSelector: FC<Props> = ({}) => {
       <div className="filter-tick">
         <div className="filter-tick-label">TICK</div>
         <FilterBg>
-          <Popup
-            content={"Only 64 tick"}
-            hoverable
-            position="right center"
-            inverted
-            size="tiny"
-            mouseEnterDelay={300}
-            openOnTriggerClick={false}
-            trigger={
-              <button
-                className={`filter-btn tickrate-btn ${tick64active}`}
-                onClick={filterByTickrate64}
-              >
-                64
-              </button>
-            }
-          />
+          <button
+            className={`filter-btn tickrate-btn ${tick64active}`}
+            onClick={filterByTickrate64}
+          >
+            64
+          </button>
 
-          <Popup
-            content={"Only 128 tick"}
-            hoverable
-            position="right center"
-            inverted
-            size="tiny"
-            mouseEnterDelay={300}
-            openOnTriggerClick={false}
-            trigger={
-              <button
-                className={`filter-btn tickrate-btn ${tick128active}`}
-                onClick={filterByTickrate128}
-              >
-                128
-              </button>
-            }
-          />
+          <button
+            className={`filter-btn tickrate-btn ${tick128active}`}
+            onClick={filterByTickrate128}
+          >
+            128
+          </button>
         </FilterBg>
       </div>
       <style jsx>{`

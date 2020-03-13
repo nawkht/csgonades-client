@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Icon } from "semantic-ui-react";
+import { FaPenFancy } from "react-icons/fa";
 import { AnimationTimings } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
@@ -18,7 +18,7 @@ export const EditButton: FC<Props> = ({ onClick, isEditing }) => {
   return (
     <>
       <div className="edit-wrapper" onClick={onClick}>
-        <Icon name="pencil alternate" /> EDIT
+        <FaPenFancy /> EDIT
       </div>
       <style jsx>{`
         .edit-wrapper {

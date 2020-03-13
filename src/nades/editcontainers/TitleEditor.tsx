@@ -10,12 +10,7 @@ type Props = {
   onClose: () => void;
 };
 
-export const TitleEditor: FC<Props> = ({
-  visisble,
-  onClose,
-  title,
-  nadeId,
-}) => {
+const TitleEditor: FC<Props> = ({ visisble, onClose, title, nadeId }) => {
   const { colors } = useTheme();
   const [nadeTitle, setNadeTitle] = useState(title || "");
   const updateNade = useUpdateNade();
@@ -75,3 +70,5 @@ export const TitleEditor: FC<Props> = ({
     </>
   );
 };
+
+export default TitleEditor;

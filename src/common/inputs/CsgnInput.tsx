@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 type Props = {
-  label: string;
+  label?: string;
   value: string;
   onChange: (value: string) => void;
 };
@@ -10,7 +10,7 @@ export const CsgnInput: FC<Props> = ({ onChange, value, label }) => {
   return (
     <>
       <div className="input-wrapper">
-        <label>{label}</label>
+        {!!label && <label>{label}</label>}
         <input value={value} onChange={e => onChange(e.target.value)}></input>
       </div>
       <style jsx>{`

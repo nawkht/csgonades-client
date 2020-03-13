@@ -11,7 +11,7 @@ type Props = {
   onDismiss: () => void;
 };
 
-export const DecriptionEditor: FC<Props> = ({ nade, onDismiss, visisble }) => {
+const DecriptionEditor: FC<Props> = ({ nade, onDismiss, visisble }) => {
   const updateNade = useUpdateNade();
   const allowEdit = useCanEditNade(nade);
 
@@ -41,3 +41,5 @@ export const DecriptionEditor: FC<Props> = ({ nade, onDismiss, visisble }) => {
     </>
   );
 };
+
+export default DecriptionEditor;

@@ -105,10 +105,18 @@ export const useTrySignIn = () => {
       return;
     }
 
+    console.log(user);
+
     (async () => {
       const { userDetails, userToken } = await trySignInFunc();
-      dispatch(setToken(userToken));
-      setUserAction(dispatch, userDetails);
+
+      if (userDetails) {
+        setUserAction(dispatch, userDetails);
+      }
+
+      if (userToken) {
+        dispatch(setToken(userToken));
+      }
     })();
   }, [dispatch, token, user]);
 
@@ -119,7 +127,10 @@ async function trySignInFunc() {
   const tokenResult = await AuthApi.refreshToken();
 
   if (tokenResult.isErr()) {
-    return;
+    return {
+      userToken: null,
+      userDetails: null,
+    };
   }
 
   const userToken = tokenResult.value;
@@ -127,7 +138,10 @@ async function trySignInFunc() {
   const userResult = await UserApi.fetchSelf(userToken);
 
   if (userResult.isErr()) {
-    return;
+    return {
+      userToken: null,
+      userDetails: null,
+    };
   }
 
   const user = userResult.value;

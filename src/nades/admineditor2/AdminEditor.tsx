@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { Button } from "semantic-ui-react";
 import { Nade } from "../../models/Nade/Nade";
 import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { AdminEditorModal } from "./AdminEditorModal";
@@ -8,7 +7,7 @@ type Props = {
   nade: Nade;
 };
 
-export const AdminEditor: FC<Props> = ({ nade }) => {
+const AdminEditor: FC<Props> = ({ nade }) => {
   const isVisible = useIsAdminOrModerator();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -24,17 +23,12 @@ export const AdminEditor: FC<Props> = ({ nade }) => {
     setIsEditing(true);
   }
 
+  console.log("Rendered admin editor");
+
   return (
     <>
       <div className="admin-editor">
-        <Button
-          fluid
-          content="Admin"
-          icon="user secret"
-          labelPosition="left"
-          color="orange"
-          onClick={showModal}
-        />
+        <button onClick={showModal}>Admin</button>
       </div>
       <AdminEditorModal
         nade={nade}
@@ -51,3 +45,5 @@ export const AdminEditor: FC<Props> = ({ nade }) => {
     </>
   );
 };
+
+export default AdminEditor;

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { FaMap } from "react-icons/fa";
-import { Popup } from "semantic-ui-react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import {
   useFilterByType,
@@ -26,23 +25,9 @@ export const NadeFilter: FC<Props> = ({ showSingInWarning }) => {
       <div className="nade-filter">
         <div className="map">
           <FilterBg>
-            <Popup
-              content="Show map"
-              hoverable
-              position="right center"
-              inverted
-              size="tiny"
-              mouseEnterDelay={300}
-              openOnTriggerClick={false}
-              trigger={
-                <button
-                  className="filter-btn"
-                  onClick={toggleMapViewVisibility}
-                >
-                  <FaMap />
-                </button>
-              }
-            />
+            <button className="filter-btn" onClick={toggleMapViewVisibility}>
+              <FaMap />
+            </button>
           </FilterBg>
         </div>
 

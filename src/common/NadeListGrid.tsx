@@ -1,6 +1,5 @@
 import { FC, memo, useMemo } from "react";
 import { isMobile, isMobileOnly } from "react-device-detect";
-import { Loader, Message } from "semantic-ui-react";
 import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
 import { EzoicPlaceHolder } from "./ezoicLoader/EzoicPlaceHolder";
@@ -15,7 +14,7 @@ type Props = {
 };
 
 export const NadeListGrid: FC<Props> = memo(
-  ({ nades, emptyMessage = "No nades found", onItemClick, loading }) => {
+  ({ nades, emptyMessage = "No nades found", onItemClick }) => {
     const numNames = nades.length;
     const hasNades = numNames > 0;
 
@@ -68,21 +67,11 @@ export const NadeListGrid: FC<Props> = memo(
       return nadesWithAds;
     }, [nades, onItemClick]);
 
-    if (loading) {
-      return (
-        <div>
-          <Loader active={loading} inline="centered" size="small" />
-        </div>
-      );
-    }
-
     if (!hasNades) {
       return (
         <>
           <div className="nadelist-nonades">
-            <Message warning>
-              <p>{emptyMessage}</p>
-            </Message>
+            <p>{emptyMessage}</p>
           </div>
           <style jsx>{`
             .nadelist-nonades {

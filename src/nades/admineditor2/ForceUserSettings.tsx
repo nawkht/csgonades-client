@@ -1,5 +1,6 @@
-import { ChangeEvent, FC, useState } from "react";
-import { Button, Input } from "semantic-ui-react";
+import { FC, useState } from "react";
+import { CsgnInput } from "../../common/inputs/CsgnInput";
+import { CsgnSaveButton } from "../../common/inputs/CsgnSaveButton";
 import { useUpdateNadeUser } from "../../store/NadeStore/hooks/useUpdateNadeUser";
 
 type Props = {
@@ -11,10 +12,6 @@ export const ForceUserSettings: FC<Props> = ({ nadeId, onClose }) => {
   const [steamIdOrUrl, setSteamIdOrUrl] = useState("");
   const updateUser = useUpdateNadeUser();
 
-  function onInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setSteamIdOrUrl(event.target.value);
-  }
-
   function onUpdateUser() {
     const steamId = cleanSteamId(steamIdOrUrl);
     updateUser(nadeId, steamId);
@@ -23,8 +20,8 @@ export const ForceUserSettings: FC<Props> = ({ nadeId, onClose }) => {
 
   return (
     <>
-      <Input fluid value={steamIdOrUrl} onChange={onInputChange} />
-      <Button onClick={onUpdateUser}>Update</Button>
+      <CsgnInput value={steamIdOrUrl} onChange={setSteamIdOrUrl} />
+      <CsgnSaveButton onClick={onUpdateUser} />
     </>
   );
 };

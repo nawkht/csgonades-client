@@ -9,7 +9,7 @@ type Props = {
   nade: Nade;
 };
 
-export const MapPositionEditor: FC<Props> = ({ nade }) => {
+const MapPositionEditor: FC<Props> = ({ nade }) => {
   const allowEdit = useCanEditNade(nade);
   const updateNade = useUpdateNade();
 
@@ -59,3 +59,4 @@ export const MapPositionEditor: FC<Props> = ({ nade }) => {
     </>
   );
 };
+export default MapPositionEditor;

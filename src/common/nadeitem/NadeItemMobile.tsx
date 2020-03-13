@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { FC, useEffect, useState } from "react";
+import { FaChevronLeft, FaPause, FaPlay } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Icon } from "semantic-ui-react";
 import { Dimensions } from "../../constants/Constants";
 import { NadeLight, Status } from "../../models/Nade/Nade";
 import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
@@ -63,17 +63,17 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
               <div className="context-action" onClick={onPlayClick}>
                 {isPlaying && (
                   <>
-                    <Icon name="pause" /> <span>Pause</span>
+                    <FaPause /> <span>Pause</span>
                   </>
                 )}
                 {!isPlaying && (
                   <>
-                    <Icon name="play" /> <span>Play</span>
+                    <FaPlay /> <span>Play</span>
                   </>
                 )}
               </div>
               <div className="context-action" onClick={onDetailsClick}>
-                <Icon name="chevron right" /> Details
+                <FaChevronLeft /> Details
               </div>
             </div>
           </div>

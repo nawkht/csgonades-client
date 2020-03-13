@@ -9,7 +9,7 @@ type Props = {
   statusInfo?: StatusInfo;
 };
 
-export const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
+const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
   const { colors } = useTheme();
 
   if (status === "accepted") {
@@ -113,3 +113,5 @@ function statusColor(status: Status, colors: ThemeColors) {
       };
   }
 }
+
+export default NadeStatus;

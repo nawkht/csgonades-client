@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Icon } from "semantic-ui-react";
+import { FaTimes } from "react-icons/fa";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { AppToast, ToastSeverity } from "../../store/ToastStore/ToastActions";
 import { useDismissToast } from "../../store/ToastStore/ToastHooks";
@@ -49,7 +49,7 @@ export const ToastItem: FC<Props> = ({ notification }) => {
               className="toast-close-btn"
               onClick={() => dismissToast(notification.id)}
             >
-              <Icon name="close" />
+              <FaTimes />
             </span>
           </div>
         )}

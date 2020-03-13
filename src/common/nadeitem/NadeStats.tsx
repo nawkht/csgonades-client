@@ -2,7 +2,6 @@ import { FC } from "react";
 import { FaRunning } from "react-icons/fa";
 import { GoEye, GoTerminal } from "react-icons/go";
 import { TiStarFullOutline } from "react-icons/ti";
-import { Popup } from "semantic-ui-react";
 import { NadeLight } from "../../models/Nade/Nade";
 import { tickrateString } from "../../models/Nade/NadeTickrate";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -48,40 +47,18 @@ export const NadeStats: FC<Props> = ({ nade }) => {
         </div>
         <div className="specials">
           {hasMovement && (
-            <Popup
-              content="Requires movement"
-              hoverable
-              inverted
-              size="tiny"
-              position="bottom center"
-              mouseEnterDelay={300}
-              openOnTriggerClick={false}
-              trigger={
-                <div className="special movement">
-                  <FaRunning />
-                </div>
-              }
-            />
+            <div className="special movement">
+              <FaRunning />
+            </div>
           )}
 
           {isJumpThrow && (
-            <Popup
-              content="Uses jumpthrow bind"
-              hoverable
-              inverted
-              size="tiny"
-              position="bottom center"
-              mouseEnterDelay={300}
-              openOnTriggerClick={false}
-              trigger={
-                <div className="special tick">
-                  <GoTerminal />
-                  <span className="special-text">
-                    {tickrateString(nade.tickrate || "any")}
-                  </span>
-                </div>
-              }
-            />
+            <div className="special tick">
+              <GoTerminal />
+              <span className="special-text">
+                {tickrateString(nade.tickrate || "any")}
+              </span>
+            </div>
           )}
         </div>
       </div>
