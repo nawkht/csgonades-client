@@ -38,7 +38,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
     } else {
       return {
         showAllAds: true,
-        codes: [112, 104, 101, 111, 113, ...mobileInContentAds],
+        codes: [112, 104, 101, 111, ...mobileInContentAds],
       };
     }
   }, [map]);
@@ -75,16 +75,12 @@ export const MapPage: FC<Props> = memo(({ map }) => {
             </div>
 
             {showAllAds && (
-              <div className="ez placement-sidebar-middle">
-                <EzoicPlaceHolder id={113} />
-              </div>
-            )}
-
-            {showAllAds && (
               <div className="ez placement-siderbar-bottom">
                 <EzoicPlaceHolder id={111} />
               </div>
             )}
+
+            <div className="ez empty"></div>
           </div>
         </div>
         <div className="ez placement-bottom">
@@ -105,8 +101,6 @@ export const MapPage: FC<Props> = memo(({ map }) => {
             ${colors.jumboGradientStart} 33.44%,
             ${colors.jumboGradientEnd} 66.89%
           );
-          padding-top: 40px;
-          padding-bottom: 40px;
           margin-bottom: 40px;
         }
 
@@ -165,11 +159,13 @@ export const MapPage: FC<Props> = memo(({ map }) => {
           width: 500px;
           display: flex;
           justify-content: space-around;
-          min-height: 50px;
+          min-height: 200px;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: flex-end;
+          margin-bottom: 10px;
+          margin-top: 10px;
         }
 
         .placement-bottom {
