@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import { Button } from "semantic-ui-react";
 import { MapCoordinates, Nade } from "../../models/Nade/Nade";
-import { useCanEditNade, useUpdateNade } from "../../store/NadeStore/NadeHooks";
+import { useCanEditNade } from "../../store/NadeStore/hooks/useCanEditNade";
+import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
 import { MapPositionModal } from "./MapPositionModal";
 
 type Props = {

@@ -3,12 +3,10 @@ import { FaStar } from "react-icons/fa";
 import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { Nade } from "../../models/Nade/Nade";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
-import {
-  useAddFavorite,
-  useIsFavorited,
-  useIsFavoriteInProgress,
-  useUnfavorite,
-} from "../../store/FavoriteStore/FavoriteHooks";
+import { useAddFavorite } from "../../store/FavoriteStore/hooks/useAddFavorite";
+import { useIsFavorited } from "../../store/FavoriteStore/hooks/useIsFavorited";
+import { useIsFavoriteInProgress } from "../../store/FavoriteStore/hooks/useIsFavoriteInProgress";
+import { useUnfavorite } from "../../store/FavoriteStore/hooks/useUnFavorite";
 
 type Props = {
   nade: Nade;

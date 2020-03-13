@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
 import { Nade } from "../../models/Nade/Nade";
-import { useCanEditNade, useUpdateNade } from "../../store/NadeStore/NadeHooks";
+import { useCanEditNade } from "../../store/NadeStore/hooks/useCanEditNade";
+import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
 import { NadeDescriptionEditor } from "../components/NadeDescriptionEditor";
 
 type Props = {

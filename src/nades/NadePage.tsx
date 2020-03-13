@@ -8,7 +8,7 @@ import { Dimensions } from "../constants/Constants";
 import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
 import { nadeTypeString } from "../models/Nade/NadeType";
-import { useCanEditNade } from "../store/NadeStore/NadeHooks";
+import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade, useNadeRegisterView } from "../store2/NadePageStore/hooks";
 import { AdminEditor } from "./admineditor2/AdminEditor";
 import { FavoriteButton } from "./components/FavoriteButton";

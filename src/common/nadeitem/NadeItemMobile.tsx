@@ -4,7 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Icon } from "semantic-ui-react";
 import { Dimensions } from "../../constants/Constants";
 import { NadeLight, Status } from "../../models/Nade/Nade";
-import { useRegisterView } from "../../store/NadeStore/NadeHooks";
+import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "./NadeItemTitle";
 import { NadeStats } from "./NadeStats";

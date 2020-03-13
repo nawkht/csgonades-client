@@ -1,13 +1,13 @@
-import { useCallback } from "react";
+import moment from "moment";
+import Router from "next/router";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AuthApi } from "../../api/TokenApi";
+import { UserApi } from "../../api/UserApi";
 import { Nade } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
-import { userSelector } from "./AuthSelectors";
-import {
-  preloadUserThunkAction,
-  signOutUserThunk,
-  trySignInThunk,
-} from "./AuthTunks";
+import { setToken, setUserAction, signOutUser } from "./AuthActions";
+import { tokenSelector, userSelector } from "./AuthSelectors";
 
 export const useSignedInUser = () => {
   const user = useSelector(userSelector);
@@ -88,27 +88,86 @@ export const useIsAdmin = (): boolean => {
 export const useSignOut = () => {
   const dispatch = useDispatch();
   const signOut = useCallback(() => {
-    dispatch(signOutUserThunk());
+    AuthApi.signOut().then(() => {
+      dispatch(signOutUser());
+    });
   }, [dispatch]);
   return signOut;
 };
 
-export const usePreloadUser = () => {
-  const dispatch = useDispatch();
-
-  const preloadUser = useCallback(() => {
-    dispatch(preloadUserThunkAction());
-  }, [dispatch]);
-
-  return preloadUser;
-};
-
 export const useTrySignIn = () => {
+  const token = useSelector(tokenSelector);
+  const user = useSelector(userSelector);
   const dispatch = useDispatch();
 
   const trySignIn = useCallback(() => {
-    dispatch(trySignInThunk());
-  }, [dispatch]);
+    if (user && token) {
+      return;
+    }
+
+    (async () => {
+      const { userDetails, userToken } = await trySignInFunc();
+      dispatch(setToken(userToken));
+      setUserAction(dispatch, userDetails);
+    })();
+  }, [dispatch, token, user]);
 
   return trySignIn;
 };
+
+async function trySignInFunc() {
+  const tokenResult = await AuthApi.refreshToken();
+
+  if (tokenResult.isErr()) {
+    return;
+  }
+
+  const userToken = tokenResult.value;
+
+  const userResult = await UserApi.fetchSelf(userToken);
+
+  if (userResult.isErr()) {
+    return;
+  }
+
+  const user = userResult.value;
+
+  return {
+    userToken,
+    userDetails: user,
+  };
+}
+
+export const useOnSignIn = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      const { userDetails, userToken } = await trySignInFunc();
+      if (!userDetails || !userToken) {
+        Router.push("/");
+      }
+
+      dispatch(setToken(userToken));
+      setUserAction(dispatch, userDetails);
+
+      const isFirstSignIn = checkIsFirstSignIn(userDetails);
+
+      if (isFirstSignIn || userDetails.steamId === "76561198199195838") {
+        Router.push(`/finishprofile`);
+      } else {
+        Router.push("/");
+      }
+    })();
+  }, [dispatch]);
+};
+
+function checkIsFirstSignIn(user: User): boolean {
+  const minutesAgoCreated = moment().diff(
+    moment(user.createdAt),
+    "minute",
+    false
+  );
+
+  return minutesAgoCreated < 2;
+}

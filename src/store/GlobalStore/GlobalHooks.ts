@@ -1,7 +1,9 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { StatsApi } from "../../api/StatsApi";
 import {
   acceptCookieConcentAction,
+  addSiteStatsActon,
   closeNavigationAction,
   toggleNavigationAction,
 } from "./GlobalActions";
@@ -10,16 +12,20 @@ import {
   isNavOpenSelector,
   siteStatsSelector,
 } from "./GlobalSelectors";
-import { fetchSiteStatsThunk } from "./GlobalThunks";
-
-const isBrowser = typeof window != "undefined";
 
 export const useSiteStats = () => {
   const dispatch = useDispatch();
   const stats = useSelector(siteStatsSelector);
 
-  const fetchSiteStats = useCallback(() => {
-    dispatch(fetchSiteStatsThunk());
+  const fetchSiteStats = useCallback(async () => {
+    const result = await StatsApi.getStats();
+
+    if (result.isErr()) {
+      console.error(result.error);
+      return;
+    }
+
+    dispatch(addSiteStatsActon(result.value));
   }, [dispatch]);
 
   return { fetchSiteStats, stats };
@@ -55,23 +61,5 @@ export const useCookieConcent = () => {
   return {
     acceptedCookieConsent,
     acceptCookieConcent,
-  };
-};
-
-export const useCountryCode = () => {
-  let countryCode = "";
-
-  if (isBrowser) {
-    countryCode = navigator.language;
-  }
-
-  const isFromAmerica = useMemo(() => {
-    const simpleCountryCode = countryCode.toLowerCase();
-    return simpleCountryCode.includes("us");
-  }, [countryCode]);
-
-  return {
-    countryCode,
-    isFromAmerica,
   };
 };

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useState } from "react";
 import { Button, Input } from "semantic-ui-react";
-import { useUpdateUser } from "../../store/NadeStore/NadeHooks";
+import { useUpdateNadeUser } from "../../store/NadeStore/hooks/useUpdateNadeUser";
 
 type Props = {
   nadeId: string;
@@ -9,7 +9,7 @@ type Props = {
 
 export const ForceUserSettings: FC<Props> = ({ nadeId, onClose }) => {
   const [steamIdOrUrl, setSteamIdOrUrl] = useState("");
-  const updateUser = useUpdateUser();
+  const updateUser = useUpdateNadeUser();
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {
     setSteamIdOrUrl(event.target.value);

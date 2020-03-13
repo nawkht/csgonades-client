@@ -2,11 +2,9 @@ import { FC, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { Button, Input } from "semantic-ui-react";
 import { Nade, Status, StatusInfo } from "../../models/Nade/Nade";
-import {
-  useDeleteNade,
-  useUpdateNade,
-  useUpdateNadeStatus,
-} from "../../store/NadeStore/NadeHooks";
+import { useDeleteNade } from "../../store/NadeStore/hooks/useDeleteNade";
+import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
+import { useUpdateNadeStatus } from "../../store/NadeStore/hooks/useUpdateNadeStatus";
 import { ForceUserSettings } from "./ForceUserSettings";
 import { StatusEditor } from "./StatusEditor";
 

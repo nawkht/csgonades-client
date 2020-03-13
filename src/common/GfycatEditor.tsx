@@ -3,7 +3,7 @@ import { Button, Input, Message } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
 import { Dimensions } from "../constants/Constants";
 import { Nade } from "../models/Nade/Nade";
-import { useUpdateNade } from "../store/NadeStore/NadeHooks";
+import { useUpdateNade } from "../store/NadeStore/hooks/useUpdateNade";
 
 type Props = {
   nade: Nade;
@@ -32,7 +32,7 @@ export const GfycatEditor: FC<Props> = ({ nade, onCancel }) => {
     }
 
     updateNade(nade.id, {
-      gfycatIdOrUrl: currentGfyID
+      gfycatIdOrUrl: currentGfyID,
     });
     setIsLoading(false);
     setError(null);

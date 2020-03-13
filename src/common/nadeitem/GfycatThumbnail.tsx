@@ -1,7 +1,7 @@
 import { FC, SyntheticEvent, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeLight } from "../../models/Nade/Nade";
-import { useRegisterView } from "../../store/NadeStore/NadeHooks";
+import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
 import { SeekBar } from "../SeekBar";
 import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
 

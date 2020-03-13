@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
-import { useUpdateNade } from "../../store/NadeStore/NadeHooks";
+import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {

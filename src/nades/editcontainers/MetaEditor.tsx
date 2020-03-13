@@ -7,7 +7,7 @@ import { Movement, nadeMovementOptions } from "../../models/Nade/NadeMovement";
 import { nadeTickrateOptions, Tickrate } from "../../models/Nade/NadeTickrate";
 import { NadeType, nadeTypeOptions } from "../../models/Nade/NadeType";
 import { nadeTechniqueOptions, Technique } from "../../models/Nade/Technique";
-import { useUpdateNade } from "../../store/NadeStore/NadeHooks";
+import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {

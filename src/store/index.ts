@@ -5,7 +5,6 @@ import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
-import { NadeReducer } from "./NadeStore/NadeReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
@@ -15,7 +14,6 @@ import { UsersReducer } from "./UsersStore/UsersReducer";
 const rootReducer = combineReducers({
   authStore: AuthReducer,
   toastStore: ToastReducer,
-  nadeStore: NadeReducer,
   favoriteStore: FavoriteReducer,
   usersStore: UsersReducer,
   globalStore: GlobalReducer,

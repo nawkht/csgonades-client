@@ -14,11 +14,8 @@ export const UserNav: FC = memo(() => {
   const user = useSelector(userSelector);
 
   useEffect(() => {
-    if (!user) {
-      console.log("> Trying to sign in");
-      trySignIn();
-    }
-  }, [user, trySignIn]);
+    trySignIn();
+  }, [trySignIn]);
 
   if (!user) {
     return <SignInnButton />;
