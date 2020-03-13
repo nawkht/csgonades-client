@@ -45,7 +45,8 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
   }
 
   function onDetailsClick() {
-    Router.push(`/nades/${nade.id}`);
+    // <Link href={"/nades/[nade]"} as={`/nades/${nade.id}`}>
+    Router.push(`/nades/[nade]`, `/nades/${nade.id}`);
   }
 
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
