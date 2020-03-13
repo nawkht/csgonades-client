@@ -1,12 +1,16 @@
 import { NextPage } from "next";
 import { useState } from "react";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Button, Message } from "semantic-ui-react";
 import { ContactApi } from "../api/ContactApi";
+import { CsgnInput } from "../common/inputs/CsgnInput";
+import { CsgnTextArea } from "../common/inputs/CsgnTextArea";
 import { Layout2 } from "../layout/Layout2";
 import { ConctactDTO } from "../models/Contact";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { withRedux } from "../utils/WithRedux";
 
 const ContactPageContainer: NextPage = () => {
+  const { colors } = useTheme();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -42,39 +46,17 @@ const ContactPageContainer: NextPage = () => {
     <>
       <Layout2 title="Contact" canonical="/contact">
         <div className="contact">
-          <h1>Contact</h1>
+          <h1>Contact me 📨</h1>
           {!!error && <p>{error}</p>}
-          <Form widths="equal" onSubmit={onSubmit}>
-            <Form.Input
-              required
-              fluid
-              label="Name"
-              placeholder="Your name"
-              value={name}
-              onChange={(_, input) => setName(input.value)}
-            />
-            <Form.Input
-              required
-              fluid
-              label="E-mail"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(_, input) => setEmail(input.value)}
-            />
-            <Form.TextArea
-              required
-              label="Message"
-              placeholder="Tell us more about you..."
-              value={message}
-              onChange={(_, input) => {
-                const value = input.value as string;
-                setMessage(value);
-              }}
-            />
-            <Button positive type="submit">
-              Send
-            </Button>
-          </Form>
+
+          <CsgnInput label="Name" value={name} onChange={setName} />
+          <CsgnInput label="E-mail" value={email} onChange={setEmail} />
+          <CsgnTextArea label="Message" value={message} onChange={setMessage} />
+
+          <Button positive onClick={onSubmit}>
+            Send
+          </Button>
+
           {success && (
             <Message positive>
               <Message.Header>Message sent</Message.Header>
@@ -89,6 +71,11 @@ const ContactPageContainer: NextPage = () => {
           padding: 50px;
           margin: 0 auto;
           min-height: 82vh;
+          color: ${colors.TEXT};
+        }
+
+        h1 {
+          text-align: center;
         }
       `}</style>
     </>

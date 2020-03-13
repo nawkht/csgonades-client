@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   label?: string;
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export const CsgnInput: FC<Props> = ({ onChange, value, label }) => {
+  const { colors } = useTheme();
+
   return (
     <>
       <div className="input-wrapper">
@@ -22,6 +25,7 @@ export const CsgnInput: FC<Props> = ({ onChange, value, label }) => {
 
         label {
           margin-bottom: 5px;
+          color: ${colors.TEXT};
         }
 
         input {
@@ -30,6 +34,7 @@ export const CsgnInput: FC<Props> = ({ onChange, value, label }) => {
           padding: 10px;
           border-radius: 5px;
           background: transparent;
+          color: ${colors.TEXT};
         }
       `}</style>
     </>

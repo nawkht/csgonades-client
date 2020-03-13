@@ -1,9 +1,12 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import { Layout2 } from "../layout/Layout2";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { withRedux } from "../utils/WithRedux";
 
 const PrivacyPolicyPageContainer: NextPage = () => {
+  const { colors } = useTheme();
+
   return (
     <>
       <Layout2 title="Privacy Policy" canonical="/privacypolicy">
@@ -110,6 +113,7 @@ const PrivacyPolicyPageContainer: NextPage = () => {
           padding-top: 100px;
           padding-bottom: 100px;
           margin: 0 auto;
+          color: ${colors.TEXT};
         }
 
         h1 {

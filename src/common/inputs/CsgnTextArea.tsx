@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   label: string;
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export const CsgnTextArea: FC<Props> = ({ value, onChange, label }) => {
+  const { colors } = useTheme();
+
   return (
     <>
       <div className="text-area-wrapper">
@@ -18,6 +21,7 @@ export const CsgnTextArea: FC<Props> = ({ value, onChange, label }) => {
           display: flex;
           flex-direction: column;
           margin-bottom: 20px;
+          color: ${colors.TEXT};
         }
 
         textarea {
@@ -28,6 +32,7 @@ export const CsgnTextArea: FC<Props> = ({ value, onChange, label }) => {
           resize: none;
           padding: 15px;
           border-radius: 5px;
+          color: ${colors.TEXT};
         }
       `}</style>
     </>
