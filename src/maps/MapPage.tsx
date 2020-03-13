@@ -50,11 +50,16 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         <div className="map-welcome">
           <PageCentralize>
             <div className="map-welcome-wrap">
-              <h1>
-                Find the best smokes, flashbangs, molotovs
-                <br /> and grenades for {capitalize(map)}. Something missing?
-                <br /> Sign in, and add a nade to help everyone out.
-              </h1>
+              <div className="welcome-msg">
+                <h1>
+                  Find the best smokes, flashbangs, molotovs and grenades for{" "}
+                  {capitalize(map)}.
+                </h1>
+                <h2>
+                  Something missing?
+                  <br /> Sign in, and add a nade to help everyone out.
+                </h2>
+              </div>
               <div className="ez top-placement">
                 <EzoicPlaceHolder id={112} />
               </div>
@@ -102,14 +107,22 @@ export const MapPage: FC<Props> = memo(({ map }) => {
             ${colors.jumboGradientEnd} 66.89%
           );
           margin-bottom: 40px;
+          padding-bottom: 30px;
+          padding-top: 30px;
         }
 
-        .map-welcome h1 {
+        .map-welcome h1,
+        .map-welcome h2 {
           font-size: 24px;
           color: ${colors.TEXT};
           font-weight: 300;
           flex: 1;
           margin: 0;
+        }
+
+        .map-welcome h2 {
+          font-size: 20px;
+          margin-top: 20px;
         }
 
         .map-page {
@@ -156,22 +169,22 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         }
 
         .top-placement {
-          width: 500px;
+          min-width: 728px;
           display: flex;
           justify-content: space-around;
-          min-height: 200px;
+          min-height: 100px;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: flex-end;
           margin-bottom: 10px;
           margin-top: 10px;
+          margin-left: 20px;
         }
 
         .placement-bottom {
-          margin-top: 30px;
+          margin-top: 50px;
           margin-bottom: 50px;
-          min-height: 200px;
           display: flex;
           align-items: center;
           justify-content: center;

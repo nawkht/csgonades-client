@@ -16,7 +16,11 @@ export const UserDropdown: FC<Props> = ({ user }) => {
   return (
     <>
       <div className="user-nav-user">
-        <Link href={`/users/[user]`} as={`/users/${user.steamId}`}>
+        <Link
+          href={`/users/[user]`}
+          as={`/users/${user.steamId}`}
+          prefetch={false}
+        >
           <a className="user-link">
             {user.avatar && (
               <img
