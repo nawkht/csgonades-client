@@ -10,7 +10,6 @@ import { NadeReducer } from "./NadeStore/NadeReducer";
 import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
-import { PersistedTipReducer } from "./TipStore/TipReducer";
 import { ToastReducer } from "./ToastStore/ToastReducer";
 import { UsersReducer } from "./UsersStore/UsersReducer";
 
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   usersStore: UsersReducer,
   globalStore: GlobalReducer,
   newNadeStore: NewNadeReducer,
-  tipStore: PersistedTipReducer,
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
 });

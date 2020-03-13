@@ -1,4 +1,6 @@
 import { Reducer } from "redux";
+import { PersistConfig, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import { User } from "../../models/User";
 import { assertNever } from "../../utils/Common";
 import { AuthActions } from "./AuthActions";
@@ -10,7 +12,7 @@ export type AuthState = {
 
 const initialState: AuthState = {};
 
-export const AuthReducer: Reducer<AuthState, AuthActions> = (
+const AuthReducerBase: Reducer<AuthState, AuthActions> = (
   state = initialState,
   action
 ): AuthState => {
@@ -35,3 +37,10 @@ export const AuthReducer: Reducer<AuthState, AuthActions> = (
       return state;
   }
 };
+
+const persistConfig: PersistConfig<AuthState> = {
+  key: "authStore",
+  storage,
+};
+
+export const AuthReducer = persistReducer(persistConfig, AuthReducerBase);

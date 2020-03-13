@@ -1,15 +1,24 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, memo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "semantic-ui-react";
 import { Dimensions } from "../../constants/Constants";
+import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import { NotificationIndicator } from "../notifications/NotificationIndicator";
 import { SignInnButton } from "./SignInnButton";
 import { UserDropdown } from "./UserDropdown";
 
-export const UserNav: FC = () => {
+export const UserNav: FC = memo(() => {
+  const trySignIn = useTrySignIn();
   const user = useSelector(userSelector);
+
+  useEffect(() => {
+    if (!user) {
+      console.log("> Trying to sign in");
+      trySignIn();
+    }
+  }, [user, trySignIn]);
 
   if (!user) {
     return <SignInnButton />;
@@ -50,4 +59,4 @@ export const UserNav: FC = () => {
       </>
     );
   }
-};
+});

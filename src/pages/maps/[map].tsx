@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { NadeApi } from "../../api/NadeApi";
 import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
@@ -19,19 +19,26 @@ const Map: NextPage<Props> = ({ map, nades }) => {
   );
 };
 
-Map.getInitialProps = async context => {
+export const getServerSideProps: GetServerSideProps = async context => {
   const map = context.query.map as CsgoMap;
 
   const results = await NadeApi.getByMap(map);
 
   if (results.isErr()) {
     return {
-      map,
-      nades: [],
+      props: {
+        map,
+        nades: [],
+      },
     };
   }
 
-  return { map, nades: results.value };
+  return {
+    props: {
+      map,
+      nades: results.value,
+    },
+  };
 };
 
-export default withRedux(Map);
+export default withRedux(Map, { ssr: false });
