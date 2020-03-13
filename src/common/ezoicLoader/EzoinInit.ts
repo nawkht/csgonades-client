@@ -14,8 +14,10 @@ export function ezoicInit(codes: number[]) {
     }
   } else if (isBrowser && hasEzoic && ezstandalone.enabled) {
     try {
-      ezstandalone.define(...codes);
-      ezstandalone.refresh();
+      setTimeout(() => {
+        ezstandalone.define(...codes);
+        ezstandalone.refresh();
+      }, 1000);
       console.log("> Ezoic refresh");
     } catch (error) {
       // no-op
