@@ -1,6 +1,6 @@
 import { FC, useMemo, useState } from "react";
 import { isMobile } from "react-device-detect";
-import { EzoicHead } from "../common/ezoicLoader/EzoicHead";
+import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
@@ -50,7 +50,7 @@ export const MapPage: FC<Props> = ({ map }) => {
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        <EzoicHead codes={codes} />
+        <EzoicLoader codes={codes} />
         <div className="map-welcome">
           <PageCentralize>
             <div className="map-welcome-wrap">

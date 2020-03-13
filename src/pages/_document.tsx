@@ -56,6 +56,27 @@ class MyDocument extends Document {
               rel="stylesheet"
               href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
             />
+            <script
+              key="ezoic-init"
+              type="text/javascript"
+              dangerouslySetInnerHTML={{
+                __html: `
+                var ezstandalone = ezstandalone || {};
+                ezstandalone.cmd = ezstandalone.cmd || [];
+                ezstandalone.cmd.push(function() {
+                  ezstandalone.setIsPWA()
+                  ezstandalone.setHasBadWords(false);
+                  ezstandalone.setABTest("mod33");
+                  console.log("> Ezoic initialized")
+                });`,
+              }}
+            />
+            <script
+              key="ezoic-script"
+              src="//www.ezojs.com/ezoic/sa.min.js"
+              defer
+              async
+            />
           </Head>
           <body>
             <Main />
