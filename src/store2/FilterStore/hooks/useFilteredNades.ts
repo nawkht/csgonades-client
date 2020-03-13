@@ -1,5 +1,6 @@
 import { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
+import { NadeLight } from "../../../models/Nade/Nade";
 import { favoritedNadeIdsSelector } from "../../../store/FavoriteStore/FavoriteSelectors";
 import { NadeFilterContext } from "../context";
 import {
@@ -16,7 +17,7 @@ export const useFilteredNades = () => {
   const { byTickrate, nades, byType, byCoords, byFavorites } = state;
 
   const filteredNades = useMemo(() => {
-    let thenades = nades;
+    let thenades = nades.sort(sortByScore);
 
     thenades = addFavoriteToNades(thenades, favoritedNades);
     thenades = filterByCoords(thenades, byCoords);
@@ -29,3 +30,7 @@ export const useFilteredNades = () => {
 
   return filteredNades;
 };
+
+function sortByScore(a: NadeLight, b: NadeLight) {
+  return b.score - a.score;
+}
