@@ -3,7 +3,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
-import { NewNadeReducer } from "./NewNadeStore/NewNadeReducer";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
 import { ToastReducer } from "./ToastStore/ToastReducer";
@@ -15,7 +14,6 @@ const rootReducer = combineReducers({
   favoriteStore: FavoriteReducer,
   usersStore: UsersReducer,
   globalStore: GlobalReducer,
-  newNadeStore: NewNadeReducer,
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
 });

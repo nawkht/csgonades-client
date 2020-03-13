@@ -1,13 +1,20 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Message } from "semantic-ui-react";
-import { useNewNade } from "../store/NewNadeStore/NewNadeHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { ImageUploader } from "./ImageUploader";
 
-export const AddImage: FC = () => {
+type Props = {
+  onAddImage: (imageData: string) => void;
+};
+
+export const AddImage: FC<Props> = ({ onAddImage }) => {
+  const [loading, setLoading] = useState(false);
   const { colors } = useTheme();
 
-  const { addImage, loading } = useNewNade();
+  function addImage(image: string) {
+    setLoading(true);
+    onAddImage(image);
+  }
 
   return (
     <>

@@ -1,12 +1,38 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Button, Input, Message } from "semantic-ui-react";
-import { useNewNade } from "../store/NewNadeStore/NewNadeHooks";
+import { NadeApi } from "../api/NadeApi";
+import { GfycatData } from "../models/Nade/GfycatData";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { cleanGfycatUrl } from "../utils/Common";
 
-export const AddGfycat = () => {
+type Props = {
+  addGfycat: (gfyId: GfycatData) => void;
+  onError: (error: string) => void;
+  clearError: () => void;
+};
+
+export const AddGfycat: FC<Props> = ({ addGfycat, clearError, onError }) => {
   const { colors } = useTheme();
-  const { addGfycat, loading, gfyData } = useNewNade();
-  const [gfyValue, setGfyValue] = useState(gfyData?.gfyId || "");
+  const [loading, setLoading] = useState(false);
+  const [gfyValue, setGfyValue] = useState("");
+
+  async function verify() {
+    setLoading(true);
+    clearError();
+    const cleanId = cleanGfycatUrl(gfyValue);
+
+    const gfyResult = await NadeApi.validateGfycat(cleanId);
+
+    if (gfyResult.isErr()) {
+      onError("Can't find the gfycat or gfycat.com might be down.");
+      setLoading(false);
+      return;
+    }
+
+    const gfyData = gfyResult.value;
+    setLoading(false);
+    addGfycat(gfyData);
+  }
 
   return (
     <>
@@ -77,7 +103,7 @@ export const AddGfycat = () => {
           />
         </div>
 
-        <Button positive loading={loading} onClick={() => addGfycat(gfyValue)}>
+        <Button positive loading={loading} onClick={verify}>
           Verify
         </Button>
       </div>

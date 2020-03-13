@@ -1,26 +1,65 @@
-import { FC, useEffect } from "react";
+import { FC, useState } from "react";
 import { Message, Step } from "semantic-ui-react";
+import { NadeApi } from "../api/NadeApi";
 import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
-import { useNewNade } from "../store/NewNadeStore/NewNadeHooks";
+import { GfycatData } from "../models/Nade/GfycatData";
+import { NadeBody } from "../models/Nade/Nade";
+import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { redirectNadePage } from "../utils/Common";
 import { AddGfycat } from "./AddGfycat";
 import { AddImage } from "./AddImage";
 
-export const NewNadePage: FC = () => {
-  const { currentStep, setStep, reset, error } = useNewNade();
-  const { colors } = useTheme();
+type NewNadeStep = "gfycat" | "result-img";
 
-  useEffect(() => {
-    reset();
-  }, []);
+export const NewNadePage: FC = () => {
+  const getToken = useGetOrUpdateToken();
+  const [currentStep, setCurrentStep] = useState<NewNadeStep>("gfycat");
+  const { colors } = useTheme();
+  const [gfyData, setGfyData] = useState<GfycatData>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  function onGfycatAdded(gfyData: GfycatData) {
+    setGfyData(gfyData);
+    setCurrentStep("result-img");
+  }
+
+  async function onAddImage(imageData: string) {
+    const token = await getToken();
+    if (!token) {
+      setError("You need to be signed in to add a nade");
+      return;
+    }
+
+    if (!gfyData) {
+      setError("Missing gfycat video, you forgot a step.");
+      return;
+    }
+
+    const nadeBody: NadeBody = {
+      imageBase64: imageData,
+      gfycatIdOrUrl: gfyData.gfyId,
+    };
+
+    const result = await NadeApi.save(nadeBody, token);
+
+    if (result.isErr()) {
+      setError("Failed to submit, try again or the service might be down.");
+      return;
+    }
+
+    const { id } = result.value;
+
+    redirectNadePage(id);
+  }
 
   function onGfyStepClick() {
-    setStep("gfycat");
+    setCurrentStep("gfycat");
   }
 
   function onImgStepClick() {
-    setStep("result-img");
+    setCurrentStep("result-img");
   }
 
   return (
@@ -54,8 +93,16 @@ export const NewNadePage: FC = () => {
           )}
 
           <div className="new-nade-step">
-            {currentStep === "gfycat" && <AddGfycat />}
-            {currentStep === "result-img" && <AddImage />}
+            {currentStep === "gfycat" && (
+              <AddGfycat
+                addGfycat={onGfycatAdded}
+                onError={e => setError(e)}
+                clearError={() => setError(null)}
+              />
+            )}
+            {currentStep === "result-img" && (
+              <AddImage onAddImage={onAddImage} />
+            )}
           </div>
         </div>
       </PageCentralize>
