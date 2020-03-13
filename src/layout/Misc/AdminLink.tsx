@@ -23,12 +23,18 @@ const AdminLink: FC<Props> = ({}) => {
       <style jsx>{`
         .admin-link-box {
           position: fixed;
-          top: 10px;
+          bottom: 10px;
           left: 10px;
           background: white;
           border: 1px solid ${colors.BORDER};
           background: ${colors.DP01};
           border-radius: 5px;
+          opacity: 0;
+          transition: opacity 0.15s;
+        }
+
+        .admin-link-box:hover {
+          opacity: 1;
         }
 
         .admin-link {

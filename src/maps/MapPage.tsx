@@ -217,6 +217,10 @@ export const MapPage: FC<Props> = memo(({ map }) => {
           .filter {
             width: 70px;
           }
+
+          .map-welcome-wrap {
+            flex-direction: column;
+          }
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
