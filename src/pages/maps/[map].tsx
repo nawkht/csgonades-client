@@ -14,7 +14,7 @@ interface Props {
 const Map: NextPage<Props> = ({ map, nades }) => {
   return (
     <NadeFilterProvider nades={nades}>
-      <MapPage map={map} />
+      <MapPage key={map} map={map} />
     </NadeFilterProvider>
   );
 };

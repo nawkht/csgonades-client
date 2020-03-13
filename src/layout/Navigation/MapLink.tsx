@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 import { capitalize } from "../../utils/Common";
 
 type Props = {
@@ -9,14 +10,18 @@ type Props = {
 };
 
 export const MapLink: FC<Props> = ({ map, currentPath }) => {
+  const isAdmin = useIsAdmin();
   const selected = currentPath ? currentPath.includes(map) : false;
 
   return (
     <>
       <li className={selected ? "nav-selected" : ""}>
-        <Link href={`/maps/[map]`} as={`/maps/${map}`}>
-          <a>{capitalize(map)}</a>
-        </Link>
+        {isAdmin && (
+          <Link href={`/maps/[map]`} as={`/maps/${map}`}>
+            <a>{capitalize(map)}</a>
+          </Link>
+        )}
+        {!isAdmin && <a href={`/maps/${map}`}>{capitalize(map)}</a>}
       </li>
       <style jsx>{`
         li {
