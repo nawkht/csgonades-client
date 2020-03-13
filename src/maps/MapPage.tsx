@@ -8,7 +8,7 @@ import { Dimensions } from "../constants/Constants";
 import { Layout2 } from "../layout/Layout2";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { useFilteredNades } from "../store2/FilterStore/hooks";
+import { useFilteredNades } from "../store2/FilterStore/hooks/useFilteredNades";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
 import { MapView } from "./mapview2/MapView";

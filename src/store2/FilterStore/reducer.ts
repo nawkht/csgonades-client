@@ -54,7 +54,7 @@ export const nadeFilterReducer: Reducer<FilterState, NadeFilterActions> = (
     case "@@nadefilter/TOGGLE_FILTER_BY_FAVORITES":
       return {
         ...state,
-        byFavorites: true,
+        byFavorites: !state.byFavorites,
       };
     default: {
       return state;

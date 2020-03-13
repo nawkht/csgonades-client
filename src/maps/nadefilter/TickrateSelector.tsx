@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { useFilterByTickrate } from "../../store2/FilterStore/hooks";
+import { useFilterByTickrate } from "../../store2/FilterStore/hooks/useFilterByTickrate";
 import { FilterBg } from "./FilterBg";
 
 type Props = {};
@@ -50,10 +50,12 @@ export const TickrateSelector: FC<Props> = ({}) => {
         }
 
         .filter-btn {
+          display: block;
           border: none;
           outline: none;
+          appearance: none;
           background: transparent;
-          width: 45px;
+          width: 100%;
           height: 45px;
           display: flex;
           align-items: center;
@@ -74,7 +76,7 @@ export const TickrateSelector: FC<Props> = ({}) => {
         }
 
         .active {
-          background: #f8ffed;
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>

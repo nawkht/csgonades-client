@@ -1,13 +1,15 @@
 import { FC } from "react";
 import { FaStar } from "react-icons/fa";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
-import { useFilterByFavorites } from "../../store2/FilterStore/hooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { useFilterByFavorites } from "../../store2/FilterStore/hooks/useFilterByFavorites";
 
 type Props = {
   showSingInWarning: () => void;
 };
 
 export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
+  const { colors } = useTheme();
   const isSignedIn = useIsSignedIn();
   const { byFavorite, filterByFavorites } = useFilterByFavorites();
 
@@ -50,7 +52,7 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
         }
 
         .active {
-          background: #f8ffed;
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>

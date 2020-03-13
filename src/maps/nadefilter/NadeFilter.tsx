@@ -1,10 +1,8 @@
 import { FC } from "react";
 import { FaMap } from "react-icons/fa";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import {
-  useFilterByType,
-  useToggleMapview,
-} from "../../store2/FilterStore/hooks";
+import { useFilterByType } from "../../store2/FilterStore/hooks/useFilterByType";
+import { useToggleMapview } from "../../store2/FilterStore/hooks/useToggleMapview";
 import { FavFilterButton } from "./FavFilterButton";
 import { FilterBg } from "./FilterBg";
 import { NadeTypeButton } from "./NadeTypeButton";

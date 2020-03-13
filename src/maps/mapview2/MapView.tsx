@@ -1,11 +1,9 @@
 import { FC, useRef, useState } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
-import {
-  useFilterByCoords,
-  useNadesForMapView,
-  useToggleMapview,
-} from "../../store2/FilterStore/hooks";
+import { useFilterByCoords } from "../../store2/FilterStore/hooks/useFilterByCoords";
+import { useNadesForMapView } from "../../store2/FilterStore/hooks/useNadesForMapView";
+import { useToggleMapview } from "../../store2/FilterStore/hooks/useToggleMapview";
 import { MapPosIcon } from "./MapPosIcon";
 
 type Props = {

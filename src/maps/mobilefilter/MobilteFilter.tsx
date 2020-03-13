@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
-import { useFilterByType } from "../../store2/FilterStore/hooks";
+import { useFilterByType } from "../../store2/FilterStore/hooks/useFilterByType";
 import { NadeTypeButton } from "../nadefilter/NadeTypeButton";
 import { FilterBgMobile } from "./FilterBgMobile";
 
