@@ -43,7 +43,7 @@ export const UserDetails: FC<Props> = ({ user }) => {
           </div>
         )}
 
-        <UserEditorModal user={user} />
+        {!!user && <UserEditorModal user={user} />}
 
         {!!user.bio && <div className="bio">{user.bio}</div>}
       </div>

@@ -18,9 +18,13 @@ export const UserEditorModal: FC<Props> = ({ user }) => {
   const allowEdit = useIsAllowedUserEdit(user);
   const [isEditing, setIsEditing] = useState(false);
   const signedInUser = useSelector(userSelector);
-  const [nickname, setNickname] = useState(signedInUser.nickname);
-  const [email, setEmail] = useState(signedInUser.email);
-  const [bio, setBio] = useState(signedInUser.bio);
+  const [nickname, setNickname] = useState(
+    signedInUser ? signedInUser.nickname : user.nickname
+  );
+  const [email, setEmail] = useState(
+    signedInUser ? signedInUser.email : user.nickname
+  );
+  const [bio, setBio] = useState(signedInUser ? signedInUser.bio : user.bio);
 
   if (!allowEdit) {
     return null;

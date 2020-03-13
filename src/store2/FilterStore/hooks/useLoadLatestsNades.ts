@@ -12,8 +12,6 @@ export const useLoadLatestsNades = (map: CsgoMap) => {
       return;
     }
 
-    setCalled(true);
-
     (async () => {
       const result = await NadeApi.getByMap(map);
 
@@ -23,6 +21,7 @@ export const useLoadLatestsNades = (map: CsgoMap) => {
           type: "@@nadefilter/REPLACE_NADES",
           payload: result.value,
         });
+        setCalled(true);
       }
     })();
   }, [called, dispatch, map]);
