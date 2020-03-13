@@ -4,9 +4,7 @@ import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
 import { User } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { useUsersActions, useUsersState } from "../store/UsersStore/UsersHooks";
 import { UserDetails } from "./UserDetails";
-import { UserEditor } from "./UserEditor/UserEditor";
 
 type Props = {
   user: User;
@@ -15,19 +13,12 @@ type Props = {
 
 export const UserUI: FC<Props> = ({ user, nades }) => {
   const { colors } = useTheme();
-  const { startEditingUser } = useUsersActions();
-  const { isEditing } = useUsersState();
 
   return (
     <>
       <div className="user-container">
         <div className="user-details">
-          <UserDetails
-            isEditing={isEditing}
-            user={user}
-            onEditClick={startEditingUser}
-          />
-          <UserEditor user={user} />
+          <UserDetails user={user} />
         </div>
         <div className="user-nades">
           <h2>Nades by {user.nickname}</h2>

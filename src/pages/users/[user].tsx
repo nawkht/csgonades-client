@@ -5,7 +5,7 @@ import { UserPage } from "../../users/UsersPage";
 import { withRedux } from "../../utils/WithRedux";
 
 type Props = {
-  user: User;
+  user: User | null;
 };
 
 const UserPageComponent: NextPage<Props> = ({ user }) => {

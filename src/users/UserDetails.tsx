@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Button } from "semantic-ui-react";
 import { Dimensions } from "../constants/Constants";
 import { formatDate } from "../models/DateFormater";
 import { User } from "../models/User";
@@ -7,20 +6,15 @@ import { useIsAllowedUserEdit } from "../store/AuthStore/AuthHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
 import { dateFromNow } from "../utils/DateUtils";
+import { UserEditorModal } from "./UserEditor/UserEditorModal";
 
 type Props = {
-  isEditing: boolean;
   user: User;
-  onEditClick: () => void;
 };
 
-export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
+export const UserDetails: FC<Props> = ({ user }) => {
   const { colors } = useTheme();
   const allowEdit = useIsAllowedUserEdit(user);
-
-  if (isEditing) {
-    return null;
-  }
 
   return (
     <>
@@ -50,12 +44,9 @@ export const UserDetails: FC<Props> = ({ isEditing, user, onEditClick }) => {
           </div>
         )}
 
+        <UserEditorModal user={user} />
+
         {!!user.bio && <div className="bio">{user.bio}</div>}
-        {allowEdit && (
-          <Button fluid onClick={onEditClick}>
-            EDIT USER
-          </Button>
-        )}
       </div>
       <style jsx>{`
         .user-details {

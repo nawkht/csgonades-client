@@ -6,13 +6,11 @@ import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
 import { ToastReducer } from "./ToastStore/ToastReducer";
-import { UsersReducer } from "./UsersStore/UsersReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
   toastStore: ToastReducer,
   favoriteStore: FavoriteReducer,
-  usersStore: UsersReducer,
   globalStore: GlobalReducer,
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
