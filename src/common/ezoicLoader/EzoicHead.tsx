@@ -25,6 +25,7 @@ export const EzoicHead: FC<Props> = memo(({ codes }) => {
             var ezstandalone = ezstandalone || {};
             ezstandalone.cmd = ezstandalone.cmd || [];
             ezstandalone.cmd.push(function() {
+              ezstandalone.setIsPWA()
               ezstandalone.setHasBadWords(false);
               ezstandalone.setABTest("mod33");
               ezstandalone.define(${codeString});
