@@ -1,21 +1,20 @@
 import { FC, useState } from "react";
 import { FaFlag } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import { Button, Form, TextArea } from "semantic-ui-react";
 import { ReportApi } from "../../api/ReportApi";
 import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { CSGNModal } from "../../common/CSGNModal";
 import { ReportAddDto } from "../../models/Report";
-import { addNotificationActionThunk } from "../../store/ToastStore/ToastThunks";
+import { useDisplayToast } from "../../store/ToastStore/hooks/useDisplayToast";
 
 type Props = {
   nadeId: string;
 };
 
 export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
-  const dispatch = useDispatch();
   const [showReportForm, setShowReportForm] = useState(false);
   const [reportMsg, setReportMsg] = useState("");
+  const displayToast = useDisplayToast();
 
   function onToggle() {
     setShowReportForm(!showReportForm);
@@ -29,13 +28,11 @@ export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
     ReportApi.add(report);
     setReportMsg("");
     setShowReportForm(false);
-    dispatch(
-      addNotificationActionThunk({
-        severity: "success",
-        title: "Report sent",
-        message: "Thanks for reporting this nade.\nWe will look into it.",
-      })
-    );
+    displayToast({
+      severity: "success",
+      title: "Report sent",
+      message: "Thanks for reporting this nade.\nWe will look into it.",
+    });
   }
 
   return (

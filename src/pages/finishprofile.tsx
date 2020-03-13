@@ -5,7 +5,7 @@ import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { useFinishProfile } from "../store/UsersStore/UsersHooks";
+import { useFinishProfile } from "../store/UsersStore/hooks/useFinishProfile";
 import { withRedux } from "../utils/WithRedux";
 
 type Props = {};

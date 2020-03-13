@@ -1,7 +1,5 @@
-import { applyMiddleware, combineReducers, createStore, Store } from "redux";
+import { combineReducers, createStore, Store } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import { tokenRefreshMiddleware } from "./AuthStore/AuthMiddleware";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
@@ -25,12 +23,10 @@ const rootReducer = combineReducers({
 function createMiddleware() {
   const isProduction = process.env.NODE_ENV === "production";
 
-  const middleware = applyMiddleware(tokenRefreshMiddleware, thunk);
-
   if (isProduction) {
-    return middleware;
+    return undefined;
   } else {
-    return composeWithDevTools(middleware);
+    return composeWithDevTools();
   }
 }
 

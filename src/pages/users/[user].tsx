@@ -1,40 +1,36 @@
-import { NextPage } from "next";
-import { startEditingUserAction } from "../../store/UsersStore/UsersActions";
-import { userErrorSelector } from "../../store/UsersStore/UsersSelectors";
-import {
-  fetchNadesForUserAction,
-  fetchUserAction,
-} from "../../store/UsersStore/UsersThunks";
+import { GetServerSideProps, NextPage } from "next";
+import { UserApi } from "../../api/UserApi";
+import { User } from "../../models/User";
 import { UserPage } from "../../users/UsersPage";
 import { withRedux } from "../../utils/WithRedux";
 
-const UserPageComponent: NextPage = () => {
-  return <UserPage />;
+type Props = {
+  user: User;
 };
 
-UserPageComponent.getInitialProps = async ({ reduxStore, query, res }) => {
-  const { dispatch, getState } = reduxStore;
-  const steamId = query.user as string;
-  const shouldDisplayEdit = query.edit === "true";
-
-  await Promise.all([
-    //@ts-ignore
-    dispatch(fetchUserAction(steamId)),
-    //@ts-ignore
-    dispatch(fetchNadesForUserAction(steamId)),
-  ]);
-
-  const error = userErrorSelector(getState());
-
-  if (error && res) {
-    res.statusCode = 404;
-  }
-
-  if (shouldDisplayEdit) {
-    dispatch(startEditingUserAction());
-  }
-
-  return;
+const UserPageComponent: NextPage<Props> = ({ user }) => {
+  return <UserPage user={user} />;
 };
 
-export default withRedux(UserPageComponent);
+export const getServerSideProps: GetServerSideProps = async context => {
+  const steamId = context.query.user as string;
+
+  const result = await UserApi.fetchUser(steamId);
+
+  if (result.isErr()) {
+    context.res.statusCode = 404;
+    return {
+      props: {
+        user: null,
+      },
+    };
+  }
+
+  return {
+    props: {
+      user: result.value,
+    },
+  };
+};
+
+export default withRedux(UserPageComponent, { ssr: false });

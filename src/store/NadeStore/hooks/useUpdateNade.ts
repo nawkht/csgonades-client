@@ -3,11 +3,12 @@ import { useDispatch } from "react-redux";
 import { NadeApi } from "../../../api/NadeApi";
 import { NadeUpdateBody } from "../../../models/Nade/Nade";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
-import { addNotificationActionThunk } from "../../ToastStore/ToastThunks";
+import { useDisplayToast } from "../../ToastStore/hooks/useDisplayToast";
 
 export const useUpdateNade = () => {
   const getToken = useGetOrUpdateToken();
   const dispatch = useDispatch();
+  const displayToast = useDisplayToast();
 
   const updateNade = useCallback(
     async (nadeId: string, data: NadeUpdateBody) => {
@@ -21,22 +22,19 @@ export const useUpdateNade = () => {
       const result = await NadeApi.update(nadeId, data, authToken);
 
       if (result.isErr()) {
-        return dispatch(
-          addNotificationActionThunk({
-            message: "Failed to update nade.",
-            severity: "error",
-          })
-        );
+        displayToast({
+          message: "Failed to update nade.",
+          severity: "error",
+        });
+        return;
       }
 
       console.warn("> Should replace nade");
 
-      dispatch(
-        addNotificationActionThunk({
-          message: "Updated nade details!",
-          severity: "success",
-        })
-      );
+      displayToast({
+        message: "Updated nade details!",
+        severity: "success",
+      });
     },
     [dispatch, getToken]
   );

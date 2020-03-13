@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { User, UserUpdateDTO } from "../../models/User";
+import { User } from "../../models/User";
 import {
   setViewingUserAction,
   startEditingUserAction,
@@ -13,7 +13,6 @@ import {
   userNadesSelector,
   viewingUserSelector,
 } from "./UsersSelectors";
-import { finishProfileThunk, updateUserThunk } from "./UsersThunks";
 
 export const useUsersActions = () => {
   const dispatch = useDispatch();
@@ -33,18 +32,10 @@ export const useUsersActions = () => {
     dispatch(stopEditingUserAction());
   }, [dispatch]);
 
-  const updateUser = useCallback(
-    (updatedFields: UserUpdateDTO) => {
-      dispatch(updateUserThunk(updatedFields));
-    },
-    [dispatch]
-  );
-
   return {
     setViewingUser,
     startEditingUser,
     stopEditingUser,
-    updateUser,
   };
 };
 
@@ -56,15 +47,4 @@ export const useUsersState = () => {
   const isUpdatingUser = useSelector(isUpdatingUserSelector);
 
   return { user, isEditing, nades, error, isUpdatingUser };
-};
-
-export const useFinishProfile = () => {
-  const dispatch = useDispatch();
-  const finishProfile = useCallback(
-    (steamId: string, updatedField: UserUpdateDTO) => {
-      dispatch(finishProfileThunk(steamId, updatedField));
-    },
-    [dispatch]
-  );
-  return finishProfile;
 };

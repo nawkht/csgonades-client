@@ -1,17 +1,15 @@
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, memo, useMemo, useState } from "react";
 import { Icon } from "semantic-ui-react";
+import { useFetchNotifications } from "../../store/NotificationStore/hooks/useFetchNotifications";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NotificationList } from "./NotificationList";
 
-export const NotificationIndicator: FC = () => {
+export const NotificationIndicator: FC = memo(() => {
   const [notificationTabVisible, setNotificationTabVisible] = useState(false);
   const { colors } = useTheme();
-  const { notificationCount, fetchNotifications } = useNotifications();
-
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
+  const { notificationCount } = useNotifications();
+  useFetchNotifications();
 
   function toggleNotificationTab() {
     setNotificationTabVisible(!notificationTabVisible);
@@ -70,4 +68,4 @@ export const NotificationIndicator: FC = () => {
       `}</style>
     </>
   );
-};
+});

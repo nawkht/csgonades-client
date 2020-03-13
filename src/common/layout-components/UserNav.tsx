@@ -5,6 +5,7 @@ import { Button } from "semantic-ui-react";
 import { Dimensions } from "../../constants/Constants";
 import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
+import { useFetchFavorites } from "../../store/FavoriteStore/hooks/useFetchFavorites";
 import { NotificationIndicator } from "../notifications/NotificationIndicator";
 import { SignInnButton } from "./SignInnButton";
 import { UserDropdown } from "./UserDropdown";
@@ -12,6 +13,7 @@ import { UserDropdown } from "./UserDropdown";
 export const UserNav: FC = memo(() => {
   const trySignIn = useTrySignIn();
   const user = useSelector(userSelector);
+  useFetchFavorites();
 
   useEffect(() => {
     trySignIn();

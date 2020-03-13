@@ -1,17 +1,10 @@
 import moment from "moment";
-import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchNotificationThunk } from "../NotificationStore/NotificationThunks";
-import {
-  lastNotificaitonFetch,
-  notificationsSelector,
-} from "./NotificationSelectors";
-import { markNotifcationAsViewedThunk } from "./NotificationThunks";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { notificationsSelector } from "./NotificationSelectors";
 
 export const useNotifications = () => {
-  const dispatch = useDispatch();
   const rawNotifications = useSelector(notificationsSelector);
-  const lastFetch = useSelector(lastNotificaitonFetch);
 
   const notificationCount = useMemo(() => {
     return rawNotifications.filter(n => !n.viewed).length;
@@ -23,34 +16,8 @@ export const useNotifications = () => {
     );
   }, [rawNotifications]);
 
-  const markNotificationAsViewed = useCallback(
-    (id: string) => {
-      dispatch(markNotifcationAsViewedThunk(id));
-    },
-    [dispatch]
-  );
-
-  const fetchNotifications = useCallback(() => {
-    if (lastFetch) {
-      const minutesSinceFetch = moment().diff(
-        moment(lastFetch),
-        "minutes",
-        false
-      );
-
-      // Only fetch notifications every 5 min
-      if (minutesSinceFetch < 5) {
-        return;
-      }
-    }
-
-    dispatch(fetchNotificationThunk());
-  }, [dispatch, lastFetch]);
-
   return {
     notifications,
     notificationCount,
-    markNotificationAsViewed,
-    fetchNotifications,
   };
 };

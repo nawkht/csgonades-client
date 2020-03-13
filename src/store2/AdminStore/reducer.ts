@@ -1,4 +1,4 @@
-import { Reducer } from "redux";
+import { Reducer } from "react";
 import { NadeLight } from "../../models/Nade/Nade";
 import { Report } from "../../models/Report";
 import { User } from "../../models/User";

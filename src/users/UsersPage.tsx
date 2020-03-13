@@ -1,11 +1,16 @@
 import { Layout2 } from "../common/layout/Layout2";
 import { PageCentralize } from "../common/PageCentralize";
+import { User } from "../models/User";
 import { useUsersState } from "../store/UsersStore/UsersHooks";
 import { UserNotFound } from "./UserNotFound";
 import { UserUI } from "./UserUI";
 
-const UserPage: React.FC = () => {
-  const { user, error, nades } = useUsersState();
+type Props = {
+  user: User;
+};
+
+const UserPage: React.FC<Props> = ({ user }) => {
+  const { error, nades } = useUsersState();
   return (
     <Layout2
       title={user ? user.nickname : "User not found"}

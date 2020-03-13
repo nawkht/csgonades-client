@@ -1,11 +1,15 @@
 import { FC, useState } from "react";
 import ReactDatepicker from "react-datepicker";
 import { Button, Form, TextArea } from "semantic-ui-react";
-import { Dimensions } from "../constants/Constants";
-import { User, UserUpdateDTO } from "../models/User";
-import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { useUsersActions, useUsersState } from "../store/UsersStore/UsersHooks";
+import { Dimensions } from "../../constants/Constants";
+import { User, UserUpdateDTO } from "../../models/User";
+import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { useUpdateUser } from "../../store/UsersStore/hooks/useUpdateUser";
+import {
+  useUsersActions,
+  useUsersState,
+} from "../../store/UsersStore/UsersHooks";
 
 type Props = {
   user: User;
@@ -13,7 +17,8 @@ type Props = {
 
 export const UserEditor: FC<Props> = ({ user }) => {
   const isAdminOrMod = useIsAdminOrModerator();
-  const { stopEditingUser, updateUser } = useUsersActions();
+  const updateUser = useUpdateUser();
+  const { stopEditingUser } = useUsersActions();
   const { isEditing, isUpdatingUser } = useUsersState();
 
   const { colors } = useTheme();
@@ -36,7 +41,7 @@ export const UserEditor: FC<Props> = ({ user }) => {
       createdAt: createdAt || undefined,
     };
 
-    updateUser(updatedUserFields);
+    updateUser(user.steamId, updatedUserFields);
   }
 
   function updateNickname(e: any) {

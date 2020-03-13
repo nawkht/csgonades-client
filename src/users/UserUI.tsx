@@ -6,7 +6,7 @@ import { User } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useUsersActions, useUsersState } from "../store/UsersStore/UsersHooks";
 import { UserDetails } from "./UserDetails";
-import { UserEditor } from "./UserEditor";
+import { UserEditor } from "./UserEditor/UserEditor";
 
 type Props = {
   user: User;

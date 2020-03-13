@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import { FC, memo, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import { Notification } from "../../models/Notification";
-import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
+import { useSetNotificationViewed } from "../../store/NotificationStore/hooks/useSetNotificationViewed";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { pluralize } from "../../utils/Common";
 import { prettyDateTime } from "../../utils/DateUtils";
@@ -11,22 +11,11 @@ type Props = {
   notification: Notification;
 };
 
-export const NotificationItem: FC<Props> = ({ notification }) => {
+export const NotificationItem: FC<Props> = memo(({ notification }) => {
   const [wasViewed] = useState(notification.viewed);
-  const { markNotificationAsViewed } = useNotifications();
   const { colors } = useTheme();
 
-  useEffect(() => {
-    const viewedTimer = setTimeout(() => {
-      if (!notification.viewed) {
-        markNotificationAsViewed(notification.id);
-      }
-    }, 1000);
-    return () => {
-      clearTimeout(viewedTimer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [notification.id]);
+  useSetNotificationViewed(notification.id);
 
   if (notification.type === "contact-msg") {
     return (
@@ -141,7 +130,7 @@ export const NotificationItem: FC<Props> = ({ notification }) => {
       `}</style>
     </>
   );
-};
+});
 
 function notificationMessage(
   notification: Notification
