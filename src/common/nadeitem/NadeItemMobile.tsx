@@ -1,6 +1,6 @@
-import Router from "next/router";
+import Link from "next/link";
 import { FC, useEffect, useState } from "react";
-import { FaChevronLeft, FaPause, FaPlay } from "react-icons/fa";
+import { FaChevronRight, FaPlay, FaStop } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Dimensions } from "../../constants/Constants";
 import { NadeLight, Status } from "../../models/Nade/Nade";
@@ -44,11 +44,6 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     setIsPlaying(!isPlaying);
   }
 
-  function onDetailsClick() {
-    // <Link href={"/nades/[nade]"} as={`/nades/${nade.id}`}>
-    Router.push(`/nades/[nade]`, `/nades/${nade.id}`);
-  }
-
   const nadeBoxClassName = nadeStatusToClassName(nade.status);
 
   return (
@@ -64,17 +59,24 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
               <div className="context-action" onClick={onPlayClick}>
                 {isPlaying && (
                   <>
-                    <FaPause /> <span>Pause</span>
+                    <span>Stop</span>{" "}
+                    <FaStop style={{ position: "relative", top: 2 }} />
                   </>
                 )}
                 {!isPlaying && (
                   <>
-                    <FaPlay /> <span>Play</span>
+                    <span>Play</span>{" "}
+                    <FaPlay style={{ position: "relative", top: 2 }} />
                   </>
                 )}
               </div>
-              <div className="context-action" onClick={onDetailsClick}>
-                <FaChevronLeft /> Details
+              <div className="context-action">
+                <Link href={"/nades/[nade]"} as={`/nades/${nade.id}`}>
+                  <a className="nade-page-link">
+                    Details{" "}
+                    <FaChevronRight style={{ position: "relative", top: 2 }} />
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -168,6 +170,10 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
 
         .media-video video {
           width: 100%;
+        }
+
+        .nade-page-link {
+          color: #222;
         }
       `}</style>
     </>

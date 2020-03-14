@@ -12,10 +12,10 @@ export const NadeListWithAds: FC = memo(() => {
       <div
         key={nade.id}
         style={{
-          marginBottom: 30,
-          marginTop: 30,
-          marginLeft: 30,
-          marginRight: 30,
+          paddingBottom: 15,
+          paddingTop: 15,
+          paddingLeft: 15,
+          paddingRight: 15,
         }}
       >
         <NadeItemMobile nade={nade} />
