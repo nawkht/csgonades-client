@@ -157,7 +157,6 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         }
 
         .ez {
-          border: 1px solid red;
         }
 
         .ad-test {
