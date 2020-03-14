@@ -63,12 +63,9 @@ export const NadeListWithAds: FC<Props> = memo(({ adCodes }) => {
       </div>
       <style jsx>{`
         .ez {
-          min-height: 50px;
-          background: #bbb;
         }
 
         .in-content {
-          min-height: 250px;
         }
       `}</style>
     </>
