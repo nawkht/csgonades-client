@@ -9,16 +9,15 @@ export const NadeListWithAds: FC = memo(() => {
 
   function renderList(nades: NadeLight[]) {
     return nades.map(nade => (
-      <div
-        key={nade.id}
-        style={{
-          paddingBottom: 15,
-          paddingTop: 15,
-          paddingLeft: 15,
-          paddingRight: 15,
-        }}
-      >
-        <NadeItemMobile nade={nade} />
+      <div key={nade.id}>
+        <div className="nade-item-wrap">
+          <NadeItemMobile nade={nade} />
+        </div>
+        <style jsx>{`
+          .nade-item-wrap {
+            padding: 15px;
+          }
+        `}</style>
       </div>
     ));
   }
