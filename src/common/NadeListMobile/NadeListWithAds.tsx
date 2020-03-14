@@ -46,6 +46,10 @@ export const NadeListWithAds: FC = memo(() => {
       </div>
       <style jsx>{`
         .ez {
+          min-height: 20px;
+          margin-left: -20px;
+          margin-right: -20px;
+          overflow: hidden;
         }
 
         .in-content {
