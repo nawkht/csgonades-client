@@ -59,7 +59,7 @@ export const NadePage: FC = memo(() => {
       <Layout2
         title={layoutTitle}
         description={nade.description}
-        canonical={`/nades/${nade.id}`}
+        canonical={`/nades/${nade.slug || nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
       >
         <div key={`nadepage-${nade.id}`}>
