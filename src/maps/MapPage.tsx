@@ -167,8 +167,9 @@ export const MapPage: FC<Props> = memo(({ map }) => {
           display: flex;
           flex-direction: row;
           align-items: center;
-          justify-content: flex-end;
+          justify-content: center;
           align-self: center;
+          margin-top: 10px;
         }
 
         .placement-bottom {
