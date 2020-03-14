@@ -4,11 +4,7 @@ import { useFilteredNades } from "../../store2/FilterStore/hooks/useFilteredNade
 import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
 import { NadeItemMobile } from "../nadeitem/NadeItemMobile";
 
-type Props = {
-  adCodes: number[];
-};
-
-export const NadeListWithAds: FC<Props> = memo(({ adCodes }) => {
+export const NadeListWithAds: FC = memo(() => {
   const nades = useFilteredNades();
 
   function renderList(nades: NadeLight[]) {
@@ -28,37 +24,24 @@ export const NadeListWithAds: FC<Props> = memo(({ adCodes }) => {
   const items3 = chunks.length > 2 ? chunks[2] : false;
   const rest = chunks.length > 3 ? chunks[3] : false;
 
-  const topOfPageAd = adCodes.length > 0 ? adCodes[0] : false;
-  const firstAd = adCodes.length > 1 ? adCodes[1] : false;
-  const secondAd = adCodes.length > 2 ? adCodes[2] : false;
-  const thirdAd = adCodes.length > 3 ? adCodes[3] : false;
-
   return (
     <>
       <div>
-        {topOfPageAd && (
-          <div className="ez">
-            <EzoicPlaceHolder id={topOfPageAd} />
-          </div>
-        )}
+        <div className="ez">
+          <EzoicPlaceHolder desc="Nade List Mobile | Top of page" id={118} />
+        </div>
         {items1 && renderList(items1)}
-        {firstAd && (
-          <div className="ez in-content">
-            <EzoicPlaceHolder id={firstAd} />
-          </div>
-        )}
+        <div className="ez in-content">
+          <EzoicPlaceHolder desc="Nade List Mobile | List 5" id={114} />
+        </div>
         {items2 && renderList(items2)}
-        {secondAd && (
-          <div className="ez in-content">
-            <EzoicPlaceHolder id={secondAd} />
-          </div>
-        )}
+        <div className="ez in-content">
+          <EzoicPlaceHolder desc="Nade List Mobile | List 6" id={115} />
+        </div>
         {items3 && renderList(items3)}
-        {thirdAd && (
-          <div className="ez in-content">
-            <EzoicPlaceHolder id={thirdAd} />
-          </div>
-        )}
+        <div className="ez in-content">
+          <EzoicPlaceHolder desc="Nade List Mobile | List 7" id={116} />
+        </div>
         {rest && renderList(rest)}
       </div>
       <style jsx>{`

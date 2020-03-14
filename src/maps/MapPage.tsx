@@ -1,12 +1,12 @@
 import { FC, memo, useMemo, useState } from "react";
 import { isMobileOnly } from "react-device-detect";
-import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { NadeListWithAds } from "../common/NadeListMobile/NadeListWithAds";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { Layout2 } from "../layout/Layout2";
 import { CsgoMap } from "../models/Nade/CsGoMap";
+import { useInitAdvert } from "../store/AdvertStore/hooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
@@ -20,29 +20,18 @@ type Props = {
 };
 
 export const MapPage: FC<Props> = memo(({ map }) => {
+  useInitAdvert();
   const { colors } = useTheme();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
-  const { codes, reducedAds } = useMemo(() => {
+  const reducedAds = useMemo(() => {
     const reducedsMapAds = ["nuke", "cobblestone", "vertigo", "cache"];
-    const reducedAds = reducedsMapAds.includes(map);
-    if (reducedAds) {
-      return {
-        codes: isMobileOnly ? [118, 114, 115, 116, 104] : [112, 104, 101],
-        reducedAds,
-      };
-    } else {
-      return {
-        codes: isMobileOnly ? [118, 114, 115, 116, 104] : [112, 104, 101, 111],
-        reducedAds,
-      };
-    }
+    return reducedsMapAds.includes(map);
   }, [map]);
 
   return (
     <>
       <Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>
-        <EzoicLoader codes={codes} />
         <div className="map-welcome">
           <PageCentralize>
             <div className="map-welcome-wrap">
@@ -57,7 +46,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
                 </h2>
               </div>
               <div className="ez top-placement">
-                <EzoicPlaceHolder id={112} />
+                <EzoicPlaceHolder desc="Map page | In top title" id={112} />
               </div>
             </div>
           </PageCentralize>
@@ -68,17 +57,17 @@ export const MapPage: FC<Props> = memo(({ map }) => {
             <NadeFilter showSingInWarning={() => setShowLoginWarning(true)} />
           </div>
           <div className="nade-list">
-            {isMobileOnly && <NadeListWithAds adCodes={codes} />}
+            {isMobileOnly && <NadeListWithAds />}
             {!isMobileOnly && <MapPageNades />}
           </div>
           <div className="map-page-aside">
             <div className="ez placement-siderbar-top">
-              <EzoicPlaceHolder id={101} />
+              <EzoicPlaceHolder desc="Map page | Sidebar Top" id={101} />
             </div>
 
             {!reducedAds && (
               <div className="ez placement-siderbar-bottom">
-                <EzoicPlaceHolder id={111} />
+                <EzoicPlaceHolder desc="	Map page | Sidebar Middle" id={111} />
               </div>
             )}
 
@@ -86,7 +75,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
           </div>
         </div>
         <div className="ez placement-bottom">
-          <EzoicPlaceHolder id={104} />
+          <EzoicPlaceHolder desc="Map page | Under nade list" id={104} />
         </div>
         <MobileFilter />
         <MapView map={map} />

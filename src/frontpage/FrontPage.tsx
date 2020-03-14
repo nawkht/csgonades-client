@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../layout/Layout2";
 import { NadeLight } from "../models/Nade/Nade";
+import { useInitAdvert } from "../store/AdvertStore/hooks";
 import { BlogList } from "./BlogList";
 import { FrontpageActions } from "./FrontpageActions";
 import { FrontPageJumbo } from "./FrontPageJumbo";
@@ -13,15 +13,17 @@ type Props = {
 };
 
 export const FrontPage: FC<Props> = ({ recentNades }) => {
+  useInitAdvert();
+
   return (
     <Layout2 canonical="">
-      <EzoicLoader codes={[110]} />
       <FrontPageJumbo />
       {false && <BlogList />}
+      <EzoicPlaceHolder desc="Front page | Over recent nades" id={119} />
       <RecentNades recentNades={recentNades} />
       <FrontpageActions />
       <div className="bottom-placeholder">
-        <EzoicPlaceHolder id={110} />
+        <EzoicPlaceHolder desc="Front Page | Bottom" id={110} />
       </div>
       <style jsx>{`
         .bottom-placeholder {

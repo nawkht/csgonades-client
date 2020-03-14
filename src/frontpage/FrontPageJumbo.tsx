@@ -30,6 +30,7 @@ const FrontPageJumbo: FC = () => {
           background-repeat: no-repeat;
           background-size: cover;
           overflow: hidden;
+          margin-bottom: 30px;
         }
 
         #jumbo-message {

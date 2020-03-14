@@ -1,5 +1,6 @@
 import { combineReducers, createStore, Store } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { AdvertReducer } from "./AdvertStore/reducer";
 import { AuthReducer } from "./AuthStore/AuthReducer";
 import { FavoriteReducer } from "./FavoriteStore/FavoriteReducer";
 import { GlobalReducer } from "./GlobalStore/GlobalReducer";
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   globalStore: GlobalReducer,
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
+  advertStore: AdvertReducer,
 });
 
 function createMiddleware() {
