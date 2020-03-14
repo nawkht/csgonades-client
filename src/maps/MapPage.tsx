@@ -35,9 +35,6 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         <div className="map-welcome">
           <PageCentralize>
             <div className="map-welcome-wrap">
-              <div className="ez top-placement">
-                <EzoicPlaceHolder desc="Map page | In top title" id={112} />
-              </div>
               <div className="welcome-msg">
                 <h1>
                   Find the best smokes, flashbangs,
@@ -47,6 +44,9 @@ export const MapPage: FC<Props> = memo(({ map }) => {
                   Something missing?
                   <br /> Sign in, and add a nade to help everyone out.
                 </h2>
+              </div>
+              <div className="ez top-placement">
+                <EzoicPlaceHolder desc="Map page | In top title" id={112} />
               </div>
             </div>
           </PageCentralize>
@@ -98,7 +98,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
 
         .map-welcome-wrap {
           display: flex;
-          flex-direction: column;
+          align-items: center;
         }
 
         .welcome-msg {
@@ -161,23 +161,13 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         }
 
         .top-placement {
-          width: 980px;
-          display: flex;
-          justify-content: space-around;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          align-self: center;
-          margin-top: 10px;
+          min-width: 730px;
+          height: 105px;
         }
 
         .placement-bottom {
           margin-top: 50px;
           margin-bottom: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
 
         .placement-sidebar-middle {
