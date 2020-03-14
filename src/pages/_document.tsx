@@ -65,17 +65,10 @@ class MyDocument extends Document {
                 ezstandalone.cmd = ezstandalone.cmd || [];
                 ezstandalone.cmd.push(function() {
                   ezstandalone.setIsPWA();
-                  ezstandalone.setHasBadWords(false);
-                  ezstandalone.setCollapseEmptyDiv();
                 });`,
               }}
             />
-            <script
-              key="ezoic-script"
-              src="//www.ezojs.com/ezoic/sa.min.js"
-              defer
-              async
-            />
+            <script key="ezoic-script" src="//www.ezojs.com/ezoic/sa.min.js" />
           </Head>
           <body>
             <Main />
