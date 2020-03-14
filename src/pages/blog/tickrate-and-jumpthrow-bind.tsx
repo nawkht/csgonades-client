@@ -181,8 +181,8 @@ const HelloWorld: FC<Props> = ({}) => {
         }
 
         .ez-huge {
-          max-width: 980px;
           height: 410px;
+          margin: 0 auto;
         }
 
         p {
