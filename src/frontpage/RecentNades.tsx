@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { NadeApi } from "../api/NadeApi";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { PageCentralize } from "../common/PageCentralize";
 import { NadeLight } from "../models/Nade/Nade";
@@ -9,14 +10,23 @@ type Props = {
 };
 
 export const RecentNades: FC<Props> = ({ recentNades }) => {
+  const [nades, setNades] = useState(recentNades);
   const { colors } = useTheme();
+
+  useEffect(() => {
+    NadeApi.getAll().then(res => {
+      if (res.isOk()) {
+        setNades(res.value);
+      }
+    });
+  }, []);
 
   return (
     <>
       <PageCentralize>
         <div className="recent-nades">
           <h3>Recent nades</h3>
-          <NadeListGrid nades={recentNades} />
+          <NadeListGrid nades={nades} />
         </div>
       </PageCentralize>
       <style jsx>{`
