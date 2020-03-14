@@ -35,18 +35,18 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         <div className="map-welcome">
           <PageCentralize>
             <div className="map-welcome-wrap">
+              <div className="ez top-placement">
+                <EzoicPlaceHolder desc="Map page | In top title" id={112} />
+              </div>
               <div className="welcome-msg">
                 <h1>
-                  Find the best smokes, flashbangs, molotovs and grenades for{" "}
-                  {capitalize(map)}.
+                  Find the best smokes, flashbangs,
+                  <br /> molotovs and grenades for {capitalize(map)}.
                 </h1>
                 <h2>
                   Something missing?
                   <br /> Sign in, and add a nade to help everyone out.
                 </h2>
-              </div>
-              <div className="ez top-placement">
-                <EzoicPlaceHolder desc="Map page | In top title" id={112} />
               </div>
             </div>
           </PageCentralize>
@@ -93,8 +93,18 @@ export const MapPage: FC<Props> = memo(({ map }) => {
             ${colors.jumboGradientEnd} 66.89%
           );
           margin-bottom: 40px;
-          padding-bottom: 30px;
-          padding-top: 30px;
+          padding-bottom: 40px;
+        }
+
+        .map-welcome-wrap {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .welcome-msg {
+          align-self: center;
+          margin-top: 40px;
+          width: 100%;
         }
 
         .map-welcome h1,
@@ -108,6 +118,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
 
         .map-welcome h2 {
           font-size: 20px;
+          margin: 0;
           margin-top: 20px;
         }
 
@@ -140,11 +151,6 @@ export const MapPage: FC<Props> = memo(({ map }) => {
           justify-content: space-between;
         }
 
-        .map-welcome-wrap {
-          display: flex;
-          align-items: center;
-        }
-
         .ez {
         }
 
@@ -155,17 +161,14 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         }
 
         .top-placement {
-          min-width: 728px;
+          width: 980px;
           display: flex;
           justify-content: space-around;
-          min-height: 100px;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: flex-end;
-          margin-bottom: 10px;
-          margin-top: 10px;
-          margin-left: 20px;
+          align-self: center;
         }
 
         .placement-bottom {
