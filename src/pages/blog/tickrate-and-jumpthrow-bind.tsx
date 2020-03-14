@@ -186,6 +186,9 @@ const HelloWorld: FC<Props> = ({}) => {
         .ez-huge {
           padding-top: 100px;
           padding-bottom: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         p {
