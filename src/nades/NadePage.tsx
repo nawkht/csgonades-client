@@ -39,6 +39,8 @@ export const NadePage: FC = memo(() => {
   const [editMetaVisible, setEditMetaVisible] = useState(false);
   const [showSignInWarning, setShowSignInWarning] = useState(false);
 
+  const allowEditTitle = allowEdit && nade.status !== "accepted";
+
   useEffect(() => {
     registerView(nade.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +74,7 @@ export const NadePage: FC = memo(() => {
             map={nade.map}
             type={nade.type}
             onEditNade={() => setEditTitleVisisble(true)}
-            allowEdit={allowEdit}
+            allowEdit={allowEditTitle}
           />
 
           <div className="nade-page">
