@@ -29,30 +29,46 @@ export const Layout2: FC<Props> = memo(
 
     return (
       <>
-        <PageHead
-          title={pageTitle}
-          description={description}
-          canonical={canonical}
-          thumbnail={metaThumbNail}
-        />
+        <div className="page">
+          <PageHead
+            title={pageTitle}
+            description={description}
+            canonical={canonical}
+            thumbnail={metaThumbNail}
+          />
 
-        <Header />
+          <div className="header">
+            <Header />
+          </div>
 
-        <MobileNav />
+          <main>{children}</main>
 
-        <main>{children}</main>
+          <div className="footer">
+            <Footer />
+          </div>
 
-        <Footer />
+          <ToastList />
+          <CookieConsent />
+          <MobileNav />
 
-        <ToastList />
+          {isAdminOrMod && (
+            <Suspense fallback={<></>}>
+              <AdminLink />
+            </Suspense>
+          )}
+        </div>
 
-        <CookieConsent />
+        <style jsx>{`
+          .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+          }
 
-        {isAdminOrMod && (
-          <Suspense fallback={<></>}>
-            <AdminLink />
-          </Suspense>
-        )}
+          main {
+            flex: 1;
+          }
+        `}</style>
 
         <style jsx global>{`
           body {

@@ -10,7 +10,7 @@ type Props = {
   initialReduxState: AppState;
 };
 
-export const withRedux = (PageComponent: NextPage, { ssr = true } = {}) => {
+export const withRedux = (PageComponent: NextPage, { ssr = false } = {}) => {
   const WithRedux: NextPage<Props> = ({ initialReduxState, ...props }) => {
     const store = getOrInitializeStore(initialReduxState);
     const persistor = persistStore(store);
