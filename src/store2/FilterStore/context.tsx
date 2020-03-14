@@ -1,6 +1,6 @@
 import React, { FC, useReducer } from "react";
+import { createContainer } from "react-tracked";
 import { NadeLight } from "../../models/Nade/Nade";
-import { NadeFilterActions } from "./actions";
 import { FilterState, nadeFilterReducer } from "./reducer";
 
 const INIT_STATE: FilterState = {
@@ -10,27 +10,29 @@ const INIT_STATE: FilterState = {
   positionModalOpen: false,
 };
 
-type FilterContextApi = {
-  state: FilterState;
-  dispatch: React.Dispatch<NadeFilterActions>;
-};
+const useValue = (props: Props) =>
+  useReducer(nadeFilterReducer, { ...INIT_STATE, nades: props.nades });
 
-export const NadeFilterContext = React.createContext<FilterContextApi>(null);
+const container = createContainer(useValue);
+
+export const NadeFilterContext = container;
+
+export const useNadeFilterState = () => {
+  const [state, dispatch] = container.useTracked();
+
+  return {
+    state,
+    dispatch,
+  };
+};
 
 type Props = {
   nades: NadeLight[];
 };
 
 export const NadeFilterProvider: FC<Props> = ({ children, nades }) => {
-  const [state, dispatch] = useReducer(nadeFilterReducer, {
-    ...INIT_STATE,
-    nades,
-  });
-
-  const value = { state, dispatch };
-
   return (
-    <NadeFilterContext.Provider value={value}>
+    <NadeFilterContext.Provider nades={nades}>
       {children}
     </NadeFilterContext.Provider>
   );

@@ -1,8 +1,8 @@
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import { MapCoordinates } from "../../../models/Nade/Nade";
-import { NadeFilterContext } from "../context";
+import { useNadeFilterState } from "../context";
 export const useFilterByCoords = () => {
-  const { dispatch } = useContext(NadeFilterContext);
+  const { dispatch } = useNadeFilterState();
 
   const filterByCoords = useCallback(
     (coords: MapCoordinates) => {

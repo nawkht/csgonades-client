@@ -1,8 +1,8 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { NadeLight } from "../../../models/Nade/Nade";
 import { favoritedNadeIdsSelector } from "../../../store/FavoriteStore/FavoriteSelectors";
-import { NadeFilterContext } from "../context";
+import { useNadeFilterState } from "../context";
 import {
   addFavoriteToNades,
   containsSimilarNade,
@@ -13,7 +13,7 @@ import {
 
 export const useNadesForMapView = (): NadeLight[] => {
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
-  const { state } = useContext(NadeFilterContext);
+  const { state } = useNadeFilterState();
   const { nades, byType, byTickrate, byFavorites } = state;
 
   const unqiueNadesForPosition = useMemo(() => {

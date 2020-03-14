@@ -1,8 +1,8 @@
-import { useCallback, useContext, useMemo } from "react";
-import { NadeFilterContext } from "../context";
+import { useCallback, useMemo } from "react";
+import { useNadeFilterState } from "../context";
 
 export const useFilterReset = () => {
-  const { state, dispatch } = useContext(NadeFilterContext);
+  const { dispatch, state } = useNadeFilterState();
 
   const resetFilter = useCallback(() => {
     dispatch({

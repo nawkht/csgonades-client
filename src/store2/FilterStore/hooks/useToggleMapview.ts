@@ -1,7 +1,8 @@
-import { useCallback, useContext } from "react";
-import { NadeFilterContext } from "../context";
+import { useCallback } from "react";
+import { useNadeFilterState } from "../context";
 export const useToggleMapview = () => {
-  const { dispatch, state } = useContext(NadeFilterContext);
+  const { dispatch, state } = useNadeFilterState();
+
   const { positionModalOpen } = state;
   const toggleMapViewVisibility = useCallback(() => {
     dispatch({

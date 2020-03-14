@@ -1,7 +1,8 @@
 import { FC, memo, useMemo, useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import { EzoicLoader } from "../common/ezoicLoader/EzoicLoader";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
+import { NadeListWithAds } from "../common/NadeListMobile/NadeListWithAds";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { Layout2 } from "../layout/Layout2";
@@ -18,27 +19,22 @@ type Props = {
   map: CsgoMap;
 };
 
-const mobileInContentAds = isMobile ? [114, 115, 116, 117, 118] : [];
-
 export const MapPage: FC<Props> = memo(({ map }) => {
   const { colors } = useTheme();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
-  const { showAllAds, codes } = useMemo(() => {
-    if (
-      map === "nuke" ||
-      map === "cobblestone" ||
-      map === "vertigo" ||
-      map === "cache"
-    ) {
+  const { codes, reducedAds } = useMemo(() => {
+    const reducedsMapAds = ["nuke", "cobblestone", "vertigo", "cache"];
+    const reducedAds = reducedsMapAds.includes(map);
+    if (reducedAds) {
       return {
-        showAllAds: false,
-        codes: [112, 104, 101, ...mobileInContentAds],
+        codes: isMobileOnly ? [118, 114, 115, 116, 104] : [112, 104, 101],
+        reducedAds,
       };
     } else {
       return {
-        showAllAds: true,
-        codes: [112, 104, 101, 111, ...mobileInContentAds],
+        codes: isMobileOnly ? [118, 114, 115, 116, 104] : [112, 104, 101, 111],
+        reducedAds,
       };
     }
   }, [map]);
@@ -72,14 +68,15 @@ export const MapPage: FC<Props> = memo(({ map }) => {
             <NadeFilter showSingInWarning={() => setShowLoginWarning(true)} />
           </div>
           <div className="nade-list">
-            <MapPageNades />
+            {isMobileOnly && <NadeListWithAds adCodes={codes} />}
+            {!isMobileOnly && <MapPageNades />}
           </div>
           <div className="map-page-aside">
             <div className="ez placement-siderbar-top">
               <EzoicPlaceHolder id={101} />
             </div>
 
-            {showAllAds && (
+            {!reducedAds && (
               <div className="ez placement-siderbar-bottom">
                 <EzoicPlaceHolder id={111} />
               </div>
@@ -160,6 +157,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         }
 
         .ez {
+          border: 1px solid red;
         }
 
         .ad-test {

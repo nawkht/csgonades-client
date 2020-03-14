@@ -1,9 +1,10 @@
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import { NadeType } from "../../../models/Nade/NadeType";
-import { NadeFilterContext } from "../context";
+import { useNadeFilterState } from "../context";
 
 export const useFilterByType = () => {
-  const { state, dispatch } = useContext(NadeFilterContext);
+  const { dispatch, state } = useNadeFilterState();
+
   const filterByType = useCallback(
     (nadeType: NadeType) => {
       dispatch({

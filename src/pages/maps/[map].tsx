@@ -20,13 +20,11 @@ const Map: NextPage<Props> = ({ map, nades }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  console.log("Getting server side props");
   const map = context.query.map as CsgoMap;
 
   const results = await NadeApi.getByMap(map);
 
   if (results.isOk()) {
-    console.log("Got nades", { nades: results.value });
     return {
       props: {
         map,
