@@ -181,6 +181,7 @@ export const NadePage: FC = memo(() => {
       <style jsx>{`
         .nade-info-container {
           display: flex;
+          margin-top: 30px;
         }
 
         .nade-info-actions {
@@ -197,22 +198,6 @@ export const NadePage: FC = memo(() => {
         .sticky {
           max-height: 1200px;
           min-height: 600px;
-        }
-
-        .placement-under-desc {
-          margin-top: 30px;
-          margin-bottom: 30px;
-        }
-
-        .nade-page-aside,
-        .nade-page-aside2,
-        .nade-page-header-placeholder {
-        }
-
-        .nade-page-header-placeholder {
-          margin-top: 20px;
-          margin-bottom: 20px;
-          height: 60px;
         }
 
         .nade-page {
