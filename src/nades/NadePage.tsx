@@ -68,6 +68,11 @@ export const NadePage: FC = memo(() => {
               <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
             </Suspense>
           )}
+
+          <div className="ez top-placement">
+            <EzoicPlaceHolder desc="Nade Page | Top of page" id={120} />
+          </div>
+
           <NadeBreadcrumb nade={nade} />
           <NadeTitle
             title={nade.title}
@@ -78,7 +83,7 @@ export const NadePage: FC = memo(() => {
           />
 
           <div className="nade-page">
-            <aside className="nade-page-aside">
+            <aside className="ez nade-page-aside">
               <EzoicPlaceHolder desc="Nade page | Left sidebar" id={106} />
             </aside>
             <div className="nade-page-content">
@@ -89,10 +94,6 @@ export const NadePage: FC = memo(() => {
                 poster={nade.images.thumbnailUrl}
                 controls={isMobile ? "mobile" : "desktop"}
               />
-
-              <div className="nade-page-header-placeholder">
-                <EzoicPlaceHolder desc="Nade page | Under video" id={108} />
-              </div>
 
               <div className="nade-info-container">
                 <div className="nade-info-empty"></div>
@@ -112,7 +113,7 @@ export const NadePage: FC = memo(() => {
                 </div>
               </div>
 
-              <div className="placement-under-desc">
+              <div className="ez placement-under-desc">
                 <EzoicPlaceHolder
                   desc="Nade page | Under description"
                   id={107}
@@ -123,7 +124,7 @@ export const NadePage: FC = memo(() => {
                 <SimilarNades nade={nade} />
               </div>
             </div>
-            <aside className="nade-page-aside2">
+            <aside className="ez nade-page-aside2">
               <EzoicPlaceHolder desc="Nade page | Right sidebar" id={109} />
             </aside>
           </div>
@@ -181,6 +182,11 @@ export const NadePage: FC = memo(() => {
         </div>
       </Layout2>
       <style jsx>{`
+        .top-placement {
+          margin-top: 10px;
+          height: 60px;
+        }
+
         .nade-info-container {
           display: flex;
           margin-top: 30px;
@@ -208,6 +214,9 @@ export const NadePage: FC = memo(() => {
           display: flex;
           padding-bottom: 50px;
           min-height: 85vh;
+        }
+
+        .ez {
         }
 
         .nade-page-aside,
