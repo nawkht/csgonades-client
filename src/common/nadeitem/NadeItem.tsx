@@ -15,9 +15,11 @@ interface Props {
 export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
   const { colors } = useTheme();
 
+  const urlIdOrSlug = nade.slug || nade.id;
+
   return (
     <>
-      <Link href={"/nades/[nade]"} as={`/nades/${nade.id}`}>
+      <Link href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
         <a
           className={"nadebox"}
           style={{ display: "inline-block" }}

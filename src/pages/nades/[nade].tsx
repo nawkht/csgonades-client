@@ -19,18 +19,31 @@ const NadePageComponent: NextPage<Props> = ({ nade }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const nadeId = context.query.nade as string;
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+}) => {
+  const nadeIdOrSlug = query.nade as string;
 
-  const result = await NadeApi.byId(nadeId);
+  const requestedSlug = checkIsSlug(nadeIdOrSlug);
+
+  const result = await NadeApi.byId(nadeIdOrSlug);
 
   if (result.isErr()) {
-    context.res.statusCode = 404;
+    res.statusCode = 404;
     return {
       props: {
         nade: null,
       },
     };
+  }
+
+  // Redirect to slug url if using non slug url
+  if (!requestedSlug && result.value.slug) {
+    res.writeHead(301, {
+      Location: `/nades/${result.value.slug}`,
+    });
+    res.end();
   }
 
   return {
@@ -39,5 +52,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     },
   };
 };
+
+function checkIsSlug(value: string) {
+  return value.includes("-");
+}
 
 export default withRedux(NadePageComponent, { ssr: false });
