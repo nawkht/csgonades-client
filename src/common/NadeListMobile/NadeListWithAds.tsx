@@ -9,7 +9,15 @@ export const NadeListWithAds: FC = memo(() => {
 
   function renderList(nades: NadeLight[]) {
     return nades.map(nade => (
-      <div key={nade.id} style={{ marginBottom: 20, marginTop: 20 }}>
+      <div
+        key={nade.id}
+        style={{
+          marginBottom: 30,
+          marginTop: 30,
+          marginLeft: 30,
+          marginRight: 30,
+        }}
+      >
         <NadeItemMobile nade={nade} />
       </div>
     ));
@@ -46,10 +54,7 @@ export const NadeListWithAds: FC = memo(() => {
       </div>
       <style jsx>{`
         .ez {
-          min-height: 20px;
-          margin-left: -20px;
-          margin-right: -20px;
-          overflow: hidden;
+          width: 100%;
         }
 
         .in-content {

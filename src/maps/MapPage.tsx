@@ -220,8 +220,6 @@ export const MapPage: FC<Props> = memo(({ map }) => {
           }
 
           .map-page {
-            padding-left: 20px;
-            padding-right: 20px;
           }
 
           .map-welcome-wrap {
