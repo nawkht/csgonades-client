@@ -23,7 +23,7 @@ export const NadeListWithAds: FC = memo(() => {
   }
 
   const chunks: NadeLight[][] = useMemo(() => {
-    return chunk(nades, 5);
+    return chunk(nades, 7);
   }, [nades]);
 
   const items1 = chunks.length > 0 ? chunks[0] : false;
