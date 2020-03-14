@@ -64,10 +64,9 @@ class MyDocument extends Document {
                 var ezstandalone = ezstandalone || {};
                 ezstandalone.cmd = ezstandalone.cmd || [];
                 ezstandalone.cmd.push(function() {
-                  ezstandalone.setIsPWA()
+                  ezstandalone.setIsPWA();
                   ezstandalone.setHasBadWords(false);
-                  ezstandalone.setABTest("mod33");
-                  console.log("> Ezoic initialized")
+                  ezstandalone.setCollapseEmptyDiv();
                 });`,
               }}
             />
