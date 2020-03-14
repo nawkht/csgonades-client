@@ -171,18 +171,21 @@ const HelloWorld: FC<Props> = ({}) => {
         }
 
         .ez {
+        }
+
+        .ez-wide {
           padding-top: 30px;
           padding-bottom: 30px;
         }
 
-        .ez-wide {
-        }
-
         .ez-box {
+          padding-top: 30px;
+          padding-bottom: 30px;
         }
 
         .ez-huge {
-          height: 410px;
+          padding-top: 100px;
+          padding-bottom: 100px;
         }
 
         p {
