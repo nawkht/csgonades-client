@@ -171,7 +171,8 @@ const HelloWorld: FC<Props> = ({}) => {
         }
 
         .ez {
-          margin: 30px auto;
+          padding-top: 30px;
+          padding-bottom: 30px;
         }
 
         .ez-wide {
@@ -182,7 +183,6 @@ const HelloWorld: FC<Props> = ({}) => {
 
         .ez-huge {
           height: 410px;
-          margin: 0 auto;
         }
 
         p {
