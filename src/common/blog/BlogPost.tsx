@@ -94,6 +94,7 @@ export const BlogPost: FC<Props> = ({ children, data }) => {
           margin: 0;
           margin-bottom: 30px;
           font-size: 36px;
+          font-weight: 300;
         }
 
         .body {

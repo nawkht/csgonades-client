@@ -194,6 +194,7 @@ const HelloWorld: FC<Props> = ({}) => {
           margin-top: 50px;
           margin-bottom: 25px;
           font-size: 28px;
+          font-weight: 300;
         }
 
         h3 {
@@ -201,6 +202,7 @@ const HelloWorld: FC<Props> = ({}) => {
           padding: 0;
           margin-top: 50px;
           font-size: 22px;
+          font-weight: 300;
         }
 
         strong {
