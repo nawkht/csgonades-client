@@ -8,7 +8,6 @@ export function ezoicInit(codes: number[]) {
       ezstandalone.define(...codes);
       ezstandalone.enable();
       ezstandalone.display();
-      console.log("> Ezoic display", codes);
     } catch (error) {
       // no-op
     }
@@ -16,7 +15,6 @@ export function ezoicInit(codes: number[]) {
     try {
       ezstandalone.define(...codes);
       ezstandalone.refresh();
-      console.log("> Ezoic refresh", codes);
     } catch (error) {
       // no-op
     }

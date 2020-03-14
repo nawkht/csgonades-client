@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
+import { FaEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { CSGNModal } from "../../common/CSGNModal";
 import { CsgnInput } from "../../common/inputs/CsgnInput";
 import { CsgnSaveButton } from "../../common/inputs/CsgnSaveButton";
@@ -53,7 +55,12 @@ export const UserEditorModal: FC<Props> = ({ user }) => {
           <CsgnSaveButton onClick={onSave} />
         </div>
       </CSGNModal>
-      <button onClick={() => setIsEditing(true)}>Edit user</button>
+      <ButtonWithIcon
+        icon={<FaEdit />}
+        value="Edit user profile"
+        backgroundColor="#3252a8"
+        onClick={() => setIsEditing(true)}
+      />
       <style jsx>{`
         .user-editor {
           display: flex;

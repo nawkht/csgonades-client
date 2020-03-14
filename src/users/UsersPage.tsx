@@ -16,7 +16,7 @@ export const UserPage: React.FC<Props> = ({ user }) => {
     >
       <PageCentralize>
         {!user && <UserNotFound />}
-        {user && <UserUI user={user} nades={[]} />}
+        {user && <UserUI user={user} />}
       </PageCentralize>
     </Layout2>
   );

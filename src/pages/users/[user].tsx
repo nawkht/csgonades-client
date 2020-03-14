@@ -9,7 +9,7 @@ type Props = {
 };
 
 const UserPageComponent: NextPage<Props> = ({ user }) => {
-  return <UserPage user={user} />;
+  return <UserPage user={user} key={user.steamId} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {

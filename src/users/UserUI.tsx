@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { NadeApi } from "../api/NadeApi";
 import { NadeListGrid } from "../common/NadeListGrid";
 import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
@@ -8,11 +9,20 @@ import { UserDetails } from "./UserDetails";
 
 type Props = {
   user: User;
-  nades: NadeLight[];
 };
 
-export const UserUI: FC<Props> = ({ user, nades }) => {
+export const UserUI: FC<Props> = ({ user }) => {
+  const [nades, setNades] = useState<NadeLight[]>([]);
+
   const { colors } = useTheme();
+
+  useEffect(() => {
+    NadeApi.byUser(user.steamId).then(res => {
+      if (res.isOk()) {
+        setNades(res.value);
+      }
+    });
+  }, []);
 
   return (
     <>
