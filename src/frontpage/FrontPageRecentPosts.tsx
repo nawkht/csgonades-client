@@ -2,7 +2,6 @@ import { FC } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { BlogList } from "../blog/BlogList";
 import { blogTickrateAndJumpthrow } from "../pages/blog/tickrate-and-jumpthrow-bind";
-import { Dimensions } from "../constants/Constants";
 
 type Props = {};
 
