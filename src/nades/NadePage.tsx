@@ -16,7 +16,7 @@ import { NadeInfo } from "./components/NadeInfo";
 import { NadeTitle } from "./components/NadeTitle";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { SimilarNades } from "./components/SimilarNades";
-import { SEO } from "../layout/Seo";
+import { SEO } from "../layout/SEO2";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));

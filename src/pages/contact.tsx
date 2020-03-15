@@ -6,7 +6,7 @@ import { CsgnInput } from "../common/inputs/CsgnInput";
 import { CsgnTextArea } from "../common/inputs/CsgnTextArea";
 import { ConctactDTO } from "../models/Contact";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { SEO } from "../layout/Seo";
+import { SEO } from "../layout/SEO2";
 
 const ContactPageContainer: NextPage = () => {
   const { colors } = useTheme();

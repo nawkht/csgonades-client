@@ -3,7 +3,7 @@ import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogPost } from "../../blog/BlogPost";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
-import { SEO } from "../../layout/Seo";
+import { SEO } from "../../layout/SEO2";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
   title: "Tickrate and it's effect on jumpthrow bind",

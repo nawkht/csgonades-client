@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { NewNadePage } from "../newnade/NewNadePage";
-import { SEO } from "../layout/Seo";
+import { SEO } from "../layout/SEO2";
 
 const NewNadeContainer: NextPage = () => {
   return (

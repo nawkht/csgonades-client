@@ -2,7 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { UserApi } from "../../api/UserApi";
 import { User } from "../../models/User";
 import { UserPage } from "../../users/UsersPage";
-import { SEO } from "../../layout/Seo";
+import { SEO } from "../../layout/SEO2";
 
 type Props = {
   user: User | null;

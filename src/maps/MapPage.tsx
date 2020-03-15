@@ -14,7 +14,7 @@ import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
 import { NadeLight } from "../models/Nade/Nade";
-import { SEO } from "../layout/Seo";
+import { SEO } from "../layout/SEO2";
 
 type Props = {
   map: CsgoMap;

@@ -3,7 +3,7 @@ import React from "react";
 import { NadeApi } from "../api/NadeApi";
 import { FrontPage } from "../frontpage/FrontPage";
 import { NadeLight } from "../models/Nade/Nade";
-import { SEO } from "../layout/Seo";
+import { SEO } from "../layout/SEO2";
 
 type Props = {
   recentNades: NadeLight[];

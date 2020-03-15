@@ -3,7 +3,7 @@ import { PageCentralize } from "../../common/PageCentralize";
 import { blogTickrateAndJumpthrow } from "./tickrate-and-jumpthrow-bind";
 import { BlogList } from "../../blog/BlogList";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { SEO } from "../../layout/Seo";
+import { SEO } from "../../layout/SEO2";
 
 type Props = {};
 

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { SEO } from "../layout/Seo";
+import { SEO } from "../layout/SEO2";
 
 const AboutPageContainer: NextPage = () => {
   const { colors } = useTheme();

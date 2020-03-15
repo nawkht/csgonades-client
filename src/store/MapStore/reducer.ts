@@ -24,13 +24,6 @@ const initialState: MapStoreState = {
   filterByTickrate: "any",
 };
 
-const defaultFilter = {
-  filterByFavorites: false,
-  filterByTickrate: "any",
-  filterByCoords: undefined,
-  filterByType: undefined,
-};
-
 export const MapStoreReducer: Reducer<MapStoreState, MapStoreActions> = (
   state = initialState,
   action

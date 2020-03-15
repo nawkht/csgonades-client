@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { FinishProfile } from "../finishprofile/FinishProfile";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
-import { SEO } from "../layout/Seo";
+import { SEO } from "../layout/SEO2";
 
 type Props = {};
 
