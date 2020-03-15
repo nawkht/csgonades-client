@@ -165,7 +165,6 @@ const HelloWorld: FC = () => {
       </Layout2>
       <style jsx>{`
         .ez {
-          background: #ccc;
         }
 
         .ez-wide {
