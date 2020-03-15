@@ -5,8 +5,6 @@ import { Layout2 } from "../layout/Layout2";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useAdminRoute } from "../store2/AdminStore/hooks";
 import { assertNever } from "../utils/Common";
-import { AdminBlogPostList } from "./AdminBlogPost/AdminBlogPostList";
-import { ArticleEditor } from "./AdminBlogPost/ArticleEditor/ArticleEditor";
 import { AdminGallery } from "./AdminGallery/AdminGallery";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
@@ -29,12 +27,8 @@ export const AdminPage: FC = () => {
         return <AdminUsers />;
       case "reports":
         return <AdminReports />;
-      case "write-blogpost":
-        return <ArticleEditor />;
       case "gallery":
         return <AdminGallery />;
-      case "blog":
-        return <AdminBlogPostList />;
       default:
         assertNever(route);
         return null;
