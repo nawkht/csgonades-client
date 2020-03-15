@@ -14,7 +14,7 @@ export const blogTickrateAndJumpthrow: BlogPost = {
   thumbnailUrl: "/blogimg/jump_thumb.jpg",
   createdAt: "2020-03-15T07:51:30.196Z",
   intro:
-    "You just set up jumpthrow bind and practiced offline for a sick smoke for Mirage. Your friends ask you to join a game on FaceIT, and you throw your smoke, but it missed! What the heck? You just tried it out... Why did this happen?",
+    "You just set up jumpthrow bind and practiced offline for a sick smoke for Mirage. Your friends ask you to join a game on FACEIT, and you throw your smoke, but it missed! What the heck? You just tried it out... Why did this happen?",
 };
 
 const HelloWorld: FC = () => {
@@ -47,10 +47,12 @@ const HelloWorld: FC = () => {
             In Counter-Strike Global Offensive game servers are either 64 tick
             or 128 tick. For matchmaking, Valve has set the tick rate to 64, to
             save money... They can then run the servers on cheaper hardware.
-            Professional tournaments and most external services like ESEA,
-            FACEIT, and PopFlash all use 128 tick. So depending on what you play
-            the most on, you know what throws will work for you and which
-            won&apos;t.
+            Professional tournaments and most external services like{" "}
+            <a href="https://play.esea.net/">ESEA</a>,{" "}
+            <a href="https://www.faceit.com/">FACEIT</a>, and{" "}
+            <a href="https://popflash.site/">PopFlash</a> all use 128 tick. So
+            depending on what you play the most on, you know what throws will
+            work for you and which won&apos;t.
           </p>
 
           <h2>What is the jump throw bind?</h2>
