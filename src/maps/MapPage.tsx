@@ -72,12 +72,12 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
         </div>
         <div className="map-page-aside">
           <div className="ez placement-siderbar-top">
-            <EzoicPlaceHolder desc="Map page | Sidebar Top" id={101} />
+            <EzoicPlaceHolder key="Map page | Sidebar Top" id={101} />
           </div>
 
           {!reducedAds && (
             <div className="ez placement-siderbar-bottom">
-              <EzoicPlaceHolder desc="	Map page | Sidebar Middle" id={111} />
+              <EzoicPlaceHolder key="Map page | Sidebar Middle" id={111} />
             </div>
           )}
 
@@ -85,7 +85,7 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
         </div>
       </div>
       <div className="ez placement-bottom">
-        <EzoicPlaceHolder desc="Map page | Under nade list" id={104} />
+        <EzoicPlaceHolder key="Map page | Under nade list" id={104} />
       </div>
       <MobileFilter />
       <MapView map={map} />

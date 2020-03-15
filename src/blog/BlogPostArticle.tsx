@@ -33,7 +33,7 @@ export const BlogPostArticle: FC<Props> = ({ children, data }) => {
         </article>
         <aside className="sidebar">
           <div className="ez mid-sidebar">
-            <EzoicPlaceHolder desc="Blog | Big sidebar center" id={124} />
+            <EzoicPlaceHolder key="Blog | Big sidebar center" id={124} />
           </div>
         </aside>
       </div>

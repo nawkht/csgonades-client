@@ -1,7 +1,6 @@
 import { FC, memo } from "react";
 
 type Props = {
-  desc?: string;
   id: number;
 };
 

@@ -3,6 +3,10 @@ const isBrowser = typeof window !== "undefined";
 const hasEzoic = typeof ezstandalone !== "undefined";
 
 export function ezoicInit(codes: number[]) {
+  if (!codes.length) {
+    return;
+  }
+
   if (isBrowser && hasEzoic && !ezstandalone.enabled) {
     try {
       ezstandalone.cmd.push(function() {

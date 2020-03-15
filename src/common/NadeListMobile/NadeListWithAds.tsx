@@ -35,19 +35,19 @@ export const NadeListWithAds: FC = memo(() => {
     <>
       <div>
         <div className="ez">
-          <EzoicPlaceHolder desc="Nade List Mobile | Top of page" id={118} />
+          <EzoicPlaceHolder key="Nade List Mobile | Top of page" id={118} />
         </div>
         {items1 && renderList(items1)}
         <div className="ez in-content">
-          <EzoicPlaceHolder desc="Nade List Mobile | List 5" id={114} />
+          <EzoicPlaceHolder key="Nade List Mobile | List 5" id={114} />
         </div>
         {items2 && renderList(items2)}
         <div className="ez in-content">
-          <EzoicPlaceHolder desc="Nade List Mobile | List 6" id={115} />
+          <EzoicPlaceHolder key="Nade List Mobile | List 6" id={115} />
         </div>
         {items3 && renderList(items3)}
         <div className="ez in-content">
-          <EzoicPlaceHolder desc="Nade List Mobile | List 7" id={116} />
+          <EzoicPlaceHolder key="Nade List Mobile | List 7" id={116} />
         </div>
         {rest && renderList(rest)}
       </div>

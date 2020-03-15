@@ -70,7 +70,7 @@ export const NadePage: FC = memo(() => {
         )}
 
         <div className="ez top-placement">
-          <EzoicPlaceHolder desc="Nade Page | Top of page" id={120} />
+          <EzoicPlaceHolder key="Nade Page | Top of page" id={120} />
         </div>
 
         <NadeBreadcrumb nade={nade} />
@@ -84,7 +84,7 @@ export const NadePage: FC = memo(() => {
 
         <div className="nade-page">
           <aside className="ez nade-page-aside">
-            <EzoicPlaceHolder desc="Nade page | Left sidebar" id={106} />
+            <EzoicPlaceHolder key="Nade page | Left sidebar" id={106} />
           </aside>
           <div className="nade-page-content">
             <ResponsiveVideo
@@ -114,7 +114,7 @@ export const NadePage: FC = memo(() => {
             </div>
 
             <div className="ez placement-under-desc">
-              <EzoicPlaceHolder desc="Nade page | Under description" id={107} />
+              <EzoicPlaceHolder key="Nade page | Under description" id={107} />
             </div>
 
             <div className="similar-nades">
@@ -122,7 +122,7 @@ export const NadePage: FC = memo(() => {
             </div>
           </div>
           <aside className="ez nade-page-aside2">
-            <EzoicPlaceHolder desc="Nade page | Right sidebar" id={109} />
+            <EzoicPlaceHolder key="Nade page | Right sidebar" id={109} />
           </aside>
         </div>
 

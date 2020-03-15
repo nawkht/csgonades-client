@@ -15,11 +15,11 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
     <>
       <FrontPageJumbo />
       <RecentNades recentNades={recentNades} />
-      <EzoicPlaceHolder desc="Front page | Over recent nades" id={119} />
+      <EzoicPlaceHolder key="Front page | Over recent nades" id={119} />
       <FrontPageRecentPosts />
       <FrontpageActions />
       <div className="bottom-placeholder">
-        <EzoicPlaceHolder desc="Front Page | Bottom" id={110} />
+        <EzoicPlaceHolder key="Front Page | Bottom" id={110} />
       </div>
 
       <style jsx>{`

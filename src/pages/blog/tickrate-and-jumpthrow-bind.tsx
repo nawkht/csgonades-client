@@ -27,7 +27,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
 
         <div className="ez ez-wide">
-          <EzoicPlaceHolder desc="Blog | Under intro" id={121} />
+          <EzoicPlaceHolder key="Blog | Under intro" id={121} />
         </div>
 
         <h2>What is tickrate?</h2>
@@ -137,7 +137,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
 
         <div className="ez ez-box">
-          <EzoicPlaceHolder desc="Blog | In content mid" id={122} />
+          <EzoicPlaceHolder key="Blog | In content mid" id={122} />
         </div>
 
         <h3>Extra range</h3>
@@ -155,7 +155,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
       </BlogPostArticle>
 
       <div className="ez ez-huge">
-        <EzoicPlaceHolder desc="Blog | Huge bottom" id={123} />
+        <EzoicPlaceHolder key="Blog | Huge bottom" id={123} />
       </div>
       <style jsx>{`
         .ez {
