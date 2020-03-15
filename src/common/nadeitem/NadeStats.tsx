@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { FaRunning, FaStar } from "react-icons/fa";
 import { GoEye, GoTerminal } from "react-icons/go";
-import { TiStarFullOutline } from "react-icons/ti";
 import { NadeLight } from "../../models/Nade/Nade";
 import { tickrateString } from "../../models/Nade/NadeTickrate";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
