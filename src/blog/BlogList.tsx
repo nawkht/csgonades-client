@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { BlogPostPreview } from "../frontpage/BlogPostPreview";
+import { BlogPostPreview } from "./BlogPostPreview";
 import { BlogPost } from "./BlogPost";
 
 type Props = {

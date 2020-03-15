@@ -79,8 +79,8 @@ export const themes: Themes = {
   },
   light: {
     DP00: "#fff",
-    DP01: "#f9f9f9",
-    DP02: "#f3f3f3",
+    DP01: "#fefefe",
+    DP02: "#f9f9f9",
     SITE_BG: "#f3f3f3",
     UI_BG: "white",
     PRIMARY: "#1c90c0",
