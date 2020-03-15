@@ -86,12 +86,12 @@ export const NadeStats: FC<Props> = ({ nade }) => {
 
         .stat {
           margin-right: 15px;
-          font-size: 16px;
+          font-size: 15px;
         }
 
         .stat-text,
         .special-text {
-          font-size: 16px;
+          font-size: 15px;
           margin-left: 5px;
         }
 
