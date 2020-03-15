@@ -1,6 +1,4 @@
 import { FC } from "react";
-import { Layout2 } from "../../layout/Layout2";
-import { withRedux } from "../../utils/WithRedux";
 import { PageCentralize } from "../../common/PageCentralize";
 import { blogTickrateAndJumpthrow } from "./tickrate-and-jumpthrow-bind";
 import { BlogList } from "../../blog/BlogList";
@@ -14,14 +12,12 @@ const BlogPage: FC<Props> = ({}) => {
 
   return (
     <>
-      <Layout2 canonical="/blog" title="Blog">
-        <PageCentralize>
-          <div className="blog-posts">
-            <h1>Blog</h1>
-            <BlogList posts={blogPosts} />
-          </div>
-        </PageCentralize>
-      </Layout2>
+      <PageCentralize>
+        <div className="blog-posts">
+          <h1>Blog</h1>
+          <BlogList posts={blogPosts} />
+        </div>
+      </PageCentralize>
       <style jsx>{`
         .blog-posts {
           margin-top: 50px;
@@ -36,4 +32,4 @@ const BlogPage: FC<Props> = ({}) => {
   );
 };
 
-export default withRedux(BlogPage);
+export default BlogPage;

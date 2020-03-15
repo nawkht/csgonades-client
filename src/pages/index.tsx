@@ -3,7 +3,6 @@ import React from "react";
 import { NadeApi } from "../api/NadeApi";
 import { FrontPage } from "../frontpage/FrontPage";
 import { NadeLight } from "../models/Nade/Nade";
-import { withRedux } from "../utils/WithRedux";
 
 type Props = {
   recentNades: NadeLight[];
@@ -32,4 +31,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default withRedux(Index, { ssr: false });
+export default Index;

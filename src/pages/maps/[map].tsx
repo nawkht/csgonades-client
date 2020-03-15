@@ -4,7 +4,6 @@ import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeLight } from "../../models/Nade/Nade";
 import { NadeFilterProvider } from "../../store2/FilterStore/context";
-import { withRedux } from "../../utils/WithRedux";
 
 interface Props {
   map: CsgoMap;
@@ -42,4 +41,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
   }
 };
 
-export default withRedux(Map, { ssr: false });
+export default Map;

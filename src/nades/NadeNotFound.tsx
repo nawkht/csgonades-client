@@ -1,9 +1,8 @@
 import { FC } from "react";
-import { Layout2 } from "../layout/Layout2";
 
 export const NadeNotFound: FC = () => {
   return (
-    <Layout2 title="Not found">
+    <>
       <div className="not-found">
         <h1>404 NOT FOUND</h1>
         <p>
@@ -20,6 +19,6 @@ export const NadeNotFound: FC = () => {
           justify-content: space-around;
         }
       `}</style>
-    </Layout2>
+    </>
   );
 };

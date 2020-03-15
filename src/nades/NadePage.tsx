@@ -56,131 +56,128 @@ export const NadePage: FC = memo(() => {
 
   return (
     <>
+      {/**
       <Layout2
         title={layoutTitle}
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
         metaThumbNail={nade.images.thumbnailUrl}
-      >
-        <div key={`nadepage-${nade.id}`}>
+      > */}
+      <div key={`nadepage-${nade.id}`}>
+        {allowEdit && (
+          <Suspense fallback={<div />}>
+            <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+          </Suspense>
+        )}
+
+        <div className="ez top-placement">
+          <EzoicPlaceHolder desc="Nade Page | Top of page" id={120} />
+        </div>
+
+        <NadeBreadcrumb nade={nade} />
+        <NadeTitle
+          title={nade.title}
+          map={nade.map}
+          type={nade.type}
+          onEditNade={() => setEditTitleVisisble(true)}
+          allowEdit={allowEditTitle}
+        />
+
+        <div className="nade-page">
+          <aside className="ez nade-page-aside">
+            <EzoicPlaceHolder desc="Nade page | Left sidebar" id={106} />
+          </aside>
+          <div className="nade-page-content">
+            <ResponsiveVideo
+              hdUrL={nade.gfycat.largeVideoUrl}
+              sdUrl={nade.gfycat.smallVideoUrl}
+              hdUrlWebm={nade.gfycat.largeVideoWebm}
+              poster={nade.images.thumbnailUrl}
+              controls={isMobile ? "mobile" : "desktop"}
+            />
+
+            <div className="nade-info-container">
+              <div className="nade-info-empty"></div>
+              <div className="nade-info-description">
+                <NadeInfo
+                  nade={nade}
+                  onEditTitle={() => setEditDescisisble(true)}
+                  onEditMeta={() => setEditMetaVisible(true)}
+                />
+              </div>
+              <div className="nade-info-actions">
+                <FavoriteButton
+                  showSignInWarning={() => setShowSignInWarning(true)}
+                  nade={nade}
+                />
+                <ReportNadeButton nadeId={nade.id} />
+              </div>
+            </div>
+
+            <div className="ez placement-under-desc">
+              <EzoicPlaceHolder desc="Nade page | Under description" id={107} />
+            </div>
+
+            <div className="similar-nades">
+              <SimilarNades nade={nade} />
+            </div>
+          </div>
+          <aside className="ez nade-page-aside2">
+            <EzoicPlaceHolder desc="Nade page | Right sidebar" id={109} />
+          </aside>
+        </div>
+
+        <div key={`hidden-${nade.id}`}>
+          <SignInWarning
+            visible={showSignInWarning}
+            onDismiss={() => setShowSignInWarning(false)}
+            message="favorite"
+          />
+
           {allowEdit && (
             <Suspense fallback={<div />}>
-              <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+              <TitleEditor
+                nadeId={nade.id}
+                title={nade.title}
+                visisble={editTitleVisisble}
+                onClose={() => setEditTitleVisisble(false)}
+              />
             </Suspense>
           )}
 
-          <div className="ez top-placement">
-            <EzoicPlaceHolder desc="Nade Page | Top of page" id={120} />
-          </div>
-
-          <NadeBreadcrumb nade={nade} />
-          <NadeTitle
-            title={nade.title}
-            map={nade.map}
-            type={nade.type}
-            onEditNade={() => setEditTitleVisisble(true)}
-            allowEdit={allowEditTitle}
-          />
-
-          <div className="nade-page">
-            <aside className="ez nade-page-aside">
-              <EzoicPlaceHolder desc="Nade page | Left sidebar" id={106} />
-            </aside>
-            <div className="nade-page-content">
-              <ResponsiveVideo
-                hdUrL={nade.gfycat.largeVideoUrl}
-                sdUrl={nade.gfycat.smallVideoUrl}
-                hdUrlWebm={nade.gfycat.largeVideoWebm}
-                poster={nade.images.thumbnailUrl}
-                controls={isMobile ? "mobile" : "desktop"}
+          {allowEdit && (
+            <Suspense fallback={<div />}>
+              <DecriptionEditor
+                visisble={editDescVisisble}
+                nade={nade}
+                onDismiss={() => setEditDescisisble(false)}
               />
+            </Suspense>
+          )}
 
-              <div className="nade-info-container">
-                <div className="nade-info-empty"></div>
-                <div className="nade-info-description">
-                  <NadeInfo
-                    nade={nade}
-                    onEditTitle={() => setEditDescisisble(true)}
-                    onEditMeta={() => setEditMetaVisible(true)}
-                  />
-                </div>
-                <div className="nade-info-actions">
-                  <FavoriteButton
-                    showSignInWarning={() => setShowSignInWarning(true)}
-                    nade={nade}
-                  />
-                  <ReportNadeButton nadeId={nade.id} />
-                </div>
-              </div>
+          {allowEdit && (
+            <Suspense fallback={<div />}>
+              <MetaEditor
+                visisble={editMetaVisible}
+                nade={nade}
+                onDismiss={() => setEditMetaVisible(false)}
+              />
+            </Suspense>
+          )}
 
-              <div className="ez placement-under-desc">
-                <EzoicPlaceHolder
-                  desc="Nade page | Under description"
-                  id={107}
-                />
-              </div>
+          {allowEdit && (
+            <Suspense fallback={<div />}>
+              <MapPositionEditor nade={nade} />
+            </Suspense>
+          )}
 
-              <div className="similar-nades">
-                <SimilarNades nade={nade} />
-              </div>
-            </div>
-            <aside className="ez nade-page-aside2">
-              <EzoicPlaceHolder desc="Nade page | Right sidebar" id={109} />
-            </aside>
-          </div>
-
-          <div key={`hidden-${nade.id}`}>
-            <SignInWarning
-              visible={showSignInWarning}
-              onDismiss={() => setShowSignInWarning(false)}
-              message="favorite"
-            />
-
-            {allowEdit && (
-              <Suspense fallback={<div />}>
-                <TitleEditor
-                  nadeId={nade.id}
-                  title={nade.title}
-                  visisble={editTitleVisisble}
-                  onClose={() => setEditTitleVisisble(false)}
-                />
-              </Suspense>
-            )}
-
-            {allowEdit && (
-              <Suspense fallback={<div />}>
-                <DecriptionEditor
-                  visisble={editDescVisisble}
-                  nade={nade}
-                  onDismiss={() => setEditDescisisble(false)}
-                />
-              </Suspense>
-            )}
-
-            {allowEdit && (
-              <Suspense fallback={<div />}>
-                <MetaEditor
-                  visisble={editMetaVisible}
-                  nade={nade}
-                  onDismiss={() => setEditMetaVisible(false)}
-                />
-              </Suspense>
-            )}
-
-            {allowEdit && (
-              <Suspense fallback={<div />}>
-                <MapPositionEditor nade={nade} />
-              </Suspense>
-            )}
-
-            {isAdminOrMod && (
-              <Suspense fallback={<div />}>
-                <AdminEditor nade={nade} />
-              </Suspense>
-            )}
-          </div>
+          {isAdminOrMod && (
+            <Suspense fallback={<div />}>
+              <AdminEditor nade={nade} />
+            </Suspense>
+          )}
         </div>
-      </Layout2>
+      </div>
       <style jsx>{`
         .top-placement {
           margin-top: 10px;

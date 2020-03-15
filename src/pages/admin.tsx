@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import React from "react";
 import { AdminPage } from "../admin/AdminPage";
 import { AdminStoreProvider } from "../store2/AdminStore/context";
-import { withRedux } from "../utils/WithRedux";
 
 const Admin: NextPage = () => {
   return (
@@ -12,4 +11,4 @@ const Admin: NextPage = () => {
   );
 };
 
-export default withRedux(Admin, { ssr: false });
+export default Admin;

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { PageCentralize } from "../../common/PageCentralize";
 import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -8,7 +8,7 @@ import { MapLink } from "./MapLink";
 
 type Props = {};
 
-export const MapNav: FC<Props> = ({}) => {
+export const MapNav: FC<Props> = memo(({}) => {
   const { colors } = useTheme();
   const router = useRouter();
   const currentRoute = router.query.name;
@@ -58,4 +58,4 @@ export const MapNav: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});

@@ -1,6 +1,14 @@
 import "../utils/css/normalize.css";
 import "../utils/css/Global.css";
+import { Layout2 } from "../layout/Layout2";
+import { withRedux } from "../utils/WithRedux";
 
-export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+const App = ({ Component, pageProps }: any) => {
+  return (
+    <Layout2 {...pageProps}>
+      <Component {...pageProps} />
+    </Layout2>
+  );
+};
+
+export default withRedux(App);

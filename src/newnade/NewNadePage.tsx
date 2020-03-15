@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { Message, Step } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
 import { PageCentralize } from "../common/PageCentralize";
-import { Layout2 } from "../layout/Layout2";
 import { GfycatData } from "../models/Nade/GfycatData";
 import { NadeBody } from "../models/Nade/Nade";
 import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";
@@ -63,7 +62,7 @@ export const NewNadePage: FC = () => {
   }
 
   return (
-    <Layout2 title="New nade" canonical="/newnade">
+    <>
       <PageCentralize>
         <div className="nade-new-container">
           <Step.Group>
@@ -122,6 +121,6 @@ export const NewNadePage: FC = () => {
           }
         `}
       </style>
-    </Layout2>
+    </>
   );
 };

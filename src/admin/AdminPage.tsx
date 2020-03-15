@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
-import { Layout2 } from "../layout/Layout2";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useAdminRoute } from "../store2/AdminStore/hooks";
 import { assertNever } from "../utils/Common";
@@ -36,7 +35,7 @@ export const AdminPage: FC = () => {
   }
 
   return (
-    <Layout2 title="Admin" canonical="/admin">
+    <>
       <PageCentralize>
         <div className="admin-container">
           <div className="admin-nav">
@@ -61,6 +60,6 @@ export const AdminPage: FC = () => {
           flex: 1;
         }
       `}</style>
-    </Layout2>
+    </>
   );
 };

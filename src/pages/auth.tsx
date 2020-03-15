@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import { useOnSignIn } from "../store/AuthStore/AuthHooks";
-import { withRedux } from "../utils/WithRedux";
 
 const Auth: NextPage = () => {
   useOnSignIn();
@@ -30,4 +29,4 @@ const Auth: NextPage = () => {
   );
 };
 
-export default withRedux(Auth, { ssr: false });
+export default Auth;

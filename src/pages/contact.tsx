@@ -4,10 +4,8 @@ import { Button, Message } from "semantic-ui-react";
 import { ContactApi } from "../api/ContactApi";
 import { CsgnInput } from "../common/inputs/CsgnInput";
 import { CsgnTextArea } from "../common/inputs/CsgnTextArea";
-import { Layout2 } from "../layout/Layout2";
 import { ConctactDTO } from "../models/Contact";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { withRedux } from "../utils/WithRedux";
 
 const ContactPageContainer: NextPage = () => {
   const { colors } = useTheme();
@@ -44,7 +42,7 @@ const ContactPageContainer: NextPage = () => {
 
   return (
     <>
-      <Layout2 title="Contact" canonical="/contact">
+      <>
         <div className="contact">
           <h1>Contact me 📨</h1>
           {!!error && <p>{error}</p>}
@@ -64,7 +62,7 @@ const ContactPageContainer: NextPage = () => {
             </Message>
           )}
         </div>
-      </Layout2>
+      </>
       <style jsx>{`
         .contact {
           max-width: 900px;
@@ -82,4 +80,4 @@ const ContactPageContainer: NextPage = () => {
   );
 };
 
-export default withRedux(ContactPageContainer, { ssr: false });
+export default ContactPageContainer;

@@ -2,7 +2,6 @@ import { GetServerSideProps, NextPage } from "next";
 import { UserApi } from "../../api/UserApi";
 import { User } from "../../models/User";
 import { UserPage } from "../../users/UsersPage";
-import { withRedux } from "../../utils/WithRedux";
 
 type Props = {
   user: User | null;
@@ -33,4 +32,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
   };
 };
 
-export default withRedux(UserPageComponent, { ssr: false });
+export default UserPageComponent;

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
-import { Layout2 } from "../layout/Layout2";
 import { NadeLight } from "../models/Nade/Nade";
 import { useInitAdvert } from "../store/AdvertStore/hooks";
 import { FrontpageActions } from "./FrontpageActions";
@@ -16,7 +15,7 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
   useInitAdvert();
 
   return (
-    <Layout2 canonical="">
+    <>
       <FrontPageJumbo />
       <RecentNades recentNades={recentNades} />
       <EzoicPlaceHolder desc="Front page | Over recent nades" id={119} />
@@ -32,6 +31,6 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
           margin-top: 30px;
         }
       `}</style>
-    </Layout2>
+    </>
   );
 };
