@@ -39,7 +39,7 @@ export const NadeListWithAds: FC<Props> = memo(({ ssrNades }) => {
 
   return (
     <>
-      <div>
+      <div className="nade-list-mobile">
         <div className="ez">
           <EzoicPlaceHolder key="Nade List Mobile | Top of page" id={118} />
         </div>
@@ -58,6 +58,9 @@ export const NadeListWithAds: FC<Props> = memo(({ ssrNades }) => {
         {rest && renderList(rest)}
       </div>
       <style jsx>{`
+        .nade-list-mobile {
+        }
+
         .ez {
           width: 100%;
         }

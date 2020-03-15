@@ -275,6 +275,10 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           .top-placement {
             width: 100%;
           }
+
+          .map-page-wrap {
+            padding: 0;
+          }
         }
       `}</style>
     </>
