@@ -39,7 +39,7 @@ export const RecentNades: FC<Props> = ({ recentNades }) => {
         }
 
         .recent-nades {
-          padding-bottom: 100px;
+          padding-bottom: 50px;
           padding-top: 30px;
         }
       `}</style>
