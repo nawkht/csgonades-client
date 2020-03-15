@@ -15,6 +15,7 @@ export const NadeNotFound: FC = () => {
         .not-found {
           min-height: 82vh;
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: space-around;
         }

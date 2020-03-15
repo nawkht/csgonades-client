@@ -28,7 +28,11 @@ export const useAdRefresher = () => {
         console.error("Failed to parse ad id");
       }
     });
-    ezoicInit(adIds);
+
+    const delay = setTimeout(() => {
+      ezoicInit(adIds);
+    }, 500);
+    return () => clearTimeout(delay);
   }, [route]);
 };
 
