@@ -2,19 +2,26 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { NadeLight } from "../../../models/Nade/Nade";
 import { favoritedNadeIdsSelector } from "../../../store/FavoriteStore/FavoriteSelectors";
-import { useNadeFilterState } from "../context";
+import {
+  filterByTickrateSelector,
+  filterByFavoritesSelector,
+  filterByTypeSelector,
+} from "../selectors";
 import {
   addFavoriteToNades,
-  containsSimilarNade,
-  filterByFavorite,
-  filterByTickrate,
   filterByType,
+  filterByTickrate,
+  filterByFavorite,
+  containsSimilarNade,
 } from "./helpers";
+import { useNadesForMap } from "./useNadesForMap";
 
 export const useNadesForMapView = (): NadeLight[] => {
+  const nades = useNadesForMap();
+  const byTickrate = useSelector(filterByTickrateSelector);
+  const byFavorites = useSelector(filterByFavoritesSelector);
+  const byType = useSelector(filterByTypeSelector);
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
-  const { state } = useNadeFilterState();
-  const { nades, byType, byTickrate, byFavorites } = state;
 
   const unqiueNadesForPosition = useMemo(() => {
     const unqiueNades: NadeLight[] = [];

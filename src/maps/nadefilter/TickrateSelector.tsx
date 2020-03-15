@@ -1,17 +1,21 @@
 import { FC } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { useFilterByTickrate } from "../../store2/FilterStore/hooks/useFilterByTickrate";
 import { FilterBg } from "./FilterBg";
+import { useFilterByTickrate } from "../../store/MapStore/hooks/useFilterByTickrate";
 
 type Props = {};
 
 export const TickrateSelector: FC<Props> = ({}) => {
   const { colors } = useTheme();
-  const {
-    byTickrate,
-    filterByTickrate128,
-    filterByTickrate64,
-  } = useFilterByTickrate();
+  const { byTickrate, filterByTickrate } = useFilterByTickrate();
+
+  function filterBy64tick() {
+    filterByTickrate("tick64");
+  }
+
+  function filterByTickrate128() {
+    filterByTickrate("tick128");
+  }
 
   const tick64active = byTickrate === "tick64" ? "active" : "";
   const tick128active = byTickrate === "tick128" ? "active" : "";
@@ -23,7 +27,7 @@ export const TickrateSelector: FC<Props> = ({}) => {
         <FilterBg>
           <button
             className={`filter-btn tickrate-btn ${tick64active}`}
-            onClick={filterByTickrate64}
+            onClick={filterBy64tick}
           >
             64
           </button>

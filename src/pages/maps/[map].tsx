@@ -3,7 +3,6 @@ import { NadeApi } from "../../api/NadeApi";
 import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeLight } from "../../models/Nade/Nade";
-import { NadeFilterProvider } from "../../store2/FilterStore/context";
 
 interface Props {
   map: CsgoMap;
@@ -11,11 +10,7 @@ interface Props {
 }
 
 const Map: NextPage<Props> = ({ map, nades }) => {
-  return (
-    <NadeFilterProvider key={map} nades={nades}>
-      <MapPage map={map} />
-    </NadeFilterProvider>
-  );
+  return <MapPage map={map} ssrNades={nades} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {

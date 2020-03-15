@@ -4,7 +4,6 @@ import { MapCoordinates, NadeLight } from "../../../models/Nade/Nade";
 import { Tickrate } from "../../../models/Nade/NadeTickrate";
 import { NadeType } from "../../../models/Nade/NadeType";
 import { favoritedNadeIdsSelector } from "../../../store/FavoriteStore/FavoriteSelectors";
-import { useNadeFilterState } from "../context";
 import {
   addFavoriteToNades,
   filterByCoords,
@@ -12,11 +11,25 @@ import {
   filterByTickrate,
   filterByType,
 } from "./helpers";
+import {
+  currentMapSelector,
+  allNadesSelector,
+  filterByCoordsSelector,
+  filterByTickrateSelector,
+  filterByFavoritesSelector,
+  filterByTypeSelector,
+} from "../selectors";
 
 export const useFilteredNades = () => {
-  const { state } = useNadeFilterState();
+  const currentMap = useSelector(currentMapSelector);
+  const allNades = useSelector(allNadesSelector);
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
-  const { byFavorites, byTickrate, nades, byCoords, byType } = state;
+  const byCoords = useSelector(filterByCoordsSelector);
+  const byTickrate = useSelector(filterByTickrateSelector);
+  const byFavorites = useSelector(filterByFavoritesSelector);
+  const byType = useSelector(filterByTypeSelector);
+
+  const nades = currentMap ? allNades[currentMap] || [] : [];
 
   const filteredNades = useMemo(() => {
     return filterNades(

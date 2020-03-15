@@ -9,6 +9,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { PageHead } from "./Misc/PageHead";
 import { MobileNav } from "./Navigation/MobileNav";
+import { useAdRefresher } from "./useAdRefresher";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
@@ -26,6 +27,7 @@ export const Layout2: FC<Props> = memo(
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
     usePageView(title);
     useSetupSession();
+    useAdRefresher();
 
     return (
       <>

@@ -7,6 +7,7 @@ import { GlobalReducer } from "./GlobalStore/GlobalReducer";
 import { NotificationReducer } from "./NotificationStore/NotificationReducer";
 import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
 import { ToastReducer } from "./ToastStore/ToastReducer";
+import { MapStoreReducer } from "./MapStore/reducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   notificationStore: NotificationReducer,
   settingsStore: PersistedSettingsReducer,
   advertStore: AdvertReducer,
+  mapStore: MapStoreReducer,
 });
 
 function createMiddleware() {

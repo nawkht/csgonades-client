@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { MapCoordinates } from "../../../models/Nade/Nade";
-import { useNadeFilterState } from "../context";
+import { useMapStoreDispatch } from "./helpers";
 export const useFilterByCoords = () => {
-  const { dispatch } = useNadeFilterState();
+  const dispatch = useMapStoreDispatch();
 
   const filterByCoords = useCallback(
     (coords: MapCoordinates) => {
       dispatch({
-        type: "@@nadefilter/FILTER_BY_MAP_COORDINATES",
+        type: "MapStore/FilterByCoordinates",
         payload: coords,
       });
     },

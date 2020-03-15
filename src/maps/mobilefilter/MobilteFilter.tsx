@@ -1,8 +1,8 @@
 import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
-import { useFilterByType } from "../../store2/FilterStore/hooks/useFilterByType";
 import { NadeTypeButton } from "../nadefilter/NadeTypeButton";
 import { FilterBgMobile } from "./FilterBgMobile";
+import { useFilterByType } from "../../store/MapStore/hooks/useFilterByType";
 
 export const MobileFilter: FC = memo(() => {
   const { byType, filterByType } = useFilterByType();

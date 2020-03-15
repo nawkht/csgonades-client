@@ -5,7 +5,6 @@ import { NadeListWithAds } from "../common/NadeListMobile/NadeListWithAds";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { CsgoMap } from "../models/Nade/CsGoMap";
-import { useInitAdvert } from "../store/AdvertStore/hooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../utils/Common";
 import { SignInWarning } from "./components/SignInWarning";
@@ -13,13 +12,16 @@ import { MapPageNades } from "./MapPageNades";
 import { MapView } from "./mapview2/MapView";
 import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { NadeFilter } from "./nadefilter/NadeFilter";
+import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
+import { NadeLight } from "../models/Nade/Nade";
 
 type Props = {
   map: CsgoMap;
+  ssrNades: NadeLight[];
 };
 
-export const MapPage: FC<Props> = memo(({ map }) => {
-  useInitAdvert();
+export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
+  useMapChangeHandler();
   const { colors } = useTheme();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
@@ -27,6 +29,10 @@ export const MapPage: FC<Props> = memo(({ map }) => {
     const reducedsMapAds = ["nuke", "cobblestone", "vertigo", "cache"];
     return reducedsMapAds.includes(map);
   }, [map]);
+
+  function showSignInWarning() {
+    setShowLoginWarning(true);
+  }
 
   return (
     <>
@@ -45,7 +51,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
               </h2>
             </div>
             <div className="ez top-placement">
-              <EzoicPlaceHolder desc="Map page | In top title" id={112} />
+              <EzoicPlaceHolder key="Map page | In top title" id={112} />
             </div>
           </div>
         </PageCentralize>
@@ -55,14 +61,14 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         <div className="filter">
           <div className="sticky-sidebar">
             <div className="ez placement-sidebar-left">
-              <EzoicPlaceHolder id={125} desc="Map page | By filter sticky" />
+              <EzoicPlaceHolder key={"Map page | By filter sticky"} id={125} />
             </div>
-            <NadeFilter showSingInWarning={() => setShowLoginWarning(true)} />
+            <NadeFilter showSingInWarning={showSignInWarning} />
           </div>
         </div>
         <div className="nade-list">
           {isMobileOnly && <NadeListWithAds />}
-          {!isMobileOnly && <MapPageNades />}
+          {!isMobileOnly && <MapPageNades ssrNades={ssrNades} />}
         </div>
         <div className="map-page-aside">
           <div className="ez placement-siderbar-top">

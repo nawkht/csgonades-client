@@ -1,17 +1,17 @@
 import { FC, useRef, useState } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
-import { useFilterByCoords } from "../../store2/FilterStore/hooks/useFilterByCoords";
-import { useNadesForMapView } from "../../store2/FilterStore/hooks/useNadesForMapView";
-import { useToggleMapview } from "../../store2/FilterStore/hooks/useToggleMapview";
 import { MapPosIcon } from "./MapPosIcon";
+import { useToggleMapview } from "../../store/MapStore/hooks/useToggleMapView";
+import { useNadesForMapView } from "../../store/MapStore/hooks/useNadesForMapView";
+import { useFilterByCoords } from "../../store/MapStore/hooks/useFilterByCoords";
 
 type Props = {
   map: CsgoMap;
 };
 
 export const MapView: FC<Props> = ({ map }) => {
-  const { mapViewVisisble, toggleMapViewVisibility } = useToggleMapview();
+  const { mapViewOpen, toggleMapViewVisibility } = useToggleMapview();
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
   const nades = useNadesForMapView();
@@ -34,7 +34,7 @@ export const MapView: FC<Props> = ({ map }) => {
     <>
       <CSGNModal
         onDismiss={toggleMapViewVisibility}
-        visible={mapViewVisisble}
+        visible={mapViewOpen}
         empty={true}
       >
         <div ref={mapViewRef} className="mapview">

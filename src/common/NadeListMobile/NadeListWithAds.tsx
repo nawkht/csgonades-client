@@ -1,8 +1,8 @@
 import { FC, memo, useMemo } from "react";
 import { NadeLight } from "../../models/Nade/Nade";
-import { useFilteredNades } from "../../store2/FilterStore/hooks/useFilteredNades";
 import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
 import { NadeItemMobile } from "../nadeitem/NadeItemMobile";
+import { useFilteredNades } from "../../store/MapStore/hooks/useFilteredNades";
 
 export const NadeListWithAds: FC = memo(() => {
   const nades = useFilteredNades();

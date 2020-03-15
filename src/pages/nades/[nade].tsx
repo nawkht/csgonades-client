@@ -4,7 +4,6 @@ import { Nade } from "../../models/Nade/Nade";
 import { NadeNotFound } from "../../nades/NadeNotFound";
 import { NadePage } from "../../nades/NadePage";
 import { NadePageStoreProvider } from "../../store2/NadePageStore/context";
-import { withRedux } from "../../utils/WithRedux";
 
 type Props = {
   nade: Nade;
@@ -57,4 +56,4 @@ function checkIsSlug(value: string) {
   return value.includes("-");
 }
 
-export default withRedux(NadePageComponent, { ssr: false });
+export default NadePageComponent;

@@ -1,19 +1,19 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { FaMap } from "react-icons/fa";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { useFilterByType } from "../../store2/FilterStore/hooks/useFilterByType";
-import { useToggleMapview } from "../../store2/FilterStore/hooks/useToggleMapview";
 import { FavFilterButton } from "./FavFilterButton";
 import { FilterBg } from "./FilterBg";
 import { NadeTypeButton } from "./NadeTypeButton";
 import { ResetFilterButton } from "./ResetFilterButton";
 import { TickrateSelector } from "./TickrateSelector";
+import { useFilterByType } from "../../store/MapStore/hooks/useFilterByType";
+import { useToggleMapview } from "../../store/MapStore/hooks/useToggleMapView";
 
 type Props = {
   showSingInWarning: () => void;
 };
 
-export const NadeFilter: FC<Props> = ({ showSingInWarning }) => {
+export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
   const { colors } = useTheme();
   const { byType, filterByType } = useFilterByType();
   const { toggleMapViewVisibility } = useToggleMapview();
@@ -95,4 +95,4 @@ export const NadeFilter: FC<Props> = ({ showSingInWarning }) => {
       `}</style>
     </>
   );
-};
+});

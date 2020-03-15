@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { FaUndo } from "react-icons/fa";
-import { useFilterReset } from "../../store2/FilterStore/hooks/useFilterReset";
+import { useFilterReset } from "../../store/MapStore/hooks/useFilterReset";
 
 type Props = {};
 

@@ -1,13 +1,20 @@
 import { FC, memo } from "react";
 import { NadeListGrid } from "../common/NadeListGrid";
-import { useFilteredNades } from "../store2/FilterStore/hooks/useFilteredNades";
+import { NadeLight } from "../models/Nade/Nade";
+import { useFilteredNades } from "../store/MapStore/hooks/useFilteredNades";
 
-export const MapPageNades: FC = memo(({}) => {
-  const filteredNades = useFilteredNades();
+type Props = {
+  ssrNades: NadeLight[];
+};
+
+export const MapPageNades: FC<Props> = memo(({ ssrNades }) => {
+  const nades = useFilteredNades();
+
+  const renderNades = nades || ssrNades;
 
   return (
     <>
-      <NadeListGrid nades={filteredNades} emptyMessage={`No nades found.`} />
+      <NadeListGrid nades={renderNades} emptyMessage={`No nades found.`} />
       <style jsx>{``}</style>
     </>
   );

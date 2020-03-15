@@ -2,7 +2,7 @@ import { FC } from "react";
 import { FaStar } from "react-icons/fa";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { useFilterByFavorites } from "../../store2/FilterStore/hooks/useFilterByFavorites";
+import { useFilterByFavorites } from "../../store/MapStore/hooks/useFilterByFavorites";
 
 type Props = {
   showSingInWarning: () => void;
@@ -11,9 +11,9 @@ type Props = {
 export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
   const { colors } = useTheme();
   const isSignedIn = useIsSignedIn();
-  const { byFavorite, filterByFavorites } = useFilterByFavorites();
+  const { byFavorites, filterByFavorites } = useFilterByFavorites();
 
-  const active = byFavorite ? "active" : "";
+  const active = byFavorites ? "active" : "";
 
   function onFilterByFavorite() {
     if (isSignedIn) {

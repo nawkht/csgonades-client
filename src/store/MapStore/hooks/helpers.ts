@@ -1,6 +1,13 @@
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { MapStoreActions } from "../actions";
 import { MapCoordinates, NadeLight } from "../../../models/Nade/Nade";
 import { Tickrate } from "../../../models/Nade/NadeTickrate";
 import { NadeType } from "../../../models/Nade/NadeType";
+
+export const useMapStoreDispatch = () => {
+  return useDispatch<Dispatch<MapStoreActions>>();
+};
 
 export function filterByType(
   nades: NadeLight[],

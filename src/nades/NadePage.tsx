@@ -3,7 +3,6 @@ import { isMobile } from "react-device-detect";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
-import { Layout2 } from "../layout/Layout2";
 import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
 import { nadeTypeString } from "../models/Nade/NadeType";
@@ -53,6 +52,8 @@ export const NadePage: FC = memo(() => {
       nade.type
     )}`;
   }
+
+  console.log("> Nade page");
 
   return (
     <>
