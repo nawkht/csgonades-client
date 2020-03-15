@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaRunning } from "react-icons/fa";
+import { FaRunning, FaStar } from "react-icons/fa";
 import { GoEye, GoTerminal } from "react-icons/go";
 import { TiStarFullOutline } from "react-icons/ti";
 import { NadeLight } from "../../models/Nade/Nade";
@@ -24,7 +24,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
           {nade.viewCount > 500 && (
             <div className="stat">
               <div className="stat-content">
-                <GoEye style={{ padding: 0, margin: 0 }} />
+                <GoEye style={{ position: "relative", top: -1 }} />
                 <span className="stat-text">{kFormatter(nade.viewCount)}</span>
               </div>
             </div>
@@ -39,7 +39,10 @@ export const NadeStats: FC<Props> = ({ nade }) => {
           {nade.favoriteCount > 0 && (
             <div className="stat">
               <div className="stat-content">
-                <TiStarFullOutline color={favoriteIconColor} />
+                <FaStar
+                  color={favoriteIconColor}
+                  style={{ position: "relative", top: -1 }}
+                />
                 <span className="stat-text">{nade.favoriteCount}</span>
               </div>
             </div>
@@ -48,13 +51,13 @@ export const NadeStats: FC<Props> = ({ nade }) => {
         <div className="specials">
           {hasMovement && (
             <div className="special movement">
-              <FaRunning />
+              <FaRunning style={{ position: "relative", top: -1 }} />
             </div>
           )}
 
           {isJumpThrow && (
             <div className="special tick">
-              <GoTerminal />
+              <GoTerminal style={{ position: "relative", top: -1 }} />
               <span className="special-text">
                 {tickrateString(nade.tickrate || "any")}
               </span>
@@ -65,7 +68,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
       <style jsx>{`
         .item-bottom {
           display: flex;
-          padding: 4px 9px;
+          padding: 10px 15px;
           align-items: center;
         }
 
@@ -76,20 +79,20 @@ export const NadeStats: FC<Props> = ({ nade }) => {
           flex: 1;
         }
 
-        .stat {
-          margin-right: 12px;
-        }
-
         .stat-content {
           display: flex;
           align-items: center;
         }
 
+        .stat {
+          margin-right: 15px;
+          font-size: 16px;
+        }
+
         .stat-text,
         .special-text {
-          font-size: 11px;
-          margin-left: 3px;
-          padding-top: 1px;
+          font-size: 16px;
+          margin-left: 5px;
         }
 
         .specials {
@@ -110,7 +113,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
 
         .new-badge {
           padding: 3px 6px;
-          font-size: 0.7em;
+          font-size: 16px;
           border-radius: 4px;
           background: #709c14;
           color: white;

@@ -17,11 +17,14 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
     <>
       <FrontPageJumbo />
 
-      <EzoicPlaceHolder key="Front page | Over recent nades" id={119} />
-
       <PageCentralize>
-        <div className="recent">
+        <div className="recent-wrap">
           <FrontPageRecentPosts />
+        </div>
+
+        <EzoicPlaceHolder key="Front page | Over recent nades" id={119} />
+
+        <div className="recent-nade-wrap">
           <RecentNades recentNades={recentNades} />
         </div>
       </PageCentralize>
@@ -32,6 +35,16 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
       </div>
 
       <style jsx>{`
+        .recent-wrap {
+          margin-top: 30px;
+          margin-bottom: 30px;
+        }
+
+        .recent-nade-wrap {
+          margin-top: 30px;
+          margin-bottom: 60px;
+        }
+
         .bottom-placeholder {
           margin-bottom: 100px;
           margin-top: 30px;

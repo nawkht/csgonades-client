@@ -46,9 +46,9 @@ export const NadeListGrid: FC<Props> = memo(
         <style jsx>{`
           .nadelist {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            grid-column-gap: ${Dimensions.GUTTER_SIZE};
-            grid-row-gap: ${Dimensions.GUTTER_SIZE};
+            grid-template-columns: repeat(auto-fill, minmax(30vmin, 1fr));
+            grid-column-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
+            grid-row-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
             width: 100%;
           }
         `}</style>

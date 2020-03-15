@@ -21,17 +21,6 @@ export const FrontPageRecentPosts: FC<Props> = ({}) => {
           font-weight: 300;
           color: ${colors.TEXT};
         }
-
-        .recent-posts {
-          margin-right: 50px;
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .recent-posts {
-            margin-right: 0;
-            margin-bottom: 50px;
-          }
-        }
       `}</style>
     </>
   );

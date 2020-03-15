@@ -21,6 +21,10 @@ type Props = {
   ssrNades: NadeLight[];
 };
 
+const sizeBarWidth = 160;
+const mainWidth = 1200;
+const spacing = 30;
+
 export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
   useMapChangeHandler();
   const { colors } = useTheme();
@@ -58,31 +62,30 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
         </PageCentralize>
       </div>
 
-      <div className="map-page">
-        <div className="filter">
-          <div className="sticky-sidebar">
-            <div className="ez placement-sidebar-left">
-              <EzoicPlaceHolder key={"Map page | By filter sticky"} id={125} />
+      <div className="map-page-wrap">
+        <div className="map-page">
+          <div className="filter">
+            <div className="sticky-sidebar">
+              <NadeFilter showSingInWarning={showSignInWarning} />
             </div>
-            <NadeFilter showSingInWarning={showSignInWarning} />
           </div>
-        </div>
-        <div className="nade-list">
-          {isMobileOnly && <NadeListWithAds ssrNades={ssrNades} />}
-          {!isMobileOnly && <MapPageNades ssrNades={ssrNades} />}
-        </div>
-        <div className="map-page-aside">
-          <div className="ez placement-siderbar-top">
-            <EzoicPlaceHolder key="Map page | Sidebar Top" id={101} />
+          <div className="nade-list">
+            {isMobileOnly && <NadeListWithAds ssrNades={ssrNades} />}
+            {!isMobileOnly && <MapPageNades ssrNades={ssrNades} />}
           </div>
-
-          {!reducedAds && (
-            <div className="ez placement-siderbar-bottom">
-              <EzoicPlaceHolder key="Map page | Sidebar Middle" id={111} />
+          <div className="map-page-aside">
+            <div className="ez placement-siderbar-top">
+              <EzoicPlaceHolder key="Map page | Sidebar Top" id={101} />
             </div>
-          )}
 
-          <div className="ez empty"></div>
+            {!reducedAds && (
+              <div className="ez placement-siderbar-bottom">
+                <EzoicPlaceHolder key="Map page | Sidebar Middle" id={111} />
+              </div>
+            )}
+
+            <div className="ez empty"></div>
+          </div>
         </div>
       </div>
       <div className="ez placement-bottom">
@@ -134,16 +137,25 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           margin-top: 20px;
         }
 
-        .map-page {
-          max-width: 1660px;
-          display: flex;
+        .map-page-wrap {
           margin: 0 auto;
-          min-height: 70vh;
+          max-width: calc(
+            ${mainWidth}px + ${2 * sizeBarWidth}px + ${4 * spacing}px
+          );
+          padding-left: ${spacing}px;
+          padding-right: ${spacing}px;
+        }
+
+        .map-page {
+          display: flex;
         }
 
         .filter {
-          width: 200px;
-          margin-right: 30px;
+          width: ${sizeBarWidth}px;
+          margin-right: ${spacing}px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
         }
 
         .sticky-sidebar {
@@ -152,24 +164,21 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           justify-content: space-between;
           position: sticky;
           top: 50px;
-          width: 200px;
+          width: 45px;
         }
 
         .nade-list {
           flex: 1;
           position: relative;
-          max-width: 1200px;
+          max-width: ${mainWidth}px;
         }
 
         .map-page-aside {
-          width: 200px;
-          margin-left: 30px;
+          width: ${sizeBarWidth}px;
+          margin-left: ${spacing}px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-        }
-
-        .ez {
         }
 
         .placement-sidebar-left {
@@ -216,9 +225,32 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           justify-content: center;
         }
 
+        @media only screen and (max-width: ${Dimensions.MEDIUM_DEVIDE}) {
+          .filter {
+            width: 45px;
+          }
+
+          .placement-sidebar-left {
+            display: none;
+          }
+        }
+
         @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
           .map-welcome-wrap {
             flex-direction: column;
+          }
+
+          .welcome-msg {
+            margin-right: 0;
+            margin-bottom: 20px;
+          }
+
+          .filter {
+            width: 45px;
+          }
+
+          .placement-sidebar-left {
+            display: none;
           }
         }
 
@@ -233,6 +265,7 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           }
 
           .map-page {
+            padding: 0;
           }
 
           .map-welcome-wrap {

@@ -19,6 +19,7 @@ export const Dimensions = {
   GUTTER_SIZE: "30px",
   MOBILE_THRESHHOLD: "850px",
   TABLET_THRESHHOLD: "1024px",
+  MEDIUM_DEVIDE: "1280px",
   BORDER_RADIUS: "5px",
 };
 

@@ -39,7 +39,7 @@ export const NadeItemTitle: FC<Props> = ({ nade }) => {
       </div>
       <style jsx>{`
         .title {
-          padding: 6px 12px;
+          padding: 10px 15px;
           display: block;
           background: ${colors.nadeItemHeadingBg};
           color: ${colors.TEXT};
@@ -53,10 +53,11 @@ export const NadeItemTitle: FC<Props> = ({ nade }) => {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          font-size: 18px;
         }
 
         .nade-type-icon {
-          width: 15px;
+          width: 20px;
           margin-right: ${Dimensions.PADDING_SMALL};
         }
 

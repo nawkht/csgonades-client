@@ -41,7 +41,6 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
           transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
           width: 100%;
-          max-width: 300px;
         }
 
         .nadebox:hover {
