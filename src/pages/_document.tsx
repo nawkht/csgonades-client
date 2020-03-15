@@ -57,7 +57,6 @@ class MyDocument extends Document {
               href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
             />
             <script
-              key="ezoic-init"
               type="text/javascript"
               dangerouslySetInnerHTML={{
                 __html: `
@@ -68,7 +67,7 @@ class MyDocument extends Document {
                 });`,
               }}
             />
-            <script key="ezoic-script" src="//www.ezojs.com/ezoic/sa.min.js" />
+            <script defer src="//www.ezojs.com/ezoic/sa.min.js" />
           </Head>
           <body>
             <Main />
