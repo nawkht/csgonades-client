@@ -12,7 +12,6 @@ export const usePageView = () => {
 
   useEffect(() => {
     const location = window.location.pathname + window.location.search;
-    console.log("Pageview", location);
     pageView({ path: location });
   }, [pageView, query, route]);
 };
