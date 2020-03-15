@@ -17,12 +17,20 @@ export const SiteNav: FC = memo(({}) => {
         </Link>
       </div>
       <style jsx>{`
+        .site-nav {
+          margin-left: 30px;
+        }
+
         .nav-item {
-          margin-right: 20px;
+          margin-right: 30px;
           padding: 10px;
-          border-radius: 5px;
+          border-radius: 15px;
           color: ${colors.TEXT};
           font-size: 16px;
+        }
+
+        .nav-item:hover {
+          background: ${colors.PRIMARY_10};
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

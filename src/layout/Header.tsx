@@ -19,8 +19,8 @@ export const Header: FC<Props> = memo(({}) => {
           <div className="header-wrap">
             <Hamburger />
             <Logo />
-            <div className="spacer" />
             <SiteNav />
+            <div className="spacer" />
             <UserNav />
           </div>
         </PageCentralize>
