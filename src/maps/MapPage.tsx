@@ -54,7 +54,12 @@ export const MapPage: FC<Props> = memo(({ map }) => {
 
         <div className="map-page">
           <div className="filter">
-            <NadeFilter showSingInWarning={() => setShowLoginWarning(true)} />
+            <div className="sticky-sidebar">
+              <div className="ez placement-sidebar-left">
+                <EzoicPlaceHolder id={125} key="Map page | By filter sticky" />
+              </div>
+              <NadeFilter showSingInWarning={() => setShowLoginWarning(true)} />
+            </div>
           </div>
           <div className="nade-list">
             {isMobileOnly && <NadeListWithAds />}
@@ -132,9 +137,15 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         .filter {
           width: 200px;
           margin-right: 30px;
+        }
+
+        .sticky-sidebar {
           display: flex;
-          flex-direction: column;
-          align-items: flex-end;
+          flex-direction: row;
+          justify-content: space-between;
+          position: sticky;
+          top: 50px;
+          width: 200px;
         }
 
         .nade-list {
@@ -152,6 +163,11 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         }
 
         .ez {
+        }
+
+        .placement-sidebar-left {
+          width: 120px;
+          max-height: 600px;
         }
 
         .ad-test {
@@ -194,10 +210,6 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         }
 
         @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
-          .filter {
-            width: 70px;
-          }
-
           .map-welcome-wrap {
             flex-direction: column;
           }

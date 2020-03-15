@@ -66,8 +66,6 @@ export const NadeFilter: FC<Props> = ({ showSingInWarning }) => {
       </div>
       <style jsx>{`
         .nade-filter {
-          position: sticky;
-          top: 50px;
         }
 
         .map,

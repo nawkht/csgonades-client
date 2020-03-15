@@ -2,7 +2,7 @@ import { FC, memo, useEffect } from "react";
 import { useRegisterAdPlaceholder } from "../../store/AdvertStore/hooks";
 
 type Props = {
-  desc: string;
+  desc?: string;
   id: number;
 };
 
