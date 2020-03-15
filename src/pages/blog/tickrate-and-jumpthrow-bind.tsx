@@ -2,7 +2,6 @@ import { FC } from "react";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogPost } from "../../blog/BlogPost";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
-import { useInitAdvert } from "../../store/AdvertStore/hooks";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
@@ -16,8 +15,6 @@ export const blogTickrateAndJumpthrow: BlogPost = {
 };
 
 const TickRateAndJumpthrowBindBlogPost: FC = () => {
-  useInitAdvert();
-
   return (
     <>
       <BlogPostArticle data={blogTickrateAndJumpthrow}>

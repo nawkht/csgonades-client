@@ -8,6 +8,7 @@ declare namespace ezstandalone {
   let DEBUG: boolean;
   let hasDisplayedAds: boolean;
   let initialized: boolean;
+  let cmd: Function[];
 
   function define(...args: any): void;
   function enable(): void;

@@ -6,7 +6,6 @@ import { Dimensions } from "../constants/Constants";
 import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
 import { nadeTypeString } from "../models/Nade/NadeType";
-import { useInitAdvert } from "../store/AdvertStore/hooks";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
@@ -28,7 +27,6 @@ const MapPositionEditor = lazy(() => import("./components/MapPositionEditor"));
 const NadeStatus = lazy(() => import("./components/NadeStatus"));
 
 export const NadePage: FC = memo(() => {
-  useInitAdvert();
   const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
   const registerView = useNadeRegisterView();

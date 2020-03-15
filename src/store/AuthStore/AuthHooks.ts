@@ -3,11 +3,12 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthApi } from "../../api/TokenApi";
 import { UserApi } from "../../api/UserApi";
-import { Nade } from "../../models/Nade/Nade";
 import { User } from "../../models/User";
 import { dateMinutesAgo } from "../../utils/DateUtils";
 import { setToken, setUserAction, signOutUser } from "./AuthActions";
-import { tokenSelector, userSelector } from "./AuthSelectors";
+import { userSelector } from "./AuthSelectors";
+import { getUserFavorites } from "../../api/FavoriteApi";
+import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
 
 export const useSignedInUser = () => {
   const user = useSelector(userSelector);
@@ -20,23 +21,6 @@ export const useIsSignedIn = (): boolean => {
     return false;
   }
   return true;
-};
-
-export const useIsAllowedNadeEdit = (nade: Nade): boolean => {
-  const user = useSelector(userSelector);
-  if (!user) {
-    return false;
-  }
-
-  if (user.role === "administrator" || user.role === "moderator") {
-    return true;
-  }
-
-  if (user.steamId === nade.steamId) {
-    return true;
-  }
-
-  return false;
 };
 
 export const useIsAllowedUserEdit = (user: User): boolean => {
@@ -95,30 +79,27 @@ export const useSignOut = () => {
   return signOut;
 };
 
-export const useTrySignIn = () => {
-  const token = useSelector(tokenSelector);
-  const user = useSelector(userSelector);
+export const usePreloadUser = () => {
   const dispatch = useDispatch();
 
-  const trySignIn = useCallback(() => {
-    if (user && token) {
-      return;
-    }
-
+  useEffect(() => {
     (async () => {
       const { userDetails, userToken } = await trySignInFunc();
 
-      if (userDetails) {
-        setUserAction(dispatch, userDetails);
+      if (!userDetails || !userToken) {
+        return;
       }
 
-      if (userToken) {
-        dispatch(setToken(userToken));
+      setUserAction(dispatch, userDetails);
+      dispatch(setToken(userToken));
+
+      const result = await getUserFavorites(userToken);
+
+      if (result.isOk()) {
+        dispatch(addAllFavoritesAction(result.value));
       }
     })();
-  }, [dispatch, token, user]);
-
-  return trySignIn;
+  }, [dispatch]);
 };
 
 async function trySignInFunc() {

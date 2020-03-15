@@ -1,25 +1,17 @@
 import { useRouter } from "next/router";
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 import { FaPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { NotificationIndicator } from "../../common/notifications/NotificationIndicator";
 import { Dimensions } from "../../constants/Constants";
-import { useTrySignIn } from "../../store/AuthStore/AuthHooks";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
-import { useFetchFavorites } from "../../store/FavoriteStore/hooks/useFetchFavorites";
 import { SignInnButton } from "../Misc/SignInnButton";
 import { UserDropdown } from "../Misc/UserDropdown";
 
 export const UserNav: FC = memo(() => {
   const router = useRouter();
-  const trySignIn = useTrySignIn();
   const user = useSelector(userSelector);
-  useFetchFavorites();
-
-  useEffect(() => {
-    trySignIn();
-  }, [trySignIn]);
 
   if (!user) {
     return <SignInnButton />;

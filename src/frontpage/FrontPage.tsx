@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { NadeLight } from "../models/Nade/Nade";
-import { useInitAdvert } from "../store/AdvertStore/hooks";
 import { FrontpageActions } from "./FrontpageActions";
 import { FrontPageJumbo } from "./FrontPageJumbo";
 import { RecentNades } from "./RecentNades";
@@ -12,8 +11,6 @@ type Props = {
 };
 
 export const FrontPage: FC<Props> = ({ recentNades }) => {
-  useInitAdvert();
-
   return (
     <>
       <FrontPageJumbo />

@@ -1,7 +1,10 @@
 import { FC, lazy, memo, Suspense } from "react";
 import { CookieConsent } from "../common/CookieConsent";
 import { ToastList } from "../common/toast/ToastList";
-import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
+import {
+  useIsAdminOrModerator,
+  usePreloadUser,
+} from "../store/AuthStore/AuthHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { usePageView } from "../utils/Analytics";
 import { useSetupSession } from "./DataFetchers/useSetupSession";
@@ -25,9 +28,10 @@ export const Layout2: FC<Props> = memo(
     const isAdminOrMod = useIsAdminOrModerator();
     const { colors } = useTheme();
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
-    usePageView(title);
     useSetupSession();
+    usePageView(title);
     useAdRefresher();
+    usePreloadUser();
 
     return (
       <>
