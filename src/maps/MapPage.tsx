@@ -14,6 +14,7 @@ import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
 import { NadeLight } from "../models/Nade/Nade";
+import { SEO } from "../layout/Seo";
 
 type Props = {
   map: CsgoMap;
@@ -36,7 +37,7 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
 
   return (
     <>
-      {/*<Layout2 title={capitalize(map)} canonical={`/maps/${map}`}>*/}
+      <SEO title={capitalize(map)} canonical={`/maps/${map}`} />
       <div className="map-welcome">
         <PageCentralize>
           <div className="map-welcome-wrap">

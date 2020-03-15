@@ -1,11 +1,13 @@
 import { NextPage } from "next";
 import { useOnSignIn } from "../store/AuthStore/AuthHooks";
+import { SEO } from "../layout/Seo";
 
 const Auth: NextPage = () => {
   useOnSignIn();
 
   return (
     <>
+      <SEO title="Signing in" canonical="/auth" />
       <div className="loading">
         <p>Signing in... Please wait.</p>
       </div>
@@ -19,6 +21,8 @@ const Auth: NextPage = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          z-index: 999;
+          background: rgba(0, 0, 0, 0.95);
         }
 
         .loading {

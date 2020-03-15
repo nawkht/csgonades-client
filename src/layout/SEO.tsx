@@ -1,23 +1,23 @@
-import Head from "next/head";
 import { FC, memo } from "react";
+import Head from "next/head";
 
 type Props = {
-  title: string;
+  title?: string;
   description?: string;
   canonical?: string;
   thumbnail?: string;
 };
 
-export const PageHead: FC<Props> = memo(
-  ({ title, description, canonical, thumbnail }) => {
+export const SEO: FC<Props> = memo(
+  ({ description, title, canonical, thumbnail }) => {
+    const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
     const pageDescription = description
       ? description
       : "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
-
     return (
       <>
         <Head>
-          <title>{title}</title>
+          <title>{pageTitle}</title>
           <meta name="description" content={pageDescription} />
           <meta
             name="keywords"
@@ -42,7 +42,6 @@ export const PageHead: FC<Props> = memo(
           )}
           {thumbnail && <meta property="og:image" content={thumbnail} />}
         </Head>
-        <style jsx>{``}</style>
       </>
     );
   }

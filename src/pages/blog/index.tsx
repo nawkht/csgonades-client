@@ -3,6 +3,7 @@ import { PageCentralize } from "../../common/PageCentralize";
 import { blogTickrateAndJumpthrow } from "./tickrate-and-jumpthrow-bind";
 import { BlogList } from "../../blog/BlogList";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { SEO } from "../../layout/Seo";
 
 type Props = {};
 
@@ -12,6 +13,7 @@ const BlogPage: FC<Props> = ({}) => {
 
   return (
     <>
+      <SEO title="Blog" canonical="/blog" />
       <PageCentralize>
         <div className="blog-posts">
           <h1>Blog</h1>

@@ -3,13 +3,17 @@ import React from "react";
 import { NadeApi } from "../api/NadeApi";
 import { FrontPage } from "../frontpage/FrontPage";
 import { NadeLight } from "../models/Nade/Nade";
+import { SEO } from "../layout/Seo";
 
 type Props = {
   recentNades: NadeLight[];
 };
 
 const Index: NextPage<Props> = ({ recentNades }) => (
-  <FrontPage recentNades={recentNades} />
+  <>
+    <SEO canonical="/" />
+    <FrontPage recentNades={recentNades} />
+  </>
 );
 
 export const getStaticProps: GetStaticProps = async () => {

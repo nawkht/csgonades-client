@@ -16,6 +16,7 @@ import { NadeInfo } from "./components/NadeInfo";
 import { NadeTitle } from "./components/NadeTitle";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { SimilarNades } from "./components/SimilarNades";
+import { SEO } from "../layout/Seo";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -51,17 +52,15 @@ export const NadePage: FC = memo(() => {
     )}`;
   }
 
-  console.log("> Nade page");
-
   return (
     <>
-      {/**
-      <Layout2
+      <SEO
         title={layoutTitle}
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
-        metaThumbNail={nade.images.thumbnailUrl}
-      > */}
+        thumbnail={nade.images.thumbnailUrl}
+      />
+
       <div key={`nadepage-${nade.id}`}>
         {allowEdit && (
           <Suspense fallback={<div />}>

@@ -11,8 +11,6 @@ export const Logo: FC<Props> = memo(({}) => {
     return theme === "light" ? "/logo.png" : "/logo-darkmode.png";
   }, [theme]);
 
-  console.log("> Rerender logo");
-
   return (
     <>
       <Link href="/" as="/">

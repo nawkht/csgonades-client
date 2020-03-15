@@ -6,6 +6,7 @@ import { CsgnInput } from "../common/inputs/CsgnInput";
 import { CsgnTextArea } from "../common/inputs/CsgnTextArea";
 import { ConctactDTO } from "../models/Contact";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { SEO } from "../layout/Seo";
 
 const ContactPageContainer: NextPage = () => {
   const { colors } = useTheme();
@@ -42,27 +43,26 @@ const ContactPageContainer: NextPage = () => {
 
   return (
     <>
-      <>
-        <div className="contact">
-          <h1>Contact me 📨</h1>
-          {!!error && <p>{error}</p>}
+      <SEO title="Contact" canonical="/contact" />
+      <div className="contact">
+        <h1>Contact me 📨</h1>
+        {!!error && <p>{error}</p>}
 
-          <CsgnInput label="Name" value={name} onChange={setName} />
-          <CsgnInput label="E-mail" value={email} onChange={setEmail} />
-          <CsgnTextArea label="Message" value={message} onChange={setMessage} />
+        <CsgnInput label="Name" value={name} onChange={setName} />
+        <CsgnInput label="E-mail" value={email} onChange={setEmail} />
+        <CsgnTextArea label="Message" value={message} onChange={setMessage} />
 
-          <Button positive onClick={onSubmit}>
-            Send
-          </Button>
+        <Button positive onClick={onSubmit}>
+          Send
+        </Button>
 
-          {success && (
-            <Message positive>
-              <Message.Header>Message sent</Message.Header>
-              <p>Your message has been sent.</p>
-            </Message>
-          )}
-        </div>
-      </>
+        {success && (
+          <Message positive>
+            <Message.Header>Message sent</Message.Header>
+            <p>Your message has been sent.</p>
+          </Message>
+        )}
+      </div>
       <style jsx>{`
         .contact {
           max-width: 900px;

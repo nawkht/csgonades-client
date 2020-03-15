@@ -1,12 +1,14 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { SEO } from "../layout/Seo";
 
 const PrivacyPolicyPageContainer: NextPage = () => {
   const { colors } = useTheme();
 
   return (
     <>
+      <SEO canonical="/privacypolicy" title="Privacy Policy" />
       <div className="privacy-policy">
         <h1>Privacy Policy</h1>
         <p>

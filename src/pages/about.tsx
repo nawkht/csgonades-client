@@ -1,11 +1,13 @@
 import { NextPage } from "next";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { SEO } from "../layout/Seo";
 
 const AboutPageContainer: NextPage = () => {
   const { colors } = useTheme();
 
   return (
     <>
+      <SEO title="About" canonical="/about" />
       <div className="about">
         <h1>About CSGO Nades</h1>
         <h2>The story</h2>

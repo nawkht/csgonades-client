@@ -2,13 +2,19 @@ import { GetServerSideProps, NextPage } from "next";
 import { UserApi } from "../../api/UserApi";
 import { User } from "../../models/User";
 import { UserPage } from "../../users/UsersPage";
+import { SEO } from "../../layout/Seo";
 
 type Props = {
   user: User | null;
 };
 
 const UserPageComponent: NextPage<Props> = ({ user }) => {
-  return <UserPage user={user} key={user.steamId} />;
+  return (
+    <>
+      <SEO title={user.nickname} canonical={`/user/${user.steamId}`} />
+      <UserPage user={user} key={user.steamId} />
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {

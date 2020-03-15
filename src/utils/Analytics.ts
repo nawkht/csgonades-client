@@ -1,27 +1,20 @@
 import { useCallback, useEffect } from "react";
 import ReactGA from "react-ga";
 import { useIsAdmin } from "../store/AuthStore/AuthHooks";
+import { useRouter } from "next/router";
 
 const IS_BROWSER = typeof window !== "undefined";
 const IS_PROD = process.env.NODE_ENV === "production";
 
-export const usePageView = (title: string) => {
+export const usePageView = () => {
+  const { query, route } = useRouter();
   const { pageView } = useAnalytics();
 
   useEffect(() => {
-    const delayedAnalytics = setTimeout(() => {
-      const location = window.location.pathname + window.location.search;
-      pageView({
-        path: location,
-        title,
-      });
-    }, 500);
-    return () => {
-      if (delayedAnalytics) {
-        clearTimeout(delayedAnalytics);
-      }
-    };
-  }, [title, pageView]);
+    const location = window.location.pathname + window.location.search;
+    console.log("Pageview", location);
+    pageView({ path: location });
+  }, [pageView, query, route]);
 };
 
 export const useAnalytics = () => {

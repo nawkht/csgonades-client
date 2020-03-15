@@ -1,13 +1,19 @@
 import { NextPage } from "next";
 import { FinishProfile } from "../finishprofile/FinishProfile";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
+import { SEO } from "../layout/Seo";
 
 type Props = {};
 
 const FinishProfilePage: NextPage<Props> = ({}) => {
   const user = useSignedInUser();
 
-  return <>{user && <FinishProfile user={user} />}</>;
+  return (
+    <>
+      <SEO canonical="/finishprofile" title="Finish profile" />
+      {user && <FinishProfile user={user} />}
+    </>
+  );
 };
 
 export default FinishProfilePage;
