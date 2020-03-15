@@ -1,16 +1,16 @@
 import { useMapStoreDispatch } from "./helpers";
 import { useCallback } from "react";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
+import { NadeLight } from "../../../models/Nade/Nade";
 
-export const useMapStoreActions = () => {
+export const useReplaceNadesForMap = () => {
   const dispatch = useMapStoreDispatch();
 
-  const setCurrentMap = useCallback(
-    (map: CsgoMap) => dispatch({ type: "MapStore/SetCurrentMap", map }),
+  const replaceNadesForMap = useCallback(
+    (map: CsgoMap, nades: NadeLight[]) =>
+      dispatch({ type: "MapStore/ReplaceNadesForMap", map, nades }),
     [dispatch]
   );
 
-  return {
-    setCurrentMap,
-  };
+  return replaceNadesForMap;
 };

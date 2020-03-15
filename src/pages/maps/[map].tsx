@@ -3,6 +3,8 @@ import { NadeApi } from "../../api/NadeApi";
 import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeLight } from "../../models/Nade/Nade";
+import { useReplaceNadesForMap } from "../../store/MapStore/hooks/useReplaceNadesForMap";
+import { useEffect } from "react";
 
 interface Props {
   map: CsgoMap;
@@ -10,6 +12,12 @@ interface Props {
 }
 
 const Map: NextPage<Props> = ({ map, nades }) => {
+  const replaceNadesForMap = useReplaceNadesForMap();
+
+  useEffect(() => {
+    replaceNadesForMap(map, nades);
+  }, []);
+
   return <MapPage map={map} ssrNades={nades} />;
 };
 
