@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Dimensions } from "../constants/Constants";
 import { BlogPostPreview } from "../frontpage/BlogPostPreview";
 import { BlogPost } from "./BlogPost";
 
