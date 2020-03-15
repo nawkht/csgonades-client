@@ -35,7 +35,13 @@ const createSitemap = async () => {
   xml += `<priority>0.5</priority>`;
   xml += "</url>";
 
-  const staticPages = ["about", "contact", "privacypolicy"];
+  const staticPages = [
+    "about",
+    "contact",
+    "privacypolicy",
+    "blog",
+    "/blog/tickrate-and-jumpthrow-bind",
+  ];
 
   staticPages.forEach(staticPage => {
     const page = `${SITE_ROOT}/${staticPage}`;
