@@ -4,8 +4,14 @@ import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
 import { NadeItemMobile } from "../nadeitem/NadeItemMobile";
 import { useFilteredNades } from "../../store/MapStore/hooks/useFilteredNades";
 
-export const NadeListWithAds: FC = memo(() => {
+type Props = {
+  ssrNades: NadeLight[];
+};
+
+export const NadeListWithAds: FC<Props> = memo(({ ssrNades }) => {
   const nades = useFilteredNades();
+
+  const renderRandes = nades || ssrNades;
 
   function renderList(nades: NadeLight[]) {
     return nades.map(nade => (
@@ -23,8 +29,8 @@ export const NadeListWithAds: FC = memo(() => {
   }
 
   const chunks: NadeLight[][] = useMemo(() => {
-    return chunk(nades, 7);
-  }, [nades]);
+    return chunk(renderRandes, 7);
+  }, [renderRandes]);
 
   const items1 = chunks.length > 0 ? chunks[0] : false;
   const items2 = chunks.length > 1 ? chunks[1] : false;

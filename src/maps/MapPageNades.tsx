@@ -10,7 +10,7 @@ type Props = {
 export const MapPageNades: FC<Props> = memo(({ ssrNades }) => {
   const nades = useFilteredNades();
 
-  const renderNades = nades || ssrNades;
+  const renderNades = nades.length ? nades : ssrNades;
 
   return (
     <>

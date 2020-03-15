@@ -68,7 +68,7 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           </div>
         </div>
         <div className="nade-list">
-          {isMobileOnly && <NadeListWithAds />}
+          {isMobileOnly && <NadeListWithAds ssrNades={ssrNades} />}
           {!isMobileOnly && <MapPageNades ssrNades={ssrNades} />}
         </div>
         <div className="map-page-aside">
