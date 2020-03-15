@@ -17,6 +17,10 @@ export const useAdRefresher = () => {
       'div[id^="ezoic-pub-ad-placeholder"]'
     );
     elements.forEach(el => {
+      if (isHidden(el)) {
+        return;
+      }
+
       try {
         const id = Number(el.id.split("-").pop());
         adIds.push(id);
@@ -27,3 +31,7 @@ export const useAdRefresher = () => {
     ezoicInit(adIds);
   }, [route]);
 };
+
+function isHidden(el: any) {
+  return el.offsetParent === null;
+}

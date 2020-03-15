@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { PageCentralize } from "../common/PageCentralize";
 import { APP_VERSION, Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
-export const Footer: FC = () => {
+export const Footer: FC = memo(() => {
   const { colors } = useTheme();
 
   const year = new Date().getFullYear();
@@ -97,4 +97,4 @@ export const Footer: FC = () => {
       `}</style>
     </>
   );
-};
+});
