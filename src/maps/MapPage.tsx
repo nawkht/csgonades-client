@@ -37,8 +37,8 @@ export const MapPage: FC<Props> = memo(({ map }) => {
             <div className="map-welcome-wrap">
               <div className="welcome-msg">
                 <h1>
-                  Find the best smokes, flashbangs,
-                  <br /> molotovs and grenades for {capitalize(map)}.
+                  Find the best smokes, flashbangs, molotovs and grenades for{" "}
+                  {capitalize(map)}.
                 </h1>
                 <h2>
                   Something missing?
@@ -56,7 +56,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
           <div className="filter">
             <div className="sticky-sidebar">
               <div className="ez placement-sidebar-left">
-                <EzoicPlaceHolder id={125} key="Map page | By filter sticky" />
+                <EzoicPlaceHolder id={125} desc="Map page | By filter sticky" />
               </div>
               <NadeFilter showSingInWarning={() => setShowLoginWarning(true)} />
             </div>
@@ -109,6 +109,7 @@ export const MapPage: FC<Props> = memo(({ map }) => {
         .welcome-msg {
           align-self: center;
           margin-top: 40px;
+          margin-right: 40px;
           width: 100%;
         }
 

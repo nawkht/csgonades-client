@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Dimensions } from "../constants/Constants";
 
 type Props = {
   code: string;
@@ -11,7 +12,11 @@ export const BlogCodeSnippet: FC<Props> = ({ code }) => {
         <pre dangerouslySetInnerHTML={{ __html: code }} />
       </code>
       <style jsx>{`
+        code {
+        }
+
         pre {
+          max-width: 100%;
           background: #444;
           color: white;
           padding: 30px;
@@ -19,8 +24,15 @@ export const BlogCodeSnippet: FC<Props> = ({ code }) => {
           margin-right: -10px;
           border-radius: 5px;
           margin-bottom: 40px;
-          overflow-y: hidden;
-          overflow-x: auto;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          pre {
+            margin-left: 0px;
+            margin-right: 0px;
+          }
         }
       `}</style>
     </>

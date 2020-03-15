@@ -1,20 +1,14 @@
 import { FC } from "react";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
-
-export type BlogData = {
-  title: string;
-  imageUrl: string;
-  imageCredit?: string;
-  imageCreditUrl?: string;
-  intro: string;
-};
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
+import { BlogPost } from "./BlogPost";
+import { Dimensions } from "../constants/Constants";
 
 type Props = {
-  data: BlogData;
+  data: BlogPost;
 };
 
-export const BlogPost: FC<Props> = ({ children, data }) => {
+export const BlogPostArticle: FC<Props> = ({ children, data }) => {
   const { colors } = useTheme();
 
   return (
@@ -34,8 +28,8 @@ export const BlogPost: FC<Props> = ({ children, data }) => {
               </div>
             )}
           </div>
-          <p>{data.intro}</p>
-          <div className="body">{children}</div>
+          <p className="lead">{data.intro}</p>
+          {children}
         </article>
         <aside className="sidebar">
           <div className="ez mid-sidebar">
@@ -44,6 +38,10 @@ export const BlogPost: FC<Props> = ({ children, data }) => {
         </aside>
       </div>
       <style jsx>{`
+        .body {
+          padding-top: 1.5rem;
+        }
+
         .sidebar {
           display: flex;
           flex-direction: column;
@@ -81,32 +79,17 @@ export const BlogPost: FC<Props> = ({ children, data }) => {
           margin-top: 50px;
           margin-bottom: 50px;
           color: ${colors.TEXT};
-        }
-
-        p {
-          margin: 0 auto;
           max-width: 800px;
-          padding-bottom: 40px;
         }
 
         h1 {
           text-align: center;
-          margin: 0;
-          margin-bottom: 30px;
-          font-size: 36px;
-          font-weight: 300;
-        }
-
-        .body {
-          max-width: 800px;
-          display: block;
-          margin: 0 auto;
         }
 
         .img-wrap {
-          max-width: 850px;
-          margin: 0 auto;
           margin-bottom: 50px;
+          margin-left: -20px;
+          margin-right: -20px;
         }
 
         .article-image {
@@ -127,6 +110,25 @@ export const BlogPost: FC<Props> = ({ children, data }) => {
 
         .image-credit a:hover {
           text-decoration: underline;
+        }
+
+        .article-wrap {
+        }
+
+        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .empty,
+          .sidebar {
+            display: none;
+          }
+
+          .img-wrap {
+            margin-left: 0;
+            margin-right: 0;
+          }
+
+          article {
+            padding: 20px;
+          }
         }
       `}</style>
     </>

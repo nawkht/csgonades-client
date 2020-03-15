@@ -1,35 +1,35 @@
 import { FC } from "react";
-import { BlogCodeSnippet } from "../../common/blog/BlogCodeSnippet";
-import { BlogData, BlogPost } from "../../common/blog/BlogPost";
+import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
+import { BlogPost } from "../../blog/BlogPost";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 import { Layout2 } from "../../layout/Layout2";
 import { useInitAdvert } from "../../store/AdvertStore/hooks";
 import { withRedux } from "../../utils/WithRedux";
+import { BlogPostArticle } from "../../blog/BlogPostArticle";
 
-type Props = {};
-
-const meta: BlogData = {
+export const blogTickrateAndJumpthrow: BlogPost = {
   title: "Tickrate and it's effect on jumpthrow bind",
+  slug: "tickrate-and-jumpthrow-bind",
   imageUrl: "/blogimg/jump.jpg",
+  thumbnailUrl: "/blogimg/jump_thumb.jpg",
+  createdAt: "2020-03-15T07:51:30.196Z",
   intro:
     "You just set up jumpthrow bind and practiced offline for a sick smoke for Mirage. Your friends ask you to join a game on FaceIT, and you throw your smoke, but it missed! What the heck? You just tried it out... Why did this happen?",
 };
 
-const HelloWorld: FC<Props> = ({}) => {
+const HelloWorld: FC = () => {
   useInitAdvert();
 
   return (
     <>
       <Layout2 canonical="/blog/tickrate-and-jumpthrow-bind">
-        <BlogPost data={meta}>
+        <BlogPostArticle data={blogTickrateAndJumpthrow}>
           <p>
-            <strong>
-              TLDR; Game servers have different rates at which they communicate
-              with your game, called tickrate. This slight timing difference
-              affects when the server thinks your bind thinks you jumped and
-              released the mouse button. Giving you slightly different results
-              on 64 and 128 tick servers. See the video below.
-            </strong>
+            TLDR; Game servers have different rates at which they communicate
+            with your game, called tickrate. This slight timing difference
+            affects when the server thinks your bind thinks you jumped and
+            released the mouse button. Giving you slightly different results on
+            64 and 128 tick servers. See the video below.
           </p>
 
           <div className="ez ez-wide">
@@ -55,7 +55,7 @@ const HelloWorld: FC<Props> = ({}) => {
 
           <h2>What is the jump throw bind?</h2>
           <p>
-            The jump throw bind is a command you can bind to one of your
+            The jump throw bind is a small script you can bind to one of your
             buttons. It allows you with one click of a button to perform
             multiple actions. In the case of the jump throw bind, these actions
             are jumping and releasing the left mouse button at the same time.
@@ -123,8 +123,8 @@ const HelloWorld: FC<Props> = ({}) => {
           />
 
           <p>
-            The Standard jump throw bind jumps and releases the left mouse
-            button and is the most basic variation that most people use.
+            The Standard jump throw bind. It will jump and release the left
+            mouse button and is the most basic variation that most people use.
           </p>
 
           <h3>With both mouse buttons</h3>
@@ -157,62 +157,31 @@ const HelloWorld: FC<Props> = ({}) => {
             would not recommend it if you&apos;re looking at guides as they 99%
             of the time use one of the other two.
           </p>
-        </BlogPost>
+        </BlogPostArticle>
 
         <div className="ez ez-huge">
           <EzoicPlaceHolder desc="Blog | Huge bottom" id={123} />
         </div>
       </Layout2>
       <style jsx>{`
-        ul {
-          margin: 0;
-          padding: 0;
-          margin-left: 20px;
-        }
-
         .ez {
+          background: #ccc;
         }
 
         .ez-wide {
-          padding-top: 30px;
-          padding-bottom: 30px;
+          margin-top: 30px;
         }
 
         .ez-box {
-          padding-top: 30px;
-          padding-bottom: 30px;
+          margin-bottom: 30px;
         }
 
         .ez-huge {
-          padding-top: 100px;
-          padding-bottom: 100px;
+          margin-top: 100px;
+          margin-bottom: 100px;
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        p {
-        }
-
-        h2 {
-          margin: 0;
-          padding: 0;
-          margin-top: 50px;
-          margin-bottom: 25px;
-          font-size: 28px;
-          font-weight: 300;
-        }
-
-        h3 {
-          margin: 0;
-          padding: 0;
-          margin-top: 50px;
-          font-size: 22px;
-          font-weight: 300;
-        }
-
-        strong {
-          font-weight: 400;
         }
       `}</style>
     </>

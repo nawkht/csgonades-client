@@ -75,57 +75,6 @@ class MyDocument extends Document {
             <NextScript />
           </body>
         </Html>
-        <style jsx global>{`
-          html {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-          }
-          *,
-          *:before,
-          *:after {
-            -webkit-box-sizing: inherit;
-            -moz-box-sizing: inherit;
-            box-sizing: inherit;
-          }
-
-          body {
-            font-family: "Roboto", Helvetica, sans-serif;
-            font-weight: 300;
-            font-size: 16px;
-          }
-
-          h1,
-          h2,
-          h3,
-          h4,
-          h5 {
-            font-family: "Roboto", Helvetica, sans-serif;
-            font-weight: 300;
-          }
-
-          h1 {
-            font-size: 2rem;
-          }
-
-          h2 {
-            font-size: 1.8rem;
-          }
-
-          h3,
-          h4,
-          h5 {
-            font-size: 1.6rem;
-          }
-
-          p {
-            font-size: 1.2rem;
-          }
-
-          input {
-            font-family: "Roboto", sans-serif;
-          }
-        `}</style>
       </>
     );
   }

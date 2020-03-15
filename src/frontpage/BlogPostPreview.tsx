@@ -1,27 +1,32 @@
 import { FC } from "react";
-import { BlogPostLight } from "../models/BlogPost";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { prettyDate } from "../utils/DateUtils";
+import { BlogPost } from "../blog/BlogPost";
+import Link from "next/link";
 
 type Props = {
-  blogPost: BlogPostLight;
+  blogPost: BlogPost;
 };
 
 export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
   const { colors } = useTheme();
+
+  const { thumbnailUrl, intro, title } = blogPost;
+
   return (
     <>
-      <div className="blog-post-preview">
-        <img src={blogPost.images.thumbnailUrl} />
+      <Link href={`/blog/${blogPost.slug}`} as={`/blog/${blogPost.slug}`}>
+        <a className="blog-post-preview">
+          <img src={thumbnailUrl} />
 
-        <h3>{blogPost.title}</h3>
+          <h3>{title}</h3>
 
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-          debitis aliquid vel magni.
-        </p>
-        <span className="blog-post-date">{prettyDate(blogPost.updatedAt)}</span>
-      </div>
+          <p>{intro}</p>
+          <span className="blog-post-date">
+            {prettyDate(blogPost.createdAt)}
+          </span>
+        </a>
+      </Link>
       <style jsx>{`
         .blog-post-preview {
           width: 320px;
@@ -34,6 +39,12 @@ export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
           margin: 20px;
           box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
           border-radius: 5px;
+          transform: scale(1);
+          transition: transform 0.15s;
+        }
+
+        .blog-post-preview:hover {
+          transform: scale(1.005);
         }
 
         .blog-post-preview img {
@@ -48,6 +59,7 @@ export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
           font-weight: 400;
           font-size: 20px;
           color: #545454;
+          color: ${colors.TEXT};
         }
 
         .blog-post-preview p {
@@ -55,6 +67,7 @@ export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
           margin-bottom: 15px;
           font-size: 16px;
           color: #545454;
+          color: ${colors.TEXT};
         }
 
         .blog-post-date {
