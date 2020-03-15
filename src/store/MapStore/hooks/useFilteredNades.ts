@@ -20,6 +20,25 @@ import {
   filterByTypeSelector,
 } from "../selectors";
 
+export const useFilterServerSideNades = (ssrNades: NadeLight[]) => {
+  const byCoords = useSelector(filterByCoordsSelector);
+  const byTickrate = useSelector(filterByTickrateSelector);
+  const byFavorites = useSelector(filterByFavoritesSelector);
+  const byType = useSelector(filterByTypeSelector);
+  const favoritedNades = useSelector(favoritedNadeIdsSelector);
+
+  return useMemo(() => {
+    return filterNades(
+      ssrNades,
+      favoritedNades,
+      byFavorites,
+      byCoords,
+      byType,
+      byTickrate
+    );
+  }, [byCoords, byTickrate, byFavorites, byType, favoritedNades, ssrNades]);
+};
+
 export const useFilteredNades = () => {
   const currentMap = useSelector(currentMapSelector);
   const allNades = useSelector(allNadesSelector);
@@ -45,7 +64,7 @@ export const useFilteredNades = () => {
   return filteredNades;
 };
 
-function filterNades(
+export function filterNades(
   nades: NadeLight[],
   favoritedNades: string[],
   byFavorites: boolean,
