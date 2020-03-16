@@ -12,6 +12,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { useAdRefresher } from "./useAdRefresher";
+import { ServiceDown } from "./ServiceDown";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
@@ -26,6 +27,7 @@ export const Layout2: FC = memo(({ children }) => {
   return (
     <>
       <div className="page">
+        <ServiceDown />
         <div className="header">
           <Header />
         </div>
