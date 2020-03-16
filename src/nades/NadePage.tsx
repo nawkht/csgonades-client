@@ -10,13 +10,10 @@ import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
 import { useNadeRegisterView } from "../store2/NadePageStore/hooks/useNadeRegisterView";
-import { FavoriteButton } from "./components/FavoriteButton";
 import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
-import { NadeInfo } from "./components/NadeInfo";
 import { NadeTitle } from "./components/NadeTitle";
-import { ReportNadeButton } from "./components/ReportNadeButtons";
-import { SimilarNades } from "./components/SimilarNades";
 import { SEO } from "../layout/SEO2";
+import { NadeInfoContainer } from "./NadeInfoContainer";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -62,244 +59,220 @@ export const NadePage: FC = memo(() => {
         nadeSeo={nade}
       />
 
-      <div key={`nadepage-${nade.id}`}>
-        {allowEdit && (
-          <Suspense fallback={<div />}>
-            <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
-          </Suspense>
-        )}
+      {allowEdit && (
+        <Suspense fallback={<div />}>
+          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+        </Suspense>
+      )}
 
-        <EzoicPlaceHolder key="Nade Page | Over title 2" id={131} height={60} />
-
-        <NadeBreadcrumb nade={nade} />
-        <NadeTitle
-          title={nade.title}
-          map={nade.map}
-          type={nade.type}
-          onEditNade={() => setEditTitleVisisble(true)}
-          allowEdit={allowEditTitle}
-        />
-
-        <div className="nade-page">
-          <aside className="ez nade-page-aside">
-            <EzoicPlaceHolder
-              key="Nade page | Left sidebar"
-              id={106}
-              height={600}
-            />
-          </aside>
-          <div className="nade-page-content">
-            <ResponsiveVideo
-              hdUrL={nade.gfycat.largeVideoUrl}
-              sdUrl={nade.gfycat.smallVideoUrl}
-              hdUrlWebm={nade.gfycat.largeVideoWebm}
-              poster={nade.images.thumbnailUrl}
-              controls={isMobile ? "mobile" : "desktop"}
-            />
-
-            <div className="nade-info-container">
-              <div className="nade-info-empty"></div>
-              <div className="nade-info-description">
-                <NadeInfo
-                  nade={nade}
-                  onEditTitle={() => setEditDescisisble(true)}
-                  onEditMeta={() => setEditMetaVisible(true)}
-                />
-              </div>
-              <div className="nade-info-actions">
-                <FavoriteButton
-                  showSignInWarning={() => setShowSignInWarning(true)}
-                  nade={nade}
-                />
-                <ReportNadeButton nadeId={nade.id} />
-              </div>
-            </div>
-
-            <div className="ez placement-under-desc">
-              <EzoicPlaceHolder
-                key="Nade page | Under description"
-                id={107}
-                height={100}
-              />
-            </div>
-
-            <div className="similar-nades">
-              <SimilarNades nade={nade} />
-            </div>
-          </div>
-          <aside className="ez nade-page-aside2">
-            <EzoicPlaceHolder
-              key="Nade page | Right sidebar"
-              id={109}
-              height={600}
-            />
-          </aside>
+      <div className="nade-page2">
+        <div className="title">
+          <NadeBreadcrumb nade={nade} />
+          <NadeTitle
+            title={nade.title}
+            map={nade.map}
+            type={nade.type}
+            onEditNade={() => setEditTitleVisisble(true)}
+            allowEdit={allowEditTitle}
+          />
         </div>
 
-        <div key={`hidden-${nade.id}`}>
-          <SignInWarning
-            visible={showSignInWarning}
-            onDismiss={() => setShowSignInWarning(false)}
-            message="favorite"
+        <div className="video">
+          <ResponsiveVideo
+            hdUrL={nade.gfycat.largeVideoUrl}
+            sdUrl={nade.gfycat.smallVideoUrl}
+            hdUrlWebm={nade.gfycat.largeVideoWebm}
+            poster={nade.images.thumbnailUrl}
+            controls={isMobile ? "mobile" : "desktop"}
           />
+        </div>
+        <div className="info">
+          <NadeInfoContainer
+            nade={nade}
+            onEditDescription={() => setEditDescisisble(true)}
+            onEditMeta={() => setEditMetaVisible(true)}
+            onShowSignInWarning={() => setShowSignInWarning(true)}
+          />
+          <EzoicPlaceHolder key="	Nade Page | Under info" id={136} />
+        </div>
 
-          {allowEdit && (
-            <Suspense fallback={<div />}>
-              <TitleEditor
-                nadeId={nade.id}
-                title={nade.title}
-                visisble={editTitleVisisble}
-                onClose={() => setEditTitleVisisble(false)}
-              />
-            </Suspense>
-          )}
+        <div className="ad-left-video">
+          <EzoicPlaceHolder key="Nade Page | Left video 2" id={132} />
+        </div>
 
-          {allowEdit && (
-            <Suspense fallback={<div />}>
-              <DecriptionEditor
-                visisble={editDescVisisble}
-                nade={nade}
-                onDismiss={() => setEditDescisisble(false)}
-              />
-            </Suspense>
-          )}
+        <div className="ad-right-video">
+          <EzoicPlaceHolder key="Nade Page | Right video 2" id={133} />
+        </div>
 
-          {allowEdit && (
-            <Suspense fallback={<div />}>
-              <MetaEditor
-                visisble={editMetaVisible}
-                nade={nade}
-                onDismiss={() => setEditMetaVisible(false)}
-              />
-            </Suspense>
-          )}
-
-          {allowEdit && (
-            <Suspense fallback={<div />}>
-              <MapPositionEditor nade={nade} />
-            </Suspense>
-          )}
-
-          {isAdminOrMod && (
-            <Suspense fallback={<div />}>
-              <AdminEditor nade={nade} />
-            </Suspense>
-          )}
+        <div className="ad-left-info">
+          <EzoicPlaceHolder key="	Nade Page | Left info 2" id={134} />
+        </div>
+        <div className="ad-right-info">
+          <EzoicPlaceHolder key="Nade Page | Right info 2" id={135} />
         </div>
       </div>
+
+      <SignInWarning
+        visible={showSignInWarning}
+        onDismiss={() => setShowSignInWarning(false)}
+        message="favorite"
+      />
+
+      {allowEdit && (
+        <Suspense fallback={<div />}>
+          <TitleEditor
+            nadeId={nade.id}
+            title={nade.title}
+            visisble={editTitleVisisble}
+            onClose={() => setEditTitleVisisble(false)}
+          />
+        </Suspense>
+      )}
+
+      {allowEdit && (
+        <Suspense fallback={<div />}>
+          <DecriptionEditor
+            visisble={editDescVisisble}
+            nade={nade}
+            onDismiss={() => setEditDescisisble(false)}
+          />
+        </Suspense>
+      )}
+
+      {allowEdit && (
+        <Suspense fallback={<div />}>
+          <MetaEditor
+            visisble={editMetaVisible}
+            nade={nade}
+            onDismiss={() => setEditMetaVisible(false)}
+          />
+        </Suspense>
+      )}
+
+      {allowEdit && (
+        <Suspense fallback={<div />}>
+          <MapPositionEditor nade={nade} />
+        </Suspense>
+      )}
+
+      {isAdminOrMod && (
+        <Suspense fallback={<div />}>
+          <AdminEditor nade={nade} />
+        </Suspense>
+      )}
       <style jsx>{`
-        .nade-info-container {
-          display: flex;
-          margin-top: 30px;
+        .nade-page2 {
+          display: grid;
+          grid-template-columns: 160px 160px 1fr 1fr 1fr 1fr 160px 160px;
+          grid-template-rows: auto auto auto;
+          grid-row-gap: ${Dimensions.GUTTER_SIZE};
+          grid-template-areas:
+            "title title title title title title title title"
+            "ad ad video video video video ad2 ad2"
+            "ad3 ad3 info info info info ad4 ad4";
+          margin-left: 10px;
+          margin-right: 10px;
         }
 
-        .nade-info-actions {
-          width: 160px;
+        .title {
+          grid-area: title;
+          margin-top: 40px;
         }
 
-        .nade-info-description {
-          margin-left: 160px;
+        .video {
+          grid-area: video;
           padding-left: 30px;
           padding-right: 30px;
-          flex: 1;
         }
 
-        .sticky {
-          max-height: 1200px;
-          min-height: 600px;
+        .info {
+          grid-area: info;
+          padding-left: 30px;
+          padding-right: 30px;
         }
 
-        .nade-page {
-          margin: 0 auto;
-          max-width: calc(1100px + 200px + 200px + 40px + 40px);
+        .ad-left-video {
+          grid-area: ad;
+        }
+
+        .ad-right-video {
+          grid-area: ad2;
+        }
+
+        .ad-left-info {
+          grid-area: ad3;
+        }
+
+        .ad-right-info {
+          grid-area: ad4;
           display: flex;
-          padding-bottom: 50px;
-          min-height: 85vh;
-        }
-
-        .ez {
-        }
-
-        .nade-page-aside,
-        .nade-page-aside2 {
-          min-height: 600px;
-          max-height: 1200px;
-        }
-
-        .nade-page-aside {
-          margin-right: 40px;
-          width: 200px;
-          display: flex;
+          flex-direction: column;
           align-items: flex-end;
-          flex-direction: column;
         }
 
-        .nade-page-aside2 {
-          margin-left: 40px;
-          width: 200px;
-          display: flex;
-          align-items: flex-start;
-          flex-direction: column;
+        @media only screen and (max-width: 1910px) {
+          .nade-page2 {
+            grid-template-areas:
+              "title title title title title title title title"
+              "ad video video video video video video ad2"
+              "ad3 ad3 info info info info ad4 ad4";
+          }
         }
 
-        .nade-page-content {
-          flex: 1;
-          max-width: 1100px;
+        @media only screen and (max-width: 1280px) {
+          .nade-page2 {
+            grid-template-rows: auto auto auto auto auto;
+            grid-template-areas:
+              "title title title title title title title title"
+              "ad video video video video video video ad2"
+              "ad info info info info info info ad2"
+              "ad3 info info info info info info ad4"
+              "ad3 info info info info info info ad4";
+          }
         }
 
-        .action-container {
-          display: flex;
-          max-width: 850px;
-          margin: 0 auto;
-          padding-top: 20px;
-          padding-bottom: 10px;
-        }
+        @media only screen and (max-width: 1024px) {
+          .nade-page2 {
+            grid-template-rows: auto auto auto auto;
+            grid-row-gap: ${Dimensions.GUTTER_SIZE};
+            grid-template-areas:
+              "title title title title title title title title"
+              "video video video video video video video video"
+              "ad info info info info info info ad2"
+              "ad info info info info info info ad2";
+          }
 
-        .empty-container {
-          flex: 1;
-          margin-right: 20px;
-        }
-
-        @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
-          .nade-page-aside,
-          .nade-page-aside2 {
+          .ad-left-info,
+          .ad-right-info {
             display: none;
           }
 
-          .similar-nades {
-            margin-left: 30px;
-            margin-right: 30px;
-          }
-
-          .nade-info-container {
-            margin-left: 30px;
-            margin-right: 30px;
+          .video {
+            padding: 0;
           }
         }
 
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .nade-page-aside,
-          .nade-page-aside2 {
+        @media only screen and (max-width: 950px) {
+          .nade-page2 {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto auto auto auto;
+            grid-row-gap: ${Dimensions.GUTTER_SIZE};
+            grid-template-areas:
+              "title title title title title title title title"
+              "video video video video video video video video"
+              "info info info info info info info info"
+              "info info info info info info info info";
+          }
+
+          .ad-left-video,
+          .ad-right-video,
+          .ad-left-info,
+          .ad-right-info {
             display: none;
           }
 
-          .similar-nades {
-            margin-left: 30px;
-            margin-right: 30px;
-          }
-
-          .nade-info-container {
-            flex-direction: column;
-          }
-
-          .nade-info-description {
-            margin-left: 0;
-          }
-
-          .nade-info-actions {
-            flex-direction: column;
-            width: 100%;
-            padding: 30px;
+          .info {
+            padding: 0;
           }
         }
       `}</style>

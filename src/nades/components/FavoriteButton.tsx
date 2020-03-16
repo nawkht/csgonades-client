@@ -50,11 +50,7 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
           loading={isFavoriteInProgress}
         />
       </div>
-      <style jsx>{`
-        .favorite-wrapper {
-          margin-bottom: 20px;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </>
   );
 };

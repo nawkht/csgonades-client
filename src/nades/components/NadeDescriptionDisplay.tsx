@@ -37,12 +37,7 @@ export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
       <style jsx>{`
         .desc-wrap {
           min-height: 200px;
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .desc-wrap {
-            min-height: auto;
-          }
+          padding: 20px 40px;
         }
       `}</style>
     </>

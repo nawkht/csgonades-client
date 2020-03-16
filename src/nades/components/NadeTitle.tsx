@@ -65,7 +65,6 @@ export const NadeTitle: FC<Props> = ({
           font-size: 30px;
           margin: 0;
           padding: 0;
-          margin-bottom: 50px;
           font-weight: 300;
           color: ${colors.TEXT};
           display: inline-block;

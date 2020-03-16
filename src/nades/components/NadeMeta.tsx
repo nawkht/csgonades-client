@@ -14,36 +14,58 @@ export const NadeMeta: FC<Props> = ({ nade }) => {
   return (
     <>
       <div className="nade-meta">
-        <h4>Type</h4>
-        <p>{nade.type ? nadeTypeString(nade.type) : "Not set."}</p>
-        <h4>Movement</h4>
-        <p>{nade.movement ? capitalize(nade.movement) : "Not set."}</p>
-        <h4>Technique</h4>
-        <p>{nade.technique ? techniqueString(nade.technique) : "Not set."}</p>
+        <div className="nade-meta-item">
+          <h4>Type</h4>
+          <p>{nade.type ? nadeTypeString(nade.type) : "Not set."}</p>
+        </div>
+
+        <div className="nade-meta-item">
+          <h4>Movement</h4>
+          <p>{nade.movement ? capitalize(nade.movement) : "Not set."}</p>
+        </div>
+
+        <div className="nade-meta-item">
+          <h4>Technique</h4>
+          <p>{nade.technique ? techniqueString(nade.technique) : "Not set."}</p>
+        </div>
+
         {nade.tickrate && (
-          <>
+          <div className="nade-meta-item">
             <h4>Tickrate</h4>
             <p>{tickrateString(nade.tickrate)}</p>
-          </>
+          </div>
         )}
       </div>
       <style jsx>{`
         .nade-meta {
-          background: #17a58b;
-          padding: 30px 20px;
-          border-radius: 5px;
-          margin-right: 40px;
-          margin-bottom: 30px;
-          margin-top: 30px;
-          min-width: 200px;
+          display: flex;
           color: white;
+          overflow-x: auto;
+        }
+
+        .nade-meta-item {
+          text-align: center;
+          flex: 1;
+          white-space: nowrap;
+          border-right: 1px solid #138a74;
+          padding: 15px;
+          background: #17a58b;
+        }
+
+        .nade-meta-item:last-child {
+          border-right: none;
         }
 
         h4 {
           margin: 0;
           padding: 0;
-          font-size: 14px;
-          font-weight: normal;
+          font-size: 12px;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+
+        p {
+          font-size: 16px;
         }
       `}</style>
     </>
