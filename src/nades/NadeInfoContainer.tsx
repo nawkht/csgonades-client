@@ -40,13 +40,15 @@ export const NadeInfoContainer: FC<Props> = ({
         </div>
       </div>
       <style jsx>{`
+        .nade-info {
+          max-width: 700px;
+          margin: 0 auto;
+          padding-bottom: 30px;
+        }
+
         .nade-info-actions {
           display: flex;
           justify-content: flex-end;
-          margin-bottom: 30px;
-        }
-
-        .nade-info {
           margin-bottom: 30px;
         }
 

@@ -78,13 +78,15 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <div className="video">
-          <ResponsiveVideo
-            hdUrL={nade.gfycat.largeVideoUrl}
-            sdUrl={nade.gfycat.smallVideoUrl}
-            hdUrlWebm={nade.gfycat.largeVideoWebm}
-            poster={nade.images.thumbnailUrl}
-            controls={isMobile ? "mobile" : "desktop"}
-          />
+          <div className="video-wrap">
+            <ResponsiveVideo
+              hdUrL={nade.gfycat.largeVideoUrl}
+              sdUrl={nade.gfycat.smallVideoUrl}
+              hdUrlWebm={nade.gfycat.largeVideoWebm}
+              poster={nade.images.thumbnailUrl}
+              controls={isMobile ? "mobile" : "desktop"}
+            />
+          </div>
         </div>
         <div className="info">
           <NadeInfoContainer
@@ -97,11 +99,7 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <div className="ad-left-video">
-          <EzoicPlaceHolder
-            key="Nade Page | Left video 2"
-            id={132}
-            height={600}
-          />
+          <EzoicPlaceHolder key="Nade Page | Left video 2" id={132} />
         </div>
 
         <div className="ad-right-video">
@@ -175,8 +173,8 @@ export const NadePage: FC = memo(() => {
             "ad ad video video video video ad2 ad2"
             "ad ad info info info info ad2 ad2"
             "ad3 ad3 info info info info ad4 ad4";
-          margin-left: 10px;
-          margin-right: 10px;
+          margin-left: 30px;
+          margin-right: 30px;
         }
 
         .title {
@@ -213,6 +211,11 @@ export const NadePage: FC = memo(() => {
           display: flex;
           flex-direction: column;
           align-items: flex-end;
+        }
+
+        .video-wrap {
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
         @media only screen and (max-width: 1910px) {
@@ -261,6 +264,7 @@ export const NadePage: FC = memo(() => {
 
         @media only screen and (max-width: 950px) {
           .nade-page2 {
+            margin: 15px;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
             grid-template-rows: auto auto auto auto;
             grid-row-gap: ${Dimensions.GUTTER_SIZE};
