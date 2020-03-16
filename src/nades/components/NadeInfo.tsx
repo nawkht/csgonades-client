@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Dimensions } from "../../constants/Constants";
 import { Nade } from "../../models/Nade/Nade";
 import { useCanEditNade } from "../../store/NadeStore/hooks/useCanEditNade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
