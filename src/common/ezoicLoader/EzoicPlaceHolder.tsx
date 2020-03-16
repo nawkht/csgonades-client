@@ -2,15 +2,18 @@ import { FC, memo } from "react";
 
 type Props = {
   id: number;
+  width?: number;
+  height?: number;
 };
 
-export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
+export const EzoicPlaceHolder: FC<Props> = memo(({ id, height, width }) => {
   return (
     <>
-      <div id={`ezoic-pub-ad-placeholder-${id}`}></div>
+      <div className="ez-wrap" id={`ezoic-pub-ad-placeholder-${id}`}></div>
       <style jsx>{`
-        div {
-          width: 100%;
+        .ez-wrap {
+          width: ${width ? `${width}px` : "100%"};
+          height: ${height ? `${height}px` : "auto"};
           display: flex;
           align-items: center;
           justify-content: center;

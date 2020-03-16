@@ -17,7 +17,7 @@ export const withRedux = (PageComponent: NextPage) => {
 
     return (
       <Provider store={store}>
-        <PersistGate persistor={persistor} loading={<div></div>}>
+        <PersistGate persistor={persistor}>
           <PageComponent {...props} />
         </PersistGate>
       </Provider>

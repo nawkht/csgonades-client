@@ -56,7 +56,11 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
               </h2>
             </div>
             <div className="ez top-placement">
-              <EzoicPlaceHolder key="Map page | In top title" id={112} />
+              <EzoicPlaceHolder
+                key="Map page | In top title"
+                id={112}
+                height={100}
+              />
             </div>
           </div>
         </PageCentralize>
@@ -77,12 +81,20 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           </div>
           <div className="map-page-aside">
             <div className="ez placement-siderbar-top">
-              <EzoicPlaceHolder key="Map page | Sidebar Top" id={101} />
+              <EzoicPlaceHolder
+                key="Map page | Sidebar Top"
+                id={101}
+                height={600}
+              />
             </div>
 
             {!reducedAds && (
               <div className="ez placement-siderbar-bottom">
-                <EzoicPlaceHolder key="Map page | Sidebar Middle" id={111} />
+                <EzoicPlaceHolder
+                  key="Map page | Sidebar Middle"
+                  id={111}
+                  height={600}
+                />
               </div>
             )}
 
@@ -212,19 +224,11 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
         }
 
         .placement-siderbar-top {
-          min-height: 600px;
           margin-bottom: 20px;
-          display: flex;
-          align-items: flex-start;
-          justify-content: center;
         }
 
         .placement-siderbar-bottom {
-          min-height: 600px;
           margin-top: 20px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
         }
 
         @media only screen and (max-width: ${Dimensions.MEDIUM_DEVIDE}) {

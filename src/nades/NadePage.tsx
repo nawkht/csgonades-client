@@ -69,7 +69,11 @@ export const NadePage: FC = memo(() => {
         )}
 
         <div className="ez top-placement">
-          <EzoicPlaceHolder key="Nade Page | Top of page" id={120} />
+          <EzoicPlaceHolder
+            key="Nade Page | Top of page"
+            id={120}
+            height={90}
+          />
         </div>
 
         <NadeBreadcrumb nade={nade} />
@@ -83,7 +87,11 @@ export const NadePage: FC = memo(() => {
 
         <div className="nade-page">
           <aside className="ez nade-page-aside">
-            <EzoicPlaceHolder key="Nade page | Left sidebar" id={106} />
+            <EzoicPlaceHolder
+              key="Nade page | Left sidebar"
+              id={106}
+              height={600}
+            />
           </aside>
           <div className="nade-page-content">
             <ResponsiveVideo
@@ -113,7 +121,11 @@ export const NadePage: FC = memo(() => {
             </div>
 
             <div className="ez placement-under-desc">
-              <EzoicPlaceHolder key="Nade page | Under description" id={107} />
+              <EzoicPlaceHolder
+                key="Nade page | Under description"
+                id={107}
+                height={100}
+              />
             </div>
 
             <div className="similar-nades">
@@ -121,7 +133,11 @@ export const NadePage: FC = memo(() => {
             </div>
           </div>
           <aside className="ez nade-page-aside2">
-            <EzoicPlaceHolder key="Nade page | Right sidebar" id={109} />
+            <EzoicPlaceHolder
+              key="Nade page | Right sidebar"
+              id={109}
+              height={600}
+            />
           </aside>
         </div>
 
@@ -177,11 +193,6 @@ export const NadePage: FC = memo(() => {
         </div>
       </div>
       <style jsx>{`
-        .top-placement {
-          margin-top: 10px;
-          height: 60px;
-        }
-
         .nade-info-container {
           display: flex;
           margin-top: 30px;
