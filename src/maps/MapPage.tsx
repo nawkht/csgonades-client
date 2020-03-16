@@ -41,7 +41,13 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
 
   return (
     <>
-      <SEO title={capitalize(map)} canonical={`/maps/${map}`} />
+      <SEO
+        title={capitalize(map)}
+        canonical={`/maps/${map}`}
+        description={`Find the best smokes, flashbangs, molotovs and grenades for ${capitalize(
+          map
+        )} for Counter-Strike Global Offensive.`}
+      />
       <div className="map-welcome">
         <PageCentralize>
           <div className="map-welcome-wrap">
@@ -57,9 +63,9 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
             </div>
             <div className="ez top-placement">
               <EzoicPlaceHolder
-                key="Map page | In top title"
-                id={112}
-                height={100}
+                key="Map Page | Right of title"
+                id={130}
+                height={150}
               />
             </div>
           </div>
@@ -112,7 +118,6 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
         onDismiss={() => setShowLoginWarning(false)}
         message="filter"
       />
-      {/*</Layout2>*/}
       <style jsx>{`
         .map-welcome {
           background: linear-gradient(
@@ -122,6 +127,7 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           );
           margin-bottom: 40px;
           padding-bottom: 40px;
+          padding-top: 40px;
         }
 
         .map-welcome-wrap {
@@ -131,7 +137,6 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
 
         .welcome-msg {
           align-self: center;
-          margin-top: 40px;
           margin-right: 40px;
           width: 100%;
         }
@@ -208,7 +213,6 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
 
         .top-placement {
           min-width: 730px;
-          height: 105px;
         }
 
         .placement-bottom {
