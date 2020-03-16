@@ -22,8 +22,8 @@ export const NadeListGrid: FC<Props> = memo(
     adsSecondColumn,
   }) => {
     const { firstRowNades, restNades } = useMemo(() => {
-      const firstRowNades = nades.slice(0, 3);
-      const restNades = nades.slice(3, nades.length);
+      const firstRowNades = nades.slice(0, 6);
+      const restNades = nades.slice(6, nades.length);
 
       return {
         firstRowNades,
@@ -88,7 +88,6 @@ export const NadeListGrid: FC<Props> = memo(
           .nadelist-ez-row {
             margin-top: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
             margin-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
-            max-height: 150px;
           }
         `}</style>
       </>
