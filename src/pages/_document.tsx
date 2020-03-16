@@ -41,11 +41,7 @@ class MyDocument extends Document {
             />
             <meta name="msapplication-TileColor" content="#da532c" />
             <meta name="theme-color" content="#ffffff"></meta>
-            <link
-              rel="icon"
-              href="/favicon/icons/favicon.ico"
-              type="image/x-icon"
-            />
+            <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
             <link
               href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
               rel="stylesheet"
