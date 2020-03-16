@@ -49,6 +49,9 @@ export const Header: FC<Props> = memo(({}) => {
           flex: 1;
           display: flex;
           justify-content: space-around;
+          height: 60px;
+          margin-top: -10px;
+          margin-bottom: -10px;
         }
       `}</style>
     </>
