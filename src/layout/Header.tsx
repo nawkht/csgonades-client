@@ -6,6 +6,7 @@ import { Logo } from "./Misc/Logo";
 import { MapNav } from "./Navigation/MapNav";
 import { SiteNav } from "./Navigation/SiteNav";
 import { UserNav } from "./Navigation/UserNav";
+import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 
 type Props = {};
 
@@ -20,7 +21,9 @@ export const Header: FC<Props> = memo(({}) => {
             <Hamburger />
             <Logo />
             <SiteNav />
-            <div className="spacer" />
+            <div className="spacer">
+              <EzoicPlaceHolder key={"ez-header"} id={126} />
+            </div>
             <UserNav />
           </div>
         </PageCentralize>
@@ -44,6 +47,7 @@ export const Header: FC<Props> = memo(({}) => {
 
         .spacer {
           flex: 1;
+          padding-right: 10px;
         }
       `}</style>
     </>

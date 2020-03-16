@@ -71,7 +71,9 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
           </div>
           <div className="nade-list">
             {isMobileOnly && <NadeListWithAds ssrNades={ssrNades} />}
-            {!isMobileOnly && <MapPageNades ssrNades={ssrNades} />}
+            {!isMobileOnly && (
+              <MapPageNades ssrNades={ssrNades} adsSecondColumn={true} />
+            )}
           </div>
           <div className="map-page-aside">
             <div className="ez placement-siderbar-top">
