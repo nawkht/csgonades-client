@@ -91,8 +91,6 @@ export const NadeListGrid: FC<Props> = memo(
             padding-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
             display: flex;
             justify-content: space-around;
-            background: #ccc;
-            height: 20px;
           }
 
           @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
