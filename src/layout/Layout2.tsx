@@ -13,6 +13,7 @@ import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { useAdRefresher } from "./useAdRefresher";
 import { ServiceDown } from "./ServiceDown";
+import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
@@ -23,6 +24,7 @@ export const Layout2: FC = memo(({ children }) => {
   usePageView();
   useAdRefresher();
   usePreloadUser();
+  useFetchClientConfig();
 
   return (
     <>
