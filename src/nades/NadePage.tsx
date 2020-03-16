@@ -71,9 +71,9 @@ export const NadePage: FC = memo(() => {
 
         <div className="ez top-placement">
           <EzoicPlaceHolder
-            key="Nade Page | Top of page"
-            id={120}
-            height={90}
+            key="Nade Page | Over title 2"
+            id={131}
+            height={60}
           />
         </div>
 
