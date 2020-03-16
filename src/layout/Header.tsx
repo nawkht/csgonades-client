@@ -48,6 +48,8 @@ export const Header: FC<Props> = memo(({}) => {
         .spacer {
           flex: 1;
           padding-right: 10px;
+          max-height: 90px;
+          overflow: hidden;
         }
       `}</style>
     </>
