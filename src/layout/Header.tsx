@@ -22,7 +22,7 @@ export const Header: FC<Props> = memo(({}) => {
             <Logo />
             <SiteNav />
             <div className="spacer">
-              <EzoicPlaceHolder key={"ez-header"} id={126} />
+              <EzoicPlaceHolder key={"Site | In header"} id={129} />
             </div>
             <UserNav />
           </div>
@@ -47,9 +47,8 @@ export const Header: FC<Props> = memo(({}) => {
 
         .spacer {
           flex: 1;
-          padding-right: 10px;
-          max-height: 90px;
-          overflow: hidden;
+          display: flex;
+          justify-content: space-around;
         }
       `}</style>
     </>
