@@ -86,8 +86,8 @@ export const NadeListGrid: FC<Props> = memo(
           }
 
           .nadelist-ez-row {
-            padding-top: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
-            padding-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
+            margin-top: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
+            margin-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
             max-height: 150px;
           }
         `}</style>
