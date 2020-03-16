@@ -97,7 +97,11 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <div className="ad-left-video">
-          <EzoicPlaceHolder key="Nade Page | Left video 2" id={132} />
+          <EzoicPlaceHolder
+            key="Nade Page | Left video 2"
+            id={132}
+            height={600}
+          />
         </div>
 
         <div className="ad-right-video">
@@ -105,7 +109,11 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <div className="ad-left-info">
-          <EzoicPlaceHolder key="	Nade Page | Left info 2" id={134} />
+          <EzoicPlaceHolder
+            key="	Nade Page | Left info 2"
+            id={134}
+            height={600}
+          />
         </div>
         <div className="ad-right-info">
           <EzoicPlaceHolder key="Nade Page | Right info 2" id={135} />
@@ -164,11 +172,12 @@ export const NadePage: FC = memo(() => {
         .nade-page2 {
           display: grid;
           grid-template-columns: 160px 160px 1fr 1fr 1fr 1fr 160px 160px;
-          grid-template-rows: auto auto auto;
+          grid-template-rows: auto auto auto auto;
           grid-row-gap: ${Dimensions.GUTTER_SIZE};
           grid-template-areas:
             "title title title title title title title title"
             "ad ad video video video video ad2 ad2"
+            "ad ad info info info info ad2 ad2"
             "ad3 ad3 info info info info ad4 ad4";
           margin-left: 10px;
           margin-right: 10px;
@@ -212,9 +221,11 @@ export const NadePage: FC = memo(() => {
 
         @media only screen and (max-width: 1910px) {
           .nade-page2 {
+            grid-template-rows: auto auto auto auto auto;
             grid-template-areas:
               "title title title title title title title title"
               "ad video video video video video video ad2"
+              "ad . info info info info . ad2"
               "ad3 ad3 info info info info ad4 ad4";
           }
         }
