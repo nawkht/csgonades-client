@@ -79,7 +79,7 @@ export const NadeListGrid: FC<Props> = memo(
           .nadelist,
           .nadelist-first-row {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(30vmin, 1fr));
+            grid-template-columns: repeat(3, minmax(30vmin, 1fr));
             grid-column-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
             grid-row-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
             width: 100%;
@@ -90,6 +90,17 @@ export const NadeListGrid: FC<Props> = memo(
             padding-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
             display: flex;
             justify-content: space-around;
+          }
+
+          @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
+            .nadelist,
+            .nadelist-first-row {
+              display: grid;
+              grid-template-columns: repeat(2, minmax(30vmin, 1fr));
+              grid-column-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
+              grid-row-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
+              width: 100%;
+            }
           }
         `}</style>
       </>
