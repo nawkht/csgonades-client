@@ -109,11 +109,7 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <div className="ad-left-info">
-          <EzoicPlaceHolder
-            key="	Nade Page | Left info 2"
-            id={134}
-            height={600}
-          />
+          <EzoicPlaceHolder key="	Nade Page | Left info 2" id={134} />
         </div>
         <div className="ad-right-info">
           <EzoicPlaceHolder key="Nade Page | Right info 2" id={135} />
