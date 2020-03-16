@@ -62,7 +62,7 @@ export const NadeListGrid: FC<Props> = memo(
         </div>
         <div className="nadelist-ez-row">
           {adsSecondColumn && (
-            <EzoicPlaceHolder key={"Nade List | Seconds row"} id={127} />
+            <EzoicPlaceHolder key={"Nade List | 3rd row"} id={128} />
           )}
         </div>
         <div className="nadelist">
@@ -86,8 +86,8 @@ export const NadeListGrid: FC<Props> = memo(
           }
 
           .nadelist-ez-row {
-            margin-top: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
-            margin-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
+            padding-top: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
+            padding-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
           }
         `}</style>
       </>
