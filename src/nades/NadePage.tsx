@@ -59,6 +59,7 @@ export const NadePage: FC = memo(() => {
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
         thumbnail={nade.images.thumbnailUrl}
+        nadeSeo={nade}
       />
 
       <div key={`nadepage-${nade.id}`}>
