@@ -46,7 +46,7 @@ export const MapPage: FC<Props> = memo(({ map, ssrNades }) => {
         canonical={`/maps/${map}`}
         description={`Find the best smokes, flashbangs, molotovs and grenades for ${capitalize(
           map
-        )} for Counter-Strike Global Offensive.`}
+        )} for Counter-Strike Global Offensive. Browse the large collection of grenades to find your favorites.`}
       />
       <div className="map-welcome">
         <PageCentralize>
