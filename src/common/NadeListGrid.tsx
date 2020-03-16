@@ -22,8 +22,9 @@ export const NadeListGrid: FC<Props> = memo(
     adsSecondColumn,
   }) => {
     const { firstRowNades, restNades } = useMemo(() => {
-      const firstRowNades = nades.slice(0, 6);
-      const restNades = nades.slice(6, nades.length);
+      const nadesPerRow = isMobile ? 4 : 6;
+      const firstRowNades = nades.slice(0, nadesPerRow);
+      const restNades = nades.slice(nadesPerRow, nades.length);
 
       return {
         firstRowNades,
@@ -90,6 +91,8 @@ export const NadeListGrid: FC<Props> = memo(
             padding-bottom: calc((${Dimensions.GUTTER_SIZE} * 1.5) / 2);
             display: flex;
             justify-content: space-around;
+            background: #ccc;
+            height: 20px;
           }
 
           @media only screen and (max-width: ${Dimensions.TABLET_THRESHHOLD}) {
