@@ -4,6 +4,8 @@ import { NadeLight, MapCoordinates } from "../../models/Nade/Nade";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeType } from "../../models/Nade/NadeType";
 import { Tickrate } from "../../models/Nade/NadeTickrate";
+import { PersistConfig, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 type NadesForMap = { [key: string]: NadeLight[] | undefined };
 
@@ -24,7 +26,7 @@ const initialState: MapStoreState = {
   filterByTickrate: "any",
 };
 
-export const MapStoreReducer: Reducer<MapStoreState, MapStoreActions> = (
+const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
   state = initialState,
   action
 ): MapStoreState => {
@@ -92,3 +94,20 @@ export const MapStoreReducer: Reducer<MapStoreState, MapStoreActions> = (
       return state;
   }
 };
+
+const persistConfig: PersistConfig<MapStoreState> = {
+  key: "settingStore",
+  storage,
+  whitelist: [
+    "filterByFavorites",
+    "filterByType",
+    "filterByCoords",
+    "filterByTickrate",
+    "currentMap",
+  ],
+};
+
+export const MapStoreReducer = persistReducer(
+  persistConfig,
+  MapStoreReducerBase
+);

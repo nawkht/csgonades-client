@@ -13,7 +13,7 @@ export type SettingsState = {
 const initialState: SettingsState = {
   theme: "light",
   clientConfig: {
-    useHardLinks: false,
+    useHardLinks: true,
   },
 };
 

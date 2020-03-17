@@ -6,6 +6,8 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { GfycatThumbnail } from "./GfycatThumbnail";
 import { NadeItemTitle } from "./NadeItemTitle";
 import { NadeStats } from "./NadeStats";
+import { useClientConfig } from "../../store/SettingsStore/hooks/useClientConfig";
+import { PageLink } from "../PageLink";
 
 interface Props {
   nade: NadeLight;
@@ -19,8 +21,8 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
 
   return (
     <>
-      <Link href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
-        <a
+      <PageLink href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
+        <div
           className={"nadebox"}
           style={{ display: "inline-block" }}
           onClick={onItemClick}
@@ -30,8 +32,8 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
             <GfycatThumbnail nade={nade} />
           </div>
           <NadeStats nade={nade} />
-        </a>
-      </Link>
+        </div>
+      </PageLink>
       <style jsx>{`
         .nadebox {
           background: ${colors.DP01};
