@@ -14,7 +14,6 @@ import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
 import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
-import { isMobile } from "react-device-detect";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
