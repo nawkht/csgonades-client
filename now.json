@@ -1,9 +1,8 @@
 {
-  "redirects": [
+  "routes": [
     {
-      "source": "/ads.txt",
-      "destination": "https://srv.adstxtmanager.com/7208/csgonades.com",
-      "statusCode": 301
+      "src": "/ads.txt",
+      "dest": "https://srv.adstxtmanager.com/7208/csgonades.com"
     }
   ]
 }
