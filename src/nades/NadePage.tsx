@@ -77,7 +77,7 @@ export const NadePage: FC = memo(() => {
         />
       </div>
 
-      {isMobile && (
+      {false && (
         <EzoicPlaceHolder
           key={"Nade Page | Under page title mobile"}
           id={137}

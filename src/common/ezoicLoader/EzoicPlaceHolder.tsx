@@ -17,6 +17,7 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id, height, width }) => {
           display: flex;
           align-items: center;
           justify-content: center;
+          overflow: hidden;
         }
       `}</style>
     </>
