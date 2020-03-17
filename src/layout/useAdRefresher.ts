@@ -13,26 +13,34 @@ export const useAdRefresher = () => {
     }
 
     const adIds = [];
-    const elements = document.querySelectorAll(
-      'div[id^="ezoic-pub-ad-placeholder"]'
-    );
-    elements.forEach(el => {
-      if (isHidden(el)) {
-        return;
-      }
 
-      try {
-        const id = Number(el.id.split("-").pop());
-        adIds.push(id);
-      } catch (error) {
-        console.error("Failed to parse ad id");
-      }
-    });
+    const delayFindAds = setTimeout(() => {
+      const elements = document.querySelectorAll(
+        'div[id^="ezoic-pub-ad-placeholder"]'
+      );
+      elements.forEach(el => {
+        if (isHidden(el)) {
+          return;
+        }
+
+        try {
+          const id = Number(el.id.split("-").pop());
+          adIds.push(id);
+        } catch (error) {
+          console.error("Failed to parse ad id");
+        }
+      });
+      console.log("> Found ads, initing ez", adIds);
+      ezstandalone.init();
+    }, 1000);
 
     const delay = setTimeout(() => {
       ezoicInit(adIds);
-    }, 500);
-    return () => clearTimeout(delay);
+    }, 2000);
+    return () => {
+      clearTimeout(delayFindAds);
+      clearTimeout(delay);
+    };
   }, [route]);
 };
 
