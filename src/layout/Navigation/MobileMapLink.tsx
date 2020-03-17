@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { AnimationTimings, Dimensions } from "../../constants/Constants";
+import { AnimationTimings } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../../utils/Common";
@@ -22,7 +22,7 @@ export const MobileMapLink: FC<Props> = ({ mapName, currentMapPath }) => {
         </PageLink>
       </li>
       <style jsx>{`
-        li a {
+        li .nav-text {
           text-decoration: none;
           display: inline-flex;
           align-content: center;
@@ -31,15 +31,11 @@ export const MobileMapLink: FC<Props> = ({ mapName, currentMapPath }) => {
           transition: background ${AnimationTimings.fast}s;
           padding: 15px 50px 15px 10px;
           border-top: 1px solid ${colors.BORDER};
+          padding-left: 20px;
         }
 
-        li a:hover {
+        li .nav-text:hover {
           background: ${colors.NAV_HOVER};
-        }
-
-        li a .nav-text {
-          align-self: center;
-          margin-left: ${Dimensions.PADDING_MEDIUM};
         }
 
         .nav-selected {
