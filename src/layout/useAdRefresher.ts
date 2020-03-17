@@ -30,8 +30,8 @@ export const useAdRefresher = () => {
     };
 
     const handleRouteChangeEnd = () => {
-      const ids = findAdCode();
       setTimeout(() => {
+        const ids = findAdCode();
         ezInit(ids);
       }, 1000);
     };
