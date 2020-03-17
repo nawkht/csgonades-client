@@ -27,6 +27,7 @@ export function ezoicInit(codes: number[]) {
   } else if (isBrowser && hasEzoic && ezstandalone.enabled) {
     try {
       ezstandalone.cmd.push(function() {
+        ezstandalone.destroy();
         const codesToString = codes.join(",");
         ezstandalone.define(...codes);
         console.log(`ezstandalone.define(${codesToString})`);
