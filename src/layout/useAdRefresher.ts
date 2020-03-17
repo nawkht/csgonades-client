@@ -23,6 +23,7 @@ export const useAdRefresher = () => {
   useEffect(() => {
     const handleRouteChangeStart = () => {
       try {
+        console.log("ezstandalone.destroy()");
         ezstandalone.destroy();
       } catch (error) {
         console.warn(error);
@@ -54,6 +55,7 @@ function ezInit(codes: number[]) {
   const codesString = codes.join(",");
   try {
     if (!ezstandalone.enabled) {
+      ezstandalone.DEBUG = true;
       if (DEBUG) {
         console.log("ezstandalone.init()");
       }
