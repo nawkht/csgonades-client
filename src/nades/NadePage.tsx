@@ -1,7 +1,5 @@
 import { FC, lazy, memo, Suspense, useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
-import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { Dimensions } from "../constants/Constants";
 import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
@@ -14,6 +12,8 @@ import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
 import { NadeTitle } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
+import { NadeActions } from "./NadeActions";
+import { NadeVideoContainer } from "./NadeVideoContainer";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -65,45 +65,31 @@ export const NadePage: FC = memo(() => {
         </Suspense>
       )}
 
-      <div className="nade-page2">
-        <div className="title">
-          <NadeBreadcrumb nade={nade} />
-          <NadeTitle
-            title={nade.title}
-            map={nade.map}
-            type={nade.type}
-            onEditNade={() => setEditTitleVisisble(true)}
-            allowEdit={allowEditTitle}
-          />
-        </div>
+      <div className="title">
+        <NadeBreadcrumb nade={nade} />
+        <NadeTitle
+          title={nade.title}
+          map={nade.map}
+          type={nade.type}
+          onEditNade={() => setEditTitleVisisble(true)}
+          allowEdit={allowEditTitle}
+        />
+      </div>
 
-        <div className="video">
-          <div className="video-wrap">
-            <ResponsiveVideo
-              hdUrL={nade.gfycat.largeVideoUrl}
-              sdUrl={nade.gfycat.smallVideoUrl}
-              hdUrlWebm={nade.gfycat.largeVideoWebm}
-              poster={nade.images.thumbnailUrl}
-              controls={isMobile ? "mobile" : "desktop"}
-            />
-          </div>
-        </div>
+      <NadeVideoContainer nade={nade} />
+
+      <NadeActions
+        nade={nade}
+        onShowSignInWarning={() => setShowSignInWarning(true)}
+      />
+
+      <div className="nade-info">
         <div className="info">
           <NadeInfoContainer
             nade={nade}
             onEditDescription={() => setEditDescisisble(true)}
             onEditMeta={() => setEditMetaVisible(true)}
-            onShowSignInWarning={() => setShowSignInWarning(true)}
           />
-          <EzoicPlaceHolder key="	Nade Page | Under info" id={136} />
-        </div>
-
-        <div className="ad-left-video">
-          <EzoicPlaceHolder key="Nade Page | Left video 2" id={132} />
-        </div>
-
-        <div className="ad-right-video">
-          <EzoicPlaceHolder key="Nade Page | Right video 2" id={133} />
         </div>
 
         <div className="ad-left-info">
@@ -112,6 +98,10 @@ export const NadePage: FC = memo(() => {
         <div className="ad-right-info">
           <EzoicPlaceHolder key="Nade Page | Right info 2" id={135} />
         </div>
+      </div>
+
+      <div className="ad-bottom">
+        <EzoicPlaceHolder key="	Nade Page | Under info" id={136} />
       </div>
 
       <SignInWarning
@@ -163,127 +153,59 @@ export const NadePage: FC = memo(() => {
         </Suspense>
       )}
       <style jsx>{`
-        .nade-page2 {
+        .nade-info {
           display: grid;
-          grid-template-columns: 160px 160px 1fr 1fr 1fr 1fr 160px 160px;
-          grid-template-rows: auto auto auto auto;
-          grid-row-gap: ${Dimensions.GUTTER_SIZE};
-          grid-template-areas:
-            "title title title title title title title title"
-            "ad ad video video video video ad2 ad2"
-            "ad ad info info info info ad2 ad2"
-            "ad3 ad3 info info info info ad4 ad4";
-          margin-left: 30px;
-          margin-right: 30px;
+          grid-template-columns: 300px 1fr 300px;
+          grid-template-areas: "adleft info adright";
+          grid-column-gap: ${Dimensions.GUTTER_SIZE};
+          max-width: 1360px;
+          margin: 0 auto;
         }
 
         .title {
-          grid-area: title;
           margin-top: 40px;
-        }
-
-        .video {
-          grid-area: video;
-          padding-left: 30px;
-          padding-right: 30px;
         }
 
         .info {
           grid-area: info;
-          padding-left: 30px;
-          padding-right: 30px;
-        }
-
-        .ad-left-video {
-          grid-area: ad;
-        }
-
-        .ad-right-video {
-          grid-area: ad2;
+          margin-bottom: 30px;
         }
 
         .ad-left-info {
-          grid-area: ad3;
+          grid-area: adleft;
+          overflow: hidden;
         }
 
         .ad-right-info {
-          grid-area: ad4;
+          grid-area: adright;
           display: flex;
           flex-direction: column;
           align-items: flex-end;
+          overflow: hidden;
         }
 
-        .video-wrap {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-
-        @media only screen and (max-width: 1910px) {
-          .nade-page2 {
-            grid-template-rows: auto auto auto auto auto;
-            grid-template-areas:
-              "title title title title title title title title"
-              "ad video video video video video video ad2"
-              "ad . info info info info . ad2"
-              "ad3 ad3 info info info info ad4 ad4";
-          }
+        .ad-bottom {
+          margin-top: 30px;
         }
 
         @media only screen and (max-width: 1280px) {
-          .nade-page2 {
-            grid-template-rows: auto auto auto auto auto;
-            grid-template-areas:
-              "title title title title title title title title"
-              "ad video video video video video video ad2"
-              "ad info info info info info info ad2"
-              "ad3 info info info info info info ad4"
-              "ad3 info info info info info info ad4";
+          .nade-info {
+            grid-template-columns: 160px 1fr 160px;
+            grid-template-areas: "adleft info adright";
+            max-width: 1080px;
           }
         }
 
-        @media only screen and (max-width: 1024px) {
-          .nade-page2 {
-            grid-template-rows: auto auto auto auto;
-            grid-row-gap: ${Dimensions.GUTTER_SIZE};
-            grid-template-areas:
-              "title title title title title title title title"
-              "video video video video video video video video"
-              "ad info info info info info info ad2"
-              "ad info info info info info info ad2";
+        @media only screen and (max-width: 768px) {
+          .nade-info {
+            grid-template-columns: 1fr;
+            grid-template-areas: "info";
+            max-width: 90vw;
           }
 
           .ad-left-info,
           .ad-right-info {
             display: none;
-          }
-
-          .video {
-            padding: 0;
-          }
-        }
-
-        @media only screen and (max-width: 950px) {
-          .nade-page2 {
-            margin: 15px;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-            grid-template-rows: auto auto auto auto;
-            grid-row-gap: ${Dimensions.GUTTER_SIZE};
-            grid-template-areas:
-              "title title title title title title title title"
-              "video video video video video video video video"
-              "info info info info info info info info"
-              "info info info info info info info info";
-          }
-
-          .ad-left-video,
-          .ad-right-video,
-          .ad-left-info,
-          .ad-right-info {
-            display: none;
-          }
-
-          .info {
-            padding: 0;
           }
         }
       `}</style>
