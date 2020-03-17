@@ -60,6 +60,7 @@ class MyDocument extends Document {
                 var ezstandalone = ezstandalone || {};
                 ezstandalone.cmd = ezstandalone.cmd || [];
                 ezstandalone.cmd.push(function() {
+                  ezstandalone.setCollapseEmptyDiv(true)
                   ezstandalone.setIsPWA();
                 });`,
               }}

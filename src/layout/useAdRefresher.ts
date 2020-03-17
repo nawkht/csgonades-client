@@ -30,8 +30,7 @@ export const useAdRefresher = () => {
           console.error("Failed to parse ad id");
         }
       });
-      console.log("> Found ads, initing ez", adIds);
-      ezstandalone.init();
+      console.log("> Found ads", adIds);
     }, 1000);
 
     const delay = setTimeout(() => {

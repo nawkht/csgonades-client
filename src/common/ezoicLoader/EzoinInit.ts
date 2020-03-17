@@ -15,6 +15,8 @@ export function ezoicInit(codes: number[]) {
         ezstandalone.display();
         console.log("EzInit", codes);
       });
+
+      ezstandalone.init();
     } catch (error) {
       // no-op
     }
