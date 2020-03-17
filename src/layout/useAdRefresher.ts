@@ -31,7 +31,9 @@ export const useAdRefresher = () => {
 
     const handleRouteChangeEnd = () => {
       const ids = findAdCode();
-      ezInit(ids);
+      setTimeout(() => {
+        ezInit(ids);
+      }, 1000);
     };
 
     Router.events.on("routeChangeStart", handleRouteChangeStart);
