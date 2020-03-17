@@ -9,23 +9,29 @@ export function ezoicInit(codes: number[]) {
 
   if (isBrowser && hasEzoic && !ezstandalone.enabled) {
     try {
+      ezstandalone.init();
+      console.log("ezstandalone.init()");
+
+      const codesToString = codes.join(",");
       ezstandalone.cmd.push(function() {
         ezstandalone.define(...codes);
+        console.log(`ezstandalone.define(${codesToString})`);
         ezstandalone.enable();
+        console.log(`ezstandalone.enable()`);
         ezstandalone.display();
-        console.log("EzInit", codes);
+        console.log(`ezstandalone.display()`);
       });
-
-      ezstandalone.init();
     } catch (error) {
       // no-op
     }
   } else if (isBrowser && hasEzoic && ezstandalone.enabled) {
     try {
       ezstandalone.cmd.push(function() {
+        const codesToString = codes.join(",");
         ezstandalone.define(...codes);
+        console.log(`ezstandalone.define(${codesToString})`);
         ezstandalone.refresh();
-        console.log("EzRefresh", codes);
+        console.log(`ezstandalone.refresh()`);
       });
     } catch (error) {
       // no-op

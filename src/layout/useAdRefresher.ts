@@ -5,7 +5,7 @@ import { ezoicInit } from "../common/ezoicLoader/EzoinInit";
 const isBrowser = typeof window !== "undefined";
 
 export const useAdRefresher = () => {
-  const { route } = useRouter();
+  const { route, query } = useRouter();
 
   useEffect(() => {
     if (!isBrowser) {
@@ -14,33 +14,24 @@ export const useAdRefresher = () => {
 
     const adIds = [];
 
-    const delayFindAds = setTimeout(() => {
-      const elements = document.querySelectorAll(
-        'div[id^="ezoic-pub-ad-placeholder"]'
-      );
-      elements.forEach(el => {
-        if (isHidden(el)) {
-          return;
-        }
+    const elements = document.querySelectorAll(
+      'div[id^="ezoic-pub-ad-placeholder"]'
+    );
+    elements.forEach(el => {
+      if (isHidden(el)) {
+        return;
+      }
 
-        try {
-          const id = Number(el.id.split("-").pop());
-          adIds.push(id);
-        } catch (error) {
-          console.error("Failed to parse ad id");
-        }
-      });
-      console.log("> Found ads", adIds);
-    }, 1000);
+      try {
+        const id = Number(el.id.split("-").pop());
+        adIds.push(id);
+      } catch (error) {
+        console.error("Failed to parse ad id");
+      }
+    });
 
-    const delay = setTimeout(() => {
-      ezoicInit(adIds);
-    }, 2000);
-    return () => {
-      clearTimeout(delayFindAds);
-      clearTimeout(delay);
-    };
-  }, [route]);
+    ezoicInit(adIds);
+  }, [route, query]);
 };
 
 function isHidden(el: any) {
