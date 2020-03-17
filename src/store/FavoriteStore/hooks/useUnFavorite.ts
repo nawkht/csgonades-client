@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { FavoriteApi } from "../../../api/FavoriteApi";
-import { useDescrementNadeFavCount } from "../../../store2/NadePageStore/hooks/useDecrementNadeFavCount";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
 import {
   addAllFavoritesAction,
@@ -11,7 +10,6 @@ import {
 } from "../FavoriteActions";
 
 export const useUnfavorite = () => {
-  const decrementNadeFavCount = useDescrementNadeFavCount();
   const getToken = useGetOrUpdateToken();
   const dispatch = useDispatch();
 
@@ -42,9 +40,8 @@ export const useUnfavorite = () => {
 
       dispatch(addAllFavoritesAction(favorites));
       dispatch(favoriteInProgressEndAction());
-      decrementNadeFavCount();
     },
-    [dispatch, getToken, decrementNadeFavCount]
+    [dispatch, getToken]
   );
 
   return unFavorite;

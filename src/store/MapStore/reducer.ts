@@ -6,6 +6,10 @@ import { NadeType } from "../../models/Nade/NadeType";
 import { Tickrate } from "../../models/Nade/NadeTickrate";
 import { PersistConfig, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import {
+  IncrementNadeFavoriteCount,
+  DecrementNadeFavoriteCount,
+} from "./actions";
 
 type NadesForMap = { [key: string]: NadeLight[] | undefined };
 
@@ -90,10 +94,64 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
         ...state,
         filterByCoords: action.payload,
       };
+    case "MapStore/IncrementNadeFavoriteCount":
+      return handleIncrementNadeFavCount(state, action, "inc");
+    case "MapStore/DecrementNadeFavoriteCount":
+      return handleIncrementNadeFavCount(state, action, "dec");
     default:
       return state;
   }
 };
+
+function handleIncrementNadeFavCount(
+  state: MapStoreState,
+  action: IncrementNadeFavoriteCount | DecrementNadeFavoriteCount,
+  incOrdDec: "inc" | "dec"
+) {
+  const currentMap = state.currentMap;
+
+  if (!currentMap) {
+    return state;
+  }
+
+  const currentMapNades = state.nadeForMap[currentMap];
+  const foundNade = currentMapNades
+    ? currentMapNades.find(n => n.id === action.nadeId)
+    : null;
+
+  console.log({
+    foundNade,
+  });
+
+  if (!foundNade) {
+    return state;
+  }
+
+  console.log("Old favcount", foundNade.favoriteCount);
+
+  const modifiedNade = { ...foundNade };
+  if (incOrdDec === "inc") {
+    console.log("Inc", incOrdDec);
+    modifiedNade.favoriteCount += 1;
+  } else {
+    console.log("Dec", incOrdDec);
+    modifiedNade.favoriteCount -= 1;
+  }
+
+  console.log("New favcount", modifiedNade.favoriteCount);
+
+  const otherNades = currentMapNades.filter(n => n.id !== action.nadeId);
+
+  const newState = {
+    ...state,
+    nadeForMap: {
+      ...state.nadeForMap,
+      [currentMap]: [...otherNades, modifiedNade],
+    },
+  };
+
+  return newState;
+}
 
 const persistConfig: PersistConfig<MapStoreState> = {
   key: "settingStore",

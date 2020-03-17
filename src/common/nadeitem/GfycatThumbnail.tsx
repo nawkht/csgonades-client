@@ -4,6 +4,7 @@ import { NadeLight } from "../../models/Nade/Nade";
 import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
 import { SeekBar } from "../SeekBar";
 import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
+import { NadeItemFavBtn } from "./NadeItemFavBtn";
 
 type Props = {
   nade: NadeLight;
@@ -79,6 +80,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
             </video>
             <SeekBar progress={progress} />
             <GfycatThumbnailControls />
+            <NadeItemFavBtn nade={nade} />
           </div>
         )}
       </div>

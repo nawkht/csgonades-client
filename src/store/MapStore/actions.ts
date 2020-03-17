@@ -41,6 +41,16 @@ type FilterByTickrate = {
   tick: Tickrate;
 };
 
+export type IncrementNadeFavoriteCount = {
+  type: "MapStore/IncrementNadeFavoriteCount";
+  nadeId: string;
+};
+
+export type DecrementNadeFavoriteCount = {
+  type: "MapStore/DecrementNadeFavoriteCount";
+  nadeId: string;
+};
+
 export type MapStoreActions =
   | SetCurrentMap
   | ReplaceNadesForMap
@@ -49,4 +59,6 @@ export type MapStoreActions =
   | FilterByType
   | FilterToggleFavorites
   | FilterReset
-  | FilterByTickrate;
+  | FilterByTickrate
+  | IncrementNadeFavoriteCount
+  | DecrementNadeFavoriteCount;
