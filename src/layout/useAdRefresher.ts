@@ -3,7 +3,7 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    const delayInit = setTimeout(tryInit, 200);
+    const delayInit = setTimeout(tryInit, 500);
 
     return () => {
       clearTimeout(delayInit);
@@ -12,7 +12,9 @@ export const useAdRefresher = () => {
 
   useEffect(() => {
     const rounteChangeHandler = () => {
-      ezDisplayAds();
+      setTimeout(() => {
+        ezDisplayAds();
+      }, 500);
     };
 
     Router.events.on("routeChangeComplete", rounteChangeHandler);
@@ -62,6 +64,10 @@ function tryInit() {
 
 function ezDisplayAds() {
   try {
+    if (!ezstandalone.initialized) {
+      tryInit();
+    }
+
     const codes = findAdCode();
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function() {
