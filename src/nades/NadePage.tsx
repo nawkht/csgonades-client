@@ -97,6 +97,10 @@ export const NadePage: FC = memo(() => {
             onEditDescription={() => setEditDescisisble(true)}
             onEditMeta={() => setEditMetaVisible(true)}
           />
+
+          <div className="ad-bottom">
+            <EzoicPlaceHolder key="	Nade Page | Under info" id={136} />
+          </div>
         </div>
 
         <div className="ad-left-info">
@@ -105,10 +109,6 @@ export const NadePage: FC = memo(() => {
         <div className="ad-right-info">
           <EzoicPlaceHolder key="Nade Page | Right info 2" id={135} />
         </div>
-      </div>
-
-      <div className="ad-bottom">
-        <EzoicPlaceHolder key="	Nade Page | Under info" id={136} />
       </div>
 
       <SignInWarning
