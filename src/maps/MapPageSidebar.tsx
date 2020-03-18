@@ -11,12 +11,9 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
   const numNades = nades.length ? nades.length : numSsr;
 
   const [firstSideBarAd, secondSideBarAd, thirdSideBarAd] = useMemo(() => {
-    const sideBarAds = [true, false, false];
+    const sideBarAds = [true, false];
     if (numNades > 24) {
       sideBarAds[1] = true;
-    }
-    if (numNades > 48) {
-      sideBarAds[2] = true;
     }
     return sideBarAds;
   }, [numNades]);
@@ -41,7 +38,7 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
           />
         </div>
       </div>
-      <div className="sjakt">
+      <div className="sjakt last">
         <div className={secondSideBarAd ? "ez-160 sticky" : "ez-160 hidden"}>
           <EzoicPlaceHolder
             key={"Sidebar Mid 160x600"}
@@ -61,33 +58,13 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
         </div>
       </div>
 
-      <div className={thirdSideBarAd ? "sjakt" : "hidden"}>
-        <div className={thirdSideBarAd ? "ez-160 sticky" : "ez-160 hidden"}>
-          <EzoicPlaceHolder
-            key="Sidebar Bottom 160x600"
-            width={160}
-            height={600}
-            id={143}
-          />
-        </div>
-
-        <div className={thirdSideBarAd ? "ez-300 sticky" : "ez-300 hidden"}>
-          <EzoicPlaceHolder
-            key="Sidebar Bottom 300x1050"
-            width={300}
-            height={1050}
-            id={147}
-          />
-        </div>
-      </div>
-
       <style jsx>{`
         .sjakt {
           flex: 1;
-          padding-bottom: 50px;
+          padding-bottom: 100px;
         }
 
-        .sjakt:last-child {
+        .last {
           padding-bottom: 0;
         }
 
