@@ -3,7 +3,7 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    const delayInit = setTimeout(tryInit, 500);
+    const delayInit = setTimeout(tryInit, 1500);
 
     return () => {
       clearTimeout(delayInit);
@@ -14,7 +14,7 @@ export const useAdRefresher = () => {
     const rounteChangeHandler = () => {
       setTimeout(() => {
         ezDisplayAds();
-      }, 500);
+      }, 1000);
     };
 
     Router.events.on("routeChangeComplete", rounteChangeHandler);
