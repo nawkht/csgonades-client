@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Router from "next/router";
 
-const DEBUG = true;
-
 export const useAdRefresher = () => {
   const [loaded, setLoaded] = useState(false);
 
@@ -23,7 +21,6 @@ export const useAdRefresher = () => {
   useEffect(() => {
     const handleRouteChangeStart = () => {
       try {
-        console.log("ezstandalone.destroy()");
         ezstandalone.destroy();
       } catch (error) {
         console.warn(error);
@@ -52,34 +49,14 @@ function isHidden(el: any) {
 }
 
 function ezInit(codes: number[]) {
-  const codesString = codes.join(",");
   try {
     if (!ezstandalone.enabled) {
-      ezstandalone.DEBUG = true;
-      if (DEBUG) {
-        console.log("ezstandalone.init()");
-      }
       ezstandalone.init();
-      if (DEBUG) {
-        console.log(`ezstandalone.define(${codesString})`);
-      }
       ezstandalone.define(...codes);
-      if (DEBUG) {
-        console.log(`ezstandalone.enable()`);
-      }
       ezstandalone.enable();
-      if (DEBUG) {
-        console.log(`ezstandalone.display()`);
-      }
       ezstandalone.display();
     } else {
-      if (DEBUG) {
-        console.log(`ezstandalone.define(${codesString})`);
-      }
       ezstandalone.define(...codes);
-      if (DEBUG) {
-        console.log(`ezstandalone.refresh()`);
-      }
       ezstandalone.refresh();
     }
   } catch (error) {}

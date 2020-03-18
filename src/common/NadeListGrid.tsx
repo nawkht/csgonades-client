@@ -80,7 +80,7 @@ export const NadeListGrid: FC<Props> = memo(
           .nadelist,
           .nadelist-first-row {
             display: grid;
-            grid-template-columns: repeat(3, minmax(30vmin, 1fr));
+            grid-template-columns: repeat(3, minmax(100px, 1fr));
             grid-column-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
             grid-row-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
             width: 100%;

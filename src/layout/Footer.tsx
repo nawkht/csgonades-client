@@ -14,18 +14,25 @@ export const Footer: FC = memo(() => {
       <div className="footer">
         <PageCentralize>
           <div className="footer-content">
-            <div className="copyright">
-              © {year} CSGO Nades <span className="version">{APP_VERSION}</span>
+            <div className="left-content">
+              <div className="copyright">
+                © {year} CSGO Nades{" "}
+                <span className="version">{APP_VERSION}</span>
+              </div>
+              <div className="footer-links">
+                <Link
+                  href="/privacypolicy"
+                  as="/privacypolicy"
+                  prefetch={false}
+                >
+                  <a>Privacy Policy</a>
+                </Link>
+                <Link href="/contact" as="/contact" prefetch={false}>
+                  <a>Contact</a>
+                </Link>
+              </div>
             </div>
-            <div className="footer-links">
-              <Link href="/privacypolicy" as="/privacypolicy" prefetch={false}>
-                <a>Privacy Policy</a>
-              </Link>{" "}
-              |{" "}
-              <Link href="/contact" as="/contact" prefetch={false}>
-                <a>Contact</a>
-              </Link>
-            </div>
+
             <div className="powered-by">
               Powered by{" "}
               <a href="https://steamcommunity.com/" rel="nofollow">
@@ -36,10 +43,19 @@ export const Footer: FC = memo(() => {
         </PageCentralize>
       </div>
       <style jsx>{`
+        a {
+          color: white;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
         .footer {
           background: ${colors.footerBg};
-          padding-top: 20px;
-          padding-bottom: 20px;
+          padding-top: 50px;
+          padding-bottom: 50px;
+          margin-top: 150px;
         }
 
         .footer-content {
@@ -47,34 +63,22 @@ export const Footer: FC = memo(() => {
           color: ${colors.footerColor};
         }
 
-        .footer .copyright {
-          flex: 1;
+        .copyright {
+          margin-bottom: 30px;
         }
 
-        .footer .footer-links {
-          flex: 2;
-          text-align: center;
+        .footer-links {
+          display: flex;
+          flex-direction: column;
         }
 
-        .footer .footer-links a {
-          color: ${colors.footerColor};
-        }
-
-        .footer .footer-links a:hover {
-          text-decoration: underline;
+        .footer-links a {
+          margin-bottom: 10px;
         }
 
         .powered-by {
           flex: 1;
           text-align: right;
-        }
-
-        .powered-by a {
-          color: ${colors.footerColor};
-        }
-
-        .powered-by a:hover {
-          text-decoration: underline;
         }
 
         .version {

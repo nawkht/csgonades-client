@@ -11,7 +11,7 @@ type Props = {
 export const NadeListWithAds: FC<Props> = memo(({ ssrNades }) => {
   const nades = useFilteredNades();
 
-  const renderRandes = nades || ssrNades;
+  const renderRandes = nades.length ? nades : ssrNades;
 
   function renderList(nades: NadeLight[]) {
     return nades.map(nade => (
@@ -40,32 +40,23 @@ export const NadeListWithAds: FC<Props> = memo(({ ssrNades }) => {
   return (
     <>
       <div className="nade-list-mobile">
-        <div className="ez">
-          <EzoicPlaceHolder key="Nade List Mobile | Top of page" id={118} />
-        </div>
         {items1 && renderList(items1)}
-        <div className="ez in-content">
+        <div className="in-content">
           <EzoicPlaceHolder key="Nade List Mobile | List 5" id={114} />
         </div>
         {items2 && renderList(items2)}
-        <div className="ez in-content">
+        <div className="in-content">
           <EzoicPlaceHolder key="Nade List Mobile | List 6" id={115} />
         </div>
         {items3 && renderList(items3)}
-        <div className="ez in-content">
+        <div className="in-content">
           <EzoicPlaceHolder key="Nade List Mobile | List 7" id={116} />
         </div>
         {rest && renderList(rest)}
       </div>
       <style jsx>{`
-        .nade-list-mobile {
-        }
-
-        .ez {
-          width: 100%;
-        }
-
         .in-content {
+          width: 100%;
         }
       `}</style>
     </>

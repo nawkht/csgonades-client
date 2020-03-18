@@ -57,7 +57,6 @@ class MyDocument extends Document {
                 ezstandalone.cmd = ezstandalone.cmd || [];
                 ezstandalone.cmd.push(function() {
                   ezstandalone.setIsPWA();
-                  console.log("ezstandalone.setIsPWA()");
                 });`,
               }}
             />

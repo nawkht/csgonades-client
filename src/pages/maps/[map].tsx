@@ -1,9 +1,9 @@
 import { GetServerSideProps, NextPage } from "next";
 import { NadeApi } from "../../api/NadeApi";
-import { MapPage } from "../../maps/MapPage";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useFilterServerSideNades } from "../../store/MapStore/hooks/useFilteredNades";
+import { MapPage2 } from "../../maps/MapPage2";
 
 interface Props {
   map: CsgoMap;
@@ -13,7 +13,7 @@ interface Props {
 const Map: NextPage<Props> = ({ map, nades }) => {
   const filteredNades = useFilterServerSideNades(nades);
 
-  return <MapPage map={map} ssrNades={filteredNades} />;
+  return <MapPage2 map={map} ssrNades={filteredNades} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
