@@ -193,6 +193,8 @@ export const NadePage: FC = memo(() => {
 
         .ad-bottom {
           margin-top: 30px;
+          display: flex;
+          justify-content: space-around;
         }
 
         @media only screen and (max-width: 1280px) {
