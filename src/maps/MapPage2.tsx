@@ -2,9 +2,7 @@ import { FC, useState } from "react";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { NadeLight } from "../models/Nade/Nade";
 import { NadeFilter } from "./nadefilter/NadeFilter";
-import { NadeListWithAds } from "../common/NadeListMobile/NadeListWithAds";
 import { MapPageNades } from "./MapPageNades";
-import { isMobileOnly } from "react-device-detect";
 import { MapPageJumbo } from "./MapPageJumbo";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { MapPageSideBar } from "./MapPageSidebar";
@@ -38,10 +36,7 @@ export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
             </div>
           </div>
           <div className="map-nade-list">
-            {isMobileOnly && <NadeListWithAds ssrNades={ssrNades} />}
-            {!isMobileOnly && (
-              <MapPageNades ssrNades={ssrNades} adsSecondColumn={true} />
-            )}
+            <MapPageNades ssrNades={ssrNades} />
           </div>
           <div className="map-sidebar">
             <MapPageSideBar numSsr={ssrNades.length} />

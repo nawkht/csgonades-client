@@ -11,13 +11,15 @@ export const FrontPageRecentPosts: FC<Props> = ({}) => {
   return (
     <>
       <div className="recent-posts">
-        <h3>Recent posts</h3>
+        <h2>Recent posts</h2>
         <BlogList posts={[blogTickrateAndJumpthrow]} />
       </div>
       <style jsx>{`
-        h3 {
+        h2 {
           text-align: center;
           font-weight: 300;
+          font-size: 24px;
+          margin-bottom: 40px;
           color: ${colors.TEXT};
         }
       `}</style>
