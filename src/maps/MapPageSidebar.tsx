@@ -10,7 +10,7 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
   const nades = useFilteredNades();
   const numNades = nades.length ? nades.length : numSsr;
 
-  const [firstSideBarAd, secondSideBarAd, thirdSideBarAd] = useMemo(() => {
+  const [firstSideBarAd, secondSideBarAd] = useMemo(() => {
     const sideBarAds = [true, false];
     if (numNades > 24) {
       sideBarAds[1] = true;
