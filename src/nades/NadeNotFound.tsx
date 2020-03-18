@@ -13,11 +13,11 @@ export const NadeNotFound: FC = () => {
       </div>
       <style jsx>{`
         .not-found {
-          min-height: 82vh;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: space-around;
+          margin-top: 40px;
         }
       `}</style>
     </>
