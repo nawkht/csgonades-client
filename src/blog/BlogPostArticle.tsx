@@ -33,7 +33,11 @@ export const BlogPostArticle: FC<Props> = ({ children, data }) => {
         </article>
         <aside className="sidebar">
           <div className="ez mid-sidebar">
-            <EzoicPlaceHolder key="Blog | Big sidebar center" id={124} />
+            <EzoicPlaceHolder
+              key="Blog | Big sidebar center"
+              id={124}
+              height={600}
+            />
           </div>
         </aside>
       </div>
@@ -43,17 +47,13 @@ export const BlogPostArticle: FC<Props> = ({ children, data }) => {
         }
 
         .sidebar {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
+          margin-top: 100px;
+          max-height: 250vh;
         }
 
         .ez {
-        }
-
-        .mid-sidebar {
-          min-height: 600px;
-          width: 100%;
+          position: sticky;
+          top: 15vh;
         }
 
         .article-wrap {

@@ -33,9 +33,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           servers. See the video below.
         </p>
 
-        <div className="ez ez-wide">
-          <EzoicPlaceHolder key="Blog | Under intro" id={121} />
-        </div>
+        <EzoicPlaceHolder key="Blog | Under intro" id={121} />
 
         <h2>What is tickrate?</h2>
         <p>
@@ -55,6 +53,8 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           depending on what you play the most on, you know what throws will work
           for you and which won&apos;t.
         </p>
+
+        <EzoicPlaceHolder key="Blog | Under second paragraph" id={154} />
 
         <h2>What is the jump throw bind?</h2>
         <p>
@@ -113,6 +113,8 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           ></iframe>
         </div>
 
+        <EzoicPlaceHolder key="Blog | In content long" id={155} />
+
         <h2>Bonus: Variations of the jump throw bind</h2>
         <p>
           There are variations of the jump throw bind. More specifically there
@@ -143,9 +145,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           normal left-click throw as well.
         </p>
 
-        <div className="ez ez-box">
-          <EzoicPlaceHolder key="Blog | In content mid" id={122} />
-        </div>
+        <EzoicPlaceHolder key="Blog | In content mid" id={122} />
 
         <h3>Extra range</h3>
         <BlogCodeSnippet
@@ -161,29 +161,8 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
       </BlogPostArticle>
 
-      <div className="ez ez-huge">
-        <EzoicPlaceHolder key="Blog | Huge bottom" id={123} />
-      </div>
-      <style jsx>{`
-        .ez {
-        }
-
-        .ez-wide {
-          margin-top: 30px;
-        }
-
-        .ez-box {
-          margin-bottom: 30px;
-        }
-
-        .ez-huge {
-          margin-top: 100px;
-          margin-bottom: 100px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      `}</style>
+      <EzoicPlaceHolder key="Blog | Huge bottom" id={123} />
+      <style jsx>{``}</style>
     </>
   );
 };
