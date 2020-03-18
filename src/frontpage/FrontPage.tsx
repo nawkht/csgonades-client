@@ -61,6 +61,11 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
           .recent {
             flex-direction: column;
           }
+
+          .recent-nade-wrap {
+            margin-left: -20px;
+            margin-right: -20px;
+          }
         }
       `}</style>
     </>

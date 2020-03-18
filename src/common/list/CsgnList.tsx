@@ -118,6 +118,10 @@ function ListBase<T>(props: Props<T>) {
             grid-template-columns: repeat(1, minmax(100px, 1fr));
           }
 
+          .list-item {
+            margin: 15px;
+          }
+
           .ad-1-container,
           .ad-2-container,
           .ad-3-container,
