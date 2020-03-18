@@ -1,65 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Router from "next/router";
 
 export const useAdRefresher = () => {
-  const [loaded, setLoaded] = useState(false);
-
   useEffect(() => {
-    if (loaded) {
-      return;
-    }
-    const delay = setTimeout(() => {
-      const ids = findAdCode();
-      ezInit(ids);
-      setLoaded(true);
-    }, 1000);
+    const delayInit = setTimeout(tryInit, 500);
+
     return () => {
-      clearTimeout(delay);
+      clearTimeout(delayInit);
     };
   });
 
   useEffect(() => {
-    const handleRouteChangeStart = () => {
-      try {
-        ezstandalone.destroy();
-      } catch (error) {
-        console.warn(error);
-      }
-    };
-
-    const handleRouteChangeEnd = () => {
+    const rounteChangeHandler = () => {
       setTimeout(() => {
-        const ids = findAdCode();
-        ezInit(ids);
-      }, 1000);
+        ezDisplayAds();
+      }, 500);
     };
 
-    Router.events.on("routeChangeStart", handleRouteChangeStart);
-    Router.events.on("routeChangeComplete", handleRouteChangeEnd);
+    Router.events.on("routeChangeComplete", rounteChangeHandler);
 
     return () => {
-      Router.events.off("routeChangeStart", handleRouteChangeStart);
-      Router.events.off("routeChangeComplete", handleRouteChangeEnd);
+      Router.events.off("routeChangeComplete", rounteChangeHandler);
     };
   }, []);
 };
 
 function isHidden(el: any) {
   return el.offsetParent === null;
-}
-
-function ezInit(codes: number[]) {
-  try {
-    if (!ezstandalone.enabled) {
-      ezstandalone.init();
-      ezstandalone.define(...codes);
-      ezstandalone.enable();
-      ezstandalone.display();
-    } else {
-      ezstandalone.define(...codes);
-      ezstandalone.refresh();
-    }
-  } catch (error) {}
 }
 
 function findAdCode() {
@@ -81,4 +48,38 @@ function findAdCode() {
     }
   });
   return adIds;
+}
+
+function tryInit() {
+  try {
+    if (!ezstandalone.initialized) {
+      ezstandalone.init();
+      console.log("> ezstandalone init");
+      ezDisplayAds();
+    }
+  } catch (error) {
+    console.warn("Failed to initialize eezstandalone", error);
+  }
+}
+
+function ezDisplayAds() {
+  try {
+    const codes = findAdCode();
+    if (!ezstandalone.enabled) {
+      ezstandalone.cmd.push(function() {
+        ezstandalone.define(...codes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> ezstandalone enable display", codes);
+      });
+    } else {
+      ezstandalone.cmd.push(function() {
+        ezstandalone.define(...codes);
+        ezstandalone.refresh();
+        console.log("> ezstandalone refresh", codes);
+      });
+    }
+  } catch (error) {
+    console.warn("Failed to display ads", error);
+  }
 }
