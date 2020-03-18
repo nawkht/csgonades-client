@@ -33,7 +33,7 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
           <EzoicPlaceHolder
             key="Sidebar Top 300x1050"
             width={300}
-            height={1050}
+            height={600}
             id={144}
           />
         </div>
@@ -52,7 +52,7 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
           <EzoicPlaceHolder
             key={"Sidebar Mid 300x1050"}
             width={300}
-            height={1050}
+            height={600}
             id={145}
           />
         </div>
