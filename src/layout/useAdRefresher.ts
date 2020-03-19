@@ -3,12 +3,12 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    ezDisplayAds();
+    setTimeout(() => ezDisplayAds(), 1000);
   }, []);
 
   useEffect(() => {
     const rounteChangeHandler = () => {
-      ezDisplayAds();
+      setTimeout(() => ezDisplayAds(), 1000);
     };
 
     Router.events.on("routeChangeComplete", rounteChangeHandler);
