@@ -8,6 +8,7 @@ import * as Sentry from "@sentry/node";
 
 Sentry.init({
   dsn: "https://da6e22eac1a8487484fb116b8640e3f8@sentry.io/1871885",
+  enabled: false,
 });
 
 const App = ({ Component, pageProps, err }: any) => {

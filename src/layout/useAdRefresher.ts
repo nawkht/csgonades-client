@@ -46,11 +46,6 @@ function findAdCode() {
 
 function ezDisplayAds() {
   try {
-    if (!ezstandalone.initialized && !!ezstandalone.init) {
-      ezstandalone.init();
-      console.log("init");
-    }
-
     const codes = findAdCode();
 
     if (!ezstandalone.enabled || !ezstandalone.hasDisplayedAds) {
@@ -68,6 +63,6 @@ function ezDisplayAds() {
       });
     }
   } catch (error) {
-    console.warn("Failed to display ads", error);
+    return;
   }
 }
