@@ -59,8 +59,8 @@ function ezDisplayAds() {
 
     if (!ezstandalone.enabled || !ezstandalone.hasDisplayedAds) {
       ezstandalone.cmd.push(function() {
-        ezstandalone.enable();
         ezstandalone.define(...codes);
+        ezstandalone.enable();
         ezstandalone.display();
         console.log("> Ez enable, display:", codes.join(","));
       });
