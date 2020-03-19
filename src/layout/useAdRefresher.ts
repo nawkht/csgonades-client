@@ -3,18 +3,16 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    const delayInit = setTimeout(tryInit, 500);
+    const delayInit = setTimeout(ezDisplayAds, 500);
 
     return () => {
       clearTimeout(delayInit);
     };
-  });
+  }, []);
 
   useEffect(() => {
     const rounteChangeHandler = () => {
-      setTimeout(() => {
-        ezDisplayAds();
-      }, 500);
+      setTimeout(ezDisplayAds, 500);
     };
 
     Router.events.on("routeChangeComplete", rounteChangeHandler);
@@ -50,38 +48,29 @@ function findAdCode() {
   return adIds;
 }
 
-function tryInit() {
-  try {
-    if (!ezstandalone.initialized) {
-      ezstandalone.init();
-      console.log("> ezstandalone init");
-      ezDisplayAds();
-    }
-  } catch (error) {
-    console.warn("Failed to initialize eezstandalone", error);
-  }
-}
-
 function ezDisplayAds() {
   try {
     if (!ezstandalone.initialized) {
-      tryInit();
+      ezstandalone.init();
+      console.log("> Ez init");
     }
 
     const codes = findAdCode();
+
     if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(function() {
-        ezstandalone.define(...codes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> ezstandalone enable display", codes);
-      });
+      ezstandalone.enable();
+      console.log("> Ez enable");
+    }
+
+    ezstandalone.define(...codes);
+    console.log("> Ez define", codes.join(","));
+
+    if (ezstandalone.hasDisplayedAds) {
+      ezstandalone.refresh();
+      console.log("> Ez refresh");
     } else {
-      ezstandalone.cmd.push(function() {
-        ezstandalone.define(...codes);
-        ezstandalone.refresh();
-        console.log("> ezstandalone refresh", codes);
-      });
+      ezstandalone.display();
+      console.log("> Ez display");
     }
   } catch (error) {
     console.warn("Failed to display ads", error);
