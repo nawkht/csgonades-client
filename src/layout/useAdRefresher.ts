@@ -11,8 +11,13 @@ export const useAdRefresher = () => {
   }, []);
 
   useEffect(() => {
+    let routeChangeAdRefresh: NodeJS.Timeout;
+
     const rounteChangeHandler = () => {
-      setTimeout(ezDisplayAds, 500);
+      if (routeChangeAdRefresh) {
+        clearTimeout(routeChangeAdRefresh);
+      }
+      routeChangeAdRefresh = setTimeout(ezDisplayAds, 750);
     };
 
     Router.events.on("routeChangeComplete", rounteChangeHandler);
