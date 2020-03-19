@@ -57,7 +57,7 @@ function ezDisplayAds() {
 
     const codes = findAdCode();
 
-    if (!ezstandalone.enabled) {
+    if (!ezstandalone.enabled || !ezstandalone.hasDisplayedAds) {
       ezstandalone.cmd.push(function() {
         ezstandalone.enable();
         ezstandalone.define(...codes);
