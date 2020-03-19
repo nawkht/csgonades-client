@@ -12,6 +12,8 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { useAdRefresher } from "./useAdRefresher";
+import { useAdBlockMetrics } from "./useAdBlockMetrics";
+
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 
@@ -25,6 +27,7 @@ export const Layout2: FC = memo(({ children }) => {
   useAdRefresher();
   usePreloadUser();
   useFetchClientConfig();
+  useAdBlockMetrics();
 
   return (
     <>
