@@ -53,13 +53,13 @@ function ezDisplayAds() {
         ezstandalone.define(...codes);
         ezstandalone.enable();
         ezstandalone.display();
-        console.log("display");
+        console.log("display", codes);
       });
     } else {
       ezstandalone.cmd.push(function() {
         ezstandalone.define(...codes);
         ezstandalone.refresh();
-        console.log("refresh");
+        console.log("refresh", codes);
       });
     }
   } catch (error) {
