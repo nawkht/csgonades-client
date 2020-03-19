@@ -58,19 +58,18 @@ function ezDisplayAds() {
     const codes = findAdCode();
 
     if (!ezstandalone.enabled) {
-      ezstandalone.enable();
-      console.log("> Ez enable");
-    }
-
-    ezstandalone.define(...codes);
-    console.log("> Ez define", codes.join(","));
-
-    if (ezstandalone.hasDisplayedAds) {
-      ezstandalone.refresh();
-      console.log("> Ez refresh");
+      ezstandalone.cmd.push(function() {
+        ezstandalone.enable();
+        ezstandalone.define(...codes);
+        ezstandalone.display();
+        console.log("> Ez enable, display:", codes.join(","));
+      });
     } else {
-      ezstandalone.display();
-      console.log("> Ez display");
+      ezstandalone.cmd.push(function() {
+        ezstandalone.define(...codes);
+        ezstandalone.refresh();
+        console.log("> Ez refresh:", codes.join(","));
+      });
     }
   } catch (error) {
     console.warn("Failed to display ads", error);
