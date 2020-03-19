@@ -152,6 +152,7 @@ export const ImageUploader = ({ onImageCropped, loading }: Props) => {
         <ReactCrop
           src={imageSrc}
           crop={crop}
+          maxWidth={1000}
           onImageLoaded={onImageLoaded}
           onComplete={onCropComplete}
           onChange={onCropChange}
@@ -159,7 +160,7 @@ export const ImageUploader = ({ onImageCropped, loading }: Props) => {
       </div>
       <style jsx>{`
         .image-uploader {
-          max-width: 70vw;
+          max-width: 1200px;
           display: block;
         }
 
