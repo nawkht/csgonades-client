@@ -76,13 +76,6 @@ export const NadePage: FC = memo(() => {
         />
       </div>
 
-      {false && (
-        <EzoicPlaceHolder
-          key={"Nade Page | Under page title mobile"}
-          id={137}
-        />
-      )}
-
       <NadeVideoContainer nade={nade} />
 
       <NadeActions
@@ -165,7 +158,7 @@ export const NadePage: FC = memo(() => {
           grid-template-columns: 300px 1fr 300px;
           grid-template-areas: "adleft info adright";
           grid-column-gap: ${Dimensions.GUTTER_SIZE};
-          max-width: 1360px;
+          max-width: calc((16 / 9) * 600px + 160px * 2 + 60px);
           margin: 0 auto;
         }
 

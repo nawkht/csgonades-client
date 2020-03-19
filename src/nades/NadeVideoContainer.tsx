@@ -14,13 +14,15 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
     <>
       <div className="video-grid">
         <div className="video">
-          <ResponsiveVideo
-            hdUrL={nade.gfycat.largeVideoUrl}
-            sdUrl={nade.gfycat.smallVideoUrl}
-            hdUrlWebm={nade.gfycat.largeVideoWebm}
-            poster={nade.images.thumbnailUrl}
-            controls={isMobile ? "mobile" : "desktop"}
-          />
+          <div className="video-wrap">
+            <ResponsiveVideo
+              hdUrL={nade.gfycat.largeVideoUrl}
+              sdUrl={nade.gfycat.smallVideoUrl}
+              hdUrlWebm={nade.gfycat.largeVideoWebm}
+              poster={nade.images.thumbnailUrl}
+              controls={isMobile ? "mobile" : "desktop"}
+            />
+          </div>
         </div>
         <div className="ad-left-video">
           <EzoicPlaceHolder key="Nade Page | Left video 2" id={132} />
@@ -37,7 +39,7 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
           grid-template-rows: auto;
           grid-template-areas: "ad video ad2";
           grid-column-gap: ${Dimensions.GUTTER_SIZE};
-          max-width: 1580px;
+          max-width: calc((16 / 9) * 600px + 160px * 2 + 60px);
           margin: 0 auto;
           padding-top: 30px;
         }
@@ -52,6 +54,11 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
 
         .video {
           grid-area: video;
+        }
+
+        .video-wrap {
+          max-width: calc((16 / 9) * 600px);
+          margin: 0 auto;
         }
 
         @media only screen and (max-width: 1400px) {
