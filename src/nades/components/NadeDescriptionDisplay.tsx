@@ -2,12 +2,14 @@ import { FC } from "react";
 import ReactMarkdown from "react-markdown";
 // @ts-ignore
 import breaks from "remark-breaks";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   value?: string;
 };
 
 export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
+  const { colors } = useTheme();
   if (!value || value.length === 0) {
     return (
       <>
@@ -16,6 +18,7 @@ export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
         </div>
         <style jsx>{`
           .no-desc {
+            color: ${colors.TEXT};
             min-height: 250px;
           }
         `}</style>
@@ -36,7 +39,8 @@ export const NadeDescriptionDisplay: FC<Props> = ({ value }) => {
       <style jsx>{`
         .desc-wrap {
           min-height: 200px;
-          padding: 20px 40px;
+          padding: 40px 40px;
+          color: ${colors.TEXT};
         }
       `}</style>
     </>
