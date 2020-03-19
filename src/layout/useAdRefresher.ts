@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Router from "next/router";
+import * as Sentry from "@sentry/browser";
 
 export const useAdRefresher = () => {
   useEffect(() => {
@@ -55,27 +56,39 @@ function findAdCode() {
 
 function ezDisplayAds() {
   try {
-    if (!ezstandalone.initialized) {
+    if (!ezstandalone.initialized && !!ezstandalone.init) {
       ezstandalone.init();
-      console.log("> Ez init");
     }
 
     const codes = findAdCode();
+
+    if (!codes.length) {
+      Sentry.captureException({
+        error: "No ad codes found, unexpected",
+      });
+    }
 
     if (!ezstandalone.enabled || !ezstandalone.hasDisplayedAds) {
       ezstandalone.cmd.push(function() {
         ezstandalone.define(...codes);
         ezstandalone.enable();
         ezstandalone.display();
-        console.log("> Ez enable, display:", codes.join(","));
       });
     } else {
       ezstandalone.cmd.push(function() {
         ezstandalone.define(...codes);
         ezstandalone.refresh();
-        console.log("> Ez refresh:", codes.join(","));
       });
     }
+
+    setTimeout(() => {
+      if (!!ezstandalone.init && !ezstandalone.hasDisplayedAds) {
+        Sentry.captureException({
+          message: "Expected to have displayed ads",
+          extra: ezstandalone,
+        });
+      }
+    }, 1000);
   } catch (error) {
     console.warn("Failed to display ads", error);
   }

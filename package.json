@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^9.3.0",
+    "@sentry/browser": "^5.14.2",
+    "@sentry/node": "^5.14.2",
     "axios": "^0.19.2",
     "cross-env": "^7.0.2",
     "nanoid": "^2.1.11",
@@ -50,6 +52,7 @@
     "@types/styled-jsx": "^2.2.8",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
+    "@zeit/next-source-maps": "^0.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
