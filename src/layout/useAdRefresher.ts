@@ -3,13 +3,7 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    const delayedInit = setTimeout(() => {
-      slowInit();
-    }, 4000);
-    return () => clearTimeout(delayedInit);
-  }, []);
-
-  useEffect(() => {
+    slowInit();
     setTimeout(() => ezDisplayAds(), 1000);
   }, []);
 
@@ -18,10 +12,19 @@ export const useAdRefresher = () => {
       setTimeout(() => ezDisplayAds(), 1000);
     };
 
+    const routeChangeBegin = () => {
+      try {
+        ezstandalone.destroy();
+        console.log("> destroy");
+      } catch (e) {}
+    };
+
     Router.events.on("routeChangeComplete", rounteChangeHandler);
+    Router.events.on("routeChangeStart", routeChangeBegin);
 
     return () => {
       Router.events.off("routeChangeComplete", rounteChangeHandler);
+      Router.events.off("routeChangeStart", routeChangeBegin);
     };
   }, []);
 };
@@ -62,19 +65,31 @@ function ezDisplayAds() {
   try {
     const codes = findAdCode();
 
-    if (!ezstandalone.enabled || !ezstandalone.hasDisplayedAds) {
-      ezstandalone.cmd.push(function() {
-        ezstandalone.define(...codes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("display", codes);
-      });
+    if (
+      !ezstandalone.define ||
+      !ezstandalone.enable ||
+      !ezstandalone.display ||
+      !ezstandalone.refresh ||
+      !ezstandalone.initialized
+    ) {
+      console.warn("> Ez Not Inited");
+      return;
+    }
+
+    ezstandalone.define(...codes);
+    console.log("> Define", codes);
+
+    if (!ezstandalone.enabled) {
+      ezstandalone.enable();
+      console.log("> Enable");
+    }
+
+    if (!ezstandalone.hasDisplayedAds) {
+      ezstandalone.display();
+      console.log("> Display");
     } else {
-      ezstandalone.cmd.push(function() {
-        ezstandalone.define(...codes);
-        ezstandalone.refresh();
-        console.log("refresh", codes);
-      });
+      ezstandalone.refresh();
+      console.log("> Refresh");
     }
   } catch (error) {
     return;
