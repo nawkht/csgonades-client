@@ -12,19 +12,20 @@ export const useAdRefresher = () => {
       setTimeout(() => ezDisplayAds(), 1000);
     };
 
+    /*
     const routeChangeBegin = () => {
       try {
         ezstandalone.destroy();
         console.log("> destroy");
       } catch (e) {}
-    };
+    };*/
 
     Router.events.on("routeChangeComplete", rounteChangeHandler);
-    Router.events.on("routeChangeStart", routeChangeBegin);
+    //Router.events.on("routeChangeStart", routeChangeBegin);
 
     return () => {
       Router.events.off("routeChangeComplete", rounteChangeHandler);
-      Router.events.off("routeChangeStart", routeChangeBegin);
+      //Router.events.off("routeChangeStart", routeChangeBegin);
     };
   }, []);
 };
