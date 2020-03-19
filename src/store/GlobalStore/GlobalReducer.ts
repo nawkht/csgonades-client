@@ -54,7 +54,7 @@ export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
 };
 
 const persistConfig: PersistConfig<GlobalState> = {
-  key: "settingStore",
+  key: "globalStore",
   whitelist: ["acceptedCookieConcent"],
   storage,
 };
