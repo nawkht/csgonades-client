@@ -60,7 +60,7 @@ class MyDocument extends Document {
                 });`,
               }}
             />
-            <script defer async src="//www.ezojs.com/ezoic/sa.min.js" />
+            <script src="//www.ezojs.com/ezoic/sa.min.js" />
           </Head>
           <body>
             <Main />
