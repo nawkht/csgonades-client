@@ -38,7 +38,7 @@ const SettingsReducer: Reducer<SettingsState, SettingsActions> = (
 };
 
 const persistConfig: PersistConfig<SettingsState> = {
-  key: "settingStore",
+  key: "settingStore-v2",
   storage,
 };
 
