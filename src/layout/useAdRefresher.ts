@@ -12,29 +12,26 @@ export const useAdRefresher = () => {
       setTimeout(() => ezDisplayAds(), 1000);
     };
 
-    /*
     const routeChangeBegin = () => {
       try {
         ezstandalone.destroy();
         console.log("> destroy");
       } catch (e) {}
-    };*/
+    };
 
     Router.events.on("routeChangeComplete", rounteChangeHandler);
-    //Router.events.on("routeChangeStart", routeChangeBegin);
+    Router.events.on("routeChangeStart", routeChangeBegin);
 
     return () => {
       Router.events.off("routeChangeComplete", rounteChangeHandler);
-      //Router.events.off("routeChangeStart", routeChangeBegin);
+      Router.events.off("routeChangeStart", routeChangeBegin);
     };
   }, []);
 };
 
-/*
 function isHidden(el: any) {
   return el.offsetParent === null;
 }
-
 
 function findAdCode() {
   const adIds: number[] = [];
@@ -56,7 +53,6 @@ function findAdCode() {
   });
   return adIds;
 }
-*/
 
 function slowInit() {
   if (!ezstandalone.initialized && ezstandalone.init) {
@@ -67,7 +63,7 @@ function slowInit() {
 
 function ezDisplayAds() {
   try {
-    // const codes = findAdCode();
+    const codes = findAdCode();
 
     if (
       !ezstandalone.define ||
@@ -80,41 +76,17 @@ function ezDisplayAds() {
       return;
     }
 
-    // ezstandalone.define(...codes);
+    ezstandalone.define(...codes);
+    console.log("> Define", codes);
 
     if (!ezstandalone.enabled) {
-      const allAdCodes = [
-        104,
-        110,
-        119,
-        121,
-        122,
-        124,
-        123,
-        129,
-        130,
-        132,
-        133,
-        134,
-        135,
-        136,
-        140,
-        141,
-        144,
-        145,
-        148,
-        149,
-        150,
-        151,
-        152,
-        153,
-        154,
-        155,
-      ];
-      ezstandalone.define(...allAdCodes);
       ezstandalone.enable();
+      console.log("> Enable");
+    }
+
+    if (!ezstandalone.hasDisplayedAds) {
       ezstandalone.display();
-      console.log("> Define, enable, display");
+      console.log("> Display");
     } else {
       ezstandalone.refresh();
       console.log("> Refresh");
