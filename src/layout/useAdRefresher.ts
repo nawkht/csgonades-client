@@ -3,7 +3,7 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    const delayInit = setTimeout(ezDisplayAds, 500);
+    const delayInit = setTimeout(ezDisplayAds, 1500);
 
     return () => {
       clearTimeout(delayInit);
