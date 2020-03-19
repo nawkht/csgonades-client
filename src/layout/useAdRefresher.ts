@@ -3,6 +3,13 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
+    const delayedInit = setTimeout(() => {
+      slowInit();
+    }, 4000);
+    return () => clearTimeout(delayedInit);
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => ezDisplayAds(), 1000);
   }, []);
 
@@ -42,6 +49,13 @@ function findAdCode() {
     }
   });
   return adIds;
+}
+
+function slowInit() {
+  if (!ezstandalone.initialized && ezstandalone.init) {
+    console.log("ezstandalone > init");
+    ezstandalone.init();
+  }
 }
 
 function ezDisplayAds() {

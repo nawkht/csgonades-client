@@ -52,7 +52,7 @@ class MyDocument extends Document {
               type="text/javascript"
               dangerouslySetInnerHTML={{
                 __html: `
-                // var runEzoicStandalone = false;
+                var runEzoicStandalone = false;
                 var ezstandalone = ezstandalone || {};
                 ezstandalone.cmd = ezstandalone.cmd || [];
                 ezstandalone.cmd.push(function() {
