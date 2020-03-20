@@ -22,6 +22,7 @@ export const ezDisplayAds = async (tries = 0) => {
     setTimeout(() => {
       ezDisplayAds(tries + 1);
     }, 2000);
+    return;
   }
 
   try {
