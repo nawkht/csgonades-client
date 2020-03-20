@@ -60,6 +60,10 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           flex: 1;
         }
 
+        .top-placement {
+          width: 730px;
+        }
+
         .map-welcome h1,
         .map-welcome h2 {
           font-size: 24px;
