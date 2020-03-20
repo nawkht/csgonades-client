@@ -51,13 +51,7 @@ class MyDocument extends Document {
             <script
               type="text/javascript"
               dangerouslySetInnerHTML={{
-                __html: `
-                var runEzoicStandalone = false;
-                var ezstandalone = ezstandalone || {};
-                ezstandalone.cmd = ezstandalone.cmd || [];
-                ezstandalone.cmd.push(function() {
-                  ezstandalone.setIsPWA();
-                });`,
+                __html: `var runEzoicStandalone = false;`,
               }}
             />
             <script defer async src="//www.ezojs.com/ezoic/sa.min.js" />

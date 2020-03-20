@@ -48,8 +48,11 @@ function findAdCode() {
 function ezDisplayAds() {
   try {
     if (!ezstandalone.initialized && ezstandalone.init) {
-      console.log("ezstandalone > init");
+      console.log("> Ez init begin");
+      ezstandalone.DEBUG = true;
+      ezstandalone.setIsPWA();
       ezstandalone.init();
+      console.log("> Ez init done");
     }
 
     if (
