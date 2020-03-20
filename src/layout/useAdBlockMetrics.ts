@@ -6,22 +6,15 @@ export const useAdBlockMetrics = () => {
 
   useEffect(() => {
     const delayedCheck = setTimeout(() => {
-      try {
-        if (ezstandalone.enabled && ezstandalone.hasDisplayedAds) {
-          event({
-            category: "AdBlockCheck",
-            action: "No Adblock",
-          });
-        } else {
-          event({
-            category: "AdBlockCheck",
-            action: "Has Adblock",
-          });
-        }
-      } catch (error) {
+      if (typeof ezstandalone === "undefined") {
         event({
           category: "AdBlockCheck",
           action: "Has Adblock",
+        });
+      } else {
+        event({
+          category: "AdBlockCheck",
+          action: "No Adblock",
         });
       }
     }, 3000);

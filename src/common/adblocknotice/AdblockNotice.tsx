@@ -1,10 +1,35 @@
-import { FC } from "react";
+import { FC, memo, useState, useEffect } from "react";
+import { useAnalytics } from "../../utils/Analytics";
 
 type Props = {};
 
 const START_DELAY = 2;
 
-export const AdBlockNotice: FC<Props> = ({}) => {
+export const AdBlockNotice: FC<Props> = memo(({}) => {
+  const { event } = useAnalytics();
+  const [showNotice, setShowNotice] = useState(false);
+
+  useEffect(() => {
+    const delayedCheck = setTimeout(() => {
+      if (typeof ezstandalone === "undefined") {
+        setShowNotice(true);
+      }
+    }, 5000);
+    return () => clearTimeout(delayedCheck);
+  }, []);
+
+  function onDismiss() {
+    event({
+      category: "AdBlockCheck",
+      action: "Dismissed",
+    });
+    setShowNotice(false);
+  }
+
+  if (!showNotice) {
+    return null;
+  }
+
   return (
     <>
       <div className="notice-container">
@@ -14,7 +39,9 @@ export const AdBlockNotice: FC<Props> = ({}) => {
               Please don&apos;t make me <strong>ECO</strong> next round!
               Whitelist this site from <strong>AdBlock</strong> ❤️
             </p>
-            <button className="dismiss-btn">Got it. Force buy!</button>
+            <button className="dismiss-btn" onClick={onDismiss}>
+              Got it. Force buy!
+            </button>
           </div>
           <div className="player">
             <img src="/blocknotice/player.svg" />
@@ -52,6 +79,7 @@ export const AdBlockNotice: FC<Props> = ({}) => {
           border-radius: 5px;
           outline: none;
           background: transparent;
+          cursor: pointer;
         }
 
         .tear {
@@ -142,4 +170,4 @@ export const AdBlockNotice: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});
