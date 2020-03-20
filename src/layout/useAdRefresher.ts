@@ -31,19 +31,29 @@ export const ezDisplayAds = async (tries = 0) => {
     }
 
     if (!ezstandalone.enabled) {
-      const csgoEzoicCodes = findAdCode();
-      ezstandalone.define(...csgoEzoicCodes);
-      ezstandalone.enable();
-      ezstandalone.display();
+      ezstandalone.cmd.push(displayAds);
     } else {
-      const csgoEzoicCodes = findAdCode();
-      ezstandalone.define(...csgoEzoicCodes);
-      ezstandalone.refresh();
+      ezstandalone.cmd.push(refreshAds);
     }
   } catch (error) {
     return;
   }
 };
+
+function displayAds() {
+  const csgoEzoicCodes = findAdCode();
+  ezstandalone.define(...csgoEzoicCodes);
+  ezstandalone.enable();
+  ezstandalone.display();
+  console.log("> ez display");
+}
+
+function refreshAds() {
+  const csgoEzoicCodes = findAdCode();
+  ezstandalone.define(...csgoEzoicCodes);
+  ezstandalone.refresh();
+  console.log("> ez refresh");
+}
 
 function findAdCode() {
   function isHidden(el: any) {
