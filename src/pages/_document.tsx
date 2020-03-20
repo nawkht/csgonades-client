@@ -49,6 +49,7 @@ class MyDocument extends Document {
               media="all"
             />
             <script
+              key="ez-init"
               type="text/javascript"
               dangerouslySetInnerHTML={{
                 __html: `
@@ -60,7 +61,12 @@ class MyDocument extends Document {
                 });`,
               }}
             />
-            <script defer async src="//www.ezojs.com/ezoic/sa.min.js" />
+            <script
+              key="ez-script"
+              defer
+              async
+              src="//www.ezojs.com/ezoic/sa.min.js"
+            />
           </Head>
           <body>
             <Main />
