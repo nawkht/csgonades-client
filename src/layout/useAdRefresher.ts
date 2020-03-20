@@ -27,6 +27,7 @@ export const ezDisplayAds = async (tries = 0) => {
 
   try {
     if (!ezstandalone.initialized) {
+      ezstandalone.setIsPWA();
       ezstandalone.init();
       console.log("> ez-init called waiting abit");
       await sleep(1000);
