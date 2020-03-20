@@ -54,7 +54,7 @@ class MyDocument extends Document {
                 __html: `var runEzoicStandalone = false;`,
               }}
             />
-            <script defer async src="//www.ezojs.com/ezoic/sa.min.js" />
+            <script src="//www.ezojs.com/ezoic/sa.min.js" />
           </Head>
           <body>
             <Main />
