@@ -3,9 +3,7 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    setTimeout(() => {
-      ezDisplayAds();
-    }, 1000);
+    ezDisplayAds();
 
     Router.events.on("routeChangeComplete", ezDisplayAds);
 
@@ -25,13 +23,18 @@ export const ezDisplayAds = async () => {
     }
 
     if (!ezstandalone.enabled) {
-      ezstandalone.define(...csgoEzoicCodes);
-      ezstandalone.enable();
-      ezstandalone.display();
-      console.log("> ez-enable-display", csgoEzoicCodes);
+      setTimeout(() => {
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> ez-enable-display", csgoEzoicCodes);
+      }, 1000);
     } else {
-      ezstandalone.define(...csgoEzoicCodes);
-      ezstandalone.refresh();
+      setTimeout(() => {
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.refresh();
+        console.log("> ez-refresh");
+      }, 1000);
     }
   } catch (error) {
     console.error("> ez error", error);
