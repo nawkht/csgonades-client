@@ -1,37 +1,14 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
 import Router from "next/router";
 
 export const useAdRefresher = () => {
-  const [routeChangeCounter, setRouteChangeCounter] = useState(0);
-  const [delay, setDelay] = useState(3);
-
-  const onPageChange = useCallback(() => {
-    setRouteChangeCounter(routeChangeCounter + 1);
-    const delayedRefresh = setTimeout(() => {
-      ezDisplayAds();
-      setDelay(0.5);
-    }, delay * 1000);
-    return () => clearTimeout(delayedRefresh);
-  }, [delay, routeChangeCounter]);
-
   useEffect(() => {
-    if (routeChangeCounter > 0) {
-      return;
-    }
-    const firstCallDelay = setTimeout(() => {
-      ezDisplayAds();
-      setDelay(0.5);
-    }, 3000);
-    return () => clearTimeout(firstCallDelay);
-  }, [routeChangeCounter]);
-
-  useEffect(() => {
-    Router.events.on("routeChangeComplete", onPageChange);
+    Router.events.on("routeChangeComplete", ezDisplayAds);
 
     return () => {
-      Router.events.off("routeChangeComplete", onPageChange);
+      Router.events.off("routeChangeComplete", ezDisplayAds);
     };
-  }, [onPageChange]);
+  }, []);
 };
 
 function isHidden(el: any) {
@@ -59,7 +36,7 @@ function findAdCode() {
   return adIds;
 }
 
-function ezDisplayAds() {
+export function ezDisplayAds() {
   try {
     if (!ezstandalone.initialized && ezstandalone.init) {
       ezstandalone.setIsPWA();
