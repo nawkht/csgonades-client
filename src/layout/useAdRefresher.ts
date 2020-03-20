@@ -38,11 +38,6 @@ function findAdCode() {
 
 export function ezDisplayAds() {
   try {
-    if (!ezstandalone.initialized && ezstandalone.init) {
-      ezstandalone.setIsPWA();
-      ezstandalone.init();
-    }
-
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function() {
         const csgoEzoicCodes = findAdCode();
