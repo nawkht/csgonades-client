@@ -6,16 +6,6 @@ type Props = {
   height?: number;
 };
 
-export const EzoicPlaceHolder: FC<Props> = memo(({ id, height, width }) => {
-  return (
-    <>
-      <div className="ez-wrap" id={`ezoic-pub-ad-placeholder-${id}`}></div>
-      <style jsx>{`
-        .ez-wrap {
-          width: ${width ? `${width}px` : "100%"};
-          height: ${height ? `${height}px` : "auto"};
-        }
-      `}</style>
-    </>
-  );
+export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
+  return <div id={`ezoic-pub-ad-placeholder-${id}`}></div>;
 });

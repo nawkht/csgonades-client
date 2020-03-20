@@ -18,7 +18,7 @@ import { EzoicHead } from "./EzoicHead";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
-export const Layout2: FC = memo(({ children }) => {
+export const Layout2: FC = memo(props => {
   const isAdminOrMod = useIsAdminOrModerator();
   const { colors } = useTheme();
   useSetupSession();
@@ -36,7 +36,7 @@ export const Layout2: FC = memo(({ children }) => {
           <Header />
         </div>
 
-        <main>{children}</main>
+        <main>{props.children}</main>
 
         <div className="footer">
           <Footer />

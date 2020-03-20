@@ -2,7 +2,6 @@ import { useCallback, useEffect } from "react";
 import ReactGA from "react-ga";
 import { useIsAdmin } from "../store/AuthStore/AuthHooks";
 import { useRouter } from "next/router";
-import { useNavigation } from "../store/GlobalStore/GlobalHooks";
 
 const IS_BROWSER = typeof window !== "undefined";
 const IS_PROD = process.env.NODE_ENV === "production";
@@ -10,13 +9,11 @@ const IS_PROD = process.env.NODE_ENV === "production";
 export const usePageView = () => {
   const { query, route } = useRouter();
   const { pageView } = useAnalytics();
-  const { closeNav } = useNavigation();
 
   useEffect(() => {
     const location = window.location.pathname + window.location.search;
     pageView({ path: location });
-    closeNav();
-  }, [pageView, query, route, closeNav]);
+  }, [pageView, query, route]);
 };
 
 export const useAnalytics = () => {

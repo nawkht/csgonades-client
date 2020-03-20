@@ -31,13 +31,5 @@ function createMiddleware() {
 export type AppState = ReturnType<typeof rootReducer>;
 
 export const initReduxStore = (initialState: AppState): Store<AppState> => {
-  let store: any;
-  const isClient = typeof window !== "undefined";
-
-  if (isClient) {
-    store = createStore(rootReducer, initialState, createMiddleware());
-  } else {
-    store = createStore(rootReducer, initialState, createMiddleware());
-  }
-  return store;
+  return createStore(rootReducer, initialState, createMiddleware());
 };
