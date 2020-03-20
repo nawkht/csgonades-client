@@ -15,7 +15,7 @@ export const Logo: FC<Props> = memo(({}) => {
     <>
       <Link href="/" as="/">
         <a className="logo">
-          <img key={logoUrl} src={logoUrl} alt="CSGO Nades logo" />
+          <img key={logoUrl} src={logoUrl} alt="CSGO Nades" />
         </a>
       </Link>
       <style jsx>{`
