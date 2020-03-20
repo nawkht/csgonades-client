@@ -15,6 +15,7 @@ import { useAdBlockMetrics } from "./useAdBlockMetrics";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { useAdRefresher } from "./useAdRefresher";
+import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
@@ -31,6 +32,7 @@ export const Layout2: FC = memo(props => {
   return (
     <>
       <div className="page">
+        <AdBlockNotice />
         <ServiceDown />
         <div className="header">
           <Header />

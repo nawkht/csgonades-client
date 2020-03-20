@@ -1,5 +1,6 @@
 import { FC, memo, useState, useEffect } from "react";
 import { useAnalytics } from "../../utils/Analytics";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -7,16 +8,33 @@ const START_DELAY = 2;
 
 export const AdBlockNotice: FC<Props> = memo(({}) => {
   const { event } = useAnalytics();
+  const [hasDisplayed, setHasDisplayed] = useState(false);
   const [showNotice, setShowNotice] = useState(false);
+  const { pathname } = useRouter();
 
   useEffect(() => {
-    const delayedCheck = setTimeout(() => {
-      if (typeof ezstandalone === "undefined") {
-        setShowNotice(true);
+    let delayedCheck: NodeJS.Timer | undefined;
+    console.log({ pathname });
+
+    if (hasDisplayed) {
+      return;
+    }
+
+    if (pathname.includes("map") || pathname.includes("nade")) {
+      delayedCheck = setTimeout(() => {
+        if (typeof ezstandalone === "undefined") {
+          setShowNotice(true);
+          setHasDisplayed(true);
+        }
+      }, 5000);
+    }
+
+    return () => {
+      if (delayedCheck) {
+        clearTimeout(delayedCheck);
       }
-    }, 5000);
-    return () => clearTimeout(delayedCheck);
-  }, []);
+    };
+  }, [pathname, hasDisplayed]);
 
   function onDismiss() {
     event({
