@@ -3,19 +3,14 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    const delay = setTimeout(() => ezDisplayAds(), 1000);
-    return () => clearTimeout(delay);
+    ezDisplayAds();
   }, []);
 
   useEffect(() => {
-    const rounteChangeHandler = () => {
-      setTimeout(() => ezDisplayAds(), 1000);
-    };
-
-    Router.events.on("routeChangeComplete", rounteChangeHandler);
+    Router.events.on("routeChangeComplete", ezDisplayAds);
 
     return () => {
-      Router.events.off("routeChangeComplete", rounteChangeHandler);
+      Router.events.off("routeChangeComplete", ezDisplayAds);
     };
   }, []);
 };
@@ -53,17 +48,6 @@ function ezDisplayAds() {
       ezstandalone.setIsPWA();
       ezstandalone.init();
       console.log("> Ez init done");
-    }
-
-    if (
-      !ezstandalone.define ||
-      !ezstandalone.enable ||
-      !ezstandalone.display ||
-      !ezstandalone.refresh ||
-      !ezstandalone.initialized
-    ) {
-      console.warn("> Ez Not Inited");
-      return;
     }
 
     if (!ezstandalone.enabled) {
