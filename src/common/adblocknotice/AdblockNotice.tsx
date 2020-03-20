@@ -25,7 +25,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           setShowNotice(true);
           setHasDisplayed(true);
         }
-      }, 5000);
+      }, 15000);
     }
 
     return () => {
