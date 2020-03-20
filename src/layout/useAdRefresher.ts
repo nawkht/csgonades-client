@@ -3,7 +3,9 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    ezDisplayAds();
+    setTimeout(() => {
+      ezDisplayAds();
+    }, 1000);
 
     Router.events.on("routeChangeComplete", ezDisplayAds);
 
@@ -13,16 +15,41 @@ export const useAdRefresher = () => {
   }, []);
 };
 
-function isHidden(el: any) {
-  return el.offsetParent === null;
-}
+export const ezDisplayAds = async () => {
+  const csgoEzoicCodes = findAdCode();
+
+  try {
+    if (!ezstandalone.initialized) {
+      console.log("> ez-init");
+      ezstandalone.init();
+    }
+
+    if (!ezstandalone.enabled) {
+      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.enable();
+      ezstandalone.display();
+      console.log("> ez-enable-display", csgoEzoicCodes);
+    } else {
+      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.refresh();
+    }
+  } catch (error) {
+    console.error("> ez error", error);
+    return;
+  }
+};
 
 function findAdCode() {
+  function isHidden(el: any) {
+    return el.offsetParent === null;
+  }
+
   const adIds: number[] = [];
 
   const elements = document.querySelectorAll(
     'div[id^="ezoic-pub-ad-placeholder"]'
   );
+
   elements.forEach(el => {
     if (isHidden(el)) {
       return;
@@ -35,33 +62,6 @@ function findAdCode() {
       console.error("Failed to parse ad id");
     }
   });
+
   return adIds;
-}
-
-export function ezDisplayAds() {
-  try {
-    if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(function() {
-        const csgoEzoicCodes = findAdCode();
-        ezstandalone.define(...csgoEzoicCodes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> Enable - Display", csgoEzoicCodes);
-      });
-    } else {
-      ezstandalone.cmd.push(function() {
-        const csgoEzoicCodes = findAdCode();
-        ezstandalone.define(...csgoEzoicCodes);
-        if (!ezstandalone.hasDisplayedAds) {
-          ezstandalone.display();
-          console.log("> Display");
-        }
-
-        ezstandalone.refresh();
-        console.log("> Refresh done", csgoEzoicCodes);
-      });
-    }
-  } catch (error) {
-    return;
-  }
 }

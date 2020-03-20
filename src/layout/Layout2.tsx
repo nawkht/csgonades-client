@@ -14,7 +14,7 @@ import { MobileNav } from "./Navigation/MobileNav";
 import { useAdBlockMetrics } from "./useAdBlockMetrics";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
-import { EzoicHead } from "./EzoicHead";
+import { useAdRefresher } from "./useAdRefresher";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
@@ -26,10 +26,10 @@ export const Layout2: FC = memo(props => {
   usePreloadUser();
   useFetchClientConfig();
   useAdBlockMetrics();
+  useAdRefresher();
 
   return (
     <>
-      <EzoicHead />
       <div className="page">
         <ServiceDown />
         <div className="header">
