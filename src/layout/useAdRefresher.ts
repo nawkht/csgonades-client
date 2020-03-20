@@ -1,37 +1,37 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Router from "next/router";
 
-function delayedRefresh(seconds: number) {
-  return function() {
-    setTimeout(ezDisplayAds, seconds * 1000);
-  };
-}
-
 export const useAdRefresher = () => {
-  const [hasChangedRoute, setHasChangedRoute] = useState(false);
+  const [routeChangeCounter, setRouteChangeCounter] = useState(0);
+  const [delay, setDelay] = useState(3);
 
-  const slowInit = useCallback(() => {
-    if (!hasChangedRoute) {
-      console.log("First page load, slow init");
-      delayedRefresh(3)();
-    }
-  }, [hasChangedRoute]);
-
-  const onRouteChange = useCallback(() => {
-    console.log("On Route change, quick refresh");
-    setHasChangedRoute(true);
-    delayedRefresh(0.5)();
-  }, []);
+  const onPageChange = useCallback(() => {
+    setRouteChangeCounter(routeChangeCounter + 1);
+    const delayedRefresh = setTimeout(() => {
+      ezDisplayAds();
+      setDelay(0.5);
+    }, delay * 1000);
+    return () => clearTimeout(delayedRefresh);
+  }, [delay, routeChangeCounter]);
 
   useEffect(() => {
-    slowInit();
+    if (routeChangeCounter > 0) {
+      return;
+    }
+    const firstCallDelay = setTimeout(() => {
+      ezDisplayAds();
+      setDelay(0.5);
+    }, 3000);
+    return () => clearTimeout(firstCallDelay);
+  }, [routeChangeCounter]);
 
-    Router.events.on("routeChangeComplete", onRouteChange);
+  useEffect(() => {
+    Router.events.on("routeChangeComplete", onPageChange);
 
     return () => {
-      Router.events.off("routeChangeComplete", onRouteChange);
+      Router.events.off("routeChangeComplete", onPageChange);
     };
-  }, [onRouteChange, slowInit]);
+  }, [onPageChange]);
 };
 
 function isHidden(el: any) {
@@ -62,10 +62,8 @@ function findAdCode() {
 function ezDisplayAds() {
   try {
     if (!ezstandalone.initialized && ezstandalone.init) {
-      console.log("> Ez init begin");
       ezstandalone.setIsPWA();
       ezstandalone.init();
-      console.log("> Ez init done");
     }
 
     if (!ezstandalone.enabled) {
