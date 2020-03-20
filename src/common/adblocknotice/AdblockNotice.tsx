@@ -38,7 +38,15 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
   function onDismiss() {
     event({
       category: "AdBlockCheck",
-      action: "Dismissed",
+      action: "Dismiss clicked",
+    });
+    setShowNotice(false);
+  }
+
+  function onOk() {
+    event({
+      category: "AdBlockCheck",
+      action: "Ok clicked",
     });
     setShowNotice(false);
   }
@@ -56,9 +64,14 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
               Please don&apos;t make me <strong>ECO</strong> next round!
               Whitelist this site from <strong>AdBlock</strong> ❤️
             </p>
-            <button className="dismiss-btn" onClick={onDismiss}>
-              Got it. Force buy!
-            </button>
+            <div className="buttons">
+              <button className="ok-btn" onClick={onDismiss}>
+                Got it. Force buy!
+              </button>
+              <button className="dismiss-btn" onClick={onOk}>
+                Dismiss
+              </button>
+            </div>
           </div>
           <div className="player">
             <img src="/blocknotice/player.svg" />
@@ -76,7 +89,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           position: fixed;
           top: calc(50% - 150px);
           right: 0;
-          width: 350px;
+          width: 400px;
           height: 300px;
           color: white;
           z-index: 999;
@@ -87,7 +100,12 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           animation-delay: ${START_DELAY}s;
         }
 
-        .dismiss-btn {
+        .buttons {
+          display: flex;
+        }
+
+        .dismiss-btn,
+        .ok-btn {
           border: none;
           display: block;
           border: 1px solid #0c8a34;
@@ -97,6 +115,12 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           outline: none;
           background: transparent;
           cursor: pointer;
+        }
+
+        .dismiss-btn {
+          border: 1px solid #bbb;
+          color: #bbb;
+          margin-left: 10px;
         }
 
         .tear {
