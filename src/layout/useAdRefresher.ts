@@ -69,12 +69,17 @@ function ezDisplayAds() {
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
-        console.log("> Display", csgoEzoicCodes);
+        console.log("> Enable - Display", csgoEzoicCodes);
       });
     } else {
       ezstandalone.cmd.push(function() {
         const csgoEzoicCodes = findAdCode();
         ezstandalone.define(...csgoEzoicCodes);
+        if (!ezstandalone.hasDisplayedAds) {
+          ezstandalone.display();
+          console.log("> Display");
+        }
+
         ezstandalone.refresh();
         console.log("> Refresh done", csgoEzoicCodes);
       });
