@@ -3,6 +3,8 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
+    ezDisplayAds();
+
     Router.events.on("routeChangeComplete", ezDisplayAds);
 
     return () => {
