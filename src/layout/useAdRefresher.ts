@@ -1,16 +1,22 @@
 import { useEffect } from "react";
 import Router from "next/router";
 
+function delayedRefresh() {
+  setTimeout(() => {
+    ezDisplayAds();
+  }, 1000);
+}
+
 export const useAdRefresher = () => {
   useEffect(() => {
     ezDisplayAds();
   }, []);
 
   useEffect(() => {
-    Router.events.on("routeChangeComplete", ezDisplayAds);
+    Router.events.on("routeChangeComplete", delayedRefresh);
 
     return () => {
-      Router.events.off("routeChangeComplete", ezDisplayAds);
+      Router.events.off("routeChangeComplete", delayedRefresh);
     };
   }, []);
 };
