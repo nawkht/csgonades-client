@@ -3,7 +3,6 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    slowInit();
     setTimeout(() => ezDisplayAds(), 1000);
   }, []);
 
@@ -12,19 +11,10 @@ export const useAdRefresher = () => {
       setTimeout(() => ezDisplayAds(), 1000);
     };
 
-    const routeChangeBegin = () => {
-      try {
-        ezstandalone.destroy();
-        console.log("> destroy");
-      } catch (e) {}
-    };
-
     Router.events.on("routeChangeComplete", rounteChangeHandler);
-    Router.events.on("routeChangeStart", routeChangeBegin);
 
     return () => {
       Router.events.off("routeChangeComplete", rounteChangeHandler);
-      Router.events.off("routeChangeStart", routeChangeBegin);
     };
   }, []);
 };
@@ -54,15 +44,13 @@ function findAdCode() {
   return adIds;
 }
 
-function slowInit() {
-  if (!ezstandalone.initialized && ezstandalone.init) {
-    console.log("ezstandalone > init");
-    ezstandalone.init();
-  }
-}
-
 function ezDisplayAds() {
   try {
+    if (!ezstandalone.initialized && ezstandalone.init) {
+      console.log("ezstandalone > init");
+      ezstandalone.init();
+    }
+
     const codes = findAdCode();
 
     if (
