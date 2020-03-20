@@ -22,7 +22,7 @@ export const ezDisplayAds = async (tries = 0) => {
     console.log("> ez script not loaded, trying again in 1 sec");
     setTimeout(() => {
       ezDisplayAds(tries + 1);
-    }, 1000);
+    }, 5000);
   }
 
   try {
