@@ -19,7 +19,6 @@ export const ezDisplayAds = async (tries = 0) => {
   }
 
   if (typeof ezstandalone === "undefined") {
-    console.log("> ez script not loaded, trying again in 1 sec");
     setTimeout(() => {
       ezDisplayAds(tries + 1);
     }, 5000);
