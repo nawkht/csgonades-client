@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import Router from "next/router";
 
+const IS_BROWSER = typeof window !== "undefined";
+
 function delayedRefresh() {
   setTimeout(() => {
     ezDisplayAds();
@@ -9,14 +11,19 @@ function delayedRefresh() {
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    ezDisplayAds();
-  }, []);
+    if (!IS_BROWSER) {
+      return;
+    }
 
-  useEffect(() => {
     Router.events.on("routeChangeComplete", delayedRefresh);
 
+    window.addEventListener("load", ezDisplayAds);
+
     return () => {
-      Router.events.off("routeChangeComplete", delayedRefresh);
+      if (IS_BROWSER) {
+        Router.events.off("routeChangeComplete", delayedRefresh);
+        window.removeEventListener("load", ezDisplayAds);
+      }
     };
   }, []);
 };
