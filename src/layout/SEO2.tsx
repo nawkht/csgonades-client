@@ -27,8 +27,8 @@ export const SEO: FC<Props> = memo(
             content="dust2 train mirage inferno cobblestone overpass cache nades flashbang smoke incendiary molotov he grenade csgo cs:go counter-strike global offensive"
           />
           <meta name="og:description" content={description} />
-          <meta name="og:title" content={title} />
-          <meta name="og:site_name" content="CSGONades" />
+          <meta name="og:title" content={pageTitle} />
+          <meta name="og:site_name" content="CSGO Nades" />
           <meta name="og:type" content="website" />
           <meta name="og:locale" content="en_EN" />
           {canonical && (
