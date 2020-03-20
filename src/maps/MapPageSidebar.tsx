@@ -1,27 +1,11 @@
-import { FC, useMemo } from "react";
-import { useFilteredNades } from "../store/MapStore/hooks/useFilteredNades";
+import { FC, memo } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 
-type Props = {
-  numSsr: number;
-};
-
-export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
-  const nades = useFilteredNades();
-  const numNades = nades.length ? nades.length : numSsr;
-
-  const [firstSideBarAd, secondSideBarAd] = useMemo(() => {
-    const sideBarAds = [true, false];
-    if (numNades > 24) {
-      sideBarAds[1] = true;
-    }
-    return sideBarAds;
-  }, [numNades]);
-
+export const MapPageSideBar: FC = memo(() => {
   return (
     <>
       <div className="sjakt">
-        <div className={firstSideBarAd ? "ez-160 sticky" : "ez-160 hidden"}>
+        <div className="ez-160 sticky">
           <EzoicPlaceHolder
             key="Sidebar Top 160x600"
             width={160}
@@ -29,31 +13,12 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
             id={140}
           />
         </div>
-        <div className={firstSideBarAd ? "ez-300 sticky" : "ez-300 hidden"}>
+        <div className="ez-300 sticky">
           <EzoicPlaceHolder
-            key="Sidebar Top 300x1050"
+            key="Sidebar Top 600"
             width={300}
             height={600}
             id={144}
-          />
-        </div>
-      </div>
-      <div className="sjakt last">
-        <div className={secondSideBarAd ? "ez-160 sticky" : "ez-160 hidden"}>
-          <EzoicPlaceHolder
-            key={"Sidebar Mid 160x600"}
-            width={160}
-            height={600}
-            id={141}
-          />
-        </div>
-
-        <div className={secondSideBarAd ? "ez-300 sticky" : "ez-300 hidden"}>
-          <EzoicPlaceHolder
-            key={"Sidebar Mid 300x1050"}
-            width={300}
-            height={600}
-            id={145}
           />
         </div>
       </div>
@@ -93,4 +58,4 @@ export const MapPageSideBar: FC<Props> = ({ numSsr }) => {
       `}</style>
     </>
   );
-};
+});

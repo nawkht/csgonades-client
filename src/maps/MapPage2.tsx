@@ -42,7 +42,7 @@ export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
             <MapPageNades ssrNades={ssrNades} />
           </div>
           <div className="map-sidebar">
-            <MapPageSideBar numSsr={ssrNades.length} />
+            <MapPageSideBar />
           </div>
         </div>
 
