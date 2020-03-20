@@ -1,31 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useCallback, useState } from "react";
 import Router from "next/router";
 
-const IS_BROWSER = typeof window !== "undefined";
-
-function delayedRefresh() {
-  setTimeout(() => {
-    ezDisplayAds();
-  }, 1000);
+function delayedRefresh(seconds: number) {
+  return function() {
+    setTimeout(ezDisplayAds, seconds * 1000);
+  };
 }
 
 export const useAdRefresher = () => {
-  useEffect(() => {
-    if (!IS_BROWSER) {
-      return;
+  const [hasChangedRoute, setHasChangedRoute] = useState(false);
+
+  const slowInit = useCallback(() => {
+    if (!hasChangedRoute) {
+      console.log("First page load, slow init");
+      delayedRefresh(3)();
     }
+  }, [hasChangedRoute]);
 
-    Router.events.on("routeChangeComplete", delayedRefresh);
+  const onRouteChange = useCallback(() => {
+    console.log("On Route change, quick refresh");
+    setHasChangedRoute(true);
+    delayedRefresh(0.5)();
+  }, []);
 
-    window.addEventListener("load", ezDisplayAds);
+  useEffect(() => {
+    slowInit();
+
+    Router.events.on("routeChangeComplete", onRouteChange);
 
     return () => {
-      if (IS_BROWSER) {
-        Router.events.off("routeChangeComplete", delayedRefresh);
-        window.removeEventListener("load", ezDisplayAds);
-      }
+      Router.events.off("routeChangeComplete", onRouteChange);
     };
-  }, []);
+  }, [onRouteChange, slowInit]);
 };
 
 function isHidden(el: any) {
