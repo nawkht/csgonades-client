@@ -18,23 +18,22 @@ export const ezDisplayAds = async () => {
 
   try {
     if (!ezstandalone.initialized) {
-      console.log("> ez-init");
       ezstandalone.init();
+      console.log("> ez-init called waiting abit");
+      await sleep(1000);
     }
 
     if (!ezstandalone.enabled) {
-      setTimeout(() => {
-        ezstandalone.define(...csgoEzoicCodes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> ez-enable-display", csgoEzoicCodes);
-      }, 1000);
+      await sleep(1000);
+      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.enable();
+      ezstandalone.display();
+      console.log("> ez-enable-display", csgoEzoicCodes);
     } else {
-      setTimeout(() => {
-        ezstandalone.define(...csgoEzoicCodes);
-        ezstandalone.refresh();
-        console.log("> ez-refresh");
-      }, 1000);
+      await sleep(1000);
+      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.refresh();
+      console.log("> ez-refresh");
     }
   } catch (error) {
     console.error("> ez error", error);
@@ -68,3 +67,5 @@ function findAdCode() {
 
   return adIds;
 }
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
