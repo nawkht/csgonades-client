@@ -14,7 +14,6 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
   useEffect(() => {
     let delayedCheck: NodeJS.Timer | undefined;
-    console.log({ pathname });
 
     if (hasDisplayed) {
       return;

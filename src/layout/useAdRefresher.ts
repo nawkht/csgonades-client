@@ -28,7 +28,6 @@ export const ezDisplayAds = async (tries = 0) => {
     if (!ezstandalone.initialized) {
       ezstandalone.setIsPWA();
       ezstandalone.init();
-      console.log("> ez-init called waiting abit");
       await sleep(1000);
     }
 
@@ -38,16 +37,13 @@ export const ezDisplayAds = async (tries = 0) => {
       ezstandalone.define(...csgoEzoicCodes);
       ezstandalone.enable();
       ezstandalone.display();
-      console.log("> ez-enable-display", csgoEzoicCodes);
     } else {
       await sleep(1000);
       const csgoEzoicCodes = findAdCode();
       ezstandalone.define(...csgoEzoicCodes);
       ezstandalone.refresh();
-      console.log("> ez-refresh");
     }
   } catch (error) {
-    console.log("> ez failed");
     return;
   }
 };
