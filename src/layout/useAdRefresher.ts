@@ -3,7 +3,8 @@ import Router from "next/router";
 
 export const useAdRefresher = () => {
   useEffect(() => {
-    setTimeout(() => ezDisplayAds(), 1000);
+    const delay = setTimeout(() => ezDisplayAds(), 1000);
+    return () => clearTimeout(delay);
   }, []);
 
   useEffect(() => {
@@ -51,8 +52,6 @@ function ezDisplayAds() {
       ezstandalone.init();
     }
 
-    const codes = findAdCode();
-
     if (
       !ezstandalone.define ||
       !ezstandalone.enable ||
@@ -64,20 +63,21 @@ function ezDisplayAds() {
       return;
     }
 
-    ezstandalone.define(...codes);
-    console.log("> Define", codes);
-
     if (!ezstandalone.enabled) {
-      ezstandalone.enable();
-      console.log("> Enable");
-    }
-
-    if (!ezstandalone.hasDisplayedAds) {
-      ezstandalone.display();
-      console.log("> Display");
+      ezstandalone.cmd.push(function() {
+        const csgoEzoicCodes = findAdCode();
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> Display", csgoEzoicCodes);
+      });
     } else {
-      ezstandalone.refresh();
-      console.log("> Refresh");
+      ezstandalone.cmd.push(function() {
+        const csgoEzoicCodes = findAdCode();
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.refresh();
+        console.log("> Refresh done", csgoEzoicCodes);
+      });
     }
   } catch (error) {
     return;

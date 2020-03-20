@@ -11,10 +11,10 @@ import { useSetupSession } from "./DataFetchers/useSetupSession";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
-import { useAdRefresher } from "./useAdRefresher";
 import { useAdBlockMetrics } from "./useAdBlockMetrics";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
+import { EzoicHead } from "./EzoicHead";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
@@ -23,13 +23,13 @@ export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
   useSetupSession();
   usePageView();
-  useAdRefresher();
   usePreloadUser();
   useFetchClientConfig();
   useAdBlockMetrics();
 
   return (
     <>
+      <EzoicHead />
       <div className="page">
         <ServiceDown />
         <div className="header">
@@ -68,15 +68,6 @@ export const Layout2: FC = memo(({ children }) => {
       <style jsx global>{`
         body {
           background: ${colors.DP00};
-          margin: 0;
-          padding: 0;
-          font-family: "Roboto", Helvetica, sans-serif;
-          font-weight: 300;
-          font-size: 16px;
-        }
-
-        a {
-          text-decoration: none;
         }
       `}</style>
     </>
