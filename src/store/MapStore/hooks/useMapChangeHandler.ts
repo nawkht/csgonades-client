@@ -15,13 +15,12 @@ export const useMapChangeHandler = () => {
       return;
     }
 
-    dispatch({
-      type: "MapStore/SetCurrentMap",
-      map: csGoMap,
-    });
-
     (async () => {
       const result = await NadeApi.getByMap(csGoMap);
+      dispatch({
+        type: "MapStore/SetCurrentMap",
+        map: csGoMap,
+      });
       if (result.isOk()) {
         dispatch({
           type: "MapStore/ReplaceNadesForMap",
