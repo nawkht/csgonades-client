@@ -141,6 +141,9 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           top: 20px;
           right: -40px;
           transform: rotate(-15deg);
+          animation-name: twist;
+          animation-duration: 0.5s;
+          animation-iteration-count: infinite;
         }
 
         .player img {
@@ -206,6 +209,18 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
           100% {
             opacity: 1;
+          }
+        }
+
+        @keyframes twist {
+          0% {
+            transform: rotate(-13deg);
+          }
+          50% {
+            transform: rotate(-15deg);
+          }
+          100% {
+            transform: rotate(-13deg);
           }
         }
       `}</style>
