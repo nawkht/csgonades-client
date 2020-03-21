@@ -32,16 +32,13 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           button. Giving you slightly different results on 64 and 128 tick
           servers. See the video below.
         </p>
-
         <EzoicPlaceHolder key="Blog | Under intro" id={121} />
-
         <h2>What is tickrate?</h2>
         <p>
           Tick rate is a networking term for game servers. It tells us how often
           our game, the client, communicates with the game server hosted by
           Valve, or third party providers.
         </p>
-
         <p>
           In Counter-Strike Global Offensive game servers are either 64 tick or
           128 tick. For matchmaking, Valve has set the tick rate to 64, to save
@@ -53,9 +50,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           depending on what you play the most on, you know what throws will work
           for you and which won&apos;t.
         </p>
-
         <EzoicPlaceHolder key="Blog | Under second paragraph" id={154} />
-
         <h2>What is the jump throw bind?</h2>
         <p>
           The jump throw bind is a small script you can bind to one of your
@@ -70,32 +65,28 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           throws as your not a robot, and you probably release the mouse button
           at slightly different times.
         </p>
-
         <h2>Why does the tickrate affect the jump throw bind?</h2>
         <p>
-          The job of the jumpthrow bind is to remove the human error out of
-          timing you releasing the nade at the correct height to make the nade
-          land the same way every time.
+          As we have explained, the jumpthrow bind removes the need for you to
+          try to time releasing the nade at the same height. We have now
+          offloaded that responsibility to the game.
         </p>
-
         <p>
           However, this comes at a cost. The bind will send two commands to the
           game server. First, it will send a jump command. Then a release
           command. These two commands are not done precisely at the same time;
           there&apos;s a small delay between them that you can&apos;t control.
         </p>
-
         <p>
           This delay is the reason your jumpthrow bind will have different
           outcomes on 64 tick and 128 tick. Because of the tickrate, the
-          commands are interpreted by the server at slightly different timings.
+          commands are interpreted by the game server at slightly different
+          timings.
         </p>
-
         <p>
           In the video below, you can see that the release happens at slightly
-          different heights.
+          different heights on the two tickrates.
         </p>
-
         <div
           style={{
             position: "relative",
@@ -112,30 +103,31 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
             allowFullScreen
           ></iframe>
         </div>
-
         <EzoicPlaceHolder key="Blog | In content long" id={155} />
+        <p>
+          Using the jumpthrow bind will give you the same result every time, if
+          your playing on the same tickrate. So if you play on both matchmaking
+          and FACEIT as a example. You are going to need to learn the same nade
+          for both tickrates, if it uses a jumpthrow bind.
+        </p>
 
         <h2>Bonus: Variations of the jump throw bind</h2>
         <p>
           There are variations of the jump throw bind. More specifically there
           are three. Let’s see them all and how they differ.
         </p>
-
         <h3>Standard</h3>
         <BlogCodeSnippet
           code={`alias "+jumpthrow" "+jump;-attack";\nalias "-jumpthrow" "-jump";\nbind x "+jumpthrow";`}
         />
-
         <p>
           The Standard jump throw bind. It will jump and release the left mouse
           button and is the most basic variation that most people use.
         </p>
-
         <h3>With both mouse buttons</h3>
         <BlogCodeSnippet
           code={`alias "+jumpthrow" "+jump;-attack;-attack2";\nalias "-jumpthrow" "-jump";\nbind x "+jumpthrow"`}
         ></BlogCodeSnippet>
-
         <p>
           Personally, I use this variation, as it allows you to do a jump throw
           with your right mouse button down for a short-range jump throw. Or for
@@ -144,14 +136,11 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           slight modification to the bind, It will still work correctly with the
           normal left-click throw as well.
         </p>
-
         <EzoicPlaceHolder key="Blog | In content mid" id={122} />
-
         <h3>Extra range</h3>
         <BlogCodeSnippet
           code={`alias "+jumpthrow" "+jump;-attack;+forward";\nalias "-jumpthrow" "-jump;-forward";\nbind x "+jumpthrow;`}
         />
-
         <p>
           Last but not least, we have the extra range jump throw bind that, in
           addition to doing a jump and release, takes a single step forward,
