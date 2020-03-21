@@ -38,6 +38,7 @@ export const MapNav: FC<Props> = memo(({}) => {
         .map-nav-wrap {
           display: flex;
           justify-content: space-between;
+          font-size: 16px;
         }
 
         ul {

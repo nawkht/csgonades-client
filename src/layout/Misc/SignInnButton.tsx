@@ -27,7 +27,7 @@ export const SignInnButton: FC = () => {
           transition: background 0.15s;
           background: #444;
           transition: background 0.2s;
-          padding: 15px 20px;
+          padding: 10px 20px;
         }
 
         .steam-logo {
