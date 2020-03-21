@@ -6,7 +6,6 @@ import { Logo } from "./Misc/Logo";
 import { MapNav } from "./Navigation/MapNav";
 import { SiteNav } from "./Navigation/SiteNav";
 import { UserNav } from "./Navigation/UserNav";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 
 type Props = {};
 
@@ -21,9 +20,7 @@ export const Header: FC<Props> = memo(({}) => {
             <Hamburger />
             <Logo />
             <SiteNav />
-            <div className="spacer">
-              <EzoicPlaceHolder key={"Site | In header"} id={129} />
-            </div>
+            <div className="spacer"></div>
             <UserNav />
           </div>
         </PageCentralize>
