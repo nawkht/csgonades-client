@@ -9,7 +9,7 @@ export const useMapChangeHandler = () => {
   const dispatch = useMapStoreDispatch();
 
   useEffect(() => {
-    const csGoMap = query["map"] as CsgoMap;
+    const csGoMap = query.map as CsgoMap;
 
     if (!csGoMap) {
       return;
