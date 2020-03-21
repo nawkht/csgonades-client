@@ -15,7 +15,10 @@ export function prettyDateTime(date: Date | string) {
   const dateNumber = jsDate.getDate();
   const year = jsDate.getFullYear();
   const hours = jsDate.getHours();
-  const minutes = jsDate.getMinutes();
+  let minutes: number | string = jsDate.getMinutes();
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
 
   return `${month} ${dateNumber}. ${year} ${hours}:${minutes}`;
 }
