@@ -89,6 +89,7 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
           border-bottom: 1px solid ${colors.BORDER};
           padding: 15px 30px;
           color: black;
+          display: block;
         }
 
         .noti-msg {
