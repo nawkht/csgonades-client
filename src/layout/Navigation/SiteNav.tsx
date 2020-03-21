@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { PageLink } from "../../common/PageLink";
 
 export const SiteNav: FC = memo(({}) => {
   const { colors } = useTheme();
@@ -9,12 +9,12 @@ export const SiteNav: FC = memo(({}) => {
   return (
     <>
       <div className="site-nav">
-        <Link href="/blog" prefetch={false}>
-          <a className="nav-item">Blog</a>
-        </Link>
-        <Link href="/about" prefetch={false}>
-          <a className="nav-item">About</a>
-        </Link>
+        <PageLink href="/blog" as="/blog">
+          <span className="nav-item">Blog</span>
+        </PageLink>
+        <PageLink href="/about" as="/about">
+          <span className="nav-item">About</span>
+        </PageLink>
       </div>
       <style jsx>{`
         .site-nav {
@@ -27,6 +27,7 @@ export const SiteNav: FC = memo(({}) => {
           border-radius: 15px;
           color: ${colors.TEXT};
           font-size: 16px;
+          cursor: pointer;
         }
 
         .nav-item:hover {

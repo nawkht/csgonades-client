@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { User } from "../../models/User";
 import { useSignOut } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { PageLink } from "../../common/PageLink";
 
 type Props = {
   user: User;
@@ -16,12 +16,8 @@ export const UserDropdown: FC<Props> = ({ user }) => {
   return (
     <>
       <div className="user-nav-user">
-        <Link
-          href={`/users/[user]`}
-          as={`/users/${user.steamId}`}
-          prefetch={false}
-        >
-          <a className="user-link">
+        <PageLink href={`/users/[user]`} as={`/users/${user.steamId}`}>
+          <span className="user-link">
             {user.avatar && (
               <img
                 className="user-avatar"
@@ -30,8 +26,8 @@ export const UserDropdown: FC<Props> = ({ user }) => {
               />
             )}
             <div>{user.nickname}</div>
-          </a>
-        </Link>
+          </span>
+        </PageLink>
 
         <button className="logout-btn" onClick={signOut}>
           <FiLogOut />
@@ -41,6 +37,7 @@ export const UserDropdown: FC<Props> = ({ user }) => {
         .user-nav-user {
           display: flex;
           align-self: center;
+          align-items: center;
         }
 
         .user-avatar {

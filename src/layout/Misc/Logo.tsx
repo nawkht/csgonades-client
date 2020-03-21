@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { FC, memo, useMemo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { PageLink } from "../../common/PageLink";
 
 type Props = {};
 
@@ -13,11 +13,11 @@ export const Logo: FC<Props> = memo(({}) => {
 
   return (
     <>
-      <Link href="/" as="/">
-        <a className="logo">
+      <PageLink href="/" as="/">
+        <span className="logo">
           <img key={logoUrl} src={logoUrl} alt="CSGO Nades" />
-        </a>
-      </Link>
+        </span>
+      </PageLink>
       <style jsx>{`
         .logo img {
           max-height: 45px;

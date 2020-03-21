@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { prettyDate } from "../utils/DateUtils";
 import { BlogPost } from "./BlogPost";
-import Link from "next/link";
+import { PageLink } from "../common/PageLink";
 
 type Props = {
   blogPost: BlogPost;
@@ -16,20 +16,23 @@ export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
   return (
     <>
       <div className="blog-post-preview">
-        <Link href={`/blog/${blogPost.slug}`} as={`/blog/${blogPost.slug}`}>
-          <a>
+        <PageLink href={`/blog/${blogPost.slug}`} as={`/blog/${blogPost.slug}`}>
+          <span>
             <div className="blog-img"></div>
 
             <h3>{title}</h3>
-          </a>
-        </Link>
+          </span>
+        </PageLink>
 
         <p>{intro}</p>
 
         <div className="actions">
-          <Link href={`/blog/${blogPost.slug}`} as={`/blog/${blogPost.slug}`}>
-            <a className="actions-read-more">Read more</a>
-          </Link>
+          <PageLink
+            href={`/blog/${blogPost.slug}`}
+            as={`/blog/${blogPost.slug}`}
+          >
+            <span className="actions-read-more">Read more</span>
+          </PageLink>
           <span className="blog-post-date">
             {prettyDate(blogPost.createdAt)}
           </span>

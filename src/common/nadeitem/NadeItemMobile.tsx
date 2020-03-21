@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { FaChevronRight, FaPlay, FaStop } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -8,6 +7,7 @@ import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "./NadeItemTitle";
 import { NadeStats } from "./NadeStats";
+import { PageLink } from "../PageLink";
 
 interface Props {
   nade: NadeLight;
@@ -73,12 +73,12 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
                 )}
               </div>
               <div className="context-action">
-                <Link href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
+                <PageLink href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
                   <a className="nade-page-link">
                     Details{" "}
                     <FaChevronRight style={{ position: "relative", top: 2 }} />
                   </a>
-                </Link>
+                </PageLink>
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { FC } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { Nade } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { prettyDate } from "../../utils/DateUtils";
+import { PageLink } from "../../common/PageLink";
 
 type Props = {
   nade: Nade;
@@ -16,9 +16,9 @@ export const NadeDetails: FC<Props> = ({ nade }) => {
       <div className="nade-details">
         <div className="nade-user">
           <img src={nade.user.avatar} />{" "}
-          <Link href={`/users/[user]`} as={`/users/${nade.user.steamId}`}>
-            <a className="user-nickname">{nade.user.nickname}</a>
-          </Link>
+          <PageLink href={`/users/[user]`} as={`/users/${nade.user.steamId}`}>
+            <span className="user-nickname">{nade.user.nickname}</span>
+          </PageLink>
         </div>
 
         <div className="nade-stats">

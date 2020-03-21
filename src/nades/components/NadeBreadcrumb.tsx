@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { FC } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Nade } from "../../models/Nade/Nade";
 import { capitalize } from "../../utils/Common";
+import { PageLink } from "../../common/PageLink";
 
 type Props = {
   nade: Nade;
@@ -17,13 +17,13 @@ export const NadeBreadcrumb: FC<Props> = ({ nade }) => {
     <>
       <div className="nade-breadcrumb-wrap">
         <div className="nade-breadcrumb">
-          <Link href="/">
-            <a className="bc-item">Home</a>
-          </Link>
+          <PageLink href="/" as="/">
+            <span className="bc-item link">Home</span>
+          </PageLink>
           <FaChevronRight size={10} />
-          <Link href={`/maps/[map]`} as={`/maps/${nade.map}`}>
-            <a className="bc-item">{capitalize(nade.map)}</a>
-          </Link>
+          <PageLink href={`/maps/[map]`} as={`/maps/${nade.map}`}>
+            <span className="bc-item link">{capitalize(nade.map)}</span>
+          </PageLink>
           <FaChevronRight size={10} />
           <span className="bc-item">{nade.title}</span>
         </div>
@@ -48,11 +48,11 @@ export const NadeBreadcrumb: FC<Props> = ({ nade }) => {
           margin-left: 5px;
         }
 
-        a {
+        .link {
           color: #a4a4a4;
         }
 
-        a:hover {
+        .link:hover {
           text-decoration: underline;
         }
       `}</style>

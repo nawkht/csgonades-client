@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FC, memo, useState } from "react";
 import { FaBell } from "react-icons/fa";
 import { Notification } from "../../models/Notification";
@@ -6,6 +5,7 @@ import { useSetNotificationViewed } from "../../store/NotificationStore/hooks/us
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { pluralize } from "../../utils/Common";
 import { prettyDateTime } from "../../utils/DateUtils";
+import { PageLink } from "../PageLink";
 
 type Props = {
   notification: Notification;
@@ -74,14 +74,14 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
 
   return (
     <>
-      <Link href={`/nades/[nade]`} as={`/nades/${notification.nadeId}`}>
-        <a className={wasViewed ? "notification" : "notification new"}>
+      <PageLink href={`/nades/[nade]`} as={`/nades/${notification.nadeId}`}>
+        <span className={wasViewed ? "notification" : "notification new"}>
           <div className="noti-msg">{notificationMessage(notification)}</div>
           <div className="noti-date">
             {prettyDateTime(notification.createdAt)}
           </div>
-        </a>
-      </Link>
+        </span>
+      </PageLink>
       <style jsx>{`
         .notification {
           color: ${colors.TEXT};
