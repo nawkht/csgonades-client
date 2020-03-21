@@ -2,14 +2,15 @@ import { FC } from "react";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";
 import { PageLink } from "../../common/PageLink";
+import { useRouter } from "next/router";
 
 type Props = {
   map: CsgoMap;
-  currentPath?: string | string[];
 };
 
-export const MapLink: FC<Props> = ({ map, currentPath }) => {
-  const selected = currentPath ? currentPath.includes(map) : false;
+export const MapLink: FC<Props> = ({ map }) => {
+  const { query } = useRouter();
+  const selected = query.map ? query.map.includes(map) : false;
 
   return (
     <>
@@ -19,7 +20,8 @@ export const MapLink: FC<Props> = ({ map, currentPath }) => {
         </PageLink>
       </li>
       <style jsx>{`
-        li {
+        li span {
+          display: block;
           padding: 15px;
           padding-left: 0;
           padding-right: 30px;
@@ -28,6 +30,10 @@ export const MapLink: FC<Props> = ({ map, currentPath }) => {
 
         li span {
           color: white;
+        }
+
+        .nav-selected {
+          font-weight: 500;
         }
       `}</style>
     </>

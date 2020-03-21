@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { FC, memo } from "react";
 import { PageCentralize } from "../../common/PageCentralize";
 import { Dimensions } from "../../constants/Constants";
@@ -10,8 +9,6 @@ type Props = {};
 
 export const MapNav: FC<Props> = memo(({}) => {
   const { colors } = useTheme();
-  const router = useRouter();
-  const currentRoute = router.query.name;
 
   return (
     <>
@@ -19,15 +16,15 @@ export const MapNav: FC<Props> = memo(({}) => {
         <PageCentralize>
           <div className="map-nav-wrap">
             <ul>
-              <MapLink map="dust2" currentPath={currentRoute} />
-              <MapLink map="mirage" currentPath={currentRoute} />
-              <MapLink map="inferno" currentPath={currentRoute} />
-              <MapLink map="overpass" currentPath={currentRoute} />
-              <MapLink map="train" currentPath={currentRoute} />
-              <MapLink map="cache" currentPath={currentRoute} />
-              <MapLink map="nuke" currentPath={currentRoute} />
-              <MapLink map="vertigo" currentPath={currentRoute} />
-              <MapLink map="cobblestone" currentPath={currentRoute} />
+              <MapLink map="dust2" />
+              <MapLink map="mirage" />
+              <MapLink map="inferno" />
+              <MapLink map="overpass" />
+              <MapLink map="train" />
+              <MapLink map="cache" />
+              <MapLink map="nuke" />
+              <MapLink map="vertigo" />
+              <MapLink map="cobblestone" />
             </ul>
             <ThemeToggler />
           </div>
