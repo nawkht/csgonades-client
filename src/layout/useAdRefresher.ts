@@ -26,11 +26,6 @@ export const ezDisplayAds = async (tries = 0) => {
   }
 
   try {
-    if (!ezstandalone.initialized) {
-      //ezstandalone.setIsPWA();
-      ezstandalone.init();
-    }
-
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(displayAds);
     } else {
