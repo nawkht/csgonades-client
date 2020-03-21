@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { tokenSelector } from "../../store/AuthStore/AuthSelectors";
 import { AdminRoutes } from "./actions";
 import { AdminStoreContext } from "./context";
+import { UserApi } from "../../api/UserApi";
+import { useGetOrUpdateToken } from "../../store/AuthStore/hooks/useGetToken";
 
 export const useAdminFetchPendingNades = () => {
   const token = useSelector(tokenSelector);
@@ -46,18 +48,29 @@ export const useAdminReports = () => {
 };
 
 export const useAdminUsers = () => {
-  const { state } = useContext(AdminStoreContext);
+  const getToken = useGetOrUpdateToken();
+  const { state, dispatch } = useContext(AdminStoreContext);
 
   const fetchUsers = useCallback(
     (page: number, limit: number, sortByActivity: boolean) => {
-      console.log("fetchUsers not implemented", {
-        page,
-        limit,
-        sortByActivity,
-      });
-      // TODO: Implement
+      (async () => {
+        const token = await getToken();
+        const result = await UserApi.fetchUsers(
+          page,
+          limit,
+          sortByActivity,
+          token
+        );
+
+        if (result.isOk()) {
+          dispatch({
+            type: "@@admin/ADD_USERS",
+            users: result.value,
+          });
+        }
+      })();
     },
-    []
+    [dispatch, getToken]
   );
 
   return {
