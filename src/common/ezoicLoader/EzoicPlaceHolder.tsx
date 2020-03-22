@@ -6,7 +6,19 @@ type Props = {
   height?: number;
 };
 
-export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
+export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
   const divId = `ezoic-pub-ad-placeholder-${id}`;
-  return <div key={divId} id={divId}></div>;
+  return (
+    <>
+      <div className="ez-div" key={divId} id={divId}></div>
+      <style jsx>{`
+        .ez-div {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          height: ${height ? `${height}px` : "auto"};
+        }
+      `}</style>
+    </>
+  );
 });
