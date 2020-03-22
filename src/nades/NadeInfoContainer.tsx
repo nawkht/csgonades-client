@@ -28,6 +28,7 @@ export const NadeInfoContainer: FC<Props> = ({
         .nade-info {
           margin: 0 auto;
           padding-bottom: 30px;
+          max-width: 750px;
         }
       `}</style>
     </>

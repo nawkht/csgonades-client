@@ -65,39 +65,49 @@ export const NadePage: FC = memo(() => {
         </Suspense>
       )}
 
-      <div className="title">
-        <NadeBreadcrumb nade={nade} />
-        <NadeTitle
-          title={nade.title}
-          map={nade.map}
-          type={nade.type}
-          onEditNade={() => setEditTitleVisisble(true)}
-          allowEdit={allowEditTitle}
-        />
-      </div>
-
-      <NadeVideoContainer nade={nade} />
-
-      <NadeActions
-        nade={nade}
-        onShowSignInWarning={() => setShowSignInWarning(true)}
-      />
-
-      <div className="nade-info">
-        <div className="info">
+      <div id="nade-page-grid">
+        <aside id="sidebar-left">
+          <div className="ez-300">
+            <EzoicPlaceHolder id={132} height={600} />
+          </div>
+          <div className="ez-160">
+            <EzoicPlaceHolder id={140} height={600} />
+          </div>
+        </aside>
+        <aside id="sidebar-right">
+          <div className="ez-300">
+            <EzoicPlaceHolder id={133} height={600} />
+          </div>
+          <div className="ez-160">
+            <EzoicPlaceHolder id={141} height={600} />
+          </div>
+        </aside>
+        <div id="nade-page-main">
+          <div className="title">
+            <NadeBreadcrumb nade={nade} />
+            <NadeTitle
+              title={nade.title}
+              map={nade.map}
+              type={nade.type}
+              onEditNade={() => setEditTitleVisisble(true)}
+              allowEdit={allowEditTitle}
+            />
+          </div>
+          <NadeVideoContainer nade={nade} />
+          <NadeActions
+            nade={nade}
+            onShowSignInWarning={() => setShowSignInWarning(true)}
+          />
           <NadeInfoContainer
             nade={nade}
             onEditDescription={() => setEditDescisisble(true)}
             onEditMeta={() => setEditMetaVisible(true)}
           />
-
-          <div className="ad-bottom">
-            <EzoicPlaceHolder id={136} />
-          </div>
         </div>
+      </div>
 
-        <div className="ad-left-info"></div>
-        <div className="ad-right-info"></div>
+      <div className="ad-bottom">
+        <EzoicPlaceHolder id={136} />
       </div>
 
       <SignInWarning
@@ -149,35 +159,32 @@ export const NadePage: FC = memo(() => {
         </Suspense>
       )}
       <style jsx>{`
-        .nade-info {
+        #nade-page-grid {
           display: grid;
           grid-template-columns: 300px 1fr 300px;
-          grid-template-areas: "adleft info adright";
+          grid-template-areas: "adleft main adright";
+          max-width: 100%;
           grid-column-gap: ${Dimensions.GUTTER_SIZE};
-          max-width: calc((16 / 9) * 600px + 160px * 2 + 60px);
+          padding-top: 50px;
+          max-width: calc((16 / 9 * 600px) + 300px + 300px + 60px);
           margin: 0 auto;
         }
 
-        .title {
-          margin-top: 40px;
+        #nade-page-main {
+          grid-area: main;
         }
 
-        .info {
-          grid-area: info;
-          margin-bottom: 30px;
-        }
-
-        .ad-left-info {
+        #sidebar-left {
           grid-area: adleft;
-          overflow: hidden;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
         }
 
-        .ad-right-info {
+        #sidebar-right {
           grid-area: adright;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          overflow: hidden;
+          justify-content: space-around;
+          align-items: center;
         }
 
         .ad-bottom {
@@ -186,23 +193,39 @@ export const NadePage: FC = memo(() => {
           justify-content: space-around;
         }
 
-        @media only screen and (max-width: 1280px) {
-          .nade-info {
+        .ez-160 {
+          display: none;
+        }
+
+        @media only screen and (max-width: 1400px) {
+          #nade-page-grid {
             grid-template-columns: 160px 1fr 160px;
-            grid-template-areas: "adleft info adright";
-            max-width: 1080px;
+            max-width: calc((16 / 9 * 600px) + 160px + 160px + 60px);
+          }
+
+          .ez-160 {
+            display: block;
+          }
+          .ez-300 {
+            display: none;
           }
         }
 
-        @media only screen and (max-width: 768px) {
-          .nade-info {
+        @media only screen and (max-width: 1000px) {
+          #nade-page-grid {
+            display: grid;
             grid-template-columns: 1fr;
-            grid-template-areas: "info";
-            max-width: 90vw;
+            grid-template-areas: "main";
+            grid-column-gap: ${Dimensions.GUTTER_SIZE};
+            padding-top: 50px;
+            max-width: calc((16 / 9 * 600px));
+            margin: 0 auto;
+            padding-left: 30px;
+            padding-right: 30px;
           }
 
-          .ad-left-info,
-          .ad-right-info {
+          #sidebar-left,
+          #sidebar-right {
             display: none;
           }
         }
