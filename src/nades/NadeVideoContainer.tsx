@@ -46,10 +46,16 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
 
         .ad-left-video {
           grid-area: ad;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .ad-right-video {
           grid-area: ad2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .video {
