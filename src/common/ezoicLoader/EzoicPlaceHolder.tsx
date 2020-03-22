@@ -12,6 +12,10 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
   const divId = `ezoic-pub-ad-placeholder-${id}`;
 
   useEffect(() => {
+    if (id !== 130) {
+      return;
+    }
+
     const delayedCheck = setTimeout(() => {
       const node = document.getElementById(divId);
       if (!node) {
@@ -38,7 +42,7 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
     }, 3000);
 
     return () => clearTimeout(delayedCheck);
-  }, [event, divId]);
+  }, [event, divId, id]);
 
   return <div key={divId} id={divId}></div>;
 });
