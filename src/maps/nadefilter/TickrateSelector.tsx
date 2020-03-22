@@ -47,7 +47,7 @@ export const TickrateSelector: FC<Props> = ({}) => {
 
         .filter-tick .filter-tick-label {
           text-align: center;
-          color: #dcdcdc;
+          color: ${colors.filterBg};
           width: 100%;
           font-size: 12px;
           margin-bottom: 5px;
