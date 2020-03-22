@@ -65,6 +65,17 @@ export const NadePage: FC = memo(() => {
         </Suspense>
       )}
 
+      <div className="title">
+        <NadeBreadcrumb nade={nade} />
+        <NadeTitle
+          title={nade.title}
+          map={nade.map}
+          type={nade.type}
+          onEditNade={() => setEditTitleVisisble(true)}
+          allowEdit={allowEditTitle}
+        />
+      </div>
+
       <div id="nade-page-grid">
         <aside id="sidebar-left">
           <div className="ez-300">
@@ -83,16 +94,6 @@ export const NadePage: FC = memo(() => {
           </div>
         </aside>
         <div id="nade-page-main">
-          <div className="title">
-            <NadeBreadcrumb nade={nade} />
-            <NadeTitle
-              title={nade.title}
-              map={nade.map}
-              type={nade.type}
-              onEditNade={() => setEditTitleVisisble(true)}
-              allowEdit={allowEditTitle}
-            />
-          </div>
           <NadeVideoContainer nade={nade} />
           <NadeActions
             nade={nade}
@@ -193,6 +194,10 @@ export const NadePage: FC = memo(() => {
 
         .ez-160 {
           display: none;
+        }
+
+        .title {
+          padding-top: 50px;
         }
 
         @media only screen and (max-width: 1400px) {

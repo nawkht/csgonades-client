@@ -21,7 +21,6 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
       </div>
       <style jsx>{`
         .video-grid {
-          margin-top: 30px;
         }
       `}</style>
     </>
