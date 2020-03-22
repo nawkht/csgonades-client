@@ -29,11 +29,13 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
       const ezLenght = node.innerHTML.length;
 
       if (ezLenght) {
+        console.log("> Ad displayed");
         event({
           category: "Ads",
           action: "Ad displayed",
         });
       } else {
+        console.log("> Empty placeholder");
         event({
           category: "Ads",
           action: "Empty placeholder",
