@@ -99,6 +99,9 @@ export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
 
         .map-nades-bottom {
           margin-top: 150px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
         }
 
         @media only screen and (max-width: 1700px) {
