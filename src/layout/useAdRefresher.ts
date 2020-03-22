@@ -31,11 +31,13 @@ export const ezDisplayAds = (tries = 0) => {
         ezstandalone.display();
         console.log("> ez display", csgoEzoicCodes);
       });
-    } else {
+    } else if (ezstandalone.enabled) {
       ezstandalone.define(...csgoEzoicCodes);
       ezstandalone.refresh();
       console.log("> ez refresh", csgoEzoicCodes);
     }
+
+    ezstandalone.init();
   } catch (error) {
     return;
   }
