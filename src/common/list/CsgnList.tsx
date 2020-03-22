@@ -62,38 +62,38 @@ function ListBase<T>(props: Props<T>) {
         }
 
         .ad-1-container {
-          grid-row-start: 3;
-          grid-row-end: 4;
+          grid-row-start: 4;
+          grid-row-end: 5;
           display: ${numItems > 6 ? "block" : "none"};
         }
 
         .ad-2-container {
-          grid-row-start: 8;
-          grid-row-end: 9;
+          grid-row-start: 9;
+          grid-row-end: 10;
           display: ${numItems > 18 ? "block" : "none"};
         }
 
         .ad-3-container {
-          grid-row-start: 13;
-          grid-row-end: 14;
+          grid-row-start: 14;
+          grid-row-end: 15;
           display: ${numItems > 30 ? "block" : "none"};
         }
 
         .ad-4-container {
-          grid-row-start: 18;
-          grid-row-end: 19;
+          grid-row-start: 19;
+          grid-row-end: 20;
           display: ${numItems > 42 ? "block" : "none"};
         }
 
         .ad-5-container {
-          grid-row-start: 23;
-          grid-row-end: 24;
+          grid-row-start: 24;
+          grid-row-end: 25;
           display: ${numItems > 54 ? "block" : "none"};
         }
 
         .ad-6-container {
-          grid-row-start: 28;
-          grid-row-end: 29;
+          grid-row-start: 29;
+          grid-row-end: 30;
           display: ${numItems > 66 ? "block" : "none"};
         }
 
