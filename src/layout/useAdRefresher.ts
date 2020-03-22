@@ -25,31 +25,27 @@ export const ezDisplayAds = async (tries = 0) => {
   }
 
   try {
+    const csgoEzoicCodes = findAdCode();
+
     if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(displayAds);
+      ezstandalone.cmd.push(function() {
+        ezstandalone.setIsPWA();
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> ez display", csgoEzoicCodes);
+      });
     } else {
-      ezstandalone.cmd.push(refreshAds);
+      ezstandalone.cmd.push(function() {
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.refresh();
+        console.log("> ez refresh", csgoEzoicCodes);
+      });
     }
   } catch (error) {
     return;
   }
 };
-
-function displayAds() {
-  const csgoEzoicCodes = findAdCode();
-  ezstandalone.setIsPWA();
-  ezstandalone.define(...csgoEzoicCodes);
-  ezstandalone.enable();
-  ezstandalone.display();
-  console.log("> ez display");
-}
-
-function refreshAds() {
-  const csgoEzoicCodes = findAdCode();
-  ezstandalone.define(...csgoEzoicCodes);
-  ezstandalone.refresh();
-  console.log("> ez refresh");
-}
 
 function findAdCode() {
   function isHidden(el: any) {
