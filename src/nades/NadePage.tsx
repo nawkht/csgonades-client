@@ -178,13 +178,11 @@ export const NadePage: FC = memo(() => {
           grid-area: adleft;
           display: flex;
           justify-content: space-around;
-          align-items: center;
         }
 
         #sidebar-right {
           grid-area: adright;
           justify-content: space-around;
-          align-items: center;
         }
 
         .ad-bottom {
