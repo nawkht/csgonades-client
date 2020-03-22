@@ -5,14 +5,11 @@ export const useAdRefresher = () => {
   const { pathname, query } = useRouter();
 
   useEffect(() => {
-    const delay = setTimeout(() => {
-      ezDisplayAds();
-    }, 500);
-    return () => clearTimeout(delay);
+    ezDisplayAds();
   }, [pathname, query]);
 };
 
-export const ezDisplayAds = async (tries = 0) => {
+export const ezDisplayAds = (tries = 0) => {
   if (tries >= 2) {
     return;
   }
