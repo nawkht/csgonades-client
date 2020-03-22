@@ -1,29 +1,32 @@
 import { useEffect } from "react";
 import { useAnalytics } from "../utils/Analytics";
+import { useRouter } from "next/router";
 
 export const useCheckIfAdPresent = () => {
+  const { pathname } = useRouter();
   const { event } = useAnalytics();
 
   useEffect(() => {
     const delayedCheck = setTimeout(() => {
+      const location = window.location.pathname + window.location.search;
       const foundAd = checkIfAdPresent();
       if (foundAd) {
-        console.log("> Ad present");
         event({
           category: "Ads",
           action: "Ad present",
+          label: location,
         });
       } else {
-        console.log("> Ad not present");
         event({
           category: "Ads",
           action: "Ad not present",
+          label: location,
         });
       }
     }, 3000);
 
     return () => clearTimeout(delayedCheck);
-  }, [event]);
+  }, [event, pathname]);
 };
 
 function checkIfAdPresent(): boolean {
