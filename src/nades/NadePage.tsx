@@ -96,12 +96,8 @@ export const NadePage: FC = memo(() => {
           </div>
         </div>
 
-        <div className="ad-left-info">
-          <EzoicPlaceHolder id={134} />
-        </div>
-        <div className="ad-right-info">
-          <EzoicPlaceHolder id={135} />
-        </div>
+        <div className="ad-left-info"></div>
+        <div className="ad-right-info"></div>
       </div>
 
       <SignInWarning
