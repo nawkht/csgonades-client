@@ -11,7 +11,6 @@ import { useSetupSession } from "./DataFetchers/useSetupSession";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
-import { useAdBlockMetrics } from "./useAdBlockMetrics";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { useAdRefresher } from "./useAdRefresher";
@@ -22,12 +21,11 @@ const AdminLink = lazy(() => import("./Misc/AdminLink"));
 export const Layout2: FC = memo(props => {
   const isAdminOrMod = useIsAdminOrModerator();
   const { colors } = useTheme();
+  useAdRefresher();
   useSetupSession();
   usePageView();
   usePreloadUser();
   useFetchClientConfig();
-  useAdBlockMetrics();
-  useAdRefresher();
 
   return (
     <>
