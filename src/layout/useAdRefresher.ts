@@ -5,7 +5,10 @@ export const useAdRefresher = () => {
   const { pathname, query } = useRouter();
 
   useEffect(() => {
-    ezDisplayAds();
+    const delay = setTimeout(() => {
+      ezDisplayAds();
+    }, 500);
+    return () => clearTimeout(delay);
   }, [pathname, query]);
 };
 
