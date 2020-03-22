@@ -10,16 +10,23 @@ export const useCheckIfAdPresent = () => {
     const delayedCheck = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
       const foundAd = checkIfAdPresent();
+      const adblockEnabled = typeof ezstandalone === "undefined";
       if (foundAd) {
+        const action = adblockEnabled
+          ? `Ad Present [AdBlock On]`
+          : `Ad Present [AdBlock Off]`;
         event({
           category: "Ads",
-          action: "Ad present",
+          action,
           label: location,
         });
       } else {
+        const action = adblockEnabled
+          ? `Ad Not Present [AdBlock On]`
+          : `Ad Not Present [AdBlock Off]`;
         event({
           category: "Ads",
-          action: "Ad not present",
+          action: action,
           label: location,
         });
       }
