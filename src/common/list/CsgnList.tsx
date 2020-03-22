@@ -25,22 +25,22 @@ function ListBase<T>(props: Props<T>) {
           </div>
         ))}
         <div className="ad-1-container">
-          <EzoicPlaceHolder key="In list 1" id={148} />
+          <EzoicPlaceHolder id={148} />
         </div>
         <div className="ad-2-container">
-          <EzoicPlaceHolder key="In list 2" id={149} />
+          <EzoicPlaceHolder id={149} />
         </div>
         <div className="ad-3-container">
-          <EzoicPlaceHolder key="In list 3" id={150} />
+          <EzoicPlaceHolder id={150} />
         </div>
         <div className="ad-4-container">
-          <EzoicPlaceHolder key="In list 4" id={151} />
+          <EzoicPlaceHolder id={151} />
         </div>
         <div className="ad-5-container">
-          <EzoicPlaceHolder key="In list 5" id={152} />
+          <EzoicPlaceHolder id={152} />
         </div>
         <div className="ad-6-container">
-          <EzoicPlaceHolder key="In list 6" id={153} />
+          <EzoicPlaceHolder id={153} />
         </div>
       </div>
       <style jsx>{`

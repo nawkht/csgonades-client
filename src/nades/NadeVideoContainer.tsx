@@ -25,11 +25,11 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
           </div>
         </div>
         <div className="ad-left-video">
-          <EzoicPlaceHolder key="Nade Page | Left video 2" id={132} />
+          <EzoicPlaceHolder id={132} />
         </div>
 
         <div className="ad-right-video">
-          <EzoicPlaceHolder key="Nade Page | Right video 2" id={133} />
+          <EzoicPlaceHolder id={133} />
         </div>
       </div>
       <style jsx>{`

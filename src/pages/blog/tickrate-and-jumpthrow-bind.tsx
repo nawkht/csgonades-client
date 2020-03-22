@@ -32,7 +32,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           button. Giving you slightly different results on 64 and 128 tick
           servers. See the video below.
         </p>
-        <EzoicPlaceHolder key="Blog | Under intro" id={121} />
+        <EzoicPlaceHolder id={121} />
         <h2>What is tickrate?</h2>
         <p>
           Tick rate is a networking term for game servers. It tells us how often
@@ -50,7 +50,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           depending on what you play the most on, you know what throws will work
           for you and which won&apos;t.
         </p>
-        <EzoicPlaceHolder key="Blog | Under second paragraph" id={154} />
+        <EzoicPlaceHolder id={154} />
         <h2>What is the jump throw bind?</h2>
         <p>
           The jump throw bind is a small script you can bind to one of your
@@ -103,7 +103,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <EzoicPlaceHolder key="Blog | In content long" id={155} />
+        <EzoicPlaceHolder id={155} />
         <p>
           Using the jumpthrow bind will give you the same result every time, if
           your playing on the same tickrate. So if you play on both matchmaking
@@ -136,7 +136,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           slight modification to the bind, It will still work correctly with the
           normal left-click throw as well.
         </p>
-        <EzoicPlaceHolder key="Blog | In content mid" id={122} />
+        <EzoicPlaceHolder id={122} />
         <h3>Extra range</h3>
         <BlogCodeSnippet
           code={`alias "+jumpthrow" "+jump;-attack;+forward";\nalias "-jumpthrow" "-jump;-forward";\nbind x "+jumpthrow;`}
@@ -150,7 +150,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
       </BlogPostArticle>
 
-      <EzoicPlaceHolder key="Blog | Huge bottom" id={123} />
+      <EzoicPlaceHolder id={123} />
       <style jsx>{``}</style>
     </>
   );

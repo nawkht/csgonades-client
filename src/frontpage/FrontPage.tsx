@@ -22,7 +22,7 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
           <FrontPageRecentPosts />
         </div>
 
-        <EzoicPlaceHolder key="Front page | Over recent nades" id={119} />
+        <EzoicPlaceHolder id={119} />
 
         <div className="recent-nade-wrap">
           <RecentNades recentNades={recentNades} />
@@ -31,7 +31,7 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
 
       <FrontpageActions />
       <div className="bottom-placeholder">
-        <EzoicPlaceHolder key="Front Page | Bottom" id={110} />
+        <EzoicPlaceHolder id={110} />
       </div>
 
       <style jsx>{`

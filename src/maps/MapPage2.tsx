@@ -47,7 +47,7 @@ export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
         </div>
 
         <div className="map-nades-bottom">
-          <EzoicPlaceHolder key="Map page | Under nade list" id={104} />
+          <EzoicPlaceHolder id={104} />
         </div>
       </div>
 
