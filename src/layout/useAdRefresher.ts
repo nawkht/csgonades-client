@@ -10,14 +10,14 @@ export const useAdRefresher = () => {
 };
 
 export const ezDisplayAds = (tries = 0) => {
-  if (tries >= 2) {
+  if (tries >= 4) {
     return;
   }
 
   if (typeof ezstandalone === "undefined") {
     setTimeout(() => {
       ezDisplayAds(tries + 1);
-    }, 2000);
+    }, 500);
     return;
   }
 
