@@ -39,7 +39,7 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
           action: "Empty placeholder",
         });
       }
-    }, 3000);
+    }, 8000);
 
     return () => clearTimeout(delayedCheck);
   }, [event, divId, id]);
