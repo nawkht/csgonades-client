@@ -44,9 +44,13 @@ function checkIfAdPresent(): boolean {
   let foundContent = false;
 
   elements.forEach(el => {
-    const hasContent = el.innerHTML.length > 0;
+    const adHtml = el.innerHTML;
+    const hasContent = adHtml.length > 0;
     if (hasContent) {
       foundContent = true;
+    }
+    if (adHtml.includes("iframe") && adHtml.includes("data-load-complete")) {
+      console.log("> Found unfilled ad unit");
     }
   });
 
