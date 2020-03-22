@@ -8,6 +8,7 @@ type Props = {
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
   const divId = `ezoic-pub-ad-placeholder-${id}`;
+  const key = new Date().getMilliseconds();
 
-  return <div id={divId}></div>;
+  return <div key={key} id={divId}></div>;
 });
