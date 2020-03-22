@@ -1,4 +1,5 @@
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useEffect } from "react";
+import { useAnalytics } from "../../utils/Analytics";
 
 type Props = {
   id: number;
@@ -7,22 +8,37 @@ type Props = {
 };
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
+  const { event } = useAnalytics();
   const divId = `ezoic-pub-ad-placeholder-${id}`;
 
-  const ref = useCallback(
-    (node: HTMLDivElement) => {
-      if (node === null) {
+  useEffect(() => {
+    const delayedCheck = setTimeout(() => {
+      const node = document.getElementById(divId);
+      if (!node) {
+        event({
+          category: "Ads",
+          action: "Placeholder removed",
+        });
         return;
       }
-      if (id === 140) {
-        setTimeout(() => {
-          const content = node.innerHTML;
-          console.log("> Placeholder content lenght", content.length);
-        }, 2000);
-      }
-    },
-    [id]
-  );
 
-  return <div ref={ref} key={divId} id={divId}></div>;
+      const ezLenght = node.innerHTML.length;
+
+      if (ezLenght) {
+        event({
+          category: "Ads",
+          action: "Ad displayed",
+        });
+      } else {
+        event({
+          category: "Ads",
+          action: "Empty placeholder",
+        });
+      }
+    }, 3000);
+
+    return () => clearTimeout(delayedCheck);
+  }, [event, divId]);
+
+  return <div key={divId} id={divId}></div>;
 });
