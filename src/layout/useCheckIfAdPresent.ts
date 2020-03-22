@@ -30,7 +30,7 @@ export const useCheckIfAdPresent = () => {
           label: location,
         });
       }
-    }, 5000);
+    }, 10000);
 
     return () => clearTimeout(delayedCheck);
   }, [event, pathname]);
