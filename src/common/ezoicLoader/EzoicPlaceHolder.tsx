@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 
 type Props = {
   id: number;
@@ -7,5 +7,22 @@ type Props = {
 };
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
-  return <div id={`ezoic-pub-ad-placeholder-${id}`}></div>;
+  const divId = `ezoic-pub-ad-placeholder-${id}`;
+
+  const ref = useCallback(
+    (node: HTMLDivElement) => {
+      if (node === null) {
+        return;
+      }
+      if (id === 140) {
+        setTimeout(() => {
+          const content = node.innerHTML;
+          console.log("> Placeholder content lenght", content.length);
+        }, 2000);
+      }
+    },
+    [id]
+  );
+
+  return <div ref={ref} key={divId} id={divId}></div>;
 });
