@@ -57,44 +57,37 @@ function ListBase<T>(props: Props<T>) {
         .ad-4-container,
         .ad-5-container,
         .ad-6-container {
-          grid-column-end: 4;
-          grid-column-start: 1;
+          grid-column: 1 / -1;
         }
 
         .ad-1-container {
-          grid-row-start: 4;
-          grid-row-end: 5;
-          display: ${numItems > 6 ? "block" : "none"};
+          grid-row: 4;
+          display: ${numItems > 9 ? "block" : "none"};
         }
 
         .ad-2-container {
-          grid-row-start: 9;
-          grid-row-end: 10;
-          display: ${numItems > 18 ? "block" : "none"};
+          grid-row: 9;
+          display: ${numItems > 21 ? "block" : "none"};
         }
 
         .ad-3-container {
-          grid-row-start: 14;
-          grid-row-end: 15;
-          display: ${numItems > 30 ? "block" : "none"};
+          grid-row: 14;
+          display: ${numItems > 33 ? "block" : "none"};
         }
 
         .ad-4-container {
-          grid-row-start: 19;
-          grid-row-end: 20;
-          display: ${numItems > 42 ? "block" : "none"};
+          grid-row: 19;
+          display: ${numItems > 45 ? "block" : "none"};
         }
 
         .ad-5-container {
-          grid-row-start: 24;
-          grid-row-end: 25;
-          display: ${numItems > 54 ? "block" : "none"};
+          grid-row: 24;
+          display: ${numItems > 57 ? "block" : "none"};
         }
 
         .ad-6-container {
-          grid-row-start: 29;
-          grid-row-end: 30;
-          display: ${numItems > 66 ? "block" : "none"};
+          grid-row: 29;
+          display: ${numItems > 69 ? "block" : "none"};
         }
 
         @media only screen and (max-width: 1200px) {
@@ -102,14 +95,34 @@ function ListBase<T>(props: Props<T>) {
             grid-template-columns: repeat(2, minmax(100px, 1fr));
           }
 
-          .ad-1-container,
-          .ad-2-container,
-          .ad-3-container,
-          .ad-4-container,
-          .ad-5-container,
+          .ad-1-container {
+            grid-row: 6;
+            display: ${numItems > 6 * 2 ? "block" : "none"};
+          }
+
+          .ad-2-container {
+            grid-row: 12;
+            display: ${numItems > 12 * 2 ? "block" : "none"};
+          }
+
+          .ad-3-container {
+            grid-row: 18;
+            display: ${numItems > 18 * 2 ? "block" : "none"};
+          }
+
+          .ad-4-container {
+            grid-row: 24;
+            display: ${numItems > 24 * 2 ? "block" : "none"};
+          }
+
+          .ad-5-container {
+            grid-row: 30;
+            display: ${numItems > 30 * 2 ? "block" : "none"};
+          }
+
           .ad-6-container {
-            grid-column-end: 3;
-            grid-column-start: 1;
+            grid-row: 37;
+            display: ${numItems > 36 * 2 ? "block" : "none"};
           }
         }
 
@@ -122,14 +135,34 @@ function ListBase<T>(props: Props<T>) {
             margin: 15px;
           }
 
-          .ad-1-container,
-          .ad-2-container,
-          .ad-3-container,
-          .ad-4-container,
-          .ad-5-container,
+          .ad-1-container {
+            grid-row: 7;
+            display: ${numItems >= 7 ? "block" : "none"};
+          }
+
+          .ad-2-container {
+            grid-row: 14;
+            display: ${numItems >= 14 ? "block" : "none"};
+          }
+
+          .ad-3-container {
+            grid-row: 25;
+            display: ${numItems >= 25 ? "block" : "none"};
+          }
+
+          .ad-4-container {
+            grid-row: 36;
+            display: ${numItems >= 36 ? "block" : "none"};
+          }
+
+          .ad-5-container {
+            grid-row: 47;
+            display: ${numItems >= 47 ? "block" : "none"};
+          }
+
           .ad-6-container {
-            grid-column-end: 2;
-            grid-column-start: 1;
+            grid-row: 58;
+            display: ${numItems >= 58 ? "block" : "none"};
           }
         }
       `}</style>
