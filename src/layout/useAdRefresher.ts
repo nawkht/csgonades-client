@@ -1,16 +1,12 @@
 import { useEffect } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 export const useAdRefresher = () => {
+  const { pathname, query } = useRouter();
+
   useEffect(() => {
     ezDisplayAds();
-
-    Router.events.on("routeChangeComplete", ezDisplayAds);
-
-    return () => {
-      Router.events.off("routeChangeComplete", ezDisplayAds);
-    };
-  }, []);
+  }, [pathname, query]);
 };
 
 export const ezDisplayAds = async (tries = 0) => {
@@ -38,6 +34,7 @@ export const ezDisplayAds = async (tries = 0) => {
 
 function displayAds() {
   const csgoEzoicCodes = findAdCode();
+  ezstandalone.setIsPWA();
   ezstandalone.define(...csgoEzoicCodes);
   ezstandalone.enable();
   ezstandalone.display();
