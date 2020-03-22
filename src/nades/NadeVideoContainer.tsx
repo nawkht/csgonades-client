@@ -35,11 +35,11 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
       <style jsx>{`
         .video-grid {
           display: grid;
-          grid-template-columns: 160px 1fr 160px;
+          grid-template-columns: 300px 1fr 300px;
           grid-template-rows: auto;
           grid-template-areas: "ad video ad2";
           grid-column-gap: ${Dimensions.GUTTER_SIZE};
-          max-width: calc((16 / 9) * 600px + 160px * 2 + 60px);
+          max-width: calc((16 / 9) * 600px + 300px * 2 + 60px);
           margin: 0 auto;
           padding-top: 30px;
         }
