@@ -15,6 +15,7 @@ import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { useAdRefresher } from "./useAdRefresher";
 import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
+import { useCheckIfAdPresent } from "./useCheckIfAdPresent";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
@@ -26,6 +27,7 @@ export const Layout2: FC = memo(props => {
   usePageView();
   usePreloadUser();
   useFetchClientConfig();
+  useCheckIfAdPresent();
 
   return (
     <>
