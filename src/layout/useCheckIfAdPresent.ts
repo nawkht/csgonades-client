@@ -30,7 +30,7 @@ export const useCheckIfAdPresent = () => {
           label: location,
         });
       }
-    }, 10000);
+    }, 3000);
 
     return () => clearTimeout(delayedCheck);
   }, [event, pathname]);
@@ -48,9 +48,6 @@ function checkIfAdPresent(): boolean {
     const hasContent = adHtml.length > 0;
     if (hasContent) {
       foundContent = true;
-    }
-    if (adHtml.includes("iframe") && !adHtml.includes("3rd party ad content")) {
-      console.log("> Found unfilled ad unit", el);
     }
   });
 
