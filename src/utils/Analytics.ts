@@ -51,6 +51,7 @@ type EventOptions = {
   label?: string;
   value?: number;
   ignore?: boolean;
+  nonInteraction?: boolean;
 };
 
 type PageViewOpts = {
@@ -70,7 +71,13 @@ class GoogleAnalytics {
     }
     try {
       this.init();
-      ReactGA.event(opts);
+      ReactGA.event({
+        action: opts.action,
+        category: opts.category,
+        label: opts.category,
+        nonInteraction: opts.nonInteraction,
+        value: opts.value,
+      });
     } catch (error) {
       // no-op
     }

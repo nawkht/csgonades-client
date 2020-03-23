@@ -13,11 +13,13 @@ export const useAdblockAnalytics = () => {
         event({
           category: "Ads",
           action: `Adblock On`,
+          nonInteraction: true,
         });
       } else {
         event({
           category: "Ads",
           action: "Adblock Off",
+          nonInteraction: true,
         });
       }
     }, 1000);
