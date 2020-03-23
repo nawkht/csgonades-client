@@ -44,12 +44,8 @@ export const useAdSlotsHandler = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const delay = setTimeout(() => {
-      if (adSlots.length) {
-        ezDisplayAds();
-      }
-    }, 500);
-
-    return () => clearTimeout(delay);
+    if (adSlots.length) {
+      ezDisplayAds();
+    }
   }, [adSlots]);
 };
