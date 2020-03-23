@@ -138,7 +138,7 @@ export const useOnSignIn = () => {
     (async () => {
       const { userDetails, userToken } = await trySignInFunc();
       if (!userDetails || !userToken) {
-        Router.push("/");
+        Router.push("/", "/");
       }
 
       dispatch(setToken(userToken));
@@ -147,9 +147,9 @@ export const useOnSignIn = () => {
       const isFirstSignIn = checkIsFirstSignIn(userDetails);
 
       if (isFirstSignIn || userDetails.steamId === "76561198199195838") {
-        Router.push(`/finishprofile`);
+        Router.push(`/finishprofile`, "/finishprofile");
       } else {
-        Router.push("/");
+        Router.push("/", "/");
       }
     })();
   }, [dispatch]);

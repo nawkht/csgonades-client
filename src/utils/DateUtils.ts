@@ -42,12 +42,16 @@ const months = {
 };
 
 export function dateMinutesAgo(date: Date | string) {
-  const now = new Date();
-  const jsDate = typeof date === "string" ? new Date(date) : date;
-  const dif = now.getTime() - jsDate.getTime();
+  try {
+    const now = new Date();
+    const jsDate = typeof date === "string" ? new Date(date) : date;
+    const dif = now.getTime() - jsDate.getTime();
 
-  const SecondsFromNowAndThen = dif / 1000;
-  const secondsBetweenDates = Math.abs(SecondsFromNowAndThen);
+    const SecondsFromNowAndThen = dif / 1000;
+    const secondsBetweenDates = Math.abs(SecondsFromNowAndThen);
 
-  return secondsBetweenDates / 60;
+    return secondsBetweenDates / 60;
+  } catch (error) {
+    return 1;
+  }
 }
