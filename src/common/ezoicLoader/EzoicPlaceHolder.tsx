@@ -1,4 +1,5 @@
-import { FC, memo } from "react";
+import { FC, memo, useEffect } from "react";
+import { useRegisterPlaceholder } from "../../store/AdStore/hooks";
 
 type Props = {
   id: number;
@@ -7,6 +8,12 @@ type Props = {
 };
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
+  const registerPlaceHolder = useRegisterPlaceholder();
+
+  useEffect(() => {
+    registerPlaceHolder(id);
+  }, [registerPlaceHolder, id]);
+
   const divId = `ezoic-pub-ad-placeholder-${id}`;
   return (
     <>
