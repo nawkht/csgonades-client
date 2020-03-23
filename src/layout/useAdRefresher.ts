@@ -26,6 +26,7 @@ export const ezDisplayAds = (tries = 0) => {
 
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function() {
+        ezstandalone.setIsPWA();
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
