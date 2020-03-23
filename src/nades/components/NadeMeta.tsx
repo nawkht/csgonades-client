@@ -40,6 +40,7 @@ export const NadeMeta: FC<Props> = ({ nade }) => {
         .nade-meta {
           display: flex;
           color: white;
+          max-width: 100%;
           overflow-x: auto;
         }
 
@@ -66,6 +67,19 @@ export const NadeMeta: FC<Props> = ({ nade }) => {
 
         p {
           font-size: 16px;
+        }
+
+        @media only screen and (max-width: 900px) {
+          .nade-meta-item {
+            padding: 10px;
+          }
+          h4 {
+            font-size: 10px;
+          }
+
+          p {
+            font-size: 14px;
+          }
         }
       `}</style>
     </>
