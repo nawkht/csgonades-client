@@ -79,18 +79,18 @@ export const NadePage: FC = memo(() => {
       <div id="nade-page-grid">
         <aside id="sidebar-left">
           <div className="ez-300">
-            <EzoicPlaceHolder id={132} height={600} />
+            <EzoicPlaceHolder id={132} />
           </div>
           <div className="ez-160">
-            <EzoicPlaceHolder id={140} height={600} />
+            <EzoicPlaceHolder id={140} />
           </div>
         </aside>
         <aside id="sidebar-right">
           <div className="ez-300">
-            <EzoicPlaceHolder id={133} height={600} />
+            <EzoicPlaceHolder id={133} />
           </div>
           <div className="ez-160">
-            <EzoicPlaceHolder id={141} height={600} />
+            <EzoicPlaceHolder id={141} />
           </div>
         </aside>
         <div id="nade-page-main">
