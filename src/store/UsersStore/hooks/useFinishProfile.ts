@@ -12,12 +12,12 @@ export const useFinishProfile = () => {
     async (steamId: string, updatedField: UserUpdateDTO) => {
       const token = await getToken();
 
-      const result = await UserApi.updateUser(steamId, updatedField, token);
-
       if (!token) {
         console.error("Missing token, cant update.");
         return;
       }
+
+      const result = await UserApi.updateUser(steamId, updatedField, token);
 
       if (result.isErr()) {
         return;

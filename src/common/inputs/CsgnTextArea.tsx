@@ -3,7 +3,7 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   label: string;
-  value: string;
+  value?: string;
   onChange: (value: string) => void;
 };
 

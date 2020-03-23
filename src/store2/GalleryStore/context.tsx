@@ -7,6 +7,7 @@ type ContextApi = {
   dispatch: React.Dispatch<GalleryActions>;
 };
 
+// @ts-ignore
 export const GalleryStoreContext = React.createContext<ContextApi>(null);
 
 export const GalleryStoreProvider: FC = ({ children }) => {

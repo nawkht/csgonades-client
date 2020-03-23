@@ -55,6 +55,12 @@ export const useAdminUsers = () => {
     (page: number, limit: number, sortByActivity: boolean) => {
       (async () => {
         const token = await getToken();
+
+        if (!token) {
+          console.error("Missing token");
+          return;
+        }
+
         const result = await UserApi.fetchUsers(
           page,
           limit,

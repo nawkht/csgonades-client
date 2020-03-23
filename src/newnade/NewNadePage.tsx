@@ -16,7 +16,7 @@ export const NewNadePage: FC = () => {
   const getToken = useGetOrUpdateToken();
   const [currentStep, setCurrentStep] = useState<NewNadeStep>("gfycat");
   const { colors } = useTheme();
-  const [gfyData, setGfyData] = useState<GfycatData>(null);
+  const [gfyData, setGfyData] = useState<GfycatData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   function onGfycatAdded(gfyData: GfycatData) {

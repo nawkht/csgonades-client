@@ -9,6 +9,10 @@ type Props = {
 };
 
 const UserPageComponent: NextPage<Props> = ({ user }) => {
+  if (!user) {
+    return <div>404! User not found</div>;
+  }
+
   return (
     <>
       <SEO title={user.nickname} canonical={`/user/${user.steamId}`} />

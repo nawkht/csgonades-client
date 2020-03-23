@@ -7,6 +7,7 @@ type ContextApi = {
   dispatch: React.Dispatch<AdminActions>;
 };
 
+// @ts-ignore
 export const AdminStoreContext = React.createContext<ContextApi>(null);
 
 export const AdminStoreProvider: FC = ({ children }) => {

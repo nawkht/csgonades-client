@@ -106,36 +106,45 @@ export const NadePage: FC = memo(() => {
           </div>
         </aside>
         <div id="nade-page-main">
-          <div className="share-buttons">
-            <span>Share on:</span>
-            <div>
-              <RedditShareButton url={shareUrl} title={nadeTitleBuilder(nade)}>
-                <RedditIcon size={30} round />
-              </RedditShareButton>
+          {nade?.status === "accepted" && (
+            <div className="share-buttons">
+              <span>Share on:</span>
+              <div>
+                <RedditShareButton
+                  url={shareUrl}
+                  title={nadeTitleBuilder(nade)}
+                >
+                  <RedditIcon size={30} round />
+                </RedditShareButton>
+              </div>
+              <div>
+                <FacebookShareButton
+                  url={shareUrl}
+                  quote={nadeTitleBuilder(nade)}
+                >
+                  <FacebookIcon size={30} round />
+                </FacebookShareButton>
+              </div>
+              <div>
+                <TwitterShareButton
+                  url={shareUrl}
+                  title={nadeTitleBuilder(nade)}
+                >
+                  <TwitterIcon size={30} round />
+                </TwitterShareButton>
+              </div>
+              <div>
+                <VKShareButton
+                  url={shareUrl}
+                  title={nadeTitleBuilder(nade)}
+                  image={nade?.images.thumbnailUrl}
+                >
+                  <VKIcon size={30} round />
+                </VKShareButton>
+              </div>
             </div>
-            <div>
-              <FacebookShareButton
-                url={shareUrl}
-                quote={nadeTitleBuilder(nade)}
-              >
-                <FacebookIcon size={30} round />
-              </FacebookShareButton>
-            </div>
-            <div>
-              <TwitterShareButton url={shareUrl} title={nadeTitleBuilder(nade)}>
-                <TwitterIcon size={30} round />
-              </TwitterShareButton>
-            </div>
-            <div>
-              <VKShareButton
-                url={shareUrl}
-                title={nadeTitleBuilder(nade)}
-                image={nade?.images.thumbnailUrl}
-              >
-                <VKIcon size={30} round />
-              </VKShareButton>
-            </div>
-          </div>
+          )}
+
           <NadeVideoContainer nade={nade} />
           <NadeActions
             nade={nade}

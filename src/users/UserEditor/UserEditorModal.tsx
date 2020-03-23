@@ -33,6 +33,11 @@ export const UserEditorModal: FC<Props> = ({ user }) => {
   }
 
   function onSave() {
+    if (!signedInUser) {
+      console.warn("No signed in user");
+      return;
+    }
+
     updateUser(signedInUser.steamId, {
       nickname,
       email,

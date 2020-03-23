@@ -3,7 +3,6 @@ import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useAdminRoute } from "../store2/AdminStore/hooks";
-import { assertNever } from "../utils/Common";
 import { AdminGallery } from "./AdminGallery/AdminGallery";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
@@ -29,7 +28,6 @@ export const AdminPage: FC = () => {
       case "gallery":
         return <AdminGallery />;
       default:
-        assertNever(route);
         return null;
     }
   }
