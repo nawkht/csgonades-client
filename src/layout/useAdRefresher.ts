@@ -32,10 +32,12 @@ export const ezDisplayAds = (tries = 0) => {
         ezstandalone.display();
       });
     } else if (ezstandalone.enabled) {
-      ezstandalone.cmd.push(function() {
-        ezstandalone.define(...csgoEzoicCodes);
-        ezstandalone.refresh();
-      });
+      setTimeout(() => {
+        ezstandalone.cmd.push(function() {
+          ezstandalone.define(...csgoEzoicCodes);
+          ezstandalone.refresh();
+        });
+      }, 1000);
     }
   } catch (error) {
     return;
