@@ -166,7 +166,7 @@ export const NadePage: FC = memo(() => {
           grid-template-areas: "adleft main adright";
           max-width: 100%;
           grid-column-gap: ${Dimensions.GUTTER_SIZE};
-          padding-top: 50px;
+          padding-top: 30px;
           max-width: calc((16 / 9 * 600px) + 300px + 300px + 60px);
           margin: 0 auto;
         }
@@ -216,11 +216,8 @@ export const NadePage: FC = memo(() => {
 
         @media only screen and (max-width: 1000px) {
           #nade-page-grid {
-            display: grid;
             grid-template-columns: 1fr;
             grid-template-areas: "main";
-            grid-column-gap: ${Dimensions.GUTTER_SIZE};
-            padding-top: 50px;
             max-width: calc((16 / 9 * 600px));
             margin: 0 auto;
             padding-left: 30px;
@@ -230,6 +227,14 @@ export const NadePage: FC = memo(() => {
           #sidebar-left,
           #sidebar-right {
             display: none;
+          }
+        }
+
+        @media only screen and (max-width: 600px) {
+          #nade-page-grid {
+            padding-top: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
           }
         }
       `}</style>

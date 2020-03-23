@@ -19,10 +19,6 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
           controls={isMobile ? "mobile" : "desktop"}
         />
       </div>
-      <style jsx>{`
-        .video-grid {
-        }
-      `}</style>
     </>
   );
 };
