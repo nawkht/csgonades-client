@@ -9,21 +9,12 @@ import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
 import { useNadeRegisterView } from "../store2/NadePageStore/hooks/useNadeRegisterView";
 import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
-import { NadeTitle, nadeTitleBuilder } from "./components/NadeTitle";
+import { NadeTitle } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
 import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  TwitterShareButton,
-  VKShareButton,
-  VKIcon,
-  RedditShareButton,
-  RedditIcon,
-} from "react-share";
+import { NadeShareActions } from "./NadeShareActions";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -58,8 +49,6 @@ export const NadePage: FC = memo(() => {
       nade.type
     )}`;
   }
-
-  const shareUrl = `https://www.csgonades.com/nades/${nade.slug || nade.id}`;
 
   return (
     <>
@@ -106,45 +95,7 @@ export const NadePage: FC = memo(() => {
           </div>
         </aside>
         <div id="nade-page-main">
-          {nade?.status === "accepted" && (
-            <div className="share-buttons">
-              <span>Share on:</span>
-              <div>
-                <RedditShareButton
-                  url={shareUrl}
-                  title={nadeTitleBuilder(nade)}
-                >
-                  <RedditIcon size={30} round />
-                </RedditShareButton>
-              </div>
-              <div>
-                <FacebookShareButton
-                  url={shareUrl}
-                  quote={nadeTitleBuilder(nade)}
-                >
-                  <FacebookIcon size={30} round />
-                </FacebookShareButton>
-              </div>
-              <div>
-                <TwitterShareButton
-                  url={shareUrl}
-                  title={nadeTitleBuilder(nade)}
-                >
-                  <TwitterIcon size={30} round />
-                </TwitterShareButton>
-              </div>
-              <div>
-                <VKShareButton
-                  url={shareUrl}
-                  title={nadeTitleBuilder(nade)}
-                  image={nade?.images.thumbnailUrl}
-                >
-                  <VKIcon size={30} round />
-                </VKShareButton>
-              </div>
-            </div>
-          )}
-
+          <NadeShareActions nade={nade} />
           <NadeVideoContainer nade={nade} />
           <NadeActions
             nade={nade}
@@ -211,21 +162,6 @@ export const NadePage: FC = memo(() => {
         </Suspense>
       )}
       <style jsx>{`
-        .share-buttons {
-          display: flex;
-          max-width: 1000px;
-          margin: 0 auto;
-          align-items: center;
-          justify-content: flex-end;
-          margin-bottom: 10px;
-        }
-
-        .share-buttons div {
-          margin-left: 10px;
-          position: relative;
-          top: 3px;
-        }
-
         #nade-page-grid {
           display: grid;
           grid-template-columns: 300px 1fr 300px;
