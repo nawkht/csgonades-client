@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 
 type Props = {};
 
-const START_DELAY = 2;
-
 export const AdBlockNotice: FC<Props> = memo(({}) => {
   const { event } = useAnalytics();
   const [hasDisplayed, setHasDisplayed] = useState(false);
@@ -25,7 +23,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           setShowNotice(true);
           setHasDisplayed(true);
         }
-      }, 10000);
+      }, 15000);
     }
 
     return () => {
@@ -59,6 +57,13 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
     <>
       <div className="notice-container">
         <div className="elements">
+          <div className="player">
+            <img className="player-img" src="/blocknotice/player.svg" />
+            <div className="tear tear-1">
+              <img className="tear-img" src="/blocknotice/tear.svg" />
+            </div>
+          </div>
+
           <div className="message">
             <p>
               Please don&apos;t make me <strong>ECO</strong> next round!
@@ -73,31 +78,30 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
               </button>
             </div>
           </div>
-          <div className="player">
-            <img src="/blocknotice/player.svg" />
-          </div>
-          <div className="tear tear-1">
-            <img src="/blocknotice/tear.svg" />
-          </div>
-          <div className="tear tear-2">
-            <img src="/blocknotice/tear.svg" />
-          </div>
         </div>
       </div>
       <style jsx>{`
         .notice-container {
           position: fixed;
-          top: calc(50% - 150px);
+          top: 0;
+          left: 0;
           right: 0;
-          width: 425px;
-          height: 300px;
-          color: white;
-          z-index: 999;
-          transform: translateX(100%);
+          bottom: 0;
+          display: flex;
+          align-content: center;
+          justify-content: space-around;
+          z-index: 900;
+          background: rgba(0, 0, 0, 0.95);
           animation-name: show-notice;
-          animation-duration: 2s;
+          animation-duration: 0.5s;
           animation-fill-mode: forwards;
-          animation-delay: ${START_DELAY}s;
+        }
+
+        .elements {
+          align-self: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .buttons {
@@ -125,102 +129,61 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
         .tear {
           position: absolute;
-          right: 47px;
-          top: 135px;
+          top: 115px;
+          left: 69px;
           transform: scale(0);
-          animation-name: tear-animate;
-          animation-duration: 3s;
-          animation-iteration-count: infinite;
           opacity: 0;
+          animation-name: tear-animate;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
         }
 
         .player {
+          position: relative;
           width: 200px;
           height: 200px;
-          position: absolute;
-          top: 20px;
-          right: -40px;
-          transform: rotate(-15deg);
-          animation-name: twist;
-          animation-duration: 0.5s;
-          animation-iteration-count: infinite;
         }
 
-        .player img {
+        .player .player-img {
           max-width: 100%;
+          transform: rotate(50deg);
         }
 
         .message {
+          z-index: 999;
+          position: relative;
+          top: -40px;
           background: #fff;
           color: #222;
-          position: absolute;
-          top: -25px;
-          right: 100px;
           padding: 20px;
-          padding-right: 50px;
+          max-width: 400px;
           border-radius: 20px;
           border: 1px solid #bbb;
-          opacity: 0;
-          animation-name: show-text;
-          animation-duration: 0.3s;
-          animation-fill-mode: forwards;
-          animation-delay: ${START_DELAY + 2}s;
-        }
-
-        .elements {
-          position: relative;
         }
 
         @keyframes tear-animate {
-          0% {
+          from {
             transform: scale(0) translateY(0px);
-            opacity: 0;
+            opacity: 0.3;
           }
 
           50% {
-            transform: scale(0.6) translateY(50px);
             opacity: 1;
           }
 
-          95% {
-            opacity: 0.01;
-          }
-
-          100% {
-            transform: scale(0) translateY(100px);
+          to {
+            transform: scale(0.4) translateY(75px);
             opacity: 0;
           }
         }
 
         @keyframes show-notice {
           0% {
-            transform: translateX(100%);
-          }
-
-          100% {
-            transform: translateX(20px);
-          }
-        }
-
-        @keyframes show-text {
-          0% {
             opacity: 0;
           }
 
           100% {
             opacity: 1;
-          }
-        }
-
-        @keyframes twist {
-          0% {
-            transform: rotate(-13deg);
-          }
-          50% {
-            transform: rotate(-15deg);
-          }
-          100% {
-            transform: rotate(-13deg);
           }
         }
       `}</style>
