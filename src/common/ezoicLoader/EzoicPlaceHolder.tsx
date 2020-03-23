@@ -17,10 +17,6 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
           justify-content: space-around;
           align-items: center;
           height: ${height ? `${height}px` : "auto"};
-          background: url("/images/spinner.svg");
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: 30px;
         }
       `}</style>
     </>
