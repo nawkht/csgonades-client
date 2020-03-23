@@ -13,7 +13,7 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
     <>
       <div className="video-grid">
         <div className="mobile-banner">
-          <EzoicPlaceHolder id={137} />
+          <EzoicPlaceHolder id={156} />
         </div>
         <ResponsiveVideo
           hdUrL={nade.gfycat.largeVideoUrl}
