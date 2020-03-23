@@ -6,7 +6,7 @@ import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { SEO } from "../../layout/SEO2";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
-  title: "Tickrate and it's effect on jumpthrow bind",
+  title: "Tickrate and It's Effect on Jumpthrow Bind",
   slug: "tickrate-and-jumpthrow-bind",
   imageUrl: "/blogimg/jump.jpg",
   thumbnailUrl: "/blogimg/jump_thumb.jpg",
