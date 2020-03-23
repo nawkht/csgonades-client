@@ -100,6 +100,23 @@ export function LightenDarkenColor(col: string, amt: number) {
   return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
 }
 
-export const removeMarkdown = (value: string) => {
-  return removeMd(value);
+export const descriptionSimplify = (value?: string) => {
+  if (!value) {
+    return "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
+  }
+
+  let desc = removeMd(value);
+  desc = desc.replace(/(\r\n|\n|\r)/gm, " ");
+  desc = truncateString(desc, 117);
+  return desc;
 };
+
+function truncateString(str, num) {
+  // If the length of str is less than or equal to num
+  // just return str--don't truncate it.
+  if (str.length <= num) {
+    return str;
+  }
+  // Return str truncated with '...' concatenated to the end of str.
+  return str.slice(0, num) + "...";
+}

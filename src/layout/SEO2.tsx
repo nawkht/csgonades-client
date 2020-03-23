@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import Head from "next/head";
 import { Nade } from "../models/Nade/Nade";
-import { capitalize, removeMarkdown } from "../utils/Common";
+import { capitalize, descriptionSimplify } from "../utils/Common";
 
 type Props = {
   title?: string;
@@ -14,9 +14,7 @@ type Props = {
 export const SEO: FC<Props> = memo(
   ({ description, title, canonical, thumbnail, nadeSeo }) => {
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
-    const pageDescription = description
-      ? removeMarkdown(description)
-      : "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
+    const pageDescription = descriptionSimplify(description);
 
     return (
       <>
@@ -63,7 +61,7 @@ function generateNadeLdJson(nade: Nade) {
   "@context": "https://schema.org",
   "@type": "VideoObject",
   "name": "${nadeTitleBuilder(nade)}",
-  "description": "${nade.description ? removeMarkdown(nade.description) : ""}",
+  "description": "${descriptionSimplify(nade.description)}",
   "thumbnailUrl": [ "${nade.images.thumbnailUrl}" ],
   "uploadDate": "${nade.createdAt}",
   "duration": "${nade.gfycat.duration}",
