@@ -35,16 +35,16 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
   function onDismiss() {
     event({
-      category: "AdBlockCheck",
-      action: "Dismiss clicked",
+      category: "Ad",
+      action: "Notice Dismiss clicked",
     });
     setShowNotice(false);
   }
 
   function onOk() {
     event({
-      category: "AdBlockCheck",
-      action: "Ok clicked",
+      category: "Ad",
+      action: "Notice Ok clicked",
     });
     setShowNotice(false);
   }
