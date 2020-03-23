@@ -9,7 +9,7 @@ export const useAdRefresher = () => {
   }, [pathname, query]);
 };
 
-export const ezDisplayAds = (tries = 0) => {
+export const ezDisplayAds = async (tries = 0) => {
   if (tries >= 4) {
     return;
   }
@@ -20,6 +20,8 @@ export const ezDisplayAds = (tries = 0) => {
     }, 500);
     return;
   }
+
+  await sleep(500);
 
   try {
     const csgoEzoicCodes = findAdCode();
@@ -73,4 +75,4 @@ function findAdCode() {
   return adIds;
 }
 
-// const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
