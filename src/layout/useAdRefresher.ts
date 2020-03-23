@@ -1,25 +1,12 @@
 import { useEffect } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export const useAdRefresher = () => {
   const { pathname, query } = useRouter();
 
   useEffect(() => {
-    Router.events.on("routeChangeStart", destroyAds);
-    return () => Router.events.off("routeChangeStart", destroyAds);
-  }, []);
-
-  useEffect(() => {
     ezDisplayAds();
   }, [pathname, query]);
-};
-
-const destroyAds = () => {
-  try {
-    ezstandalone.destroy();
-  } catch (error) {
-    // no-op
-  }
 };
 
 export const ezDisplayAds = (tries = 0) => {

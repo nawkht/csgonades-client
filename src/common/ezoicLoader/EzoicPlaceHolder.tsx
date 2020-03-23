@@ -20,6 +20,7 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
           background: url("/images/spinner.svg");
           background-position: center;
           background-repeat: no-repeat;
+          background-size: 30px;
         }
       `}</style>
     </>
