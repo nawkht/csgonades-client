@@ -15,17 +15,9 @@ export const FrontpageActions: FC<Props> = ({}) => {
         >
           <div className="action discord">
             <div className="discord-msg">
-              Join us
-              <br />
-              on <span className="fat">Discord</span>
+              Join us on <span className="fat">Discord</span>
             </div>
-            <div className="discord-sub-msg">
-              One of us!
-              <br />
-              <span className="invis">__</span>One of us!
-              <br />
-              <span className="invis">___</span>...One of us!
-            </div>
+            <div className="sub-msg">One of us! One of us! ..One of us!</div>
             <div className="discord-logo">
               <FaDiscord />
             </div>
@@ -39,15 +31,11 @@ export const FrontpageActions: FC<Props> = ({}) => {
         >
           <div className="action paypal">
             <p className="paypal-msg">
-              Consider donating
-              <br />
-              through <span>Paypal</span>
+              Consider donating with <span>Paypal</span>
             </p>
 
-            <p className="paypal-sub-msg">
-              <em>*glub* *glub*</em>
-              <br />
-              I&apos;m running out of energy drink&apos;s.
+            <p className="sub-msg">
+              *glub* I&apos;m running out of energy drink&apos;s.
             </p>
 
             <div className="paypal-logo">
@@ -63,28 +51,31 @@ export const FrontpageActions: FC<Props> = ({}) => {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          margin-bottom: 50px;
         }
 
         .action {
-          padding: 40px;
-          width: 300px;
+          padding: 20px;
           color: white;
           border-radius: 5px;
           margin: 20px;
           transition: transform 0.2s;
+          width: 300px;
+          height: 110px;
         }
 
         .action:hover {
           transform: scale(1.02);
         }
 
-        .discord-msg {
-          margin-bottom: 20px;
-          font-size: 20px;
+        .discord-msg,
+        .paypal-msg {
+          margin-bottom: 10px;
+          font-size: 18px;
           line-height: 28px;
         }
 
-        .discord-sub-msg {
+        .sub-msg {
           font-size: 14px;
           color: rgba(255, 255, 255, 0.7);
         }
@@ -92,14 +83,14 @@ export const FrontpageActions: FC<Props> = ({}) => {
         .discord {
           background: #7289da;
           position: relative;
-          min-height: 220px;
         }
 
-        .discord-logo {
+        .discord-logo,
+        .paypal-logo {
           position: absolute;
-          top: 20px;
-          right: 20px;
-          font-size: 100px;
+          bottom: 15px;
+          right: 15px;
+          font-size: 50px;
           opacity: 0.2;
           color: #fff;
         }
@@ -107,21 +98,6 @@ export const FrontpageActions: FC<Props> = ({}) => {
         .paypal {
           position: relative;
           background: #00659d;
-          min-height: 220px;
-        }
-
-        .paypal-logo {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          font-size: 100px;
-          opacity: 0.2;
-          color: #fff;
-        }
-
-        .paypal-msg {
-          font-size: 20px;
-          line-height: 28px;
         }
 
         .paypal-msg span {

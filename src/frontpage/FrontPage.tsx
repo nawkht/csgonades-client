@@ -18,6 +18,8 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
       <FrontPageJumbo />
 
       <PageCentralize>
+        <FrontpageActions />
+
         <div className="recent-wrap">
           <FrontPageRecentPosts />
         </div>
@@ -29,7 +31,6 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
         </div>
       </PageCentralize>
 
-      <FrontpageActions />
       <div className="bottom-placeholder">
         <EzoicPlaceHolder id={110} />
       </div>
