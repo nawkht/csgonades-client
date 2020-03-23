@@ -27,7 +27,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
               </h2>
             </div>
             <div className="top-placement">
-              <EzoicPlaceHolder id={130} height={150} width={730} />
+              <EzoicPlaceHolder id={130} width={730} />
             </div>
           </div>
         </PageCentralize>
@@ -40,8 +40,9 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
             ${colors.jumboGradientEnd} 66.89%
           );
           margin-bottom: 40px;
-          padding-bottom: 40px;
-          padding-top: 40px;
+          min-height: 230px;
+          display: flex;
+          align-items: center;
         }
 
         .map-welcome-wrap {
@@ -52,6 +53,8 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
         .welcome-msg {
           align-self: center;
           margin-right: 40px;
+          padding-bottom: 40px;
+          padding-top: 40px;
           flex: 1;
         }
 
@@ -66,6 +69,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           font-weight: 300;
           flex: 1;
           margin: 0;
+          padding: 0;
         }
 
         .map-welcome h2 {

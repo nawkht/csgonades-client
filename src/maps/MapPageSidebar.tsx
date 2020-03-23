@@ -6,10 +6,10 @@ export const MapPageSideBar: FC = memo(() => {
     <>
       <div className="sjakt">
         <div className="ez-160 sticky">
-          <EzoicPlaceHolder width={160} height={600} id={140} />
+          <EzoicPlaceHolder width={160} id={140} />
         </div>
         <div className="ez-300 sticky">
-          <EzoicPlaceHolder width={300} height={600} id={144} />
+          <EzoicPlaceHolder width={300} id={144} />
         </div>
       </div>
 

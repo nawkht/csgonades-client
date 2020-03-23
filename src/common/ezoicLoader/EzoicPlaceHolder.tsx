@@ -10,13 +10,22 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
   const divId = `ezoic-pub-ad-placeholder-${id}`;
   return (
     <>
-      <div className="ez-div" key={divId} id={divId}></div>
+      <div className="ez-wrap">
+        <div className="ez-div" key={divId} id={divId}></div>
+      </div>
       <style jsx>{`
         .ez-div {
           display: flex;
           justify-content: space-around;
           align-items: center;
           height: ${height ? `${height}px` : "auto"};
+          background: url("/images/spinner.svg");
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        .ez-wrap {
+          position: relative;
         }
       `}</style>
     </>
