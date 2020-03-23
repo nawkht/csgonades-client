@@ -74,7 +74,7 @@ class GoogleAnalytics {
       ReactGA.event({
         action: opts.action,
         category: opts.category,
-        label: opts.category,
+        label: opts.label,
         nonInteraction: opts.nonInteraction,
         value: opts.value,
       });
