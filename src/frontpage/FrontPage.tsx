@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { NadeLight } from "../models/Nade/Nade";
 import { FrontpageActions } from "./FrontpageActions";
 import { FrontPageJumbo } from "./FrontPageJumbo";
@@ -24,16 +23,10 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
           <FrontPageRecentPosts />
         </div>
 
-        <EzoicPlaceHolder id={119} />
-
         <div className="recent-nade-wrap">
           <RecentNades recentNades={recentNades} />
         </div>
       </PageCentralize>
-
-      <div className="bottom-placeholder">
-        <EzoicPlaceHolder id={110} />
-      </div>
 
       <style jsx>{`
         .recent-wrap {
