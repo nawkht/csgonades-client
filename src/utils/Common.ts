@@ -1,5 +1,6 @@
 import Router from "next/router";
 import { NadeType } from "../models/Nade/NadeType";
+import removeMd from "remove-markdown";
 
 export const capitalize = (s: string) => {
   if (typeof s !== "string") return "";
@@ -98,3 +99,7 @@ export function LightenDarkenColor(col: string, amt: number) {
 
   return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
 }
+
+export const removeMarkdown = (value: string) => {
+  return removeMd(value);
+};

@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import Head from "next/head";
 import { Nade } from "../models/Nade/Nade";
-import { capitalize } from "../utils/Common";
+import { capitalize, removeMarkdown } from "../utils/Common";
 
 type Props = {
   title?: string;
@@ -15,8 +15,9 @@ export const SEO: FC<Props> = memo(
   ({ description, title, canonical, thumbnail, nadeSeo }) => {
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
     const pageDescription = description
-      ? description
+      ? removeMarkdown(description)
       : "CSGO Nades is a website that collects nades for Counter-Strike Global Offensive. You can browse smokes, flashbangs, molotovs or he-grenades for the most popular maps in CS:GO.";
+
     return (
       <>
         <Head>
@@ -26,7 +27,7 @@ export const SEO: FC<Props> = memo(
             name="keywords"
             content="dust2 train mirage inferno cobblestone overpass cache nades flashbang smoke incendiary molotov he grenade csgo cs:go counter-strike global offensive"
           />
-          <meta name="og:description" content={description} />
+          <meta name="og:description" content={pageDescription} />
           <meta name="og:title" content={pageTitle} />
           <meta name="og:site_name" content="CSGO Nades" />
           <meta name="og:type" content="website" />
@@ -62,7 +63,7 @@ function generateNadeLdJson(nade: Nade) {
   "@context": "https://schema.org",
   "@type": "VideoObject",
   "name": "${nadeTitleBuilder(nade)}",
-  "description": "${nade.description}",
+  "description": "${nade.description ? removeMarkdown(nade.description) : ""}",
   "thumbnailUrl": [ "${nade.images.thumbnailUrl}" ],
   "uploadDate": "${nade.createdAt}",
   "duration": "${nade.gfycat.duration}",
