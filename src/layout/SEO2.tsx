@@ -77,7 +77,7 @@ function generateNadeLdJson(nade: Nade) {
 
 function nadeTitleBuilder(nade: Nade) {
   const { map, type, title } = nade;
-  const titleBuilder = [];
+  const titleBuilder: string[] = [];
 
   if (map) {
     titleBuilder.push(capitalize(map));

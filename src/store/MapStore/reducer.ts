@@ -119,15 +119,9 @@ function handleIncrementNadeFavCount(
     ? currentMapNades.find(n => n.id === action.nadeId)
     : null;
 
-  console.log({
-    foundNade,
-  });
-
-  if (!foundNade) {
+  if (!foundNade || !currentMapNades) {
     return state;
   }
-
-  console.log("Old favcount", foundNade.favoriteCount);
 
   const modifiedNade = { ...foundNade };
   if (incOrdDec === "inc") {
@@ -137,8 +131,6 @@ function handleIncrementNadeFavCount(
     console.log("Dec", incOrdDec);
     modifiedNade.favoriteCount -= 1;
   }
-
-  console.log("New favcount", modifiedNade.favoriteCount);
 
   const otherNades = currentMapNades.filter(n => n.id !== action.nadeId);
 

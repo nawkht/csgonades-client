@@ -138,7 +138,7 @@ export const useOnSignIn = () => {
     (async () => {
       const { userDetails, userToken } = await trySignInFunc();
       if (!userDetails || !userToken) {
-        Router.push("/", "/");
+        return Router.push("/", "/");
       }
 
       dispatch(setToken(userToken));

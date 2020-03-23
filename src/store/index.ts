@@ -32,6 +32,6 @@ function createMiddleware() {
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export const initReduxStore = (initialState: AppState): Store<AppState> => {
+export const initReduxStore = (initialState?: AppState): Store<AppState> => {
   return createStore(rootReducer, initialState, createMiddleware());
 };

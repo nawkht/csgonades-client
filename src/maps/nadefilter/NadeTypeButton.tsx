@@ -5,7 +5,7 @@ import { iconFromType } from "../../utils/Common";
 
 type Props = {
   type: NadeType;
-  currentType: NadeType;
+  currentType?: NadeType;
   mobile?: boolean;
   onFilterByType: (type: NadeType) => void;
 };

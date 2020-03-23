@@ -12,6 +12,7 @@ type ContextApi = {
   dispatch: React.Dispatch<NadeActions>;
 };
 
+// @ts-ignore
 export const NadePageStoreContext = React.createContext<ContextApi>(null);
 
 type Props = {

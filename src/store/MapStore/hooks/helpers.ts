@@ -30,7 +30,7 @@ export function filterByFavorite(nades: NadeLight[], byFavorite: boolean) {
 
 export function filterByTickrate(
   nades: NadeLight[],
-  byTickrate: Tickrate
+  byTickrate?: Tickrate
 ): NadeLight[] {
   if (byTickrate === "tick128") {
     return nades.filter(n => n.tickrate !== "tick64");

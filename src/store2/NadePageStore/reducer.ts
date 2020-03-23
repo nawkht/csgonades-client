@@ -23,6 +23,10 @@ export const NadePageReducer: Reducer<NadePageState, NadeActions> = (
       };
     }
     case "@@nades/ON_FAVORITE_NADE": {
+      if (!state.nade) {
+        return state;
+      }
+
       return {
         ...state,
         nade: {
@@ -32,6 +36,10 @@ export const NadePageReducer: Reducer<NadePageState, NadeActions> = (
       };
     }
     case "@@nades/ON_UNFAVORITE_NADE": {
+      if (!state.nade) {
+        return state;
+      }
+
       return {
         ...state,
         nade: {
