@@ -12,7 +12,7 @@ export const blogTickrateAndJumpthrow: BlogPost = {
   thumbnailUrl: "/blogimg/jump_thumb.jpg",
   createdAt: "2020-03-15T07:51:30.196Z",
   intro:
-    "You just set up jumpthrow bind and practiced offline for a sick smoke for Mirage. Your friends ask you to join a game on FACEIT, and you throw your smoke, but it missed! What the heck? You just tried it out... Why did this happen?",
+    "You just set up jumpthrow bind and practised offline for a sick smoke for Mirage. Your friends ask you to join a game on FACEIT, and you throw your smoke, but it missed! What the heck? You just tried it out... Why did this happen?",
 };
 
 const TickRateAndJumpthrowBindBlogPost: FC = () => {

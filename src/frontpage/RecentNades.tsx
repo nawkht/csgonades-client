@@ -39,7 +39,7 @@ export const RecentNades: FC<Props> = ({ recentNades }) => {
   return (
     <>
       <div className="recent-nades">
-        <h3>Recent nades</h3>
+        <h3>Recent Nades</h3>
 
         <CsgnList<NadeLight>
           data={nades}

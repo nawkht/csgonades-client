@@ -11,7 +11,7 @@ export const FrontPageRecentPosts: FC<Props> = ({}) => {
   return (
     <>
       <div className="recent-posts">
-        <h2>Recent posts</h2>
+        <h2>Recent Posts</h2>
         <BlogList posts={[blogTickrateAndJumpthrow]} />
       </div>
       <style jsx>{`
