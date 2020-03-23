@@ -70,15 +70,22 @@ export const NadeMeta: FC<Props> = ({ nade }) => {
         }
 
         @media only screen and (max-width: 900px) {
+          .nade-meta {
+            flex-wrap: wrap;
+            flex-direction: row;
+          }
           .nade-meta-item {
             padding: 10px;
-          }
-          h4 {
-            font-size: 10px;
+            min-width: 50%;
+            border-bottom: 1px solid #138a74;
           }
 
-          p {
-            font-size: 14px;
+          .nade-meta-item:nth-child(2) {
+            border-right: none;
+          }
+
+          .nade-meta-item:nth-child(4) {
+            border-right: none;
           }
         }
       `}</style>
