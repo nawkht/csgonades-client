@@ -12,9 +12,6 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
   return (
     <>
       <div className="video-grid">
-        <div className="mobile-banner">
-          <EzoicPlaceHolder id={156} />
-        </div>
         <ResponsiveVideo
           hdUrL={nade.gfycat.largeVideoUrl}
           sdUrl={nade.gfycat.smallVideoUrl}
@@ -22,6 +19,9 @@ export const NadeVideoContainer: FC<Props> = ({ nade }) => {
           poster={nade.images.thumbnailUrl}
           controls={isMobile ? "mobile" : "desktop"}
         />
+        <div className="mobile-banner">
+          <EzoicPlaceHolder id={156} />
+        </div>
       </div>
       <style jsx>{`
         .mobile-banner {
