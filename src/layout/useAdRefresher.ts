@@ -1,22 +1,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useIsAdmin } from "../store/AuthStore/AuthHooks";
 
 export const useAdRefresher = () => {
-  const isAdmin = useIsAdmin();
   const { pathname, query } = useRouter();
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      const csgoEzoicCodes = findAdCode();
-      console.log("> Found placeholders", csgoEzoicCodes);
-
-      if (!isAdmin) {
-        ezDisplayAds();
-      }
+      ezDisplayAds();
     }, 500);
     return () => clearTimeout(delay);
-  }, [pathname, query, isAdmin]);
+  }, [pathname, query]);
 };
 
 export const ezDisplayAds = (tries = 0) => {
