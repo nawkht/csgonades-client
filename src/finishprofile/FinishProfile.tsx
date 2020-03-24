@@ -13,9 +13,17 @@ export const FinishProfile: FC<Props> = ({ user }) => {
   const [nickname, setNickname] = useState(user.nickname);
   const [email, setEmail] = useState(user.email);
   const [bio, setBio] = useState(user.bio);
+  const [error, setError] = useState<string | undefined>();
   const { colors } = useTheme();
 
   function onSubmit() {
+    if (nickname.includes("@")) {
+      setError(
+        "It looks like you put your e-mail as your nickname. This is not very smart as it will be visible to anyone."
+      );
+      return;
+    }
+
     setLoading(true);
     finishProfile(user.steamId, {
       nickname,
@@ -36,6 +44,12 @@ export const FinishProfile: FC<Props> = ({ user }) => {
         </PageCentralize>
       </div>
       <PageCentralize>
+        {!!error && (
+          <div className="error">
+            <h3>Error</h3>
+            <p>{error}</p>
+          </div>
+        )}
         <div className="profile-form">
           <span className="label">
             Nickname <span className="require">*</span>
@@ -78,6 +92,15 @@ export const FinishProfile: FC<Props> = ({ user }) => {
           color: ${colors.TEXT};
         }
 
+        .error {
+          background: #800d0d;
+          color: white;
+          max-width: 400px;
+          margin: 30px auto;
+          padding: 20px;
+          border-radius: 5px;
+        }
+
         .profile-form {
           display: flex;
           flex-direction: column;
@@ -88,6 +111,7 @@ export const FinishProfile: FC<Props> = ({ user }) => {
 
         .label {
           margin-bottom: 5px;
+          margin-top: 30px;
           font-size: 18px;
           color: ${colors.TEXT};
         }
