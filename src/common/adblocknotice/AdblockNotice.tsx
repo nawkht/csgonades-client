@@ -23,7 +23,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           setShowNotice(true);
           setHasDisplayed(true);
         }
-      }, 15000);
+      }, 10000);
     }
 
     return () => {
@@ -66,8 +66,8 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
           <div className="message">
             <p>
-              Please don&apos;t make me <strong>ECO</strong> next round!
-              Whitelist this site from <strong>AdBlock</strong> ❤️
+              Don&apos;t make me <strong>ECO</strong>!<br />
+              Whitelist this site from <strong>AdBlock</strong> 👊
             </p>
             <div className="buttons">
               <button className="ok-btn" onClick={onDismiss}>
@@ -91,7 +91,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           align-content: center;
           justify-content: space-around;
           z-index: 900;
-          background: rgba(0, 0, 0, 0.95);
+          background: rgba(0, 0, 0, 0.5);
           animation-name: show-notice;
           animation-duration: 0.5s;
           animation-fill-mode: forwards;
@@ -106,25 +106,30 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
         .buttons {
           display: flex;
+          white-space: nowrap;
         }
 
         .dismiss-btn,
         .ok-btn {
           border: none;
           display: block;
-          border: 1px solid #0c8a34;
-          color: #0c8a34;
+          border: none;
+          background: #0aa6d1;
+          color: #fff;
           padding: 10px;
           border-radius: 5px;
           outline: none;
-          background: transparent;
           cursor: pointer;
+          flex: 1;
+          margin-right: 15px;
+          font-size: 18px;
         }
 
         .dismiss-btn {
           border: 1px solid #bbb;
           color: #bbb;
-          margin-left: 10px;
+          margin-right: 0;
+          background: transparent;
         }
 
         .tear {
@@ -142,6 +147,11 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           position: relative;
           width: 200px;
           height: 200px;
+          transform: translateY(30px) scale(0.8);
+          animation-name: player-appear;
+          animation-duration: 0.5s;
+          animation-fill-mode: forwards;
+          animation-delay: 0.25s;
         }
 
         .player .player-img {
@@ -152,13 +162,14 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
         .message {
           z-index: 999;
           position: relative;
-          top: -40px;
-          background: #fff;
+          top: -150px;
+          background: rgba(255, 255, 255, 1);
           color: #222;
           padding: 20px;
           max-width: 400px;
-          border-radius: 20px;
-          border: 1px solid #bbb;
+          border-radius: 5px;
+          text-align: center;
+          font-size: 18px;
         }
 
         @keyframes tear-animate {
@@ -172,7 +183,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           }
 
           to {
-            transform: scale(0.4) translateY(75px);
+            transform: scale(0.5) translateY(75px);
             opacity: 0;
           }
         }
@@ -184,6 +195,15 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
           100% {
             opacity: 1;
+          }
+        }
+
+        @keyframes player-appear {
+          from {
+            transform: translateY(30px) scale(0.8);
+          }
+          to {
+            transform: translateY(-100px) scale(1);
           }
         }
       `}</style>
