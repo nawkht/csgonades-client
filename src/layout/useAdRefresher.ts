@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 export const useAdRefresher = () => {
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
 
   useEffect(() => {
     const delay = setTimeout(() => {
       ezDisplayAds();
     }, 500);
     return () => clearTimeout(delay);
-  }, [pathname]);
+  }, [pathname, query]);
 };
 
 export const ezDisplayAds = (tries = 0) => {
