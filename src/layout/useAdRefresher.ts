@@ -36,11 +36,13 @@ export const ezDisplayAds = async (tries = 0) => {
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
+        console.log("> Placeholders", csgoEzoicCodes.join(","));
       });
     } else if (ezstandalone.enabled) {
       ezstandalone.cmd.push(function() {
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.refresh();
+        console.log("> Placeholders", csgoEzoicCodes.join(","));
       });
     }
   } catch (error) {
