@@ -19,7 +19,7 @@ export const useAdRefresher = () => {
   }, [pathname, query, isAdmin]);
 };
 
-export const ezDisplayAds = async (tries = 0) => {
+export const ezDisplayAds = (tries = 0) => {
   if (tries >= 4) {
     return;
   }
@@ -83,5 +83,3 @@ function findAdCode() {
 
   return adIds;
 }
-
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
