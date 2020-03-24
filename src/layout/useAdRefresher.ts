@@ -8,6 +8,9 @@ export const useAdRefresher = () => {
 
   useEffect(() => {
     const delay = setTimeout(() => {
+      const csgoEzoicCodes = findAdCode();
+      console.log("> Found placeholders", csgoEzoicCodes);
+
       if (!isAdmin) {
         ezDisplayAds();
       }
