@@ -1,46 +1,12 @@
 import { useEffect } from "react";
-import Router from "next/router";
 
-export const useAdRefresher = () => {
+export const useNewAdRefresher = () => {
   useEffect(() => {
-    console.log("> Ad refresher");
-
-    let showDelay: NodeJS.Timer;
-
-    setTimeout(() => {
+    const delay = setTimeout(() => {
       ezDisplayAds();
     }, 500);
-
-    function onRouteChangeBegin() {
-      if (showDelay) {
-        clearTimeout(showDelay);
-      }
-      ezDestroy();
-    }
-
-    function onRouteChangeComplete() {
-      showDelay = setTimeout(() => {
-        ezDisplayAds();
-      }, 500);
-    }
-
-    Router.events.on("routeChangeStart", onRouteChangeBegin);
-    Router.events.on("routeChangeComplete", onRouteChangeComplete);
-
-    return () => {
-      Router.events.off("routeChangeStart", onRouteChangeBegin);
-      Router.events.off("routeChangeComplete", onRouteChangeComplete);
-      clearTimeout(showDelay);
-    };
+    return () => clearTimeout(delay);
   }, []);
-};
-
-const ezDestroy = () => {
-  try {
-    ezstandalone.destroy();
-  } catch (error) {
-    // no-op
-  }
 };
 
 export const ezDisplayAds = (tries = 0) => {
@@ -67,14 +33,13 @@ export const ezDisplayAds = (tries = 0) => {
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
-        console.log("> Placeholders", csgoEzoicCodes.join(","));
+        console.log("> enable", csgoEzoicCodes.join(","));
       });
     } else if (ezstandalone.enabled) {
       ezstandalone.define(...csgoEzoicCodes);
       ezstandalone.refresh();
+      console.log("> refresh", csgoEzoicCodes.join(","));
     }
-
-    ezstandalone.init();
   } catch (error) {
     return;
   }

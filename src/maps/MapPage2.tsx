@@ -13,6 +13,7 @@ import { Dimensions } from "../constants/Constants";
 import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
 import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
+import { useNewAdRefresher } from "../layout/useAdRefresher";
 
 type Props = {
   map: CsgoMap;
@@ -20,6 +21,7 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
+  useNewAdRefresher();
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
