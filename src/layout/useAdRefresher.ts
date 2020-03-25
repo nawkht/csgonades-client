@@ -41,6 +41,7 @@ export const ezDisplayAds = (tries = 0) => {
     } else if (ezstandalone.enabled) {
       ezstandalone.cmd.push(function() {
         ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.display();
         ezstandalone.refresh();
         console.log("> Placeholders", csgoEzoicCodes.join(","));
       });
