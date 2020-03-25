@@ -64,19 +64,14 @@ export const ezDisplayAds = (tries = 0) => {
 
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function() {
-        ezstandalone.setIsPWA();
-        ezstandalone.setCollapseEmptyDiv();
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
         console.log("> Placeholders", csgoEzoicCodes.join(","));
       });
     } else if (ezstandalone.enabled) {
-      ezstandalone.cmd.push(function() {
-        ezstandalone.define(...csgoEzoicCodes);
-        ezstandalone.refresh();
-        console.log("> Placeholders", csgoEzoicCodes.join(","));
-      });
+      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.refresh();
     }
 
     ezstandalone.init();
