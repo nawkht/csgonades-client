@@ -54,7 +54,6 @@ const AdTesting: FC<Props> = ({}) => {
         <div className="page">
           <div className="buttons">
             <h3>Standalone commands</h3>
-            <button onClick={onEnable}>ezstandalone.enable()</button>
 
             <span>Define ads, PAGE1+PAGE2</span>
             <button onClick={onDefineAll}>
@@ -71,6 +70,7 @@ const AdTesting: FC<Props> = ({}) => {
               ezstandalone.define(159, 160)
             </button>
 
+            <button onClick={onEnable}>ezstandalone.enable()</button>
             <button onClick={onDisplay}>ezstandalone.display()</button>
             <button onClick={onRefresh}>ezstandalone.refresh()</button>
           </div>
@@ -127,11 +127,22 @@ const AdTesting: FC<Props> = ({}) => {
         </div>
       </div>
       <style jsx>{`
+        button {
+          background: #000;
+          color: white;
+          border: none;
+          cursor: pointer;
+          padding: 10px;
+          border-radius: 5px;
+          margin-right: 10px;
+        }
+
         .debug {
           background: #000;
           color: white;
           margin-top: 30px;
           padding: 20px;
+          color: yellow;
         }
 
         .placeholder-wrap {
