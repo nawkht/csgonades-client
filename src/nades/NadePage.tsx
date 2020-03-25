@@ -15,6 +15,7 @@ import { NadeInfoContainer } from "./NadeInfoContainer";
 import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
 import { NadeShareActions } from "./NadeShareActions";
+import { NadeComments } from "./comments/NadeComments";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -106,6 +107,7 @@ export const NadePage: FC = memo(() => {
             onEditDescription={() => setEditDescisisble(true)}
             onEditMeta={() => setEditMetaVisible(true)}
           />
+          <NadeComments nadeId={nade.id} />
         </div>
       </div>
 

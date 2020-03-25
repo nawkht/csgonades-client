@@ -23,8 +23,8 @@ export const NadeDetails: FC<Props> = ({ nade }) => {
 
         <div className="nade-stats">
           <span>
-            {nade.viewCount} views | {nade.favoriteCount} favorites |{" "}
-            {prettyDate(nade.createdAt)}
+            {nade.viewCount} views | {nade.commentCount} comments |{" "}
+            {nade.favoriteCount} favorites | {prettyDate(nade.createdAt)}
           </span>
         </div>
       </div>

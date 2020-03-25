@@ -35,6 +35,7 @@ export type Nade = {
   status: Status;
   statusInfo?: StatusInfo;
   viewCount: number;
+  commentCount: number;
   favoriteCount: number;
   mapEndCoord?: MapCoordinates;
   score: number;
