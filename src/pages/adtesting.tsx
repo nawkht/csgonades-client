@@ -30,6 +30,10 @@ const AdTesting: FC<Props> = ({}) => {
     ezstandalone.define(159, 160);
   }
 
+  function onDisplay() {
+    ezstandalone.display();
+  }
+
   return (
     <>
       <div className="ad-testing">
@@ -44,6 +48,7 @@ const AdTesting: FC<Props> = ({}) => {
             <h3>Standalone commands</h3>
             <button onClick={onInit}>ezstandalone.init()</button>
             <button onClick={onEnable}>ezstandalone.enable()</button>
+            <button onClick={onDisplay}>ezstandalone.display()</button>
             <button onClick={onRefresh}>ezstandalone.refresh()</button>
             <button onClick={onDefineAll}>
               ezstandalone.define(157, 158, 159, 160)
