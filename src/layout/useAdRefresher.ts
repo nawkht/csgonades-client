@@ -8,24 +8,20 @@ export const useAdRefresher = () => {
     let showDelay: NodeJS.Timer;
 
     setTimeout(() => {
-      console.log("> Init");
       ezDisplayAds();
-    }, 2000);
+    }, 500);
 
     function onRouteChangeBegin() {
       if (showDelay) {
-        console.log("Aborting show ads");
         clearTimeout(showDelay);
       }
       ezDestroy();
-      console.log("> Destroying ads");
     }
 
     function onRouteChangeComplete() {
-      console.log("> Route change complete");
       showDelay = setTimeout(() => {
         ezDisplayAds();
-      }, 2000);
+      }, 500);
     }
 
     Router.events.on("routeChangeStart", onRouteChangeBegin);
@@ -42,7 +38,6 @@ export const useAdRefresher = () => {
 const ezDestroy = () => {
   try {
     ezstandalone.destroy();
-    console.log("> ez destory");
   } catch (error) {
     // no-op
   }
