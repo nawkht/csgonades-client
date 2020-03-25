@@ -1,19 +1,42 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Router from "next/router";
 
 export const useAdRefresher = () => {
-  const { pathname, query } = useRouter();
-
   useEffect(() => {
-    const delay = setTimeout(() => {
+    console.log("> Ad refresher");
+
+    let showDelay: NodeJS.Timer;
+
+    setTimeout(() => {
+      console.log("> Init");
       ezDisplayAds();
-    }, 500);
+    }, 2000);
+
+    function onRouteChangeBegin() {
+      if (showDelay) {
+        console.log("Aborting show ads");
+        clearTimeout(showDelay);
+      }
+      ezDestroy();
+      console.log("> Destroying ads");
+    }
+
+    function onRouteChangeComplete() {
+      console.log("> Route change complete");
+      showDelay = setTimeout(() => {
+        ezDisplayAds();
+      }, 2000);
+    }
+
+    Router.events.on("routeChangeStart", onRouteChangeBegin);
+    Router.events.on("routeChangeComplete", onRouteChangeComplete);
 
     return () => {
-      clearTimeout(delay);
-      ezDestroy();
+      Router.events.off("routeChangeStart", onRouteChangeBegin);
+      Router.events.off("routeChangeComplete", onRouteChangeComplete);
+      clearTimeout(showDelay);
     };
-  }, [pathname, query]);
+  }, []);
 };
 
 const ezDestroy = () => {
