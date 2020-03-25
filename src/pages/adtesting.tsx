@@ -42,6 +42,10 @@ const AdTesting: FC<Props> = ({}) => {
     ezstandalone.display();
   }
 
+  function onDestroy() {
+    ezstandalone.destroy();
+  }
+
   return (
     <>
       <div className="ad-testing">
@@ -73,6 +77,7 @@ const AdTesting: FC<Props> = ({}) => {
             <button onClick={onEnable}>ezstandalone.enable()</button>
             <button onClick={onDisplay}>ezstandalone.display()</button>
             <button onClick={onRefresh}>ezstandalone.refresh()</button>
+            <button onClick={onDestroy}>ezstandalone.destroy()</button>
           </div>
 
           {page === 1 && (
