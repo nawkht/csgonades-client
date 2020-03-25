@@ -8,8 +8,21 @@ export const useAdRefresher = () => {
     const delay = setTimeout(() => {
       ezDisplayAds();
     }, 500);
-    return () => clearTimeout(delay);
+
+    return () => {
+      clearTimeout(delay);
+      ezDestroy();
+    };
   }, [pathname, query]);
+};
+
+const ezDestroy = () => {
+  try {
+    ezstandalone.destroy();
+    console.log("> ez destory");
+  } catch (error) {
+    // no-op
+  }
 };
 
 export const ezDisplayAds = (tries = 0) => {
