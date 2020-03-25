@@ -2,10 +2,7 @@ import { useEffect } from "react";
 
 export const useNewAdRefresher = () => {
   useEffect(() => {
-    const delay = setTimeout(() => {
-      ezDisplayAds();
-    }, 500);
-    return () => clearTimeout(delay);
+    ezDisplayAds();
   }, []);
 };
 
@@ -29,7 +26,7 @@ export const ezDisplayAds = (tries = 0) => {
     }
 
     if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(function() {
+      ezstandalone.cmd.push(function () {
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
@@ -56,7 +53,7 @@ function findAdCode() {
     'div[id^="ezoic-pub-ad-placeholder"]'
   );
 
-  elements.forEach(el => {
+  elements.forEach((el) => {
     if (isHidden(el)) {
       return;
     }
