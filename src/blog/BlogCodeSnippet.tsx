@@ -20,8 +20,6 @@ export const BlogCodeSnippet: FC<Props> = ({ code }) => {
           background: #444;
           color: white;
           padding: 30px;
-          margin-left: -10px;
-          margin-right: -10px;
           border-radius: 5px;
           margin-bottom: 40px;
           white-space: pre-wrap;
