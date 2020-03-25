@@ -7,7 +7,7 @@ export const useAdRefresher = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       ezDisplayAds();
-    }, 450);
+    }, 500);
     return () => clearTimeout(delay);
   }, [pathname, query]);
 };
@@ -45,6 +45,8 @@ export const ezDisplayAds = (tries = 0) => {
         console.log("> Placeholders", csgoEzoicCodes.join(","));
       });
     }
+
+    ezstandalone.init();
   } catch (error) {
     return;
   }
