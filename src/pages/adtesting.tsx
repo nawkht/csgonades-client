@@ -121,14 +121,17 @@ const AdTesting: FC<Props> = ({}) => {
               </div>
             </div>
           )}
-        </div>
-
-        <div className="debug">
-          <h2>Debug</h2>
-          <span>ezstandalone.placeholders:</span> {JSON.stringify(placeholders)}
-          <br />
-          <span>ezstandalone.selectedplaceholder:</span>{" "}
-          {JSON.stringify(selectedPlaceholder)}
+          <div className="debug">
+            <h2>Debug</h2>
+            <span>ezstandalone.placeholders:</span>
+            <br />
+            {JSON.stringify(placeholders)}
+            <br />
+            <br />
+            <span>ezstandalone.selectedplaceholder:</span>
+            <br />
+            {JSON.stringify(selectedPlaceholder)}
+          </div>
         </div>
       </div>
       <style jsx>{`
