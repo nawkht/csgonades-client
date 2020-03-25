@@ -18,10 +18,6 @@ const AdTesting: FC<Props> = ({}) => {
     return () => clearInterval(debugInterval);
   }, []);
 
-  function onInit() {
-    ezstandalone.init();
-  }
-
   function onRefresh() {
     ezstandalone.refresh();
   }
@@ -58,21 +54,31 @@ const AdTesting: FC<Props> = ({}) => {
         <div className="page">
           <div className="buttons">
             <h3>Standalone commands</h3>
-            <button onClick={onInit}>ezstandalone.init()</button>
             <button onClick={onEnable}>ezstandalone.enable()</button>
-            <button onClick={onDisplay}>ezstandalone.display()</button>
-            <button onClick={onRefresh}>ezstandalone.refresh()</button>
+
+            <span>Define ads, PAGE1+PAGE2</span>
             <button onClick={onDefineAll}>
               ezstandalone.define(157, 158, 159, 160)
             </button>
+
+            <span>Define ads, PAGE1</span>
+            <button onClick={onDefinePage1}>
+              ezstandalone.define(157, 158)
+            </button>
+
+            <span>Define ads, PAGE2</span>
+            <button onClick={onDefinePage2}>
+              ezstandalone.define(159, 160)
+            </button>
+
+            <button onClick={onDisplay}>ezstandalone.display()</button>
+            <button onClick={onRefresh}>ezstandalone.refresh()</button>
           </div>
 
           {page === 1 && (
             <div className="ads">
               <h4>PAGE 1</h4>
-              <button onClick={onDefinePage1}>
-                ezstandalone.define(157, 158)
-              </button>
+
               <div className="ad-units">
                 <div className="placeholder-wrap">
                   Placeholder[157]
@@ -93,9 +99,6 @@ const AdTesting: FC<Props> = ({}) => {
           {page === 2 && (
             <div className="ads">
               <h4>PAGE 2</h4>
-              <button onClick={onDefinePage2}>
-                ezstandalone.define(159, 160)
-              </button>
 
               <div className="ad-units">
                 <div className="placeholder-wrap">
@@ -128,6 +131,7 @@ const AdTesting: FC<Props> = ({}) => {
           background: #000;
           color: white;
           margin-top: 30px;
+          padding: 20px;
         }
 
         .placeholder-wrap {
