@@ -1,10 +1,22 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 
 type Props = {};
 
 const AdTesting: FC<Props> = ({}) => {
+  const [placeholders, setPlaceholder] = useState([]);
+  const [selectedPlaceholder, setSelectedPlaceholder] = useState([]);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const debugInterval = setInterval(() => {
+      // @ts-ignore
+      setPlaceholder(ezstandalone.placeholders);
+      // @ts-ignore
+      setSelectedPlaceholder(ezstandalone.selectedPlaceholders);
+    }, 1000);
+    return () => clearInterval(debugInterval);
+  }, []);
 
   function onInit() {
     ezstandalone.init();
@@ -102,8 +114,22 @@ const AdTesting: FC<Props> = ({}) => {
             </div>
           )}
         </div>
+
+        <div className="debug">
+          <h2>Debug</h2>
+          <span>ezstandalone.placeholders:</span> {JSON.stringify(placeholders)}
+          <br />
+          <span>ezstandalone.selectedplaceholder:</span>{" "}
+          {JSON.stringify(selectedPlaceholder)}
+        </div>
       </div>
       <style jsx>{`
+        .debug {
+          background: #000;
+          color: white;
+          margin-top: 30px;
+        }
+
         .placeholder-wrap {
           text-align: center;
         }
