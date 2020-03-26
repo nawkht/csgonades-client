@@ -96,8 +96,11 @@ export const NadePage: FC = memo(() => {
             <EzoicPlaceHolder id={141} />
           </div>
         </aside>
-        <div id="nade-page-main">
+        <div id="nade-social">
           <NadeShareActions nade={nade} />
+        </div>
+
+        <div id="nade-page-main">
           <NadeVideoContainer nade={nade} />
           <NadeActions
             nade={nade}
@@ -170,12 +173,18 @@ export const NadePage: FC = memo(() => {
         #nade-page-grid {
           display: grid;
           grid-template-columns: 300px 1fr 300px;
-          grid-template-areas: "adleft main adright";
+          grid-template-areas:
+            ". social ."
+            "adleft main adright";
           max-width: 100%;
           grid-column-gap: ${Dimensions.GUTTER_SIZE};
           padding-top: 30px;
           max-width: calc((16 / 9 * 600px) + 300px + 300px + 60px);
           margin: 0 auto;
+        }
+
+        #nade-social {
+          grid-area: social;
         }
 
         #nade-page-main {
@@ -224,7 +233,9 @@ export const NadePage: FC = memo(() => {
         @media only screen and (max-width: 1000px) {
           #nade-page-grid {
             grid-template-columns: 1fr;
-            grid-template-areas: "main";
+            grid-template-areas:
+              "social"
+              "main";
             max-width: calc((16 / 9 * 600px));
             margin: 0 auto;
             padding-left: 30px;
