@@ -3,14 +3,12 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPost } from "./BlogPost";
 import { Dimensions } from "../constants/Constants";
-import { useNewAdRefresher } from "../layout/useAdRefresher";
 
 type Props = {
   data: BlogPost;
 };
 
 export const BlogPostArticle: FC<Props> = ({ children, data }) => {
-  useNewAdRefresher();
   const { colors } = useTheme();
 
   return (

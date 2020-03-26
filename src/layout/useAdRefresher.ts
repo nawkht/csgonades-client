@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 
-export const useNewAdRefresher = (dep?: any) => {
+export const useNewAdRefresher = () => {
   useEffect(() => {
-    const delay = setTimeout(() => {
-      ezDisplayAds();
-    }, 500);
-    return () => clearTimeout(delay);
-  }, [dep]);
+    ezDisplayAds();
+  }, []);
 };
 
 export const ezDisplayAds = (tries = 0) => {

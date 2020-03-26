@@ -7,15 +7,13 @@ import { RecentNades } from "./RecentNades";
 import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
-import { useNewAdRefresher } from "../layout/useAdRefresher";
+import { AdSetup } from "../common/AdSetup";
 
 type Props = {
   recentNades: NadeLight[];
 };
 
 export const FrontPage: FC<Props> = ({ recentNades }) => {
-  useNewAdRefresher();
-
   return (
     <>
       <FrontPageJumbo />
@@ -35,6 +33,8 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
       <div className="bottom-placeholder">
         <EzoicPlaceHolder id={110} />
       </div>
+
+      <AdSetup />
 
       <style jsx>{`
         .recent-wrap {

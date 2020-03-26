@@ -16,7 +16,7 @@ import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
 import { NadeShareActions } from "./NadeShareActions";
 import { NadeComments } from "./comments/NadeComments";
-import { useNewAdRefresher } from "../layout/useAdRefresher";
+import { AdSetup } from "../common/AdSetup";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -28,7 +28,6 @@ const MapPositionEditor = lazy(() => import("./components/MapPositionEditor"));
 const NadeStatus = lazy(() => import("./components/NadeStatus"));
 
 export const NadePage: FC = memo(() => {
-  useNewAdRefresher();
   const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
   const registerView = useNadeRegisterView();
@@ -165,6 +164,8 @@ export const NadePage: FC = memo(() => {
           <AdminEditor nade={nade} />
         </Suspense>
       )}
+
+      <AdSetup key={nade.id} />
       <style jsx>{`
         #nade-page-grid {
           display: grid;
