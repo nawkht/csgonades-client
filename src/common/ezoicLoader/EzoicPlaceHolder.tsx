@@ -7,11 +7,11 @@ type Props = {
 };
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
-  const divId = `ezoic-pub-ad-placeholder-${id}`;
-
   return (
     <>
-      <div className="ez-div" key={divId} id={divId}></div>
+      <div className="ez-div">
+        <div id={`ezoic-pub-ad-placeholder-${id}`} />
+      </div>
       <style jsx>{`
         .ez-div {
           display: flex;
