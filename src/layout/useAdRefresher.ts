@@ -4,7 +4,7 @@ export const useNewAdRefresher = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       ezDisplayAds();
-    }, 1500);
+    }, 500);
     return () => clearTimeout(delay);
   }, []);
 };
