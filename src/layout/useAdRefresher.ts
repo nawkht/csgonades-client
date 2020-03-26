@@ -2,7 +2,10 @@ import { useEffect } from "react";
 
 export const useNewAdRefresher = () => {
   useEffect(() => {
-    ezDisplayAds();
+    const delay = setTimeout(() => {
+      ezDisplayAds();
+    }, 500);
+    return () => clearTimeout(delay);
   }, []);
 };
 
@@ -33,9 +36,11 @@ export const ezDisplayAds = (tries = 0) => {
         console.log("> enable", csgoEzoicCodes.join(","));
       });
     } else if (ezstandalone.enabled) {
-      ezstandalone.define(...csgoEzoicCodes);
-      ezstandalone.refresh();
-      console.log("> refresh", csgoEzoicCodes.join(","));
+      ezstandalone.cmd.push(function () {
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.refresh();
+        console.log("> refresh", csgoEzoicCodes.join(","));
+      });
     }
   } catch (error) {
     return;
