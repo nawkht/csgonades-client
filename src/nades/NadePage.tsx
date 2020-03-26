@@ -85,7 +85,7 @@ export const NadePage: FC = memo(() => {
             <EzoicPlaceHolder id={132} />
           </div>
           <div className="ez-160">
-            <EzoicPlaceHolder id={140} />
+            <EzoicPlaceHolder id={162} />
           </div>
         </aside>
         <aside id="sidebar-right">
@@ -93,7 +93,7 @@ export const NadePage: FC = memo(() => {
             <EzoicPlaceHolder id={133} />
           </div>
           <div className="ez-160">
-            <EzoicPlaceHolder id={141} />
+            <EzoicPlaceHolder id={161} />
           </div>
         </aside>
         <div id="nade-social">
