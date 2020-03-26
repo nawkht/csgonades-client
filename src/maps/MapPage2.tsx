@@ -21,7 +21,7 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
-  useNewAdRefresher();
+  useNewAdRefresher(map);
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
