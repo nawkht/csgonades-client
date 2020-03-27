@@ -64,6 +64,7 @@ export const ezDisplayAds = (onRefreshCalled: Function) => {
         if (!csgoEzoicCodes.length) {
           return;
         }
+        ezstandalone.define(csgoEzoicCodes);
         ezstandalone.refresh();
         console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
       });
