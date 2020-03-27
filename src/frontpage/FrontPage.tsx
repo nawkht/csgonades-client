@@ -18,10 +18,12 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
       <FrontPageJumbo />
 
       <PageCentralize>
-        <FrontpageActions />
-
         <div className="recent-wrap">
           <FrontPageRecentPosts />
+          <aside className="front-page-sidebar">
+            <FrontpageActions />
+            <EzoicPlaceHolder id={163} />
+          </aside>
         </div>
 
         <div className="recent-nade-wrap">
@@ -35,8 +37,14 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
 
       <style jsx>{`
         .recent-wrap {
-          margin-top: 30px;
-          margin-bottom: 30px;
+          margin-top: 75px;
+          margin-bottom: 75px;
+          display: flex;
+        }
+
+        .front-page-sidebar {
+          margin-left: 50px;
+          width: 350px;
         }
 
         .recent-nade-wrap {
@@ -56,14 +64,25 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
           margin-bottom: 100px;
         }
 
+        @media only screen and (max-width: 1000px) {
+          .recent-wrap {
+            flex-direction: column;
+          }
+
+          .front-page-sidebar {
+            margin-left: 0;
+            width: 100%;
+          }
+        }
+
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           .recent {
             flex-direction: column;
           }
 
           .recent-nade-wrap {
-            margin-left: -20px;
-            margin-right: -20px;
+            margin-left: -10px;
+            margin-right: -10px;
           }
         }
       `}</style>

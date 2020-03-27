@@ -3,6 +3,8 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPost } from "./BlogPost";
 import { Dimensions } from "../constants/Constants";
+import { prettyDate } from "../utils/DateUtils";
+import { BlogAuthor } from "./BlogAuthor";
 
 type Props = {
   data: BlogPost;
@@ -17,6 +19,7 @@ export const BlogPostArticle: FC<Props> = ({ children, data }) => {
         <div className="empty" />
         <article>
           <h1>{data.title}</h1>
+          <div className="article-date">{prettyDate(data.createdAt)}</div>
           <div className="img-wrap">
             <img className="article-image" src={data.imageUrl} />
             {!!data.imageCredit && !!data.imageCreditUrl && (
@@ -30,21 +33,30 @@ export const BlogPostArticle: FC<Props> = ({ children, data }) => {
           </div>
           <p className="lead">{data.intro}</p>
           {children}
+          <BlogAuthor />
         </article>
+
         <aside className="sidebar">
           <div className="ez mid-sidebar">
             <EzoicPlaceHolder id={124} />
           </div>
         </aside>
       </div>
+      <EzoicPlaceHolder id={123} />
       <style jsx>{`
         .body {
           padding-top: 1.5rem;
         }
 
+        .article-date {
+          text-align: right;
+          margin-bottom: 5px;
+          color: #bbb;
+        }
+
         .sidebar {
-          margin-top: 100px;
-          max-height: 250vh;
+          margin-top: 100vh;
+          max-height: 100vh;
         }
 
         .ez {
@@ -80,6 +92,7 @@ export const BlogPostArticle: FC<Props> = ({ children, data }) => {
 
         h1 {
           text-align: center;
+          font-weight: 300;
         }
 
         .img-wrap {

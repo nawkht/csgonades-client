@@ -41,9 +41,10 @@ const createSitemap = async () => {
     "privacypolicy",
     "blog",
     "/blog/tickrate-and-jumpthrow-bind",
+    "/blog/practise-config",
   ];
 
-  staticPages.forEach(staticPage => {
+  staticPages.forEach((staticPage) => {
     const page = `${SITE_ROOT}/${staticPage}`;
 
     xml += "<url>";
@@ -55,7 +56,7 @@ const createSitemap = async () => {
 
   const maps = mapsList();
 
-  maps.forEach(map => {
+  maps.forEach((map) => {
     const page = `${SITE_ROOT}/maps/${map}`;
     xml += "<url>";
     xml += `<loc>${page}</loc>`;

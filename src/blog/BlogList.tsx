@@ -10,7 +10,7 @@ export const BlogList: FC<Props> = ({ posts }) => {
   return (
     <>
       <div className="blog-post-list">
-        {posts.map(bp => (
+        {posts.map((bp) => (
           <BlogPostPreview key={bp.title} blogPost={bp} />
         ))}
       </div>

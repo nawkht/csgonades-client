@@ -77,6 +77,10 @@ export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
           border-radius: 5px;
         }
 
+        .blog-post-preview p {
+          flex: 1;
+        }
+
         .blog-post-preview img {
           display: inline-block;
           max-width: 100%;

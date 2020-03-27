@@ -4,12 +4,13 @@ import { blogTickrateAndJumpthrow } from "./tickrate-and-jumpthrow-bind";
 import { BlogList } from "../../blog/BlogList";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { SEO } from "../../layout/SEO2";
+import { blogPractiseConfig } from "./practice-config";
 
 type Props = {};
 
 const BlogPage: FC<Props> = ({}) => {
   const { colors } = useTheme();
-  const blogPosts = [blogTickrateAndJumpthrow];
+  const blogPosts = [blogPractiseConfig, blogTickrateAndJumpthrow];
 
   return (
     <>
@@ -22,12 +23,14 @@ const BlogPage: FC<Props> = ({}) => {
       </PageCentralize>
       <style jsx>{`
         .blog-posts {
-          margin-top: 50px;
+          margin-top: 75px;
           color: ${colors.TEXT};
         }
 
         h1 {
           text-align: center;
+          font-weight: 300;
+          margin-bottom: 50px;
         }
       `}</style>
     </>

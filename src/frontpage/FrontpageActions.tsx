@@ -46,22 +46,15 @@ export const FrontpageActions: FC<Props> = ({}) => {
       </div>
       <style jsx>{`
         .actions-wrapper {
-          margin: 0 auto;
-          max-width: 700px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 50px;
+          width: 100%;
         }
 
         .action {
           padding: 20px;
           color: white;
           border-radius: 5px;
-          margin: 20px;
           transition: transform 0.2s;
-          width: 300px;
-          height: 110px;
+          margin-bottom: 30px;
         }
 
         .action:hover {
