@@ -5,5 +5,7 @@ type Props = {
 };
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
-  return <div id={`ezoic-pub-ad-placeholder-${id}`}></div>;
+  const now = Date.now();
+
+  return <div key={now} id={`ezoic-pub-ad-placeholder-${id}`}></div>;
 });
