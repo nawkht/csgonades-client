@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, memo } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { AppToast, ToastSeverity } from "../../store/ToastStore/ToastActions";
@@ -8,7 +8,7 @@ type Props = {
   notification: AppToast;
 };
 
-export const ToastItem: FC<Props> = ({ notification }) => {
+export const ToastItem: FC<Props> = memo(({ notification }) => {
   const { colors } = useTheme();
   const dismissToast = useDismissToast();
   const [fadingOut, setIsFadingOut] = useState(false);
@@ -123,4 +123,4 @@ export const ToastItem: FC<Props> = ({ notification }) => {
       `}</style>
     </>
   );
-};
+});

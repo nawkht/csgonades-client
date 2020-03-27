@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { NadeLight } from "../models/Nade/Nade";
 import { FrontpageActions } from "./FrontpageActions";
@@ -7,12 +7,15 @@ import { RecentNades } from "./RecentNades";
 import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
+import { useNewAdRefresher } from "../layout/useAdRefresher";
 
 type Props = {
   recentNades: NadeLight[];
 };
 
-export const FrontPage: FC<Props> = ({ recentNades }) => {
+export const FrontPage: FC<Props> = memo(({ recentNades }) => {
+  useNewAdRefresher();
+
   return (
     <>
       <FrontPageJumbo />
@@ -55,6 +58,9 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
         .bottom-placeholder {
           margin-bottom: 100px;
           margin-top: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
         }
 
         .recent {
@@ -88,4 +94,4 @@ export const FrontPage: FC<Props> = ({ recentNades }) => {
       `}</style>
     </>
   );
-};
+});

@@ -1,11 +1,9 @@
-import { FC } from "react";
 import { blogTickrateAndJumpthrow } from "../pages/blog/tickrate-and-jumpthrow-bind";
 import { blogPractiseConfig } from "../pages/blog/practice-config";
 import { BlogListRecent } from "../blog/BlogListRecent";
+import { memo } from "react";
 
-type Props = {};
-
-export const FrontPageRecentPosts: FC<Props> = ({}) => {
+export const FrontPageRecentPosts = memo(({}) => {
   return (
     <>
       <div className="recent-posts">
@@ -20,4 +18,4 @@ export const FrontPageRecentPosts: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});

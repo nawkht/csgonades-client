@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useIsAdminOrModerator } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
-const AdminLink: FC<Props> = ({}) => {
+export const AdminLink: FC<Props> = memo(({}) => {
   const { colors } = useTheme();
   const isAdminOrMod = useIsAdminOrModerator();
 
@@ -45,6 +45,4 @@ const AdminLink: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
-
-export default AdminLink;
+});

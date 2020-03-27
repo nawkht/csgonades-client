@@ -1,10 +1,8 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, memo } from "react";
 import Axios from "axios";
 import { CSGNModal } from "../common/CSGNModal";
 
-type Props = {};
-
-export const ServiceDown: FC<Props> = ({}) => {
+export const ServiceDown: FC = memo(({}) => {
   const [serviceUp, setServiceUp] = useState(true);
 
   useEffect(() => {
@@ -57,25 +55,4 @@ export const ServiceDown: FC<Props> = ({}) => {
       `}</style>
     </CSGNModal>
   );
-
-  return (
-    <>
-      {!serviceUp && (
-        <div className="service-down">
-          The service seems to be down at the moment. Refresh the page or come
-          back later.
-        </div>
-      )}
-
-      <style jsx>{`
-        .service-down {
-          background: maroon;
-          color: white;
-          padding: 20px;
-          width: 100%;
-          text-align: center;
-        }
-      `}</style>
-    </>
-  );
-};
+});

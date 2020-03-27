@@ -1,10 +1,7 @@
-import { FC, lazy, memo, Suspense } from "react";
+import { FC, memo } from "react";
 import { CookieConsent } from "../common/CookieConsent";
 import { ToastList } from "../common/toast/ToastList";
-import {
-  useIsAdminOrModerator,
-  usePreloadUser,
-} from "../store/AuthStore/AuthHooks";
+import { usePreloadUser } from "../store/AuthStore/AuthHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { usePageView } from "../utils/Analytics";
 import { useSetupSession } from "./DataFetchers/useSetupSession";
@@ -15,19 +12,17 @@ import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
 import { useAdblockAnalytics } from "./useCheckIfAdPresent";
-import { useNewAdRefresher } from "./useAdRefresher";
+import { AdminLink } from "./Misc/AdminLink";
 
-const AdminLink = lazy(() => import("./Misc/AdminLink"));
-
-export const Layout2: FC = memo((props) => {
-  const isAdminOrMod = useIsAdminOrModerator();
+export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
-  useNewAdRefresher();
   useSetupSession();
   usePageView();
   usePreloadUser();
   useFetchClientConfig();
   useAdblockAnalytics();
+
+  console.log("> Layout render");
 
   return (
     <>
@@ -38,7 +33,7 @@ export const Layout2: FC = memo((props) => {
           <Header />
         </div>
 
-        <main>{props.children}</main>
+        <main>{children}</main>
 
         <div className="footer">
           <Footer />
@@ -47,12 +42,7 @@ export const Layout2: FC = memo((props) => {
         <ToastList />
         <CookieConsent />
         <MobileNav />
-
-        {isAdminOrMod && (
-          <Suspense fallback={<></>}>
-            <AdminLink />
-          </Suspense>
-        )}
+        <AdminLink />
       </div>
 
       <style jsx>{`

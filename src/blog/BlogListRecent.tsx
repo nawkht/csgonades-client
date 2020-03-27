@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { BlogPost } from "./BlogPost";
 import { BlogPostPreviewHorizontal } from "./BlogPostPreviewHorizontal";
 
@@ -6,7 +6,7 @@ type Props = {
   posts: BlogPost[];
 };
 
-export const BlogListRecent: FC<Props> = ({ posts }) => {
+export const BlogListRecent: FC<Props> = memo(({ posts }) => {
   return (
     <>
       <div className="blog-post-list">
@@ -21,4 +21,4 @@ export const BlogListRecent: FC<Props> = ({ posts }) => {
       `}</style>
     </>
   );
-};
+});

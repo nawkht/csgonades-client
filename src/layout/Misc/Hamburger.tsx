@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { FaBars } from "react-icons/fa";
 import { Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
@@ -6,7 +6,7 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
-export const Hamburger: FC<Props> = ({}) => {
+export const Hamburger: FC<Props> = memo(({}) => {
   const { colors } = useTheme();
   const { toggleNav } = useNavigation();
 
@@ -34,4 +34,4 @@ export const Hamburger: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});

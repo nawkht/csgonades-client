@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, memo } from "react";
 import { NadeApi } from "../api/NadeApi";
 import { NadeLight } from "../models/Nade/Nade";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
@@ -11,12 +11,12 @@ type Props = {
   recentNades: NadeLight[];
 };
 
-export const RecentNades: FC<Props> = ({ recentNades }) => {
+export const RecentNades: FC<Props> = memo(({ recentNades }) => {
   const [nades, setNades] = useState(recentNades);
   const { colors } = useTheme();
 
   useEffect(() => {
-    NadeApi.getAll().then(res => {
+    NadeApi.getAll().then((res) => {
       if (res.isOk()) {
         const fetchedNades = res.value.slice(0, 6);
         setNades(fetchedNades);
@@ -62,4 +62,4 @@ export const RecentNades: FC<Props> = ({ recentNades }) => {
       `}</style>
     </>
   );
-};
+});

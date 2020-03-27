@@ -1,16 +1,18 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPost } from "./BlogPost";
 import { Dimensions } from "../constants/Constants";
 import { prettyDate } from "../utils/DateUtils";
 import { BlogAuthor } from "./BlogAuthor";
+import { useNewAdRefresher } from "../layout/useAdRefresher";
 
 type Props = {
   data: BlogPost;
 };
 
-export const BlogPostArticle: FC<Props> = ({ children, data }) => {
+export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
+  useNewAdRefresher();
   const { colors } = useTheme();
 
   return (
@@ -142,4 +144,4 @@ export const BlogPostArticle: FC<Props> = ({ children, data }) => {
       `}</style>
     </>
   );
-};
+});

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Nade } from "../../models/Nade/Nade";
 import { capitalize } from "../../utils/Common";
@@ -8,7 +8,7 @@ type Props = {
   nade: Nade;
 };
 
-export const NadeBreadcrumb: FC<Props> = ({ nade }) => {
+export const NadeBreadcrumb: FC<Props> = memo(({ nade }) => {
   if (!nade.map || !nade.title) {
     return null;
   }
@@ -58,4 +58,4 @@ export const NadeBreadcrumb: FC<Props> = ({ nade }) => {
       `}</style>
     </>
   );
-};
+});

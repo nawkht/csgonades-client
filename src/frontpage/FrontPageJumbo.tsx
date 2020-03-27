@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
-const FrontPageJumbo: FC = () => {
+export const FrontPageJumbo: FC = memo(() => {
   const { colors } = useTheme();
   return (
     <>
@@ -71,6 +71,4 @@ const FrontPageJumbo: FC = () => {
       `}</style>
     </>
   );
-};
-
-export { FrontPageJumbo };
+});

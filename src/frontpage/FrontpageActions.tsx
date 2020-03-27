@@ -1,10 +1,8 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { FaDiscord, FaPaypal } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 
-type Props = {};
-
-export const FrontpageActions: FC<Props> = ({}) => {
+export const FrontpageActions: FC = memo(({}) => {
   return (
     <>
       <div className="actions-wrapper">
@@ -118,4 +116,4 @@ export const FrontpageActions: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { Status, StatusInfo } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -9,7 +9,7 @@ type Props = {
   statusInfo?: StatusInfo;
 };
 
-const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
+const NadeStatus: FC<Props> = memo(({ status, statusInfo }) => {
   const { colors } = useTheme();
 
   if (status === "accepted") {
@@ -82,7 +82,7 @@ const NadeStatus: FC<Props> = ({ status, statusInfo }) => {
       `}</style>
     </>
   );
-};
+});
 
 function statusColor(status: Status, colors: ThemeColors) {
   switch (status) {

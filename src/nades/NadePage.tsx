@@ -1,4 +1,4 @@
-import { FC, lazy, memo, Suspense, useEffect, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { Dimensions } from "../constants/Constants";
 import { SignInWarning } from "../maps/components/SignInWarning";
@@ -16,17 +16,16 @@ import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
 import { NadeShareActions } from "./NadeShareActions";
 import { NadeComments } from "./comments/NadeComments";
-
-const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
-const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
-const DecriptionEditor = lazy(() =>
-  import("./editcontainers/DescriptionEditor")
-);
-const MetaEditor = lazy(() => import("./editcontainers/MetaEditor"));
-const MapPositionEditor = lazy(() => import("./components/MapPositionEditor"));
-const NadeStatus = lazy(() => import("./components/NadeStatus"));
+import { useNewAdRefresher } from "../layout/useAdRefresher";
+import NadeStatus from "./components/NadeStatus";
+import TitleEditor from "./editcontainers/TitleEditor";
+import DecriptionEditor from "./editcontainers/DescriptionEditor";
+import MetaEditor from "./editcontainers/MetaEditor";
+import MapPositionEditor from "./components/MapPositionEditor";
+import AdminEditor from "./admineditor2/AdminEditor";
 
 export const NadePage: FC = memo(() => {
+  useNewAdRefresher();
   const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
   const registerView = useNadeRegisterView();
@@ -62,9 +61,7 @@ export const NadePage: FC = memo(() => {
       />
 
       {allowEdit && (
-        <Suspense fallback={<div />}>
-          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
-        </Suspense>
+        <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
       )}
 
       <div className="title">
@@ -119,47 +116,33 @@ export const NadePage: FC = memo(() => {
       />
 
       {allowEdit && (
-        <Suspense fallback={<div />}>
-          <TitleEditor
-            nadeId={nade.id}
-            title={nade.title}
-            visisble={editTitleVisisble}
-            onClose={() => setEditTitleVisisble(false)}
-          />
-        </Suspense>
+        <TitleEditor
+          nadeId={nade.id}
+          title={nade.title}
+          visisble={editTitleVisisble}
+          onClose={() => setEditTitleVisisble(false)}
+        />
       )}
 
       {allowEdit && (
-        <Suspense fallback={<div />}>
-          <DecriptionEditor
-            visisble={editDescVisisble}
-            nade={nade}
-            onDismiss={() => setEditDescisisble(false)}
-          />
-        </Suspense>
+        <DecriptionEditor
+          visisble={editDescVisisble}
+          nade={nade}
+          onDismiss={() => setEditDescisisble(false)}
+        />
       )}
 
       {allowEdit && (
-        <Suspense fallback={<div />}>
-          <MetaEditor
-            visisble={editMetaVisible}
-            nade={nade}
-            onDismiss={() => setEditMetaVisible(false)}
-          />
-        </Suspense>
+        <MetaEditor
+          visisble={editMetaVisible}
+          nade={nade}
+          onDismiss={() => setEditMetaVisible(false)}
+        />
       )}
 
-      {allowEdit && (
-        <Suspense fallback={<div />}>
-          <MapPositionEditor nade={nade} />
-        </Suspense>
-      )}
+      {allowEdit && <MapPositionEditor nade={nade} />}
 
-      {isAdminOrMod && (
-        <Suspense fallback={<div />}>
-          <AdminEditor nade={nade} />
-        </Suspense>
-      )}
+      {isAdminOrMod && <AdminEditor nade={nade} />}
 
       <style jsx>{`
         #nade-page-grid {

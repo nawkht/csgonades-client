@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, memo } from "react";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { NadeLight } from "../models/Nade/Nade";
 import { NadeFilter } from "./nadefilter/NadeFilter";
@@ -13,13 +13,15 @@ import { Dimensions } from "../constants/Constants";
 import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
 import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
+import { useNewAdRefresher } from "../layout/useAdRefresher";
 
 type Props = {
   map: CsgoMap;
   ssrNades: NadeLight[];
 };
 
-export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
+export const MapPage2: FC<Props> = memo(({ map, ssrNades }) => {
+  useNewAdRefresher();
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
@@ -153,4 +155,4 @@ export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
       `}</style>
     </>
   );
-};
+});
