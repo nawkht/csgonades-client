@@ -16,7 +16,6 @@ import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
 import { NadeShareActions } from "./NadeShareActions";
 import { NadeComments } from "./comments/NadeComments";
-import { useNewAdRefresher } from "../layout/useAdRefresher";
 import NadeStatus from "./components/NadeStatus";
 import TitleEditor from "./editcontainers/TitleEditor";
 import DecriptionEditor from "./editcontainers/DescriptionEditor";
@@ -25,7 +24,6 @@ import MapPositionEditor from "./components/MapPositionEditor";
 import AdminEditor from "./admineditor2/AdminEditor";
 
 export const NadePage: FC = memo(() => {
-  useNewAdRefresher();
   const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
   const registerView = useNadeRegisterView();

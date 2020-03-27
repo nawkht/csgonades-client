@@ -5,14 +5,12 @@ import { BlogPost } from "./BlogPost";
 import { Dimensions } from "../constants/Constants";
 import { prettyDate } from "../utils/DateUtils";
 import { BlogAuthor } from "./BlogAuthor";
-import { useNewAdRefresher } from "../layout/useAdRefresher";
 
 type Props = {
   data: BlogPost;
 };
 
 export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
-  useNewAdRefresher();
   const { colors } = useTheme();
 
   return (

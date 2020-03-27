@@ -1,43 +1,73 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 export const useNewAdRefresher = () => {
+  const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
   const { route, query } = useRouter();
+
+  function onRefresh() {
+    console.log("> Refresh called");
+    setLastRefresh(new Date());
+  }
 
   useEffect(() => {
     if (route.includes("adtesting")) {
       return;
     }
-    ezDisplayAds();
-  }, [query, route]);
-};
 
-export const ezDisplayAds = async () => {
-  console.log("> ezDisplayAds");
-  if (typeof ezstandalone === "undefined") {
-    console.log("> ezstandalone not found");
-    await sleep(2);
-  }
-
-  try {
-    await sleep(1);
-    const csgoEzoicCodes = findAdCode();
-
-    if (!csgoEzoicCodes.length) {
+    if (!lastRefresh) {
+      console.log("> Initial call");
+      ezDisplayAds(onRefresh);
       return;
     }
 
-    ezstandalone.define(csgoEzoicCodes);
+    const timeSinceLastCall = secondsBetween(lastRefresh);
 
+    if (timeSinceLastCall < 30) {
+      console.log("> refresh called to fast", timeSinceLastCall);
+      return;
+    }
+
+    console.log("> calling refresh");
+    ezDisplayAds(onRefresh);
+  }, [query, route, lastRefresh]);
+};
+
+function secondsBetween(pastDate: Date) {
+  const now = new Date();
+  const difference = (now.getTime() - pastDate.getTime()) / 1000;
+  return Math.floor(difference);
+}
+
+export const ezDisplayAds = (onRefreshCalled: Function) => {
+  console.log("> ezDisplayAds");
+  if (typeof ezstandalone === "undefined") {
+    console.log("> ezstandalone not found");
+    return;
+  }
+
+  try {
     if (!ezstandalone.enabled) {
-      ezstandalone.enable();
-      await sleep(0.5);
-      ezstandalone.display();
-      console.log(`> ezstandalone.display (${csgoEzoicCodes.join(",")})`);
+      ezstandalone.cmd.push(() => {
+        const csgoEzoicCodes = findAdCode();
+        if (!csgoEzoicCodes.length) {
+          return;
+        }
+        ezstandalone.define(csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log(`> ezstandalone.display (${csgoEzoicCodes.join(",")})`);
+      });
     } else {
-      await sleep(0.5);
-      ezstandalone.refresh();
-      console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
+      ezstandalone.cmd.push(() => {
+        const csgoEzoicCodes = findAdCode();
+        if (!csgoEzoicCodes.length) {
+          return;
+        }
+        ezstandalone.refresh();
+        console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
+      });
+      onRefreshCalled();
     }
   } catch (error) {
     console.error("> ezstandalone error", error);
@@ -71,6 +101,3 @@ function findAdCode() {
 
   return adIds;
 }
-
-const sleep = (seconds: number) =>
-  new Promise((resolve) => setTimeout(resolve, seconds * 1000));
