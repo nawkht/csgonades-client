@@ -27,7 +27,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
               </h2>
             </div>
             <div className="top-placement">
-              <EzoicPlaceHolder id={130} width={730} />
+              <EzoicPlaceHolder id={130} />
             </div>
           </div>
         </PageCentralize>
