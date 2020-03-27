@@ -90,7 +90,7 @@ export const useAdDetector = () => {
       adDivs.forEach((adDiv) => {
         console.log("> Ad frame lenght", adDiv.innerHTML.length, { adDiv });
       });
-    }, 3000);
+    }, 20000);
     return () => clearTimeout(delay);
   }, [pathname, query]);
 };
