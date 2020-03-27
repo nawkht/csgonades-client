@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 export const useNewAdRefresher = () => {
-  const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
   const { route, query } = useRouter();
-
-  function onRefresh() {
-    setLastRefresh(new Date());
-  }
 
   useEffect(() => {
     if (route.includes("adtesting")) {
@@ -15,34 +10,14 @@ export const useNewAdRefresher = () => {
     }
 
     const delay = setTimeout(() => {
-      if (!lastRefresh) {
-        ezDisplayAds(onRefresh);
-        return;
-      }
-
-      const timeSinceLastCall = secondsBetween(lastRefresh);
-
-      if (timeSinceLastCall < 30) {
-        console.log("> refresh called to fast", timeSinceLastCall);
-        return;
-      }
-
-      ezDisplayAds(onRefresh);
+      ezDisplayAds();
     }, 1000);
     return () => clearTimeout(delay);
-  }, [query, route, lastRefresh]);
+  }, [query, route]);
 };
 
-function secondsBetween(pastDate: Date) {
-  const now = new Date();
-  const difference = (now.getTime() - pastDate.getTime()) / 1000;
-  return Math.floor(difference);
-}
-
-export const ezDisplayAds = (onRefreshCalled: Function) => {
-  console.log("> ezDisplayAds");
+export const ezDisplayAds = () => {
   if (typeof ezstandalone === "undefined") {
-    console.log("> ezstandalone not found");
     return;
   }
 
@@ -60,12 +35,11 @@ export const ezDisplayAds = (onRefreshCalled: Function) => {
         console.log(`> ezstandalone.display (${csgoEzoicCodes.join(",")})`);
       });
     } else {
-      ezstandalone.cmd.push(() => {
+      ezstandalone.cmd.push(function () {
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.refresh();
         console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
       });
-      onRefreshCalled();
     }
   } catch (error) {
     console.error("> ezstandalone error", error);

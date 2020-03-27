@@ -45,9 +45,7 @@ export const useAdSlotsHandler = () => {
 
   useEffect(() => {
     if (adSlots.length) {
-      ezDisplayAds(() => {
-        // no-op
-      });
+      ezDisplayAds();
     }
   }, [adSlots]);
 };
