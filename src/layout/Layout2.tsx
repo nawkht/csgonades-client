@@ -13,7 +13,7 @@ import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClien
 import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
 import { useAdblockAnalytics } from "./useCheckIfAdPresent";
 import { AdminLink } from "./Misc/AdminLink";
-import { useNewAdRefresher, useAdDetector } from "./useAdRefresher";
+import { useNewAdRefresher } from "./useAdRefresher";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -23,7 +23,6 @@ export const Layout2: FC = memo(({ children }) => {
   usePreloadUser();
   useFetchClientConfig();
   useAdblockAnalytics();
-  useAdDetector();
 
   return (
     <>
