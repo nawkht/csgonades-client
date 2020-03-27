@@ -6,7 +6,6 @@ export const useNewAdRefresher = () => {
   const { route, query } = useRouter();
 
   function onRefresh() {
-    console.log("> Refresh called");
     setLastRefresh(new Date());
   }
 
@@ -15,21 +14,22 @@ export const useNewAdRefresher = () => {
       return;
     }
 
-    if (!lastRefresh) {
-      console.log("> Initial call");
+    const delay = setTimeout(() => {
+      if (!lastRefresh) {
+        ezDisplayAds(onRefresh);
+        return;
+      }
+
+      const timeSinceLastCall = secondsBetween(lastRefresh);
+
+      if (timeSinceLastCall < 30) {
+        console.log("> refresh called to fast", timeSinceLastCall);
+        return;
+      }
+
       ezDisplayAds(onRefresh);
-      return;
-    }
-
-    const timeSinceLastCall = secondsBetween(lastRefresh);
-
-    if (timeSinceLastCall < 30) {
-      console.log("> refresh called to fast", timeSinceLastCall);
-      return;
-    }
-
-    console.log("> calling refresh");
-    ezDisplayAds(onRefresh);
+    }, 1000);
+    return () => clearTimeout(delay);
   }, [query, route, lastRefresh]);
 };
 
@@ -46,13 +46,14 @@ export const ezDisplayAds = (onRefreshCalled: Function) => {
     return;
   }
 
+  const csgoEzoicCodes = findAdCode();
+  if (!csgoEzoicCodes.length) {
+    return;
+  }
+
   try {
     if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(() => {
-        const csgoEzoicCodes = findAdCode();
-        if (!csgoEzoicCodes.length) {
-          return;
-        }
+      ezstandalone.cmd.push(function () {
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
@@ -60,10 +61,6 @@ export const ezDisplayAds = (onRefreshCalled: Function) => {
       });
     } else {
       ezstandalone.cmd.push(() => {
-        const csgoEzoicCodes = findAdCode();
-        if (!csgoEzoicCodes.length) {
-          return;
-        }
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.refresh();
         console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
