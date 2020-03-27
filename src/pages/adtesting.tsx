@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
+import { EzoicHead } from "../common/EzoicHead";
 
 type Props = {};
 
@@ -48,6 +49,8 @@ const AdTesting: FC<Props> = ({}) => {
 
   return (
     <>
+      <EzoicHead />
+
       <div className="ad-testing">
         <div className="navigation">
           <h3>Navigate between the two virtual pages</h3>

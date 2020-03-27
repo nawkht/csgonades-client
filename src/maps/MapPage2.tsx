@@ -13,6 +13,7 @@ import { Dimensions } from "../constants/Constants";
 import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
 import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
+import { EzoicHead } from "../common/EzoicHead";
 
 type Props = {
   map: CsgoMap;
@@ -29,6 +30,7 @@ export const MapPage2: FC<Props> = ({ map, ssrNades }) => {
 
   return (
     <>
+      <EzoicHead />
       <SEO title={capitalize(map)} canonical={`/maps/${map}`} />
       <MapPageJumbo map={map} />
       <div className="map-page-container">

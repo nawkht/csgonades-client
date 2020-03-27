@@ -16,6 +16,7 @@ import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
 import { NadeShareActions } from "./NadeShareActions";
 import { NadeComments } from "./comments/NadeComments";
+import { EzoicHead } from "../common/EzoicHead";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -53,6 +54,7 @@ export const NadePage: FC = memo(() => {
 
   return (
     <>
+      <EzoicHead />
       <SEO
         title={layoutTitle}
         description={nade.description}

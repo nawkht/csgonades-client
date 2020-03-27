@@ -48,7 +48,6 @@ class MyDocument extends Document {
               key="google-font-roboto"
               media="all"
             />
-            <script src="//www.ezojs.com/ezoic/sa.min.js" />
           </Head>
           <body>
             <Main />

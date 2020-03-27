@@ -16,7 +16,7 @@ const Map: NextPage<Props> = ({ map, nades }) => {
   return <MapPage2 map={map} ssrNades={filteredNades} />;
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const map = context.query.map as CsgoMap;
 
   const results = await NadeApi.getByMap(map);
