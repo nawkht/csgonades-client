@@ -30,13 +30,12 @@ export const ezDisplayAds = async () => {
     ezstandalone.define(csgoEzoicCodes);
 
     if (!ezstandalone.enabled) {
-      await sleep(1);
       ezstandalone.enable();
-      await sleep(1);
+      await sleep(3);
       ezstandalone.display();
       console.log(`> ezstandalone.display (${csgoEzoicCodes.join(",")})`);
     } else {
-      await sleep(1);
+      await sleep(3);
       ezstandalone.refresh();
       console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
     }
