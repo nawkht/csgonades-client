@@ -28,21 +28,15 @@ export const ezDisplayAds = () => {
 
   try {
     if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(function () {
-        ezstandalone.define(csgoEzoicCodes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log(`> ezstandalone.display (${csgoEzoicCodes.join(",")})`);
-      });
+      ezstandalone.define(csgoEzoicCodes);
+      ezstandalone.enable();
+      ezstandalone.display();
     } else {
-      ezstandalone.cmd.push(function () {
-        ezstandalone.define(csgoEzoicCodes);
-        ezstandalone.refresh();
-        console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
-      });
+      ezstandalone.define(csgoEzoicCodes);
+      ezstandalone.refresh();
     }
   } catch (error) {
-    console.error("> ezstandalone error", error);
+    console.warn("> ezstandalone error", error);
     return;
   }
 };
