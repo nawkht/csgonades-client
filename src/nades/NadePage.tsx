@@ -174,6 +174,7 @@ export const NadePage: FC = memo(() => {
 
         #sidebar-right {
           grid-area: adright;
+          display: flex;
           justify-content: space-around;
         }
 
