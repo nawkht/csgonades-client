@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { useAnalytics } from "../utils/Analytics";
-import { useRouter } from "next/router";
 import { APP_VERSION } from "../constants/Constants";
 
 export const useAdblockAnalytics = () => {
-  const { pathname } = useRouter();
   const { event } = useAnalytics();
 
   useEffect(() => {
@@ -25,8 +23,8 @@ export const useAdblockAnalytics = () => {
           nonInteraction: true,
         });
       }
-    }, 1000);
+    }, 5000);
 
     return () => clearTimeout(delayedCheck);
-  }, [event, pathname]);
+  }, [event]);
 };

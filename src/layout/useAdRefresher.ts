@@ -73,3 +73,24 @@ function findAdCode() {
 
   return adIds;
 }
+
+export const useAdDetector = () => {
+  const { pathname, query } = useRouter();
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      const adCodes = findAdCode();
+
+      if (!adCodes.length) {
+        return;
+      }
+
+      const adDivs = document.querySelectorAll('div[id^="google_ads_iframe_"]');
+
+      adDivs.forEach((adDiv) => {
+        console.log("> Ad frame lenght", adDiv.innerHTML.length, { adDiv });
+      });
+    }, 3000);
+    return () => clearTimeout(delay);
+  }, [pathname, query]);
+};
