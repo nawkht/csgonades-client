@@ -5,6 +5,10 @@ export const useNewAdRefresher = () => {
   const { route, query } = useRouter();
 
   useEffect(() => {
+    if (route.includes("adtesting")) {
+      return;
+    }
+
     const delay = setTimeout(() => {
       ezDisplayAds();
     }, 1000);
