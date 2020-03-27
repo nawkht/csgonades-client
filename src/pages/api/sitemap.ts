@@ -41,7 +41,7 @@ const createSitemap = async () => {
     "privacypolicy",
     "blog",
     "/blog/tickrate-and-jumpthrow-bind",
-    "/blog/practise-config",
+    "/blog/practice-config",
   ];
 
   staticPages.forEach((staticPage) => {

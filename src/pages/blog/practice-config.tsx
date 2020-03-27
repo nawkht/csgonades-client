@@ -6,8 +6,8 @@ import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 
 export const blogPractiseConfig: BlogPost = {
-  title: "The Perfect Practise Config for Counter-Strike Global Offensive",
-  slug: "practise-config",
+  title: "The Perfect Practice Config for Counter-Strike Global Offensive",
+  slug: "practice-config",
   imageUrl: "/blogimg/prac-config.jpg",
   thumbnailUrl: "/blogimg/prac-config_thumb.jpg",
   createdAt: "2020-03-27T21:00:00.000Z",
