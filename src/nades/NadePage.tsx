@@ -80,20 +80,10 @@ export const NadePage: FC = memo(() => {
 
       <div id="nade-page-grid">
         <aside id="sidebar-left">
-          <div className="ez-300">
-            <EzoicPlaceHolder id={132} />
-          </div>
-          <div className="ez-160">
-            <EzoicPlaceHolder id={162} />
-          </div>
+          <EzoicPlaceHolder id={162} />
         </aside>
         <aside id="sidebar-right">
-          <div className="ez-300">
-            <EzoicPlaceHolder id={133} />
-          </div>
-          <div className="ez-160">
-            <EzoicPlaceHolder id={161} />
-          </div>
+          <EzoicPlaceHolder id={161} />
         </aside>
         <div id="nade-social">
           <NadeShareActions nade={nade} />
@@ -101,10 +91,14 @@ export const NadePage: FC = memo(() => {
 
         <div id="nade-page-main">
           <NadeVideoContainer nade={nade} />
+
           <NadeActions
             nade={nade}
             onShowSignInWarning={() => setShowSignInWarning(true)}
           />
+
+          <EzoicPlaceHolder id={156} />
+
           <NadeInfoContainer
             nade={nade}
             onEditDescription={() => setEditDescisisble(true)}
@@ -206,10 +200,6 @@ export const NadePage: FC = memo(() => {
           justify-content: space-around;
         }
 
-        .ez-160 {
-          display: none;
-        }
-
         .title {
           padding-top: 50px;
         }
@@ -218,13 +208,6 @@ export const NadePage: FC = memo(() => {
           #nade-page-grid {
             grid-template-columns: 160px 1fr 160px;
             max-width: calc((16 / 9 * 600px) + 160px + 160px + 60px);
-          }
-
-          .ez-160 {
-            display: block;
-          }
-          .ez-300 {
-            display: none;
           }
         }
 
