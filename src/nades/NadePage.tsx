@@ -16,7 +16,6 @@ import { NadeActions } from "./NadeActions";
 import { NadeVideoContainer } from "./NadeVideoContainer";
 import { NadeShareActions } from "./NadeShareActions";
 import { NadeComments } from "./comments/NadeComments";
-import { AdSetup } from "../common/AdSetup";
 
 const AdminEditor = lazy(() => import("./admineditor2/AdminEditor"));
 const TitleEditor = lazy(() => import("./editcontainers/TitleEditor"));
@@ -168,7 +167,6 @@ export const NadePage: FC = memo(() => {
         </Suspense>
       )}
 
-      <AdSetup key={nade.id} />
       <style jsx>{`
         #nade-page-grid {
           display: grid;

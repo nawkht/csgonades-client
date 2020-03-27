@@ -15,12 +15,14 @@ import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
 import { useAdblockAnalytics } from "./useCheckIfAdPresent";
+import { useNewAdRefresher } from "./useAdRefresher";
 
 const AdminLink = lazy(() => import("./Misc/AdminLink"));
 
-export const Layout2: FC = memo(props => {
+export const Layout2: FC = memo((props) => {
   const isAdminOrMod = useIsAdminOrModerator();
   const { colors } = useTheme();
+  useNewAdRefresher();
   useSetupSession();
   usePageView();
   usePreloadUser();

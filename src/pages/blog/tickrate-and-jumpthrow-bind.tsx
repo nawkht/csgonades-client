@@ -4,7 +4,6 @@ import { BlogPost } from "../../blog/BlogPost";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { SEO } from "../../layout/SEO2";
-import { AdSetup } from "../../common/AdSetup";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
   title: "Tickrate and It's Effect on Jumpthrow Bind",
@@ -152,8 +151,6 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
       </BlogPostArticle>
 
       <EzoicPlaceHolder id={123} />
-      <AdSetup />
-      <style jsx>{``}</style>
     </>
   );
 };
