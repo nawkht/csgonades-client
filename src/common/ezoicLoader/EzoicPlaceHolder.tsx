@@ -10,7 +10,7 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
   return (
     <>
       <div className="ez-div">
-        <div id={`ezoic-pub-ad-placeholder-${id}`} />
+        <PlainPlaceHolder id={id} />
       </div>
       <style jsx>{`
         .ez-div {
@@ -22,4 +22,8 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id, height }) => {
       `}</style>
     </>
   );
+});
+
+export const PlainPlaceHolder: FC<{ id: number }> = memo(({ id }) => {
+  return <div id={`ezoic-pub-ad-placeholder-${id}`}></div>;
 });
