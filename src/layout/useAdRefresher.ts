@@ -20,7 +20,7 @@ export const ezDisplayAds = async () => {
   }
 
   try {
-    await sleep(0.5);
+    await sleep(1);
     const csgoEzoicCodes = findAdCode();
 
     if (!csgoEzoicCodes.length) {
@@ -31,11 +31,11 @@ export const ezDisplayAds = async () => {
 
     if (!ezstandalone.enabled) {
       ezstandalone.enable();
-      await sleep(3);
+      await sleep(0.5);
       ezstandalone.display();
       console.log(`> ezstandalone.display (${csgoEzoicCodes.join(",")})`);
     } else {
-      await sleep(3);
+      await sleep(0.5);
       ezstandalone.refresh();
       console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
     }
