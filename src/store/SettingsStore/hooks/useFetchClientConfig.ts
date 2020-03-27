@@ -7,11 +7,12 @@ export const useFetchClientConfig = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
+    const clientConfigFetch = setInterval(async () => {
       const res = await ClientConfigApi.fetchClientConfig();
       if (res.isOk()) {
         dispatch(replaceClientConfigAction(res.value));
       }
-    })();
+    }, 120 * 1000);
+    return () => clearInterval(clientConfigFetch);
   }, [dispatch]);
 };
