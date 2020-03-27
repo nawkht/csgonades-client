@@ -7,7 +7,6 @@ import { RecentNades } from "./RecentNades";
 import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
-import { EzoicHead } from "../common/EzoicHead";
 
 type Props = {
   recentNades: NadeLight[];
@@ -16,7 +15,6 @@ type Props = {
 export const FrontPage: FC<Props> = ({ recentNades }) => {
   return (
     <>
-      <EzoicHead />
       <FrontPageJumbo />
 
       <PageCentralize>
