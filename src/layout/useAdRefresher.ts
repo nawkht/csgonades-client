@@ -13,12 +13,14 @@ export const useNewAdRefresher = () => {
 };
 
 export const ezDisplayAds = async () => {
+  console.log("> ezDisplayAds");
   if (typeof ezstandalone === "undefined") {
+    console.log("> ezstandalone not found");
     await sleep(2);
   }
 
   try {
-    await sleep(500);
+    await sleep(0.5);
     const csgoEzoicCodes = findAdCode();
 
     if (!csgoEzoicCodes.length) {
@@ -28,17 +30,18 @@ export const ezDisplayAds = async () => {
     ezstandalone.define(csgoEzoicCodes);
 
     if (!ezstandalone.enabled) {
-      await sleep(1000);
+      await sleep(1);
       ezstandalone.enable();
-      await sleep(1000);
+      await sleep(1);
       ezstandalone.display();
       console.log(`> ezstandalone.display (${csgoEzoicCodes.join(",")})`);
     } else {
-      await sleep(1000);
+      await sleep(1);
       ezstandalone.refresh();
       console.log(`> ezstandalone.refresh (${csgoEzoicCodes.join(",")})`);
     }
   } catch (error) {
+    console.error("> ezstandalone error", error);
     return;
   }
 };
