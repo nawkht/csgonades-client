@@ -5,6 +5,8 @@ import { BlogPost } from "./BlogPost";
 import { Dimensions } from "../constants/Constants";
 import { prettyDate } from "../utils/DateUtils";
 import { BlogAuthor } from "./BlogAuthor";
+import { NadeShareActions } from "../nades/NadeShareActions";
+import { SEO } from "../layout/SEO2";
 
 type Props = {
   data: BlogPost;
@@ -15,11 +17,22 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
   return (
     <>
+      <SEO
+        title={data.title}
+        canonical={`/blog/${data.slug}`}
+        description={data.intro}
+        thumbnail={data.thumbnailUrl}
+      />
       <div className="article-wrap">
         <div className="empty" />
         <article>
           <h1>{data.title}</h1>
-          <div className="article-date">{prettyDate(data.createdAt)}</div>
+          <NadeShareActions
+            url={`/blog/${data.slug}`}
+            title={data.title}
+            image={data.thumbnailUrl}
+            visisble={true}
+          />
           <div className="img-wrap">
             <img className="article-image" src={data.imageUrl} />
             {!!data.imageCredit && !!data.imageCreditUrl && (
@@ -31,6 +44,8 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
               </div>
             )}
           </div>
+          <div className="article-date">{prettyDate(data.createdAt)}</div>
+
           <p className="lead">{data.intro}</p>
           {children}
           <BlogAuthor />

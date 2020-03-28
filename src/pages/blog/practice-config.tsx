@@ -1,5 +1,4 @@
 import { BlogPost } from "../../blog/BlogPost";
-import { SEO } from "../../layout/SEO2";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCopyPaste } from "../../blog/BlogCopyPaste";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
@@ -21,7 +20,6 @@ export const blogPractiseConfig: BlogPost = {
 const PractiseConfigBlogPost = () => {
   return (
     <>
-      <SEO />
       <BlogPostArticle data={blogPractiseConfig}>
         <p>
           If you are in a hurry copy-paste the two commands below into your

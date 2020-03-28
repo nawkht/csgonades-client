@@ -3,7 +3,6 @@ import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogPost } from "../../blog/BlogPost";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
-import { SEO } from "../../layout/SEO2";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
   title: "Tickrate and It's Effect on Jumpthrow Bind",
@@ -18,12 +17,6 @@ export const blogTickrateAndJumpthrow: BlogPost = {
 const TickRateAndJumpthrowBindBlogPost: FC = () => {
   return (
     <>
-      <SEO
-        title={blogTickrateAndJumpthrow.title}
-        canonical={`/blog/${blogTickrateAndJumpthrow.slug}`}
-        description={blogTickrateAndJumpthrow.intro}
-        thumbnail={blogTickrateAndJumpthrow.thumbnailUrl}
-      />
       <BlogPostArticle data={blogTickrateAndJumpthrow}>
         <p>
           TLDR; Game servers have different rates at which they communicate with

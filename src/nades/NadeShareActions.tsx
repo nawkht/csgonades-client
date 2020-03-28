@@ -9,29 +9,34 @@ import {
   VKShareButton,
   VKIcon,
 } from "react-share";
-import { Nade } from "../models/Nade/Nade";
-import { nadeTitleBuilder } from "./components/NadeTitle";
 import { useAnalytics } from "../utils/Analytics";
 
 type Props = {
-  nade: Nade;
+  visisble: boolean;
+  url: string;
+  title: string;
+  image?: string;
 };
 
-export const NadeShareActions: FC<Props> = ({ nade }) => {
+export const NadeShareActions: FC<Props> = ({
+  visisble,
+  url,
+  title,
+  image,
+}) => {
   const { event } = useAnalytics();
-  const shareUrl = `https://www.csgonades.com/nades/${nade.slug || nade.id}`;
-  const title = nadeTitleBuilder(nade);
-
-  if (nade.status !== "accepted") {
-    return null;
-  }
+  const shareUrl = `https://www.csgonades.com${url}`;
 
   function onSosialShare(socialNetwork: string) {
     event({
       category: "SocialShare",
       action: socialNetwork,
-      label: nade.slug || nade.id,
+      label: url,
     });
+  }
+
+  if (!visisble) {
+    return null;
   }
 
   return (
@@ -54,11 +59,7 @@ export const NadeShareActions: FC<Props> = ({ nade }) => {
           </TwitterShareButton>
         </div>
         <div onClick={() => onSosialShare("VK")}>
-          <VKShareButton
-            url={shareUrl}
-            title={nadeTitleBuilder(nade)}
-            image={nade?.images.thumbnailUrl}
-          >
+          <VKShareButton url={shareUrl} title={title} image={image}>
             <VKIcon size={30} round />
           </VKShareButton>
         </div>
@@ -66,8 +67,6 @@ export const NadeShareActions: FC<Props> = ({ nade }) => {
       <style jsx>{`
         .share-buttons {
           display: flex;
-          max-width: 1000px;
-          margin: 0 auto;
           align-items: center;
           justify-content: flex-end;
           margin-bottom: 10px;

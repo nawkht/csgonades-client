@@ -9,7 +9,7 @@ import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
 import { useNadeRegisterView } from "../store2/NadePageStore/hooks/useNadeRegisterView";
 import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
-import { NadeTitle } from "./components/NadeTitle";
+import { NadeTitle, nadeTitleBuilder } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
 import { NadeActions } from "./NadeActions";
@@ -81,7 +81,12 @@ export const NadePage: FC = memo(() => {
           <EzoicPlaceHolder id={161} />
         </aside>
         <div id="nade-social">
-          <NadeShareActions nade={nade} />
+          <NadeShareActions
+            title={nadeTitleBuilder(nade)}
+            visisble={nade?.status === "accepted"}
+            url={`/nades/${nade?.slug || nade?.id}`}
+            image={nade?.images.thumbnailUrl}
+          />
         </div>
 
         <div id="nade-page-main">

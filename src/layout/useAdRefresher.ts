@@ -11,11 +11,7 @@ export const useNewAdRefresher = () => {
     const delay = setTimeout(() => {
       ezDisplayAds();
     }, 500);
-    return () => {
-      if (delay) {
-        clearTimeout(delay);
-      }
-    };
+    return () => clearTimeout(delay);
   }, [query, route]);
 };
 
