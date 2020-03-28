@@ -1,18 +1,20 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
+import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 
 export const useNewAdRefresher = () => {
-  const { route, query } = useRouter();
+  const { acceptedCookieConsent } = useCookieConcent();
+  const { route } = useRouter();
 
   useEffect(() => {
-    if (route.includes("adtesting")) {
+    if (route.includes("adtesting") || !acceptedCookieConsent) {
+      console.log("> No cookie concent given");
       return;
     }
-    const delay = setTimeout(() => {
-      ezDisplayAds();
-    }, 750);
-    return () => clearTimeout(delay);
-  }, [query, route]);
+
+    Router.events.on("routeChangeComplete", ezDisplayAds);
+    return () => Router.events.off("routeChangeComplete", ezDisplayAds);
+  }, [acceptedCookieConsent, route]);
 };
 
 export const ezDisplayAds = () => {
@@ -28,11 +30,13 @@ export const ezDisplayAds = () => {
   try {
     ezstandalone.define(csgoEzoicCodes);
 
-    if (!ezstandalone.enabled) {
+    if (!ezstandalone.scriptsLoaded) {
       ezstandalone.enable();
       ezstandalone.display();
-    } else {
+      console.log("> enable display");
+    } else if (ezstandalone.scriptsLoaded) {
       ezstandalone.refresh();
+      console.log("> refresh");
     }
   } catch (error) {
     console.warn("> ezstandalone error", error);

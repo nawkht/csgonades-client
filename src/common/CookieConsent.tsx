@@ -3,6 +3,7 @@ import { FaCookieBite } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { ezDisplayAds } from "../layout/useAdRefresher";
 
 export const CookieConsent: FC = memo(() => {
   const [render, setRender] = useState(false);
@@ -24,6 +25,11 @@ export const CookieConsent: FC = memo(() => {
     return classNames.join(" ");
   }, [acceptedCookieConsent, render]);
 
+  function onCookieConsentAccept() {
+    ezDisplayAds();
+    acceptCookieConcent();
+  }
+
   return (
     <>
       <div className={wrapperClassName}>
@@ -40,7 +46,7 @@ export const CookieConsent: FC = memo(() => {
           </div>
 
           <div className="close-button">
-            <button className="accept-btn" onClick={acceptCookieConcent}>
+            <button className="accept-btn" onClick={onCookieConsentAccept}>
               I understand.
             </button>
           </div>
