@@ -7,14 +7,13 @@ import { RecentNades } from "./RecentNades";
 import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
-import { useIsAdmin } from "../store/AuthStore/AuthHooks";
+import { PropellerAd } from "./PropellerAd";
 
 type Props = {
   recentNades: NadeLight[];
 };
 
 export const FrontPage: FC<Props> = memo(({ recentNades }) => {
-  const isAdmin = useIsAdmin();
   return (
     <>
       <FrontPageJumbo />
@@ -25,13 +24,7 @@ export const FrontPage: FC<Props> = memo(({ recentNades }) => {
           <aside className="front-page-sidebar">
             <FrontpageActions />
             <EzoicPlaceHolder id={163} />
-            {isAdmin && (
-              <script
-                async
-                data-cfasync="false"
-                src="//native.propellerclick.com/1?z=3164971"
-              ></script>
-            )}
+            <PropellerAd />
           </aside>
         </div>
 
