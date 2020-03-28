@@ -7,6 +7,7 @@ import { CSGNModal } from "../../common/CSGNModal";
 import { CsgnTextArea } from "../../common/inputs/CsgnTextArea";
 import { CsgnSaveButton } from "../../common/inputs/CsgnSaveButton";
 import { useGetOrUpdateToken } from "../../store/AuthStore/hooks/useGetToken";
+import { RenderMarkdown } from "../components/RenderMarkdown";
 
 type Props = {
   nadeComment: NadeComment;
@@ -76,7 +77,9 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
             {prettyDateTime(nadeComment.createdAt)}
           </div>
         </div>
-        <div className="nade-comment-msg">{nadeComment.message}</div>
+        <div className="nade-comment-msg">
+          <RenderMarkdown value={nadeComment.message} />
+        </div>
         {allowEditAndDelete && (
           <div className="actions">
             <button onClick={() => setEditorVisisble(true)}>Edit</button>
