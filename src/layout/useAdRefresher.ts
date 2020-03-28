@@ -46,10 +46,8 @@ export const ezRefreshAds = (tries = 0) => {
       });
       console.log("> enable display");
     } else if (ezstandalone.scriptsLoaded) {
-      ezstandalone.cmd.push(function () {
-        ezstandalone.define(csgoEzoicCodes);
-        ezstandalone.refresh();
-      });
+      ezstandalone.define(csgoEzoicCodes);
+      ezstandalone.refresh();
       console.log("> refresh");
     }
   } catch (error) {
