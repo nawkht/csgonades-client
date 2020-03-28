@@ -1,8 +1,20 @@
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import { useIsAdmin } from "../store/AuthStore/AuthHooks";
 
 export const PropellerAd: FC = memo(({}) => {
   const isAdmin = useIsAdmin();
+  const adRef = useCallback((node: HTMLDivElement) => {
+    if (!node) {
+      return;
+    }
+    const script = document.createElement("script");
+
+    script.src = "//native.propellerclick.com/1?z=3164971";
+    script.async = true;
+    script.setAttribute("data-cfasync", "false");
+
+    node.appendChild(script);
+  }, []);
 
   if (!isAdmin) {
     return null;
@@ -10,16 +22,9 @@ export const PropellerAd: FC = memo(({}) => {
 
   return (
     <>
-      <div className="propeller">
-        <script
-          async
-          data-cfasync="false"
-          src="//native.propellerclick.com/1?z=3164971"
-        ></script>
-      </div>
+      <div className="propeller" ref={adRef}></div>
       <style jsx>{`
         .propeller {
-          border: 1px solid red;
           height: 300px;
           width: 100%;
         }
