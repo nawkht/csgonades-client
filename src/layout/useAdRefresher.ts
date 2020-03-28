@@ -26,12 +26,12 @@ export const ezDisplayAds = () => {
   }
 
   try {
+    ezstandalone.define(csgoEzoicCodes);
+
     if (!ezstandalone.enabled) {
-      ezstandalone.define(csgoEzoicCodes);
       ezstandalone.enable();
-      ezstandalone.display();
+      ezstandalone.refresh();
     } else {
-      ezstandalone.define(csgoEzoicCodes);
       ezstandalone.refresh();
     }
   } catch (error) {
