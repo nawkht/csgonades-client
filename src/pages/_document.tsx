@@ -6,6 +6,10 @@ class MyDocument extends Document {
       <>
         <Html lang="en">
           <Head>
+            <link
+              rel="preconnect"
+              href="https://securepubads.g.doubleclick.net"
+            />
             <script src="//www.ezojs.com/ezoic/sa.min.js" />
             <meta
               name="viewport"
