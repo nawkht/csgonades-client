@@ -7,14 +7,10 @@ export const useNewAdRefresher = () => {
   const { route, pathname } = useRouter();
 
   useEffect(() => {
-    const delay = setTimeout(() => {
-      if (route.includes("adtesting") || !acceptedCookieConsent) {
-        return;
-      }
-
-      ezRefreshAds();
-    }, 500);
-    return () => clearTimeout(delay);
+    if (route.includes("adtesting") || !acceptedCookieConsent) {
+      return;
+    }
+    ezRefreshAds();
   }, [route, acceptedCookieConsent, pathname]);
 };
 
