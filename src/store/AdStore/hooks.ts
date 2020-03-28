@@ -4,7 +4,7 @@ import { AdActions } from "./actions";
 import { useCallback, useEffect } from "react";
 import Router from "next/router";
 import { adSlotsSelector } from "./selectors";
-import { ezDisplayAds } from "../../layout/useAdRefresher";
+import { ezRefreshAds } from "../../layout/useAdRefresher";
 
 const useAdStoreDispatch = () => {
   return useDispatch<Dispatch<AdActions>>();
@@ -45,7 +45,7 @@ export const useAdSlotsHandler = () => {
 
   useEffect(() => {
     if (adSlots.length) {
-      ezDisplayAds();
+      ezRefreshAds();
     }
   }, [adSlots]);
 };

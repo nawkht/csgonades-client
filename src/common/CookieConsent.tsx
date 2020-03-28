@@ -3,7 +3,7 @@ import { FaCookieBite } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { ezDisplayAds } from "../layout/useAdRefresher";
+import { ezFirstInit } from "../layout/useAdRefresher";
 
 export const CookieConsent: FC = memo(() => {
   const [render, setRender] = useState(false);
@@ -13,7 +13,7 @@ export const CookieConsent: FC = memo(() => {
   useEffect(() => {
     const renderTimer = setTimeout(() => {
       setRender(true);
-    }, 1000);
+    }, 2000);
     return () => clearTimeout(renderTimer);
   }, []);
 
@@ -26,7 +26,7 @@ export const CookieConsent: FC = memo(() => {
   }, [acceptedCookieConsent, render]);
 
   function onCookieConsentAccept() {
-    ezDisplayAds();
+    ezFirstInit();
     acceptCookieConcent();
   }
 
@@ -47,7 +47,7 @@ export const CookieConsent: FC = memo(() => {
 
           <div className="close-button">
             <button className="accept-btn" onClick={onCookieConsentAccept}>
-              I understand.
+              I Accept
             </button>
           </div>
         </div>
@@ -55,7 +55,7 @@ export const CookieConsent: FC = memo(() => {
       <style jsx>{`
         .cookie-consent-wrapper {
           position: fixed;
-          bottom: 20px;
+          bottom: 50px;
           left: 0;
           right: 0;
           z-index: 999;
@@ -74,14 +74,14 @@ export const CookieConsent: FC = memo(() => {
 
         .cookie-consent {
           max-width: 500px;
-          border: 2px solid ${colors.BORDER};
           border-radius: 5px;
-          background: rgba(255, 255, 255, 0.97);
-          color: #333;
+          background: rgba(0, 0, 0, 0.95);
+          color: #fff;
           padding: 20px 30px;
           display: flex;
           flex-direction: column;
           align-items: center;
+          font-size: 18px;
         }
 
         .cookie-icon {
@@ -103,13 +103,13 @@ export const CookieConsent: FC = memo(() => {
         .accept-btn {
           appearance: none;
           border: none;
-          background: transparent;
+          background: ${colors.PRIMARY};
           white-space: nowrap;
           padding: 10px 20px;
-          color: ${colors.TEXT};
+          color: #fff;
           border-radius: 5px;
           font-weight: 300;
-          border: 1px solid ${colors.TEXT};
+          border: none;
           cursor: pointer;
           font-size: 1em;
           outline: none;
