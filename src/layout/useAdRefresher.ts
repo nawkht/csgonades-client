@@ -1,19 +1,21 @@
 import { useEffect } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
+import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 
 export const useNewAdRefresher = () => {
-  const { route } = useRouter();
+  const { acceptedCookieConsent } = useCookieConcent();
+  const { route, pathname } = useRouter();
 
   useEffect(() => {
-    if (route.includes("adtesting")) {
-      return;
-    }
+    const delay = setTimeout(() => {
+      if (route.includes("adtesting") || !acceptedCookieConsent) {
+        return;
+      }
 
-    ezRefreshAds();
-
-    Router.events.on("routeChangeComplete", ezRefreshAds);
-    return () => Router.events.off("routeChangeComplete", ezRefreshAds);
-  }, [route]);
+      ezRefreshAds();
+    }, 500);
+    return () => clearTimeout(delay);
+  }, [route, acceptedCookieConsent, pathname]);
 };
 
 export const ezRefreshAds = () => {
