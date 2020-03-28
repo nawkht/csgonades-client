@@ -37,10 +37,12 @@ export const CookieConsent: FC = memo(() => {
           </div>
 
           <div className="consent-txt">
-            In order to give you a better service CSGO Nades uses{" "}
-            <a href="/policy">cookies</a> for analytics and advertising. By
-            continuing to browse the site you are agreeing to our use of
-            cookies.
+            <p>
+              In order to give you a better service CSGO Nades uses{" "}
+              <a href="/policy">cookies</a> for analytics and advertising. By
+              continuing to browse the site you are agreeing to our use of
+              cookies.
+            </p>
           </div>
 
           <div className="close-button">
@@ -53,17 +55,20 @@ export const CookieConsent: FC = memo(() => {
       <style jsx>{`
         .cookie-consent-wrapper {
           position: fixed;
-          bottom: 50px;
+          bottom: 0;
           left: 0;
           right: 0;
+          background: rgba(0, 0, 0, 0.9);
           z-index: 999;
           display: flex;
           justify-content: space-around;
           display: flex;
           transform: translateY(200%);
           transition: transform 0.15s;
-          margin-left: 20px;
-          margin-right: 20px;
+          padding-left: 15px;
+          padding-right: 15px;
+          padding-bottom: 75px;
+          padding-top: 50px;
         }
 
         .visible {
@@ -73,9 +78,7 @@ export const CookieConsent: FC = memo(() => {
         .cookie-consent {
           max-width: 500px;
           border-radius: 5px;
-          background: rgba(0, 0, 0, 0.95);
           color: #fff;
-          padding: 20px 30px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -103,7 +106,7 @@ export const CookieConsent: FC = memo(() => {
           border: none;
           background: ${colors.PRIMARY};
           white-space: nowrap;
-          padding: 10px 20px;
+          padding: 20px 40px;
           color: #fff;
           border-radius: 5px;
           font-weight: 300;
@@ -114,8 +117,7 @@ export const CookieConsent: FC = memo(() => {
         }
 
         .accept-btn:hover {
-          border: 1px solid ${colors.PRIMARY};
-          color: ${colors.PRIMARY};
+          background: #083345;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
