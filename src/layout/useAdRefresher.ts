@@ -20,9 +20,16 @@ export const useNewAdRefresher = () => {
   }, [route, query]);
 };
 
-export const ezRefreshAds = () => {
+export const ezRefreshAds = (tries = 0) => {
+  if (tries > 2) {
+    return;
+  }
+
   try {
     if (typeof ezstandalone === "undefined") {
+      setTimeout(() => {
+        ezRefreshAds(tries + 1);
+      }, 1000);
       return;
     }
 
