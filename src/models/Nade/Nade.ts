@@ -58,6 +58,7 @@ export type NadeLight = {
   userAvatar: string;
   isFavorited?: boolean;
   technique?: Technique;
+  commentCount: number;
   movement?: Movement;
 };
 

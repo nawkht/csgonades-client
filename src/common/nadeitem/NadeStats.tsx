@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaRunning, FaStar } from "react-icons/fa";
+import { FaRunning, FaStar, FaComment } from "react-icons/fa";
 import { GoEye, GoTerminal } from "react-icons/go";
 import { NadeLight } from "../../models/Nade/Nade";
 import { tickrateString } from "../../models/Nade/NadeTickrate";
@@ -43,6 +43,18 @@ export const NadeStats: FC<Props> = ({ nade }) => {
                   style={{ position: "relative", top: -1 }}
                 />
                 <span className="stat-text">{nade.favoriteCount}</span>
+              </div>
+            </div>
+          )}
+
+          {nade.commentCount > 0 && (
+            <div className="stat">
+              <div className="stat-content">
+                <FaComment
+                  color={favoriteIconColor}
+                  style={{ position: "relative", top: -1 }}
+                />
+                <span className="stat-text">{nade.commentCount}</span>
               </div>
             </div>
           )}
