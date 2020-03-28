@@ -3,7 +3,6 @@ import { FaCookieBite } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { ezFirstInit } from "../layout/useAdRefresher";
 
 export const CookieConsent: FC = memo(() => {
   const [render, setRender] = useState(false);
@@ -26,7 +25,6 @@ export const CookieConsent: FC = memo(() => {
   }, [acceptedCookieConsent, render]);
 
   function onCookieConsentAccept() {
-    ezFirstInit();
     acceptCookieConcent();
   }
 

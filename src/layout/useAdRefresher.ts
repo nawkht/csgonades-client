@@ -1,62 +1,38 @@
 import { useEffect } from "react";
 import Router, { useRouter } from "next/router";
-import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 
 export const useNewAdRefresher = () => {
-  const { acceptedCookieConsent } = useCookieConcent();
   const { route } = useRouter();
 
   useEffect(() => {
-    if (route.includes("adtesting") || !acceptedCookieConsent) {
+    if (route.includes("adtesting")) {
       return;
     }
-    const delay = setTimeout(() => {
-      ezFirstInit();
-    }, 500);
-    return () => clearTimeout(delay);
-  }, [acceptedCookieConsent, route]);
 
-  useEffect(() => {
-    if (route.includes("adtesting") || !acceptedCookieConsent) {
-      console.log("> No cookie concent given");
-      return;
-    }
+    ezRefreshAds();
 
     Router.events.on("routeChangeComplete", ezRefreshAds);
     return () => Router.events.off("routeChangeComplete", ezRefreshAds);
-  }, [acceptedCookieConsent, route]);
-};
-
-export const ezFirstInit = () => {
-  if (typeof ezstandalone === "undefined") {
-    return;
-  }
-
-  try {
-    const csgoEzoicCodes = findAdCode();
-    if (!ezstandalone.scriptsLoaded) {
-      ezstandalone.define(csgoEzoicCodes);
-      ezstandalone.enable();
-      ezstandalone.display();
-      console.log("> enable display");
-    }
-  } catch (error) {
-    // no-op
-  }
+  }, [route]);
 };
 
 export const ezRefreshAds = () => {
-  if (typeof ezstandalone === "undefined") {
-    return;
-  }
-
   try {
+    if (typeof ezstandalone === "undefined") {
+      return;
+    }
+
     const csgoEzoicCodes = findAdCode();
     if (!csgoEzoicCodes.length) {
       return;
     }
 
-    if (ezstandalone.scriptsLoaded) {
+    if (!ezstandalone.scriptsLoaded) {
+      ezstandalone.define(csgoEzoicCodes);
+      ezstandalone.enable();
+      ezstandalone.display();
+      console.log("> enable display");
+    } else if (ezstandalone.scriptsLoaded) {
       ezstandalone.define(csgoEzoicCodes);
       ezstandalone.refresh();
       console.log("> refresh");
