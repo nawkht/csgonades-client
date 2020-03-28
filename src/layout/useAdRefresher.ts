@@ -10,7 +10,7 @@ export const useNewAdRefresher = () => {
     }
     const delay = setTimeout(() => {
       ezDisplayAds();
-    }, 500);
+    }, 750);
     return () => clearTimeout(delay);
   }, [query, route]);
 };
@@ -30,7 +30,7 @@ export const ezDisplayAds = () => {
 
     if (!ezstandalone.enabled) {
       ezstandalone.enable();
-      ezstandalone.refresh();
+      ezstandalone.display();
     } else {
       ezstandalone.refresh();
     }
