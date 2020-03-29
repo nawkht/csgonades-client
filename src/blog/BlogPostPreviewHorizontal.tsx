@@ -23,10 +23,10 @@ export const BlogPostPreviewHorizontal: FC<Props> = ({ blogPost }) => {
             <h3>{title}</h3>
             <p>{intro}</p>
             <div className="actions">
-              <span className="actions-read-more">Read more</span>
               <span className="blog-post-date">
                 {prettyDate(blogPost.createdAt)}
               </span>
+              <span className="actions-read-more">Read more</span>
             </div>
           </div>
         </div>
@@ -41,6 +41,7 @@ export const BlogPostPreviewHorizontal: FC<Props> = ({ blogPost }) => {
           border-radius: 5px;
           box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
           margin-bottom: 50px;
+          font-size: 18px;
         }
 
         .actions {
@@ -61,8 +62,8 @@ export const BlogPostPreviewHorizontal: FC<Props> = ({ blogPost }) => {
         .content p {
           flex: 1;
           padding: 0px 30px;
-          margin-bottom: 15px;
-          font-size: 16px;
+          margin-bottom: 30px;
+          font-size: 18px;
           color: #545454;
           color: ${colors.TEXT};
         }
@@ -85,7 +86,6 @@ export const BlogPostPreviewHorizontal: FC<Props> = ({ blogPost }) => {
         }
 
         .blog-post-preview h3 {
-          text-align: center;
           margin: 0;
           padding: 15px 30px;
           font-weight: 400;
@@ -97,7 +97,7 @@ export const BlogPostPreviewHorizontal: FC<Props> = ({ blogPost }) => {
         .blog-post-date {
           text-align: right;
           color: #bbb;
-          font-size: 14px;
+          font-size: 16px;
         }
       `}</style>
     </>
