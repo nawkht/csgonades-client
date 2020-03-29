@@ -1,13 +1,13 @@
 import { FC, SyntheticEvent, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { NadeLight } from "../../models/Nade/Nade";
+import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
 import { SeekBar } from "../SeekBar";
 import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
 
 type Props = {
-  nade: NadeLight;
+  nade: NadeLight | Nade;
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {

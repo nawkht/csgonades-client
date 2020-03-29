@@ -5,12 +5,17 @@ import { BlogList } from "../../blog/BlogList";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { SEO } from "../../layout/SEO2";
 import { blogPractiseConfig } from "./practice-config";
+import { blogNadeAlignCrosshair } from "./smoke-align-crosshair";
 
 type Props = {};
 
 const BlogPage: FC<Props> = ({}) => {
   const { colors } = useTheme();
-  const blogPosts = [blogPractiseConfig, blogTickrateAndJumpthrow];
+  const blogPosts = [
+    blogNadeAlignCrosshair,
+    blogPractiseConfig,
+    blogTickrateAndJumpthrow,
+  ];
 
   return (
     <>

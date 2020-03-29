@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { FaRunning, FaStar, FaComment } from "react-icons/fa";
 import { GoEye, GoTerminal } from "react-icons/go";
-import { NadeLight } from "../../models/Nade/Nade";
+import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { tickrateString } from "../../models/Nade/NadeTickrate";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { kFormatter } from "../../utils/Common";
 
 type Props = {
-  nade: NadeLight;
+  nade: NadeLight | Nade;
 };
 
 export const NadeStats: FC<Props> = ({ nade }) => {

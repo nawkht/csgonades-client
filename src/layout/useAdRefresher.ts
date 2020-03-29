@@ -2,17 +2,18 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 export const useNewAdRefresher = () => {
-  const { route, query } = useRouter();
+  const { asPath } = useRouter();
 
   useEffect(() => {
-    if (route.includes("adtesting")) {
+    console.log(">", asPath);
+    if (asPath.includes("adtesting")) {
       return;
     }
     const delay = setTimeout(() => {
       ezRefreshAds();
-    }, 1000);
+    }, 500);
     return () => clearTimeout(delay);
-  }, [route, query]);
+  }, [asPath]);
 };
 
 export const ezRefreshAds = (tries = 0) => {
@@ -34,11 +35,9 @@ export const ezRefreshAds = (tries = 0) => {
     }
 
     if (!ezstandalone.scriptsLoaded) {
-      ezstandalone.cmd.push(function () {
-        ezstandalone.define(csgoEzoicCodes);
-        ezstandalone.enable();
-        ezstandalone.display();
-      });
+      ezstandalone.define(csgoEzoicCodes);
+      ezstandalone.enable();
+      ezstandalone.display();
       console.log("> enable display");
     } else if (ezstandalone.scriptsLoaded) {
       ezstandalone.define(csgoEzoicCodes);

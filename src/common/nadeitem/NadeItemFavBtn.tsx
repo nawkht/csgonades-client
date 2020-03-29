@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { NadeLight } from "../../models/Nade/Nade";
+import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useIsFavoriteInProgress } from "../../store/FavoriteStore/hooks/useIsFavoriteInProgress";
 import { useIsFavorited } from "../../store/FavoriteStore/hooks/useIsFavorited";
@@ -10,7 +10,7 @@ import { FaStar, FaSpinner, FaTimes } from "react-icons/fa";
 import { useMapFavCount } from "../../store/MapStore/hooks/useMapFavCount";
 
 type Props = {
-  nade: NadeLight;
+  nade: NadeLight | Nade;
 };
 
 export const NadeItemFavBtn: FC<Props> = ({ nade }) => {

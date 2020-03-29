@@ -30,7 +30,7 @@ export type Nade = {
   type?: NadeType;
   steamId: string;
   user: UserLight;
-  createdAt: string;
+  createdAt: Date | string;
   updatedAt: string;
   status: Status;
   statusInfo?: StatusInfo;
@@ -39,6 +39,7 @@ export type Nade = {
   favoriteCount: number;
   mapEndCoord?: MapCoordinates;
   score: number;
+  isFavorited?: boolean;
 };
 
 export type NadeLight = {
@@ -50,7 +51,7 @@ export type NadeLight = {
   images: NadeImages;
   type?: NadeType;
   tickrate?: Tickrate;
-  createdAt: Date;
+  createdAt: Date | string;
   viewCount: number;
   favoriteCount: number;
   mapEndCoord?: MapCoordinates;

@@ -40,8 +40,9 @@ const createSitemap = async () => {
     "contact",
     "privacypolicy",
     "blog",
-    "/blog/tickrate-and-jumpthrow-bind",
-    "/blog/practice-config",
+    "blog/tickrate-and-jumpthrow-bind",
+    "blog/practice-config",
+    "blog/smoke-align-crosshair",
   ];
 
   staticPages.forEach((staticPage) => {
@@ -50,7 +51,7 @@ const createSitemap = async () => {
     xml += "<url>";
     xml += `<loc>${page}</loc>`;
     xml += `<changefreq>monthly</changefreq>`;
-    xml += `<priority>0.4</priority>`;
+    xml += `<priority>0.5</priority>`;
     xml += "</url>";
   });
 
