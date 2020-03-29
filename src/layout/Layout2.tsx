@@ -10,7 +10,6 @@ import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
-import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
 import { useAdblockAnalytics } from "./useCheckIfAdPresent";
 import { AdminLink } from "./Misc/AdminLink";
 import { useNewAdRefresher } from "./useAdRefresher";
@@ -27,7 +26,6 @@ export const Layout2: FC = memo(({ children }) => {
   return (
     <>
       <div className="page">
-        <AdBlockNotice />
         <ServiceDown />
         <div className="header">
           <Header />
