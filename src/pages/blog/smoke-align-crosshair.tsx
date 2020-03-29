@@ -18,7 +18,20 @@ export const blogNadeAlignCrosshair: BlogPost = {
 const NadeAlignCrosshairBlogPost: FC = () => {
   return (
     <>
-      <BlogPostArticle data={blogNadeAlignCrosshair}>
+      <BlogPostArticle
+        data={blogNadeAlignCrosshair}
+        schema={{
+          url: blogNadeAlignCrosshair.slug,
+          title: blogNadeAlignCrosshair.title,
+          datePublished: blogNadeAlignCrosshair.createdAt,
+          description: blogNadeAlignCrosshair.intro,
+          image: {
+            url: blogNadeAlignCrosshair.imageUrl,
+            width: 1200,
+            height: 675,
+          },
+        }}
+      >
         <p>To get the result as shown in the image above you can choose;</p>
         <p>
           <b>Simple bind:</b> No need to edit your config file, but you have to

@@ -3,16 +3,25 @@ import Head from "next/head";
 import { Nade } from "../models/Nade/Nade";
 import { capitalize, descriptionSimplify } from "../utils/Common";
 
+export type BlogPostSchema = {
+  url: string;
+  title: string;
+  image: { url: string; width: number; height: number };
+  datePublished: string;
+  description: string;
+};
+
 type Props = {
   title?: string;
   description?: string;
   canonical?: string;
   thumbnail?: string;
   nadeSeo?: Nade;
+  blogSchema?: BlogPostSchema;
 };
 
 export const SEO: FC<Props> = memo(
-  ({ description, title, canonical, thumbnail, nadeSeo }) => {
+  ({ description, title, canonical, thumbnail, nadeSeo, blogSchema }) => {
     const pageTitle = title ? `${title} - CSGO Nades` : `CSGO Nades`;
     const pageDescription = descriptionSimplify(description);
 
@@ -49,11 +58,55 @@ export const SEO: FC<Props> = memo(
               dangerouslySetInnerHTML={{ __html: generateNadeLdJson(nadeSeo) }}
             />
           )}
+          {!!blogSchema && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: generateBlogLdJson(blogSchema),
+              }}
+            />
+          )}
         </Head>
       </>
     );
   }
 );
+
+function generateBlogLdJson(data: BlogPostSchema) {
+  const schema = `
+{
+  “@context”: “http://schema.org”,
+  “@type”: “BlogPosting”,
+  “mainEntityOfPage”:{
+    “@type”:”WebPage”,
+    “@id”:”https://www.csgonades.com/blog/${data.url}”
+  },
+  “headline”: “${data.title}”,
+  “image”: {
+    “@type”: “ImageObject”,
+    “url”: “${data.image.url}”,
+    “height”: ${data.image.height},
+    “width”: ${data.image.width}
+  },
+  “datePublished”: “${data.datePublished}”,
+  “author”: {
+    “@type”: “Person”,
+    “name”: “Mellet”
+  },
+  “publisher”: {
+    “@type”: “Organization”,
+    “name”: “CSGO Nades”,
+    “logo”: {
+      “@type”: “ImageObject”,
+      “url”: “https://www.csgonades.com/logo.png”,
+      “width”: 472,
+      “height”: 304
+    }
+  },
+  “description”: “${data.description}”,
+}`;
+  return schema;
+}
 
 function generateNadeLdJson(nade: Nade) {
   return `

@@ -6,13 +6,14 @@ import { Dimensions } from "../constants/Constants";
 import { prettyDate } from "../utils/DateUtils";
 import { BlogAuthor } from "./BlogAuthor";
 import { NadeShareActions } from "../nades/NadeShareActions";
-import { SEO } from "../layout/SEO2";
+import { SEO, BlogPostSchema } from "../layout/SEO2";
 
 type Props = {
   data: BlogPost;
+  schema: BlogPostSchema;
 };
 
-export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
+export const BlogPostArticle: FC<Props> = memo(({ children, data, schema }) => {
   const { colors } = useTheme();
 
   return (
@@ -22,6 +23,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         canonical={`/blog/${data.slug}`}
         description={data.intro}
         thumbnail={data.thumbnailUrl}
+        blogSchema={schema}
       />
       <div className="article-wrap">
         <div className="empty" />
