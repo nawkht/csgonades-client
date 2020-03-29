@@ -10,7 +10,7 @@ export const blogNadeAlignCrosshair: BlogPost = {
   slug: "smoke-align-crosshair",
   imageUrl: "/blogimg/nade-align-crosshair/align-crosshair.jpg",
   thumbnailUrl: "/blogimg/nade-align-crosshair/align-crosshair_thumb.jpg",
-  createdAt: "2020-03-29T21:00:00.000Z",
+  createdAt: "2020-03-29T20:00:00.000Z",
   intro:
     "For particular smokes, it can be hard to find something natural to place your crosshair at to hit that perfect smoke. This key bind will help you align those hard nades.",
 };
