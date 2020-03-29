@@ -72,13 +72,11 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data, schema }) => {
         }
 
         .sidebar {
-          margin-top: 100vh;
-          max-height: 100vh;
+          margin-top: 800px;
+          max-height: 600vh;
         }
 
         .ez {
-          position: sticky;
-          top: 15vh;
         }
 
         .article-wrap {
