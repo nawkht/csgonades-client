@@ -5,15 +5,15 @@ type Props = {};
 
 export const BlogAuthor: FC<Props> = ({}) => {
   const { colors } = useTheme();
-  const defaultName = "Mellet";
+  const defaultName = "Mellet Solbakk";
   const defaultAvatar = "/mellet.jpeg";
 
   return (
     <>
       <div className="author">
-        <h4>Author</h4>
+        <img src={defaultAvatar} />
         <div className="author-details">
-          <img src={defaultAvatar} />
+          <span>WRITTEN BY</span>
           <p>{defaultName}</p>
         </div>
       </div>
@@ -23,17 +23,29 @@ export const BlogAuthor: FC<Props> = ({}) => {
           padding: 20px;
           border-radius: 5px;
           margin-top: 100px;
+          display: flex;
+        }
+
+        .author img {
+          width: 60px;
+          border-radius: 50%;
+          margin-right: 20px;
         }
 
         .author-details {
-          display: flex;
-          align-items: center;
         }
 
-        .author-details img {
-          width: 50px;
-          border-radius: 50%;
-          margin-right: 10px;
+        .author-details span {
+          display: block;
+          margin-bottom: 6px;
+          color: #bbb;
+          font-size: 16px;
+        }
+
+        .author-details p {
+          font-size: 18px;
+          margin: 0;
+          padding: 0;
         }
       `}</style>
     </>
