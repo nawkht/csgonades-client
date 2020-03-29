@@ -17,7 +17,7 @@ export const usePageView = () => {
     const pageViewDelay = setTimeout(() => {
       const location = window.location.pathname + window.location.search;
       pageView({ path: location });
-    }, 1000);
+    }, 500);
     return () => clearTimeout(pageViewDelay);
   }, [pageView, query, route, closeNav]);
 };

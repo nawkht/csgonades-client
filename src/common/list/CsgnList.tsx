@@ -58,6 +58,9 @@ function ListBase<T>(props: Props<T>) {
         .ad-5-container,
         .ad-6-container {
           grid-column: 1 / -1;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
         }
 
         .ad-1-container {

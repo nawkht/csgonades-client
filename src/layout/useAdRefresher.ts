@@ -8,15 +8,7 @@ export const useNewAdRefresher = () => {
     if (route.includes("adtesting")) {
       return;
     }
-    const delay = setTimeout(() => {
-      ezRefreshAds();
-    }, 500);
-
-    return () => {
-      if (delay) {
-        clearTimeout(delay);
-      }
-    };
+    ezRefreshAds();
   }, [route, query]);
 };
 
@@ -51,6 +43,9 @@ export const ezRefreshAds = (tries = 0) => {
       console.log("> refresh");
     }
   } catch (error) {
+    setTimeout(() => {
+      ezRefreshAds(tries + 1);
+    }, 1000);
     console.warn("> ezstandalone error", error);
     return;
   }

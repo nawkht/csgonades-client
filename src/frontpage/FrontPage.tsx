@@ -7,7 +7,6 @@ import { RecentNades } from "./RecentNades";
 import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
-import { PropellerAd } from "./PropellerAd";
 
 type Props = {
   recentNades: NadeLight[];
@@ -24,7 +23,6 @@ export const FrontPage: FC<Props> = memo(({ recentNades }) => {
           <aside className="front-page-sidebar">
             <FrontpageActions />
             <EzoicPlaceHolder id={163} />
-            <PropellerAd />
           </aside>
         </div>
 
