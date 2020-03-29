@@ -8,7 +8,10 @@ export const useNewAdRefresher = () => {
     if (route.includes("adtesting")) {
       return;
     }
-    ezRefreshAds();
+    const delay = setTimeout(() => {
+      ezRefreshAds();
+    }, 1000);
+    return () => clearTimeout(delay);
   }, [route, query]);
 };
 
