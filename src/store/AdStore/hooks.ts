@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { AdActions } from "./actions";
 import { useCallback, useEffect } from "react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { adSlotsSelector } from "./selectors";
 
 const useAdStoreDispatch = () => {
@@ -26,6 +26,7 @@ export const useRegisterPlaceholder = () => {
 };
 
 export const useAdSlotsHandler = () => {
+  const { asPath } = useRouter();
   const adSlots = useSelector(adSlotsSelector);
   const dispatch = useAdStoreDispatch();
 
@@ -43,13 +44,13 @@ export const useAdSlotsHandler = () => {
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (!adSlots.length) {
+      if (!adSlots.length || asPath.includes("adtesting")) {
         return;
       }
       onNewSlots(adSlots);
     }, 250);
     return () => clearTimeout(delay);
-  }, [adSlots]);
+  }, [adSlots, asPath]);
 };
 
 function onNewSlots(slots: number[]) {
