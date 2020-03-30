@@ -6,12 +6,15 @@ import {
   addSiteStatsActon,
   closeNavigationAction,
   toggleNavigationAction,
+  replaceClientConfigAction,
 } from "./GlobalActions";
 import {
   acceptedCookieConsentSelector,
   isNavOpenSelector,
   siteStatsSelector,
+  clientConfigSelector,
 } from "./GlobalSelectors";
+import { ClientConfig } from "../../api/ClientConfigApi";
 
 export const useSiteStats = () => {
   const dispatch = useDispatch();
@@ -61,5 +64,22 @@ export const useCookieConcent = () => {
   return {
     acceptedCookieConsent,
     acceptCookieConcent,
+  };
+};
+
+export const useClientConfig = () => {
+  const dispatch = useDispatch();
+  const clientConfig = useSelector(clientConfigSelector);
+
+  const replaceClientConfig = useCallback(
+    (config: ClientConfig) => {
+      dispatch(replaceClientConfigAction(config));
+    },
+    [dispatch]
+  );
+
+  return {
+    clientConfig,
+    replaceClientConfig,
   };
 };

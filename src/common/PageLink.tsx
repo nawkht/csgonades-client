@@ -1,12 +1,12 @@
 import { forwardRef } from "react";
 import Link from "next/link";
-import { useClientConfig } from "../store/SettingsStore/hooks/useClientConfig";
+import { useClientConfig } from "../store/GlobalStore/GlobalHooks";
 
 export const PageLink = forwardRef<Link, any>(
   ({ children, href, as, ...rest }, ref) => {
-    const { useHardLinks } = useClientConfig();
+    const { clientConfig } = useClientConfig();
 
-    if (useHardLinks) {
+    if (clientConfig.useHardLinks) {
       return <a href={as}>{children}</a>;
     }
 

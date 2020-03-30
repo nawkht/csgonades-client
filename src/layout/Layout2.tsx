@@ -18,7 +18,6 @@ export const Layout2: FC = memo(({ children }) => {
   useSetupSession();
   usePageView();
   usePreloadUser();
-  //useFetchClientConfig();
 
   return (
     <>

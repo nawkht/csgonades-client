@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { ClientConfigApi } from "../../../api/ClientConfigApi";
-import { replaceClientConfigAction } from "../SettingsActions";
 import { useDispatch } from "react-redux";
+import { replaceClientConfigAction } from "../GlobalActions";
 
 export const useFetchClientConfig = () => {
   const dispatch = useDispatch();

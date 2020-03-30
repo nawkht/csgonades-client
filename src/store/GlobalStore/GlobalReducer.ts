@@ -4,11 +4,13 @@ import storage from "redux-persist/lib/storage";
 import { SiteStats } from "../../api/StatsApi";
 import { assertNever } from "../../utils/Common";
 import { GlobalActions } from "./GlobalActions";
+import { ClientConfig } from "../../api/ClientConfigApi";
 
 export type GlobalState = {
   readonly stats: SiteStats;
   readonly isNavOpen: boolean;
   readonly acceptedCookieConcent: boolean;
+  readonly clientConfig: ClientConfig;
 };
 
 const initialState: GlobalState = {
@@ -20,6 +22,9 @@ const initialState: GlobalState = {
   },
   isNavOpen: false,
   acceptedCookieConcent: false,
+  clientConfig: {
+    useHardLinks: true,
+  },
 };
 
 export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
@@ -47,6 +52,8 @@ export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
         ...state,
         acceptedCookieConcent: true,
       };
+    case "@@global/ReplaceClientConfig":
+      return state;
     default:
       assertNever(action);
       return state;

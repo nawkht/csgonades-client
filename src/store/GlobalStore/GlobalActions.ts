@@ -1,4 +1,5 @@
 import { SiteStats } from "../../api/StatsApi";
+import { ClientConfig } from "../../api/ClientConfigApi";
 
 type AddSiteStatsAction = {
   readonly type: "@@global/ADD_SITE_STATS";
@@ -17,11 +18,24 @@ type AcceptCookieConcent = {
   readonly type: "@@global/ACCEPT_COOKIE_CONCENT";
 };
 
+type ReplaceClientConfig = {
+  type: "@@global/ReplaceClientConfig";
+  config: ClientConfig;
+};
+
 export type GlobalActions =
   | AddSiteStatsAction
   | ToggleNavigation
   | CloseNavigation
-  | AcceptCookieConcent;
+  | AcceptCookieConcent
+  | ReplaceClientConfig;
+
+export const replaceClientConfigAction = (
+  config: ClientConfig
+): ReplaceClientConfig => ({
+  type: "@@global/ReplaceClientConfig",
+  config,
+});
 
 export const addSiteStatsActon = (stats: SiteStats): AddSiteStatsAction => ({
   type: "@@global/ADD_SITE_STATS",
