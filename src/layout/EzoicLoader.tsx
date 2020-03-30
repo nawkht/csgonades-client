@@ -14,6 +14,7 @@ export const EzoicLoader = memo(() => {
         console.log("> enable");
         ezstandalone.display();
         console.log("> display");
+        ezstandalone.refresh();
       });
     }, 2000);
     return () => clearTimeout(delay);
