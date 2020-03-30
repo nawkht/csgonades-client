@@ -11,7 +11,7 @@ export const useNewAdRefresher = () => {
     }
     const delay = setTimeout(() => {
       ezRefreshAds();
-    }, 500);
+    }, 1500);
     return () => clearTimeout(delay);
   }, [asPath, query, pathname]);
 };
@@ -20,7 +20,8 @@ export const ezRefreshAds = () => {
   try {
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function () {
-        ezstandalone.findAll();
+        const csgoEzoicCodes = findAdCode();
+        ezstandalone.define(csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
         console.log("> enable display");
@@ -28,7 +29,6 @@ export const ezRefreshAds = () => {
     } else {
       ezstandalone.cmd.push(function () {
         const csgoEzoicCodes = findAdCode();
-        ezstandalone.findAll();
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.refresh();
         console.log("> refresh");
