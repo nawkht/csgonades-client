@@ -13,7 +13,7 @@ export type SettingsState = {
 const initialState: SettingsState = {
   theme: "light",
   clientConfig: {
-    useHardLinks: false,
+    useHardLinks: true,
   },
 };
 
@@ -30,8 +30,12 @@ const SettingsReducer: Reducer<SettingsState, SettingsActions> = (
     case "Settings/ReplaceClientConfig":
       return {
         ...state,
-        clientConfig: action.config,
       };
+    /*
+      return {
+        ...state,
+        clientConfig: action.config,
+      };*/
     default:
       return state;
   }

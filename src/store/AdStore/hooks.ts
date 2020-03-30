@@ -60,8 +60,10 @@ function onNewSlots(slots: number[]) {
     if (!ezstandalone.enabled) {
       ezstandalone.enable();
       ezstandalone.display();
+      console.log("> display", slots);
     } else {
       ezstandalone.refresh();
+      console.log("> refresh", slots);
     }
   } catch (error) {}
 }

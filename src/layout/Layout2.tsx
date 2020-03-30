@@ -9,7 +9,6 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
-import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { AdminLink } from "./Misc/AdminLink";
 import { useAdSlotsHandler } from "../store/AdStore/hooks";
 
@@ -19,7 +18,7 @@ export const Layout2: FC = memo(({ children }) => {
   useSetupSession();
   usePageView();
   usePreloadUser();
-  useFetchClientConfig();
+  //useFetchClientConfig();
 
   return (
     <>
