@@ -18,15 +18,9 @@ export const useNewAdRefresher = () => {
 
 export const ezRefreshAds = () => {
   try {
-    const placeholders = findAdCode();
-    if (!placeholders.length) {
-      return;
-    }
-
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function () {
-        const csgoEzoicCodes = findAdCode();
-        ezstandalone.define(csgoEzoicCodes);
+        ezstandalone.findAll();
         ezstandalone.enable();
         ezstandalone.display();
         console.log("> enable display");
@@ -34,6 +28,7 @@ export const ezRefreshAds = () => {
     } else {
       ezstandalone.cmd.push(function () {
         const csgoEzoicCodes = findAdCode();
+        ezstandalone.findAll();
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.refresh();
         console.log("> refresh");
