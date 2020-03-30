@@ -11,17 +11,24 @@ export const useNewAdRefresher = () => {
 
 export const ezRefreshAds = () => {
   try {
-    // @ts-ignore
-    ezstandalone = ezstandalone || {};
+    const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
     ezstandalone.cmd = ezstandalone.cmd || [];
 
-    ezstandalone.cmd.push(function () {
-      const csgoEzoicCodes = findAdCode();
-      ezstandalone.define(csgoEzoicCodes);
-      ezstandalone.enable();
-      ezstandalone.display();
-      console.log("> enable display", csgoEzoicCodes);
-    });
+    if (!ezstandalone.enabled) {
+      ezstandalone.cmd.push(function () {
+        const csgoEzoicCodes = findAdCode();
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> enable display", csgoEzoicCodes);
+      });
+    } else {
+      ezstandalone.cmd.push(function () {
+        const csgoEzoicCodes = findAdCode();
+        ezstandalone.define(...csgoEzoicCodes);
+        ezstandalone.refresh();
+      });
+    }
   } catch (error) {
     return;
   }
