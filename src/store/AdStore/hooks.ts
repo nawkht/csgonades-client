@@ -35,7 +35,6 @@ export const useAdSlotsHandler = () => {
 
   useEffect(() => {
     function clearPlaceholders() {
-      console.log("> Clearing ad slots");
       dispatch({
         type: "Ads/BeforeNavigationChange",
       });
@@ -53,8 +52,6 @@ export const useAdSlotsHandler = () => {
         firstRenderAds(adSlotsToDisplay);
       } else if (adSlotsToRefresh.length) {
         refreshAds(adSlotsToRefresh);
-      } else {
-        console.warn("!!!Should never get here!!!");
       }
     }, 1000);
     return () => clearTimeout(delay);
@@ -68,16 +65,16 @@ function enableEzoicIfNotDone() {
       console.log("> enabled ez");
     }
   } catch (error) {
-    console.warn("enableEzoicIfNotDone err", error);
+    // no-op
   }
 }
 
 function firstRenderAds(slots: number[]) {
   try {
-    ezstandalone.loadGroup(slots, true, true, true);
-    console.log("> Loaded group", slots);
+    ezstandalone.loadMore(slots);
+    console.log("> Loaded more", slots);
   } catch (error) {
-    console.warn("firstRenderAds err", error);
+    // no-op
   }
 }
 
@@ -87,6 +84,6 @@ function refreshAds(slots: number[]) {
     ezstandalone.refresh();
     console.log("> refreshed", slots);
   } catch (error) {
-    console.warn("refreshAds err", error);
+    // no-op
   }
 }

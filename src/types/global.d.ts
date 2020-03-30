@@ -38,7 +38,7 @@ declare namespace ezstandalone {
     newPageview?: boolean,
     callback?: Function
   ): void;
-  function loadMore(): void;
+  function loadMore(slots: number[]): void;
   function load(): void;
   function generateStandaloneScriptURL(): void;
   function onStandaloneLoadEvent(): void;

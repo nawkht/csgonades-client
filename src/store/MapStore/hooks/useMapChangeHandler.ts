@@ -1,6 +1,5 @@
 import { useMapStoreDispatch } from "./helpers";
 import { useEffect } from "react";
-import { NadeApi } from "../../../api/NadeApi";
 import { useRouter } from "next/router";
 import { CsgoMap } from "../../../models/Nade/CsGoMap";
 
@@ -15,19 +14,9 @@ export const useMapChangeHandler = () => {
       return;
     }
 
-    (async () => {
-      const result = await NadeApi.getByMap(csGoMap);
-      dispatch({
-        type: "MapStore/SetCurrentMap",
-        map: csGoMap,
-      });
-      if (result.isOk()) {
-        dispatch({
-          type: "MapStore/ReplaceNadesForMap",
-          map: csGoMap,
-          nades: result.value,
-        });
-      }
-    })();
+    dispatch({
+      type: "MapStore/SetCurrentMap",
+      map: csGoMap,
+    });
   }, [query, dispatch]);
 };

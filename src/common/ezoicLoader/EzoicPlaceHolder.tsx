@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useLayoutEffect, useRef } from "react";
 import { useRegisterPlaceholder } from "../../store/AdStore/hooks";
 
 type Props = {
@@ -6,21 +6,24 @@ type Props = {
 };
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
+  const ref = useRef<HTMLDivElement>(null);
   const registerPlaceholder = useRegisterPlaceholder();
 
-  const ref = useCallback(
-    (node: HTMLDivElement) => {
-      if (!node) {
-        return;
-      }
-      if (node.offsetParent !== null) {
-        registerPlaceholder(id);
-      }
-    },
-    [id, registerPlaceholder]
-  );
+  useLayoutEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+    const hidden = isHidden(ref.current);
+    if (!hidden) {
+      registerPlaceholder(id);
+    }
+  }, [id, registerPlaceholder]);
 
   const placeHolderId = `ezoic-pub-ad-placeholder-${id}`;
 
-  return <div ref={ref} id={placeHolderId} />;
+  return <div ref={ref} id={placeHolderId}></div>;
 });
+
+function isHidden(el: HTMLDivElement) {
+  return el.offsetParent === null;
+}

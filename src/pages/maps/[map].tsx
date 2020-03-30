@@ -13,7 +13,7 @@ interface Props {
 const Map: NextPage<Props> = ({ map, nades }) => {
   const filteredNades = useFilterServerSideNades(nades);
 
-  return <MapPage2 key={map} map={map} ssrNades={filteredNades} />;
+  return <MapPage2 map={map} ssrNades={filteredNades} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

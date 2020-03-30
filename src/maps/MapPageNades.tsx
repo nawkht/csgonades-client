@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
 import { NadeLight } from "../models/Nade/Nade";
-import { useFilteredNades } from "../store/MapStore/hooks/useFilteredNades";
 import { CsgnList } from "../common/list/CsgnList";
 import { NadeItem } from "../common/nadeitem/NadeItem";
 import { isMobileOnly } from "react-device-detect";
@@ -11,10 +10,6 @@ type Props = {
 };
 
 export const MapPageNades: FC<Props> = memo(({ ssrNades }) => {
-  const nades = useFilteredNades();
-
-  const renderNades = nades.length ? nades : ssrNades;
-
   function renderItem(item: NadeLight) {
     if (isMobileOnly) {
       return <NadeItemMobile nade={item} />;
@@ -29,7 +24,7 @@ export const MapPageNades: FC<Props> = memo(({ ssrNades }) => {
 
   return (
     <CsgnList<NadeLight>
-      data={renderNades}
+      data={ssrNades}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
     />

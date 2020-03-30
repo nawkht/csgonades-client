@@ -1,5 +1,6 @@
 import { Dimensions } from "../../constants/Constants";
 import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
+import { FC, memo } from "react";
 
 type Props<T> = {
   data: T[];
@@ -10,17 +11,23 @@ type Props<T> = {
 function ListBase<T>(props: Props<T>) {
   const { data, renderItem, keyExtractor } = props;
 
-  function getKey(item: T) {
-    return keyExtractor(item);
-  }
+  return (
+    <List data={data} keyExtractor={keyExtractor} renderItem={renderItem} />
+  );
+}
 
+const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const numItems = data.length;
 
   return (
     <>
       <div className="list">
         {data.map((item, i) => (
-          <div className="list-item" key={getKey(item)} style={{ order: i }}>
+          <div
+            className="list-item"
+            key={keyExtractor(item)}
+            style={{ order: i }}
+          >
             {renderItem(item)}
           </div>
         ))}
@@ -171,6 +178,6 @@ function ListBase<T>(props: Props<T>) {
       `}</style>
     </>
   );
-}
+});
 
 export const CsgnList = ListBase;

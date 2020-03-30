@@ -28,7 +28,7 @@ export const MapPage2: FC<Props> = memo(({ map, ssrNades }) => {
   }
 
   return (
-    <>
+    <div key={map}>
       <SEO title={capitalize(map)} canonical={`/maps/${map}`} />
       <MapPageJumbo map={map} />
       <div className="map-page-container">
@@ -151,6 +151,6 @@ export const MapPage2: FC<Props> = memo(({ map, ssrNades }) => {
           }
         }
       `}</style>
-    </>
+    </div>
   );
 });
