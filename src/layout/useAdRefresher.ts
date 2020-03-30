@@ -14,7 +14,7 @@ export const useNewAdRefresher = () => {
   }, [asPath]);
 };
 
-export const ezRefreshAds = () => {
+const ezRefreshAds = () => {
   try {
     const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
     ezstandalone.cmd = ezstandalone.cmd || [];

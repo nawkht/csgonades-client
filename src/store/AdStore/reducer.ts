@@ -1,18 +1,12 @@
 import { Reducer } from "redux";
 import { AdActions } from "./actions";
 
-type SlotsForPage = { [slotId: string]: boolean };
-
 export type AdStoreState = {
-  displayedAds: SlotsForPage;
-  slotsForGroupLoad: number[];
-  slotsForRefresh: number[];
+  slots: number[];
 };
 
 const initialState: AdStoreState = {
-  displayedAds: {},
-  slotsForGroupLoad: [],
-  slotsForRefresh: [],
+  slots: [],
 };
 
 export const AdReducer: Reducer<AdStoreState, AdActions> = (
@@ -23,27 +17,13 @@ export const AdReducer: Reducer<AdStoreState, AdActions> = (
     case "Ads/BeforeNavigationChange":
       return {
         ...state,
-        slotsForGroupLoad: [],
-        slotsForRefresh: [],
+        slots: [],
       };
     case "Ads/RegisterPlaceholder":
-      const adSlotAsString = action.slot.toString();
-
-      if (state.displayedAds[adSlotAsString]) {
-        return {
-          ...state,
-          slotsForRefresh: [...state.slotsForRefresh, action.slot],
-        };
-      } else {
-        return {
-          ...state,
-          displayedAds: {
-            ...state.displayedAds,
-            [adSlotAsString]: true,
-          },
-          slotsForGroupLoad: [...state.slotsForGroupLoad, action.slot],
-        };
-      }
+      return {
+        ...state,
+        slots: [...state.slots, action.slot],
+      };
     default:
       return state;
   }

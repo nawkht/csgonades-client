@@ -3,10 +3,7 @@ import { Dispatch } from "redux";
 import { AdActions } from "./actions";
 import { useCallback, useEffect } from "react";
 import Router from "next/router";
-import {
-  adSlotsToRefreshSelector,
-  adSlotsToDisplaySelector,
-} from "./selectors";
+import { adSlotsSelector } from "./selectors";
 
 const useAdStoreDispatch = () => {
   return useDispatch<Dispatch<AdActions>>();
@@ -29,8 +26,7 @@ export const useRegisterPlaceholder = () => {
 };
 
 export const useAdSlotsHandler = () => {
-  const adSlotsToDisplay = useSelector(adSlotsToDisplaySelector);
-  const adSlotsToRefresh = useSelector(adSlotsToRefreshSelector);
+  const adSlots = useSelector(adSlotsSelector);
   const dispatch = useAdStoreDispatch();
 
   useEffect(() => {
@@ -46,44 +42,27 @@ export const useAdSlotsHandler = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    enableEzoicIfNotDone();
     const delay = setTimeout(() => {
-      if (adSlotsToDisplay.length) {
-        firstRenderAds(adSlotsToDisplay);
-      } else if (adSlotsToRefresh.length) {
-        refreshAds(adSlotsToRefresh);
+      if (!adSlots.length) {
+        return;
       }
+      onNewSlots(adSlots);
     }, 1000);
     return () => clearTimeout(delay);
-  }, [adSlotsToDisplay, adSlotsToRefresh]);
+  }, [adSlots]);
 };
 
-function enableEzoicIfNotDone() {
+function onNewSlots(slots: number[]) {
   try {
+    ezstandalone.define(...slots);
+
     if (!ezstandalone.enabled) {
       ezstandalone.enable();
-      console.log("> enabled ez");
+      ezstandalone.display();
+      console.log("> enable, display", slots)
+    } else {
+      ezstandalone.refresh();
+      console.log("> refresh", slots)
     }
-  } catch (error) {
-    // no-op
-  }
-}
-
-function firstRenderAds(slots: number[]) {
-  try {
-    ezstandalone.loadMore(slots);
-    console.log("> Loaded more", slots);
-  } catch (error) {
-    // no-op
-  }
-}
-
-function refreshAds(slots: number[]) {
-  try {
-    ezstandalone.define(slots);
-    ezstandalone.refresh();
-    console.log("> refreshed", slots);
-  } catch (error) {
-    // no-op
-  }
+  } catch (error) {}
 }

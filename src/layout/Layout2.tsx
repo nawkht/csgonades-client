@@ -11,17 +11,15 @@ import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { AdminLink } from "./Misc/AdminLink";
-import { useNewAdRefresher } from "./useAdRefresher";
+import { useAdSlotsHandler } from "../store/AdStore/hooks";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
-
+  useAdSlotsHandler();
   useSetupSession();
   usePageView();
   usePreloadUser();
   useFetchClientConfig();
-  useNewAdRefresher();
-  //useAdblockAnalytics();
 
   return (
     <>

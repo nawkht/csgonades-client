@@ -1,4 +1,4 @@
-import { FC, memo, useLayoutEffect, useRef } from "react";
+import { FC, memo, useRef, useEffect } from "react";
 import { useRegisterPlaceholder } from "../../store/AdStore/hooks";
 
 type Props = {
@@ -9,7 +9,7 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
   const ref = useRef<HTMLDivElement>(null);
   const registerPlaceholder = useRegisterPlaceholder();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!ref.current) {
       return;
     }
