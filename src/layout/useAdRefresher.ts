@@ -35,14 +35,18 @@ export const ezRefreshAds = (tries = 0) => {
     }
 
     if (!ezstandalone.scriptsLoaded) {
-      ezstandalone.define(csgoEzoicCodes);
-      ezstandalone.enable();
-      ezstandalone.display();
-      console.log("> enable display");
+      ezstandalone.cmd.push(function () {
+        ezstandalone.define(csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> enable display");
+      });
     } else if (ezstandalone.scriptsLoaded) {
-      ezstandalone.define(csgoEzoicCodes);
-      ezstandalone.refresh();
-      console.log("> refresh");
+      ezstandalone.cmd.push(function () {
+        ezstandalone.define(csgoEzoicCodes);
+        ezstandalone.refresh();
+        console.log("> refresh");
+      });
     }
   } catch (error) {
     setTimeout(() => {
