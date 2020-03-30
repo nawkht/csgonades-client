@@ -9,17 +9,14 @@ const IS_PROD = process.env.NODE_ENV === "production";
 
 export const usePageView = () => {
   const { closeNav } = useNavigation();
-  const { query, route } = useRouter();
+  const { asPath } = useRouter();
   const { pageView } = useAnalytics();
 
   useEffect(() => {
     closeNav();
-    const pageViewDelay = setTimeout(() => {
-      const location = window.location.pathname + window.location.search;
-      pageView({ path: location });
-    }, 500);
-    return () => clearTimeout(pageViewDelay);
-  }, [pageView, query, route, closeNav]);
+    const location = window.location.pathname + window.location.search;
+    pageView({ path: location });
+  }, [pageView, asPath, closeNav]);
 };
 
 export const useAnalytics = () => {
