@@ -27,6 +27,7 @@ export const ezRefreshAds = () => {
         const csgoEzoicCodes = findAdCode();
         ezstandalone.define(...csgoEzoicCodes);
         ezstandalone.refresh();
+        console.log("> refresh", csgoEzoicCodes);
       });
     }
   } catch (error) {
