@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 export const useNewAdRefresher = () => {
   const { asPath } = useRouter();
   useEffect(() => {
+    if (asPath.includes("adtesting")) {
+      return;
+    }
     const delay = setTimeout(() => {
       ezRefreshAds();
     }, 500);
