@@ -2,19 +2,23 @@ import { memo, useEffect } from "react";
 
 export const EzoicLoader = memo(() => {
   useEffect(() => {
+    const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
+    ezstandalone.cmd = ezstandalone.cmd || [];
+
+    ezstandalone.cmd.push(function () {
+      const csgoEzoicCodes = findAdCode();
+      console.log("> codes", csgoEzoicCodes);
+      ezstandalone.define(...csgoEzoicCodes);
+      console.log("> define");
+      ezstandalone.enable();
+      console.log("> enable");
+    });
+
     const delay = setTimeout(() => {
-      const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
-      ezstandalone.cmd = ezstandalone.cmd || [];
       ezstandalone.cmd.push(function () {
-        const csgoEzoicCodes = findAdCode();
-        console.log("> codes", csgoEzoicCodes);
-        ezstandalone.define(...csgoEzoicCodes);
-        console.log("> define");
-        ezstandalone.enable();
-        console.log("> enable");
         ezstandalone.display();
-        console.log("> display");
         ezstandalone.refresh();
+        console.log("> display, refresh");
       });
     }, 2000);
     return () => clearTimeout(delay);
