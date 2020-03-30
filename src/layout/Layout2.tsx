@@ -11,11 +11,17 @@ import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
 import { AdminLink } from "./Misc/AdminLink";
-import { useNewAdRefresher } from "./useAdRefresher";
+import { EzoicLoader } from "./EzoicLoader";
+
+const canUseDOM = !!(
+  typeof window !== "undefined" &&
+  window.document &&
+  window.document.createElement
+);
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
-  useNewAdRefresher();
+
   useSetupSession();
   usePageView();
   usePreloadUser();
@@ -25,6 +31,7 @@ export const Layout2: FC = memo(({ children }) => {
   return (
     <>
       <div className="page">
+        {canUseDOM && <EzoicLoader />}
         <ServiceDown />
         <div className="header">
           <Header />

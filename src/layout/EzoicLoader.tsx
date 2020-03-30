@@ -1,16 +1,9 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 
-export const useNewAdRefresher = () => {
+type Props = {};
+
+export const EzoicLoader: FC<Props> = ({}) => {
   useEffect(() => {
-    const delay = setTimeout(() => {
-      ezRefreshAds();
-    }, 500);
-    return () => clearTimeout(delay);
-  }, []);
-};
-
-export const ezRefreshAds = () => {
-  try {
     // @ts-ignore
     ezstandalone = ezstandalone || {};
     ezstandalone.cmd = ezstandalone.cmd || [];
@@ -22,9 +15,9 @@ export const ezRefreshAds = () => {
       ezstandalone.display();
       console.log("> enable display", csgoEzoicCodes);
     });
-  } catch (error) {
-    return;
-  }
+  }, []);
+
+  return null;
 };
 
 function findAdCode() {
