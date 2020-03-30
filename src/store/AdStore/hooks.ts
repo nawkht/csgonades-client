@@ -55,15 +55,22 @@ export const useAdSlotsHandler = () => {
 
 function onNewSlots(slots: number[]) {
   try {
-    ezstandalone.define(...slots);
+    const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
+    ezstandalone.cmd = ezstandalone.cmd || [];
 
     if (!ezstandalone.enabled) {
-      ezstandalone.enable();
-      ezstandalone.display();
-      console.log("> display", slots);
+      ezstandalone.cmd.push(function () {
+        ezstandalone.define(...slots);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> enable display", slots.toString());
+      });
     } else {
-      ezstandalone.refresh();
-      console.log("> refresh", slots);
+      ezstandalone.cmd.push(function () {
+        ezstandalone.define(...slots);
+        ezstandalone.refresh();
+        console.log("> refresh", slots.toString());
+      });
     }
   } catch (error) {}
 }
