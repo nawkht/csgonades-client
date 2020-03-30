@@ -6,7 +6,6 @@ class MyDocument extends Document {
       <>
         <Html lang="en">
           <Head>
-            <script src="//www.ezojs.com/ezoic/sa.min.js" />
             <meta
               name="viewport"
               content="initial-scale=1.0, width=device-width"
@@ -49,6 +48,7 @@ class MyDocument extends Document {
               key="google-font-roboto"
               media="all"
             />
+            <script src="//www.ezojs.com/ezoic/sa.min.js" />
           </Head>
           <body>
             <Main />
