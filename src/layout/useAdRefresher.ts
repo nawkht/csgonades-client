@@ -16,32 +16,21 @@ export const useNewAdRefresher = () => {
   }, [asPath]);
 };
 
-export const ezRefreshAds = (tries = 0) => {
-  if (tries > 2) {
-    return;
-  }
-
+export const ezRefreshAds = () => {
   try {
-    if (typeof ezstandalone === "undefined") {
-      setTimeout(() => {
-        ezRefreshAds(tries + 1);
-      }, 1000);
-      return;
-    }
-
     const csgoEzoicCodes = findAdCode();
     if (!csgoEzoicCodes.length) {
       return;
     }
 
-    if (!ezstandalone.scriptsLoaded) {
+    if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function () {
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
         console.log("> enable display");
       });
-    } else if (ezstandalone.scriptsLoaded) {
+    } else {
       ezstandalone.cmd.push(function () {
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.refresh();
@@ -49,10 +38,6 @@ export const ezRefreshAds = (tries = 0) => {
       });
     }
   } catch (error) {
-    setTimeout(() => {
-      ezRefreshAds(tries + 1);
-    }, 1000);
-    console.warn("> ezstandalone error", error);
     return;
   }
 };
