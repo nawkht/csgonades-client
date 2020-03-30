@@ -47,7 +47,7 @@ export const useAdSlotsHandler = () => {
         return;
       }
       onNewSlots(adSlots);
-    }, 1000);
+    }, 250);
     return () => clearTimeout(delay);
   }, [adSlots]);
 };
@@ -59,10 +59,10 @@ function onNewSlots(slots: number[]) {
     if (!ezstandalone.enabled) {
       ezstandalone.enable();
       ezstandalone.display();
-      console.log("> enable, display", slots)
+      console.log("> enable, display", slots);
     } else {
       ezstandalone.refresh();
-      console.log("> refresh", slots)
+      console.log("> refresh", slots);
     }
   } catch (error) {}
 }
