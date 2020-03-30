@@ -1,24 +1,25 @@
-import React from "react";
+import { memo, useEffect } from "react";
 
-export class EzoicLoader extends React.PureComponent {
-  componentDidMount() {
-    const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
-    ezstandalone.cmd = ezstandalone.cmd || [];
-    ezstandalone.cmd.push(function () {
-      const csgoEzoicCodes = findAdCode();
-      console.log("> codes", csgoEzoicCodes);
-      ezstandalone.define(...csgoEzoicCodes);
-      console.log("> define");
-      ezstandalone.enable();
-      console.log("> enable");
-      ezstandalone.display();
-      console.log("> display");
-    });
-  }
-  render() {
-    return null;
-  }
-}
+export const EzoicLoader = memo(() => {
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
+      ezstandalone.cmd = ezstandalone.cmd || [];
+      ezstandalone.cmd.push(function () {
+        const csgoEzoicCodes = findAdCode();
+        console.log("> codes", csgoEzoicCodes);
+        ezstandalone.define(...csgoEzoicCodes);
+        console.log("> define");
+        ezstandalone.enable();
+        console.log("> enable");
+        ezstandalone.display();
+        console.log("> display");
+      });
+    }, 2000);
+    return () => clearTimeout(delay);
+  }, []);
+  return null;
+});
 
 function findAdCode() {
   function isHidden(el: any) {
