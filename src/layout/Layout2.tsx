@@ -10,7 +10,6 @@ import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { useFetchClientConfig } from "../store/SettingsStore/hooks/useFetchClientConfig";
-import { useAdblockAnalytics } from "./useCheckIfAdPresent";
 import { AdminLink } from "./Misc/AdminLink";
 import { useNewAdRefresher } from "./useAdRefresher";
 
@@ -21,7 +20,7 @@ export const Layout2: FC = memo(({ children }) => {
   usePageView();
   usePreloadUser();
   useFetchClientConfig();
-  useAdblockAnalytics();
+  //useAdblockAnalytics();
 
   return (
     <>
