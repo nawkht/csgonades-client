@@ -1,8 +1,8 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, memo } from "react";
 
 type Props = {};
 
-export const EzoicLoader: FC<Props> = ({}) => {
+export const EzoicLoader: FC<Props> = memo(({}) => {
   useEffect(() => {
     // @ts-ignore
     ezstandalone = ezstandalone || {};
@@ -18,7 +18,7 @@ export const EzoicLoader: FC<Props> = ({}) => {
   }, []);
 
   return null;
-};
+});
 
 function findAdCode() {
   function isHidden(el: any) {
