@@ -8,6 +8,7 @@ export class EzoicLoader extends React.PureComponent {
       const csgoEzoicCodes = findAdCode();
       ezstandalone.define(csgoEzoicCodes);
       ezstandalone.enable();
+      ezstandalone.display();
       ezstandalone.refresh();
       console.log("> enable display", csgoEzoicCodes);
     });
