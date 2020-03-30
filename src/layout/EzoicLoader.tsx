@@ -1,24 +1,23 @@
-import { FC, useEffect, memo } from "react";
+import React from "react";
 
-type Props = {};
-
-export const EzoicLoader: FC<Props> = memo(({}) => {
-  useEffect(() => {
-    // @ts-ignore
-    ezstandalone = ezstandalone || {};
-    ezstandalone.cmd = ezstandalone.cmd || [];
-
-    ezstandalone.cmd.push(function () {
-      const csgoEzoicCodes = findAdCode();
-      ezstandalone.define(csgoEzoicCodes);
-      ezstandalone.enable();
-      ezstandalone.display();
-      console.log("> enable display", csgoEzoicCodes);
-    });
-  }, []);
-
-  return null;
-});
+export class EzoicLoader extends React.PureComponent {
+  componentDidMount() {
+    try {
+      ezstandalone.cmd.push(function () {
+        const csgoEzoicCodes = findAdCode();
+        ezstandalone.define(csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> enable display", csgoEzoicCodes);
+      });
+    } catch (error) {
+      // no-op
+    }
+  }
+  render() {
+    return null;
+  }
+}
 
 function findAdCode() {
   function isHidden(el: any) {
