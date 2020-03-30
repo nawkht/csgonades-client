@@ -18,13 +18,14 @@ export const useNewAdRefresher = () => {
 
 export const ezRefreshAds = () => {
   try {
-    const csgoEzoicCodes = findAdCode();
-    if (!csgoEzoicCodes.length) {
+    const placeholders = findAdCode();
+    if (!placeholders.length) {
       return;
     }
 
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function () {
+        const csgoEzoicCodes = findAdCode();
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.enable();
         ezstandalone.display();
@@ -32,6 +33,7 @@ export const ezRefreshAds = () => {
       });
     } else {
       ezstandalone.cmd.push(function () {
+        const csgoEzoicCodes = findAdCode();
         ezstandalone.define(csgoEzoicCodes);
         ezstandalone.refresh();
         console.log("> refresh");
