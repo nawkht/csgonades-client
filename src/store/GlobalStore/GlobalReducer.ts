@@ -23,7 +23,7 @@ const initialState: GlobalState = {
   isNavOpen: false,
   acceptedCookieConcent: false,
   clientConfig: {
-    useHardLinks: true,
+    useHardLinks: false,
   },
 };
 
