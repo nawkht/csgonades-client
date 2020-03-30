@@ -13,7 +13,6 @@ export const usePageView = () => {
   const { pageView } = useAnalytics();
 
   function onPathChange(path: string) {
-    console.log("> Page view", path);
     closeNav();
     pageView({ path });
   }
