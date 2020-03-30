@@ -14,10 +14,8 @@ import {
   filterByFavorite,
   containsSimilarNade,
 } from "./helpers";
-import { useNadesForMap } from "./useNadesForMap";
 
-export const useNadesForMapView = (): NadeLight[] => {
-  const nades = useNadesForMap();
+export const useNadesForMapView = (nades: NadeLight[]): NadeLight[] => {
   const byTickrate = useSelector(filterByTickrateSelector);
   const byFavorites = useSelector(filterByFavoritesSelector);
   const byType = useSelector(filterByTypeSelector);

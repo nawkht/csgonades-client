@@ -16,10 +16,10 @@ import { capitalize } from "../utils/Common";
 
 type Props = {
   map: CsgoMap;
-  ssrNades: NadeLight[];
+  allNades: NadeLight[];
 };
 
-export const MapPage2: FC<Props> = memo(({ map, ssrNades }) => {
+export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
@@ -39,7 +39,7 @@ export const MapPage2: FC<Props> = memo(({ map, ssrNades }) => {
             </div>
           </div>
           <div className="map-nade-list">
-            <MapPageNades ssrNades={ssrNades} />
+            <MapPageNades allNades={allNades} />
           </div>
           <div className="map-sidebar">
             <MapPageSideBar />
@@ -52,7 +52,7 @@ export const MapPage2: FC<Props> = memo(({ map, ssrNades }) => {
       </div>
 
       <MobileFilter />
-      <MapView map={map} />
+      <MapView map={map} allNades={allNades} />
       <SignInWarning
         visible={showLoginWarning}
         onDismiss={() => setShowLoginWarning(false)}

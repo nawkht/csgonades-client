@@ -4,12 +4,15 @@ import { CsgnList } from "../common/list/CsgnList";
 import { NadeItem } from "../common/nadeitem/NadeItem";
 import { isMobileOnly } from "react-device-detect";
 import { NadeItemMobile } from "../common/nadeitem/NadeItemMobile";
+import { useFilterServerSideNades } from "../store/MapStore/hooks/useFilteredNades";
 
 type Props = {
-  ssrNades: NadeLight[];
+  allNades: NadeLight[];
 };
 
-export const MapPageNades: FC<Props> = memo(({ ssrNades }) => {
+export const MapPageNades: FC<Props> = memo(({ allNades }) => {
+  const nades = useFilterServerSideNades(allNades);
+
   function renderItem(item: NadeLight) {
     if (isMobileOnly) {
       return <NadeItemMobile nade={item} />;
@@ -24,7 +27,7 @@ export const MapPageNades: FC<Props> = memo(({ ssrNades }) => {
 
   return (
     <CsgnList<NadeLight>
-      data={ssrNades}
+      data={nades}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
     />

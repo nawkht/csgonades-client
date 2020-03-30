@@ -5,16 +5,18 @@ import { MapPosIcon } from "./MapPosIcon";
 import { useToggleMapview } from "../../store/MapStore/hooks/useToggleMapView";
 import { useNadesForMapView } from "../../store/MapStore/hooks/useNadesForMapView";
 import { useFilterByCoords } from "../../store/MapStore/hooks/useFilterByCoords";
+import { NadeLight } from "../../models/Nade/Nade";
 
 type Props = {
   map: CsgoMap;
+  allNades: NadeLight[];
 };
 
-export const MapView: FC<Props> = ({ map }) => {
+export const MapView: FC<Props> = ({ map, allNades }) => {
   const { mapViewOpen, toggleMapViewVisibility } = useToggleMapview();
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapWidth, setMapWidth] = useState(0);
-  const nades = useNadesForMapView();
+  const nades = useNadesForMapView(allNades);
   const filterByCoords = useFilterByCoords();
   const mapViewRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +47,7 @@ export const MapView: FC<Props> = ({ map }) => {
             onLoad={onMapViewImageLoaded}
           />
           {mapLoaded &&
-            nades.map(n => (
+            nades.map((n) => (
               <MapPosIcon
                 key={n.id}
                 nade={n}
