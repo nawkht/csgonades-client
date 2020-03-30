@@ -1,5 +1,7 @@
 import { AppState } from "..";
 
-export const adSlotsSelector = (state: AppState) => {
-  return state.adStore.slots;
-};
+export const adSlotsToDisplaySelector = (state: AppState) =>
+  state.adStore.slotsForGroupLoad;
+
+export const adSlotsToRefreshSelector = (state: AppState) =>
+  state.adStore.slotsForRefresh;

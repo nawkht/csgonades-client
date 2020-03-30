@@ -3,8 +3,8 @@ type RegisterPlaceholder = {
   slot: number;
 };
 
-type ClearAdSlots = {
-  type: "Ads/ClearAdSlots";
+type BeforeNavigationChange = {
+  type: "Ads/BeforeNavigationChange";
 };
 
-export type AdActions = RegisterPlaceholder | ClearAdSlots;
+export type AdActions = RegisterPlaceholder | BeforeNavigationChange;

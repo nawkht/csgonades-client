@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { FC, memo, useEffect, useMemo } from "react";
+import { FC, memo, useMemo } from "react";
 import { FaTimes } from "react-icons/fa";
 import { AnimationTimings, Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
@@ -13,11 +13,7 @@ export const MobileNav: FC<Props> = memo(({}) => {
   const { colors } = useTheme();
   const router = useRouter();
   const { toggleNav } = useNavigation();
-  const { closeNav, isNavOpen } = useNavigation();
-
-  useEffect(() => {
-    closeNav();
-  }, []);
+  const { isNavOpen } = useNavigation();
 
   const currentRoute = router.query.name;
 

@@ -31,7 +31,13 @@ declare namespace ezstandalone {
   function getPlaceholderElems(): void;
   function clearPlaceholderElems(): void;
   function fireEvent(): void;
-  function loadGroup(): void;
+  function loadGroup(
+    placeholderIds: number[],
+    callDisplay?: boolean,
+    callDefine?: boolean,
+    newPageview?: boolean,
+    callback?: Function
+  ): void;
   function loadMore(): void;
   function load(): void;
   function generateStandaloneScriptURL(): void;

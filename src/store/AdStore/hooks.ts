@@ -3,8 +3,10 @@ import { Dispatch } from "redux";
 import { AdActions } from "./actions";
 import { useCallback, useEffect } from "react";
 import Router from "next/router";
-import { adSlotsSelector } from "./selectors";
-import { ezRefreshAds } from "../../layout/useAdRefresher";
+import {
+  adSlotsToRefreshSelector,
+  adSlotsToDisplaySelector,
+} from "./selectors";
 
 const useAdStoreDispatch = () => {
   return useDispatch<Dispatch<AdActions>>();
@@ -27,14 +29,15 @@ export const useRegisterPlaceholder = () => {
 };
 
 export const useAdSlotsHandler = () => {
-  const adSlots = useSelector(adSlotsSelector);
+  const adSlotsToDisplay = useSelector(adSlotsToDisplaySelector);
+  const adSlotsToRefresh = useSelector(adSlotsToRefreshSelector);
   const dispatch = useAdStoreDispatch();
 
   useEffect(() => {
     function clearPlaceholders() {
       console.log("> Clearing ad slots");
       dispatch({
-        type: "Ads/ClearAdSlots",
+        type: "Ads/BeforeNavigationChange",
       });
     }
 
@@ -44,8 +47,46 @@ export const useAdSlotsHandler = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (adSlots.length) {
-      ezRefreshAds();
-    }
-  }, [adSlots]);
+    enableEzoicIfNotDone();
+    const delay = setTimeout(() => {
+      if (adSlotsToDisplay.length) {
+        firstRenderAds(adSlotsToDisplay);
+      } else if (adSlotsToRefresh.length) {
+        refreshAds(adSlotsToRefresh);
+      } else {
+        console.warn("!!!Should never get here!!!");
+      }
+    }, 1000);
+    return () => clearTimeout(delay);
+  }, [adSlotsToDisplay, adSlotsToRefresh]);
 };
+
+function enableEzoicIfNotDone() {
+  try {
+    if (!ezstandalone.enabled) {
+      ezstandalone.enable();
+      console.log("> enabled ez");
+    }
+  } catch (error) {
+    console.warn("enableEzoicIfNotDone err", error);
+  }
+}
+
+function firstRenderAds(slots: number[]) {
+  try {
+    ezstandalone.loadGroup(slots, true, true, true);
+    console.log("> Loaded group", slots);
+  } catch (error) {
+    console.warn("firstRenderAds err", error);
+  }
+}
+
+function refreshAds(slots: number[]) {
+  try {
+    ezstandalone.define(slots);
+    ezstandalone.refresh();
+    console.log("> refreshed", slots);
+  } catch (error) {
+    console.warn("refreshAds err", error);
+  }
+}

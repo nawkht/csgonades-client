@@ -12,11 +12,15 @@ export const usePageView = () => {
   const { asPath } = useRouter();
   const { pageView } = useAnalytics();
 
-  useEffect(() => {
+  function onPathChange(path: string) {
+    console.log("> Page view", path);
     closeNav();
-    const location = window.location.pathname + window.location.search;
-    pageView({ path: location });
-  }, [pageView, asPath, closeNav]);
+    pageView({ path });
+  }
+
+  useEffect(() => {
+    onPathChange(asPath);
+  }, [asPath]);
 };
 
 export const useAnalytics = () => {
