@@ -2,17 +2,15 @@ import React from "react";
 
 export class EzoicLoader extends React.PureComponent {
   componentDidMount() {
-    try {
-      ezstandalone.cmd.push(function () {
-        const csgoEzoicCodes = findAdCode();
-        ezstandalone.define(csgoEzoicCodes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> enable display", csgoEzoicCodes);
-      });
-    } catch (error) {
-      // no-op
-    }
+    const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
+    ezstandalone.cmd = ezstandalone.cmd || [];
+    ezstandalone.cmd.push(function () {
+      const csgoEzoicCodes = findAdCode();
+      ezstandalone.define(csgoEzoicCodes);
+      ezstandalone.enable();
+      ezstandalone.display();
+      console.log("> enable display", csgoEzoicCodes);
+    });
   }
   render() {
     return null;
