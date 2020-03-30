@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 export const useNewAdRefresher = () => {
-  const { asPath } = useRouter();
+  const { asPath, query, pathname } = useRouter();
 
   useEffect(() => {
     console.log(">", asPath);
@@ -13,7 +13,7 @@ export const useNewAdRefresher = () => {
       ezRefreshAds();
     }, 500);
     return () => clearTimeout(delay);
-  }, [asPath]);
+  }, [asPath, query, pathname]);
 };
 
 export const ezRefreshAds = () => {
