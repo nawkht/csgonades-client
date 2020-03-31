@@ -4,6 +4,7 @@ import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogNadeItem } from "../../blog/BlogNadeItem";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
+import { CsConsole } from "../../blog/CsConsole";
 
 export const blogNadeAlignCrosshair: BlogPost = {
   title: "Large Crosshair to Align Smokes in CS:GO",
@@ -36,22 +37,29 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           Open your console and write <code>cl_crosshairsize</code> to get the
           current crosshair size you are using.
         </p>
-        <img
-          src="/blogimg/nade-align-crosshair/big_crosshair_console.jpg"
-          alt="Console command to get your crosshair gap"
+        <CsConsole
+          actions={[
+            {
+              input: "cl_crosshairsize",
+              output: `"cl_crosshairsize" = "2.5" ( def. 5 ) `,
+            },
+            {
+              input: `bind "X" "toggle cl_crosshairsize 2.5 5000"`,
+              output: `bind "X" "toggle cl_crosshairsize 2.5 5000"`,
+            },
+          ]}
         />
         <p>
-          As seen above, my crosshair has a size of 2.5, so I will bind my X
-          button to the following:
+          As seen above, my crosshair has a size of 2.5, so I set it to toggle
+          between 2.5 and 5000.
         </p>
-        <BlogCodeSnippet
-          code={`bind "X" "toggle cl_crosshairsize 2.5 2000"\n`}
-        />
         <p>
           Pressing X will make my crosshair large. Pressing it again will set it
           back to normal.
         </p>
         <EzoicPlaceHolder id={154} />
+        <BlogCodeSnippet code={'bind "X" "toggle cl_crosshairsize 2.5 5000"'} />
+
         <h3>2. Advanced: Hide on release</h3>
         <p>
           This method will give you the same result, but when you release your
@@ -59,9 +67,21 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         </p>
 
         <p>First, get your current settings:</p>
-        <img
-          src="/blogimg/nade-align-crosshair/big_crosshair_console_advanced.jpg"
-          alt="Console commands to get your crosshair settings"
+        <CsConsole
+          actions={[
+            {
+              input: "cl_crosshairgap",
+              output: `"cl_crosshairgap" = "-1" ( def. 1 ) `,
+            },
+            {
+              input: "cl_crosshairdot",
+              output: `"cl_crosshairdot" = "0" ( def. 1 ) `,
+            },
+            {
+              input: "cl_crosshairsize",
+              output: `"cl_crosshairsize" = "2.5" ( def. 5 ) `,
+            },
+          ]}
         />
         <p>
           As we can see, I have a size of 2.5, the gap of -1 and no dot enabled
