@@ -91,7 +91,11 @@ export const ResponsiveVideo: FC<Props> = ({
           </video>
         </div>
         <div className="gfycat">
-          <a href={`https://gfycat.com/${gfyId}`} target="_black">
+          <a
+            href={`https://gfycat.com/${gfyId}`}
+            target="_black"
+            rel="noopener"
+          >
             <img src="/gfycat.png" />
           </a>
         </div>
