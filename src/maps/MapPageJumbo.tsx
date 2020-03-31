@@ -15,11 +15,11 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
   const placeHolderForMap = useMemo(() => {
     switch (map) {
       case "dust2":
-        return <EzoicPlaceHolder id={164} />;
+        return 164;
       case "mirage":
-        return <EzoicPlaceHolder id={165} />;
+        return 165;
       default:
-        return <EzoicPlaceHolder id={130} />;
+        return 130;
     }
   }, [map]);
 
@@ -38,7 +38,9 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
                 <br /> Sign in, and add a nade to help everyone out.
               </h2>
             </div>
-            <div className="top-placement">{placeHolderForMap}</div>
+            <div className="top-placement">
+              <EzoicPlaceHolder id={placeHolderForMap} />
+            </div>
           </div>
         </PageCentralize>
       </div>

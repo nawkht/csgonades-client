@@ -1,12 +1,28 @@
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
+import { CsgoMap } from "../models/Nade/CsGoMap";
 
-export const MapPageSideBar: FC = memo(() => {
+type Props = {
+  map: CsgoMap;
+};
+
+export const MapPageSideBar: FC<Props> = memo(({ map }) => {
+  const placeHolderId = useMemo(() => {
+    switch (map) {
+      case "dust2":
+        return 166;
+      case "mirage":
+        return 167;
+      default:
+        return 140;
+    }
+  }, [map]);
+
   return (
     <>
       <div className="sjakt">
         <div className="sticky">
-          <EzoicPlaceHolder id={140} />
+          <EzoicPlaceHolder id={placeHolderId} />
         </div>
       </div>
 

@@ -42,7 +42,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             <MapPageNades allNades={allNades} />
           </div>
           <div className="map-sidebar">
-            <MapPageSideBar />
+            <MapPageSideBar map={map} />
           </div>
         </div>
 
