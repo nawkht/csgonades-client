@@ -19,7 +19,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
     if (pathname.includes("map") || pathname.includes("nade")) {
       delayedCheck = setTimeout(() => {
-        if (typeof ezstandalone === "undefined") {
+        if (typeof ezstandalone === "undefined" || !ezstandalone.initialized) {
           setShowNotice(true);
           setHasDisplayed(true);
         }
