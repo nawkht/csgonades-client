@@ -11,6 +11,7 @@ import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
 import { useAdSlotsHandler } from "../store/AdStore/hooks";
+import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -23,6 +24,7 @@ export const Layout2: FC = memo(({ children }) => {
     <>
       <div className="page">
         <ServiceDown />
+        <AdBlockNotice />
         <div className="header">
           <Header />
         </div>
