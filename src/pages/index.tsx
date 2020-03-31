@@ -4,33 +4,39 @@ import { NadeApi } from "../api/NadeApi";
 import { FrontPage } from "../frontpage/FrontPage";
 import { NadeLight } from "../models/Nade/Nade";
 import { SEO } from "../layout/SEO2";
+import { StatsApi, SiteStats } from "../api/StatsApi";
 
 type Props = {
   recentNades: NadeLight[];
+  stats: SiteStats | null;
 };
 
-const Index: NextPage<Props> = ({ recentNades }) => (
+const Index: NextPage<Props> = ({ recentNades, stats }) => (
   <>
     <SEO canonical="/" />
-    <FrontPage recentNades={recentNades} />
+    <FrontPage recentNades={recentNades} stats={stats} />
   </>
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const result = await NadeApi.getAll();
+  let stats: SiteStats | null = null;
+  let recentNades: NadeLight[] = [];
 
-  if (result.isErr()) {
-    console.error(result.error);
-    return {
-      props: {
-        recentNades: [],
-      },
-    };
+  const result = await NadeApi.getAll();
+  const statsResult = await StatsApi.getStats();
+
+  if (statsResult.isOk()) {
+    stats = statsResult.value;
+  }
+
+  if (result.isOk()) {
+    recentNades = result.value;
   }
 
   return {
     props: {
-      recentNades: result.value,
+      recentNades,
+      stats,
     },
   };
 };

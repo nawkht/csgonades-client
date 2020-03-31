@@ -7,15 +7,17 @@ import { RecentNades } from "./RecentNades";
 import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
+import { SiteStats } from "../api/StatsApi";
 
 type Props = {
   recentNades: NadeLight[];
+  stats: SiteStats | null;
 };
 
-export const FrontPage: FC<Props> = memo(({ recentNades }) => {
+export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
   return (
     <>
-      <FrontPageJumbo />
+      <FrontPageJumbo stats={stats} />
 
       <PageCentralize>
         <div className="recent-wrap">
