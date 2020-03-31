@@ -1,15 +1,27 @@
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { PageCentralize } from "../common/PageCentralize";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { capitalize } from "../utils/Common";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { CsgoMap } from "../models/Nade/CsGoMap";
 
 type Props = {
-  map: string;
+  map: CsgoMap;
 };
 
 export const MapPageJumbo: FC<Props> = memo(({ map }) => {
   const { colors } = useTheme();
+
+  const placeHolderForMap = useMemo(() => {
+    switch (map) {
+      case "dust2":
+        return <EzoicPlaceHolder id={164} />;
+      case "mirage":
+        return <EzoicPlaceHolder id={165} />;
+      default:
+        return <EzoicPlaceHolder id={130} />;
+    }
+  }, [map]);
 
   return (
     <>
@@ -26,9 +38,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
                 <br /> Sign in, and add a nade to help everyone out.
               </h2>
             </div>
-            <div className="top-placement">
-              <EzoicPlaceHolder id={130} />
-            </div>
+            <div className="top-placement">{placeHolderForMap}</div>
           </div>
         </PageCentralize>
       </div>
