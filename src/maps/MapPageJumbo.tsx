@@ -18,6 +18,8 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
         return 164;
       case "mirage":
         return 165;
+      case "inferno":
+        return 168;
       default:
         return 130;
     }
