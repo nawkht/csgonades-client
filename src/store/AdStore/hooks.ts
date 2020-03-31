@@ -59,11 +59,25 @@ export const useAdSlotsHandler = () => {
   }, [adSlots, asPath, acceptedCookieConsent]);
 };
 
-function onNewSlots(slots: number[]) {
+async function onNewSlots(slots: number[]) {
   try {
     const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
     ezstandalone.cmd = ezstandalone.cmd || [];
 
+    if (!ezstandalone.enabled) {
+      ezstandalone.cmd.push(function () {
+        ezstandalone.enable();
+      });
+      await sleep(1000);
+    }
+
+    ezstandalone.cmd.push(function () {
+      ezstandalone.define(...slots);
+      ezstandalone.refresh();
+      console.log("> refresh", slots.toString());
+    });
+
+    /*
     if (!ezstandalone.enabled) {
       ezstandalone.cmd.push(function () {
         ezstandalone.define(...slots);
@@ -77,6 +91,8 @@ function onNewSlots(slots: number[]) {
         ezstandalone.refresh();
         console.log("> refresh", slots.toString());
       });
-    }
+    }*/
   } catch (error) {}
 }
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
