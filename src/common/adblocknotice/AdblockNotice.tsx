@@ -23,7 +23,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           setShowNotice(true);
           setHasDisplayed(true);
         }
-      }, 10000);
+      }, 25 * 1000);
     }
 
     return () => {
@@ -66,12 +66,13 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
           <div className="message">
             <p>
-              Don&apos;t make me <strong>ECO</strong>!<br />
+              Don&apos;t make me <strong>ECO</strong> this round!
+              <br />
               Whitelist this site from <strong>AdBlock</strong> 👊
             </p>
             <div className="buttons">
               <button className="ok-btn" onClick={onDismiss}>
-                Got it. Force buy!
+                Force buy! I will!
               </button>
               <button className="dismiss-btn" onClick={onOk}>
                 Dismiss
@@ -90,7 +91,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           display: flex;
           align-content: center;
           justify-content: space-around;
-          z-index: 900;
+          z-index: 998;
           background: rgba(0, 0, 0, 0.5);
           animation-name: show-notice;
           animation-duration: 0.5s;
@@ -134,12 +135,12 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
 
         .tear {
           position: absolute;
-          top: 115px;
+          top: 110px;
           left: 69px;
           transform: scale(0);
           opacity: 0;
           animation-name: tear-animate;
-          animation-duration: 2s;
+          animation-duration: 1.5s;
           animation-iteration-count: infinite;
         }
 
@@ -183,7 +184,7 @@ export const AdBlockNotice: FC<Props> = memo(({}) => {
           }
 
           to {
-            transform: scale(0.5) translateY(75px);
+            transform: scale(0.55) translateY(25px);
             opacity: 0;
           }
         }
