@@ -34,6 +34,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
       event({
         category: "Favorite",
         action: "Unfavorite from Thumbnail",
+        label: nade.slug,
       });
     } else {
       addFavorite(nade.id);
@@ -41,6 +42,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
       event({
         category: "Favorite",
         action: "Favorite from Thumbnail",
+        label: nade.slug,
       });
     }
   }
