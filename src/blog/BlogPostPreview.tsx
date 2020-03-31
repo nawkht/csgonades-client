@@ -52,7 +52,6 @@ export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
           background: url(${thumbnailUrl});
           background-position: center;
           background-size: cover;
-          opacity: 0.9;
         }
 
         .actions-read-more {

@@ -84,6 +84,11 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           </div>
         )}
       </div>
+      <style jsx global>{`
+        .front img {
+          filter: saturate(115%) brightness(105%);
+        }
+      `}</style>
       <style jsx>{`
         .player {
           position: relative;
