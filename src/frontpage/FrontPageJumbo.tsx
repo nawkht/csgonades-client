@@ -104,7 +104,7 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
           justify-content: center;
           background: ${colors.DP02};
           color: ${colors.TEXT};
-          z-index: 999;
+          z-index: 701;
         }
 
         .stat-item {
