@@ -4,6 +4,7 @@ import { AdActions } from "./actions";
 import { useCallback, useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import { adSlotsSelector } from "./selectors";
+import { useCookieConcent } from "../GlobalStore/GlobalHooks";
 
 const useAdStoreDispatch = () => {
   return useDispatch<Dispatch<AdActions>>();
@@ -29,6 +30,7 @@ export const useAdSlotsHandler = () => {
   const { asPath } = useRouter();
   const adSlots = useSelector(adSlotsSelector);
   const dispatch = useAdStoreDispatch();
+  const { acceptedCookieConsent } = useCookieConcent();
 
   useEffect(() => {
     function clearPlaceholders() {
@@ -44,13 +46,17 @@ export const useAdSlotsHandler = () => {
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (!adSlots.length || asPath.includes("adtesting")) {
+      if (
+        !adSlots.length ||
+        asPath.includes("adtesting") ||
+        !acceptedCookieConsent
+      ) {
         return;
       }
       onNewSlots(adSlots);
     }, 100);
     return () => clearTimeout(delay);
-  }, [adSlots, asPath]);
+  }, [adSlots, asPath, acceptedCookieConsent]);
 };
 
 function onNewSlots(slots: number[]) {
