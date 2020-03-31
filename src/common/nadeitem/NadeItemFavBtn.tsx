@@ -8,12 +8,14 @@ import { useUnfavorite } from "../../store/FavoriteStore/hooks/useUnFavorite";
 import { Popup } from "semantic-ui-react";
 import { FaStar, FaSpinner, FaTimes } from "react-icons/fa";
 import { useMapFavCount } from "../../store/MapStore/hooks/useMapFavCount";
+import { useAnalytics } from "../../utils/Analytics";
 
 type Props = {
   nade: NadeLight | Nade;
 };
 
 export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
+  const { event } = useAnalytics();
   const isSignedIn = useIsSignedIn();
   const isFavoriteInProgress = useIsFavoriteInProgress();
   const isFavorite = useIsFavorited(nade.id);
@@ -29,9 +31,17 @@ export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
     if (isFavorite) {
       unFavorite(isFavorite.id);
       decrementNadeFavCount(nade.id);
+      event({
+        category: "Favorite",
+        action: "Unfavorite from Thumbnail",
+      });
     } else {
       addFavorite(nade.id);
       incrementNadeFavCount(nade.id);
+      event({
+        category: "Favorite",
+        action: "Favorite from Thumbnail",
+      });
     }
   }
 

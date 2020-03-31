@@ -1,8 +1,18 @@
 import { FC, memo } from "react";
 import { FaDiscord, FaPaypal } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
+import { useAnalytics } from "../utils/Analytics";
 
 export const FrontpageActions: FC = memo(({}) => {
+  const { event } = useAnalytics();
+
+  function onDonateClick() {
+    event({
+      category: "Front Page Action",
+      action: "Paypal Donate",
+    });
+  }
+
   return (
     <>
       <div className="actions-wrapper">
@@ -26,6 +36,7 @@ export const FrontpageActions: FC = memo(({}) => {
           href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=XHPRF8RJZKBHS&item_name=CSGO+Nades&currency_code=USD&source=url"
           target="_blank"
           rel="noopener noreferrer nofollow"
+          onClick={onDonateClick}
         >
           <div className="action paypal">
             <p className="paypal-msg">
