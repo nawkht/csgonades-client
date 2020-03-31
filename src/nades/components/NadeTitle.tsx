@@ -5,7 +5,6 @@ import { NadeType } from "../../models/Nade/NadeType";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../../utils/Common";
 import { EditButton } from "./EditButton";
-import { Nade } from "../../models/Nade/Nade";
 
 type Props = {
   title: string;
@@ -25,26 +24,7 @@ export const NadeTitle: FC<Props> = ({
   const { colors } = useTheme();
 
   const nadeTitle = useMemo(() => {
-    const titleBuilder: string[] = [];
-
-    if (map) {
-      titleBuilder.push(capitalize(map));
-    }
-
-    if (type) {
-      titleBuilder.push(type);
-      titleBuilder.push("for");
-    }
-
-    if (title && title.length) {
-      titleBuilder.push(title);
-    }
-
-    if (titleBuilder.length === 0) {
-      return "No title";
-    }
-
-    return titleBuilder.join(" ");
+    return nadeTitleBuilder(type, title, map);
   }, [title, map, type]);
 
   return (
@@ -84,20 +64,24 @@ export const NadeTitle: FC<Props> = ({
   );
 };
 
-export const nadeTitleBuilder = (nade: Nade) => {
+export const nadeTitleBuilder = (
+  type?: NadeType,
+  title?: string,
+  map?: CsgoMap
+) => {
   const titleBuilder: string[] = [];
 
-  if (nade.map) {
-    titleBuilder.push(capitalize(nade.map));
+  if (type) {
+    titleBuilder.push(capitalize(type));
   }
 
-  if (nade.type) {
-    titleBuilder.push(nade.type);
-    titleBuilder.push("for");
+  if (title && title.length) {
+    titleBuilder.push(title);
   }
 
-  if (nade.title && nade.title.length) {
-    titleBuilder.push(nade.title);
+  if (map) {
+    titleBuilder.push("on");
+    titleBuilder.push(capitalize(map));
   }
 
   if (titleBuilder.length === 0) {

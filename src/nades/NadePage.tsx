@@ -22,6 +22,8 @@ import DecriptionEditor from "./editcontainers/DescriptionEditor";
 import MetaEditor from "./editcontainers/MetaEditor";
 import MapPositionEditor from "./components/MapPositionEditor";
 import AdminEditor from "./admineditor2/AdminEditor";
+import { ArticleJsonLd } from "next-seo";
+import { descriptionSimplify } from "../utils/Common";
 
 export const NadePage: FC = memo(() => {
   const isAdminOrMod = useIsAdminOrModerator();
@@ -50,12 +52,21 @@ export const NadePage: FC = memo(() => {
 
   return (
     <>
+      <ArticleJsonLd
+        url={`https://www.csgonades.com/nades/${nade?.slug || nade?.id}`}
+        title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
+        authorName={nade?.user.nickname}
+        datePublished={nade?.createdAt}
+        images={[nade?.images.thumbnailUrl]}
+        description={descriptionSimplify(nade?.description)}
+        publisherName={"CSGO Nades"}
+        publisherLogo={"https://www.csgonades.com/logo.png"}
+      />
       <SEO
         title={layoutTitle}
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
         thumbnail={nade.images.thumbnailUrl}
-        nadeSeo={nade}
       />
 
       {allowEdit && (
@@ -82,7 +93,7 @@ export const NadePage: FC = memo(() => {
         </aside>
         <div id="nade-social">
           <NadeShareActions
-            title={nadeTitleBuilder(nade)}
+            title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
             visisble={nade?.status === "accepted"}
             url={`/nades/${nade?.slug || nade?.id}`}
             image={nade?.images.thumbnailUrl}

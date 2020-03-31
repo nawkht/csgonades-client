@@ -17,20 +17,7 @@ export const blogTickrateAndJumpthrow: BlogPost = {
 const TickRateAndJumpthrowBindBlogPost: FC = () => {
   return (
     <>
-      <BlogPostArticle
-        data={blogTickrateAndJumpthrow}
-        schema={{
-          url: blogTickrateAndJumpthrow.slug,
-          title: blogTickrateAndJumpthrow.title,
-          datePublished: blogTickrateAndJumpthrow.createdAt,
-          description: blogTickrateAndJumpthrow.intro,
-          image: {
-            url: blogTickrateAndJumpthrow.imageUrl,
-            width: 1200,
-            height: 800,
-          },
-        }}
-      >
+      <BlogPostArticle data={blogTickrateAndJumpthrow}>
         <p>
           TLDR; Game servers have different rates at which they communicate with
           your game, called tickrate. This slight timing difference affects when

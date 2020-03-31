@@ -6,24 +6,34 @@ import { Dimensions } from "../constants/Constants";
 import { prettyDate } from "../utils/DateUtils";
 import { BlogAuthor } from "./BlogAuthor";
 import { NadeShareActions } from "../nades/NadeShareActions";
-import { SEO, BlogPostSchema } from "../layout/SEO2";
+import { SEO } from "../layout/SEO2";
+import { ArticleJsonLd } from "next-seo";
+import { descriptionSimplify } from "../utils/Common";
 
 type Props = {
   data: BlogPost;
-  schema: BlogPostSchema;
 };
 
-export const BlogPostArticle: FC<Props> = memo(({ children, data, schema }) => {
+export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
   const { colors } = useTheme();
 
   return (
     <>
+      <ArticleJsonLd
+        url={`https://www.csgonades.com/blog/${data.slug}`}
+        authorName="Mellet Solbakk"
+        datePublished={data.createdAt}
+        description={descriptionSimplify(data.intro)}
+        images={[data.imageUrl]}
+        publisherLogo="https://www.csgonades.com/logo.png"
+        publisherName="CSGO Nades"
+        title={data.title}
+      />
       <SEO
         title={data.title}
         canonical={`/blog/${data.slug}`}
         description={data.intro}
         thumbnail={data.thumbnailUrl}
-        blogSchema={schema}
       />
       <div className="article-wrap">
         <div className="empty" />

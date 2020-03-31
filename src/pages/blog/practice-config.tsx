@@ -20,20 +20,7 @@ export const blogPractiseConfig: BlogPost = {
 const PractiseConfigBlogPost = () => {
   return (
     <>
-      <BlogPostArticle
-        data={blogPractiseConfig}
-        schema={{
-          url: blogPractiseConfig.slug,
-          title: blogPractiseConfig.title,
-          datePublished: blogPractiseConfig.createdAt,
-          description: blogPractiseConfig.intro,
-          image: {
-            url: blogPractiseConfig.imageUrl,
-            width: 1200,
-            height: 800,
-          },
-        }}
-      >
+      <BlogPostArticle data={blogPractiseConfig}>
         <p>
           If you are in a hurry copy-paste the two commands below into your
           console. Or read on to set it up properly.

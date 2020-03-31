@@ -6,7 +6,7 @@ import { BlogNadeItem } from "../../blog/BlogNadeItem";
 import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 
 export const blogNadeAlignCrosshair: BlogPost = {
-  title: "Tip: Large Crosshair to Align Smokes in CS:GO",
+  title: "Large Crosshair to Align Smokes in CS:GO",
   slug: "smoke-align-crosshair",
   imageUrl: "/blogimg/nade-align-crosshair/align-crosshair.jpg",
   thumbnailUrl: "/blogimg/nade-align-crosshair/align-crosshair_thumb.jpg",
@@ -18,20 +18,7 @@ export const blogNadeAlignCrosshair: BlogPost = {
 const NadeAlignCrosshairBlogPost: FC = () => {
   return (
     <>
-      <BlogPostArticle
-        data={blogNadeAlignCrosshair}
-        schema={{
-          url: blogNadeAlignCrosshair.slug,
-          title: blogNadeAlignCrosshair.title,
-          datePublished: blogNadeAlignCrosshair.createdAt,
-          description: blogNadeAlignCrosshair.intro,
-          image: {
-            url: blogNadeAlignCrosshair.imageUrl,
-            width: 1200,
-            height: 675,
-          },
-        }}
-      >
+      <BlogPostArticle data={blogNadeAlignCrosshair}>
         <p>To get the result as shown in the image above you can choose;</p>
         <p>
           <b>Simple bind:</b> No need to edit your config file, but you have to
