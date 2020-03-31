@@ -5,7 +5,7 @@ import { tokenExpiredOrAboutTo } from "../../../utils/TokenUtil";
 import { setToken } from "../AuthActions";
 import { tokenSelector } from "../AuthSelectors";
 
-export const useGetOrUpdateToken = () => {
+export const useGetOrUpdateToken = (): (() => Promise<string | null>) => {
   const dispatch = useDispatch();
   const token = useSelector(tokenSelector);
 

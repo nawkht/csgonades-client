@@ -1,39 +1,57 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NotificationApi } from "../../../api/NotificationApi";
-import { userSelector } from "../../AuthStore/AuthSelectors";
 import { useGetOrUpdateToken } from "../../AuthStore/hooks/useGetToken";
 import { addUnreadNotificationsAction } from "../NotificationActions";
+import { useRouter } from "next/router";
+import { lastNotificationFetchSelector } from "../NotificationSelectors";
+import { dateMinutesAgo } from "../../../utils/DateUtils";
+import { useIsSignedIn } from "../../AuthStore/AuthHooks";
 
 export const useFetchNotifications = () => {
   const dispatch = useDispatch();
+  const { asPath } = useRouter();
   const getToken = useGetOrUpdateToken();
-  const user = useSelector(userSelector);
+  const isSignedIn = useIsSignedIn();
+  const lastNotificationFetch = useSelector(lastNotificationFetchSelector);
 
-  useEffect(() => {
-    if (!user) {
+  const fetchNotifications = useCallback(async () => {
+    const authToken = await getToken();
+
+    if (!authToken) {
       return;
     }
 
-    const delay = setTimeout(() => {
-      (async () => {
-        const authToken = await getToken();
+    const result = await NotificationApi.getNotifications(authToken);
 
-        if (!authToken) {
-          return;
-        }
+    if (result.isErr()) {
+      console.error(result.error);
+      return;
+    }
+    dispatch(addUnreadNotificationsAction(result.value));
+  }, [dispatch, getToken]);
 
-        const result = await NotificationApi.getNotifications(authToken);
+  // Initial app load
+  useEffect(() => {
+    if (!isSignedIn) {
+      return;
+    }
 
-        if (result.isErr()) {
-          console.error(result.error);
-          return;
-        }
+    fetchNotifications();
+  }, [isSignedIn]);
 
-        dispatch(addUnreadNotificationsAction(result.value));
-      })();
-    }, 1000);
+  // On page change, check if we should refetch
+  useEffect(() => {
+    if (!lastNotificationFetch || !isSignedIn) {
+      return;
+    }
 
-    return () => clearTimeout(delay);
-  }, [user, dispatch, getToken]);
+    const mintutesAgoLastFetch = dateMinutesAgo(lastNotificationFetch);
+
+    if (mintutesAgoLastFetch < 10) {
+      return;
+    }
+
+    fetchNotifications();
+  }, [isSignedIn, lastNotificationFetch, asPath]);
 };

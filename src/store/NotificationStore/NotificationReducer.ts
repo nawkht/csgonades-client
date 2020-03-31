@@ -5,6 +5,7 @@ import { NotificationActions } from "./NotificationActions";
 type NotificationState = {
   notifications: Notification[];
   loading: boolean;
+  lastFetch?: Date;
 };
 
 const INITIAL_STATE: NotificationState = {
@@ -21,10 +22,11 @@ export const NotificationReducer: Reducer<
       return {
         ...state,
         notifications: action.notifications,
+        lastFetch: new Date(),
       };
     case "@@notification/MARK_SEEN":
       const updatedNotifications: Notification[] = state.notifications.map(
-        noti => {
+        (noti) => {
           if (noti.id === action.notificationId) {
             return {
               ...noti,
