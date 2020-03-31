@@ -10,6 +10,7 @@ type Props = {
 export const NadeVideoContainer: FC<Props> = ({ nade }) => {
   return (
     <ResponsiveVideo
+      gfyId={nade.gfycat.gfyId}
       hdUrL={nade.gfycat.largeVideoUrl}
       sdUrl={nade.gfycat.smallVideoUrl}
       hdUrlWebm={nade.gfycat.largeVideoWebm}

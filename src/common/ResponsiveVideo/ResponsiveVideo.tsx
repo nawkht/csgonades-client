@@ -3,6 +3,7 @@ import { VideoControls } from "./VideoControls";
 import { VideoProgress } from "./VideoProgress";
 
 type Props = {
+  gfyId: string;
   sdUrl: string;
   hdUrL: string;
   hdUrlWebm?: string;
@@ -13,6 +14,7 @@ type Props = {
 export type Quality = "hd" | "sd";
 
 export const ResponsiveVideo: FC<Props> = ({
+  gfyId,
   sdUrl,
   hdUrL,
   hdUrlWebm,
@@ -88,6 +90,11 @@ export const ResponsiveVideo: FC<Props> = ({
             <source src={videoUrl} type="video/mp4" />
           </video>
         </div>
+        <div className="gfycat">
+          <a href={`https://gfycat.com/${gfyId}`} target="_black">
+            <img src="/gfycat.png" />
+          </a>
+        </div>
         {controls === "desktop" && (
           <div className="video-controls">
             <VideoProgress
@@ -112,10 +119,24 @@ export const ResponsiveVideo: FC<Props> = ({
           background: black;
           padding-top: 56.25%;
           overflow: hidden;
+          border: 1px solid green;
         }
 
         .video-container:hover .video-controls {
           transform: translateY(0);
+        }
+
+        .gfycat {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+
+        .gfycat img {
+          width: 80px;
+          margin-top: 15px;
+          margin-right: 15px;
+          opacity: 0.7;
         }
 
         .video-content {
