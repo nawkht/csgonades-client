@@ -31,7 +31,7 @@ const PlaceholderObserver: FC<Props> = memo(({ id }) => {
     const hidden = isHidden(ref.current);
     if (!hidden) {
       registerPlaceholder(id);
-      mutationObserver.observe(ref.current, { childList: true });
+      mutationObserver.observe(ref.current, { subtree: true });
     }
     return () => mutationObserver.disconnect();
   }, [id, registerPlaceholder]);
