@@ -1,30 +1,52 @@
 import { useEffect } from "react";
-import { useAnalytics } from "../utils/Analytics";
-import { APP_VERSION } from "../constants/Constants";
+import { useRouter } from "next/router";
 
-export const useAdblockAnalytics = () => {
-  const { event } = useAnalytics();
+export const useCheckIfAdsPresent = () => {
+  const { asPath } = useRouter();
 
   useEffect(() => {
     const delayedCheck = setTimeout(() => {
-      const adblockEnabled = typeof ezstandalone === "undefined";
-      if (adblockEnabled) {
-        event({
-          category: "Ads",
-          action: `Adblock On`,
-          label: APP_VERSION,
-          nonInteraction: true,
-        });
-      } else {
-        event({
-          category: "Ads",
-          action: "Adblock Off",
-          label: APP_VERSION,
-          nonInteraction: true,
-        });
+      const ezoicEnabled = ezstandalone && ezstandalone.enabled;
+      if (!ezoicEnabled) {
+        return;
       }
-    }, 5000);
+
+      getVisiblePlaceholder(asPath);
+    }, 15 * 1000);
 
     return () => clearTimeout(delayedCheck);
-  }, [event]);
+  }, [asPath]);
 };
+
+function getVisiblePlaceholder(url: string) {
+  if (!ezstandalone.enabled) {
+    return;
+  }
+
+  const placeholderElements: Element[] = [];
+  const placeholders = document.querySelectorAll<HTMLDivElement>(
+    "[id^=ezoic-pub-ad-placeholder]"
+  );
+  placeholders.forEach((ph) => {
+    if (ph.offsetParent !== null) {
+      placeholderElements.push(ph);
+    }
+  });
+
+  let displayedAdsCount = 0;
+  placeholderElements.forEach((el) => {
+    if (el.innerHTML.includes("<iframe")) {
+      displayedAdsCount += 1;
+    }
+  });
+
+  const selectedPlaceholderCount = Object.keys(
+    ezstandalone.selectedPlaceholders
+  ).length;
+
+  console.log({
+    url,
+    selectedPlaceholderCount,
+    displayedAdsCount,
+  });
+}
