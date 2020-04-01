@@ -12,7 +12,7 @@ import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
 import { useAdSlotsHandler } from "../store/AdStore/hooks";
 import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
-// import { useCheckIfAdsPresent } from "./useCheckIfAdPresent";
+import { useCheckIfAdsPresent } from "./useCheckIfAdPresent";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -20,7 +20,7 @@ export const Layout2: FC = memo(({ children }) => {
   useSetupSession();
   usePageView();
   usePreloadUser();
-  // useCheckIfAdsPresent();
+  useCheckIfAdsPresent();
 
   return (
     <>

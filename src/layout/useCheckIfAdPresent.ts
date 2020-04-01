@@ -1,16 +1,15 @@
 import { useEffect } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export const useCheckIfAdsPresent = () => {
   const { asPath } = useRouter();
 
   useEffect(() => {
-    function handleRouteChangeStart() {
+    const delayedCheck = setTimeout(() => {
       getVisiblePlaceholder(asPath);
-    }
+    }, 15 * 1000);
 
-    Router.events.on("routeChangeStart", handleRouteChangeStart);
-    return () => Router.events.off("routeChangeStart", handleRouteChangeStart);
+    return () => clearTimeout(delayedCheck);
   }, [asPath]);
 };
 
