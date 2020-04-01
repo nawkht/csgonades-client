@@ -19,6 +19,7 @@ export const useCheckIfAdsPresent = () => {
         category: "Ad Count",
         action: `Selected(${selectedPlaceholderCount}) Displayed(${displayedAdsCount})`,
         label: asPath,
+        nonInteraction: true,
       });
     }, 15 * 1000);
 
