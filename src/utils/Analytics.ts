@@ -18,7 +18,10 @@ export const usePageView = () => {
   }
 
   useEffect(() => {
-    onPathChange(asPath);
+    const delay = setTimeout(() => {
+      onPathChange(asPath);
+    }, 1000);
+    return () => clearTimeout(delay);
   }, [asPath]);
 };
 
