@@ -9,7 +9,7 @@ declare namespace ezstandalone {
   let hasDisplayedAds: boolean;
   let initialized: boolean;
   let cmd: Function[];
-
+  let selectedPlaceholders: { [key: string]: boolean };
   function define(...args: any): void;
   function enable(): void;
   function display(): void;

@@ -1,4 +1,4 @@
-import { FC, memo, useRef, useEffect } from "react";
+import { FC, memo, useRef, useEffect, useState } from "react";
 import { useRegisterPlaceholder } from "../../store/AdStore/hooks";
 
 type Props = {
@@ -16,17 +16,32 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
 });
 
 const PlaceholderObserver: FC<Props> = memo(({ id }) => {
+  const [placeholderVisisble, setPlaceholderVisisble] = useState<boolean>(
+    false
+  );
   const ref = useRef<HTMLDivElement>(null);
   const registerPlaceholder = useRegisterPlaceholder();
-  const mutationObserver = new MutationObserver((mutation) => {
-    mutation.forEach((mut) => {
-      if (mut.addedNodes.length) {
-        if (mut.addedNodes[0].nodeName === "IFRAME") {
-          console.log("> Displayed ad");
-        }
+
+  useEffect(() => {
+    if (placeholderVisisble) {
+      registerPlaceholder(id);
+    }
+  }, [placeholderVisisble]);
+
+  useEffect(() => {
+    const delayedCheck = setTimeout(() => {
+      const ezoicInitialized = ezstandalone && ezstandalone.initialized;
+      if (ref.current && ezoicInitialized) {
+        const isSelected = ezstandalone.selectedPlaceholders[`${id}`];
+        const adPresent = ref.current.innerHTML.includes("<iframe");
+        console.log("> Check", id, {
+          isSelected,
+          adPresent,
+        });
       }
-    });
-  });
+    }, 15 * 1000);
+    return () => clearTimeout(delayedCheck);
+  }, [id]);
 
   useEffect(() => {
     if (!ref.current) {
@@ -34,10 +49,8 @@ const PlaceholderObserver: FC<Props> = memo(({ id }) => {
     }
     const hidden = isHidden(ref.current);
     if (!hidden) {
-      registerPlaceholder(id);
-      mutationObserver.observe(ref.current, { subtree: true, childList: true });
+      setPlaceholderVisisble(true);
     }
-    return () => mutationObserver.disconnect();
   }, [id, registerPlaceholder]);
 
   return (
