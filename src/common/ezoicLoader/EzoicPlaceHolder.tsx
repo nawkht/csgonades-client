@@ -16,17 +16,8 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
 });
 
 const PlaceholderObserver: FC<Props> = memo(({ id }) => {
-  const [placeholderVisisble, setPlaceholderVisisble] = useState<boolean>(
-    false
-  );
   const ref = useRef<HTMLDivElement>(null);
   const registerPlaceholder = useRegisterPlaceholder();
-
-  useEffect(() => {
-    if (placeholderVisisble) {
-      registerPlaceholder(id);
-    }
-  }, [placeholderVisisble]);
 
   useEffect(() => {
     if (!ref.current) {
@@ -34,7 +25,7 @@ const PlaceholderObserver: FC<Props> = memo(({ id }) => {
     }
     const hidden = isHidden(ref.current);
     if (!hidden) {
-      setPlaceholderVisisble(true);
+      registerPlaceholder(id);
     }
   }, [id, registerPlaceholder]);
 
