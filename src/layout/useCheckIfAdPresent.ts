@@ -30,8 +30,6 @@ export const useCheckIfAdsPresent = () => {
         label: `Landing page: ${isLanding}`,
       };
 
-      console.log("> Event", adRatioEvent);
-
       event(adRatioEvent);
       setLanding(false);
     }, 10 * 1000);
