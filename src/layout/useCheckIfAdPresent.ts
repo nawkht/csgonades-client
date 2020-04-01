@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAnalytics } from "../utils/Analytics";
 
 export const useCheckIfAdsPresent = () => {
+  const [isLanding, setLanding] = useState(true);
   const { asPath } = useRouter();
   const { event } = useAnalytics();
 
@@ -20,14 +21,20 @@ export const useCheckIfAdsPresent = () => {
         return;
       }
 
-      event({
+      const adRatioEvent = {
         category: "Ad DisplayRatio",
         action: `${
           Math.round((displayedAdsCount / selectedPlaceholderCount) * 10) / 10
         }`,
         nonInteraction: true,
-      });
-    }, 15 * 1000);
+        label: `Landing page: ${isLanding}`,
+      };
+
+      console.log("> Event", adRatioEvent);
+
+      event(adRatioEvent);
+      setLanding(false);
+    }, 5 * 1000);
 
     return () => clearTimeout(delayedCheck);
   }, [asPath]);
