@@ -6,34 +6,6 @@ type Props = {};
 const AdTesting: FC<Props> = ({}) => {
   const [page, setPage] = useState(1);
 
-  function onRefresh() {
-    ezstandalone.refresh();
-  }
-
-  function onEnable() {
-    ezstandalone.enable();
-  }
-
-  function onDefineAll() {
-    ezstandalone.define(157, 158, 159, 160);
-  }
-
-  function onDefinePage1() {
-    ezstandalone.define(157, 158);
-  }
-
-  function onDefinePage2() {
-    ezstandalone.define(159, 160);
-  }
-
-  function onDisplay() {
-    ezstandalone.display();
-  }
-
-  function onDestroy() {
-    ezstandalone.destroy();
-  }
-
   return (
     <>
       <div className="ad-testing">
@@ -47,31 +19,43 @@ const AdTesting: FC<Props> = ({}) => {
           <div className="buttons">
             <h3>Standalone commands</h3>
 
-            <span>Define ads, PAGE1+PAGE2</span>
-            <button onClick={onDefineAll}>
-              ezstandalone.define(157, 158, 159, 160)
-            </button>
+            <button onClick={() => ezstandalone.enable()}>enable()</button>
+            <button onClick={() => ezstandalone.display()}>display()</button>
+            <button onClick={() => ezstandalone.refresh()}>refresh()</button>
+            <button onClick={() => ezstandalone.destroy()}>destroy()</button>
 
             <span>Define ads, PAGE1</span>
-            <button onClick={onDefinePage1}>
-              ezstandalone.define(157, 158)
+            <button onClick={() => ezstandalone.define(157, 158)}>
+              define(157, 158)
             </button>
 
             <span>Define ads, PAGE2</span>
-            <button onClick={onDefinePage2}>
-              ezstandalone.define(159, 160)
+            <button onClick={() => ezstandalone.define(158, 159, 160)}>
+              define(158, 159, 160)
             </button>
 
-            <button onClick={onEnable}>ezstandalone.enable()</button>
-            <button onClick={onDisplay}>ezstandalone.display()</button>
-            <button onClick={onRefresh}>ezstandalone.refresh()</button>
-            <button onClick={onDestroy}>ezstandalone.destroy()</button>
+            <span>Load group, PAGE1</span>
+            <button
+              onClick={() =>
+                ezstandalone.loadGroup([157, 158], true, true, true)
+              }
+            >
+              loadGrop([157, 158])
+            </button>
+
+            <span>Load loadGrop, PAGE2</span>
+            <button
+              onClick={() =>
+                ezstandalone.loadGroup([158, 159, 160], true, true, true)
+              }
+            >
+              loadGrop([158, 159, 160])
+            </button>
           </div>
 
           {page === 1 && (
             <div className="ads">
               <h4>PAGE 1</h4>
-
               <div className="ad-units">
                 <div className="placeholder-wrap">
                   Placeholder[157]
@@ -81,7 +65,7 @@ const AdTesting: FC<Props> = ({}) => {
                 </div>
                 <div className="placeholder-wrap">
                   Placeholder[158]
-                  <div className="ez">
+                  <div className="ez common">
                     <EzoicPlaceHolder id={158} />
                   </div>
                 </div>
@@ -92,8 +76,13 @@ const AdTesting: FC<Props> = ({}) => {
           {page === 2 && (
             <div className="ads">
               <h4>PAGE 2</h4>
-
               <div className="ad-units">
+                <div className="placeholder-wrap">
+                  Placeholder[158]
+                  <div className="ez common">
+                    <EzoicPlaceHolder id={158} />
+                  </div>
+                </div>
                 <div className="placeholder-wrap">
                   Placeholder[159]
                   <div className="ez">
@@ -136,11 +125,13 @@ const AdTesting: FC<Props> = ({}) => {
           display: flex;
           flex-direction: column;
           margin-right: 30px;
+          width: 300px;
         }
 
         .ad-units {
           display: flex;
           margin-top: 20px;
+          flex-wrap: wrap;
         }
 
         .buttons button {
@@ -151,6 +142,16 @@ const AdTesting: FC<Props> = ({}) => {
           border: 1px solid #bbb;
           padding: 20px;
           display: flex;
+        }
+
+        .ads {
+          flex: 1;
+          max-width: 70%;
+        }
+
+        .page-ads {
+          display: flex;
+          flex-wrap: wrap;
         }
 
         .ad-testing {
@@ -164,6 +165,10 @@ const AdTesting: FC<Props> = ({}) => {
           width: 336px;
           height: 280px;
           margin: 10px;
+        }
+
+        .common {
+          background: pink;
         }
       `}</style>
     </>
