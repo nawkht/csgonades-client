@@ -5,9 +5,24 @@ type Props = {
   id: number;
 };
 
+const isBrowser = typeof window !== "undefined";
+
 export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
+  if (!isBrowser) {
+    return null;
+  }
+
+  return <PlaceholderObserver id={id} />;
+});
+
+const PlaceholderObserver: FC<Props> = memo(({ id }) => {
   const ref = useRef<HTMLDivElement>(null);
   const registerPlaceholder = useRegisterPlaceholder();
+  const mutationObserver = new MutationObserver((mutation) => {
+    mutation.forEach((mut) => {
+      console.log("Mutation", mut);
+    });
+  });
 
   useEffect(() => {
     if (!ref.current) {
@@ -16,12 +31,21 @@ export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
     const hidden = isHidden(ref.current);
     if (!hidden) {
       registerPlaceholder(id);
+      mutationObserver.observe(ref.current, { childList: true });
     }
+    return () => mutationObserver.disconnect();
   }, [id, registerPlaceholder]);
 
-  const placeHolderId = `ezoic-pub-ad-placeholder-${id}`;
+  return (
+    <div ref={ref}>
+      <PurePlaceholder id={id} />
+    </div>
+  );
+});
 
-  return <div ref={ref} id={placeHolderId}></div>;
+const PurePlaceholder: FC<Props> = memo(({ id }) => {
+  const placeHolderId = `ezoic-pub-ad-placeholder-${id}`;
+  return <div id={placeHolderId}></div>;
 });
 
 function isHidden(el: HTMLDivElement) {
