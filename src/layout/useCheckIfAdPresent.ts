@@ -34,7 +34,7 @@ export const useCheckIfAdsPresent = () => {
 
       event(adRatioEvent);
       setLanding(false);
-    }, 5 * 1000);
+    }, 10 * 1000);
 
     return () => clearTimeout(delayedCheck);
   }, [asPath]);
