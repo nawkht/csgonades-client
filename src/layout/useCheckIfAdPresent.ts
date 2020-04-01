@@ -1,20 +1,16 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 export const useCheckIfAdsPresent = () => {
   const { asPath } = useRouter();
 
   useEffect(() => {
-    const delayedCheck = setTimeout(() => {
-      const ezoicEnabled = ezstandalone && ezstandalone.enabled;
-      if (!ezoicEnabled) {
-        return;
-      }
-
+    function handleRouteChangeStart() {
       getVisiblePlaceholder(asPath);
-    }, 15 * 1000);
+    }
 
-    return () => clearTimeout(delayedCheck);
+    Router.events.on("routeChangeStart", handleRouteChangeStart);
+    return () => Router.events.off("routeChangeStart", handleRouteChangeStart);
   }, [asPath]);
 };
 
