@@ -29,11 +29,16 @@ const PlaceholderObserver: FC<Props> = memo(({ id }) => {
   }, [placeholderVisisble]);
 
   useEffect(() => {
+    if (!placeholderVisisble || !ezstandalone.enabled) {
+      return;
+    }
+
     const delayedCheck = setTimeout(() => {
-      const ezoicInitialized = ezstandalone && ezstandalone.initialized;
-      if (ref.current && ezoicInitialized) {
+      const placeholderDiv = ref.current;
+
+      if (placeholderDiv) {
         const isSelected = ezstandalone.selectedPlaceholders[`${id}`];
-        const adPresent = ref.current.innerHTML.includes("<iframe");
+        const adPresent = placeholderDiv.innerHTML.includes("<iframe");
         console.log("> Check", id, {
           isSelected,
           adPresent,
@@ -41,7 +46,7 @@ const PlaceholderObserver: FC<Props> = memo(({ id }) => {
       }
     }, 15 * 1000);
     return () => clearTimeout(delayedCheck);
-  }, [id]);
+  }, [id, placeholderVisisble]);
 
   useEffect(() => {
     if (!ref.current) {
