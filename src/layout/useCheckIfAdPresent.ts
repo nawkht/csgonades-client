@@ -15,9 +15,14 @@ export const useCheckIfAdsPresent = () => {
         selectedPlaceholderCount,
         displayedAdsCount,
       } = getVisiblePlaceholder();
+
+      if (selectedPlaceholderCount > 0) {
+        return;
+      }
+
       event({
         category: "Ad Count",
-        action: `Selected(${selectedPlaceholderCount}) Displayed(${displayedAdsCount})`,
+        action: `Ratio: ${displayedAdsCount / selectedPlaceholderCount}`,
         label: asPath,
         nonInteraction: true,
       });
