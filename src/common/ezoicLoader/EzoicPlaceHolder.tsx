@@ -1,4 +1,4 @@
-import { FC, memo, useRef, useEffect, useState } from "react";
+import { FC, memo, useRef, useEffect } from "react";
 import { useRegisterPlaceholder } from "../../store/AdStore/hooks";
 
 type Props = {
