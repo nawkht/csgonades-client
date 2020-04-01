@@ -20,7 +20,11 @@ const PlaceholderObserver: FC<Props> = memo(({ id }) => {
   const registerPlaceholder = useRegisterPlaceholder();
   const mutationObserver = new MutationObserver((mutation) => {
     mutation.forEach((mut) => {
-      console.log("Mutation", mut);
+      if (mut.addedNodes.length) {
+        if (mut.addedNodes[0].nodeName === "IFRAME") {
+          console.log("> Displayed ad");
+        }
+      }
     });
   });
 
