@@ -1,4 +1,4 @@
-import { FC, memo, useMemo } from "react";
+import { FC, memo } from "react";
 import { PageCentralize } from "../common/PageCentralize";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { capitalize } from "../utils/Common";
@@ -11,19 +11,6 @@ type Props = {
 
 export const MapPageJumbo: FC<Props> = memo(({ map }) => {
   const { colors } = useTheme();
-
-  const placeHolderForMap = useMemo(() => {
-    switch (map) {
-      case "dust2":
-        return 164;
-      case "mirage":
-        return 165;
-      case "inferno":
-        return 168;
-      default:
-        return 130;
-    }
-  }, [map]);
 
   return (
     <>
@@ -41,7 +28,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
               </h2>
             </div>
             <div className="top-placement">
-              <EzoicPlaceHolder id={placeHolderForMap} />
+              <EzoicPlaceHolder id={130} />
             </div>
           </div>
         </PageCentralize>
