@@ -16,7 +16,7 @@ export const useCheckIfAdsPresent = () => {
         displayedAdsCount,
       } = getVisiblePlaceholder();
 
-      if (selectedPlaceholderCount > 0) {
+      if (selectedPlaceholderCount === 0) {
         return;
       }
 
