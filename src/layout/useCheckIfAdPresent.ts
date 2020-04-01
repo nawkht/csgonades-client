@@ -21,11 +21,10 @@ export const useCheckIfAdsPresent = () => {
       }
 
       event({
-        category: "Ad Display Ratio",
+        category: "Ad DisplayRatio",
         action: `${
           Math.round((displayedAdsCount / selectedPlaceholderCount) * 10) / 10
         }`,
-        label: asPath,
         nonInteraction: true,
       });
     }, 15 * 1000);
