@@ -116,10 +116,11 @@ export const NadePage: FC = memo(() => {
               onEditMeta={() => setEditMetaVisible(true)}
             />
           </div>
-          <div id="nade-comment-container">
-            <NadeComments nadeId={nade.id} />
-          </div>
         </div>
+      </div>
+
+      <div id="nade-comment-container">
+        <NadeComments nadeId={nade.id} />
       </div>
 
       <div className="ad-bottom">
