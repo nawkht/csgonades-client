@@ -46,7 +46,7 @@ export const CommentSubmit: FC<Props> = memo(
           <div className="nade-submit">
             <textarea
               value={message}
-              onChange={e => setMessage(e.target.value)}
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="Write a comment."
             />
             <button onClick={onSubmit} disabled={loading}>

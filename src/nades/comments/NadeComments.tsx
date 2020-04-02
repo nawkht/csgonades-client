@@ -12,10 +12,10 @@ export const NadeComments: FC<Props> = memo(({ nadeId }) => {
 
   return (
     <>
-      <div className="nade-comments">
+      <div className="nade-comment-container">
         <CommentSubmit nadeId={nadeId} onCommentSubmitted={addComment} />
 
-        {comments.map(nc => (
+        {comments.map((nc) => (
           <NadeCommentItem
             key={nc.id}
             nadeComment={nc}
@@ -24,7 +24,7 @@ export const NadeComments: FC<Props> = memo(({ nadeId }) => {
         ))}
       </div>
       <style jsx>{`
-        .nade-comments {
+        .nade-comment-container {
           max-width: 750px;
           margin: 0 auto;
           padding-top: 30px;
