@@ -32,8 +32,7 @@ export const NadeBreadcrumb: FC<Props> = memo(({ nade }) => {
       <style jsx>{`
         .nade-breadcrumb-wrap {
           display: flex;
-          justify-content: space-around;
-          margin-bottom: 10px;
+          margin-bottom: 5px;
         }
 
         .nade-breadcrumb {
@@ -45,7 +44,6 @@ export const NadeBreadcrumb: FC<Props> = memo(({ nade }) => {
 
         .bc-item {
           margin-right: 5px;
-          margin-left: 5px;
         }
 
         .link {

@@ -123,7 +123,6 @@ export const ResponsiveVideo: FC<Props> = ({
           background: black;
           padding-top: 56.25%;
           overflow: hidden;
-          border: 1px solid green;
         }
 
         .video-container:hover .video-controls {

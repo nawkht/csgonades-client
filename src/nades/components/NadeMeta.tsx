@@ -5,56 +5,71 @@ import { tickrateString } from "../../models/Nade/NadeTickrate";
 import { nadeTypeString } from "../../models/Nade/NadeType";
 import { techniqueString } from "../../models/Nade/Technique";
 import { capitalize } from "../../utils/Common";
+import { useCanEditNade } from "../../store/NadeStore/hooks/useCanEditNade";
+import { EditButton } from "./EditButton";
 
 type Props = {
   nade: Nade;
+  onEditMeta: () => void;
 };
 
-export const NadeMeta: FC<Props> = ({ nade }) => {
+export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
+  const allowEdit = useCanEditNade(nade);
+
   return (
     <>
-      <div className="nade-meta">
-        <div className="nade-meta-item">
-          <h4>Type</h4>
-          <p>{nade.type ? nadeTypeString(nade.type) : "Not set."}</p>
-        </div>
-
-        <div className="nade-meta-item">
-          <h4>Movement</h4>
-          <p>{nade.movement ? capitalize(nade.movement) : "Not set."}</p>
-        </div>
-
-        <div className="nade-meta-item">
-          <h4>Technique</h4>
-          <p>{nade.technique ? techniqueString(nade.technique) : "Not set."}</p>
-        </div>
-
-        {nade.tickrate && (
+      <EditButton allowEdit={allowEdit} onClick={onEditMeta}>
+        <div className="nade-meta">
           <div className="nade-meta-item">
-            <h4>Tickrate</h4>
-            <p>{tickrateString(nade.tickrate)}</p>
+            <h4>Type</h4>
+            <p>{nade.type ? nadeTypeString(nade.type) : "Not set."}</p>
           </div>
-        )}
-      </div>
+
+          <div className="nade-meta-item">
+            <h4>Movement</h4>
+            <p>{nade.movement ? capitalize(nade.movement) : "Not set."}</p>
+          </div>
+
+          <div className="nade-meta-item">
+            <h4>Technique</h4>
+            <p>
+              {nade.technique ? techniqueString(nade.technique) : "Not set."}
+            </p>
+          </div>
+
+          {nade.tickrate && (
+            <div className="nade-meta-item">
+              <h4>Tickrate</h4>
+              <p>{tickrateString(nade.tickrate)}</p>
+            </div>
+          )}
+        </div>
+      </EditButton>
       <style jsx>{`
         .nade-meta {
           display: flex;
+          flex-direction: column;
           color: white;
-          max-width: 100%;
-          overflow-x: auto;
         }
 
         .nade-meta-item {
           text-align: center;
           flex: 1;
           white-space: nowrap;
-          border-right: 1px solid #138a74;
-          padding: 15px;
+          padding: 10px;
           background: #17a58b;
+          border-bottom: 1px solid #12826e;
+        }
+
+        .nade-meta-item:first-child {
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
         }
 
         .nade-meta-item:last-child {
-          border-right: none;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          border-bottom: none;
         }
 
         h4 {
@@ -69,22 +84,28 @@ export const NadeMeta: FC<Props> = ({ nade }) => {
           font-size: 16px;
         }
 
-        @media only screen and (max-width: 900px) {
+        @media only screen and (max-width: 1000px) {
           .nade-meta {
-            flex-wrap: wrap;
             flex-direction: row;
-          }
-          .nade-meta-item {
-            padding: 10px;
-            min-width: 50%;
-            border-bottom: 1px solid #138a74;
+            margin: 0 auto;
           }
 
-          .nade-meta-item:nth-child(2) {
-            border-right: none;
+          .nade-item {
+            border-radius: 0px;
+            border-bottom: 0px;
           }
 
-          .nade-meta-item:nth-child(4) {
+          .nade-meta-item:first-child {
+            border: none;
+            border-radius: 0px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+          }
+
+          .nade-meta-item:last-child {
+            border-radius: 0px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
             border-right: none;
           }
         }

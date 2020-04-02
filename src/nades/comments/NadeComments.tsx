@@ -25,9 +25,7 @@ export const NadeComments: FC<Props> = memo(({ nadeId }) => {
       </div>
       <style jsx>{`
         .nade-comment-container {
-          max-width: 750px;
-          margin: 0 auto;
-          padding-top: 30px;
+          width: 100%;
         }
       `}</style>
     </>

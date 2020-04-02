@@ -5,15 +5,13 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { EditButton } from "./EditButton";
 import { NadeDescriptionDisplay } from "./NadeDescriptionDisplay";
 import { NadeDetails } from "./NadeDetails";
-import { NadeMeta } from "./NadeMeta";
 
 type Props = {
   nade: Nade;
   onEditTitle: () => void;
-  onEditMeta: () => void;
 };
 
-export const NadeInfo: FC<Props> = ({ nade, onEditTitle, onEditMeta }) => {
+export const NadeInfo: FC<Props> = ({ nade, onEditTitle }) => {
   const allowEdit = useCanEditNade(nade);
   const { colors } = useTheme();
 
@@ -22,15 +20,6 @@ export const NadeInfo: FC<Props> = ({ nade, onEditTitle, onEditMeta }) => {
       <div className="nade-info">
         <NadeDetails nade={nade} />
         <div className="nade-desc-meta">
-          <EditButton
-            allowEdit={allowEdit}
-            onClick={onEditMeta}
-            offsetTop={5}
-            offsetRight={5}
-          >
-            <NadeMeta nade={nade} />
-          </EditButton>
-
           <EditButton
             allowEdit={allowEdit}
             onClick={onEditTitle}

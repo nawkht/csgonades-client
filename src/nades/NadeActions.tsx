@@ -13,24 +13,21 @@ export const NadeActions: FC<Props> = ({ nade, onShowSignInWarning }) => {
     <>
       <div className="nade-info-actions">
         <div className="action">
-          <ReportNadeButton nadeId={nade.id} />
+          <FavoriteButton showSignInWarning={onShowSignInWarning} nade={nade} />
         </div>
         <div className="action">
-          <FavoriteButton showSignInWarning={onShowSignInWarning} nade={nade} />
+          <ReportNadeButton nadeId={nade.id} />
         </div>
       </div>
       <style jsx>{`
         .nade-info-actions {
           display: flex;
-          width: calc(300px + 30px);
-          margin: 0 auto;
-          padding-top: 30px;
-          padding-bottom: 30px;
-          justify-content: space-between;
+          flex-direction: column;
         }
 
         .action {
-          width: 150px;
+          width: 100%;
+          margin-bottom: 30px;
         }
       `}</style>
     </>

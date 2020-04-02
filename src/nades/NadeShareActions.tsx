@@ -42,40 +42,37 @@ export const NadeShareActions: FC<Props> = ({
   return (
     <>
       <div className="share-buttons">
-        <span>Share on:</span>
         <div onClick={() => onSosialShare("Reddit")}>
           <RedditShareButton url={shareUrl} title={title}>
-            <RedditIcon size={30} round />
+            <RedditIcon size={40} />
           </RedditShareButton>
         </div>
         <div onClick={() => onSosialShare("Facebook")}>
           <FacebookShareButton url={shareUrl} quote={title}>
-            <FacebookIcon size={30} round />
+            <FacebookIcon size={40} />
           </FacebookShareButton>
         </div>
         <div onClick={() => onSosialShare("Twitter")}>
           <TwitterShareButton url={shareUrl} title={title}>
-            <TwitterIcon size={30} round />
+            <TwitterIcon size={40} />
           </TwitterShareButton>
         </div>
         <div onClick={() => onSosialShare("VK")}>
           <VKShareButton url={shareUrl} title={title} image={image}>
-            <VKIcon size={30} round />
+            <VKIcon size={40} />
           </VKShareButton>
         </div>
       </div>
       <style jsx>{`
         .share-buttons {
           display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          margin-bottom: 10px;
+          border-radius: 5px;
+          overflow: hidden;
+          width: 160px;
         }
 
         .share-buttons div {
-          margin-left: 10px;
-          position: relative;
-          top: 3px;
+          margin-bottom: -5px;
         }
       `}</style>
     </>

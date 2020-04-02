@@ -1,5 +1,4 @@
 import { FC, useMemo } from "react";
-import { Dimensions } from "../../constants/Constants";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeType } from "../../models/Nade/NadeType";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
@@ -29,35 +28,19 @@ export const NadeTitle: FC<Props> = ({
 
   return (
     <>
-      <div className="center-title">
-        <EditButton onClick={onEditNade} allowEdit={allowEdit}>
-          <h1>{nadeTitle}</h1>
-        </EditButton>
-      </div>
+      <EditButton onClick={onEditNade} allowEdit={allowEdit}>
+        <h1>{nadeTitle}</h1>
+      </EditButton>
 
       <style jsx>{`
-        .center-title {
-          display: flex;
-          justify-content: space-around;
-        }
-
         h1 {
-          text-align: center;
           font-size: 30px;
           margin: 0;
           padding: 0;
+          margin-left: -1px;
           font-weight: 300;
           color: ${colors.TEXT};
-          display: inline-block;
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          h1 {
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-          }
+          text-align: left;
         }
       `}</style>
     </>
