@@ -109,13 +109,16 @@ export const NadePage: FC = memo(() => {
           />
 
           <EzoicPlaceHolder id={156} />
-
-          <NadeInfoContainer
-            nade={nade}
-            onEditDescription={() => setEditDescisisble(true)}
-            onEditMeta={() => setEditMetaVisible(true)}
-          />
-          <NadeComments nadeId={nade.id} />
+          <div id="nade-info-container">
+            <NadeInfoContainer
+              nade={nade}
+              onEditDescription={() => setEditDescisisble(true)}
+              onEditMeta={() => setEditMetaVisible(true)}
+            />
+          </div>
+          <div id="nade-comment-container">
+            <NadeComments nadeId={nade.id} />
+          </div>
         </div>
       </div>
 
