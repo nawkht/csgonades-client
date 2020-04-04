@@ -92,9 +92,6 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
 
         .map-sidebar {
           grid-area: ad;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
         }
 
         .map-nades-bottom {
