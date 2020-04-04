@@ -134,10 +134,10 @@ export const NadePage: FC = memo(() => {
         <div id="nade-comment-container">
           <NadeComments nadeId={nade.id} />
         </div>
-      </div>
 
-      <div className="ad-bottom">
-        <EzoicPlaceHolder id={136} />
+        <div id="placement-bottom">
+          <EzoicPlaceHolder id={136} />
+        </div>
       </div>
 
       <SignInWarning
@@ -183,10 +183,10 @@ export const NadePage: FC = memo(() => {
             "title miniad miniad miniad"
             "main main main sidebar"
             "info info actions sidebar"
+            "slot2 slot2 . sidebar"
             "comments comments . sidebar";
           max-width: 100%;
           grid-column-gap: 40px;
-          grid-row-gap: 40px;
           max-width: 1260px;
           margin: 0 auto;
           padding-left: 30px;
@@ -196,18 +196,22 @@ export const NadePage: FC = memo(() => {
 
         #nade-info-container {
           grid-area: info;
+          padding-bottom: 40px;
         }
 
         #nade-page-main {
           grid-area: main;
+          padding-bottom: 40px;
         }
 
         #sidebar-right {
           grid-area: sidebar;
+          padding-bottom: 40px;
         }
 
         #nade-actions {
           grid-area: actions;
+          padding-bottom: 40px;
         }
 
         #nade-actions .action {
@@ -217,16 +221,17 @@ export const NadePage: FC = memo(() => {
 
         #nade-comment-container {
           grid-area: comments;
+          padding-bottom: 40px;
         }
 
-        .ad-bottom {
-          margin-top: 30px;
-          display: flex;
-          justify-content: space-around;
+        #placement-bottom {
+          grid-area: slot2;
+          padding-bottom: 40px;
         }
 
         #title {
           grid-area: title;
+          padding-bottom: 40px;
         }
 
         #side-bar-ad {
@@ -238,12 +243,7 @@ export const NadePage: FC = memo(() => {
           display: flex;
           align-items: flex-end;
           justify-content: flex-end;
-        }
-
-        .eztest {
-          height: 60px;
-          width: 468px;
-          background: #ccc;
+          padding-bottom: 40px;
         }
 
         @media only screen and (max-width: 1000px) {
@@ -255,6 +255,7 @@ export const NadePage: FC = memo(() => {
               "main main"
               "actions actions"
               "info info"
+              "slot2 slot2"
               "sidebar sidebar"
               "comments comments";
           }
@@ -290,6 +291,7 @@ export const NadePage: FC = memo(() => {
               "miniad miniad"
               "title title"
               "main main"
+              "slot2 slot2"
               "info info"
               "actions actions"
               "sidebar sidebar"
