@@ -108,8 +108,18 @@ export const descriptionSimplify = (value?: string) => {
   let desc = removeMd(value);
   desc = desc.replace(/(\r\n|\n|\r)/gm, " ");
   desc = truncateString(desc, 117);
+  desc = escapeHtml(desc);
   return desc;
 };
+
+function escapeHtml(unsafe: string) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 function truncateString(str, num) {
   // If the length of str is less than or equal to num
