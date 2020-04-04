@@ -43,12 +43,6 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         <div className="ad-4-container">
           <EzoicPlaceHolder id={151} />
         </div>
-        <div className="ad-5-container">
-          <EzoicPlaceHolder id={152} />
-        </div>
-        <div className="ad-6-container">
-          <EzoicPlaceHolder id={153} />
-        </div>
       </div>
       <style jsx>{`
         .list {
@@ -61,9 +55,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         .ad-1-container,
         .ad-2-container,
         .ad-3-container,
-        .ad-4-container,
-        .ad-5-container,
-        .ad-6-container {
+        .ad-4-container {
           grid-column: 1 / -1;
           display: flex;
           align-items: center;
@@ -76,26 +68,16 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         }
 
         .ad-2-container {
-          grid-row: 9;
-          display: ${numItems > 21 ? "block" : "none"};
-        }
-
-        .ad-3-container {
           grid-row: 14;
           display: ${numItems > 33 ? "block" : "none"};
         }
 
-        .ad-4-container {
-          grid-row: 19;
-          display: ${numItems > 45 ? "block" : "none"};
-        }
-
-        .ad-5-container {
+        .ad-3-container {
           grid-row: 24;
           display: ${numItems > 57 ? "block" : "none"};
         }
 
-        .ad-6-container {
+        .ad-4-container {
           grid-row: 29;
           display: ${numItems > 69 ? "block" : "none"};
         }
@@ -111,26 +93,16 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           }
 
           .ad-2-container {
-            grid-row: 12;
-            display: ${numItems > 12 * 2 ? "block" : "none"};
-          }
-
-          .ad-3-container {
             grid-row: 18;
             display: ${numItems > 18 * 2 ? "block" : "none"};
           }
 
-          .ad-4-container {
-            grid-row: 24;
-            display: ${numItems > 24 * 2 ? "block" : "none"};
-          }
-
-          .ad-5-container {
+          .ad-3-container {
             grid-row: 30;
             display: ${numItems > 30 * 2 ? "block" : "none"};
           }
 
-          .ad-6-container {
+          .ad-4-container {
             grid-row: 37;
             display: ${numItems > 36 * 2 ? "block" : "none"};
           }
@@ -151,26 +123,16 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           }
 
           .ad-2-container {
-            grid-row: 14;
-            display: ${numItems >= 14 ? "block" : "none"};
-          }
-
-          .ad-3-container {
             grid-row: 25;
             display: ${numItems >= 25 ? "block" : "none"};
           }
 
-          .ad-4-container {
-            grid-row: 36;
-            display: ${numItems >= 36 ? "block" : "none"};
-          }
-
-          .ad-5-container {
+          .ad-3-container {
             grid-row: 47;
             display: ${numItems >= 47 ? "block" : "none"};
           }
 
-          .ad-6-container {
+          .ad-4-container {
             grid-row: 58;
             display: ${numItems >= 58 ? "block" : "none"};
           }
