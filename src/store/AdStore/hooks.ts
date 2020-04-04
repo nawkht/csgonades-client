@@ -61,9 +61,6 @@ export const useAdSlotsHandler = () => {
 
 async function onNewSlots(slots: number[]) {
   try {
-    const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
-    ezstandalone.cmd = ezstandalone.cmd || [];
-
     if (!ezstandalone.enabled) {
       ezstandalone.define(...slots);
       ezstandalone.enable();
