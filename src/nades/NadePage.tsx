@@ -180,7 +180,7 @@ export const NadePage: FC = memo(() => {
           display: grid;
           grid-template-columns: auto 110px 160px 160px;
           grid-template-areas:
-            "title miniad miniad miniad"
+            "title title miniad miniad"
             "main main main sidebar"
             "info info actions sidebar"
             "slot2 slot2 . sidebar"
