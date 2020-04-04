@@ -65,20 +65,18 @@ async function onNewSlots(slots: number[]) {
     ezstandalone.cmd = ezstandalone.cmd || [];
 
     if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(function () {
-        ezstandalone.define(...slots);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> enable display", slots.toString());
-      });
+      ezstandalone.define(...slots);
+      ezstandalone.enable();
+      sleep(500);
+      ezstandalone.display();
+      console.log("> enable display", slots.toString());
     } else {
-      ezstandalone.cmd.push(function () {
-        ezstandalone.define(...slots);
-        ezstandalone.refresh();
-        console.log("> refresh", slots.toString());
-      });
+      ezstandalone.define(...slots);
+      sleep(250);
+      ezstandalone.refresh();
+      console.log("> refresh", slots.toString());
     }
   } catch (error) {}
 }
 
-// const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
