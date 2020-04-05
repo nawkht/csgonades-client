@@ -38,6 +38,8 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           height: 250px;
           margin-top: 10px;
           margin-bottom: 10px;
+          display: flex;
+          align-items: center;
         }
         .map-welcome {
           background: linear-gradient(
