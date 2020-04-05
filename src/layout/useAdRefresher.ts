@@ -12,7 +12,7 @@ export const useNewAdRefresher = () => {
     }
     const delay = setTimeout(() => {
       ezRefreshAds();
-    }, 1000);
+    }, 500);
     return () => clearTimeout(delay);
   }, [asPath, acceptedCookieConsent]);
 };
