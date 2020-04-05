@@ -6,57 +6,81 @@
     <title>Test Page</title>
     <script src="//www.ezojs.com/ezoic/sa.min.js"></script>
     <style>
-      #main-container {
+      .group {
         border: 1px solid #bbb;
         display: flex;
         flex-wrap: wrap;
       }
 
       .wrapper {
-        width: 400px;
-        height: 400px;
+        width: 350px;
+        height: 350px;
         margin: 20px;
         background: #f9f9f9;
       }
     </style>
     <script>
+      function defineA() {
+        ezstandalone.define(157, 158);
+      }
+
+      function defineB() {
+        ezstandalone.define(158, 159);
+      }
+
       function init() {
-        ezstandalone.define(157, 158, 159, 160);
         ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> Init called");
       }
 
       function onRefresh() {
         ezstandalone.refresh();
-        console.log("> Refresh called");
+      }
+
+      function onDisplay() {
+        ezstandalone.display();
+      }
+
+      function onDestroy() {
+        ezstandalone.destroy();
       }
     </script>
   </head>
   <body>
     <h2>Ad testing</h2>
-    <button onclick="init()">Init</button>
-    <button onclick="onRefresh()">Refresh</button>
-    <div id="main-container">
+    <button onclick="defineA()">ezstandalone.define(157, 158)</button>
+    <button onclick="defineB()">ezstandalone.define(158, 159)</button>
+    <button onclick="init()">ezstandalone.enable()</button>
+    <button onclick="onDisplay()">ezstandalone.display()</button>
+    <button onclick="onRefresh()">ezstandalone.refresh()</button>
+    <button onclick="onDestroy()">ezstandalone.destroy()</button>
+    <h1>Page 1</h1>
+    <div class="group">
       <div class="wrapper">
+        <b>ezoic-pub-ad-placeholder-157</b>
         <!-- Ezoic - Test1 - sidebar -->
         <div id="ezoic-pub-ad-placeholder-157"></div>
         <!-- End Ezoic - Test1 - sidebar -->
       </div>
       <div class="wrapper">
+        <b>ezoic-pub-ad-placeholder-158</b>
         <!-- Ezoic - Test2 - top_of_page -->
         <div id="ezoic-pub-ad-placeholder-158"></div>
         <!-- End Ezoic - Test2 - top_of_page -->
       </div>
+    </div>
+    <h1>Page 2</h1>
+    <div class="group">
       <div class="wrapper">
-        <!-- Ezoic - Test3 - under_page_title -->
-        <div id="ezoic-pub-ad-placeholder-159"></div>
-        <!-- End Ezoic - Test3 - under_page_title -->
+        <b>ezoic-pub-ad-placeholder-158</b>
+        <!-- Ezoic - Test1 - sidebar -->
+        <div id="ezoic-pub-ad-placeholder-157"></div>
+        <!-- End Ezoic - Test1 - sidebar -->
       </div>
       <div class="wrapper">
-        <!-- Ezoic - Test4 - under_first_paragraph -->
-        <div id="ezoic-pub-ad-placeholder-160"></div>
-        <!-- End Ezoic - Test4 - under_first_paragraph -->
+        <b>ezoic-pub-ad-placeholder-159</b>
+        <!-- Ezoic - Test2 - top_of_page -->
+        <div id="ezoic-pub-ad-placeholder-159"></div>
+        <!-- End Ezoic - Test2 - top_of_page -->
       </div>
     </div>
   </body>
