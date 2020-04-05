@@ -21,6 +21,7 @@ const ezRefreshAds = () => {
   try {
     if (!ezstandalone.enabled) {
       const csgoEzoicCodes = findAdCode();
+      ezstandalone.setIsPWA();
       ezstandalone.define(csgoEzoicCodes);
       ezstandalone.enable();
       ezstandalone.display();
