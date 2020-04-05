@@ -17,7 +17,7 @@ export const MapPageSideBar: FC<Props> = memo(() => {
 
       <style jsx>{`
         .sjakt {
-          flex: 1;
+          height: 100%;
         }
 
         .sticky {
