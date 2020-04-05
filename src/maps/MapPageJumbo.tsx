@@ -34,6 +34,11 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
         </PageCentralize>
       </div>
       <style jsx>{`
+        .top-placement {
+          height: 250px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
         .map-welcome {
           background: linear-gradient(
             236.51deg,
