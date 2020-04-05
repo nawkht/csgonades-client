@@ -12,7 +12,7 @@ export const useNewAdRefresher = () => {
     }
     const delay = setTimeout(() => {
       ezRefreshAds();
-    }, 500);
+    }, 1000);
     return () => clearTimeout(delay);
   }, [asPath, acceptedCookieConsent]);
 };
@@ -21,13 +21,13 @@ const ezRefreshAds = () => {
   try {
     if (!ezstandalone.enabled) {
       const csgoEzoicCodes = findAdCode();
-      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.define(csgoEzoicCodes);
       ezstandalone.enable();
       ezstandalone.display();
       console.log("> enable display", csgoEzoicCodes);
     } else if (ezstandalone.enabled && ezstandalone.hasDisplayedAds) {
       const csgoEzoicCodes = findAdCode();
-      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.define(csgoEzoicCodes);
       ezstandalone.refresh();
       console.log("> refresh", csgoEzoicCodes);
     }
