@@ -10,15 +10,15 @@ import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
-import { useAdSlotsHandler } from "../store/AdStore/hooks";
 import { AdBlockNotice } from "../common/adblocknotice/AdblockNotice";
+import { useNewAdRefresher } from "./useAdRefresher";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
-  useAdSlotsHandler();
   useSetupSession();
   usePageView();
   usePreloadUser();
+  useNewAdRefresher();
 
   return (
     <>

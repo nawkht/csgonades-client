@@ -1,39 +1,35 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 
 export const useNewAdRefresher = () => {
   const { asPath } = useRouter();
+  const { acceptedCookieConsent } = useCookieConcent();
+
   useEffect(() => {
-    if (asPath.includes("adtesting")) {
+    if (asPath.includes("adtesting") || !acceptedCookieConsent) {
       return;
     }
     const delay = setTimeout(() => {
       ezRefreshAds();
     }, 500);
     return () => clearTimeout(delay);
-  }, [asPath]);
+  }, [asPath, acceptedCookieConsent]);
 };
 
 const ezRefreshAds = () => {
   try {
-    const ezstandalone = (window.ezstandalone = window.ezstandalone || {});
-    ezstandalone.cmd = ezstandalone.cmd || [];
-
     if (!ezstandalone.enabled) {
-      ezstandalone.cmd.push(function () {
-        const csgoEzoicCodes = findAdCode();
-        ezstandalone.define(...csgoEzoicCodes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> enable display", csgoEzoicCodes);
-      });
-    } else {
-      ezstandalone.cmd.push(function () {
-        const csgoEzoicCodes = findAdCode();
-        ezstandalone.define(...csgoEzoicCodes);
-        ezstandalone.refresh();
-        console.log("> refresh", csgoEzoicCodes);
-      });
+      const csgoEzoicCodes = findAdCode();
+      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.enable();
+      ezstandalone.display();
+      console.log("> enable display", csgoEzoicCodes);
+    } else if (ezstandalone.enabled && ezstandalone.hasDisplayedAds) {
+      const csgoEzoicCodes = findAdCode();
+      ezstandalone.define(...csgoEzoicCodes);
+      ezstandalone.refresh();
+      console.log("> refresh", csgoEzoicCodes);
     }
   } catch (error) {
     return;

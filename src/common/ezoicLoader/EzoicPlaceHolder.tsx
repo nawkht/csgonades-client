@@ -1,5 +1,4 @@
-import { FC, memo, useRef, useEffect } from "react";
-import { useRegisterPlaceholder } from "../../store/AdStore/hooks";
+import { FC, memo, useState, useEffect } from "react";
 
 type Props = {
   id: number;
@@ -8,13 +7,23 @@ type Props = {
 const isBrowser = typeof window !== "undefined";
 
 export const EzoicPlaceHolder: FC<Props> = memo(({ id }) => {
-  if (!isBrowser) {
+  const [onClient, setOnClient] = useState(false);
+
+  useEffect(() => {
+    if (isBrowser) {
+      setOnClient(true);
+    }
+  }, []);
+
+  if (!onClient) {
     return null;
   }
 
-  return <PlaceholderObserver id={id} />;
+  const placeHolderId = `ezoic-pub-ad-placeholder-${id}`;
+  return <div id={placeHolderId}></div>;
 });
 
+/*
 const PlaceholderObserver: FC<Props> = memo(({ id }) => {
   const ref = useRef<HTMLDivElement>(null);
   const registerPlaceholder = useRegisterPlaceholder();
@@ -44,3 +53,4 @@ const PurePlaceholder: FC<Props> = memo(({ id }) => {
 function isHidden(el: HTMLDivElement) {
   return el.offsetParent === null;
 }
+*/
