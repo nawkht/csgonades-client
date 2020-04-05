@@ -19,11 +19,23 @@ export const useNewAdRefresher = () => {
   }, [asPath, acceptedCookieConsent]);
 };
 
-const ezRefreshAds = () => {
+const ezRefreshAds = (tries = 0) => {
+  if (tries > 2) {
+    return;
+  }
+
+  const ezoicInitialized = typeof ezstandalone !== "undefined";
+
+  if (!ezoicInitialized) {
+    setTimeout(() => {
+      ezRefreshAds(tries + 1);
+    }, 500);
+    return;
+  }
+
   try {
     if (!ezstandalone.enabled) {
       const csgoEzoicCodes = findAdCode();
-      ezstandalone.setIsPWA();
       ezstandalone.define(csgoEzoicCodes);
       ezstandalone.enable();
       ezstandalone.display();
