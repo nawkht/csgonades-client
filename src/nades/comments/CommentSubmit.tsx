@@ -58,7 +58,7 @@ export const CommentSubmit: FC<Props> = memo(
           <div className="comment-sign-in">
             <p>Do you want to comment on this nade?</p>
             <p>
-              <a href={Config.SIGN_IN_URL}>Sing in with steam</a>
+              <a href={Config.SIGN_IN_URL}>Sign in with steam</a>
             </p>
           </div>
         )}
