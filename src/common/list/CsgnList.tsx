@@ -60,51 +60,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           display: flex;
           align-items: center;
           justify-content: space-around;
-        }
-
-        .ad-1-container {
-          grid-row: 4;
-          display: ${numItems > 9 ? "block" : "none"};
-        }
-
-        .ad-2-container {
-          grid-row: 14;
-          display: ${numItems > 33 ? "block" : "none"};
-        }
-
-        .ad-3-container {
-          grid-row: 24;
-          display: ${numItems > 57 ? "block" : "none"};
-        }
-
-        .ad-4-container {
-          grid-row: 29;
-          display: ${numItems > 69 ? "block" : "none"};
+          display: none;
         }
 
         @media only screen and (max-width: 1200px) {
           .list {
             grid-template-columns: repeat(2, minmax(100px, 1fr));
-          }
-
-          .ad-1-container {
-            grid-row: 6;
-            display: ${numItems > 6 * 2 ? "block" : "none"};
-          }
-
-          .ad-2-container {
-            grid-row: 18;
-            display: ${numItems > 18 * 2 ? "block" : "none"};
-          }
-
-          .ad-3-container {
-            grid-row: 30;
-            display: ${numItems > 30 * 2 ? "block" : "none"};
-          }
-
-          .ad-4-container {
-            grid-row: 37;
-            display: ${numItems > 36 * 2 ? "block" : "none"};
           }
         }
 
