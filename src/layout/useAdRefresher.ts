@@ -12,10 +12,7 @@ export const useNewAdRefresher = () => {
     if (asPath.includes("adtesting") || !acceptedCookieConsent || !isBrowser) {
       return;
     }
-    const delay = setTimeout(() => {
-      ezRefreshAds();
-    }, 500);
-    return () => clearTimeout(delay);
+    ezRefreshAds();
   }, [asPath, acceptedCookieConsent]);
 };
 
