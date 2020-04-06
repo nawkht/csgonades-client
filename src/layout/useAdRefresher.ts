@@ -1,19 +1,17 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useCookieConcent } from "../store/GlobalStore/GlobalHooks";
 
 const isBrowser = typeof window !== "undefined";
 
 export const useNewAdRefresher = () => {
   const { asPath } = useRouter();
-  const { acceptedCookieConsent } = useCookieConcent();
 
   useEffect(() => {
-    if (asPath.includes("adtesting") || !acceptedCookieConsent || !isBrowser) {
+    if (asPath.includes("adtesting") || !isBrowser) {
       return;
     }
     ezRefreshAds();
-  }, [asPath, acceptedCookieConsent]);
+  }, [asPath]);
 };
 
 const ezRefreshAds = (tries = 0) => {
