@@ -183,8 +183,8 @@ export const NadePage: FC = memo(() => {
             "title title miniad miniad"
             "main main main sidebar"
             "info info actions sidebar"
-            "slot2 slot2 . sidebar"
-            "comments comments . sidebar";
+            "comments comments . sidebar"
+            "slot2 slot2 . sidebar";
           max-width: 100%;
           grid-column-gap: 40px;
           max-width: 1260px;
