@@ -1,4 +1,4 @@
-import { FC, memo, useState, useEffect, useCallback } from "react";
+import { FC, memo, useState, useEffect } from "react";
 
 type AdType = "top-medium-rectangle" | "skyscraper";
 
@@ -23,6 +23,7 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
 
   return (
     <>
+      <div id=""></div>
       <div className="ad-unit">{adCodeByType(type)}</div>
       <style jsx>{`
         .ad-unit {
@@ -33,41 +34,53 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
 });
 
 const SkySkaper = memo(() => {
-  const ref = useCallback((node: HTMLDivElement) => {
-    if (!node) {
+  useEffect(() => {
+    const div = document.getElementById("60796-4");
+    if (!div) {
+      console.log("Ad div not found");
       return;
     }
-
     const firstScript = document.createElement("script");
     firstScript.src = "//ads.themoneytizer.com/s/gen.js?type=4";
     const secondScript = document.createElement("script");
     secondScript.src =
       "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=4";
-
-    node.append(firstScript, secondScript);
+    div.appendChild(firstScript);
+    div.appendChild(secondScript);
+    return () => {
+      if (div) {
+        div.innerHTML = "";
+      }
+    };
   }, []);
 
-  return <div ref={ref} id="60796-4"></div>;
+  return <div id="60796-4"></div>;
 });
 
 const TopMedRec = memo(() => {
-  const ref = useCallback((node: HTMLDivElement) => {
-    if (!node) {
+  useEffect(() => {
+    const div = document.getElementById("60796-2");
+    if (!div) {
+      console.log("Ad div not found");
       return;
     }
-
     const firstScript = document.createElement("script");
     firstScript.src = "//ads.themoneytizer.com/s/gen.js?type=2";
     const secondScript = document.createElement("script");
     secondScript.src =
       "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=2";
-
-    node.append(firstScript, secondScript);
+    div.appendChild(firstScript);
+    div.appendChild(secondScript);
+    return () => {
+      if (div) {
+        div.innerHTML = "";
+      }
+    };
   }, []);
 
   console.log("TopMedRec render");
 
-  return <div ref={ref} id="60796-2"></div>;
+  return <div id="60796-2"></div>;
 });
 
 function adCodeByType(type: AdType) {
