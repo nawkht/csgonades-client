@@ -12,9 +12,12 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (isBrowser) {
-      setMounted(true);
-    }
+    const delay = setTimeout(() => {
+      if (isBrowser) {
+        setMounted(true);
+      }
+    }, 1000);
+    return () => clearTimeout(delay);
   }, []);
 
   if (!mounted) {
