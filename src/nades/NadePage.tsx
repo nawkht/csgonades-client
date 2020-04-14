@@ -25,6 +25,7 @@ import { NadeMeta } from "./components/NadeMeta";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { Dimensions } from "../constants/Constants";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadePage: FC = memo(() => {
   const isAdminOrMod = useIsAdminOrModerator();
@@ -87,7 +88,7 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <aside id="sidebar-right">
-          <div id="side-bar-ad"></div>
+          <AdUnit type="top-medium-rectangle" />
         </aside>
 
         <div id="nade-actions">

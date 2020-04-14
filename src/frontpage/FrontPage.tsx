@@ -26,7 +26,6 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
               src="https://discordapp.com/widget?id=181028616061190144&theme=dark"
               width="100%"
               height="400"
-              allowTransparency={true}
               frameBorder="0"
             ></iframe>
             <FrontpageActions />

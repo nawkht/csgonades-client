@@ -1,5 +1,6 @@
 import { FC, memo } from "react";
 import { CsgoMap } from "../models/Nade/CsGoMap";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   map: CsgoMap;
@@ -9,7 +10,9 @@ export const MapPageSideBar: FC<Props> = memo(() => {
   return (
     <>
       <div className="sjakt">
-        <div className="sticky"></div>
+        <div className="sticky">
+          <AdUnit type="skyscraper" />
+        </div>
       </div>
 
       <style jsx>{`
