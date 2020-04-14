@@ -5,7 +5,8 @@ type AdType =
   | "top-medium-rectangle"
   | "skyscraper"
   | "mega-bottom"
-  | "half-page";
+  | "half-page"
+  | "mega-banner";
 
 type Props = {
   type: AdType;
@@ -32,7 +33,16 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
 
   return (
     <>
-      <AdGenerator id={adTypeId} />
+      <div className="placeholder-wrap">
+        <AdGenerator id={adTypeId} />
+      </div>
+      <style jsx>{`
+        .placeholder-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      `}</style>
     </>
   );
 });
@@ -66,6 +76,8 @@ function adIdByType(type: AdType) {
       return 2;
     case "half-page":
       return 3;
+    case "mega-banner":
+      return 1;
     default:
       return 0;
   }
