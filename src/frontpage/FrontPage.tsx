@@ -23,7 +23,15 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
         <div className="recent-wrap">
           <FrontPageRecentPosts />
           <aside className="front-page-sidebar">
+            <iframe
+              src="https://discordapp.com/widget?id=181028616061190144&theme=dark"
+              width="100%"
+              height="400"
+              allowTransparency={true}
+              frameBorder="0"
+            ></iframe>
             <FrontpageActions />
+
             <EzoicPlaceHolder id={163} />
           </aside>
         </div>
