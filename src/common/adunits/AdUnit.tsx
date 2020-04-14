@@ -21,22 +21,16 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
     return null;
   }
 
+  const adTypeId = type === "skyscraper" ? 4 : 2;
+
   return (
     <>
-      <div className="ad-unit">
-        <AdGenerator type={type} />
-      </div>
-      <style jsx>{`
-        .ad-unit {
-        }
-      `}</style>
+      <AdGenerator id={adTypeId} />
     </>
   );
 });
 
-const AdGenerator: FC<Props> = memo(({ type }) => {
-  const idByType = type === "skyscraper" ? "4" : "2";
-
+const AdGenerator: FC<{ id: number }> = memo(({ id }) => {
   const ref = useCallback(
     (node: HTMLDivElement) => {
       if (!node) {
@@ -44,14 +38,13 @@ const AdGenerator: FC<Props> = memo(({ type }) => {
       }
 
       const firstScript = document.createElement("script");
-      firstScript.src = `//ads.themoneytizer.com/s/gen.js?type=${idByType}`;
+      firstScript.src = `//ads.themoneytizer.com/s/gen.js?type=${id}`;
       const secondScript = document.createElement("script");
-      secondScript.src = `//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=${idByType}`;
-
+      secondScript.src = `//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=${id}`;
       node.append(firstScript, secondScript);
     },
-    [idByType]
+    [id]
   );
 
-  return <div id={`60796-${idByType}`} ref={ref} />;
+  return <div id={`60796-${id}`} ref={ref}></div>;
 });
