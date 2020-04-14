@@ -26,27 +26,11 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
     return null;
   }
 
-  const { id, height, width } = adIdByType(type);
+  const { id } = adIdByType(type);
 
   return (
     <>
-      <div className="placeholder-center">
-        <div className="placeholder-wrap">
-          <AdGenerator id={id} />
-        </div>
-      </div>
-      <style jsx>{`
-        .placeholder-center {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .placeholder-wrap {
-          min-width: ${width}px;
-          min-height: ${height}px;
-        }
-      `}</style>
+      <AdGenerator id={id} />
     </>
   );
 });
@@ -67,7 +51,11 @@ const AdGenerator: FC<{ id: number }> = memo(({ id }) => {
     [id]
   );
 
-  return <div id={`60796-${id}`} ref={ref}></div>;
+  return (
+    <>
+      <div id={`60796-${id}`} ref={ref}></div>
+    </>
+  );
 });
 
 type AdProps = {

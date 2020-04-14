@@ -3,7 +3,7 @@ import { PageCentralize } from "../common/PageCentralize";
 import { capitalize } from "../utils/Common";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { CsgoMap } from "../models/Nade/CsGoMap";
-import { AdUnit } from "../common/adunits/AdUnit";
+import { AdTag } from "../layout/AdContainer";
 
 type Props = {
   map: CsgoMap;
@@ -28,7 +28,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
               </h2>
             </div>
             <div className="top-placement">
-              <AdUnit type="mega-banner" />
+              <AdTag tagType="mega-banner" />
             </div>
           </div>
         </PageCentralize>

@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { CsgoMap } from "../models/Nade/CsGoMap";
-import { AdUnit } from "../common/adunits/AdUnit";
+import { AdTag } from "../layout/AdContainer";
 
 type Props = {
   map: CsgoMap;
@@ -11,7 +11,7 @@ export const MapPageSideBar: FC<Props> = memo(() => {
     <>
       <div className="sjakt">
         <div className="sticky">
-          <AdUnit type="skyscraper" />
+          <AdTag tagType="skyscraper" />
         </div>
       </div>
 
