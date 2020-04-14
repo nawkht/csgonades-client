@@ -9,7 +9,7 @@ import { SEO } from "../layout/SEO2";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
 import { PageCentralize } from "../common/PageCentralize";
-import { AdTag } from "../layout/AdContainer";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   data: BlogPost;
@@ -57,7 +57,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
             <div className="article-date">{prettyDate(data.createdAt)}</div>
             <p className="lead">{data.intro}</p>
             <div className="blog-top-placement">
-              <AdTag tagType="mega-banner" />
+              <AdUnit tagType="mega-banner" />
             </div>
             {children}
             <BlogAuthor />
@@ -74,10 +74,10 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
           <aside className="sidebar">
             <div className="sidebar-placement">
-              <AdTag tagType="half-page" />
+              <AdUnit tagType="half-page" />
             </div>
             <div className="sidebar-medium">
-              <AdTag tagType="top-medium-rectangle" />
+              <AdUnit tagType="top-medium-rectangle" />
             </div>
           </aside>
         </article>

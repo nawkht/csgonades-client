@@ -25,7 +25,7 @@ import { NadeMeta } from "./components/NadeMeta";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { Dimensions } from "../constants/Constants";
-import { AdTag } from "../layout/AdContainer";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadePage: FC = memo(() => {
   const isAdminOrMod = useIsAdminOrModerator();
@@ -88,9 +88,9 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <aside id="sidebar-right">
-          <AdTag tagType="top-medium-rectangle" />
+          <AdUnit tagType="top-medium-rectangle" />
           <div className="half-page-plactement">
-            <AdTag tagType="half-page" />
+            <AdUnit tagType="half-page" />
           </div>
         </aside>
 

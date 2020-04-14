@@ -9,7 +9,7 @@ import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
-import { AdTag, AdContainer } from "./AdContainer";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -28,7 +28,7 @@ export const Layout2: FC = memo(({ children }) => {
         <main>{children}</main>
 
         <div className="footer-placement">
-          <AdTag tagType="mega-bottom" />
+          <AdUnit tagType="mega-bottom" />
         </div>
 
         <div className="footer">
@@ -38,8 +38,6 @@ export const Layout2: FC = memo(({ children }) => {
         <ToastList />
         <MobileNav />
         <AdminLink />
-
-        <AdContainer />
       </div>
 
       <style jsx>{`

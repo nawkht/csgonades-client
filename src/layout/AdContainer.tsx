@@ -9,11 +9,11 @@ export const AdContainer: FC<Props> = memo(({}) => {
   return (
     <>
       <div id={AD_CONTAINER_ID}>
-        <AdUnit type="half-page" />
-        <AdUnit type="skyscraper" />
-        <AdUnit type="mega-bottom" />
-        <AdUnit type="mega-banner" />
-        <AdUnit type="top-medium-rectangle" />
+        <AdUnit tagType="half-page" />
+        <AdUnit tagType="skyscraper" />
+        <AdUnit tagType="mega-bottom" />
+        <AdUnit tagType="mega-banner" />
+        <AdUnit tagType="top-medium-rectangle" />
       </div>
       <style jsx>
         {`

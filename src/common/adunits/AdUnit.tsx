@@ -9,33 +9,42 @@ type AdType =
   | "mega-banner";
 
 type Props = {
-  type: AdType;
+  tagType: AdType;
 };
 
 const isBrowser = typeof window !== "undefined";
 
-export const AdUnit: FC<Props> = memo(({ type }) => {
+export const AdUnit: FC<Props> = memo(({ tagType }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    if (isBrowser && !isMobile && IS_PROD) {
-      setMounted(true);
-    }
+    const delay = setTimeout(() => {
+      if (isBrowser && !isMobile && IS_PROD) {
+        setMounted(true);
+      }
+    }, 5000);
+    return () => clearTimeout(delay);
   }, []);
 
   if (!mounted) {
     return null;
   }
 
+  const adProps = adIdByType(tagType);
+
   return (
     <>
-      <AdGenerator type={type} />
+      <AdGenerator {...adProps} />
     </>
   );
 });
 
-const AdGenerator: FC<{ type: AdType }> = memo(({ type }) => {
-  const { id, height, width } = adIdByType(type);
+type AdProps = {
+  id: number;
+  width: number;
+  height: number;
+};
 
+const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
   const ref = useCallback(
     (node: HTMLDivElement) => {
       if (!node) {
@@ -64,12 +73,6 @@ const AdGenerator: FC<{ type: AdType }> = memo(({ type }) => {
     </>
   );
 });
-
-type AdProps = {
-  id: number;
-  width: number;
-  height: number;
-};
 
 function adIdByType(type: AdType): AdProps {
   switch (type) {
