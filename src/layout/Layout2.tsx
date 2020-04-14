@@ -45,7 +45,8 @@ export const Layout2: FC = memo(({ children }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 100px;
+          margin-top: 50px;
+          margin-bottom: 50px;
         }
 
         .page {

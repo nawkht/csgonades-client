@@ -55,7 +55,6 @@ export const Footer: FC = memo(() => {
           background: ${colors.footerBg};
           padding-top: 50px;
           padding-bottom: 50px;
-          margin-top: 150px;
         }
 
         .footer-content {

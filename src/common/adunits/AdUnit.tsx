@@ -26,18 +26,25 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
     return null;
   }
 
-  const adTypeId = adIdByType(type);
+  const { id, height, width } = adIdByType(type);
 
   return (
     <>
-      <div className="placeholder-wrap">
-        <AdGenerator id={adTypeId} />
+      <div className="placeholder-center">
+        <div className="placeholder-wrap">
+          <AdGenerator id={id} />
+        </div>
       </div>
       <style jsx>{`
-        .placeholder-wrap {
+        .placeholder-center {
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        .placeholder-wrap {
+          min-width: ${width}px;
+          min-height: ${height}px;
         }
       `}</style>
     </>
@@ -63,19 +70,25 @@ const AdGenerator: FC<{ id: number }> = memo(({ id }) => {
   return <div id={`60796-${id}`} ref={ref}></div>;
 });
 
-function adIdByType(type: AdType) {
+type AdProps = {
+  id: number;
+  width: number;
+  height: number;
+};
+
+function adIdByType(type: AdType): AdProps {
   switch (type) {
     case "mega-bottom":
-      return 28;
+      return { id: 28, height: 90, width: 728 };
     case "skyscraper":
-      return 4;
+      return { id: 4, height: 600, width: 120 };
     case "top-medium-rectangle":
-      return 2;
+      return { id: 2, width: 300, height: 250 };
     case "half-page":
-      return 3;
+      return { id: 3, width: 300, height: 600 };
     case "mega-banner":
-      return 1;
+      return { id: 1, width: 728, height: 90 };
     default:
-      return 0;
+      return { id: 0, height: 0, width: 0 };
   }
 }

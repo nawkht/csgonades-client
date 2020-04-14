@@ -56,6 +56,9 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           <div id="article-content">
             <div className="article-date">{prettyDate(data.createdAt)}</div>
             <p className="lead">{data.intro}</p>
+            <div className="blog-top-placement">
+              <AdUnit type="mega-banner" />
+            </div>
             {children}
             <BlogAuthor />
           </div>
@@ -112,12 +115,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
         .article-date {
           text-align: right;
-          margin-bottom: 5px;
           color: #bbb;
-        }
-
-        .img-wrap {
-          margin-bottom: 50px;
         }
 
         .article-image {
@@ -145,6 +143,10 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           height: 600px;
           position: sticky;
           top: 50px;
+        }
+
+        .blog-top-placement {
+          padding-bottom: 20px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
