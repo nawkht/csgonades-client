@@ -1,6 +1,6 @@
 import { FC, memo, useState, useEffect, useCallback } from "react";
 import { isMobile } from "react-device-detect";
-
+import { IS_PROD } from "../../constants/Constants";
 type AdType = "top-medium-rectangle" | "skyscraper" | "mega-bottom";
 
 type Props = {
@@ -13,7 +13,7 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (isBrowser && !isMobile) {
+      if (isBrowser && !isMobile && IS_PROD) {
         setMounted(true);
       }
     }, 1000);

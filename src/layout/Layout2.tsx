@@ -42,6 +42,9 @@ export const Layout2: FC = memo(({ children }) => {
 
       <style jsx>{`
         .footer-placement {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .page {
