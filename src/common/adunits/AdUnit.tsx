@@ -17,7 +17,7 @@ const isBrowser = typeof window !== "undefined";
 export const AdUnit: FC<Props> = memo(({ type }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    if (isBrowser && !isMobile && IS_PROD) {
+    if (isBrowser && !isMobile && !IS_PROD) {
       setMounted(true);
     }
   }, []);
@@ -26,16 +26,16 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
     return null;
   }
 
-  const { id } = adIdByType(type);
-
   return (
     <>
-      <AdGenerator id={id} />
+      <AdGenerator type={type} />
     </>
   );
 });
 
-const AdGenerator: FC<{ id: number }> = memo(({ id }) => {
+const AdGenerator: FC<{ type: AdType }> = memo(({ type }) => {
+  const { id, height, width } = adIdByType(type);
+
   const ref = useCallback(
     (node: HTMLDivElement) => {
       if (!node) {
@@ -53,7 +53,13 @@ const AdGenerator: FC<{ id: number }> = memo(({ id }) => {
 
   return (
     <>
-      <div id={`60796-${id}`} ref={ref}></div>
+      <div className="tag-container" id={`60796-${id}`} ref={ref}></div>
+      <style jsx>{`
+        .tag-container {
+          min-width: ${width}px;
+          min-height: ${height}px;
+        }
+      `}</style>
     </>
   );
 });
