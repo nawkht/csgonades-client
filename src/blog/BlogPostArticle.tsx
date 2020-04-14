@@ -8,6 +8,8 @@ import { NadeShareActions } from "../nades/NadeShareActions";
 import { SEO } from "../layout/SEO2";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
+import { PageCentralize } from "../common/PageCentralize";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   data: BlogPost;
@@ -34,41 +36,77 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         description={data.intro}
         thumbnail={data.thumbnailUrl}
       />
-      <div className="article-wrap">
-        <div className="empty" />
+      <PageCentralize>
         <article>
-          <h1>{data.title}</h1>
-          <NadeShareActions
-            url={`/blog/${data.slug}`}
-            title={data.title}
-            image={data.thumbnailUrl}
-            visisble={true}
-          />
-          <div className="img-wrap">
-            <img className="article-image" src={data.imageUrl} />
-            {!!data.imageCredit && !!data.imageCreditUrl && (
-              <div className="image-credit">
-                Photo by{" "}
-                <a href={data.imageCreditUrl} target="_top">
-                  {data.imageCredit}
-                </a>
-              </div>
-            )}
+          <h1 id="article-title">{data.title}</h1>
+          <div id="article-image">
+            <div className="img-wrap">
+              <img className="article-image" src={data.imageUrl} />
+              {!!data.imageCredit && !!data.imageCreditUrl && (
+                <div className="image-credit">
+                  Photo by{" "}
+                  <a href={data.imageCreditUrl} target="_top">
+                    {data.imageCredit}
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="article-date">{prettyDate(data.createdAt)}</div>
 
-          <p className="lead">{data.intro}</p>
-          {children}
-          <BlogAuthor />
+          <div id="article-content">
+            <div className="article-date">{prettyDate(data.createdAt)}</div>
+            <p className="lead">{data.intro}</p>
+            {children}
+            <BlogAuthor />
+          </div>
+
+          <div id="social">
+            <NadeShareActions
+              url={`/blog/${data.slug}`}
+              title={data.title}
+              image={data.thumbnailUrl}
+              visisble={true}
+            />
+          </div>
+
+          <aside className="sidebar">
+            <div className="sidebar-placement">
+              <AdUnit type="half-page" />
+            </div>
+          </aside>
         </article>
-
-        <aside className="sidebar">
-          <div className="ez mid-sidebar"></div>
-        </aside>
-      </div>
+      </PageCentralize>
       <style jsx>{`
-        .body {
-          padding-top: 1.5rem;
+        article {
+          display: grid;
+          grid-template-columns: auto 300px;
+          grid-template-areas:
+            "title social"
+            "image sidebar"
+            "main sidebar"
+            "main sidebar";
+          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+          grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+          color: ${colors.TEXT};
+          margin-top: ${Dimensions.GUTTER_SIZE * 2}px;
+        }
+
+        #social {
+          grid-area: social;
+        }
+
+        h1#article-title {
+          grid-area: title;
+          font-weight: 300;
+        }
+
+        #article-content {
+          grid-area: main;
+        }
+
+        aside {
+          grid-area: sidebar;
+          width: 100%;
         }
 
         .article-date {
@@ -77,49 +115,8 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           color: #bbb;
         }
 
-        .sidebar {
-          margin-top: 800px;
-          max-height: 600vh;
-        }
-
-        .ez {
-        }
-
-        .article-wrap {
-          display: flex;
-          max-width: calc(850px + 300px + 300px + 100px);
-          margin: 0 auto;
-        }
-
-        .empty,
-        .sidebar {
-          width: 300px;
-        }
-
-        .empty {
-          margin-right: 50px;
-        }
-
-        .sidebar {
-          margin-left: 50px;
-        }
-
-        article {
-          margin-top: 50px;
-          margin-bottom: 50px;
-          color: ${colors.TEXT};
-          max-width: 800px;
-        }
-
-        h1 {
-          text-align: center;
-          font-weight: 300;
-        }
-
         .img-wrap {
           margin-bottom: 50px;
-          margin-left: -20px;
-          margin-right: -20px;
         }
 
         .article-image {
@@ -142,22 +139,26 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           text-decoration: underline;
         }
 
-        .article-wrap {
+        .sidebar-placement {
+          width: 300px;
+          height: 600px;
+          position: sticky;
+          top: 50px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .empty,
-          .sidebar {
-            display: none;
-          }
-
-          .img-wrap {
-            margin-left: 0;
-            margin-right: 0;
-          }
-
           article {
-            padding: 20px;
+            grid-template-columns: 1fr;
+            grid-template-areas:
+              "title"
+              "social"
+              "image"
+              "main"
+              "sidebar";
+          }
+
+          aside {
+            display: none;
           }
         }
       `}</style>

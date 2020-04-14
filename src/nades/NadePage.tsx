@@ -89,6 +89,9 @@ export const NadePage: FC = memo(() => {
 
         <aside id="sidebar-right">
           <AdUnit type="top-medium-rectangle" />
+          <div className="half-page-plactement">
+            <AdUnit type="half-page" />
+          </div>
         </aside>
 
         <div id="nade-actions">
@@ -189,6 +192,10 @@ export const NadePage: FC = memo(() => {
           padding-left: ${Dimensions.GUTTER_SIZE}px;
           padding-right: ${Dimensions.GUTTER_SIZE}px;
           padding-top: ${Dimensions.GUTTER_SIZE}px;
+        }
+
+        .half-page-plactement {
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #nade-meta {

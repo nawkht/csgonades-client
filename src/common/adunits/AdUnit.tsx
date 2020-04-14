@@ -1,7 +1,11 @@
 import { FC, memo, useState, useEffect, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { IS_PROD } from "../../constants/Constants";
-type AdType = "top-medium-rectangle" | "skyscraper" | "mega-bottom";
+type AdType =
+  | "top-medium-rectangle"
+  | "skyscraper"
+  | "mega-bottom"
+  | "half-page";
 
 type Props = {
   type: AdType;
@@ -60,6 +64,8 @@ function adIdByType(type: AdType) {
       return 4;
     case "top-medium-rectangle":
       return 2;
+    case "half-page":
+      return 3;
     default:
       return 0;
   }

@@ -50,11 +50,12 @@ export const BlogCopyPaste: FC<Props> = ({ value }) => {
 
         .copy-confirm {
           position: absolute;
-          bottom: 10px;
-          left: 100%;
+          bottom: 100%;
+          right: 0;
           background: #79c900;
           color: white;
           margin-left: 10px;
+          margin-bottom: 10px;
           padding: 5px;
           border-radius: 5px;
           opacity: 0;
