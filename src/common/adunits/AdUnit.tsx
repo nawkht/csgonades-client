@@ -17,7 +17,7 @@ const isBrowser = typeof window !== "undefined";
 export const AdUnit: FC<Props> = memo(({ type }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    if (isBrowser && !isMobile && !IS_PROD) {
+    if (isBrowser && !isMobile && IS_PROD) {
       setMounted(true);
     }
   }, []);
