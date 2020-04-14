@@ -1,6 +1,7 @@
 import { FC, memo, useState, useEffect, useCallback } from "react";
+import { isMobile } from "react-device-detect";
 
-type AdType = "top-medium-rectangle" | "skyscraper";
+type AdType = "top-medium-rectangle" | "skyscraper" | "mega-bottom";
 
 type Props = {
   type: AdType;
@@ -10,10 +11,9 @@ const isBrowser = typeof window !== "undefined";
 
 export const AdUnit: FC<Props> = memo(({ type }) => {
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (isBrowser) {
+      if (isBrowser && !isMobile) {
         setMounted(true);
       }
     }, 1000);
@@ -24,7 +24,7 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
     return null;
   }
 
-  const adTypeId = type === "skyscraper" ? 4 : 2;
+  const adTypeId = adIdByType(type);
 
   return (
     <>
@@ -51,3 +51,16 @@ const AdGenerator: FC<{ id: number }> = memo(({ id }) => {
 
   return <div id={`60796-${id}`} ref={ref}></div>;
 });
+
+function adIdByType(type: AdType) {
+  switch (type) {
+    case "mega-bottom":
+      return 28;
+    case "skyscraper":
+      return 4;
+    case "top-medium-rectangle":
+      return 2;
+    default:
+      return 0;
+  }
+}

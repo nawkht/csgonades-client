@@ -263,27 +263,12 @@ export const NadePage: FC = memo(() => {
               "comments comments";
           }
 
-          #miniad {
-            justify-content: center;
-          }
-
-          #side-bar-ad {
-            display: none;
-          }
-
           #nade-actions {
             grid-area: actions;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             margin: 0 auto;
-          }
-
-          #nade-actions .action {
-            margin-left: 10px;
-            margin-right: 10px;
-            margin-bottom: 0px;
-            width: 160px;
           }
         }
 
@@ -296,9 +281,9 @@ export const NadePage: FC = memo(() => {
               "info info"
               "meta meta"
               "actions actions"
-              "sidebar sidebar"
               "comments comments"
-              "slot2 slot2";
+              "slot2 slot2"
+              "sidebar sidebar";
             padding-left: 15px;
             padding-right: 15px;
           }

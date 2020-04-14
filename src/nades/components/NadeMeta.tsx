@@ -22,25 +22,27 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
         <div className="nade-meta">
           <div className="nade-meta-item">
             <h4>Type</h4>
-            <p>{nade.type ? nadeTypeString(nade.type) : "Not set."}</p>
+            <span>{nade.type ? nadeTypeString(nade.type) : "Not set."}</span>
           </div>
 
           <div className="nade-meta-item">
             <h4>Movement</h4>
-            <p>{nade.movement ? capitalize(nade.movement) : "Not set."}</p>
+            <span>
+              {nade.movement ? capitalize(nade.movement) : "Not set."}
+            </span>
           </div>
 
           <div className="nade-meta-item">
             <h4>Technique</h4>
-            <p>
+            <span>
               {nade.technique ? techniqueString(nade.technique) : "Not set."}
-            </p>
+            </span>
           </div>
 
           {nade.tickrate && (
             <div className="nade-meta-item">
               <h4>Tickrate</h4>
-              <p>{tickrateString(nade.tickrate)}</p>
+              <span>{tickrateString(nade.tickrate)}</span>
             </div>
           )}
         </div>
@@ -80,7 +82,7 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
           margin-bottom: 5px;
         }
 
-        p {
+        span {
           font-size: 16px;
         }
 
@@ -109,7 +111,7 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
             border-right: none;
           }
 
-          p {
+          span {
             font-size: 14px;
           }
         }
