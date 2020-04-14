@@ -17,7 +17,7 @@ const isBrowser = typeof window !== "undefined";
 export const AdUnit: FC<Props> = memo(({ type }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    if (isBrowser && !isMobile && IS_PROD) {
+    if (isBrowser && !isMobile && !IS_PROD) {
       setMounted(true);
     }
   }, []);
@@ -46,7 +46,8 @@ const AdGenerator: FC<{ type: AdType }> = memo(({ type }) => {
       firstScript.src = `//ads.themoneytizer.com/s/gen.js?type=${id}`;
       const secondScript = document.createElement("script");
       secondScript.src = `//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=${id}`;
-      node.append(firstScript, secondScript);
+      node.appendChild(firstScript);
+      node.appendChild(secondScript);
     },
     [id]
   );
@@ -72,17 +73,18 @@ type AdProps = {
 
 function adIdByType(type: AdType): AdProps {
   switch (type) {
-    case "mega-bottom":
-      return { id: 28, height: 90, width: 728 };
-    case "skyscraper":
-      return { id: 4, height: 600, width: 120 };
+    case "mega-banner":
+      return { id: 1, width: 728, height: 90 };
     case "top-medium-rectangle":
       return { id: 2, width: 300, height: 250 };
     case "half-page":
       return { id: 3, width: 300, height: 600 };
-    case "mega-banner":
-      return { id: 1, width: 728, height: 90 };
+    case "skyscraper":
+      return { id: 4, height: 600, width: 120 };
+    case "mega-bottom":
+      return { id: 28, height: 90, width: 728 };
     default:
+      console.error("!NEVER!");
       return { id: 0, height: 0, width: 0 };
   }
 }

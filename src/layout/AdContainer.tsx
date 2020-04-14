@@ -34,11 +34,11 @@ type AdType =
   | "mega-banner";
 
 const adUnitIds = {
+  "mega-banner": "60796-1",
   "top-medium-rectangle": "60796-2",
+  "half-page": "60796-3",
   skyscraper: "60796-4",
   "mega-bottom": "60796-28",
-  "mega-banner": "60796-1",
-  "half-page": "60796-3",
 };
 
 export const AdTag: FC<{ tagType: AdType }> = memo(({ tagType }) => {
@@ -67,7 +67,9 @@ export const AdTag: FC<{ tagType: AdType }> = memo(({ tagType }) => {
     }, 1000);
 
     return () => {
-      clearTimeout(delay);
+      if (delay) {
+        clearTimeout(delay);
+      }
       if (originalAdElement && adContainerRef && self) {
         self.removeChild(originalAdElement);
         adContainerRef.appendChild(originalAdElement);
