@@ -1,5 +1,4 @@
 import { FC, memo, useState, useEffect, useCallback } from "react";
-import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 
 type AdType = "top-medium-rectangle" | "skyscraper";
 
@@ -10,14 +9,13 @@ type Props = {
 const isBrowser = typeof window !== "undefined";
 
 export const AdUnit: FC<Props> = memo(({ type }) => {
-  const isAdmin = useIsAdmin();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (isBrowser && isAdmin) {
+    if (isBrowser) {
       setMounted(true);
     }
-  }, [isAdmin]);
+  }, []);
 
   if (!mounted) {
     return null;
@@ -42,17 +40,12 @@ const SkySkaper = memo(() => {
 
     const firstScript = document.createElement("script");
     firstScript.src = "//ads.themoneytizer.com/s/gen.js?type=4";
-    firstScript.async = true;
     const secondScript = document.createElement("script");
     secondScript.src =
       "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=4";
-    secondScript.async = true;
 
-    node.append(firstScript);
-    node.append(secondScript);
+    node.append(firstScript, secondScript);
   }, []);
-
-  console.log("Skyskraper render");
 
   return <div ref={ref} id="60796-4"></div>;
 });
@@ -65,14 +58,11 @@ const TopMedRec = memo(() => {
 
     const firstScript = document.createElement("script");
     firstScript.src = "//ads.themoneytizer.com/s/gen.js?type=2";
-    firstScript.async = true;
     const secondScript = document.createElement("script");
     secondScript.src =
       "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=2";
-    secondScript.async = true;
 
-    node.append(firstScript);
-    node.append(secondScript);
+    node.append(firstScript, secondScript);
   }, []);
 
   console.log("TopMedRec render");
