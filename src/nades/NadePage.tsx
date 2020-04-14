@@ -87,12 +87,7 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <aside id="sidebar-right">
-          <div id="side-bar-ad">
-            <div id="60796-2">
-              <script src="//ads.themoneytizer.com/s/gen.js?type=2"></script>
-              <script src="//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=2"></script>
-            </div>
-          </div>
+          <div id="side-bar-ad"></div>
         </aside>
 
         <div id="nade-actions">
