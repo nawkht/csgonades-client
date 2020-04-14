@@ -10,13 +10,14 @@ export const Config = {
 };
 
 export const Dimensions = {
+  PAGE_WIDTH: 1290,
+  GUTTER_SIZE: 30,
   SIDEBAR_WIDTH: "180px",
   HEADER_HEIGHT: "65px",
   PADDING_SMALL: "6px",
   PADDING_MEDIUM: "12px",
   PADDING_LARGE: "18px",
   PADDING_HUGE: "24px",
-  GUTTER_SIZE: "30px",
   MOBILE_THRESHHOLD: "850px",
   TABLET_THRESHHOLD: "1024px",
   MEDIUM_DEVIDE: "1280px",

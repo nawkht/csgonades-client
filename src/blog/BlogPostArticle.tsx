@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPost } from "./BlogPost";
 import { Dimensions } from "../constants/Constants";
 import { prettyDate } from "../utils/DateUtils";
@@ -64,12 +63,9 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         </article>
 
         <aside className="sidebar">
-          <div className="ez mid-sidebar">
-            <EzoicPlaceHolder id={124} />
-          </div>
+          <div className="ez mid-sidebar"></div>
         </aside>
       </div>
-      <EzoicPlaceHolder id={123} />
       <style jsx>{`
         .body {
           padding-top: 1.5rem;

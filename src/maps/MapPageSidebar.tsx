@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 
 type Props = {
@@ -11,7 +10,10 @@ export const MapPageSideBar: FC<Props> = memo(() => {
     <>
       <div className="sjakt">
         <div className="sticky">
-          <EzoicPlaceHolder id={140} />
+          <div id="60796-4">
+            <script src="//ads.themoneytizer.com/s/gen.js?type=4"></script>
+            <script src="//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=4"></script>
+          </div>
         </div>
       </div>
 

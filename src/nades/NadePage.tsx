@@ -1,5 +1,4 @@
 import { FC, memo, useEffect, useState } from "react";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
 import { nadeTypeString } from "../models/Nade/NadeType";
@@ -25,6 +24,7 @@ import { descriptionSimplify } from "../utils/Common";
 import { NadeMeta } from "./components/NadeMeta";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
+import { Dimensions } from "../constants/Constants";
 
 export const NadePage: FC = memo(() => {
   const isAdminOrMod = useIsAdminOrModerator();
@@ -52,7 +52,7 @@ export const NadePage: FC = memo(() => {
   }
 
   return (
-    <>
+    <div key={nade.id}>
       <ArticleJsonLd
         url={`https://www.csgonades.com/nades/${nade?.slug || nade?.id}`}
         title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
@@ -75,10 +75,6 @@ export const NadePage: FC = memo(() => {
       )}
 
       <div id="nade-page-grid">
-        <div id="miniad">
-          <EzoicPlaceHolder id={156} />
-        </div>
-
         <div id="title">
           <NadeBreadcrumb nade={nade} />
           <NadeTitle
@@ -91,12 +87,40 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <aside id="sidebar-right">
-          <NadeMeta nade={nade} onEditMeta={() => setEditMetaVisible(true)} />
-
           <div id="side-bar-ad">
-            <EzoicPlaceHolder id={161} />
+            <div id="60796-2">
+              <script src="//ads.themoneytizer.com/s/gen.js?type=2"></script>
+              <script src="//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=2"></script>
+            </div>
           </div>
         </aside>
+
+        <div id="nade-actions">
+          <div id="nade-social">
+            <NadeShareActions
+              title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
+              visisble={nade?.status === "accepted"}
+              url={`/nades/${nade?.slug || nade?.id}`}
+              image={nade?.images.thumbnailUrl}
+            />
+          </div>
+
+          <div id="nade-buttons">
+            <div className="nade-btn">
+              <FavoriteButton
+                showSignInWarning={() => setShowSignInWarning(true)}
+                nade={nade}
+              />
+            </div>
+            <div className="nade-btn">
+              <ReportNadeButton nadeId={nade.id} />
+            </div>
+          </div>
+        </div>
+
+        <div id="nade-meta">
+          <NadeMeta nade={nade} onEditMeta={() => setEditMetaVisible(true)} />
+        </div>
 
         <div id="nade-page-main">
           <NadeVideoContainer nade={nade} />
@@ -109,35 +133,11 @@ export const NadePage: FC = memo(() => {
           />
         </div>
 
-        <div id="nade-actions">
-          <div className="action">
-            <NadeShareActions
-              title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
-              visisble={nade?.status === "accepted"}
-              url={`/nades/${nade?.slug || nade?.id}`}
-              image={nade?.images.thumbnailUrl}
-            />
-          </div>
-
-          <div className="action">
-            <FavoriteButton
-              showSignInWarning={() => setShowSignInWarning(true)}
-              nade={nade}
-            />
-          </div>
-
-          <div className="action">
-            <ReportNadeButton nadeId={nade.id} />
-          </div>
-        </div>
-
         <div id="nade-comment-container">
           <NadeComments nadeId={nade.id} />
         </div>
 
-        <div id="placement-bottom">
-          <EzoicPlaceHolder id={136} />
-        </div>
+        <div id="placement-bottom"></div>
       </div>
 
       <SignInWarning
@@ -178,83 +178,90 @@ export const NadePage: FC = memo(() => {
       <style jsx>{`
         #nade-page-grid {
           display: grid;
-          grid-template-columns: auto 110px 160px 160px;
+          grid-template-columns: auto 110px 160px 300px;
           grid-template-areas:
-            "title title miniad miniad"
+            "title title title ."
             "main main main sidebar"
-            "info info actions sidebar"
+            "actions actions actions sidebar"
+            "info info meta sidebar"
             "comments comments . sidebar"
             "slot2 slot2 . sidebar";
           max-width: 100%;
-          grid-column-gap: 40px;
-          max-width: 1260px;
+          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+          max-width: ${Dimensions.PAGE_WIDTH + 2 * Dimensions.GUTTER_SIZE}px;
           margin: 0 auto;
-          padding-left: 30px;
-          padding-right: 30px;
-          padding-top: 40px;
+          padding-left: ${Dimensions.GUTTER_SIZE}px;
+          padding-right: ${Dimensions.GUTTER_SIZE}px;
+          padding-top: ${Dimensions.GUTTER_SIZE}px;
+        }
+
+        #nade-meta {
+          grid-area: meta;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #nade-info-container {
           grid-area: info;
-          padding-bottom: 40px;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #nade-page-main {
           grid-area: main;
-          padding-bottom: 40px;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #sidebar-right {
           grid-area: sidebar;
-          padding-bottom: 40px;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #nade-actions {
           grid-area: actions;
-          padding-bottom: 40px;
+          display: flex;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
-        #nade-actions .action {
-          max-width: 160px;
-          margin-bottom: 30px;
+        #nade-social {
+          flex: 1;
+        }
+
+        #nade-buttons {
+          display: flex;
+        }
+
+        #nade-buttons .nade-btn {
+          margin-left: ${Dimensions.GUTTER_SIZE}px;
+          min-width: 160px;
         }
 
         #nade-comment-container {
           grid-area: comments;
-          padding-bottom: 40px;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #placement-bottom {
           grid-area: slot2;
-          padding-bottom: 40px;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #title {
           grid-area: title;
-          padding-bottom: 40px;
+          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #side-bar-ad {
-          margin-top: 30px;
-        }
-
-        #miniad {
-          grid-area: miniad;
-          display: flex;
-          align-items: flex-end;
-          justify-content: flex-end;
-          padding-bottom: 40px;
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
         }
 
         @media only screen and (max-width: 1000px) {
           #nade-page-grid {
             grid-template-columns: 1fr 1fr;
             grid-template-areas:
-              "miniad miniad"
               "title title"
               "main main"
               "actions actions"
               "info info"
+              "meta meta"
               "slot2 slot2"
               "sidebar sidebar"
               "comments comments";
@@ -288,32 +295,34 @@ export const NadePage: FC = memo(() => {
           #nade-page-grid {
             grid-template-columns: 1fr 1fr;
             grid-template-areas:
-              "miniad miniad"
               "title title"
               "main main"
-              "slot2 slot2"
               "info info"
+              "meta meta"
               "actions actions"
               "sidebar sidebar"
-              "comments comments";
+              "comments comments"
+              "slot2 slot2";
             padding-left: 15px;
             padding-right: 15px;
           }
 
           #nade-actions {
-            grid-area: actions;
-            display: block;
-            margin: 0 auto;
+            align-items: center;
+            flex-direction: column;
           }
 
-          #nade-actions .action {
-            margin-left: 10px;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            width: 160px;
+          #nade-buttons {
+            align-items: center;
+            flex-direction: column;
+          }
+
+          #nade-buttons .nade-btn {
+            margin-top: ${Dimensions.GUTTER_SIZE / 2}px;
+            margin-left: 0;
           }
         }
       `}</style>
-    </>
+    </div>
   );
 });

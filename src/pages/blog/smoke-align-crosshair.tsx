@@ -3,7 +3,6 @@ import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogNadeItem } from "../../blog/BlogNadeItem";
-import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 import { CsConsole } from "../../blog/CsConsole";
 
 export const blogNadeAlignCrosshair: BlogPost = {
@@ -30,7 +29,6 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           big. And when you release it, it goes back to normal. But you will
           have to edit your config file.
         </p>
-        <EzoicPlaceHolder id={121} />
         <h2>How to set it up</h2>
         <h3>1. Simple: Toggle crosshair</h3>
         <p>
@@ -57,7 +55,6 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           Pressing X will make my crosshair large. Pressing it again will set it
           back to normal.
         </p>
-        <EzoicPlaceHolder id={154} />
         <BlogCodeSnippet code={'bind "X" "toggle cl_crosshairsize 2.5 5000"'} />
 
         <h3>2. Advanced: Hide on release</h3>
@@ -98,8 +95,6 @@ const NadeAlignCrosshairBlogPost: FC = () => {
             'bind "X" "+crosshairsmoke"\nalias "-crosshairsmoke" "cl_crosshairsize 2.5;cl_crosshairdot 0;cl_crosshairgap -1"\nalias "+crosshairsmoke" "cl_crosshairsize 1337;cl_crosshairdot 1;cl_crosshairgap 10"\n'
           }
         />
-
-        <EzoicPlaceHolder id={155} />
 
         <p>Change out X with whatever key you prefer.</p>
         <p>

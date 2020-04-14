@@ -1,5 +1,4 @@
 import { Dimensions } from "../../constants/Constants";
-import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
 import { FC, memo } from "react";
 
 type Props<T> = {
@@ -31,25 +30,17 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
             {renderItem(item)}
           </div>
         ))}
-        <div className="ad-1-container">
-          <EzoicPlaceHolder id={148} />
-        </div>
-        <div className="ad-2-container">
-          <EzoicPlaceHolder id={149} />
-        </div>
-        <div className="ad-3-container">
-          <EzoicPlaceHolder id={150} />
-        </div>
-        <div className="ad-4-container">
-          <EzoicPlaceHolder id={151} />
-        </div>
+        <div className="ad-1-container"></div>
+        <div className="ad-2-container"></div>
+        <div className="ad-3-container"></div>
+        <div className="ad-4-container"></div>
       </div>
       <style jsx>{`
         .list {
           display: grid;
-          grid-template-columns: repeat(3, minmax(100px, 1fr));
-          grid-column-gap: calc(${Dimensions.GUTTER_SIZE} * 1.5);
-          margin-top: -20px;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+          grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
         }
 
         .ad-1-container,

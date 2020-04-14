@@ -59,7 +59,7 @@ export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
                 placeholder="Report reason..."
                 value={reportMsg}
                 rows={10}
-                onChange={e => setReportMsg(e.currentTarget.value)}
+                onChange={(e) => setReportMsg(e.currentTarget.value)}
               />
             </Form.Field>
             <Button positive type="submit">
@@ -69,6 +69,8 @@ export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
         </div>
       </CSGNModal>
       <style jsx>{`
+        .report-button-wrapper {
+        }
         .report-nade {
           min-width: 40vw;
         }

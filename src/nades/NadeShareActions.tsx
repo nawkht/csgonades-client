@@ -68,7 +68,7 @@ export const NadeShareActions: FC<Props> = ({
           display: flex;
           border-radius: 5px;
           overflow: hidden;
-          width: 160px;
+          width: calc(40px * 4);
         }
 
         .share-buttons div {

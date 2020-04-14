@@ -108,6 +108,10 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
             border-bottom-right-radius: 5px;
             border-right: none;
           }
+
+          p {
+            font-size: 14px;
+          }
         }
       `}</style>
     </>

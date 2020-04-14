@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogPost } from "../../blog/BlogPost";
-import { EzoicPlaceHolder } from "../../common/ezoicLoader/EzoicPlaceHolder";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
@@ -25,7 +24,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           button. Giving you slightly different results on 64 and 128 tick
           servers. See the video below.
         </p>
-        <EzoicPlaceHolder id={121} />
+
         <h2>What is tickrate?</h2>
         <p>
           Tick rate is a networking term for game servers. It tells us how often
@@ -43,7 +42,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           depending on what you play the most on, you know what throws will work
           for you and which won&apos;t.
         </p>
-        <EzoicPlaceHolder id={154} />
+
         <h2>What is the jump throw bind?</h2>
         <p>
           The jump throw bind is a small script you can bind to one of your
@@ -96,7 +95,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <EzoicPlaceHolder id={155} />
+        <br />
         <p>
           Using the jumpthrow bind will give you the same result every time, if
           your playing on the same tickrate. So if you play on both matchmaking
@@ -129,7 +128,6 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           slight modification to the bind, It will still work correctly with the
           normal left-click throw as well.
         </p>
-        <EzoicPlaceHolder id={122} />
         <h3>Extra range</h3>
         <BlogCodeSnippet
           code={`alias "+jumpthrow" "+jump;-attack;+forward";\nalias "-jumpthrow" "-jump;-forward";\nbind x "+jumpthrow;`}
@@ -142,8 +140,6 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           time use one of the other two.
         </p>
       </BlogPostArticle>
-
-      <EzoicPlaceHolder id={123} />
     </>
   );
 };

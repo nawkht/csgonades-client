@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { NadeLight } from "../models/Nade/Nade";
 import { FrontpageActions } from "./FrontpageActions";
 import { FrontPageJumbo } from "./FrontPageJumbo";
@@ -31,8 +30,6 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
               frameBorder="0"
             ></iframe>
             <FrontpageActions />
-
-            <EzoicPlaceHolder id={163} />
           </aside>
         </div>
 
@@ -41,9 +38,7 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
         </div>
       </PageCentralize>
 
-      <div className="bottom-placeholder">
-        <EzoicPlaceHolder id={110} />
-      </div>
+      <div className="bottom-placeholder"></div>
 
       <style jsx>{`
         .recent-wrap {

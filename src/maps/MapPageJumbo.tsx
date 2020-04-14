@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
 import { PageCentralize } from "../common/PageCentralize";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { capitalize } from "../utils/Common";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { CsgoMap } from "../models/Nade/CsGoMap";
@@ -27,9 +26,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
                 <br /> Sign in, and add a nade to help everyone out.
               </h2>
             </div>
-            <div className="top-placement">
-              <EzoicPlaceHolder id={130} />
-            </div>
+            <div className="top-placement"></div>
           </div>
         </PageCentralize>
       </div>

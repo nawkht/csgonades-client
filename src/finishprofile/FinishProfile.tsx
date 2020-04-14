@@ -57,19 +57,19 @@ export const FinishProfile: FC<Props> = ({ user }) => {
           <input
             value={nickname}
             placeholder="Nickname"
-            onChange={e => setNickname(e.target.value)}
+            onChange={(e) => setNickname(e.target.value)}
           />
           <span className="label">E-mail</span>
           <input
             value={email}
             placeholder="E-mail"
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <span className="label">Bio</span>
           <textarea
             value={bio}
             placeholder="Write something funny... Or keep it blank if your mysterious."
-            onChange={e => setBio(e.target.value)}
+            onChange={(e) => setBio(e.target.value)}
             rows={10}
           />
           <button disabled={loading} className="save-btn" onClick={onSubmit}>

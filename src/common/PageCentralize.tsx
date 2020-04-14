@@ -7,9 +7,9 @@ export const PageCentralize: FC = ({ children }) => {
       <div className="page-centralize">{children}</div>
       <style jsx>{`
         .page-centralize {
-          max-width: 1280px;
-          padding-left: 40px;
-          padding-right: 40px;
+          max-width: ${Dimensions.PAGE_WIDTH + 2 * Dimensions.GUTTER_SIZE}px;
+          padding-left: ${Dimensions.GUTTER_SIZE}px;
+          padding-right: ${Dimensions.GUTTER_SIZE}px;
           margin: 0 auto;
         }
 

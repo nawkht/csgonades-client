@@ -4,7 +4,6 @@ import { NadeLight } from "../models/Nade/Nade";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 import { MapPageNades } from "./MapPageNades";
 import { MapPageJumbo } from "./MapPageJumbo";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { MapPageSideBar } from "./MapPageSidebar";
 import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { MapView } from "./mapview2/MapView";
@@ -46,9 +45,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           </div>
         </div>
 
-        <div className="map-nades-bottom">
-          <EzoicPlaceHolder id={104} />
-        </div>
+        <div className="map-nades-bottom"></div>
       </div>
 
       <MobileFilter />
@@ -69,9 +66,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           grid-template-columns: 300px 1fr 300px;
           grid-template-rows: auto;
           grid-template-areas: "filter nades ad";
-          grid-column-gap: 30px;
-          margin-left: 30px;
-          margin-right: 30px;
+          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
         }
 
         .map-filter {
@@ -103,10 +98,15 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
 
         @media only screen and (max-width: 1700px) {
           .map-page-container {
-            max-width: calc(1200px + 320px + 60px + 60px);
+            max-width: calc(
+              ${Dimensions.PAGE_WIDTH}px + 240px +
+                ${Dimensions.GUTTER_SIZE * 4}px
+            );
+            padding-left: ${Dimensions.GUTTER_SIZE}px;
+            padding-right: ${Dimensions.GUTTER_SIZE}px;
           }
           .map-nades {
-            grid-template-columns: 160px auto 160px;
+            grid-template-columns: 120px minmax(1px, 1290px) 120px;
             grid-template-areas: "filter nades ad";
           }
         }

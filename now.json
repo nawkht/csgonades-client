@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/ads.txt",
-      "dest": "https://srv.adstxtmanager.com/7208/csgonades.com"
+      "dest": "https://www.themoneytizer.com/ads.txt"
     }
   ]
 }
