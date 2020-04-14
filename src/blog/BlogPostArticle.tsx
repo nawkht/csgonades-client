@@ -89,6 +89,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
           color: ${colors.TEXT};
           margin-top: ${Dimensions.GUTTER_SIZE * 2}px;
+          margin-bottom: ${Dimensions.GUTTER_SIZE * 2}px;
         }
 
         #social {
