@@ -21,6 +21,8 @@ export const MapPageSideBar: FC<Props> = memo(() => {
         }
 
         .sticky {
+          position: sticky;
+          top: 50px;
           display: flex;
           justify-content: space-around;
         }

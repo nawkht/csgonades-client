@@ -1,4 +1,4 @@
-import { FC, memo, useState, useEffect } from "react";
+import { FC, memo, useState, useEffect, useCallback } from "react";
 import { useIsAdmin } from "../../store/AuthStore/AuthHooks";
 
 type AdType = "top-medium-rectangle" | "skyscraper";
@@ -23,36 +23,69 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
     return null;
   }
 
-  console.log("Render ad unit", type);
-
   return (
     <>
       <div className="ad-unit">{adCodeByType(type)}</div>
       <style jsx>{`
         .ad-unit {
-          min-width: 100%;
         }
       `}</style>
     </>
   );
 });
 
+const SkySkaper = memo(() => {
+  const ref = useCallback((node: HTMLDivElement) => {
+    if (!node) {
+      return;
+    }
+
+    const firstScript = document.createElement("script");
+    firstScript.src = "//ads.themoneytizer.com/s/gen.js?type=4";
+    firstScript.async = true;
+    const secondScript = document.createElement("script");
+    secondScript.src =
+      "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=4";
+    secondScript.async = true;
+
+    node.append(firstScript);
+    node.append(secondScript);
+  }, []);
+
+  console.log("Skyskraper render");
+
+  return <div ref={ref} id="60796-4"></div>;
+});
+
+const TopMedRec = memo(() => {
+  const ref = useCallback((node: HTMLDivElement) => {
+    if (!node) {
+      return;
+    }
+
+    const firstScript = document.createElement("script");
+    firstScript.src = "//ads.themoneytizer.com/s/gen.js?type=2";
+    firstScript.async = true;
+    const secondScript = document.createElement("script");
+    secondScript.src =
+      "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=2";
+    secondScript.async = true;
+
+    node.append(firstScript);
+    node.append(secondScript);
+  }, []);
+
+  console.log("TopMedRec render");
+
+  return <div ref={ref} id="60796-2"></div>;
+});
+
 function adCodeByType(type: AdType) {
   switch (type) {
     case "top-medium-rectangle":
-      return (
-        <div id="60796-2">
-          <script src="//ads.themoneytizer.com/s/gen.js?type=2"></script>
-          <script src="//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=2"></script>
-        </div>
-      );
+      return <TopMedRec />;
     case "skyscraper":
-      return (
-        <div id="60796-4">
-          <script src="//ads.themoneytizer.com/s/gen.js?type=4"></script>
-          <script src="//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=4"></script>
-        </div>
-      );
+      return <SkySkaper />;
     default:
       return <></>;
   }
