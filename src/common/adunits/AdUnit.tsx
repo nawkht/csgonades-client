@@ -35,25 +35,23 @@ export const AdUnit: FC<Props> = memo(({ type }) => {
 });
 
 const AdGenerator: FC<Props> = memo(({ type }) => {
+  const idByType = type === "skyscraper" ? "4" : "2";
+
   const ref = useCallback(
     (node: HTMLDivElement) => {
       if (!node) {
         return;
       }
-      const idByType = type === "skyscraper" ? "4" : "2";
 
-      const adDiv = document.createElement("div");
-      adDiv.id = `60796-${idByType}`;
       const firstScript = document.createElement("script");
       firstScript.src = `//ads.themoneytizer.com/s/gen.js?type=${idByType}`;
       const secondScript = document.createElement("script");
       secondScript.src = `//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=${idByType}`;
-      adDiv.appendChild(firstScript);
-      adDiv.appendChild(secondScript);
-      node.appendChild(adDiv);
+
+      node.append(firstScript, secondScript);
     },
-    [type]
+    [idByType]
   );
 
-  return <div ref={ref} />;
+  return <div id={`60796-${idByType}`} ref={ref} />;
 });
