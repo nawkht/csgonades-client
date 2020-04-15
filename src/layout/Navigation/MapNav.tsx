@@ -15,39 +15,57 @@ export const MapNav: FC<Props> = memo(({}) => {
       <nav id="map-nav">
         <PageCentralize>
           <div className="comp-wrap">
-            <div className="comp">
-              <span>Active duty</span>
-              <ul>
-                <MapLink map="dust2" />
-                <MapLink map="mirage" />
-                <MapLink map="inferno" />
-                <MapLink map="overpass" />
-                <MapLink map="vertigo" />
-                <MapLink map="train" />
-                <MapLink map="nuke" />
-              </ul>
-            </div>
+            <ul id="map-nav-list">
+              <MapLink map="dust2" />
+              <MapLink map="mirage" />
+              <MapLink map="inferno" />
+              <MapLink map="overpass" />
+              <MapLink map="vertigo" />
+              <MapLink map="train" />
+              <MapLink map="nuke" />
+              <MapLink map="cache" />
+              <MapLink map="anubis" isNew={true} />
+              <span id="ad-label">Active duty</span>
+              <span id="r-label">Reserve</span>
+            </ul>
             <ThemeToggler />
           </div>
         </PageCentralize>
-        <div className="reserve-wrap">
-          <PageCentralize>
-            <div className="reserve">
-              <span>Reserve</span>
-              <ul>
-                <MapLink map="cache" />
-                <MapLink map="anubis" isNew={true} />
-              </ul>
-            </div>
-            <div className="map-nav-wrap">
-              <div className="map-nav-maps"></div>
-            </div>
-          </PageCentralize>
-        </div>
       </nav>
       <style jsx>{`
         #map-nav {
           background: ${colors.PRIMARY};
+        }
+
+        #map-nav-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: grid;
+          grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+          grid-template-areas:
+            "ad-label dust2 mirage inferno overpass vertigo train nuke"
+            "r-label cache anubis . . . . .";
+        }
+
+        #ad-label {
+          grid-area: ad-label;
+        }
+
+        #r-label {
+          grid-area: r-label;
+        }
+
+        #ad-label,
+        #r-label {
+          font-size: 12px;
+          font-weight: 500;
+          padding: 15px 10px;
+          min-width: 83px;
+          background: rgba(0, 0, 0, 0.1);
+          color: white;
+          border: 1px solid rgba(0, 0, 0, 0.15);
+          border-top: none;
         }
 
         .comp-wrap {
@@ -56,31 +74,6 @@ export const MapNav: FC<Props> = memo(({}) => {
         }
 
         .reserve-wrap {
-        }
-
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-        }
-
-        .comp,
-        .reserve {
-          display: flex;
-          align-items: center;
-          margin-bottom: -1px;
-        }
-
-        .comp span,
-        .reserve span {
-          font-size: 12px;
-          font-weight: 500;
-          padding: 15px 10px;
-          min-width: 83px;
-          background: rgba(0, 0, 0, 0.1);
-          color: white;
-          border: 1px solid rgba(0, 0, 0, 0.15);
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

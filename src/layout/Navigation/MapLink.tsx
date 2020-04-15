@@ -24,6 +24,7 @@ export const MapLink: FC<Props> = ({ map, isNew }) => {
       <style jsx>{`
         li {
           position: relative;
+          grid-area: ${map};
         }
 
         li .map-name {
@@ -34,11 +35,9 @@ export const MapLink: FC<Props> = ({ map, isNew }) => {
           padding: 15px 20px;
           background: rgba(0, 0, 0, 0.05);
           border: 1px solid rgba(0, 0, 0, 0.15);
+          border-top: none;
           border-left: none;
-        }
-
-        li .map-name {
-          color: white;
+          text-align: center;
         }
 
         .nav-selected {
