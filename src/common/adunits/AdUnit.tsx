@@ -3,6 +3,7 @@ import { isMobile } from "react-device-detect";
 import { IS_PROD } from "../../constants/Constants";
 type AdType =
   | "top-medium-rectangle"
+  | "bottom-medium-rectangle"
   | "skyscraper"
   | "mega-bottom"
   | "half-page"
@@ -102,6 +103,8 @@ function adIdByType(type: AdType): AdProps {
       return { id: 4, height: 600 };
     case "mega-bottom":
       return { id: 28, height: 90 };
+    case "bottom-medium-rectangle":
+      return { id: 19, height: 250 };
     default:
       console.error("!NEVER!");
       return { id: 0, height: 0 };

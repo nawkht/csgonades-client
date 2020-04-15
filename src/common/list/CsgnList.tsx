@@ -1,6 +1,8 @@
-import { Dimensions } from "../../constants/Constants";
 import { FC, memo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { Dimensions } from "../../constants/Constants";
+import { AdUnit } from "../adunits/AdUnit";
+import { isMobile } from "react-device-detect";
 
 type Props<T> = {
   data: T[];
@@ -21,6 +23,15 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const numItems = data.length;
   const isEmpty = numItems === 0;
 
+  const displayFirstAd = numItems > 15 && !isMobile;
+  const displaySecondAd = numItems > 30 && !isMobile;
+
+  console.log({
+    displayFirstAd,
+    displaySecondAd,
+    numItems,
+  });
+
   return (
     <>
       {isEmpty && (
@@ -38,10 +49,16 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
             {renderItem(item)}
           </div>
         ))}
-        <div className="ad-1-container"></div>
-        <div className="ad-2-container"></div>
-        <div className="ad-3-container"></div>
-        <div className="ad-4-container"></div>
+        {displayFirstAd && (
+          <div className="ad-1-container">
+            <AdUnit center tagType="top-medium-rectangle" />
+          </div>
+        )}
+        {displaySecondAd && (
+          <div className="ad-2-container">
+            <AdUnit center tagType="bottom-medium-rectangle" />
+          </div>
+        )}
       </div>
       <style jsx>{`
         .empty-list {
@@ -55,56 +72,29 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
 
         .list {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
         }
 
         .ad-1-container,
-        .ad-2-container,
-        .ad-3-container,
-        .ad-4-container {
-          grid-column: 1 / -1;
+        .ad-2-container {
           display: flex;
           align-items: center;
           justify-content: space-around;
-          display: none;
+          background: ${colors.DP02};
+          width: 300px;
+          height: 250px;
+          justify-self: center;
+          box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
         }
 
-        @media only screen and (max-width: 1200px) {
-          .list {
-            grid-template-columns: repeat(2, minmax(100px, 1fr));
-          }
+        .ad-1-container {
+          order: 12;
         }
 
-        @media only screen and (max-width: 700px) {
-          .list {
-            grid-template-columns: repeat(1, minmax(100px, 1fr));
-          }
-
-          .list-item {
-            margin: 15px;
-          }
-
-          .ad-1-container {
-            grid-row: 7;
-            display: ${numItems >= 7 ? "block" : "none"};
-          }
-
-          .ad-2-container {
-            grid-row: 25;
-            display: ${numItems >= 25 ? "block" : "none"};
-          }
-
-          .ad-3-container {
-            grid-row: 47;
-            display: ${numItems >= 47 ? "block" : "none"};
-          }
-
-          .ad-4-container {
-            grid-row: 58;
-            display: ${numItems >= 58 ? "block" : "none"};
-          }
+        .ad-2-container {
+          order: 23;
         }
       `}</style>
     </>

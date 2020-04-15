@@ -57,13 +57,15 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
       />
       <style jsx>{`
         .map-page-container {
-          max-width: calc(1920px);
+          max-width: ${Dimensions.PAGE_WIDTH + 2 * Dimensions.GUTTER_SIZE}px;
           margin: 0 auto;
+          padding-left: ${Dimensions.GUTTER_SIZE}px;
+          padding-right: ${Dimensions.GUTTER_SIZE}px;
         }
 
         .map-nades {
           display: grid;
-          grid-template-columns: 300px 1fr 300px;
+          grid-template-columns: 45px 1fr 120px;
           grid-template-rows: auto;
           grid-template-areas: "filter nades ad";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
@@ -82,7 +84,6 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         }
 
         .map-nade-list {
-          grid-area: nades;
         }
 
         .map-sidebar {
@@ -94,28 +95,6 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           display: flex;
           justify-content: space-around;
           align-items: center;
-        }
-
-        @media only screen and (max-width: 1700px) {
-          .map-page-container {
-            max-width: calc(
-              ${Dimensions.PAGE_WIDTH}px + 240px +
-                ${Dimensions.GUTTER_SIZE * 4}px
-            );
-            padding-left: ${Dimensions.GUTTER_SIZE}px;
-            padding-right: ${Dimensions.GUTTER_SIZE}px;
-          }
-          .map-nades {
-            grid-template-columns: 120px minmax(1px, 1290px) 120px;
-            grid-template-areas: "filter nades ad";
-          }
-        }
-
-        @media only screen and (max-width: 1400px) {
-          .map-nades {
-            grid-template-columns: 45px auto 160px;
-            grid-template-areas: "filter nades ad";
-          }
         }
 
         @media only screen and (max-width: 930px) {
