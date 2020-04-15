@@ -44,16 +44,16 @@ export const MapNav: FC<Props> = memo(({}) => {
           display: grid;
           grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
           grid-template-areas:
-            "ad-label dust2 mirage inferno overpass vertigo train nuke"
-            "r-label cache anubis . . . . .";
+            "acduty dust2 mirage inferno overpass vertigo train nuke"
+            "reserve cache anubis . . . . .";
         }
 
         #ad-label {
-          grid-area: ad-label;
+          grid-area: acduty;
         }
 
         #r-label {
-          grid-area: r-label;
+          grid-area: reserve;
         }
 
         #ad-label,
