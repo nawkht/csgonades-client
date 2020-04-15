@@ -8,6 +8,7 @@ const CsGoMaps = {
   vertigo: "Vertigo",
   train: "Train",
   cobblestone: "Cobblestone",
+  anubis: "Anubis",
 };
 
 export type CsgoMap = keyof typeof CsGoMaps;

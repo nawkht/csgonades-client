@@ -24,6 +24,7 @@ export const MapNav: FC<Props> = memo(({}) => {
               <MapLink map="cache" />
               <MapLink map="nuke" />
               <MapLink map="vertigo" />
+              <MapLink map="anubis" />
               <MapLink map="cobblestone" />
             </ul>
             <ThemeToggler />

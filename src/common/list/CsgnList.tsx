@@ -1,5 +1,6 @@
 import { Dimensions } from "../../constants/Constants";
 import { FC, memo } from "react";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props<T> = {
   data: T[];
@@ -16,10 +17,17 @@ function ListBase<T>(props: Props<T>) {
 }
 
 const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
+  const { colors } = useTheme();
   const numItems = data.length;
+  const isEmpty = numItems === 0;
 
   return (
     <>
+      {isEmpty && (
+        <div className="empty-list">
+          No nades here yet, sign in to add some!
+        </div>
+      )}
       <div className="list">
         {data.map((item, i) => (
           <div
@@ -36,6 +44,15 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         <div className="ad-4-container"></div>
       </div>
       <style jsx>{`
+        .empty-list {
+          border: 1px solid ${colors.BORDER};
+          padding: 30px;
+          font-size: 18px;
+          border-radius: 5px;
+          background: ${colors.DP02};
+          color: ${colors.TEXT};
+        }
+
         .list {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
