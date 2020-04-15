@@ -66,7 +66,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
 
         .list {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
         }
@@ -77,10 +77,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           align-items: center;
           justify-content: space-around;
           background: ${colors.DP02};
-          width: 300px;
-          height: 250px;
+          width: 310px;
+          height: 260px;
           justify-self: center;
+          padding: 5px;
           box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
         }
 
         .ad-1-container {
