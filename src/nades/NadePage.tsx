@@ -88,7 +88,7 @@ export const NadePage: FC = memo(() => {
         </div>
 
         <aside id="sidebar-right">
-          <AdUnit tagType="top-medium-rectangle" />
+          <AdUnit center tagType="top-medium-rectangle" />
         </aside>
 
         <div id="nade-actions">
@@ -128,7 +128,7 @@ export const NadePage: FC = memo(() => {
             onEditDescription={() => setEditDescisisble(true)}
           />
           <div id="placement-bottom">
-            <AdUnit tagType="mega-bottom" />
+            <AdUnit center tagType="mega-bottom" />
           </div>
         </div>
 

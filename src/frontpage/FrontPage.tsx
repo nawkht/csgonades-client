@@ -21,7 +21,7 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
 
       <PageCentralize>
         <div className="top-placeholder">
-          <AdUnit tagType="mega-banner" />
+          <AdUnit center tagType="mega-banner" />
         </div>
 
         <div className="recent-wrap">
@@ -64,9 +64,6 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
 
         .top-placeholder {
           margin-top: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
         }
 
         .recent {

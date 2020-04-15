@@ -52,11 +52,10 @@ export const AdUnit: FC<Props> = memo(({ tagType, center }) => {
 
 type AdProps = {
   id: number;
-  width: number;
   height: number;
 };
 
-const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
+const AdGenerator: FC<AdProps> = memo(({ height, id }) => {
   useEffect(() => {
     injectScripts(id);
   }, [id]);
@@ -66,7 +65,6 @@ const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
       <div className="tag-container" id={`60796-${id}`}></div>
       <style jsx>{`
         .tag-container {
-          min-width: ${width}px;
           min-height: ${height + 5}px;
         }
       `}</style>
@@ -95,17 +93,17 @@ function injectScripts(divId: number) {
 function adIdByType(type: AdType): AdProps {
   switch (type) {
     case "mega-banner":
-      return { id: 1, width: 728, height: 90 };
+      return { id: 1, height: 90 };
     case "top-medium-rectangle":
-      return { id: 2, width: 300, height: 250 };
+      return { id: 2, height: 250 };
     case "half-page":
-      return { id: 3, width: 300, height: 600 };
+      return { id: 3, height: 600 };
     case "skyscraper":
-      return { id: 4, height: 600, width: 120 };
+      return { id: 4, height: 600 };
     case "mega-bottom":
-      return { id: 28, height: 90, width: 728 };
+      return { id: 28, height: 90 };
     default:
       console.error("!NEVER!");
-      return { id: 0, height: 0, width: 0 };
+      return { id: 0, height: 0 };
   }
 }

@@ -28,7 +28,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
               </h2>
             </div>
             <div className="top-placement">
-              <AdUnit tagType="mega-banner" />
+              <AdUnit center tagType="mega-banner" />
             </div>
           </div>
         </PageCentralize>
@@ -38,8 +38,6 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           height: 250px;
           margin-top: 10px;
           margin-bottom: 10px;
-          display: flex;
-          align-items: center;
         }
         .map-welcome {
           background: linear-gradient(

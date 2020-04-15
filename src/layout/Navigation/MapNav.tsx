@@ -25,7 +25,7 @@ export const MapNav: FC<Props> = memo(({}) => {
               <MapLink map="nuke" />
               <MapLink map="cache" />
               <MapLink map="anubis" isNew={true} />
-              <span id="ad-label">Active duty</span>
+              <span id="acduty-label">Active duty</span>
               <span id="r-label">Reserve</span>
             </ul>
             <ThemeToggler />
@@ -56,7 +56,7 @@ export const MapNav: FC<Props> = memo(({}) => {
           grid-area: reserve;
         }
 
-        #ad-label,
+        #acduty-label,
         #r-label {
           font-size: 12px;
           font-weight: 500;
