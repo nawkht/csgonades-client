@@ -50,13 +50,19 @@ const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
       if (!node) {
         return;
       }
+      const script1 = document.createElement("script");
+      script1.setAttribute(
+        "src",
+        "//ads.themoneytizer.com/s/gen.js?type=" + id
+      );
+      node.appendChild(script1);
 
-      const firstScript = document.createElement("script");
-      firstScript.src = `//ads.themoneytizer.com/s/gen.js?type=${id}`;
-      const secondScript = document.createElement("script");
-      secondScript.src = `//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=${id}`;
-      node.appendChild(firstScript);
-      node.appendChild(secondScript);
+      const script2 = document.createElement("script");
+      script2.setAttribute(
+        "src",
+        "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=" + id
+      );
+      node.appendChild(script2);
     },
     [id]
   );
