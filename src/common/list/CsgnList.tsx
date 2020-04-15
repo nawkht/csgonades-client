@@ -66,7 +66,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
 
         .list {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(316px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(316px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
         }
