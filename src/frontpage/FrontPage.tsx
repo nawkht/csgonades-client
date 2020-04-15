@@ -20,10 +20,6 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
       <FrontPageJumbo stats={stats} />
 
       <PageCentralize>
-        <div className="top-placeholder">
-          <AdUnit center tagType="mega-banner" />
-        </div>
-
         <div className="recent-wrap">
           <FrontPageRecentPosts />
           <aside className="front-page-sidebar">
@@ -60,10 +56,6 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
         .recent-nade-wrap {
           margin-top: 30px;
           margin-bottom: 60px;
-        }
-
-        .top-placeholder {
-          margin-top: 50px;
         }
 
         .recent {
