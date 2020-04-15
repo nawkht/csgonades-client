@@ -11,6 +11,7 @@ const CsGoMaps = {
   vertigo: "Vertigo",
   train: "Train",
   cobblestone: "Cobblestone",
+  anubis: "Anubis",
 };
 
 function mapsList() {
