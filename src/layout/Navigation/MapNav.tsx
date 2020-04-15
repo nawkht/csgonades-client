@@ -36,7 +36,7 @@ export const MapNav: FC<Props> = memo(({}) => {
               <span>Reserve</span>
               <ul>
                 <MapLink map="cache" />
-                <MapLink map="anubis" />
+                <MapLink map="anubis" isNew={true} />
               </ul>
             </div>
             <div className="map-nav-wrap">
