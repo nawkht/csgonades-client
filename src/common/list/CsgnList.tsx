@@ -23,8 +23,8 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const numItems = data.length;
   const isEmpty = numItems === 0;
 
-  const displayFirstAd = numItems > 15 && !isMobile;
-  const displaySecondAd = numItems > 30 && !isMobile;
+  const displayFirstAd = numItems > 7 && !isMobile;
+  const displaySecondAd = numItems > 20 && !isMobile;
 
   return (
     <>
@@ -66,7 +66,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
 
         .list {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(316px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
         }
@@ -77,20 +77,21 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           align-items: center;
           justify-content: space-around;
           background: ${colors.DP02};
-          width: 310px;
-          height: 260px;
+          width: 316px;
+          height: 266px;
           justify-self: center;
-          padding: 5px;
+          padding: 8px;
           box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
           border-radius: 5px;
+          align-self: center;
         }
 
         .ad-1-container {
-          order: 12;
+          order: 6;
         }
 
         .ad-2-container {
-          order: 23;
+          order: 17;
         }
       `}</style>
     </>

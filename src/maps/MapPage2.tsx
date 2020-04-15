@@ -4,7 +4,6 @@ import { NadeLight } from "../models/Nade/Nade";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 import { MapPageNades } from "./MapPageNades";
 import { MapPageJumbo } from "./MapPageJumbo";
-import { MapPageSideBar } from "./MapPageSidebar";
 import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { MapView } from "./mapview2/MapView";
 import { SignInWarning } from "./components/SignInWarning";
@@ -40,12 +39,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           <div className="map-nade-list">
             <MapPageNades allNades={allNades} />
           </div>
-          <div className="map-sidebar">
-            <MapPageSideBar map={map} />
-          </div>
         </div>
-
-        <div className="map-nades-bottom"></div>
       </div>
 
       <MobileFilter />
@@ -65,9 +59,9 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
 
         .map-nades {
           display: grid;
-          grid-template-columns: 45px 1fr 120px;
+          grid-template-columns: 45px 1fr;
           grid-template-rows: auto;
-          grid-template-areas: "filter nades ad";
+          grid-template-areas: "filter nades";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
         }
 
@@ -81,20 +75,6 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         .map-filter-sticky {
           position: sticky;
           top: 50px;
-        }
-
-        .map-nade-list {
-        }
-
-        .map-sidebar {
-          grid-area: ad;
-        }
-
-        .map-nades-bottom {
-          margin-top: 150px;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
         }
 
         @media only screen and (max-width: 930px) {
