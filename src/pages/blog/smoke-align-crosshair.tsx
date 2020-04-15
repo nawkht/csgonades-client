@@ -4,6 +4,7 @@ import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogNadeItem } from "../../blog/BlogNadeItem";
 import { CsConsole } from "../../blog/CsConsole";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogNadeAlignCrosshair: BlogPost = {
   title: "Large Crosshair to Align Smokes in CS:GO",
@@ -57,6 +58,8 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         </p>
         <BlogCodeSnippet code={'bind "X" "toggle cl_crosshairsize 2.5 5000"'} />
 
+        <AdUnit center tagType="mega-banner" />
+
         <h3>2. Advanced: Hide on release</h3>
         <p>
           This method will give you the same result, but when you release your
@@ -101,6 +104,7 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           On the 2nd line, set the values for your crosshair, so it goes back to
           your settings when you release the button.
         </p>
+
         <p>The result of the command is the following:</p>
         <img
           src="/blogimg/nade-align-crosshair/big_crosshair_example_advanced.jpg"
@@ -118,6 +122,8 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           don&apos;t want the gap to change, remove that as well. It&apos;s up
           to you!
         </p>
+
+        <AdUnit center tagType="mega-bottom" />
 
         <h2>Example of smoke using the key bind</h2>
         <p>

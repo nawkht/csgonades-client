@@ -7,6 +7,7 @@ import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
 import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { SiteStats } from "../api/StatsApi";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   recentNades: NadeLight[];
@@ -19,6 +20,10 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
       <FrontPageJumbo stats={stats} />
 
       <PageCentralize>
+        <div className="top-placeholder">
+          <AdUnit tagType="mega-banner" />
+        </div>
+
         <div className="recent-wrap">
           <FrontPageRecentPosts />
           <aside className="front-page-sidebar">
@@ -29,6 +34,9 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
               frameBorder="0"
             ></iframe>
             <FrontpageActions />
+            <div className="sidebar-placeholder">
+              <AdUnit tagType="top-medium-rectangle" />
+            </div>
           </aside>
         </div>
 
@@ -36,8 +44,6 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
           <RecentNades recentNades={recentNades} />
         </div>
       </PageCentralize>
-
-      <div className="bottom-placeholder"></div>
 
       <style jsx>{`
         .recent-wrap {
@@ -47,8 +53,8 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
         }
 
         .front-page-sidebar {
-          margin-left: 50px;
-          width: 350px;
+          margin-left: 30px;
+          width: 300px;
         }
 
         .recent-nade-wrap {
@@ -56,9 +62,8 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
           margin-bottom: 60px;
         }
 
-        .bottom-placeholder {
-          margin-bottom: 100px;
-          margin-top: 30px;
+        .top-placeholder {
+          margin-top: 50px;
           display: flex;
           align-items: center;
           justify-content: space-around;

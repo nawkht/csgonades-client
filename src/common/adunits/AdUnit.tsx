@@ -10,11 +10,12 @@ type AdType =
 
 type Props = {
   tagType: AdType;
+  center?: boolean;
 };
 
 const isBrowser = typeof window !== "undefined";
 
-export const AdUnit: FC<Props> = memo(({ tagType }) => {
+export const AdUnit: FC<Props> = memo(({ tagType, center }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -29,11 +30,22 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
     return null;
   }
 
+  const className = center ? "tz center" : "tz";
+
   const adProps = adIdByType(tagType);
 
   return (
     <>
-      <AdGenerator {...adProps} />
+      <div className={className}>
+        <AdGenerator {...adProps} />
+      </div>
+      <style jsx>{`
+        .center {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      `}</style>
     </>
   );
 });
@@ -55,7 +67,7 @@ const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
       <style jsx>{`
         .tag-container {
           min-width: ${width}px;
-          min-height: ${height}px;
+          min-height: ${height + 5}px;
         }
       `}</style>
     </>

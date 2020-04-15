@@ -2,6 +2,7 @@ import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCopyPaste } from "../../blog/BlogCopyPaste";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogPractiseConfig: BlogPost = {
   title: "The Perfect Practice Config for CS:GO",
@@ -49,6 +50,8 @@ const PractiseConfigBlogPost = () => {
           }
         />
 
+        <AdUnit center tagType="mega-banner" />
+
         <h2>What does the config do?</h2>
         <h3>Basics</h3>
         <p>
@@ -93,6 +96,8 @@ const PractiseConfigBlogPost = () => {
         <h3>1. Fly command</h3>
         <p>Allows you to fly freely in the air.</p>
         <BlogCodeSnippet code="bind X noclip" />
+
+        <AdUnit center tagType="top-medium-rectangle" />
 
         <h3>2. Simulate grenade throw</h3>
         <p>

@@ -127,13 +127,14 @@ export const NadePage: FC = memo(() => {
             nade={nade}
             onEditDescription={() => setEditDescisisble(true)}
           />
+          <div id="placement-bottom">
+            <AdUnit tagType="mega-bottom" />
+          </div>
         </div>
 
         <div id="nade-comment-container">
           <NadeComments nadeId={nade.id} />
         </div>
-
-        <div id="placement-bottom"></div>
       </div>
 
       <SignInWarning
@@ -240,8 +241,10 @@ export const NadePage: FC = memo(() => {
         }
 
         #placement-bottom {
-          grid-area: slot2;
-          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
+          padding-top: ${Dimensions.GUTTER_SIZE}px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
         }
 
         #title {

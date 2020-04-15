@@ -2,6 +2,7 @@ import { FC } from "react";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
   title: "Tickrate and It's Effect on Jumpthrow Bind",
@@ -42,6 +43,8 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           depending on what you play the most on, you know what throws will work
           for you and which won&apos;t.
         </p>
+
+        <AdUnit center tagType="mega-banner" />
 
         <h2>What is the jump throw bind?</h2>
         <p>
@@ -102,6 +105,8 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           and FACEIT as a example. You are going to need to learn the same nade
           for both tickrates, if it uses a jumpthrow bind.
         </p>
+
+        <AdUnit center tagType="mega-bottom" />
 
         <h2>Bonus: Variations of the jump throw bind</h2>
         <p>
