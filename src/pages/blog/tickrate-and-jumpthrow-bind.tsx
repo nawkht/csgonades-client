@@ -5,7 +5,7 @@ import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
-  title: "Why Smokes Are Different on 64 and 128 Tick with Jumpthrow",
+  title: "Why Jumpthrow Smokes Are Different on 64 and 128 Tick",
   slug: "tickrate-and-jumpthrow-bind",
   imageUrl: "/blogimg/jump.jpg",
   thumbnailUrl: "/blogimg/jump_thumb.jpg",
