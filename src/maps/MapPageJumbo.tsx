@@ -66,6 +66,8 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
 
         .top-placement {
           width: 730px;
+          display: flex;
+          align-items: center;
         }
 
         .map-welcome h1,
