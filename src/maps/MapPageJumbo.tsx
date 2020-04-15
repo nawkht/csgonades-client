@@ -34,33 +34,25 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
         </PageCentralize>
       </div>
       <style jsx>{`
-        .top-placement {
-          height: 250px;
-          margin-top: 10px;
-          margin-bottom: 10px;
-        }
         .map-welcome {
           background: linear-gradient(
             236.51deg,
             ${colors.jumboGradientStart} 33.44%,
             ${colors.jumboGradientEnd} 66.89%
           );
-          margin-bottom: 40px;
-          min-height: 230px;
-          display: flex;
-          align-items: center;
+          margin-bottom: 50px;
+          padding-bottom: 50px;
+          padding-top: 50px;
         }
 
         .map-welcome-wrap {
           display: flex;
-          align-items: center;
+          min-height: 100px;
         }
 
         .welcome-msg {
           align-self: center;
-          margin-right: 40px;
-          padding-bottom: 40px;
-          padding-top: 40px;
+          margin-right: 30px;
           flex: 1;
         }
 
