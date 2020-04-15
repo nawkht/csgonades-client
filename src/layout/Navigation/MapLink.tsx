@@ -22,10 +22,15 @@ export const MapLink: FC<Props> = ({ map }) => {
       <style jsx>{`
         li span {
           display: block;
-          padding: 15px;
-          padding-left: 0;
-          padding-right: 30px;
           color: white;
+          margin-left: -15px;
+          margin-right: 30px;
+          min-width: 75px;
+          font-size: 16px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          padding-right: 15px;
+          padding-left: 15px;
         }
 
         li span {

@@ -39,10 +39,7 @@ export const MobileNav: FC<Props> = memo(({}) => {
             <MobileMapLink mapName="cache" currentMapPath={currentRoute} />
             <MobileMapLink mapName="nuke" currentMapPath={currentRoute} />
             <MobileMapLink mapName="vertigo" currentMapPath={currentRoute} />
-            <MobileMapLink
-              mapName="cobblestone"
-              currentMapPath={currentRoute}
-            />
+            <MobileMapLink mapName="anubis" currentMapPath={currentRoute} />
           </ul>
           <div className="theme-toggle">
             <ThemeToggler />
