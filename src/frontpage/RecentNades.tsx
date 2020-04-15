@@ -18,7 +18,7 @@ export const RecentNades: FC<Props> = memo(({ recentNades }) => {
   useEffect(() => {
     NadeApi.getAll().then((res) => {
       if (res.isOk()) {
-        const fetchedNades = res.value.slice(0, 6);
+        const fetchedNades = res.value.slice(0, 8);
         setNades(fetchedNades);
       }
     });

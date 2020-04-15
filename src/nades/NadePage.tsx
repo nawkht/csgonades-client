@@ -89,9 +89,6 @@ export const NadePage: FC = memo(() => {
 
         <aside id="sidebar-right">
           <AdUnit tagType="top-medium-rectangle" />
-          <div className="half-page-plactement">
-            <AdUnit tagType="half-page" />
-          </div>
         </aside>
 
         <div id="nade-actions">

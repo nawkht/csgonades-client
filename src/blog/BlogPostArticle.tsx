@@ -76,9 +76,6 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
             <div className="sidebar-placement">
               <AdUnit tagType="half-page" />
             </div>
-            <div className="sidebar-medium">
-              <AdUnit tagType="top-medium-rectangle" />
-            </div>
           </aside>
         </article>
       </PageCentralize>
@@ -142,10 +139,6 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         }
 
         .sidebar-placement {
-          margin-bottom: 50vh;
-        }
-
-        .sidebar-medium {
           position: sticky;
           top: 50px;
         }

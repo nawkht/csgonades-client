@@ -1,4 +1,4 @@
-import { FC, memo, useState, useEffect, useCallback } from "react";
+import { FC, memo, useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { IS_PROD } from "../../constants/Constants";
 type AdType =
@@ -45,28 +45,13 @@ type AdProps = {
 };
 
 const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
-  const ref = useCallback(
-    (node: HTMLDivElement) => {
-      if (!node) {
-        return;
-      }
-      const script1 = document.createElement("script");
-      script1.src = "//ads.themoneytizer.com/s/gen.js?type=" + id;
-      script1.type = "text/javascript";
-      node.appendChild(script1);
-
-      const script2 = document.createElement("script");
-      script2.src =
-        "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=" + id;
-      script2.type = "text/javascript";
-      node.appendChild(script2);
-    },
-    [id]
-  );
+  useEffect(() => {
+    injectScripts(id);
+  }, [id]);
 
   return (
     <>
-      <div className="tag-container" id={`60796-${id}`} ref={ref}></div>
+      <div className="tag-container" id={`60796-${id}`}></div>
       <style jsx>{`
         .tag-container {
           min-width: ${width}px;
@@ -76,6 +61,24 @@ const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
     </>
   );
 });
+
+function injectScripts(divId: number) {
+  const adTagDiv = document.getElementById(`60796-${divId}`);
+  if (!adTagDiv) {
+    console.warn(">> Ad div not found <<", divId);
+    return;
+  }
+  const script1 = document.createElement("script");
+  script1.src = "//ads.themoneytizer.com/s/gen.js?type=" + divId;
+  script1.type = "text/javascript";
+  adTagDiv.appendChild(script1);
+
+  const script2 = document.createElement("script");
+  script2.src =
+    "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=" + divId;
+  script2.type = "text/javascript";
+  adTagDiv.appendChild(script2);
+}
 
 function adIdByType(type: AdType): AdProps {
   switch (type) {
