@@ -29,14 +29,12 @@ export const MapLink: FC<Props> = ({ map, isNew }) => {
         li .map-name {
           display: block;
           color: white;
-          margin-left: -15px;
-          margin-right: 30px;
-          min-width: 75px;
+          min-width: 90px;
           font-size: 16px;
-          padding-top: 5px;
-          padding-bottom: 5px;
-          padding-right: 15px;
-          padding-left: 15px;
+          padding: 15px 20px;
+          background: rgba(0, 0, 0, 0.05);
+          border: 1px solid rgba(0, 0, 0, 0.15);
+          border-left: none;
         }
 
         li .map-name {
@@ -49,18 +47,22 @@ export const MapLink: FC<Props> = ({ map, isNew }) => {
 
         .new-map {
           position: absolute;
-          left: 0;
-          bottom: 0;
-          font-size: 10px;
-          background: rgba(127, 176, 2, 0.9);
+          top: 0;
+          right: 0;
+          font-size: 9px;
+          background: rgba(127, 176, 2, 0.7);
           color: white;
-          border-radius: 3px;
+          border-radius: 2px;
           padding: 0px 2px;
           display: block;
-          margin-left: 55px;
-          margin-bottom: 5px;
+          margin-top: 2px;
+          margin-right: 2px;
           pointer-events: none;
           font-weight: 400;
+        }
+
+        li:hover .map-name {
+          background: rgba(0, 0, 0, 0.1);
         }
       `}</style>
     </>

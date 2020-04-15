@@ -53,12 +53,9 @@ export const MapNav: FC<Props> = memo(({}) => {
         .comp-wrap {
           display: flex;
           justify-content: space-between;
-          padding: 8px 0px;
         }
 
         .reserve-wrap {
-          border-top: 1px solid #0084c9;
-          padding: 8px 0px;
         }
 
         ul {
@@ -68,14 +65,22 @@ export const MapNav: FC<Props> = memo(({}) => {
           display: flex;
         }
 
-        .comp {
+        .comp,
+        .reserve {
+          display: flex;
+          align-items: center;
+          margin-bottom: -1px;
         }
 
         .comp span,
         .reserve span {
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 500;
-          color: #0071ad;
+          padding: 15px 10px;
+          min-width: 83px;
+          background: rgba(0, 0, 0, 0.1);
+          color: white;
+          border: 1px solid rgba(0, 0, 0, 0.15);
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
