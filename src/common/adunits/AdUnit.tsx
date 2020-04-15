@@ -21,7 +21,7 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
       if (isBrowser && !isMobile && IS_PROD) {
         setMounted(true);
       }
-    }, 5000);
+    }, 500);
     return () => clearTimeout(delay);
   }, []);
 
@@ -51,17 +51,14 @@ const AdGenerator: FC<AdProps> = memo(({ height, id, width }) => {
         return;
       }
       const script1 = document.createElement("script");
-      script1.setAttribute(
-        "src",
-        "//ads.themoneytizer.com/s/gen.js?type=" + id
-      );
+      script1.src = "//ads.themoneytizer.com/s/gen.js?type=" + id;
+      script1.type = "text/javascript";
       node.appendChild(script1);
 
       const script2 = document.createElement("script");
-      script2.setAttribute(
-        "src",
-        "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=" + id
-      );
+      script2.src =
+        "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=" + id;
+      script2.type = "text/javascript";
       node.appendChild(script2);
     },
     [id]
