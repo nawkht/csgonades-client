@@ -26,12 +26,6 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const displayFirstAd = numItems > 15 && !isMobile;
   const displaySecondAd = numItems > 30 && !isMobile;
 
-  console.log({
-    displayFirstAd,
-    displaySecondAd,
-    numItems,
-  });
-
   return (
     <>
       {isEmpty && (

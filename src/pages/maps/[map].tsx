@@ -26,7 +26,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } else {
-    console.log("Failed to get nades");
     return {
       props: {
         map,

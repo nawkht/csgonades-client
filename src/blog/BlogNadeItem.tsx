@@ -21,7 +21,6 @@ export const BlogNadeItem: FC<Props> = memo(({ nadeSlug }) => {
   useEffect(() => {
     (async () => {
       const res = await NadeApi.byId(nadeSlug);
-      console.log("Fetched nade");
       if (res.isOk()) {
         setNade(res.value);
       }
