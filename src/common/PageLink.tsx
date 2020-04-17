@@ -4,9 +4,9 @@ import { useClientConfig } from "../store/GlobalStore/GlobalHooks";
 
 export const PageLink = forwardRef<Link, any>(
   ({ children, href, as, ...rest }, ref) => {
-    const {  } = useClientConfig();
+    const { clientConfig } = useClientConfig();
 
-    if (true) {
+    if (clientConfig.useHardLinks) {
       return <a href={as}>{children}</a>;
     }
 
