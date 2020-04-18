@@ -108,6 +108,25 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
 
         <AdUnit center tagType="mega-bottom" />
 
+        <p>
+          Here is also the YouTuber{" "}
+          <a href="https://www.youtube.com/channel/UCPKbW1excf-E7Tmwom1AgkQ">
+            BananaGaming
+          </a>{" "}
+          explaining the same concept:
+        </p>
+
+        <div className="video-container">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube-nocookie.com/embed/rOTtmSrtXtI"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+
         <h2>Bonus: Variations of the jump throw bind</h2>
         <p>
           There are variations of the jump throw bind. More specifically there
@@ -145,7 +164,27 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           time use one of the other two.
         </p>
       </BlogPostArticle>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .video-container {
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+        }
+
+        .video-container::after {
+          padding-top: 56.25%;
+          display: block;
+          content: "";
+        }
+
+        .video-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      `}</style>
     </>
   );
 };
