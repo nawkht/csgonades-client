@@ -6,7 +6,7 @@ export const ServiceDown: FC = memo(({}) => {
   const [serviceUp, setServiceUp] = useState(true);
 
   useEffect(() => {
-    Axios.get("https://api.csgonades.com")
+    Axios.get("https://api.csgonades.com/status")
       .then(() => setServiceUp(true))
       .catch(() => setServiceUp(false));
   }, []);
