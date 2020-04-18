@@ -56,7 +56,7 @@ export type NadeLight = {
   favoriteCount: number;
   mapEndCoord?: MapCoordinates;
   score: number;
-  userAvatar: string;
+  user: UserLight;
   isFavorited?: boolean;
   technique?: Technique;
   commentCount: number;

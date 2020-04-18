@@ -36,7 +36,7 @@ export const BlogNadeItem: FC<Props> = memo(({ nadeSlug }) => {
     <>
       <PageLink href={"/nades/[nade]"} as={`/nades/${nade?.slug}`}>
         <div className={"nadebox"} style={{ display: "inline-block" }}>
-          <NadeItemTitle nade={{ ...nade, userAvatar: nade.user.avatar }} />
+          <NadeItemTitle nade={{ ...nade }} />
           <div className="video">
             <GfycatThumbnail nade={nade} />
           </div>

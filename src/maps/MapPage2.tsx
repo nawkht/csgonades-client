@@ -28,7 +28,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
   return (
     <div key={map}>
       <SEO title={capitalize(map)} canonical={`/maps/${map}`} />
-      <MapPageJumbo map={map} />
+      <MapPageJumbo map={map} nades={allNades} />
       <div className="map-page-container">
         <div className="map-nades">
           <div className="map-filter">

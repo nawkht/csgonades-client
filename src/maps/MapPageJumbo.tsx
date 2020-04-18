@@ -4,12 +4,15 @@ import { capitalize } from "../utils/Common";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { TopContributorList } from "./TopContributor";
+import { NadeLight } from "../models/Nade/Nade";
 
 type Props = {
   map: CsgoMap;
+  nades: NadeLight[];
 };
 
-export const MapPageJumbo: FC<Props> = memo(({ map }) => {
+export const MapPageJumbo: FC<Props> = memo(({ map, nades }) => {
   const { colors } = useTheme();
 
   return (
@@ -31,6 +34,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
               <AdUnit center tagType="mega-banner" />
             </div>
           </div>
+          <TopContributorList nades={nades} />
         </PageCentralize>
       </div>
       <style jsx>{`
@@ -40,9 +44,9 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
             ${colors.jumboGradientStart} 33.44%,
             ${colors.jumboGradientEnd} 66.89%
           );
-          margin-bottom: 50px;
           padding-bottom: 50px;
           padding-top: 50px;
+          margin-bottom: 50px;
         }
 
         .map-welcome-wrap {
