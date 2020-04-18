@@ -44,11 +44,12 @@ export const FrontpageActions: FC = memo(({}) => {
         >
           <div className="action paypal">
             <p className="paypal-msg">
-              Consider donating with <span>Paypal</span>
+              Support via <span>Paypal</span>
             </p>
 
             <p className="sub-msg">
-              *glub* I&apos;m running out of energy drink&apos;s.
+              I&apos;m running out of energy drink&apos;s.
+              <br /> *glub* *glub*
             </p>
 
             <div className="paypal-logo">

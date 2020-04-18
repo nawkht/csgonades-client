@@ -19,12 +19,9 @@ const isBrowser = typeof window !== "undefined";
 export const AdUnit: FC<Props> = memo(({ tagType, center }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    const delay = setTimeout(() => {
-      if (isBrowser && !isMobile && IS_PROD) {
-        setMounted(true);
-      }
-    }, 500);
-    return () => clearTimeout(delay);
+    if (isBrowser && !isMobile && IS_PROD) {
+      setMounted(true);
+    }
   }, []);
 
   if (!mounted) {
