@@ -38,7 +38,9 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
       />
       <PageCentralize>
         <article>
-          <h1 id="article-title">{data.title}</h1>
+          <div id="article-title">
+            <h1>{data.title}</h1>
+          </div>
           <div id="article-image">
             <div className="img-wrap">
               <img className="article-img" src={data.imageUrl} />
@@ -96,9 +98,14 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           grid-area: social;
         }
 
-        h1#article-title {
+        #article-title {
+          width: 100%;
           grid-area: title;
+        }
+
+        #article-title h1 {
           font-weight: 300;
+          max-width: 800px;
         }
 
         #article-content {
