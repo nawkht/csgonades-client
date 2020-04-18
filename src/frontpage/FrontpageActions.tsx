@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { FaPaypal } from "react-icons/fa";
+import { FaPaypal, FaDiscord } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 import { useAnalytics } from "../utils/Analytics";
 
@@ -15,6 +15,26 @@ export const FrontpageActions: FC = memo(({}) => {
 
   return (
     <>
+      <div className="actions-wrapper">
+        <a
+          href="https://discord.gg/010h0KFCBNASyMUKv"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >
+          <div className="action discord">
+            <p className="discord-msg">
+              Join us on <span>Discord</span>
+            </p>
+
+            <p className="sub-msg">One of us... one of us!</p>
+
+            <div className="discord-logo">
+              <FaDiscord />
+            </div>
+          </div>
+        </a>
+      </div>
+
       <div className="actions-wrapper">
         <a
           href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=XHPRF8RJZKBHS&item_name=CSGO+Nades&currency_code=USD&source=url"
@@ -40,7 +60,6 @@ export const FrontpageActions: FC = memo(({}) => {
       <style jsx>{`
         .actions-wrapper {
           width: 100%;
-          margin-top: 30px;
           margin-bottom: 30px;
         }
 
