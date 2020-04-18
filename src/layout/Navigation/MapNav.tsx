@@ -20,7 +20,7 @@ export const MapNav: FC<Props> = memo(({}) => {
               <MapLink map="mirage" />
               <MapLink map="inferno" />
               <MapLink map="overpass" />
-              <MapLink map="vertigo" />
+              <MapLink map="vertigo" isUpdated={true} />
               <MapLink map="train" />
               <MapLink map="nuke" />
               <MapLink map="cache" />

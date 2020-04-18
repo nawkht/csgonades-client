@@ -7,16 +7,19 @@ import { useRouter } from "next/router";
 type Props = {
   map: CsgoMap;
   isNew?: boolean;
+  isUpdated?: boolean;
 };
 
-export const MapLink: FC<Props> = ({ map, isNew }) => {
+export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
   const { query } = useRouter();
   const selected = query.map ? query.map.includes(map) : false;
+  const labelString = createLabelString(isNew, isUpdated);
+  const showLabel = isNew || isUpdated;
 
   return (
     <>
       <li className={selected ? "nav-selected" : ""}>
-        {isNew && <span className="new-map">New</span>}
+        {showLabel && <span className="new-map">{labelString}</span>}
         <PageLink href={`/maps/[map]`} as={`/maps/${map}`}>
           <span className="map-name">{capitalize(map)}</span>
         </PageLink>
@@ -48,7 +51,7 @@ export const MapLink: FC<Props> = ({ map, isNew }) => {
           position: absolute;
           top: 0;
           right: 0;
-          font-size: 9px;
+          font-size: 8px;
           background: rgba(127, 176, 2, 0.7);
           color: white;
           border-radius: 2px;
@@ -67,3 +70,13 @@ export const MapLink: FC<Props> = ({ map, isNew }) => {
     </>
   );
 };
+
+function createLabelString(isNew?: boolean, isUpdated?: boolean) {
+  if (isNew) {
+    return "New";
+  }
+  if (isUpdated) {
+    return "Update";
+  }
+  return "";
+}
