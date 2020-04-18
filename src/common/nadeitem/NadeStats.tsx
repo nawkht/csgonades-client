@@ -5,6 +5,7 @@ import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { tickrateString } from "../../models/Nade/NadeTickrate";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { kFormatter } from "../../utils/Common";
+import { dateMinutesAgo } from "../../utils/DateUtils";
 
 type Props = {
   nade: NadeLight | Nade;
@@ -15,12 +16,13 @@ export const NadeStats: FC<Props> = ({ nade }) => {
   const favoriteIconColor = nade.isFavorited ? colors.FAV_YELLOW : undefined;
   const hasMovement = nade.movement === "running";
   const isJumpThrow = nade.technique === "jumpthrow";
+  const nadeIsNew = isNew(nade.createdAt);
 
   return (
     <>
       <div className="item-bottom">
         <div className="stats">
-          {nade.viewCount > 500 && (
+          {!nadeIsNew && (
             <div className="stat">
               <div className="stat-content">
                 <GoEye style={{ position: "relative", top: -1 }} />
@@ -29,7 +31,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
             </div>
           )}
 
-          {nade.viewCount <= 500 && (
+          {nadeIsNew && (
             <div className="stat">
               <span className="new-badge">NEW</span>
             </div>
@@ -134,3 +136,9 @@ export const NadeStats: FC<Props> = ({ nade }) => {
     </>
   );
 };
+
+function isNew(createdAt: Date | string) {
+  const hoursAgoAdded = dateMinutesAgo(createdAt) / 60;
+
+  return hoursAgoAdded < 48;
+}
