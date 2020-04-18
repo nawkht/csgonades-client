@@ -18,7 +18,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
   return (
     <>
       <BlogPostArticle data={blogTickrateAndJumpthrow}>
-        <p className="tldr">
+        <p>
           Game servers have different rates at which they communicate with your
           game, called tickrate. This slight timing difference affects the
           movement speed the server thinks you have while jumping, giving you
