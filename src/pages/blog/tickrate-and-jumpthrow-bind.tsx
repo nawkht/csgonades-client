@@ -18,12 +18,12 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
   return (
     <>
       <BlogPostArticle data={blogTickrateAndJumpthrow}>
-        <p>
-          TLDR; Game servers have different rates at which they communicate with
-          your game, called tickrate. This slight timing difference affects when
-          the server thinks your bind thinks you jumped and released the mouse
-          button. Giving you slightly different results on 64 and 128 tick
-          servers. See the video below.
+        <p className="tldr">
+          Game servers have different rates at which they communicate with your
+          game, called tickrate. This slight timing difference affects the
+          movement speed the server thinks you have while jumping, giving you
+          slightly different results on 64 and 128 tick servers. See the video
+          below.
         </p>
 
         <h2>What is tickrate?</h2>
@@ -68,15 +68,15 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
         <p>
           However, this comes at a cost. The bind will send two commands to the
-          game server. First, it will send a jump command. Then a release
-          command. These two commands are not done precisely at the same time;
-          there&apos;s a small delay between them that you can&apos;t control.
+          game server. First, it will send a jump command, then a release
+          command.
         </p>
         <p>
-          This delay is the reason your jumpthrow bind will have different
-          outcomes on 64 tick and 128 tick. Because of the tickrate, the
-          commands are interpreted by the game server at slightly different
-          timings.
+          Since the server and client communicate less frequently on 64 tick,
+          the server will recieve slighly different movement speeds during your
+          jump. This is the reason your jumpthrow bind will have different
+          outcomes on 64 tick and 128 tick. Because of the tickrate, the release
+          of the grenade will have different speeds on 64 and 128 tick.
         </p>
         <p>
           In the video below, you can see that the release happens at slightly
@@ -145,6 +145,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           time use one of the other two.
         </p>
       </BlogPostArticle>
+      <style jsx>{``}</style>
     </>
   );
 };

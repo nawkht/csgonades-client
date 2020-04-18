@@ -41,7 +41,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           <h1 id="article-title">{data.title}</h1>
           <div id="article-image">
             <div className="img-wrap">
-              <img className="article-image" src={data.imageUrl} />
+              <img className="article-img" src={data.imageUrl} />
               {!!data.imageCredit && !!data.imageCreditUrl && (
                 <div className="image-credit">
                   Photo by{" "}
@@ -103,6 +103,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
         #article-content {
           grid-area: main;
+          max-width: 800px;
         }
 
         aside {
@@ -111,14 +112,17 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         }
 
         .article-date {
-          text-align: right;
           color: #bbb;
+          margin-bottom: 15px;
         }
 
-        .article-image {
-          max-width: 100%;
+        #article-image {
+          max-width: 800px;
+        }
+
+        .article-img {
+          width: 100%;
           display: block;
-          margin: 0 auto;
         }
 
         .image-credit {
