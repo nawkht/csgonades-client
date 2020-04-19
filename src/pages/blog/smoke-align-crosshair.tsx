@@ -7,13 +7,13 @@ import { CsConsole } from "../../blog/CsConsole";
 import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogNadeAlignCrosshair: BlogPost = {
-  title: "Large Crosshair to Align Smokes in CS:GO",
+  title: "Smoke Align Crosshair Bind for CS:GO",
   slug: "smoke-align-crosshair",
   imageUrl: "/blogimg/nade-align-crosshair/align-crosshair.jpg",
   thumbnailUrl: "/blogimg/nade-align-crosshair/align-crosshair_thumb.jpg",
   createdAt: "2020-03-29T20:00:00.000Z",
   intro:
-    "For particular smokes, it can be hard to find something natural to place your crosshair at to hit that perfect smoke. This key bind will help you align those hard nades.",
+    "Create a fullscreen crosshair to line up smokes and other nades. For particular smokes, it can be hard to find something natural to place your crosshair at to hit that perfect smoke. This key bind will help you align those hard nades.",
 };
 
 const NadeAlignCrosshairBlogPost: FC = () => {
