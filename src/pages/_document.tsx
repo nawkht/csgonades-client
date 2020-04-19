@@ -48,6 +48,11 @@ class MyDocument extends Document {
               key="google-font-roboto"
               media="all"
             />
+            <script
+              data-ad-client="ca-pub-2255854420599519"
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            ></script>
             {/**
              * <script
               type="text/javascript"
