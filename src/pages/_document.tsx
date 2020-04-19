@@ -48,11 +48,13 @@ class MyDocument extends Document {
               key="google-font-roboto"
               media="all"
             />
-            <script
+            {/**
+             * <script
               type="text/javascript"
               async
               dangerouslySetInnerHTML={{ __html: consentScript }}
             />
+             */}
           </Head>
           <body>
             <Main />
