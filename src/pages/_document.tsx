@@ -68,7 +68,7 @@ class MyDocument extends Document {
 
 export default MyDocument;
 
-const consentScript = `
+/*const consentScript = `
 var elem = document.createElement("script");
 elem.src = "https://quantcast.mgr.consensu.org/cmp.js";
 elem.async = true;
@@ -151,3 +151,4 @@ window.__cmp("init", {
   "No Option": false,
 });
 `;
+*/

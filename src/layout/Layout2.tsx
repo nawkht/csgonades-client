@@ -9,6 +9,7 @@ import { Header } from "./Header";
 import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
+import { CookieConsent } from "../common/CookieConsent";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -33,6 +34,7 @@ export const Layout2: FC = memo(({ children }) => {
         <ToastList />
         <MobileNav />
         <AdminLink />
+        <CookieConsent />
       </div>
 
       <style jsx>{`

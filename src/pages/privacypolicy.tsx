@@ -57,11 +57,6 @@ const PrivacyPolicyPageContainer: NextPage = () => {
           we cannot control the activities of, such other advertisers or web
           sites.
         </p>
-        <ul>
-          <li>
-            <a href="https://g.ezoic.net/privacy/csgonades.com">Ezoic</a>
-          </li>
-        </ul>
         <h2>Security</h2>
         <p>
           We value your trust in providing us your Personal Information, thus we
