@@ -15,11 +15,12 @@ type Props = {
 };
 
 const isBrowser = typeof window !== "undefined";
+const ADS_ENABLED = false;
 
 export const AdUnit: FC<Props> = memo(({ tagType, center }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    if (isBrowser && !isMobile && IS_PROD) {
+    if (ADS_ENABLED && isBrowser && !isMobile && IS_PROD) {
       setMounted(true);
     }
   }, []);
