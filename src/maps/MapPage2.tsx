@@ -27,7 +27,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
 
   return (
     <div key={map}>
-      <SEO title={capitalize(map)} canonical={`/maps/${map}`} />
+      <SEO title={mapPageTitleSeo(map)} canonical={`/maps/${map}`} />
       <MapPageJumbo map={map} nades={allNades} />
       <div className="map-page-container">
         <div className="map-nades">
@@ -110,3 +110,11 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
     </div>
   );
 });
+
+function mapPageTitleSeo(map: CsgoMap) {
+  if (!map) {
+    return "Not found";
+  }
+
+  return `${capitalize(map)} smokes, flashes and molotovs`;
+}
