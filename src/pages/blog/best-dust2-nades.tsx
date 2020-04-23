@@ -28,7 +28,7 @@ const PractiseConfigBlogPost = () => {
           need to excel on Dust2.
         </p>
 
-        <h2>1. Xbox smoke</h2>
+        <h2>1. Xbox Smoke</h2>
         <p>
           Aaah... Xbox. Everyone wants to smoke Xbox. Why? Because there is
           always an annoying AWP in mid stopping you from going short. So here
@@ -52,7 +52,7 @@ const PractiseConfigBlogPost = () => {
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-top-mid-aJd" />
         </div>
 
-        <h2>2. Long corner smoke</h2>
+        <h2>2. Long Corner Smoke</h2>
         <p>
           Why do we throw this smoke? It forces the CT to have to go wide to
           spot double doors on long. This way, even if he gets the first frag,
@@ -81,7 +81,7 @@ const PractiseConfigBlogPost = () => {
           <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-long-doors" />
           <BlogNadeItem nadeSlug="dust2-smoke-a-cross-from-long-doors" />
         </div>
-        <h2>4. The mid to B smoke</h2>
+        <h2>4. The Mid to B Smoke</h2>
         <p>
           Rush B!? Rush A!!.. Nah... Let&apos;s go mid to B instead. Throw this
           smoke and do a B split.
@@ -90,7 +90,7 @@ const PractiseConfigBlogPost = () => {
           <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-xbox" />
         </div>
 
-        <h2>5. B Door smoke</h2>
+        <h2>5. B Door Smoke</h2>
         <p>
           Recently the skybox in tunnels was removed on Dust2; thrown some
           smokes through the roof! These are for B doors, but head over to the
