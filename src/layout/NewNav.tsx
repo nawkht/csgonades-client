@@ -41,6 +41,7 @@ export const NewNav: FC<Props> = ({}) => {
           padding-bottom: 15px;
           overflow: hidden;
           border-radius: 5px;
+          margin-bottom: 30px;
         }
 
         .nav-label {
