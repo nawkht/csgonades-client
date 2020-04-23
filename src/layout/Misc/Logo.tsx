@@ -14,16 +14,16 @@ export const Logo: FC<Props> = memo(({}) => {
   return (
     <>
       <PageLink href="/" as="/">
-        <span className="logo">
+        <div id="logo">
           <img key={logoUrl} src={logoUrl} alt="CSGO Nades" />
-        </span>
+        </div>
       </PageLink>
       <style jsx>{`
-        .logo {
+        #logo {
           display: block;
         }
 
-        .logo img {
+        #logo img {
           max-height: 40px;
           display: block;
         }

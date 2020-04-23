@@ -36,9 +36,6 @@ export const NightDayToggle: FC<Props> = ({ checked, onChange }) => {
         .container {
           display: block;
           position: relative;
-          top: 13px;
-          right: 0;
-          transform: scale(0.5);
         }
 
         .toggleWrapper {

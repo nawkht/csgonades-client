@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { NightDayToggle } from "./NightDayToggle";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 type Props = {};
 
@@ -13,14 +13,16 @@ export const ThemeToggler: FC<Props> = ({}) => {
   return (
     <>
       <div className="darkmode-toggle">
-        <NightDayToggle checked={checked} onChange={toggleTheme} />
+        <DarkModeToggle
+          checked={checked}
+          onChange={toggleTheme}
+          size={45}
+          speed={3}
+        />
       </div>
       <style jsx>{`
         .darkmode-toggle {
           display: block;
-          overflow: hidden;
-          width: 45px;
-          height: 26px;
           margin-left: 20px;
         }
 

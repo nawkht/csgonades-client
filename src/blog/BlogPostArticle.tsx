@@ -60,6 +60,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           <BlogAuthor />
         </div>
       </article>
+
       <aside id="blog-sidebar">
         <div id="blog-sidebar-wrap">
           <SidebarPanel title="SHARE">
@@ -72,6 +73,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           </SidebarPanel>
         </div>
       </aside>
+
       <style jsx>{`
         article {
           grid-area: main;
@@ -105,6 +107,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           background: ${colors.DP02};
           padding: 20px 30px;
           border-radius: 5px;
+          max-width: 100%;
         }
 
         #blog-sidebar {
@@ -125,6 +128,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
         #article-image {
           grid-area: blog-image;
+          max-width: 100%;
         }
 
         .article-img {
@@ -148,16 +152,14 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
           article {
-            grid-template-columns: 1fr;
-            grid-template-areas:
-              "title"
-              "social"
-              "image"
-              "main"
-              "sidebar";
+            margin: 0;
           }
 
-          aside {
+          #article-title {
+            padding: 15px;
+          }
+
+          #blog-sidebar {
             display: none;
           }
         }
