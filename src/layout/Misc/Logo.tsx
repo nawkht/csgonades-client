@@ -21,10 +21,11 @@ export const Logo: FC<Props> = memo(({}) => {
       <style jsx>{`
         #logo {
           display: block;
+          width: 60px;
         }
 
         #logo img {
-          max-height: 40px;
+          width: 100%;
           display: block;
         }
       `}</style>
