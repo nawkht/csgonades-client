@@ -41,10 +41,11 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
           transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
           width: 100%;
+          border: 1px solid ${colors.BORDER};
         }
 
         .nadebox:hover {
-          box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.05);
         }
 
         .video {

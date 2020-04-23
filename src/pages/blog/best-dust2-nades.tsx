@@ -41,6 +41,11 @@ const PractiseConfigBlogPost = () => {
           </PageLink>
           , or the last one if you prefer not to use the bind.
         </p>
+        <p>
+          <strong>
+            Tip: Mouse over the thumbnail and it will play the video.
+          </strong>
+        </p>
         <div className="nade-list">
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-t-spawn-7Nn" />
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-t-spawn" />
@@ -137,6 +142,7 @@ const PractiseConfigBlogPost = () => {
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+          margin-bottom: 30px;
         }
 
         .video-container {
