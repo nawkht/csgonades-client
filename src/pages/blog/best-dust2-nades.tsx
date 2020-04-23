@@ -5,7 +5,7 @@ import { PageLink } from "../../common/PageLink";
 import { Dimensions } from "../../constants/Constants";
 
 export const bestDust2Nades: BlogPost = {
-  title: "Best Grenade Spots for Dust2 - Must Know!",
+  title: "Best Smoke Spots for Dust2 - Must Know!",
   slug: "best-dust2-nades",
   imageUrl: "/blogimg/dust2-b.jpg",
   thumbnailUrl: "/blogimg/dust2-b_thumb.jpg",
