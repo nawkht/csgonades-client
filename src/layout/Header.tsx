@@ -17,7 +17,9 @@ export const Header: FC<Props> = memo(({}) => {
         <div className="header-wrap">
           <Hamburger />
           <Logo />
-          <ThemeToggler />
+          <div id="theme-toggle">
+            <ThemeToggler />
+          </div>
           <div className="spacer"></div>
           <SiteNav />
           <UserNav />
@@ -51,6 +53,10 @@ export const Header: FC<Props> = memo(({}) => {
           #header {
             padding-left: 15px;
             padding-right: 15px;
+          }
+
+          #theme-toggle {
+            display: none;
           }
         }
       `}</style>

@@ -77,11 +77,9 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           align-items: center;
           justify-content: space-around;
           background: ${colors.DP02};
-          width: 316px;
-          height: 266px;
+          width: 300px;
+          height: 250px;
           justify-self: center;
-          padding: 8px;
-          box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
           border-radius: 5px;
           align-self: center;
           display: none;

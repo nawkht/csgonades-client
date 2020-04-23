@@ -97,6 +97,12 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
             margin: 15px;
           }
         }
+
+        @media only screen and (max-width: 340px) {
+          #front-page {
+            margin: 0px;
+          }
+        }
       `}</style>
     </>
   );

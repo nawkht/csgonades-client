@@ -81,7 +81,9 @@ const PractiseConfigBlogPost = () => {
           Rush B!? Rush A!!.. Nah... Let&apos;s go mid to B instead. Throw this
           smoke and do a B split.
         </p>
-        <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-xbox" />
+        <div className="nade-list">
+          <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-xbox" />
+        </div>
 
         <h2>5. B Door smoke</h2>
         <p>
@@ -132,7 +134,7 @@ const PractiseConfigBlogPost = () => {
       <style jsx>{`
         .nade-list {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(316px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
         }
@@ -156,6 +158,13 @@ const PractiseConfigBlogPost = () => {
           left: 0;
           width: 100%;
           height: 100%;
+        }
+
+        @media only screen and (max-width: 400px) {
+          .nade-list {
+            margin-left: -10px;
+            margin-right: -10px;
+          }
         }
       `}</style>
     </>

@@ -298,6 +298,13 @@ export const NadePage: FC = memo(() => {
               "misc misc misc";
           }
         }
+
+        @media only screen and (max-width: 400px) {
+          #nade-page-main {
+            margin-left: -15px;
+            margin-right: -15px;
+          }
+        }
       `}</style>
     </>
   );

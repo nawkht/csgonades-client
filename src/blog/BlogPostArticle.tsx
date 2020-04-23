@@ -155,6 +155,14 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
             margin: 0;
           }
 
+          #article-content {
+            grid-area: blog-main;
+            background: ${colors.DP02};
+            padding: 20px 15px;
+            border-radius: 5px;
+            max-width: 100%;
+          }
+
           #article-title {
             padding: 15px;
           }

@@ -121,6 +121,13 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             margin: 15px;
           }
         }
+
+        @media only screen and (max-width: 400px) {
+          #map-page {
+            margin: 0;
+            margin-bottom: 50px;
+          }
+        }
       `}</style>
     </>
   );
