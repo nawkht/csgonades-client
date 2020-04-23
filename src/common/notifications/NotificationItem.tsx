@@ -80,13 +80,20 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
           <div className="noti-date">
             {prettyDateTime(notification.createdAt)}
           </div>
+          <div className="noti-divider"></div>
         </span>
       </PageLink>
       <style jsx>{`
+        .noti-divider {
+          height: 1px;
+          background: ${colors.BORDER};
+          margin-left: -30px;
+          margin-right: -30px;
+        }
+
         .notification {
           color: ${colors.TEXT};
           white-space: nowrap;
-          border-bottom: 1px solid ${colors.BORDER};
           padding: 15px 30px;
           color: black;
           display: block;

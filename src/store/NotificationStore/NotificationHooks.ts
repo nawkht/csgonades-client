@@ -6,11 +6,11 @@ export const useNotifications = () => {
   const rawNotifications = useSelector(notificationsSelector);
 
   const notificationCount = useMemo(() => {
-    return rawNotifications.filter(n => !n.viewed).length;
+    return rawNotifications.filter((n) => !n.viewed).length;
   }, [rawNotifications]);
 
   const notifications = useMemo(() => {
-    return rawNotifications.sort((a, b) => dateSort(b.createdAt, a.createdAt));
+    return rawNotifications.sort((a, b) => dateSort(a.createdAt, b.createdAt));
   }, [rawNotifications]);
 
   return {
