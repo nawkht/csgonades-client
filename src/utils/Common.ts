@@ -107,7 +107,7 @@ export const descriptionSimplify = (value?: string) => {
 
   let desc = removeMd(value);
   desc = desc.replace(/(\r\n|\n|\r)/gm, " ");
-  desc = truncateString(desc, 117);
+  desc = truncateString(desc, 200);
   desc = escapeHtml(desc);
   return desc;
 };
