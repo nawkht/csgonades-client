@@ -129,6 +129,8 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         #article-image {
           grid-area: blog-image;
           max-width: 100%;
+          border-radius: 5px;
+          overflow: hidden;
         }
 
         .article-img {
