@@ -23,6 +23,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         url={`https://www.csgonades.com/blog/${data.slug}`}
         authorName="Mellet Solbakk"
         datePublished={data.createdAt}
+        dateModified={data.updatedAt || data.createdAt}
         description={descriptionSimplify(data.intro)}
         images={[data.imageUrl]}
         publisherLogo="https://www.csgonades.com/logo.png"

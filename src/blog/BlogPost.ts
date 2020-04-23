@@ -7,4 +7,5 @@ export type BlogPost = {
   imageCreditUrl?: string;
   intro: string;
   createdAt: string;
+  updatedAt?: string;
 };
