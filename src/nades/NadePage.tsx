@@ -73,10 +73,6 @@ export const NadePage: FC = memo(() => {
         thumbnail={nade.images.thumbnailUrl}
       />
 
-      {allowEdit && (
-        <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
-      )}
-
       <aside id="nadepage-sidebar">
         <div id="nadepage-sidebar-content">
           <SidebarPanel title="SHARE">
@@ -106,6 +102,9 @@ export const NadePage: FC = memo(() => {
 
       <div id="nade-page-grid">
         <div id="title">
+          {allowEdit && (
+            <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+          )}
           <NadeBreadcrumb nade={nade} />
           <NadeTitle
             title={nade.title}

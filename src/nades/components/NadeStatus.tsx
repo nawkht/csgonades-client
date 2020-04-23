@@ -23,18 +23,19 @@ const NadeStatus: FC<Props> = memo(({ status, statusInfo }) => {
           <div>
             <h3>Waiting for approval</h3>
             <p>
-              To make the process go fast,
-              <br /> hold your mouse over the <strong>title</strong>,{" "}
-              <strong>description</strong>
-              <br /> and the <strong>meta panel</strong> to edit them.
+              To make the process go fast, hold your mouse over the{" "}
+              <strong>title</strong>, <strong>description</strong> and the{" "}
+              <strong>meta panel</strong> to edit them.
             </p>
             <style jsx>{`
               h3 {
-                font-size: 24px;
+                font-size: 20px;
                 text-align: center;
+                margin-bottom: 10px;
+                font-weight: 400;
               }
               p {
-                font-size: 16px;
+                font-size: 18px;
                 text-align: center;
               }
             `}</style>
@@ -69,8 +70,6 @@ const NadeStatus: FC<Props> = memo(({ status, statusInfo }) => {
       <div className="status-container">{statusText()}</div>
       <style jsx>{`
         .status-container {
-          max-width: 400px;
-          margin: 0 auto;
           background: ${statusColors.background};
           border: 1px solid ${statusColors.border};
           padding: 12px 18px;
