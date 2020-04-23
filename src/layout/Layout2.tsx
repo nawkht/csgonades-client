@@ -72,7 +72,7 @@ export const Layout2: FC = memo(({ children }) => {
 
         nav {
           grid-area: nav;
-          background: ${colors.DP02};
+          padding-left: 30px;
         }
 
         footer {

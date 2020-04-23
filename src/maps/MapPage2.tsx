@@ -11,7 +11,6 @@ import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler
 import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
 import { TopContributorList } from "./TopContributor";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { SidebarPanel } from "../common/SidebarPanel";
 
 type Props = {
@@ -20,7 +19,6 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
-  const { colors } = useTheme();
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
@@ -71,12 +69,12 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         aside {
           grid-area: sidebar;
           width: 300px;
-          background: ${colors.DP02};
+          margin-right: 30px;
         }
 
         #map-sidebar {
           position: sticky;
-          top: calc(65px);
+          top: calc(65px + 30px);
         }
 
         .map-page-container {

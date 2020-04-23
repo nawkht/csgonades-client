@@ -37,8 +37,7 @@ export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
           color: ${colors.TEXT};
           min-width: 90px;
           font-size: 16px;
-          padding: 10px 30px 10px 15px;
-          margin-left: 15px;
+          padding: 10px 30px 10px 30px;
           border-top-left-radius: 5px;
           border-bottom-left-radius: 5px;
           margin-top: 5px;
@@ -62,11 +61,11 @@ export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
         }
 
         li:hover .map-name {
-          background: ${colors.DP00};
+          text-decoration: underline;
         }
 
         .nav-selected .map-name {
-          background: ${colors.DP00};
+          font-weight: 400;
         }
       `}</style>
     </>

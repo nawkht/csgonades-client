@@ -186,13 +186,13 @@ export const NadePage: FC = memo(() => {
 
         #nadepage-sidebar-content {
           position: sticky;
-          top: 65px;
+          top: calc(65px + 30px);
         }
 
         #nadepage-sidebar {
           grid-area: sidebar;
           width: 300px;
-          background: ${colors.DP02};
+          margin-right: 30px;
         }
 
         #misc {

@@ -113,12 +113,12 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         #blog-sidebar {
           grid-area: sidebar;
           width: 300px;
-          background: ${colors.DP02};
+          margin-right: 30px;
         }
 
         #blog-sidebar-wrap {
           position: sticky;
-          top: 65px;
+          top: calc(65px + 30px);
         }
 
         .article-date {

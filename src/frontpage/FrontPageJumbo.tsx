@@ -1,5 +1,4 @@
 import { FC, memo, useState, useEffect } from "react";
-import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { SiteStats, StatsApi } from "../api/StatsApi";
 
@@ -26,14 +25,15 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
   return (
     <>
       <div id="jumbo">
-        <div id="jumbo-message">
-          <h1>
-            Hi, welcome to CSGO Nades.
-            <br /> A community to learn and share
-            <br /> nades for Counter-Strike Global Offensive.
-          </h1>
-          <div className="illustration" />
+        <h1>
+          Hi, welcome to CSGO Nades.
+          <br /> A community to learn and share
+          <br /> nades for Counter-Strike Global Offensive.
+        </h1>
+        <div id="jumbo-ill">
+          <img src="/images/ilustration.svg" />
         </div>
+
         {newestStats && (
           <div className="stats">
             <div className="stat-item">
@@ -49,7 +49,11 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
       </div>
       <style jsx>{`
         #jumbo {
-          position: relative;
+          display: grid;
+          grid-template-columns: 1fr 1fr 300px;
+          grid-template-areas:
+            "msg msg ill"
+            "stats stats stats";
           background: linear-gradient(
             252.84deg,
             ${colors.jumboGradientStart} 33.44%,
@@ -58,54 +62,42 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
-          overflow: hidden;
           margin-bottom: 30px;
-          padding-bottom: 60px;
           border-radius: 5px;
-          box-shadow: ${colors.SHADOW};
-        }
-
-        #jumbo-message {
-          position: relative;
-          display: block;
-          padding-top: 75px;
-          padding-bottom: 75px;
-          padding-left: 30px;
-          padding-right: 30px;
-        }
-
-        .illustration {
-          position: absolute;
-          bottom: -75px;
-          right: 0;
-          width: 350px;
-          height: 350px;
-          background: url("/images/ilustration.svg");
-          background-position: center;
-          background-size: contain;
-          background-repeat: no-repeat;
-          opacity: 0.9;
-          z-index: 700;
+          overflow: hidden;
         }
 
         h1 {
+          grid-area: msg;
           color: ${colors.TEXT};
           margin: 0;
           padding: 0;
           font-weight: 300;
           font-size: 2.2rem;
+          padding: 50px 30px;
+        }
+
+        #jumbo-ill {
+          grid-area: ill;
+          height: 200px;
+          width: 300px;
+          overflow: hidden;
+          align-self: flex-end;
+          padding-right: 30px;
+          padding-top: 30px;
+        }
+
+        #jumbo-ill img {
+          width: 100%;
+          display: block;
         }
 
         .stats {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
+          grid-area: stats;
           display: flex;
           justify-content: center;
           background: ${colors.DP02};
           color: ${colors.TEXT};
-          z-index: 701;
         }
 
         .stat-item {
@@ -124,11 +116,24 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
           font-size: 16px;
         }
 
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .illustration {
-            width: 150px;
-            height: 150px;
-            bottom: -40px;
+        @media only screen and (max-width: 600px) {
+          #jumbo {
+            display: grid;
+            grid-template-columns: 1fr 1fr 300px;
+            grid-template-areas:
+              "msg msg msg"
+              ". . ill"
+              "stats stats stats";
+            background: linear-gradient(
+              252.84deg,
+              ${colors.jumboGradientStart} 33.44%,
+              ${colors.jumboGradientEnd} 66.89%
+            );
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-bottom: 30px;
+            border-radius: 5px;
           }
         }
       `}</style>

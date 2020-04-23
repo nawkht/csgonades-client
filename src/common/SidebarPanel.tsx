@@ -21,12 +21,16 @@ export const SidebarPanel: FC<Props> = ({ title, children, titleComp }) => {
       <style jsx>{`
         .sidebar-panel {
           background: ${colors.DP02};
+          border-radius: 5px;
+          overflow: hidden;
+          margin-bottom: 30px;
         }
+
         .sidebar-title {
           padding: 12px 30px;
           background ${colors.PRIMARY};
           color: white;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 500;
           display: flex;
           justify-content: space-between;

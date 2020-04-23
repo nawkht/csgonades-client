@@ -58,7 +58,7 @@ export const MobileNav: FC<Props> = memo(({}) => {
         }
 
         .exit-nav {
-          padding-left: 30px;
+          padding-left: 15px;
           padding-top: 18px;
           padding-bottom: 16px;
           color: ${colors.TEXT};

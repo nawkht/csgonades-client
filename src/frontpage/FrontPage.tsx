@@ -9,7 +9,6 @@ import { blogNadeAlignCrosshair } from "../pages/blog/smoke-align-crosshair";
 import { blogPractiseConfig } from "../pages/blog/practice-config";
 import { bestDust2Nades } from "../pages/blog/best-dust2-nades";
 import { BlogList } from "../blog/BlogList";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 const recentPosts = [
   bestDust2Nades,
@@ -23,8 +22,6 @@ type Props = {
 };
 
 export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
-  const { colors } = useTheme();
-
   return (
     <>
       <div id="front-page">
@@ -51,13 +48,12 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
         aside {
           grid-area: sidebar;
           width: 300px;
-          background: ${colors.DP02};
+          margin-right: 30px;
         }
 
         #sidebar-wrap {
           position: sticky;
-          top: 65px;
-          padding: 30px 30px;
+          top: calc(65px + 30px);
         }
 
         #front-page {

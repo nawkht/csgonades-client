@@ -32,7 +32,7 @@ export const NewNav: FC<Props> = ({}) => {
       <style jsx>{`
         #nav {
           position: sticky;
-          top: calc(65px);
+          top: calc(65px + 30px);
         }
 
         #active-duty-nades,
@@ -40,11 +40,12 @@ export const NewNav: FC<Props> = ({}) => {
           background: ${colors.DP02};
           padding-bottom: 15px;
           overflow: hidden;
+          border-radius: 5px;
         }
 
         .nav-label {
           font-weight: 500;
-          font-size: 14px;
+          font-size: 12px;
           display: block;
           white-space: nowrap;
           padding: 15px 30px;
