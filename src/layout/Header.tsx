@@ -1,11 +1,10 @@
 import { FC, memo } from "react";
-import { PageCentralize } from "../common/PageCentralize";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { Hamburger } from "./Misc/Hamburger";
 import { Logo } from "./Misc/Logo";
-import { MapNav } from "./Navigation/MapNav";
 import { SiteNav } from "./Navigation/SiteNav";
 import { UserNav } from "./Navigation/UserNav";
+import { ThemeToggler } from "./Misc/ThemeToggler";
 
 type Props = {};
 
@@ -14,32 +13,29 @@ export const Header: FC<Props> = memo(({}) => {
 
   return (
     <>
-      <header>
-        <PageCentralize>
-          <div className="header-wrap">
-            <Hamburger />
-            <Logo />
-            <SiteNav />
-            <div className="spacer"></div>
-            <UserNav />
-          </div>
-        </PageCentralize>
-      </header>
-      <MapNav />
+      <div id="header">
+        <div className="header-wrap">
+          <Hamburger />
+          <Logo />
+          <ThemeToggler />
+          <div className="spacer"></div>
+          <SiteNav />
+          <UserNav />
+        </div>
+      </div>
       <style jsx>{`
-        header {
+        #header {
           padding: 10px;
-          padding-left: 0;
-          padding-right: 0;
-          background: ${colors.DP01};
-          min-height: 65px;
+          padding-left: 30px;
+          padding-right: 30px;
+          background: ${colors.DP03};
+          height: 65px;
         }
 
         .header-wrap {
           display: flex;
           align-items: center;
           height: 100%;
-          min-height: 47px;
         }
 
         .spacer {
@@ -49,6 +45,13 @@ export const Header: FC<Props> = memo(({}) => {
           height: 60px;
           margin-top: -10px;
           margin-bottom: -10px;
+        }
+
+        @media only screen and (max-width: 910px) {
+          #header {
+            padding-left: 15px;
+            padding-right: 15px;
+          }
         }
       `}</style>
     </>

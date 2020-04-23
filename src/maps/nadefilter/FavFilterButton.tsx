@@ -35,24 +35,29 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
         .filter-btn {
           border: none;
           outline: none;
-          background: transparent;
-          width: 45px;
-          height: 45px;
+          background: ${colors.primaryBtnBg};
+          width: 40px;
+          height: 40px;
           display: flex;
           align-items: center;
           justify-content: space-around;
           color: #767676;
-          font-size: 20px;
+          font-size: 19px;
           cursor: pointer;
           overflow: hidden;
+          border-radius: 5px;
         }
 
         .favorite {
           color: rgb(250, 200, 0);
         }
 
+        .filter-btn:hover {
+          background: ${colors.primaryBtnHover};
+        }
+
         .active {
-          background: ${colors.filterBgHover};
+          background: ${colors.primaryBtnHover};
         }
       `}</style>
     </>

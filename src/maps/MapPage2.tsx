@@ -4,13 +4,15 @@ import { NadeLight } from "../models/Nade/Nade";
 import { NadeFilter } from "./nadefilter/NadeFilter";
 import { MapPageNades } from "./MapPageNades";
 import { MapPageJumbo } from "./MapPageJumbo";
-import { MobileFilter } from "./mobilefilter/MobilteFilter";
 import { MapView } from "./mapview2/MapView";
 import { SignInWarning } from "./components/SignInWarning";
 import { Dimensions } from "../constants/Constants";
 import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
 import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
+import { TopContributorList } from "./TopContributor";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { SidebarPanel } from "../common/SidebarPanel";
 
 type Props = {
   map: CsgoMap;
@@ -18,6 +20,7 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
+  const { colors } = useTheme();
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
@@ -26,23 +29,25 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
   }
 
   return (
-    <div key={map}>
-      <SEO title={mapPageTitleSeo(map)} canonical={`/maps/${map}`} />
-      <MapPageJumbo map={map} nades={allNades} />
-      <div className="map-page-container">
-        <div className="map-nades">
-          <div className="map-filter">
-            <div className="map-filter-sticky">
-              <NadeFilter showSingInWarning={showSignInWarning} />
-            </div>
-          </div>
-          <div className="map-nade-list">
-            <MapPageNades allNades={allNades} />
-          </div>
+    <>
+      <div key={map} id="map-page">
+        <SEO title={mapPageTitleSeo(map)} canonical={`/maps/${map}`} />
+        <MapPageJumbo map={map} nades={allNades} />
+        <div className="map-nade-list">
+          <MapPageNades allNades={allNades} />
         </div>
       </div>
 
-      <MobileFilter />
+      <aside key={map}>
+        <div id="map-sidebar">
+          <NadeFilter showSingInWarning={showSignInWarning} />
+
+          <SidebarPanel title="TOP CONTRIBUTOS">
+            <TopContributorList nades={allNades} />
+          </SidebarPanel>
+        </div>
+      </aside>
+
       <MapView map={map} allNades={allNades} />
       <SignInWarning
         visible={showLoginWarning}
@@ -50,6 +55,30 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         message="filter"
       />
       <style jsx>{`
+        .fake-ph {
+          width: 300px;
+          height: 250px;
+          background: pink;
+        }
+
+        #map-page {
+          grid-area: main;
+          min-height: 100vh;
+          margin: 30px;
+          margin-bottom: 100px;
+        }
+
+        aside {
+          grid-area: sidebar;
+          width: 300px;
+          background: ${colors.DP02};
+        }
+
+        #map-sidebar {
+          position: sticky;
+          top: calc(65px);
+        }
+
         .map-page-container {
           max-width: ${Dimensions.PAGE_WIDTH + 2 * Dimensions.GUTTER_SIZE}px;
           margin: 0 auto;
@@ -77,37 +106,23 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           top: 50px;
         }
 
-        @media only screen and (max-width: 930px) {
-          .map-nades {
-            grid-template-columns: 45px auto;
-            grid-template-areas: "filter nades";
+        @media only screen and (max-width: 1210px) {
+          #map-page {
+            margin-right: 30px;
           }
 
-          .map-sidebar {
-            display: none;
-          }
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .map-nades {
-            grid-template-columns: auto;
-            grid-template-rows: auto;
-            grid-template-areas: "nades";
-          }
-
-          .map-filter,
-          .map-sidebar {
-            display: none;
+          aside {
+            width: 100%;
           }
         }
 
-        @media only screen and (max-width: 500px) {
-          .map-nades {
-            margin: 0;
+        @media only screen and (max-width: 910px) {
+          #map-page {
+            margin: 15px;
           }
         }
       `}</style>
-    </div>
+    </>
   );
 });
 
@@ -116,5 +131,5 @@ function mapPageTitleSeo(map: CsgoMap) {
     return "Not found";
   }
 
-  return `${capitalize(map)} smokes, flashes and molotovs`;
+  return `${capitalize(map)} Smokes, Flashes and Molotovs`;
 }

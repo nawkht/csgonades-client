@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { BlogPostPreview } from "./BlogPostPreview";
 import { BlogPost } from "./BlogPost";
+import { Dimensions } from "../constants/Constants";
 
 type Props = {
   posts: BlogPost[];
@@ -17,12 +18,11 @@ export const BlogList: FC<Props> = ({ posts }) => {
 
       <style jsx>{`
         .blog-post-list {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          margin-left: -20px;
-          margin-right: -20px;
-          margin-top: -20px;
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+          grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+          width: 100%;
         }
       `}</style>
     </>

@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
 import { FaBars } from "react-icons/fa";
-import { Dimensions } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
@@ -26,7 +25,7 @@ export const Hamburger: FC<Props> = memo(({}) => {
           color: ${colors.TEXT};
         }
 
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+        @media only screen and (max-width: 910px) {
           .hamburger {
             display: block;
           }

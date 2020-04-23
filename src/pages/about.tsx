@@ -48,15 +48,14 @@ const AboutPageContainer: NextPage = () => {
       </div>
       <style jsx>{`
         .about {
-          max-width: 900px;
-          margin: 0 auto;
-          padding: 40px;
-          min-height: 90vh;
+          margin: 30px;
+          margin-bottom: 100px;
+          max-width: 800px;
+          padding: 20px 30px;
           color: ${colors.TEXT};
-        }
-
-        h1 {
-          text-align: center;
+          background: ${colors.DP02};
+          border-radius: 5px;
+          grid-area: main;
         }
       `}</style>
     </>

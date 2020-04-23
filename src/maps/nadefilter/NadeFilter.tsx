@@ -2,12 +2,12 @@ import { FC, memo } from "react";
 import { FaMap } from "react-icons/fa";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { FavFilterButton } from "./FavFilterButton";
-import { FilterBg } from "./FilterBg";
 import { NadeTypeButton } from "./NadeTypeButton";
 import { ResetFilterButton } from "./ResetFilterButton";
 import { TickrateSelector } from "./TickrateSelector";
 import { useFilterByType } from "../../store/MapStore/hooks/useFilterByType";
 import { useToggleMapview } from "../../store/MapStore/hooks/useToggleMapView";
+import { SidebarPanel } from "../../common/SidebarPanel";
 
 type Props = {
   showSingInWarning: () => void;
@@ -21,16 +21,18 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
   return (
     <>
       <div className="nade-filter">
-        <div className="map">
-          <FilterBg>
-            <button className="filter-btn" onClick={toggleMapViewVisibility}>
-              <FaMap />
-            </button>
-          </FilterBg>
-        </div>
-
-        <div className="types">
-          <FilterBg>
+        <SidebarPanel title="ACTIONS" titleComp={<ResetFilterButton />}>
+          <div id="filter-actions">
+            <div className="map">
+              <button className="filter-btn" onClick={toggleMapViewVisibility}>
+                <FaMap />
+              </button>
+            </div>
+            <FavFilterButton showSingInWarning={showSingInWarning} />
+          </div>
+        </SidebarPanel>
+        <SidebarPanel title="TYPE" titleComp={<ResetFilterButton />}>
+          <div id="type-btns">
             <NadeTypeButton
               type="smoke"
               currentType={byType}
@@ -51,46 +53,40 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
               currentType={byType}
               onFilterByType={filterByType}
             />
-          </FilterBg>
-        </div>
+          </div>
+        </SidebarPanel>
 
-        <div className="favorite-container">
-          <FilterBg>
-            <FavFilterButton showSingInWarning={showSingInWarning} />
-          </FilterBg>
-        </div>
-
-        <TickrateSelector />
-
-        <ResetFilterButton />
+        <SidebarPanel title="TICKRATE" titleComp={<ResetFilterButton />}>
+          <TickrateSelector />
+        </SidebarPanel>
       </div>
       <style jsx>{`
-        .nade-filter {
-        }
-
-        .map,
-        .types,
-        .favorite-container {
-          margin-bottom: 30px;
+        #filter-actions {
+          display: flex;
         }
 
         .filter-btn {
           border: none;
           outline: none;
-          background: transparent;
-          width: 45px;
-          height: 45px;
+          width: 40px;
+          height: 40px;
           display: flex;
           align-items: center;
           justify-content: space-around;
-          color: ${colors.filterColor};
+          color: ${colors.TEXT};
           font-size: 20px;
           cursor: pointer;
-          border-bottom: 1px solid #e9e9e9;
+          border-radius: 5px;
+          background: ${colors.primaryBtnBg};
+          margin-right: 20px;
         }
 
-        .filter-btn:last-child {
-          border-bottom: none;
+        .filter-btn:hover {
+          background: ${colors.primaryBtnHover};
+        }
+
+        .filter-btn:hover {
+          background: ${colors.primaryBtnHover};
         }
       `}</style>
     </>

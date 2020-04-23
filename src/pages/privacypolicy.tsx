@@ -105,16 +105,14 @@ const PrivacyPolicyPageContainer: NextPage = () => {
       </div>
       <style jsx>{`
         .privacy-policy {
-          max-width: 900px;
-          padding: 40px;
-          padding-top: 100px;
-          padding-bottom: 100px;
-          margin: 0 auto;
+          grid-area: main;
+          max-width: 800px;
+          margin: 40px;
+          margin-bottom: 100px;
           color: ${colors.TEXT};
-        }
-
-        h1 {
-          text-align: center;
+          background: ${colors.DP01};
+          padding: 20px 30px;
+          border-radius: 5px;
         }
       `}</style>
     </>

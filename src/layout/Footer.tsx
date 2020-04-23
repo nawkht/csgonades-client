@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { FC, memo } from "react";
-import { PageCentralize } from "../common/PageCentralize";
 import { APP_VERSION, Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
@@ -12,35 +11,28 @@ export const Footer: FC = memo(() => {
   return (
     <>
       <div className="footer">
-        <PageCentralize>
-          <div className="footer-content">
-            <div className="left-content">
-              <div className="copyright">
-                © {year} CSGO Nades{" "}
-                <span className="version">{APP_VERSION}</span>
-              </div>
-              <div className="footer-links">
-                <Link
-                  href="/privacypolicy"
-                  as="/privacypolicy"
-                  prefetch={false}
-                >
-                  <a>Privacy Policy</a>
-                </Link>
-                <Link href="/contact" as="/contact" prefetch={false}>
-                  <a>Contact</a>
-                </Link>
-              </div>
+        <div className="footer-content">
+          <div className="left-content">
+            <div className="copyright">
+              © {year} CSGO Nades <span className="version">{APP_VERSION}</span>
             </div>
-
-            <div className="powered-by">
-              Powered by{" "}
-              <a href="https://steamcommunity.com/" rel="nofollow">
-                Steam
-              </a>
+            <div className="footer-links">
+              <Link href="/privacypolicy" as="/privacypolicy" prefetch={false}>
+                <a>Privacy Policy</a>
+              </Link>
+              <Link href="/contact" as="/contact" prefetch={false}>
+                <a>Contact</a>
+              </Link>
             </div>
           </div>
-        </PageCentralize>
+
+          <div className="powered-by">
+            Powered by{" "}
+            <a href="https://steamcommunity.com/" rel="nofollow">
+              Steam
+            </a>
+          </div>
+        </div>
       </div>
       <style jsx>{`
         a {
@@ -52,9 +44,8 @@ export const Footer: FC = memo(() => {
         }
 
         .footer {
-          background: ${colors.footerBg};
-          padding-top: 50px;
-          padding-bottom: 50px;
+          background: ${colors.PRIMARY};
+          padding: 50px 30px;
         }
 
         .footer-content {

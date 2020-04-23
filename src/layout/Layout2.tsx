@@ -10,6 +10,7 @@ import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
 import { CookieConsent } from "../common/CookieConsent";
+import { NewNav } from "./NewNav";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -19,23 +20,27 @@ export const Layout2: FC = memo(({ children }) => {
 
   return (
     <>
-      <div className="page">
-        <ServiceDown />
-        <div className="header">
+      <div id="page">
+        <header>
           <Header />
-        </div>
+        </header>
 
-        <main>{children}</main>
+        <nav>
+          <NewNav />
+        </nav>
 
-        <div className="footer">
+        {children}
+
+        <footer>
           <Footer />
-        </div>
-
-        <ToastList />
-        <MobileNav />
-        <AdminLink />
-        <CookieConsent />
+        </footer>
       </div>
+
+      <ServiceDown />
+      <ToastList />
+      <MobileNav />
+      <AdminLink />
+      <CookieConsent />
 
       <style jsx>{`
         .footer-placement {
@@ -46,15 +51,56 @@ export const Layout2: FC = memo(({ children }) => {
           margin-bottom: 50px;
         }
 
-        .page {
+        #page {
+          display: grid;
           min-height: 100vh;
-          display: flex;
-          flex-direction: column;
+          width: 100%;
+          background: ${colors.DP00};
+          grid-template-columns: auto 1fr auto;
+          grid-template-areas:
+            "header header header"
+            "nav main sidebar"
+            "footer footer footer";
         }
 
-        main {
-          flex: 1;
-          margin-bottom: 50px;
+        header {
+          grid-area: header;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+
+        nav {
+          grid-area: nav;
+          background: ${colors.DP02};
+        }
+
+        footer {
+          grid-area: footer;
+        }
+
+        @media only screen and (max-width: 1210px) {
+          #page {
+            grid-template-areas:
+              "header header header"
+              "nav main main"
+              "nav sidebar sidebar"
+              "footer footer footer";
+          }
+        }
+
+        @media only screen and (max-width: 910px) {
+          #page {
+            grid-template-areas:
+              "header header header"
+              "main main main"
+              "sidebar sidebar sidebar"
+              "footer footer footer";
+          }
+
+          nav {
+            display: none;
+          }
         }
       `}</style>
 

@@ -1,17 +1,18 @@
 import { FC } from "react";
-import { PageCentralize } from "../../common/PageCentralize";
 import { blogTickrateAndJumpthrow } from "./tickrate-and-jumpthrow-bind";
 import { BlogList } from "../../blog/BlogList";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { SEO } from "../../layout/SEO2";
 import { blogPractiseConfig } from "./practice-config";
 import { blogNadeAlignCrosshair } from "./smoke-align-crosshair";
+import { bestDust2Nades } from "./best-dust2-nades";
 
 type Props = {};
 
 const BlogPage: FC<Props> = ({}) => {
   const { colors } = useTheme();
   const blogPosts = [
+    bestDust2Nades,
     blogNadeAlignCrosshair,
     blogPractiseConfig,
     blogTickrateAndJumpthrow,
@@ -20,22 +21,27 @@ const BlogPage: FC<Props> = ({}) => {
   return (
     <>
       <SEO title="Blog" canonical="/blog" />
-      <PageCentralize>
-        <div className="blog-posts">
-          <h1>Blog</h1>
-          <BlogList posts={blogPosts} />
-        </div>
-      </PageCentralize>
+      <div className="blog-posts">
+        <h1>Blog</h1>
+        <BlogList posts={blogPosts} />
+      </div>
+      <aside></aside>
       <style jsx>{`
+        aside {
+          grid-area: sidebar;
+          width: 300px;
+        }
         .blog-posts {
-          margin-top: 75px;
           color: ${colors.TEXT};
+          grid-area: main;
+          margin: 30px;
+          margin-bottom: 100px;
         }
 
         h1 {
-          text-align: center;
           font-weight: 300;
-          margin-bottom: 50px;
+          margin-bottom: 30px;
+          font-size: 32px;
         }
       `}</style>
     </>

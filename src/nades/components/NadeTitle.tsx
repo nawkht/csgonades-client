@@ -34,7 +34,7 @@ export const NadeTitle: FC<Props> = ({
 
       <style jsx>{`
         h1 {
-          font-size: 30px;
+          font-size: 32px;
           margin: 0;
           padding: 0;
           margin-left: -1px;

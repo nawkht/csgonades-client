@@ -3,6 +3,7 @@ import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";
 import { PageLink } from "../../common/PageLink";
 import { useRouter } from "next/router";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   map: CsgoMap;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
+  const { colors } = useTheme();
   const { query } = useRouter();
   const selected = query.map ? query.map.includes(map) : false;
   const labelString = createLabelString(isNew, isUpdated);
@@ -27,24 +29,20 @@ export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
       <style jsx>{`
         li {
           position: relative;
-          grid-area: ${map};
+          overflow: hidden;
         }
 
         li .map-name {
           display: block;
-          color: white;
+          color: ${colors.TEXT};
           min-width: 90px;
           font-size: 16px;
-          padding: 15px 20px;
-          background: rgba(0, 0, 0, 0.05);
-          border: 1px solid rgba(0, 0, 0, 0.15);
-          border-top: none;
-          border-left: none;
-          text-align: center;
-        }
-
-        .nav-selected {
-          font-weight: 500;
+          padding: 10px 30px 10px 15px;
+          margin-left: 15px;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          margin-top: 5px;
+          transition: background 0.2s;
         }
 
         .new-map {
@@ -64,7 +62,11 @@ export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
         }
 
         li:hover .map-name {
-          background: rgba(0, 0, 0, 0.1);
+          background: ${colors.DP00};
+        }
+
+        .nav-selected .map-name {
+          background: ${colors.DP00};
         }
       `}</style>
     </>

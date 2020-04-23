@@ -1,5 +1,4 @@
 import { FC, memo, useState, useEffect } from "react";
-import { PageCentralize } from "../common/PageCentralize";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { SiteStats, StatsApi } from "../api/StatsApi";
@@ -27,16 +26,14 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
   return (
     <>
       <div id="jumbo">
-        <PageCentralize>
-          <div id="jumbo-message">
-            <h1>
-              Hi, welcome to CSGO Nades.
-              <br /> A community to learn and share
-              <br /> nades for Counter-Strike Global Offensive.
-            </h1>
-            <div className="illustration" />
-          </div>
-        </PageCentralize>
+        <div id="jumbo-message">
+          <h1>
+            Hi, welcome to CSGO Nades.
+            <br /> A community to learn and share
+            <br /> nades for Counter-Strike Global Offensive.
+          </h1>
+          <div className="illustration" />
+        </div>
         {newestStats && (
           <div className="stats">
             <div className="stat-item">
@@ -64,13 +61,17 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
           overflow: hidden;
           margin-bottom: 30px;
           padding-bottom: 60px;
+          border-radius: 5px;
+          box-shadow: ${colors.SHADOW};
         }
 
         #jumbo-message {
           position: relative;
           display: block;
-          padding-top: 100px;
-          padding-bottom: 100px;
+          padding-top: 75px;
+          padding-bottom: 75px;
+          padding-left: 30px;
+          padding-right: 30px;
         }
 
         .illustration {

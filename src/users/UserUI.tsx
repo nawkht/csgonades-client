@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { NadeApi } from "../api/NadeApi";
-import { Dimensions } from "../constants/Constants";
 import { NadeLight } from "../models/Nade/Nade";
 import { User } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
@@ -20,7 +19,7 @@ export const UserUI: FC<Props> = ({ user }) => {
   const { colors } = useTheme();
 
   useEffect(() => {
-    NadeApi.byUser(user.steamId).then(res => {
+    NadeApi.byUser(user.steamId).then((res) => {
       if (res.isOk()) {
         setNades(res.value);
       }
@@ -56,16 +55,18 @@ export const UserUI: FC<Props> = ({ user }) => {
       </div>
       <style jsx>{`
         .user-container {
+          grid-area: main;
           position: relative;
-          margin-top: 50px;
+          margin: 30px;
           margin-bottom: 100px;
           display: flex;
           flex-direction: column;
-          min-height: 80vh;
+          min-height: 60vh;
         }
 
         .user-details {
-          margin-bottom: ${Dimensions.GUTTER_SIZE};
+          display: block;
+          margin-bottom: 30px;
         }
 
         .user-nades {

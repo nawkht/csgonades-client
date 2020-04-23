@@ -1,4 +1,3 @@
-import { PageCentralize } from "../common/PageCentralize";
 import { User } from "../models/User";
 import { UserNotFound } from "./UserNotFound";
 import { UserUI } from "./UserUI";
@@ -9,10 +8,10 @@ type Props = {
 
 export const UserPage: React.FC<Props> = ({ user }) => {
   return (
-    <PageCentralize>
+    <>
       {!user && <UserNotFound />}
       {user && <UserUI user={user} />}
-    </PageCentralize>
+    </>
   );
 };
 

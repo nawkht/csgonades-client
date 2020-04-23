@@ -64,15 +64,14 @@ export const BlogPostPreview: FC<Props> = ({ blogPost }) => {
         }
 
         .blog-post-preview {
-          width: 350px;
+          width: 100%;
           display: flex;
           flex-direction: column;
           overflow: hidden;
           color: ${colors.TEXT};
           background: ${colors.DP01};
           border-radius: 5px;
-          margin: 20px;
-          box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: ${colors.SHADOW};
           border-radius: 5px;
         }
 

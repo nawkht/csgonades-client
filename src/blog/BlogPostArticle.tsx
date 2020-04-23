@@ -8,8 +8,7 @@ import { NadeShareActions } from "../nades/NadeShareActions";
 import { SEO } from "../layout/SEO2";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
-import { PageCentralize } from "../common/PageCentralize";
-import { AdUnit } from "../common/adunits/AdUnit";
+import { SidebarPanel } from "../common/SidebarPanel";
 
 type Props = {
   data: BlogPost;
@@ -36,86 +35,87 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         description={data.intro}
         thumbnail={data.thumbnailUrl}
       />
-      <PageCentralize>
-        <article>
-          <div id="article-title">
-            <h1>{data.title}</h1>
+      <article>
+        <div id="article-title">
+          <h1>{data.title}</h1>
+        </div>
+        <div id="article-image">
+          <div className="img-wrap">
+            <img className="article-img" src={data.imageUrl} />
+            {!!data.imageCredit && !!data.imageCreditUrl && (
+              <div className="image-credit">
+                Photo by{" "}
+                <a href={data.imageCreditUrl} target="_top">
+                  {data.imageCredit}
+                </a>
+              </div>
+            )}
           </div>
-          <div id="article-image">
-            <div className="img-wrap">
-              <img className="article-img" src={data.imageUrl} />
-              {!!data.imageCredit && !!data.imageCreditUrl && (
-                <div className="image-credit">
-                  Photo by{" "}
-                  <a href={data.imageCreditUrl} target="_top">
-                    {data.imageCredit}
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
+        </div>
 
-          <div id="article-content">
-            <div className="article-date">{prettyDate(data.createdAt)}</div>
-            <p className="lead">{data.intro}</p>
-            {children}
-            <BlogAuthor />
-          </div>
-
-          <div id="social">
+        <div id="article-content">
+          <div className="article-date">{prettyDate(data.createdAt)}</div>
+          <p className="lead">{data.intro}</p>
+          {children}
+          <BlogAuthor />
+        </div>
+      </article>
+      <aside id="blog-sidebar">
+        <div id="blog-sidebar-wrap">
+          <SidebarPanel title="SHARE">
             <NadeShareActions
               url={`/blog/${data.slug}`}
               title={data.title}
               image={data.thumbnailUrl}
               visisble={true}
             />
-          </div>
-
-          <aside className="sidebar">
-            <div className="sidebar-placement">
-              <AdUnit tagType="half-page" />
-            </div>
-          </aside>
-        </article>
-      </PageCentralize>
+          </SidebarPanel>
+        </div>
+      </aside>
       <style jsx>{`
         article {
+          grid-area: main;
           display: grid;
-          grid-template-columns: auto 300px;
+          grid-template-columns: 1fr;
           grid-template-areas:
-            "title social"
-            "image sidebar"
-            "main sidebar"
-            "main sidebar";
+            "blog-title"
+            "blog-image"
+            "blog-main"
+            "blog-main";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
           color: ${colors.TEXT};
-          margin-top: ${Dimensions.GUTTER_SIZE * 2}px;
-          margin-bottom: ${Dimensions.GUTTER_SIZE * 2}px;
-        }
-
-        #social {
-          grid-area: social;
+          max-width: 850px;
+          margin: 30px;
+          margin-bottom: 100px;
         }
 
         #article-title {
           width: 100%;
-          grid-area: title;
+          grid-area: blog-title;
         }
 
         #article-title h1 {
           font-weight: 300;
-          max-width: 800px;
+          font-size: 32px;
         }
 
         #article-content {
-          grid-area: main;
-          max-width: 800px;
+          grid-area: blog-main;
+          background: ${colors.DP02};
+          padding: 20px 30px;
+          border-radius: 5px;
         }
 
-        aside {
+        #blog-sidebar {
           grid-area: sidebar;
-          width: 100%;
+          width: 300px;
+          background: ${colors.DP02};
+        }
+
+        #blog-sidebar-wrap {
+          position: sticky;
+          top: 65px;
         }
 
         .article-date {
@@ -124,7 +124,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         }
 
         #article-image {
-          max-width: 800px;
+          grid-area: blog-image;
         }
 
         .article-img {
@@ -144,11 +144,6 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
         .image-credit a:hover {
           text-decoration: underline;
-        }
-
-        .sidebar-placement {
-          position: sticky;
-          top: 50px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

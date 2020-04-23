@@ -25,9 +25,11 @@ import { NadeMeta } from "./components/NadeMeta";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { Dimensions } from "../constants/Constants";
-import { AdUnit } from "../common/adunits/AdUnit";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { SidebarPanel } from "../common/SidebarPanel";
 
 export const NadePage: FC = memo(() => {
+  const { colors } = useTheme();
   const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
   const registerView = useNadeRegisterView();
@@ -53,7 +55,7 @@ export const NadePage: FC = memo(() => {
   }
 
   return (
-    <div key={nade.id}>
+    <>
       <ArticleJsonLd
         url={`https://www.csgonades.com/nades/${nade?.slug || nade?.id}`}
         title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
@@ -75,6 +77,33 @@ export const NadePage: FC = memo(() => {
         <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
       )}
 
+      <aside id="nadepage-sidebar">
+        <div id="nadepage-sidebar-content">
+          <SidebarPanel title="SHARE">
+            <NadeShareActions
+              title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
+              visisble={nade?.status === "accepted"}
+              url={`/nades/${nade?.slug || nade?.id}`}
+              image={nade?.images.thumbnailUrl}
+            />
+          </SidebarPanel>
+
+          <SidebarPanel title="ACTIONS">
+            <div id="nade-buttons">
+              <div className="nade-btn">
+                <FavoriteButton
+                  showSignInWarning={() => setShowSignInWarning(true)}
+                  nade={nade}
+                />
+              </div>
+              <div className="nade-btn">
+                <ReportNadeButton nadeId={nade.id} />
+              </div>
+            </div>
+          </SidebarPanel>
+        </div>
+      </aside>
+
       <div id="nade-page-grid">
         <div id="title">
           <NadeBreadcrumb nade={nade} />
@@ -85,33 +114,6 @@ export const NadePage: FC = memo(() => {
             onEditNade={() => setEditTitleVisisble(true)}
             allowEdit={allowEditTitle}
           />
-        </div>
-
-        <aside id="sidebar-right">
-          <AdUnit center tagType="top-medium-rectangle" />
-        </aside>
-
-        <div id="nade-actions">
-          <div id="nade-social">
-            <NadeShareActions
-              title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
-              visisble={nade?.status === "accepted"}
-              url={`/nades/${nade?.slug || nade?.id}`}
-              image={nade?.images.thumbnailUrl}
-            />
-          </div>
-
-          <div id="nade-buttons">
-            <div className="nade-btn">
-              <FavoriteButton
-                showSignInWarning={() => setShowSignInWarning(true)}
-                nade={nade}
-              />
-            </div>
-            <div className="nade-btn">
-              <ReportNadeButton nadeId={nade.id} />
-            </div>
-          </div>
         </div>
 
         <div id="nade-meta">
@@ -127,13 +129,15 @@ export const NadePage: FC = memo(() => {
             nade={nade}
             onEditDescription={() => setEditDescisisble(true)}
           />
-          <div id="placement-bottom">
-            <AdUnit center tagType="mega-bottom" />
-          </div>
         </div>
 
         <div id="nade-comment-container">
           <NadeComments nadeId={nade.id} />
+        </div>
+
+        <div id="misc">
+          {allowEdit && <MapPositionEditor nade={nade} />}
+          {isAdminOrMod && <AdminEditor nade={nade} />}
         </div>
       </div>
 
@@ -168,28 +172,47 @@ export const NadePage: FC = memo(() => {
         />
       )}
 
-      {allowEdit && <MapPositionEditor nade={nade} />}
-
-      {isAdminOrMod && <AdminEditor nade={nade} />}
-
       <style jsx>{`
+        .share-label {
+          background: ${colors.DP01};
+          padding: 15px 30px 15px 30px;
+          font-weight: normal;
+          font-size: 14px;
+        }
+
+        #share-buttons {
+          padding: 15px 30px 30px 30px;
+        }
+
+        #nadepage-sidebar-content {
+          position: sticky;
+          top: 65px;
+        }
+
+        #nadepage-sidebar {
+          grid-area: sidebar;
+          width: 300px;
+          background: ${colors.DP02};
+        }
+
+        #misc {
+          grid-area: misc;
+        }
+
         #nade-page-grid {
+          margin: 30px;
+          margin-bottom: 100px;
+          grid-area: main;
           display: grid;
-          grid-template-columns: auto 110px 160px 300px;
+          grid-template-columns: 1fr 1fr 200px;
           grid-template-areas:
-            "title title title ."
-            "main main main sidebar"
-            "actions actions actions sidebar"
-            "info info meta sidebar"
-            "comments comments . sidebar"
-            "slot2 slot2 . sidebar";
+            "title title title"
+            "video video video"
+            "info info meta"
+            "comments comments ."
+            "misc misc misc";
           max-width: 100%;
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
-          max-width: ${Dimensions.PAGE_WIDTH + 2 * Dimensions.GUTTER_SIZE}px;
-          margin: 0 auto;
-          padding-left: ${Dimensions.GUTTER_SIZE}px;
-          padding-right: ${Dimensions.GUTTER_SIZE}px;
-          padding-top: ${Dimensions.GUTTER_SIZE}px;
         }
 
         .half-page-plactement {
@@ -207,7 +230,7 @@ export const NadePage: FC = memo(() => {
         }
 
         #nade-page-main {
-          grid-area: main;
+          grid-area: video;
           padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
@@ -216,23 +239,13 @@ export const NadePage: FC = memo(() => {
           padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
-        #nade-actions {
-          grid-area: actions;
-          display: flex;
-          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
-        }
-
-        #nade-social {
-          flex: 1;
-        }
-
         #nade-buttons {
           display: flex;
+          justify-content: space-between;
         }
 
         #nade-buttons .nade-btn {
-          margin-left: ${Dimensions.GUTTER_SIZE}px;
-          min-width: 160px;
+          width: 47%;
         }
 
         #nade-comment-container {
@@ -256,61 +269,36 @@ export const NadePage: FC = memo(() => {
           margin-top: ${Dimensions.GUTTER_SIZE}px;
         }
 
-        @media only screen and (max-width: 1000px) {
+        @media only screen and (max-width: 1210px) {
           #nade-page-grid {
-            grid-template-columns: 1fr 1fr;
-            grid-template-areas:
-              "title title"
-              "main main"
-              "actions actions"
-              "info info"
-              "meta meta"
-              "slot2 slot2"
-              "sidebar sidebar"
-              "comments comments";
+            margin-right: 30px;
           }
 
-          #nade-actions {
-            grid-area: actions;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 0 auto;
+          #nadepage-sidebar {
+            width: 100%;
           }
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 910px) {
           #nade-page-grid {
-            grid-template-columns: 1fr 1fr;
+            margin-left: 15px;
+            margin-right: 15px;
+          }
+        }
+
+        @media only screen and (max-width: 800px) {
+          #nade-page-grid {
+            grid-template-columns: 1fr 200px 1fr;
             grid-template-areas:
-              "title title"
-              "main main"
-              "info info"
-              "meta meta"
-              "actions actions"
-              "comments comments"
-              "slot2 slot2"
-              "sidebar sidebar";
-            padding-left: 15px;
-            padding-right: 15px;
-          }
-
-          #nade-actions {
-            align-items: center;
-            flex-direction: column;
-          }
-
-          #nade-buttons {
-            align-items: center;
-            flex-direction: column;
-          }
-
-          #nade-buttons .nade-btn {
-            margin-top: ${Dimensions.GUTTER_SIZE / 2}px;
-            margin-left: 0;
+              "title title title"
+              "video video video"
+              "info info info"
+              ". meta ."
+              "comments comments comments"
+              "misc misc misc";
           }
         }
       `}</style>
-    </div>
+    </>
   );
 });

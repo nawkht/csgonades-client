@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { Message, Step } from "semantic-ui-react";
 import { NadeApi } from "../api/NadeApi";
-import { PageCentralize } from "../common/PageCentralize";
 import { GfycatData } from "../models/Nade/GfycatData";
 import { NadeBody } from "../models/Nade/Nade";
 import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";
@@ -63,53 +62,50 @@ export const NewNadePage: FC = () => {
 
   return (
     <>
-      <PageCentralize>
-        <div className="nade-new-container">
-          <Step.Group>
-            <Step
-              active={currentStep === "gfycat"}
-              icon="video"
-              link
-              title="Video"
-              description="Add gfycat video"
-              onClick={onGfyStepClick}
-            />
-            <Step
-              active={currentStep === "result-img"}
-              icon="image"
-              link
-              title="Screenshot"
-              description="Add a image of the resulting nade"
-              onClick={onImgStepClick}
-            />
-          </Step.Group>
+      <div className="nade-new-container">
+        <Step.Group>
+          <Step
+            active={currentStep === "gfycat"}
+            icon="video"
+            link
+            title="Video"
+            description="Add gfycat video"
+            onClick={onGfyStepClick}
+          />
+          <Step
+            active={currentStep === "result-img"}
+            icon="image"
+            link
+            title="Screenshot"
+            description="Add a image of the resulting nade"
+            onClick={onImgStepClick}
+          />
+        </Step.Group>
 
-          {error && (
-            <Message negative>
-              <Message.Header>Error</Message.Header>
-              <p>{error}</p>
-            </Message>
+        {error && (
+          <Message negative>
+            <Message.Header>Error</Message.Header>
+            <p>{error}</p>
+          </Message>
+        )}
+
+        <div className="new-nade-step">
+          {currentStep === "gfycat" && (
+            <AddGfycat
+              addGfycat={onGfycatAdded}
+              onError={(e) => setError(e)}
+              clearError={() => setError(null)}
+            />
           )}
-
-          <div className="new-nade-step">
-            {currentStep === "gfycat" && (
-              <AddGfycat
-                addGfycat={onGfycatAdded}
-                onError={e => setError(e)}
-                clearError={() => setError(null)}
-              />
-            )}
-            {currentStep === "result-img" && (
-              <AddImage onAddImage={onAddImage} />
-            )}
-          </div>
+          {currentStep === "result-img" && <AddImage onAddImage={onAddImage} />}
         </div>
-      </PageCentralize>
+      </div>
 
       <style jsx>
         {`
           .nade-new-container {
-            margin-top: 50px;
+            grid-area: main;
+            margin-top: 30px;
             margin-bottom: 100px;
           }
 

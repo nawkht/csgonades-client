@@ -65,15 +65,13 @@ const ContactPageContainer: NextPage = () => {
       </div>
       <style jsx>{`
         .contact {
-          max-width: 900px;
-          padding: 50px;
-          margin: 0 auto;
-          min-height: 82vh;
+          margin: 30px;
+          margin-bottom: 100px;
+          max-width: 800px;
+          padding: 20px 30px;
           color: ${colors.TEXT};
-        }
-
-        h1 {
-          text-align: center;
+          background: ${colors.DP01};
+          border-radius: 5px;
         }
       `}</style>
     </>

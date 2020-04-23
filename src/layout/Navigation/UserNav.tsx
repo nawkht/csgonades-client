@@ -4,7 +4,6 @@ import { FaPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { NotificationIndicator } from "../../common/notifications/NotificationIndicator";
-import { Dimensions } from "../../constants/Constants";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import { SignInnButton } from "../Misc/SignInnButton";
 import { UserDropdown } from "../Misc/UserDropdown";
@@ -19,8 +18,10 @@ export const UserNav: FC = memo(() => {
     return (
       <>
         <div className="user-nav">
-          <NotificationIndicator />
-          <div className="user-new-nade">
+          <div id="noti-ind">
+            <NotificationIndicator />
+          </div>
+          <div id="user-new-nade">
             <ButtonWithIcon
               onClick={() => {
                 router.push("/newnade", "/newnade");
@@ -40,12 +41,13 @@ export const UserNav: FC = memo(() => {
             align-items: center;
           }
 
-          .user-new-nade {
+          #user-new-nade {
             margin-right: 20px;
           }
 
-          @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-            .new-nade-btn {
+          @media only screen and (max-width: 930px) {
+            #noti-ind,
+            #user-new-nade {
               display: none;
             }
           }

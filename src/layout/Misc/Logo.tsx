@@ -19,8 +19,12 @@ export const Logo: FC<Props> = memo(({}) => {
         </span>
       </PageLink>
       <style jsx>{`
+        .logo {
+          display: block;
+        }
+
         .logo img {
-          max-height: 45px;
+          max-height: 40px;
           display: block;
         }
       `}</style>

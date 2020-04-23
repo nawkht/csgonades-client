@@ -59,8 +59,8 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
           flex: 1;
           white-space: nowrap;
           padding: 10px;
-          background: #17a58b;
-          border-bottom: 1px solid #12826e;
+          background: #729b79;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .nade-meta-item:first-child {
@@ -84,36 +84,6 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
 
         span {
           font-size: 16px;
-        }
-
-        @media only screen and (max-width: 1000px) {
-          .nade-meta {
-            flex-direction: row;
-            margin: 0 auto;
-          }
-
-          .nade-item {
-            border-radius: 0px;
-            border-bottom: 0px;
-          }
-
-          .nade-meta-item:first-child {
-            border: none;
-            border-radius: 0px;
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-          }
-
-          .nade-meta-item:last-child {
-            border-radius: 0px;
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-            border-right: none;
-          }
-
-          span {
-            font-size: 14px;
-          }
         }
       `}</style>
     </>

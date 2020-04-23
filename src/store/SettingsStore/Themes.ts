@@ -2,6 +2,7 @@ export type ThemeColors = {
   DP00: string;
   DP01: string;
   DP02: string;
+  DP03: string;
   FAV_YELLOW: string;
   SITE_BG: string;
   UI_BG: string;
@@ -33,6 +34,7 @@ export type ThemeColors = {
   boxTitleBg: string;
   jumboGradientStart: string;
   jumboGradientEnd: string;
+  SHADOW: string;
 };
 
 type Themes = {
@@ -42,12 +44,13 @@ type Themes = {
 
 export const themes: Themes = {
   dark: {
-    DP00: "#121212",
-    DP01: "#1e1e1e",
-    DP02: "#232323",
+    DP00: "#141414",
+    DP01: "#1f1f1f",
+    DP02: "#292929",
+    DP03: "#363636",
     SITE_BG: "#121212",
     UI_BG: "#212121",
-    PRIMARY: "#0d516e",
+    PRIMARY: "#364958",
     PRIMARY_10: "rgba(28, 143, 192, 0.1)",
     PRIMARY_BLACK: "#262626",
     BORDER: "rgba(0, 0, 0, 1)",
@@ -61,8 +64,8 @@ export const themes: Themes = {
     nadeItemHeadingBg: "#232323",
     footerBg: "#212121",
     footerColor: "white",
-    primaryBtnBg: "#0d516e",
-    primaryBtnHover: "rgba(28, 143, 192, 1)",
+    primaryBtnBg: "#363636",
+    primaryBtnHover: "#404040",
     filterBg: "#0d516e",
     filterBgHover: "#09384d",
     filterColor: "white",
@@ -76,14 +79,16 @@ export const themes: Themes = {
     boxTitleBg: "#232323",
     jumboGradientStart: "#1e1e1e",
     jumboGradientEnd: "#232323",
+    SHADOW: "none",
   },
   light: {
-    DP00: "#fff",
-    DP01: "#fefefe",
-    DP02: "#f9f9f9",
+    DP00: "#ededed",
+    DP01: "#f5f5f5",
+    DP02: "#fafafa",
+    DP03: "#fff",
     SITE_BG: "#f3f3f3",
     UI_BG: "white",
-    PRIMARY: "#1c90c0",
+    PRIMARY: "#364958",
     PRIMARY_10: "rgba(28, 143, 192, 0.1)",
     PRIMARY_BLACK: "#262626",
     BORDER: "rgba(0, 0, 0, 0.1)",
@@ -97,8 +102,8 @@ export const themes: Themes = {
     nadeItemHeadingBg: "#eee",
     footerBg: "#1c90c0",
     footerColor: "white",
-    primaryBtnBg: "#f9f9f9",
-    primaryBtnHover: "rgba(28, 143, 192, 1)",
+    primaryBtnBg: "#eaeaea",
+    primaryBtnHover: "#d4d4d4",
     filterBg: "#3f444e",
     filterBgHover: "#1c90c0",
     filterColor: "#ffffff",
@@ -112,6 +117,7 @@ export const themes: Themes = {
     boxTitleBg: "#f9f9f9",
     jumboGradientStart: "#f9f9f9",
     jumboGradientEnd: "#eeeeee",
+    SHADOW: "none",
   },
 };
 

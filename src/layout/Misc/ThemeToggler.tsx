@@ -20,6 +20,8 @@ export const ThemeToggler: FC<Props> = ({}) => {
           display: block;
           overflow: hidden;
           width: 45px;
+          height: 26px;
+          margin-left: 20px;
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {

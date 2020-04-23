@@ -14,6 +14,7 @@ export const NadeTypeButton: FC<Props> = memo(
   ({ type, currentType, mobile, onFilterByType }) => {
     const { colors } = useTheme();
     const iconUrl = iconFromType(type);
+    const contrast = type === "smoke" ? 70 : 100;
 
     const classNameBuilder = useMemo(() => {
       const base = ["nade-type-btn", "icon"];
@@ -32,12 +33,16 @@ export const NadeTypeButton: FC<Props> = memo(
       <>
         {mobile && (
           <button className={classNameBuilder} onClick={onClick}>
-            <div className="type-icon"></div>
+            <div className="type-icon">
+              {iconUrl && <img src={iconUrl} width="70%" />}
+            </div>
           </button>
         )}
         {!mobile && (
           <button className={classNameBuilder} onClick={onClick}>
-            <div className="type-icon"></div>
+            <div className="type-icon">
+              {iconUrl && <img src={iconUrl} width="100%" />}
+            </div>
           </button>
         )}
 
@@ -47,28 +52,35 @@ export const NadeTypeButton: FC<Props> = memo(
             border: none;
             background: transparent;
             outline: none;
-            border-bottom: ${mobile
-              ? `none`
-              : `1px solid ${colors.filterBorder}`};
-            width: ${mobile ? "60px" : "45px"};
-            height: ${mobile ? "60px" : "45px"};
+            width: 40px;
+            height: 40px;
+            background: ${colors.primaryBtnBg};
+            border-radius: 5px;
+            margin-right: 20px;
           }
 
           .nade-type-btn:last-child {
-            border-bottom: none;
+            margin-right: 0px;
           }
 
           .type-icon {
             width: 100%;
             height: 100%;
-            background: url(${iconUrl});
-            background-size: ${mobile ? "35px" : "26px"};
-            background-repeat: no-repeat;
-            background-position: 45% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+          }
+
+          .type-icon img {
+            filter: brightness(${contrast}%);
+          }
+
+          .nade-type-btn:hover {
+            background: ${colors.primaryBtnHover};
           }
 
           .active {
-            background: ${colors.filterBgHover};
+            background: ${colors.primaryBtnHover};
           }
         `}</style>
       </>

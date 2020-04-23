@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { FilterBg } from "./FilterBg";
 import { useFilterByTickrate } from "../../store/MapStore/hooks/useFilterByTickrate";
 
 type Props = {};
@@ -23,34 +22,23 @@ export const TickrateSelector: FC<Props> = ({}) => {
   return (
     <>
       <div className="filter-tick">
-        <div className="filter-tick-label">TICK</div>
-        <FilterBg>
-          <button
-            className={`filter-btn tickrate-btn ${tick64active}`}
-            onClick={filterBy64tick}
-          >
-            64
-          </button>
+        <button
+          className={`filter-btn tickrate-btn ${tick64active}`}
+          onClick={filterBy64tick}
+        >
+          64
+        </button>
 
-          <button
-            className={`filter-btn tickrate-btn ${tick128active}`}
-            onClick={filterByTickrate128}
-          >
-            128
-          </button>
-        </FilterBg>
+        <button
+          className={`filter-btn tickrate-btn ${tick128active}`}
+          onClick={filterByTickrate128}
+        >
+          128
+        </button>
       </div>
       <style jsx>{`
         .filter-tick {
-          margin-bottom: 30px;
-        }
-
-        .filter-tick .filter-tick-label {
-          text-align: center;
-          color: ${colors.filterBg};
-          width: 100%;
-          font-size: 12px;
-          margin-bottom: 5px;
+          display: flex;
         }
 
         .filter-btn {
@@ -58,29 +46,26 @@ export const TickrateSelector: FC<Props> = ({}) => {
           border: none;
           outline: none;
           appearance: none;
-          background: transparent;
-          width: 100%;
-          height: 45px;
+          width: 40px;
+          height: 40px;
           display: flex;
           align-items: center;
           justify-content: space-around;
-          color: ${colors.filterColor};
-          font-size: 20px;
           cursor: pointer;
-          border-bottom: 1px solid ${colors.filterBorder};
-        }
-
-        .filter-btn:last-child {
-          border: none;
-        }
-
-        .tickrate-btn {
           font-size: 16px;
           font-weight: 300;
+          background: ${colors.primaryBtnBg};
+          color: ${colors.TEXT};
+          border-radius: 5px;
+          margin-right: 20px;
+        }
+
+        .filter-btn:hover {
+          background: ${colors.primaryBtnHover};
         }
 
         .active {
-          background: ${colors.filterBgHover};
+          background: ${colors.primaryBtnHover};
         }
       `}</style>
     </>

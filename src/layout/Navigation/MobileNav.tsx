@@ -1,21 +1,16 @@
-import { useRouter } from "next/router";
 import { FC, memo, useMemo } from "react";
 import { FaTimes } from "react-icons/fa";
-import { AnimationTimings, Dimensions } from "../../constants/Constants";
+import { AnimationTimings } from "../../constants/Constants";
 import { useNavigation } from "../../store/GlobalStore/GlobalHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { ThemeToggler } from "../Misc/ThemeToggler";
-import { MobileMapLink } from "./MobileMapLink";
+import { NewNav } from "../NewNav";
 
 type Props = {};
 
 export const MobileNav: FC<Props> = memo(({}) => {
   const { colors } = useTheme();
-  const router = useRouter();
   const { toggleNav } = useNavigation();
   const { isNavOpen } = useNavigation();
-
-  const currentRoute = router.query.name;
 
   const mobileNavClassName = useMemo(() => {
     if (isNavOpen) {
@@ -30,20 +25,7 @@ export const MobileNav: FC<Props> = memo(({}) => {
           <div className="exit-nav" onClick={toggleNav}>
             <FaTimes />
           </div>
-          <ul>
-            <MobileMapLink mapName="dust2" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="mirage" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="inferno" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="overpass" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="train" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="cache" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="nuke" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="vertigo" currentMapPath={currentRoute} />
-            <MobileMapLink mapName="anubis" currentMapPath={currentRoute} />
-          </ul>
-          <div className="theme-toggle">
-            <ThemeToggler />
-          </div>
+          <NewNav />
         </nav>
       </aside>
       <style jsx>{`
@@ -53,13 +35,13 @@ export const MobileNav: FC<Props> = memo(({}) => {
           left: 0;
           bottom: 0;
           z-index: 999;
-          border-right: 1px solid ${colors.BORDER};
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           overflow-y: auto;
           overflow-x: hidden;
-          background: ${colors.DP01};
+          background: ${colors.DP02};
+          width: 250px;
         }
 
         #mobile-navigation {
@@ -76,7 +58,7 @@ export const MobileNav: FC<Props> = memo(({}) => {
         }
 
         .exit-nav {
-          padding-left: 16px;
+          padding-left: 30px;
           padding-top: 18px;
           padding-bottom: 16px;
           color: ${colors.TEXT};
@@ -95,13 +77,7 @@ export const MobileNav: FC<Props> = memo(({}) => {
           width: 100%;
         }
 
-        .theme-toggle {
-          position: relative;
-          top: 20px;
-          left: 55px;
-        }
-
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+        @media only screen and (max-width: 910px) {
           #mobile-navigation {
             display: block;
           }

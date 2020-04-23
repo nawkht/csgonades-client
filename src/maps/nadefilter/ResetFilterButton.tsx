@@ -24,8 +24,8 @@ export const ResetFilterButton: FC<Props> = memo(({}) => {
         .filter-btn {
           border: none;
           outline: none;
-          width: 45px;
-          height: 45px;
+          width: 25px;
+          height: 25px;
           display: flex;
           align-items: center;
           justify-content: space-around;

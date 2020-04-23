@@ -53,7 +53,7 @@ const MapPositionEditor: FC<Props> = ({ nade }) => {
         .position-btn {
           max-width: 150px;
           margin: 0 auto;
-          padding-bottom: 100px;
+          padding-bottom: 30px;
         }
       `}</style>
     </>

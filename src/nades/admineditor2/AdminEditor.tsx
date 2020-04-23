@@ -37,7 +37,6 @@ const AdminEditor: FC<Props> = ({ nade }) => {
         .admin-editor {
           max-width: 150px;
           margin: 0 auto;
-          padding-bottom: 100px;
         }
       `}</style>
     </>

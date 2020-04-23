@@ -3,11 +3,19 @@ import { NadeLight } from "../models/Nade/Nade";
 import { FrontpageActions } from "./FrontpageActions";
 import { FrontPageJumbo } from "./FrontPageJumbo";
 import { RecentNades } from "./RecentNades";
-import { FrontPageRecentPosts } from "./FrontPageRecentPosts";
-import { PageCentralize } from "../common/PageCentralize";
-import { Dimensions } from "../constants/Constants";
 import { SiteStats } from "../api/StatsApi";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { blogNadeAlignCrosshair } from "../pages/blog/smoke-align-crosshair";
+import { blogPractiseConfig } from "../pages/blog/practice-config";
+import { bestDust2Nades } from "../pages/blog/best-dust2-nades";
+import { BlogList } from "../blog/BlogList";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
+
+const recentPosts = [
+  bestDust2Nades,
+  blogNadeAlignCrosshair,
+  blogPractiseConfig,
+];
 
 type Props = {
   recentNades: NadeLight[];
@@ -15,36 +23,51 @@ type Props = {
 };
 
 export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
+  const { colors } = useTheme();
+
   return (
     <>
-      <FrontPageJumbo stats={stats} />
+      <div id="front-page">
+        <FrontPageJumbo stats={stats} />
 
-      <PageCentralize>
         <div className="recent-wrap">
-          <FrontPageRecentPosts />
-          <aside className="front-page-sidebar">
-            <FrontpageActions />
-            <div className="sidebar-placeholder">
-              <AdUnit tagType="top-medium-rectangle" />
-            </div>
-          </aside>
+          <BlogList posts={recentPosts} />
         </div>
 
         <div className="recent-nade-wrap">
           <RecentNades recentNades={recentNades} />
         </div>
-      </PageCentralize>
+      </div>
+      <aside className="front-page-sidebar">
+        <div id="sidebar-wrap">
+          <FrontpageActions />
+          <div className="sidebar-placeholder">
+            <AdUnit tagType="top-medium-rectangle" />
+          </div>
+        </div>
+      </aside>
 
       <style jsx>{`
-        .recent-wrap {
-          margin-top: 75px;
-          margin-bottom: 75px;
-          display: flex;
+        aside {
+          grid-area: sidebar;
+          width: 300px;
+          background: ${colors.DP02};
         }
 
-        .front-page-sidebar {
-          margin-left: 30px;
-          width: 300px;
+        #sidebar-wrap {
+          position: sticky;
+          top: 65px;
+          padding: 30px 30px;
+        }
+
+        #front-page {
+          grid-area: main;
+          margin: 30px;
+          margin-bottom: 100px;
+        }
+
+        .recent-wrap {
+          margin-bottom: 75px;
         }
 
         .recent-nade-wrap {
@@ -59,25 +82,19 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
           margin-bottom: 100px;
         }
 
-        @media only screen and (max-width: 1000px) {
-          .recent-wrap {
-            flex-direction: column;
+        @media only screen and (max-width: 1210px) {
+          #front-page {
+            margin-right: 30px;
           }
 
-          .front-page-sidebar {
-            margin-left: 0;
+          aside {
             width: 100%;
           }
         }
 
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          .recent {
-            flex-direction: column;
-          }
-
-          .recent-nade-wrap {
-            margin-left: -10px;
-            margin-right: -10px;
+        @media only screen and (max-width: 910px) {
+          #front-page {
+            margin: 15px;
           }
         }
       `}</style>

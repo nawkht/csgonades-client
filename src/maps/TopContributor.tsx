@@ -36,40 +36,34 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
       (n) => n.steamId !== "76561198026064832"
     );
     sortedContributors.sort((a, b) => b.nadeCount - a.nadeCount);
-    sortedContributors = sortedContributors.slice(0, 3);
+    sortedContributors = sortedContributors.slice(0, 6);
 
     return sortedContributors;
   }, [nades]);
 
   return (
     <>
-      <div className="cont-wrap">
-        <div className="cont-cont">
-          <span>Top contributors</span>
-          <div className="cont-list">
-            {contributors.map((c) => (
-              <TopContributor key={c.steamId} user={c} />
-            ))}
-          </div>
-        </div>
+      <div className="cont-list">
+        {contributors.map((c) => (
+          <TopContributor key={c.steamId} user={c} />
+        ))}
       </div>
       <style jsx>{`
-        .cont-wrap {
-          display: flex;
-          margin-top: 30px;
-          color: ${colors.TEXT};
-        }
-
         .cont-list {
           display: flex;
           align-items: center;
+          flex-wrap: wrap;
+          justify-content: space-between;
         }
 
         span {
           font-weight: 300;
           margin-bottom: 10px;
           display: block;
-          font-size: 16px;
+          font-size: 14px;
+          font-weight: normal;
+          background: ${colors.DP01};
+          padding: 15px 30px;
         }
       `}</style>
     </>
@@ -92,20 +86,23 @@ const TopContributor: FC<Props> = ({ user }) => {
         .contributor {
           display: flex;
           align-items: center;
-          margin-right: 15px;
-          background: ${colors.DP02};
-          border-radius: 10px;
+          background: ${colors.DP01};
+          color: ${colors.TEXT};
           overflow: hidden;
+          margin-bottom: 10px;
+          height: 25px;
+          border-radius: 5px;
         }
 
         .contributor img {
-          width: 25px;
+          height: 90%;
           border-radius: 50%;
         }
 
         span {
           padding: 5px;
           display: block;
+          font-size: 12px;
         }
       `}</style>
     </>

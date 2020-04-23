@@ -1,15 +1,12 @@
 import { FC } from "react";
 import {
   RedditShareButton,
-  RedditIcon,
   FacebookShareButton,
-  FacebookIcon,
   TwitterShareButton,
-  TwitterIcon,
   VKShareButton,
-  VKIcon,
 } from "react-share";
 import { useAnalytics } from "../utils/Analytics";
+import { FaVk, FaTwitter, FaRedditAlien, FaFacebookF } from "react-icons/fa";
 
 type Props = {
   visisble: boolean;
@@ -44,35 +41,58 @@ export const NadeShareActions: FC<Props> = ({
       <div className="share-buttons">
         <div onClick={() => onSosialShare("Reddit")}>
           <RedditShareButton url={shareUrl} title={title}>
-            <RedditIcon size={40} />
+            <div className="share-icon">
+              <FaRedditAlien />
+            </div>
           </RedditShareButton>
         </div>
         <div onClick={() => onSosialShare("Facebook")}>
           <FacebookShareButton url={shareUrl} quote={title}>
-            <FacebookIcon size={40} />
+            <div className="share-icon">
+              <FaFacebookF />
+            </div>
           </FacebookShareButton>
         </div>
         <div onClick={() => onSosialShare("Twitter")}>
           <TwitterShareButton url={shareUrl} title={title}>
-            <TwitterIcon size={40} />
+            <div className="share-icon">
+              <FaTwitter />
+            </div>
           </TwitterShareButton>
         </div>
         <div onClick={() => onSosialShare("VK")}>
           <VKShareButton url={shareUrl} title={title} image={image}>
-            <VKIcon size={40} />
+            <div className="share-icon vk">
+              <FaVk />
+            </div>
           </VKShareButton>
         </div>
       </div>
       <style jsx>{`
         .share-buttons {
           display: flex;
-          border-radius: 5px;
-          overflow: hidden;
-          width: calc(40px * 4);
+          justify-content: space-between;
         }
 
         .share-buttons div {
           margin-bottom: -5px;
+        }
+
+        .share-icon {
+          width: 40px;
+          height: 40px;
+          font-size: 25px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          color: #fff;
+          background: #454545;
+          border-radius: 5px;
+          transition: background 0.2s;
+        }
+
+        .share-icon:hover {
+          background: #111;
         }
       `}</style>
     </>
