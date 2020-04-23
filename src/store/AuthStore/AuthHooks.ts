@@ -1,4 +1,4 @@
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthApi } from "../../api/TokenApi";
@@ -132,13 +132,15 @@ async function trySignInFunc() {
 }
 
 export const useOnSignIn = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
       const { userDetails, userToken } = await trySignInFunc();
       if (!userDetails || !userToken) {
-        return Router.push("/", "/");
+        router.push("/", "/");
+        return;
       }
 
       dispatch(setToken(userToken));
@@ -147,12 +149,12 @@ export const useOnSignIn = () => {
       const isFirstSignIn = checkIsFirstSignIn(userDetails);
 
       if (isFirstSignIn || userDetails.steamId === "76561198199195838") {
-        Router.push(`/finishprofile`, "/finishprofile");
+        router.push("/finishprofile", "/finishprofile");
       } else {
-        Router.push("/", "/");
+        router.push("/", "/");
       }
     })();
-  }, [dispatch]);
+  }, [dispatch, router]);
 };
 
 function checkIsFirstSignIn(user: User): boolean {
