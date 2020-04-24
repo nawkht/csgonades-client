@@ -73,7 +73,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
         <p>
           Since the server and client communicate less frequently on 64 tick,
-          the server will recieve slighly different movement speeds during your
+          the server will receive slightly different movement speeds during your
           jump. This is the reason your jumpthrow bind will have different
           outcomes on 64 tick and 128 tick. Because of the tickrate, the release
           of the grenade will have different speeds on 64 and 128 tick.
@@ -101,9 +101,9 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         <br />
         <p>
           Using the jumpthrow bind will give you the same result every time, if
-          your playing on the same tickrate. So if you play on both matchmaking
-          and FACEIT as a example. You are going to need to learn the same nade
-          for both tickrates, if it uses a jumpthrow bind.
+          your playing on the same tickrate. If you play on both matchmaking and
+          FACEIT, you are going to need to learn the same nade for both
+          tickrates, if it uses a jumpthrow bind.
         </p>
 
         <AdUnit center tagType="mega-bottom" />
@@ -129,7 +129,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
 
         <h2>Bonus: Variations of the jump throw bind</h2>
         <p>
-          There are variations of the jump throw bind. More specifically there
+          There are variations of the jump throw bind. More specifically, there
           are three. Let’s see them all and how they differ.
         </p>
         <h3>Standard</h3>
