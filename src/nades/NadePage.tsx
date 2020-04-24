@@ -75,7 +75,7 @@ export const NadePage: FC = memo(() => {
 
       <aside id="nadepage-sidebar">
         <div id="nadepage-sidebar-content">
-          <SidebarPanel title="SHARE">
+          <SidebarPanel first title="SHARE">
             <NadeShareActions
               title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
               visisble={nade?.status === "accepted"}
@@ -84,7 +84,7 @@ export const NadePage: FC = memo(() => {
             />
           </SidebarPanel>
 
-          <SidebarPanel title="ACTIONS">
+          <SidebarPanel last title="ACTIONS">
             <div id="nade-buttons">
               <div className="nade-btn">
                 <FavoriteButton

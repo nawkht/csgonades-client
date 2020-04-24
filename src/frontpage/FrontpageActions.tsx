@@ -23,7 +23,7 @@ export const FrontpageActions: FC = memo(({}) => {
         >
           <div className="action discord">
             <p className="discord-msg">
-              Join us on <span>Discord</span>
+              Join us on <b>Discord</b>
             </p>
 
             <p className="sub-msg">One of us... one of us!</p>
