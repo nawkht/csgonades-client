@@ -61,6 +61,7 @@ export const NadePage: FC = memo(() => {
         title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
         authorName={nade?.user.nickname}
         datePublished={nade?.createdAt}
+        dateModified={nade?.updatedAt}
         images={[nade?.images.thumbnailUrl]}
         description={descriptionSimplify(nade?.description)}
         publisherName={"CSGO Nades"}
