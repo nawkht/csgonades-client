@@ -40,7 +40,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         <div id="map-sidebar">
           <NadeFilter showSingInWarning={showSignInWarning} />
 
-          <SidebarPanel title="TOP CONTRIBUTOS">
+          <SidebarPanel last title="TOP CONTRIBUTOS">
             <TopContributorList nades={allNades} />
           </SidebarPanel>
         </div>

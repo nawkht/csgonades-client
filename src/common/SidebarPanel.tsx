@@ -1,17 +1,36 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 type Props = {
   title: string;
   titleComp?: any;
+  first?: boolean;
+  last?: boolean;
 };
 
-export const SidebarPanel: FC<Props> = ({ title, children, titleComp }) => {
+export const SidebarPanel: FC<Props> = ({
+  title,
+  children,
+  titleComp,
+  first,
+  last,
+}) => {
   const { colors } = useTheme();
+
+  const classNames = useMemo(() => {
+    const base = ["sidebar-panel"];
+    if (first) {
+      base.push("first");
+    }
+    if (last) {
+      base.push("last");
+    }
+    return base.join(" ");
+  }, [first, last]);
 
   return (
     <>
-      <div className="sidebar-panel">
+      <div className={classNames}>
         <div className="sidebar-title">
           {title}
           {titleComp}
@@ -21,9 +40,17 @@ export const SidebarPanel: FC<Props> = ({ title, children, titleComp }) => {
       <style jsx>{`
         .sidebar-panel {
           background: ${colors.DP02};
-          border-radius: 5px;
           overflow: hidden;
-          margin-bottom: 30px;
+        }
+
+        .first {
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+        }
+
+        .last {
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
         }
 
         .sidebar-title {

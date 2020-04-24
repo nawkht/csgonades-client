@@ -21,7 +21,7 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
   return (
     <>
       <div className="nade-filter">
-        <SidebarPanel title="ACTIONS" titleComp={<ResetFilterButton />}>
+        <SidebarPanel first title="ACTIONS" titleComp={<ResetFilterButton />}>
           <div id="filter-actions">
             <div className="map">
               <button className="filter-btn" onClick={toggleMapViewVisibility}>

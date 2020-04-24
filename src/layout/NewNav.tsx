@@ -40,8 +40,16 @@ export const NewNav: FC<Props> = ({}) => {
           background: ${colors.DP02};
           padding-bottom: 15px;
           overflow: hidden;
-          border-radius: 5px;
-          margin-bottom: 30px;
+        }
+
+        #active-duty-nades {
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+        }
+
+        #reserve-nades {
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
         }
 
         .nav-label {
