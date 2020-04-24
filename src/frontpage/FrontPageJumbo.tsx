@@ -56,8 +56,8 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
             "stats stats stats";
           background: linear-gradient(
             252.84deg,
-            ${colors.jumboGradientStart} 33.44%,
-            ${colors.jumboGradientEnd} 66.89%
+            ${colors.DP00} 40%,
+            ${colors.DP01} 70%
           );
           background-position: center;
           background-repeat: no-repeat;
