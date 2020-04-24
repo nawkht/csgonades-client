@@ -52,10 +52,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
           {nade.commentCount > 0 && (
             <div className="stat">
               <div className="stat-content">
-                <FaComment
-                  color={favoriteIconColor}
-                  style={{ position: "relative", top: -1 }}
-                />
+                <FaComment style={{ position: "relative", top: -1 }} />
                 <span className="stat-text">{nade.commentCount}</span>
               </div>
             </div>
