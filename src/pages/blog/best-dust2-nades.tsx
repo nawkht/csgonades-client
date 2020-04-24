@@ -5,11 +5,12 @@ import { PageLink } from "../../common/PageLink";
 import { Dimensions } from "../../constants/Constants";
 
 export const bestDust2Nades: BlogPost = {
-  title: "Best Smoke Spots for Dust2 - Must Know!",
+  title: "Best Grenade Spots for Dust2 - Must Know!",
   slug: "best-dust2-nades",
   imageUrl: "/blogimg/dust2-b.jpg",
   thumbnailUrl: "/blogimg/dust2-b_thumb.jpg",
   createdAt: "2020-04-23T02:32:00.000Z",
+  updatedAt: "2020-04-24T15:05:00.000Z",
   intro:
     "Dust2 is one of the most popular maps in CS:GO. Let's take a look at the essential nades everyone should know to gain an edge on the map.",
 };
