@@ -29,6 +29,15 @@ const PractiseConfigBlogPost = () => {
           need to excel on Dust2.
         </p>
 
+        <p>
+          This list is my personal favorites, but you can also browse all Dust2
+          nades to find your own preferrences.
+        </p>
+
+        <PageLink href={`/maps/[map]`} as={`/maps/dust2`}>
+          <span className="dust2-cta">All Dust2 Nades</span>
+        </PageLink>
+
         <h2>1. Xbox Smoke</h2>
         <p>
           Aaah... Xbox. Everyone wants to smoke Xbox. Why? Because there is
@@ -114,6 +123,11 @@ const PractiseConfigBlogPost = () => {
           If you want to learn even more nades for Dust2, head over there. Or,
           if you know a good one, sign in and add it for everyone else to enjoy!
         </p>
+
+        <PageLink href={`/maps/[map]`} as={`/maps/dust2`}>
+          <span className="dust2-cta">All Dust2 Nades</span>
+        </PageLink>
+
         <p>Here are some Dust2 tricks as well for inspiration:</p>
         <div className="video-container">
           <iframe
@@ -138,6 +152,19 @@ const PractiseConfigBlogPost = () => {
         </div>
       </BlogPostArticle>
       <style jsx>{`
+        .dust2-cta {
+          background: #299464;
+          border-radius: 10px;
+          color: white;
+          display: block;
+          margin: 30px auto;
+          padding: 15px 30px;
+          width: 200px;
+          text-align: center;
+          font-weight: 500;
+          font-size: 18px;
+        }
+
         .nade-list {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
