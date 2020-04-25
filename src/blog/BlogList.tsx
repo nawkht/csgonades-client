@@ -19,7 +19,7 @@ export const BlogList: FC<Props> = ({ posts }) => {
       <style jsx>{`
         .blog-post-list {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
           width: 100%;
