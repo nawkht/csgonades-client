@@ -22,75 +22,122 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
     <>
       <div className="nade-filter">
         <SidebarPanel first title="FILTERS" titleComp={<ResetFilterButton />}>
-          <div id="filter-actions">
-            <div className="filter-section-wrap">
-              <div className="filter-section">
-                <span className="filter-label">MAP</span>
-                <div className="map">
-                  <button
-                    className="filter-btn"
-                    onClick={toggleMapViewVisibility}
-                  >
-                    <FaMap />
-                  </button>
-                </div>
-              </div>
+          <div id="filter-grid">
+            <div id="map-label" className="filter-label">
+              MAP
             </div>
 
-            <div className="filter-section-wrap">
-              <div className="filter-section">
-                <span className="filter-label">TYPE</span>
-                <div id="type-btns">
-                  <NadeTypeButton
-                    type="smoke"
-                    currentType={byType}
-                    onFilterByType={filterByType}
-                  />
-                  <NadeTypeButton
-                    type="flash"
-                    currentType={byType}
-                    onFilterByType={filterByType}
-                  />
-                  <NadeTypeButton
-                    type="molotov"
-                    currentType={byType}
-                    onFilterByType={filterByType}
-                  />
-                  <NadeTypeButton
-                    type="hegrenade"
-                    currentType={byType}
-                    onFilterByType={filterByType}
-                  />
-                </div>
-              </div>
+            <div id="tick-label" className="filter-label">
+              TICKRATE
+            </div>
+            <div id="tick-filter">
+              <TickrateSelector />
+            </div>
+            <div id="fav-label" className="filter-label">
+              FAVORITES
+            </div>
+            <div id="fav-filter">
+              <FavFilterButton showSingInWarning={showSingInWarning} />
+            </div>
+            <div id="map-filter">
+              <button className="filter-btn" onClick={toggleMapViewVisibility}>
+                <FaMap />
+              </button>
+            </div>
+            <div id="type-label" className="filter-label">
+              TYPE
+            </div>
+            <div id="smoke-filter">
+              <NadeTypeButton
+                type="smoke"
+                currentType={byType}
+                onFilterByType={filterByType}
+              />
             </div>
 
-            <div className="filter-section-wrap">
-              <div className="filter-section">
-                <span className="filter-label">TICKRATE</span>
-                <TickrateSelector />
-              </div>
-              <div className="filter-section">
-                <span className="filter-label">FAVORITES</span>
-                <FavFilterButton showSingInWarning={showSingInWarning} />
-              </div>
+            <div id="flash-filter">
+              <NadeTypeButton
+                type="flash"
+                currentType={byType}
+                onFilterByType={filterByType}
+              />
+            </div>
+
+            <div id="molotov-filter">
+              <NadeTypeButton
+                type="molotov"
+                currentType={byType}
+                onFilterByType={filterByType}
+              />
+            </div>
+
+            <div id="grenade-filter">
+              <NadeTypeButton
+                type="hegrenade"
+                currentType={byType}
+                onFilterByType={filterByType}
+              />
             </div>
           </div>
         </SidebarPanel>
       </div>
       <style jsx>{`
-        .filter-section-wrap {
-          margin-bottom: 20px;
-          display: flex;
-          justify-content: space-between;
+        #filter-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-template-areas:
+            "map-label . . ."
+            "map-filter . . ."
+            "type-label type-label type-label type-label"
+            "smoke flash molotov grenade"
+            "tick-label tick-label fav-label fav-label"
+            "tick tick fav fav";
         }
 
-        .filter-section-wrap:last-child {
-          margin-bottom: 0;
+        #map-label {
+          grid-area: map-label;
         }
 
-        .filter-section {
-          min-width: 50%;
+        #tick-label {
+          grid-area: tick-label;
+        }
+
+        #fav-label {
+          grid-area: fav-label;
+        }
+
+        #type-label {
+          grid-area: type-label;
+        }
+
+        #map-filter {
+          grid-area: map-filter;
+          padding-bottom: 20px;
+        }
+
+        #fav-filter {
+          grid-area: fav;
+        }
+
+        #tick-filter {
+          grid-area: tick;
+        }
+
+        #smoke-filter {
+          grid-area: smoke;
+          padding-bottom: 20px;
+        }
+
+        #flash-filter {
+          grid-area: flash;
+        }
+
+        #molotov-filter {
+          grid-area: molotov;
+        }
+
+        #grenade-filter {
+          grid-area: grenade;
         }
 
         .filter-label {
@@ -98,7 +145,8 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
           font-weight: 300;
           margin-bottom: 5px;
           display: block;
-          font-weight: 400;
+          font-weight: 500;
+          color: ${colors.TEXT};
         }
 
         .filter-btn {
