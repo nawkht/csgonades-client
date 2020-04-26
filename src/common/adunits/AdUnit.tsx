@@ -15,7 +15,7 @@ type Props = {
 };
 
 const isBrowser = typeof window !== "undefined";
-const ADS_ENABLED = false;
+const ADS_ENABLED = true;
 
 export const AdUnit: FC<Props> = memo(({ tagType, center }) => {
   const [mounted, setMounted] = useState(false);
