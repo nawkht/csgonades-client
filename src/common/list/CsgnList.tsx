@@ -1,8 +1,8 @@
 import { FC, memo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { Dimensions } from "../../constants/Constants";
-import { AdUnit } from "../adunits/AdUnit";
 import { isMobile } from "react-device-detect";
+import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
 
 type Props<T> = {
   data: T[];
@@ -45,12 +45,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         ))}
         {displayFirstAd && (
           <div className="ad-1-container">
-            <AdUnit center tagType="top-medium-rectangle" />
+            <EzoicPlaceHolder id={148} />
           </div>
         )}
         {displaySecondAd && (
           <div className="ad-2-container">
-            <AdUnit center tagType="bottom-medium-rectangle" />
+            <EzoicPlaceHolder id={149} />
           </div>
         )}
       </div>
@@ -82,7 +82,6 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           justify-self: center;
           border-radius: 5px;
           align-self: center;
-          display: none;
         }
 
         .ad-1-container {
