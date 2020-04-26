@@ -1,0 +1,8 @@
+{
+  "routes": [
+    {
+      "src": "/ads.txt",
+      "dest": "https://srv.adstxtmanager.com/7208/csgonades.com"
+    }
+  ]
+}

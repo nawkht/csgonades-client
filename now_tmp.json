@@ -1,8 +1,0 @@
-{
-  "routes": [
-    {
-      "src": "/ads.txt",
-      "dest": "https://www.themoneytizer.com/ads.txt"
-    }
-  ]
-}

@@ -11,9 +11,11 @@ import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
 import { CookieConsent } from "../common/CookieConsent";
 import { NewNav } from "./NewNav";
+import { useNewAdRefresher } from "./useAdRefresher";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
+  useNewAdRefresher();
   useSetupSession();
   usePageView();
   usePreloadUser();

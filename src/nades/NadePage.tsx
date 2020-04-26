@@ -27,7 +27,7 @@ import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { SidebarPanel } from "../common/SidebarPanel";
-import { AdUnit } from "../common/adunits/AdUnit";
+import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 
 export const NadePage: FC = memo(() => {
   const { colors } = useTheme();
@@ -101,7 +101,7 @@ export const NadePage: FC = memo(() => {
           </SidebarPanel>
 
           <div className="ph-unit">
-            <AdUnit tagType="half-page" />
+            <EzoicPlaceHolder id={170} />
           </div>
         </div>
       </aside>

@@ -53,6 +53,7 @@ class MyDocument extends Document {
               async
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             ></script>
+            <script src="//www.ezojs.com/ezoic/sa.min.js"></script>
             {false && (
               <script
                 type="text/javascript"
