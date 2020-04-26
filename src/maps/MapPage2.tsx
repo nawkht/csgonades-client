@@ -35,7 +35,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           canonical={`/maps/${map}`}
           description={`Find the best smokes, flashbangs, molotovs and grenades for ${capitalize(
             map
-          )}. Browse our large collection of nades for Counter-Strike Global Offensive.`}
+          )}. Browse our large collection of nades for CS:GO.`}
         />
         <MapPageJumbo map={map} nades={allNades} />
         <div className="map-nade-list">
