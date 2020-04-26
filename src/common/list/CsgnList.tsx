@@ -1,7 +1,6 @@
 import { FC, memo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { Dimensions } from "../../constants/Constants";
-import { isMobile } from "react-device-detect";
+import { Dimensions, Config } from "../../constants/Constants";
 import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
 
 type Props<T> = {
@@ -23,8 +22,8 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const numItems = data.length;
   const isEmpty = numItems === 0;
 
-  const displayFirstAd = numItems > 7 && !isMobile;
-  const displaySecondAd = numItems > 20 && !isMobile;
+  const displayFirstAd = numItems > 7;
+  const displaySecondAd = numItems > 20;
 
   return (
     <>
@@ -43,12 +42,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
             {renderItem(item)}
           </div>
         ))}
-        {displayFirstAd && (
+        {displayFirstAd && Config.ADS_ENABLED && (
           <div className="ad-1-container">
             <EzoicPlaceHolder id={148} />
           </div>
         )}
-        {displaySecondAd && (
+        {displaySecondAd && Config.ADS_ENABLED && (
           <div className="ad-2-container">
             <EzoicPlaceHolder id={149} />
           </div>
@@ -73,7 +72,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
 
         .ad-1-container,
         .ad-2-container {
-          display: flex;
+          display: ${Config.ADS_ENABLED ? "flex" : "none"};
           align-items: center;
           justify-content: space-around;
           background: ${colors.DP02};

@@ -7,6 +7,7 @@ export const Config = {
   SIGN_IN_URL: IS_PROD
     ? "https://api.csgonades.com/auth/steam"
     : "http://localhost:5000/auth/steam",
+  ADS_ENABLED: true,
 };
 
 export const Dimensions = {

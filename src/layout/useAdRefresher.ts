@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { IS_PROD } from "../constants/Constants";
+import { IS_PROD, Config } from "../constants/Constants";
 
 const isBrowser = typeof window !== "undefined";
 
@@ -8,7 +8,7 @@ export const useNewAdRefresher = () => {
   const { asPath } = useRouter();
 
   useEffect(() => {
-    if (asPath.includes("adtesting") || (!isBrowser && !IS_PROD)) {
+    if (!isBrowser || !IS_PROD || !Config.ADS_ENABLED) {
       return;
     }
     ezRefreshAds();
