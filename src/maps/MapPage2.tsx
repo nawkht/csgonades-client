@@ -30,7 +30,13 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
   return (
     <>
       <div key={map} id="map-page">
-        <SEO title={mapPageTitleSeo(map)} canonical={`/maps/${map}`} />
+        <SEO
+          title={mapPageTitleSeo(map)}
+          canonical={`/maps/${map}`}
+          description={`Find the best smokes, flashbangs, molotovs and grenades for ${capitalize(
+            map
+          )}. Browse our large collection of nades for Counter-Strike Global Offensive.`}
+        />
         <MapPageJumbo map={map} nades={allNades} />
         <div className="map-nade-list">
           <MapPageNades allNades={allNades} />
