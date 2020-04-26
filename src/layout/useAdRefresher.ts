@@ -32,12 +32,18 @@ const ezRefreshAds = (tries = 0) => {
   try {
     if (!ezstandalone.enabled) {
       const csgoEzoicCodes = findAdCode();
+      if (!csgoEzoicCodes.length) {
+        return;
+      }
       ezstandalone.define(csgoEzoicCodes);
       ezstandalone.enable();
       ezstandalone.display();
       console.log("> enable display", csgoEzoicCodes);
     } else if (ezstandalone.enabled && ezstandalone.hasDisplayedAds) {
       const csgoEzoicCodes = findAdCode();
+      if (!csgoEzoicCodes.length) {
+        return;
+      }
       ezstandalone.define(csgoEzoicCodes);
       ezstandalone.refresh();
       console.log("> refresh", csgoEzoicCodes);
