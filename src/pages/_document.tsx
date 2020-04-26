@@ -53,13 +53,13 @@ class MyDocument extends Document {
               async
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             ></script>
-            {/**
-             * <script
-              type="text/javascript"
-              async
-              dangerouslySetInnerHTML={{ __html: consentScript }}
-            />
-             */}
+            {true && (
+              <script
+                type="text/javascript"
+                async
+                dangerouslySetInnerHTML={{ __html: consentScript }}
+              />
+            )}
           </Head>
           <body>
             <Main />
@@ -73,7 +73,7 @@ class MyDocument extends Document {
 
 export default MyDocument;
 
-/*const consentScript = `
+const consentScript = `
 var elem = document.createElement("script");
 elem.src = "https://quantcast.mgr.consensu.org/cmp.js";
 elem.async = true;
@@ -156,4 +156,3 @@ window.__cmp("init", {
   "No Option": false,
 });
 `;
-*/

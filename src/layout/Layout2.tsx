@@ -40,7 +40,7 @@ export const Layout2: FC = memo(({ children }) => {
       <ToastList />
       <MobileNav />
       <AdminLink />
-      <CookieConsent />
+      {false && <CookieConsent />}
 
       <style jsx>{`
         .footer-placement {

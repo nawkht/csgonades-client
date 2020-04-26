@@ -12,6 +12,7 @@ import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
 import { TopContributorList } from "./TopContributor";
 import { SidebarPanel } from "../common/SidebarPanel";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   map: CsgoMap;
@@ -43,6 +44,9 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           <SidebarPanel last title="TOP CONTRIBUTOS">
             <TopContributorList nades={allNades} />
           </SidebarPanel>
+          <div className="ph-unit">
+            <AdUnit tagType="bottom-medium-rectangle" />
+          </div>
         </div>
       </aside>
 
@@ -53,12 +57,6 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         message="filter"
       />
       <style jsx>{`
-        .fake-ph {
-          width: 300px;
-          height: 250px;
-          background: pink;
-        }
-
         #map-page {
           grid-area: main;
           min-height: 100vh;
@@ -102,6 +100,10 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         .map-filter-sticky {
           position: sticky;
           top: 50px;
+        }
+
+        .ph-unit {
+          margin-top: 30px;
         }
 
         @media only screen and (max-width: 1210px) {

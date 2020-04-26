@@ -1,4 +1,4 @@
-import nanoId from "nanoid";
+import { nanoid } from "nanoid";
 import { capitalize } from "../../utils/Common";
 
 export type ToastSeverity = "info" | "success" | "warning" | "error";
@@ -34,7 +34,7 @@ export type ToastActions = AddToastAction | RemoveToastAction;
 export const addNotificationAction = (
   notification: AppToastCreate
 ): AddToastAction => {
-  const id = nanoId();
+  const id = nanoid();
   const noti: AppToast = {
     ...notification,
     id,

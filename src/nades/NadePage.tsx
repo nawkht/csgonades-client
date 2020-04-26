@@ -27,6 +27,7 @@ import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { SidebarPanel } from "../common/SidebarPanel";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadePage: FC = memo(() => {
   const { colors } = useTheme();
@@ -98,6 +99,10 @@ export const NadePage: FC = memo(() => {
               </div>
             </div>
           </SidebarPanel>
+
+          <div className="ph-unit">
+            <AdUnit tagType="half-page" />
+          </div>
         </div>
       </aside>
 
@@ -173,6 +178,10 @@ export const NadePage: FC = memo(() => {
       )}
 
       <style jsx>{`
+        .ph-unit {
+          margin-top: 30px;
+        }
+
         .share-label {
           background: ${colors.DP01};
           padding: 15px 30px 15px 30px;

@@ -9,6 +9,7 @@ import { SEO } from "../layout/SEO2";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
 import { SidebarPanel } from "../common/SidebarPanel";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   data: BlogPost;
@@ -64,7 +65,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
       <aside id="blog-sidebar">
         <div id="blog-sidebar-wrap">
-          <SidebarPanel title="SHARE">
+          <SidebarPanel first last title="SHARE">
             <NadeShareActions
               url={`/blog/${data.slug}`}
               title={data.title}
@@ -72,10 +73,17 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
               visisble={true}
             />
           </SidebarPanel>
+          <div className="ph-unit">
+            <AdUnit tagType="half-page" />
+          </div>
         </div>
       </aside>
 
       <style jsx>{`
+        .ph-unit {
+          margin-top: 30px;
+        }
+
         article {
           grid-area: main;
           display: grid;
