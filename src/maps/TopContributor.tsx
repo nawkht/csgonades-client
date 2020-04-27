@@ -5,6 +5,7 @@ import { NadeLight } from "../models/Nade/Nade";
 
 interface UserContribution extends UserLight {
   nadeCount: number;
+  favCount: number;
 }
 
 type ContListProps = {
@@ -16,16 +17,18 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
     const contCount: { [key: string]: UserContribution } = {};
     nades.forEach((nade) => {
       const steamId = nade.user.steamId;
-      const currentDate = contCount[steamId];
-      if (currentDate) {
+      const currentUser = contCount[steamId];
+      if (currentUser) {
         contCount[steamId] = {
-          ...currentDate,
-          nadeCount: currentDate.nadeCount + 1,
+          ...currentUser,
+          nadeCount: currentUser.nadeCount + 1,
+          favCount: currentUser.favCount + nade.favoriteCount,
         };
       } else {
         contCount[steamId] = {
           ...nade.user,
           nadeCount: 1,
+          favCount: nade.favoriteCount,
         };
       }
     });
@@ -33,7 +36,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
     sortedContributors = sortedContributors.filter(
       (n) => n.steamId !== "76561198026064832"
     );
-    sortedContributors.sort((a, b) => b.nadeCount - a.nadeCount);
+    sortedContributors.sort((a, b) => b.favCount - a.favCount);
     sortedContributors = sortedContributors.slice(0, 3);
 
     const gold = sortedContributors.shift();
@@ -76,8 +79,16 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
             </div>
           </>
         )}
+        <div id="cont-desc">Based on number of favorites recieved.</div>
       </div>
       <style jsx>{`
+        #cont-desc {
+          font-size: 12px;
+          color: #bbb;
+          text-align: center;
+          grid-area: desc;
+        }
+
         .cont-list {
           display: grid;
           grid-template-columns: 1fr;
@@ -85,7 +96,8 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           grid-template-areas:
             "gold"
             "silver"
-            "bronze";
+            "bronze"
+            "desc";
         }
 
         #gold,
