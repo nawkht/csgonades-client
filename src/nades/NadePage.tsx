@@ -56,8 +56,9 @@ export const NadePage: FC = memo(() => {
   }
 
   return (
-    <div key={nade.id}>
+    <>
       <ArticleJsonLd
+        key={nade.id}
         url={`https://www.csgonades.com/nades/${nade?.slug || nade?.id}`}
         title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
         authorName={nade?.user.nickname}
@@ -69,13 +70,14 @@ export const NadePage: FC = memo(() => {
         publisherLogo={"https://www.csgonades.com/logo.png"}
       />
       <SEO
+        key={nade.id}
         title={layoutTitle}
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
         thumbnail={nade.images.thumbnailUrl}
       />
 
-      <aside id="nadepage-sidebar">
+      <aside key={nade.id} id="nadepage-sidebar">
         <div id="nadepage-sidebar-content">
           <SidebarPanel first title="SHARE">
             <NadeShareActions
@@ -106,7 +108,7 @@ export const NadePage: FC = memo(() => {
         </div>
       </aside>
 
-      <div id="nade-page-grid">
+      <div key={nade.id} id="nade-page-grid">
         <div id="title">
           {allowEdit && (
             <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
@@ -315,6 +317,6 @@ export const NadePage: FC = memo(() => {
           }
         }
       `}</style>
-    </div>
+    </>
   );
 });
