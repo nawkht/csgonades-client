@@ -15,7 +15,7 @@ export const useNewAdRefresher = () => {
   }, [asPath]);
 };
 
-const ezRefreshAds = (tries = 0) => {
+const ezRefreshAds = async (tries = 0) => {
   if (tries > 2) {
     return;
   }
@@ -35,18 +35,23 @@ const ezRefreshAds = (tries = 0) => {
       if (!csgoEzoicCodes.length) {
         return;
       }
-      ezstandalone.define(csgoEzoicCodes);
-      ezstandalone.enable();
-      ezstandalone.display();
-      console.log("> enable display", csgoEzoicCodes);
+      ezstandalone.cmd.push(() => {
+        ezstandalone.define(csgoEzoicCodes);
+        ezstandalone.enable();
+        ezstandalone.display();
+        console.log("> enable display", csgoEzoicCodes.toString());
+      });
     } else if (ezstandalone.enabled && ezstandalone.hasDisplayedAds) {
+      sleep(500);
       const csgoEzoicCodes = findAdCode();
       if (!csgoEzoicCodes.length) {
         return;
       }
-      ezstandalone.define(csgoEzoicCodes);
-      ezstandalone.refresh();
-      console.log("> refresh", csgoEzoicCodes);
+      ezstandalone.cmd.push(() => {
+        ezstandalone.define(csgoEzoicCodes);
+        ezstandalone.refresh();
+        console.log("> refresh", csgoEzoicCodes.toString());
+      });
     }
   } catch (error) {
     return;
@@ -79,3 +84,5 @@ function findAdCode() {
 
   return adIds;
 }
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

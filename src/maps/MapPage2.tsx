@@ -109,7 +109,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         }
 
         .ph-unit {
-          margin-top: 30px;
+          margin-top: 15px;
         }
 
         @media only screen and (max-width: 1210px) {

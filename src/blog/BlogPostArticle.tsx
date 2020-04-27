@@ -9,7 +9,7 @@ import { SEO } from "../layout/SEO2";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
 import { SidebarPanel } from "../common/SidebarPanel";
-import { AdUnit } from "../common/adunits/AdUnit";
+import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 
 type Props = {
   data: BlogPost;
@@ -74,14 +74,14 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
             />
           </SidebarPanel>
           <div className="ph-unit">
-            <AdUnit tagType="half-page" />
+            <EzoicPlaceHolder id={171} />
           </div>
         </div>
       </aside>
 
       <style jsx>{`
         .ph-unit {
-          margin-top: 30px;
+          margin-top: 15px;
         }
 
         article {

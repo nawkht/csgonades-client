@@ -179,7 +179,7 @@ export const NadePage: FC = memo(() => {
 
       <style jsx>{`
         .ph-unit {
-          margin-top: 30px;
+          margin-top: 15px;
         }
 
         .share-label {
