@@ -28,6 +28,7 @@ export const BlogAuthor: FC<Props> = ({}) => {
 
         .author img {
           width: 60px;
+          height: 60px;
           border-radius: 50%;
           margin-right: 20px;
         }
