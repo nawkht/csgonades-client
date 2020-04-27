@@ -56,7 +56,7 @@ export const NadePage: FC = memo(() => {
   }
 
   return (
-    <>
+    <div key={nade.id}>
       <ArticleJsonLd
         url={`https://www.csgonades.com/nades/${nade?.slug || nade?.id}`}
         title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
@@ -315,6 +315,6 @@ export const NadePage: FC = memo(() => {
           }
         }
       `}</style>
-    </>
+    </div>
   );
 });
