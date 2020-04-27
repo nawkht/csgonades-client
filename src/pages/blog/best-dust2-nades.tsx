@@ -43,15 +43,12 @@ const PractiseConfigBlogPost = () => {
           Aaah... Xbox. Everyone wants to smoke Xbox. Why? Because there is
           always an annoying AWP in mid stopping you from going short. So here
           are three options for you. For 64 tick and 128 tick if you use{" "}
-          <PageLink
-            href="/blog/tickrate-and-jumpthrow-bind"
-            as="/blog/tickrate-and-jumpthrow-bind"
-          >
+          <PageLink href="/blog/jumpthrow-bind" as="/blog/jumpthrow-bind">
             jumpthrow bind
           </PageLink>
           , or the last one if you prefer not to use the bind.
         </p>
-        <p>
+        <p className="tip">
           <strong>
             Tip: Mouse over the thumbnail and it will play the video.
           </strong>
@@ -152,6 +149,10 @@ const PractiseConfigBlogPost = () => {
         </div>
       </BlogPostArticle>
       <style jsx>{`
+        .tip {
+          text-align: center;
+        }
+
         .dust2-cta {
           background: #299464;
           border-radius: 10px;
