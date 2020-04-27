@@ -10,7 +10,7 @@ export const NewNav: FC<Props> = ({}) => {
     <>
       <div id="nav">
         <div id="active-duty-nades">
-          <span className="nav-label">ACTIVE DUTY MAPS</span>
+          <span className="nav-label">ACTIVE DUTY NADES</span>
           <ul>
             <MapLink map="dust2" />
             <MapLink map="mirage" />
@@ -22,7 +22,7 @@ export const NewNav: FC<Props> = ({}) => {
           </ul>
         </div>
         <div id="reserve-nades">
-          <span className="nav-label">RESERVE MAPS</span>
+          <span className="nav-label">RESERVE NADES</span>
           <ul>
             <MapLink map="cache" />
             <MapLink map="anubis" />
