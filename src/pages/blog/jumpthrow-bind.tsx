@@ -45,14 +45,8 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           robot, and you probably release the mouse button at slightly different
           times.
         </p>
-        <h2>Single key jumpthrow bind</h2>
-        <p>Simple jumpthrow bind that you can paste into your console.</p>
-        <p>
-          Change <em>KEY</em> with whatever key you prefer to use.
-        </p>
-        <BlogCodeSnippet code={'bind KEY "+jump; -attack; -jump"'} />
 
-        <h2>Jumpthrow alias in autoexec</h2>
+        <h2>Setting up jumpthrow bind</h2>
         <p>
           If you don’t have a autoexec config file allready, you can follow{" "}
           <a href="https://www.dailyesports.gg/how-to-create-a-custom-csgo-config-autoexec-cfg/">
