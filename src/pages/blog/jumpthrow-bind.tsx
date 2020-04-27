@@ -70,6 +70,18 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           }
         />
 
+        <p>
+          Now that you got your jumpthrow bind is set up, head over to your
+          favorite map and find some nades that use the jumpthrow bind.
+        </p>
+
+        <PageLink href="/maps/[map]" as="/maps/dust2">
+          <span className="cta-map">Dust2 Nades</span>
+        </PageLink>
+        <PageLink href="/maps/[map]" as="/maps/mirage">
+          <span className="cta-map">Mirage Nades</span>
+        </PageLink>
+
         <div className="video-container">
           <iframe
             width="560"
@@ -111,6 +123,19 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           left: 0;
           width: 100%;
           height: 100%;
+        }
+
+        .cta-map {
+          background: #299464;
+          border-radius: 10px;
+          color: white;
+          display: block;
+          margin: 30px auto;
+          padding: 15px 30px;
+          width: 200px;
+          text-align: center;
+          font-weight: 500;
+          font-size: 18px;
         }
       `}</style>
     </>
