@@ -152,6 +152,8 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
           border: 1px solid ${colors.BORDER};
           margin-top: 30px;
           border-radius: 5px;
+          background: ${colors.DP03};
+          color: ${colors.TEXT};
         }
 
         .nade-comment-header {
