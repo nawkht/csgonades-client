@@ -44,12 +44,11 @@ export const FrontpageActions: FC = memo(({}) => {
         >
           <div className="action paypal">
             <p className="paypal-msg">
-              Support via <span>Paypal</span>
+              Support me on <span>Paypal</span>
             </p>
 
             <p className="sub-msg">
-              I&apos;m running out of energy drink&apos;s.
-              <br /> *glub* *glub*
+              Refill my fuel tank <span className="emoji">🥤</span>
             </p>
 
             <div className="paypal-logo">
@@ -59,6 +58,13 @@ export const FrontpageActions: FC = memo(({}) => {
         </a>
       </div>
       <style jsx>{`
+        .emoji {
+          font-size: 2.5em;
+          position: relative;
+          top: 5px;
+          left: -3px;
+        }
+
         .actions-wrapper {
           width: 100%;
           margin-bottom: 30px;
