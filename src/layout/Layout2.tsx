@@ -15,10 +15,10 @@ import { useNewAdRefresher } from "./useAdRefresher";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
-  useNewAdRefresher();
   useSetupSession();
   usePageView();
   usePreloadUser();
+  useNewAdRefresher();
 
   return (
     <>
