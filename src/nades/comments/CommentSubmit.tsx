@@ -47,7 +47,7 @@ export const CommentSubmit: FC<Props> = memo(
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write a comment."
+              placeholder="Write a comment. It's a person on the other side, don't be to mean! 😏"
             />
             <button onClick={onSubmit} disabled={loading}>
               Submit
@@ -79,11 +79,14 @@ export const CommentSubmit: FC<Props> = memo(
 
           .nade-submit textarea {
             width: 100%;
-            resize: none;
+            min-height: 200px;
             font-size: 18px;
             padding: 20px;
-            border: 1px solid ${colors.BORDER};
+            border: 1px dashed ${colors.PRIMARY};
             outline: none;
+            background: ${colors.DP03};
+            color: ${colors.TEXT};
+            border-radius: 5px;
           }
 
           .nade-submit button {

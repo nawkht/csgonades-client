@@ -87,6 +87,7 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
         #message {
           grid-area: msg;
           padding: 50px 30px;
+          color: ${colors.TEXT};
         }
 
         #message p {

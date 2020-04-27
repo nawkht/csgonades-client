@@ -30,8 +30,8 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           background: ${colors.DP01};
           padding: 40px 30px;
           margin-bottom: 30px;
-          box-shadow: ${colors.SHADOW};
           border-radius: 5px;
+          color: ${colors.TEXT};
         }
 
         .map-welcome-wrap {
