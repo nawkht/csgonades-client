@@ -29,17 +29,27 @@ const ezRefreshAds = async (tries = 0) => {
     return;
   }
 
+  sleep(500);
+
   try {
     if (!ezstandalone.enabled) {
+      const csgoEzoicCodes = findAdCode();
+      if (!csgoEzoicCodes.length) {
+        return;
+      }
+      ezstandalone.define(csgoEzoicCodes);
       ezstandalone.enable();
+      ezstandalone.display();
+      console.log("> enable display", csgoEzoicCodes.toString());
+    } else if (ezstandalone.enabled && ezstandalone.hasDisplayedAds) {
+      const csgoEzoicCodes = findAdCode();
+      if (!csgoEzoicCodes.length) {
+        return;
+      }
+      ezstandalone.define(csgoEzoicCodes);
+      ezstandalone.refresh();
+      console.log("> refresh", csgoEzoicCodes.toString());
     }
-
-    sleep(500);
-
-    const csgoEzoicCodes = findAdCode();
-    ezstandalone.define(csgoEzoicCodes);
-    ezstandalone.refresh();
-    console.log("> refresh", csgoEzoicCodes.toString());
   } catch (error) {
     return;
   }
