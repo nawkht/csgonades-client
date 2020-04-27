@@ -25,11 +25,28 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
   return (
     <>
       <div id="jumbo">
-        <h1>
-          Hi, welcome to CSGO Nades.
-          <br /> A community to learn and share
-          <br /> nades for Counter-Strike Global Offensive.
-        </h1>
+        <div id="message">
+          <h1>
+            Hi! Welcome to CSGO Nades.
+            <br /> A community to learn and share
+            <br /> nades for Counter-Strike Global Offensive.
+          </h1>
+          <p>
+            I was once a Global Elite, but with age, my reaction time has slowly
+            withered away 🥺
+            <br />I have left these nades for you; It&apos;s your turn to become
+            Global🤩
+            <br /> With great power comes great responsibility.
+            <br />-{" "}
+            <a
+              rel="noopener noreferrer"
+              href="https://steamcommunity.com/profiles/76561198026064832/"
+              target="_blank"
+            >
+              sNipn
+            </a>
+          </p>
+        </div>
         <div id="jumbo-ill">
           <img src="/images/ilustration.svg" />
         </div>
@@ -67,14 +84,30 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
           overflow: hidden;
         }
 
-        h1 {
+        #message {
           grid-area: msg;
+          padding: 50px 30px;
+        }
+
+        #message p {
+          font-size: 1.3rem;
+        }
+
+        #message a {
+          color: ${colors.TEXT};
+        }
+
+        #message a:hover {
+          text-decoration: underline;
+        }
+
+        h1 {
           color: ${colors.TEXT};
           margin: 0;
           padding: 0;
           font-weight: 300;
           font-size: 2.2rem;
-          padding: 50px 30px;
+          margin-bottom: 20px;
         }
 
         #jumbo-ill {

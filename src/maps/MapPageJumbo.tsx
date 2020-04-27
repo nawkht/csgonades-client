@@ -19,10 +19,11 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           Find the best smokes, flashbangs, molotovs and grenades for{" "}
           {capitalize(map)}.
         </h1>
-        <h2>
-          Something missing?
-          <br /> Sign in, and add a nade to help everyone out.
-        </h2>
+        <h2>With these nades you might have a chance against BOT Bob 🤖</h2>
+        <p>
+          Channel your inner Global Elite, sign in, then add your genius nades
+          to the list 🏆
+        </p>
       </div>
       <style jsx>{`
         .map-welcome {
@@ -64,6 +65,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           font-size: 20px;
           margin: 0;
           margin-top: 20px;
+          margin-bottom: 20px;
         }
 
         @media only screen and (max-width: 1200px) {

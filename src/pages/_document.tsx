@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import { Config } from "../constants/Constants";
 
 class MyDocument extends Document {
   render() {
@@ -53,7 +54,9 @@ class MyDocument extends Document {
               async
               src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             ></script>
-            <script src="//www.ezojs.com/ezoic/sa.min.js"></script>
+            {Config.ADS_ENABLED && (
+              <script src="//www.ezojs.com/ezoic/sa.min.js"></script>
+            )}
             {false && (
               <script
                 type="text/javascript"
