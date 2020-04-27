@@ -31,29 +31,15 @@ const ezRefreshAds = async (tries = 0) => {
 
   try {
     if (!ezstandalone.enabled) {
-      sleep(500);
-      const csgoEzoicCodes = findAdCode();
-      if (!csgoEzoicCodes.length) {
-        return;
-      }
-      ezstandalone.cmd.push(() => {
-        ezstandalone.define(csgoEzoicCodes);
-        ezstandalone.enable();
-        ezstandalone.display();
-        console.log("> enable display", csgoEzoicCodes.toString());
-      });
-    } else if (ezstandalone.enabled && ezstandalone.hasDisplayedAds) {
-      sleep(500);
-      const csgoEzoicCodes = findAdCode();
-      if (!csgoEzoicCodes.length) {
-        return;
-      }
-      ezstandalone.cmd.push(() => {
-        ezstandalone.define(csgoEzoicCodes);
-        ezstandalone.refresh();
-        console.log("> refresh", csgoEzoicCodes.toString());
-      });
+      ezstandalone.enable();
     }
+
+    sleep(500);
+
+    const csgoEzoicCodes = findAdCode();
+    ezstandalone.define(csgoEzoicCodes);
+    ezstandalone.refresh();
+    console.log("> refresh", csgoEzoicCodes.toString());
   } catch (error) {
     return;
   }
