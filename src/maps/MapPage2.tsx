@@ -29,7 +29,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
 
   return (
     <>
-      <div key={map} id="map-page">
+      <div key={"map-" + map} id="map-page">
         <SEO
           title={mapPageTitleSeo(map)}
           canonical={`/maps/${map}`}
@@ -43,7 +43,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         </div>
       </div>
 
-      <aside key={map}>
+      <aside key={"side" + map}>
         <div id="map-sidebar">
           <NadeFilter showSingInWarning={showSignInWarning} />
 
