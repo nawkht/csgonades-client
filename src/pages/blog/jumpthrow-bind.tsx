@@ -69,7 +69,29 @@ const NadeAlignCrosshairBlogPost: FC = () => {
             'alias "+jumpthrow" "+jump;-attack;-attack2"\nalias "-jumpthrow" "-jump"\nbind "KEY" "+jumpthrow"'
           }
         />
+        <h3>How to use</h3>
+        <p>
+          Take out your smoke, hold down either your left, right or both mouse
+          buttons. Then press the button you selected for your bind. The script
+          will jump, and release both mouse buttons for you.
+        </p>
 
+        <b>Normal range jumpthrow</b>
+        <p>
+          Hold down <em>left mouse button</em>, click the bind.
+        </p>
+
+        <b>Short range jumpthrow</b>
+        <p>
+          Holde down <em>right mouse button</em>, click the bind.
+        </p>
+
+        <b>Medium range jumpthrow</b>
+        <p>
+          Holde down <em>both mouse button</em>, click the bind.
+        </p>
+
+        <h2>Conclusion</h2>
         <p>
           Now that you got your jumpthrow bind is set up, head over to your
           favorite map and find some nades that use the jumpthrow bind.
