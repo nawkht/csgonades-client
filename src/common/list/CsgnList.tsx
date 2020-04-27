@@ -22,8 +22,8 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const numItems = data.length;
   const isEmpty = numItems === 0;
 
-  const displayFirstAd = numItems > 7;
-  const displaySecondAd = numItems > 20;
+  const displayFirstAd = numItems > 10;
+  const displaySecondAd = numItems > 22;
 
   return (
     <>
@@ -84,11 +84,11 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         }
 
         .ad-1-container {
-          order: 6;
+          order: 9;
         }
 
         .ad-2-container {
-          order: 17;
+          order: 20;
         }
       `}</style>
     </>
