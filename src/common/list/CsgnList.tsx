@@ -25,6 +25,8 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const displayFirstAd = numItems > 10;
   const displaySecondAd = numItems > 22;
 
+  const listAdsEnabled = Config.ADS_ENABLED && false;
+
   return (
     <>
       {isEmpty && (
@@ -42,12 +44,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
             {renderItem(item)}
           </div>
         ))}
-        {displayFirstAd && Config.ADS_ENABLED && (
+        {displayFirstAd && listAdsEnabled && (
           <div className="ad-1-container">
             <EzoicPlaceHolder id={172} />
           </div>
         )}
-        {displaySecondAd && Config.ADS_ENABLED && (
+        {displaySecondAd && listAdsEnabled && (
           <div className="ad-2-container">
             <EzoicPlaceHolder id={173} />
           </div>
@@ -72,7 +74,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
 
         .ad-1-container,
         .ad-2-container {
-          display: ${Config.ADS_ENABLED ? "flex" : "none"};
+          display: ${listAdsEnabled ? "flex" : "none"};
           align-items: center;
           justify-content: space-around;
           background: ${colors.DP02};
