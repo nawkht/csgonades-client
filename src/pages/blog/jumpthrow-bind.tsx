@@ -2,6 +2,7 @@ import { FC } from "react";
 import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
+import { PageLink } from "../../common/PageLink";
 
 export const blogJumpthrowBind: BlogPost = {
   title: "Jumpthrow Bind for CS:GO - Ultimate Guide",
@@ -79,6 +80,16 @@ const NadeAlignCrosshairBlogPost: FC = () => {
             allowFullScreen
           ></iframe>
         </div>
+
+        <h2>Read more</h2>
+        <p>
+          <PageLink
+            href="/blog/tickrate-and-jumpthrow-bind"
+            as="/blog/tickrate-and-jumpthrow-bind"
+          >
+            <span>Why Jumpthrow Smokes Are Different on 64 and 128 Tick</span>
+          </PageLink>
+        </p>
       </BlogPostArticle>
       <style jsx>{`
         .video-container {
