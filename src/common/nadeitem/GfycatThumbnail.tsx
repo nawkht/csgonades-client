@@ -38,9 +38,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   }
 
   const onLoad = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
-    if (isSafari) {
-      e.currentTarget.playbackRate = 1;
-    } else {
+    if (!isSafari) {
       e.currentTarget.playbackRate = 3;
     }
   };
