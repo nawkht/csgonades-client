@@ -8,6 +8,22 @@ import {
   filterByTypeSelector,
 } from "../selectors";
 
+export const useDisplayingNadesForPosition = () => {
+  const dispatch = useMapStoreDispatch();
+  const byCoords = useSelector(filterByCoordsSelector);
+
+  const reset = useCallback(() => {
+    dispatch({
+      type: "MapStore/FilterReset",
+    });
+  }, [dispatch]);
+
+  return {
+    isDisplayingCoords: !!byCoords,
+    reset,
+  };
+};
+
 export const useFilterReset = () => {
   const byCoords = useSelector(filterByCoordsSelector);
   const byTickrate = useSelector(filterByTickrateSelector);
