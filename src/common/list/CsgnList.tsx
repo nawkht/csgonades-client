@@ -44,12 +44,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         ))}
         {displayFirstAd && Config.ADS_ENABLED && (
           <div className="ad-1-container">
-            <EzoicPlaceHolder id={148} />
+            <EzoicPlaceHolder id={172} />
           </div>
         )}
         {displaySecondAd && Config.ADS_ENABLED && (
           <div className="ad-2-container">
-            <EzoicPlaceHolder id={149} />
+            <EzoicPlaceHolder id={173} />
           </div>
         )}
       </div>
