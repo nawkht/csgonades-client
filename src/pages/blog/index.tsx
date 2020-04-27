@@ -6,12 +6,14 @@ import { SEO } from "../../layout/SEO2";
 import { blogPractiseConfig } from "./practice-config";
 import { blogNadeAlignCrosshair } from "./smoke-align-crosshair";
 import { bestDust2Nades } from "./best-dust2-nades";
+import { blogJumpthrowBind } from "./jumpthrow-bind";
 
 type Props = {};
 
 const BlogPage: FC<Props> = ({}) => {
   const { colors } = useTheme();
   const blogPosts = [
+    blogJumpthrowBind,
     bestDust2Nades,
     blogNadeAlignCrosshair,
     blogPractiseConfig,

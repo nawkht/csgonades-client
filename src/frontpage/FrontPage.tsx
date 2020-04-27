@@ -6,15 +6,11 @@ import { RecentNades } from "./RecentNades";
 import { SiteStats } from "../api/StatsApi";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { blogNadeAlignCrosshair } from "../pages/blog/smoke-align-crosshair";
-import { blogPractiseConfig } from "../pages/blog/practice-config";
 import { bestDust2Nades } from "../pages/blog/best-dust2-nades";
 import { BlogList } from "../blog/BlogList";
+import { blogJumpthrowBind } from "../pages/blog/jumpthrow-bind";
 
-const recentPosts = [
-  bestDust2Nades,
-  blogNadeAlignCrosshair,
-  blogPractiseConfig,
-];
+const recentPosts = [blogJumpthrowBind, bestDust2Nades, blogNadeAlignCrosshair];
 
 type Props = {
   recentNades: NadeLight[];
