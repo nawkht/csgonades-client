@@ -31,6 +31,7 @@ const ezRefreshAds = async (tries = 0) => {
 
   try {
     if (!ezstandalone.enabled) {
+      sleep(500);
       const csgoEzoicCodes = findAdCode();
       if (!csgoEzoicCodes.length) {
         return;
