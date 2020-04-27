@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const RecentNades: FC<Props> = memo(({ recentNades }) => {
-  const [nades, setNades] = useState(recentNades);
+  const [nades, setNades] = useState(recentNades.slice(0, 6));
   const { colors } = useTheme();
 
   useEffect(() => {
