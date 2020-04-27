@@ -45,6 +45,7 @@ const createSitemap = async () => {
     "blog/practice-config",
     "blog/smoke-align-crosshair",
     "blog/best-dust2-nades",
+    "blog/jumpthrow-bind",
   ];
 
   staticPages.forEach((staticPage) => {
