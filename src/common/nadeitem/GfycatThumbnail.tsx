@@ -5,6 +5,7 @@ import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
 import { SeekBar } from "../SeekBar";
 import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
+import { isSafari } from "react-device-detect";
 
 type Props = {
   nade: NadeLight | Nade;
@@ -37,7 +38,11 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
   }
 
   const onLoad = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
-    e.currentTarget.playbackRate = 3;
+    if (isSafari) {
+      e.currentTarget.playbackRate = 1;
+    } else {
+      e.currentTarget.playbackRate = 3;
+    }
   };
 
   function onMouseEnter() {
