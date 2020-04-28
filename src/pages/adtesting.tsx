@@ -11,7 +11,7 @@ const AdTesting: NextPage = () => {
           <div className="ad-units">
             <div className="med-rec">
               Med rectangle
-              <AdUnit tagType="top-medium-rectangle" />
+              <AdUnit tagType="300x250" />
             </div>
           </div>
         </div>

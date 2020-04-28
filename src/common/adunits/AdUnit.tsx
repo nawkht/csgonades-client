@@ -1,13 +1,7 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo, useEffect, useMemo } from "react";
 import { IS_PROD } from "../../constants/Constants";
 
-type AdType =
-  | "top-medium-rectangle"
-  | "bottom-medium-rectangle"
-  | "skyscraper"
-  | "mega-bottom"
-  | "half-page"
-  | "mega-banner";
+type AdType = "300x250";
 
 type Props = {
   tagType: AdType;
@@ -16,29 +10,49 @@ type Props = {
 
 const ADS_ENABLED = true;
 
-export const AdUnit: FC<Props> = memo(() => {
+export const AdUnit: FC<Props> = memo(({ tagType }) => {
   useEffect(() => {
     if (!ADS_ENABLED || !IS_PROD) {
       return;
     }
 
-    try {
-      // @ts-ignore
-      window._mNHandle.queue.push(function () {
-        // @ts-ignore
-        window._mNDetails.loadTag("438793428", "300x250", "438793428");
-      });
-    } catch (error) {
-      console.warn("AdErr", error);
+    loadAdByType(tagType);
+  }, [tagType]);
+
+  const adId = useMemo(() => {
+    switch (tagType) {
+      case "300x250":
+        return "438793428";
+      default:
+        return "unknown";
     }
-  }, []);
+  }, [tagType]);
 
   return (
     <>
-      <div id="438793428"></div>
+      <div id={adId}></div>
     </>
   );
 });
+
+function loadAdByType(type: AdType) {
+  switch (type) {
+    case "300x250":
+      try {
+        // @ts-ignore
+        window._mNHandle.queue.push(function () {
+          // @ts-ignore
+          window._mNDetails.loadTag("438793428", "300x250", "438793428");
+        });
+      } catch (error) {
+        console.warn("AdErr", error);
+      }
+      return;
+    default:
+      return;
+  }
+}
+
 /**
 type AdProps = {
   id: number;

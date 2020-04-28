@@ -12,7 +12,7 @@ import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
 import { TopContributorList } from "./TopContributor";
 import { SidebarPanel } from "../common/SidebarPanel";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   map: CsgoMap;
@@ -51,7 +51,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             <TopContributorList nades={allNades} />
           </SidebarPanel>
           <div className="ph-unit">
-            <EzoicPlaceHolder id={169} />
+            <AdUnit tagType="300x250" />
           </div>
         </div>
       </aside>
