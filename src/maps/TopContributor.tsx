@@ -52,10 +52,6 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
       };
     });
     sortedContributors.sort((a, b) => b.score - a.score);
-    console.log({
-      sortedContributors,
-    });
-
     sortedContributors = sortedContributors.slice(0, 3);
 
     const gold = sortedContributors.shift();

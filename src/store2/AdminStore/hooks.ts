@@ -1,18 +1,8 @@
-import { useCallback, useContext, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { tokenSelector } from "../../store/AuthStore/AuthSelectors";
+import { useCallback, useContext } from "react";
 import { AdminRoutes } from "./actions";
 import { AdminStoreContext } from "./context";
 import { UserApi } from "../../api/UserApi";
 import { useGetOrUpdateToken } from "../../store/AuthStore/hooks/useGetToken";
-
-export const useAdminFetchPendingNades = () => {
-  const token = useSelector(tokenSelector);
-
-  useEffect(() => {
-    console.log("Should fetch pending nades");
-  }, [token]);
-};
 
 export const useAdminRoute = () => {
   const { dispatch, state } = useContext(AdminStoreContext);

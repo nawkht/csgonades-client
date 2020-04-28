@@ -66,12 +66,10 @@ async function onNewSlots(slots: number[]) {
       ezstandalone.enable();
       sleep(500);
       ezstandalone.display();
-      console.log("> enable display", slots.toString());
     } else {
       ezstandalone.define(...slots);
       sleep(250);
       ezstandalone.refresh();
-      console.log("> refresh", slots.toString());
     }
   } catch (error) {}
 }
