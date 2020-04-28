@@ -103,7 +103,7 @@ export const NadePage: FC = memo(() => {
           </SidebarPanel>
 
           <div className="ph-unit">
-            <AdUnit tagType="300x600" />
+            <AdUnit tagType="300x250" />
           </div>
         </div>
       </aside>
