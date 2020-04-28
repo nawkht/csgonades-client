@@ -70,14 +70,13 @@ export const NadePage: FC = memo(() => {
         publisherLogo={"https://www.csgonades.com/logo.png"}
       />
       <SEO
-        key={nade.id}
         title={layoutTitle}
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
         thumbnail={nade.images.thumbnailUrl}
       />
 
-      <aside key={nade.id} id="nadepage-sidebar">
+      <aside id="nadepage-sidebar">
         <div id="nadepage-sidebar-content">
           <SidebarPanel first title="SHARE">
             <NadeShareActions
@@ -108,7 +107,7 @@ export const NadePage: FC = memo(() => {
         </div>
       </aside>
 
-      <div key={nade.id} id="nade-page-grid">
+      <div id="nade-page-grid">
         <div id="title">
           {allowEdit && (
             <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
