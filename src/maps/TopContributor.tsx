@@ -7,6 +7,7 @@ import { dateMinutesAgo } from "../utils/DateUtils";
 interface UserContribution extends UserLight {
   nadeCount: number;
   score: number;
+  avgScore: number;
 }
 
 type ContListProps = {
@@ -27,13 +28,16 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
       if (currentUser) {
         contCount[steamId] = {
           ...currentUser,
+          nadeCount: currentUser.nadeCount + 1,
           score: currentUser.score + nade.score,
+          avgScore: 0,
         };
       } else {
         contCount[steamId] = {
           ...nade.user,
           nadeCount: 1,
           score: nade.score,
+          avgScore: 0,
         };
       }
     });
@@ -41,8 +45,16 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
     sortedContributors = sortedContributors.filter(
       (n) => n.steamId !== "76561198026064832"
     );
-
-    sortedContributors.sort((a, b) => b.score - a.score);
+    sortedContributors = sortedContributors.map((u) => {
+      return {
+        ...u,
+        avgScore: u.score / u.nadeCount,
+      };
+    });
+    sortedContributors.sort((a, b) => b.avgScore - a.avgScore);
+    console.log({
+      sortedContributors,
+    });
 
     sortedContributors = sortedContributors.slice(0, 3);
 
