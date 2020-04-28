@@ -2,7 +2,6 @@ import { FC } from "react";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
-import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
   title: "Why Jumpthrow Smokes Are Different on 64 and 128 Tick",
@@ -43,8 +42,6 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           depending on what you play the most on, you know what throws will work
           for you and which won&apos;t.
         </p>
-
-        <AdUnit center tagType="mega-banner" />
 
         <h2>What is the jump throw bind?</h2>
         <p>
@@ -105,8 +102,6 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           FACEIT, you are going to need to learn the same nade for both
           tickrates, if it uses a jumpthrow bind.
         </p>
-
-        <AdUnit center tagType="mega-bottom" />
 
         <p>
           Here is also the YouTuber{" "}

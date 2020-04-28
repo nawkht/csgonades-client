@@ -4,7 +4,6 @@ import { FrontpageActions } from "./FrontpageActions";
 import { FrontPageJumbo } from "./FrontPageJumbo";
 import { RecentNades } from "./RecentNades";
 import { SiteStats } from "../api/StatsApi";
-import { AdUnit } from "../common/adunits/AdUnit";
 import { blogNadeAlignCrosshair } from "../pages/blog/smoke-align-crosshair";
 import { bestDust2Nades } from "../pages/blog/best-dust2-nades";
 import { BlogList } from "../blog/BlogList";
@@ -34,9 +33,7 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
       <aside className="front-page-sidebar">
         <div id="sidebar-wrap">
           <FrontpageActions />
-          <div className="sidebar-placeholder">
-            <AdUnit tagType="top-medium-rectangle" />
-          </div>
+          <div className="sidebar-placeholder"></div>
         </div>
       </aside>
 

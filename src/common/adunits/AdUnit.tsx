@@ -1,6 +1,6 @@
-import { FC, memo, useState, useEffect } from "react";
-import { isMobile } from "react-device-detect";
+import { FC, memo, useEffect } from "react";
 import { IS_PROD } from "../../constants/Constants";
+
 type AdType =
   | "top-medium-rectangle"
   | "bottom-medium-rectangle"
@@ -14,41 +14,32 @@ type Props = {
   center?: boolean;
 };
 
-const isBrowser = typeof window !== "undefined";
-const ADS_ENABLED = false;
+const ADS_ENABLED = true;
 
-export const AdUnit: FC<Props> = memo(({ tagType, center }) => {
-  const [mounted, setMounted] = useState(false);
+export const AdUnit: FC<Props> = memo(() => {
   useEffect(() => {
-    if (ADS_ENABLED && isBrowser && !isMobile && IS_PROD) {
-      setMounted(true);
+    if (!ADS_ENABLED || !IS_PROD) {
+      return;
+    }
+
+    try {
+      // @ts-ignore
+      window._mNHandle.queue.push(function () {
+        // @ts-ignore
+        window._mNDetails.loadTag("438793428", "300x250", "438793428");
+      });
+    } catch (error) {
+      console.warn("AdErr", error);
     }
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
-
-  const className = center ? "tz center" : "tz";
-
-  const adProps = adIdByType(tagType);
-
   return (
     <>
-      <div className={className}>
-        <AdGenerator {...adProps} />
-      </div>
-      <style jsx>{`
-        .center {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      `}</style>
+      <div id="438793428"></div>
     </>
   );
 });
-
+/**
 type AdProps = {
   id: number;
   height: number;
@@ -108,3 +99,4 @@ function adIdByType(type: AdType): AdProps {
       return { id: 0, height: 0 };
   }
 }
+ */

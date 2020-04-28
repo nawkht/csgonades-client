@@ -9,10 +9,6 @@ const AdTesting: NextPage = () => {
         <div className="ads">
           <h1>Adtesting</h1>
           <div className="ad-units">
-            <div className="skyskraper">
-              Skyskraper
-              <AdUnit tagType="skyscraper" />
-            </div>
             <div className="med-rec">
               Med rectangle
               <AdUnit tagType="top-medium-rectangle" />
