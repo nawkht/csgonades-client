@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { Dimensions, Config } from "../../constants/Constants";
-import { EzoicPlaceHolder } from "../ezoicLoader/EzoicPlaceHolder";
+import { AdUnit } from "../adunits/AdUnit";
 
 type Props<T> = {
   data: T[];
@@ -25,7 +25,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const displayFirstAd = numItems > 10;
   const displaySecondAd = numItems > 22;
 
-  const listAdsEnabled = Config.ADS_ENABLED && false;
+  const listAdsEnabled = Config.ADS_ENABLED;
 
   return (
     <>
@@ -46,12 +46,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         ))}
         {displayFirstAd && listAdsEnabled && (
           <div className="ad-1-container">
-            <EzoicPlaceHolder id={172} />
+            <AdUnit tagType="300x250" />
           </div>
         )}
         {displaySecondAd && listAdsEnabled && (
           <div className="ad-2-container">
-            <EzoicPlaceHolder id={173} />
+            <AdUnit tagType="300x250" />
           </div>
         )}
       </div>
