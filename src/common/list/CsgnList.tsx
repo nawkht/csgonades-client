@@ -25,7 +25,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
   const displayFirstAd = numItems > 10;
   const displaySecondAd = numItems > 22;
 
-  const listAdsEnabled = Config.ADS_ENABLED;
+  const listAdsEnabled = Config.ADS_ENABLED && false;
 
   return (
     <>
