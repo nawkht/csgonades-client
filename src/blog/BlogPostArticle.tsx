@@ -10,6 +10,7 @@ import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
 import { SidebarPanel } from "../common/SidebarPanel";
 import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   data: BlogPost;
@@ -74,7 +75,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
             />
           </SidebarPanel>
           <div className="ph-unit">
-            <EzoicPlaceHolder id={171} />
+            <AdUnit tagType="300x600" />
           </div>
         </div>
       </aside>
