@@ -1,127 +1,71 @@
-import { FC, memo, useEffect, useMemo } from "react";
+import { FC, memo, useEffect } from "react";
 import { IS_PROD } from "../../constants/Constants";
 
-type AdType = "300x250" | "300x600";
+type AdType = "300x250" | "300x600" | "728x90";
 
 type Props = {
   tagType: AdType;
   center?: boolean;
 };
 
+type AdData = {
+  id: string;
+  size: string;
+};
+
 const ADS_ENABLED = true;
 
 export const AdUnit: FC<Props> = memo(({ tagType }) => {
+  const adData = getAdData(tagType);
   useEffect(() => {
     if (!ADS_ENABLED || !IS_PROD) {
       return;
     }
 
-    loadAdByType(tagType);
-  }, [tagType]);
-
-  const adId = useMemo(() => {
-    switch (tagType) {
-      case "300x250":
-        return "438793428";
-      case "300x600":
-        return "722839325";
-      default:
-        return "unknown";
-    }
-  }, [tagType]);
+    loadAdByType(adData);
+  }, [adData]);
 
   return (
     <>
-      <div id={adId}></div>
+      <div id={adData.id}></div>
     </>
   );
 });
 
-function loadAdByType(type: AdType) {
-  switch (type) {
+function getAdData(tagType: AdType) {
+  switch (tagType) {
     case "300x250":
-      try {
-        // @ts-ignore
-        window._mNHandle.queue.push(function () {
-          // @ts-ignore
-          window._mNDetails.loadTag("438793428", "300x250", "438793428");
-        });
-      } catch (error) {
-        console.warn("AdErr", error);
-      }
-      return;
+      return {
+        id: "438793428",
+        size: "300x250",
+      };
     case "300x600":
-      try {
-        // @ts-ignore
-        window._mNHandle.queue.push(function () {
-          // @ts-ignore
-          window._mNDetails.loadTag("722839325", "300x600", "722839325");
-        });
-      } catch (error) {}
-      return;
+      return {
+        id: "722839325",
+        size: "300x600",
+      };
+    case "728x90":
+      return {
+        id: "416812087",
+        size: "728x90",
+      };
+
     default:
-      return;
+      return {
+        id: "",
+        size: "",
+      };
   }
 }
 
-/**
-type AdProps = {
-  id: number;
-  height: number;
-};
-
-const AdGenerator: FC<AdProps> = memo(({ height, id }) => {
-  useEffect(() => {
-    injectScripts(id);
-  }, [id]);
-
-  return (
-    <>
-      <div className="tag-container" id={`60796-${id}`}></div>
-      <style jsx>{`
-        .tag-container {
-          min-height: ${height + 5}px;
-        }
-      `}</style>
-    </>
-  );
-});
-
-function injectScripts(divId: number) {
-  const adTagDiv = document.getElementById(`60796-${divId}`);
-  if (!adTagDiv) {
-    console.warn(">> Ad div not found <<", divId);
-    return;
-  }
-  const script1 = document.createElement("script");
-  script1.src = "//ads.themoneytizer.com/s/gen.js?type=" + divId;
-  script1.type = "text/javascript";
-  adTagDiv.appendChild(script1);
-
-  const script2 = document.createElement("script");
-  script2.src =
-    "//ads.themoneytizer.com/s/requestform.js?siteId=60796&formatId=" + divId;
-  script2.type = "text/javascript";
-  adTagDiv.appendChild(script2);
-}
-
-function adIdByType(type: AdType): AdProps {
-  switch (type) {
-    case "mega-banner":
-      return { id: 1, height: 90 };
-    case "top-medium-rectangle":
-      return { id: 2, height: 250 };
-    case "half-page":
-      return { id: 3, height: 600 };
-    case "skyscraper":
-      return { id: 4, height: 600 };
-    case "mega-bottom":
-      return { id: 28, height: 90 };
-    case "bottom-medium-rectangle":
-      return { id: 19, height: 250 };
-    default:
-      console.error("!NEVER!");
-      return { id: 0, height: 0 };
+function loadAdByType(adData: AdData) {
+  try {
+    // @ts-ignore
+    window._mNHandle.queue.push(function () {
+      // @ts-ignore
+      window._mNDetails.loadTag(adData.id, adData.size, adData.id);
+    });
+  } catch (error) {
+    console.warn("AdErr", error);
   }
 }
- */

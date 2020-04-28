@@ -3,6 +3,7 @@ import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { PageLink } from "../../common/PageLink";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogJumpthrowBind: BlogPost = {
   title: "Jumpthrow Bind for CS:GO - Ultimate Guide",
@@ -63,6 +64,11 @@ const NadeAlignCrosshairBlogPost: FC = () => {
             'alias "+jumpthrow" "+jump;-attack;-attack2"\nalias "-jumpthrow" "-jump"\nbind "KEY" "+jumpthrow"'
           }
         />
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
+
         <h3>How to use</h3>
         <p>
           Take out your smoke, hold down either your left, right or both mouse
@@ -120,6 +126,10 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         </p>
       </BlogPostArticle>
       <style jsx>{`
+        .a-tag {
+          margin: 30px 0px;
+        }
+
         .video-container {
           overflow: hidden;
           position: relative;

@@ -2,6 +2,7 @@ import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCopyPaste } from "../../blog/BlogCopyPaste";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogPractiseConfig: BlogPost = {
   title: "The Perfect Practice Config for CS:GO",
@@ -48,6 +49,10 @@ const PractiseConfigBlogPost = () => {
             "sv_cheats 1\nbot_kick\nmp_limitteams 0\nmp_autoteambalance 0\nmp_maxmoney 60000\nmp_startmoney 60000\nmp_buytime 9999\nmp_buy_anywhere 1\nmp_freezetime 0\nmp_roundtime 60\nmp_roundtime_defuse 60\nmp_respawn_on_death_ct 1\nmp_respawn_on_death_t 1\nsv_infinite_ammo 1\nsv_grenade_trajectory 1\nsv_grenade_trajectory_time 15\nsv_showimpacts 1\nsv_showimpacts_time 10\nammo_grenade_limit_total 5\nmp_warmup_end\nmp_restartgame 1"
           }
         />
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
 
         <h2>What does the config do?</h2>
         <h3>Basics</h3>
@@ -121,6 +126,11 @@ const PractiseConfigBlogPost = () => {
         </p>
         <BlogCodeSnippet code="bind X sv_rethrow_last_grenade" />
       </BlogPostArticle>
+      <style jsx>{`
+        .a-tag {
+          margin: 30px 0px;
+        }
+      `}</style>
     </>
   );
 };

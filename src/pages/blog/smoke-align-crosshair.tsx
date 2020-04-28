@@ -4,6 +4,7 @@ import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogNadeItem } from "../../blog/BlogNadeItem";
 import { CsConsole } from "../../blog/CsConsole";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogNadeAlignCrosshair: BlogPost = {
   title: "Smoke Lineup Crosshair Bind for CS:GO",
@@ -57,6 +58,10 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           back to normal.
         </p>
         <BlogCodeSnippet code={'bind "X" "toggle cl_crosshairsize 2.5 5000"'} />
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
 
         <h3>2. Advanced: Hide on release</h3>
         <p>
@@ -135,6 +140,10 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         </p>
       </BlogPostArticle>
       <style jsx>{`
+        .a-tag {
+          margin: 30px 0px;
+        }
+
         img {
           max-width: 100%;
           margin: 30px auto;

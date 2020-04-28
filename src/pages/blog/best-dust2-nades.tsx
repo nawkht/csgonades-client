@@ -3,6 +3,7 @@ import { BlogPostArticle } from "../../blog/BlogPostArticle";
 import { BlogNadeItem } from "../../blog/BlogNadeItem";
 import { PageLink } from "../../common/PageLink";
 import { Dimensions } from "../../constants/Constants";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const bestDust2Nades: BlogPost = {
   title: "Best Grenade Spots for Dust2 - Must Know!",
@@ -57,6 +58,10 @@ const PractiseConfigBlogPost = () => {
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-t-spawn-7Nn" />
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-t-spawn" />
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-top-mid-aJd" />
+        </div>
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
         </div>
 
         <h2>2. Long Corner Smoke</h2>
@@ -149,6 +154,10 @@ const PractiseConfigBlogPost = () => {
         </div>
       </BlogPostArticle>
       <style jsx>{`
+        .a-tag {
+          margin: 30px 0px;
+        }
+
         .tip {
           text-align: center;
         }

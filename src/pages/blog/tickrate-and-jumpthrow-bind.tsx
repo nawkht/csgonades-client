@@ -2,6 +2,7 @@ import { FC } from "react";
 import { BlogCodeSnippet } from "../../blog/BlogCodeSnippet";
 import { BlogPost } from "../../blog/BlogPost";
 import { BlogPostArticle } from "../../blog/BlogPostArticle";
+import { AdUnit } from "../../common/adunits/AdUnit";
 
 export const blogTickrateAndJumpthrow: BlogPost = {
   title: "Why Jumpthrow Smokes Are Different on 64 and 128 Tick",
@@ -68,6 +69,11 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           game server. First, it will send a jump command, then a release
           command.
         </p>
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
+
         <p>
           Since the server and client communicate less frequently on 64 tick,
           the server will receive slightly different movement speeds during your
@@ -160,6 +166,10 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
       </BlogPostArticle>
       <style jsx>{`
+        .a-tag {
+          margin: 30px 0px;
+        }
+
         .video-container {
           overflow: hidden;
           position: relative;
