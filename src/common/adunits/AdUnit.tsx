@@ -1,7 +1,7 @@
 import { FC, memo, useEffect, useMemo } from "react";
 import { IS_PROD } from "../../constants/Constants";
 
-type AdType = "300x250";
+type AdType = "300x250" | "300x600";
 
 type Props = {
   tagType: AdType;
@@ -23,6 +23,8 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
     switch (tagType) {
       case "300x250":
         return "438793428";
+      case "300x600":
+        return "722839325";
       default:
         return "unknown";
     }
@@ -47,6 +49,15 @@ function loadAdByType(type: AdType) {
       } catch (error) {
         console.warn("AdErr", error);
       }
+      return;
+    case "300x600":
+      try {
+        // @ts-ignore
+        window._mNHandle.queue.push(function () {
+          // @ts-ignore
+          window._mNDetails.loadTag("722839325", "300x600", "722839325");
+        });
+      } catch (error) {}
       return;
     default:
       return;
