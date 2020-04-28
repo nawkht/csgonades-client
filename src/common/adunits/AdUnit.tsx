@@ -27,7 +27,15 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
 
   return (
     <>
-      <div id={adData.id}></div>
+      <div className="ph">
+        <div id={adData.id}></div>
+      </div>
+      <style jsx>{`
+        .ph {
+          display: flex;
+          justify-content: space-around;
+        }
+      `}</style>
     </>
   );
 });
