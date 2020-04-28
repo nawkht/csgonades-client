@@ -2,10 +2,11 @@ import { FC, useMemo } from "react";
 import { UserLight } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeLight } from "../models/Nade/Nade";
+import { dateMinutesAgo } from "../utils/DateUtils";
 
 interface UserContribution extends UserLight {
   nadeCount: number;
-  favCount: number;
+  score: number;
 }
 
 type ContListProps = {
@@ -16,19 +17,23 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
   const contributors = useMemo(() => {
     const contCount: { [key: string]: UserContribution } = {};
     nades.forEach((nade) => {
+      const oneWeek = 60 * 24 * 3;
+      const daysAgo = dateMinutesAgo(nade.createdAt);
+      if (daysAgo < oneWeek) {
+        return;
+      }
       const steamId = nade.user.steamId;
       const currentUser = contCount[steamId];
       if (currentUser) {
         contCount[steamId] = {
           ...currentUser,
-          nadeCount: currentUser.nadeCount + 1,
-          favCount: currentUser.favCount + nade.favoriteCount,
+          score: currentUser.score + nade.score,
         };
       } else {
         contCount[steamId] = {
           ...nade.user,
           nadeCount: 1,
-          favCount: nade.favoriteCount,
+          score: nade.score,
         };
       }
     });
@@ -36,7 +41,9 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
     sortedContributors = sortedContributors.filter(
       (n) => n.steamId !== "76561198026064832"
     );
-    sortedContributors.sort((a, b) => b.favCount - a.favCount);
+
+    sortedContributors.sort((a, b) => b.score - a.score);
+
     sortedContributors = sortedContributors.slice(0, 3);
 
     const gold = sortedContributors.shift();
@@ -79,7 +86,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
             </div>
           </>
         )}
-        <div id="cont-desc">Based on number of favorites recieved.</div>
+        <div id="cont-desc">Based on popularity of users nades.</div>
       </div>
       <style jsx>{`
         #cont-desc {
@@ -156,7 +163,6 @@ const TopContributor: FC<Props> = ({ user }) => {
           <img src={user.avatar} />
           <span>{user.nickname}</span>
         </div>
-        <span className="nade-count">{user.nadeCount} NADES</span>
       </div>
       <style jsx>{`
         .contributor-wrap {
@@ -188,7 +194,7 @@ const TopContributor: FC<Props> = ({ user }) => {
         span {
           display: block;
           padding-left: 5px;
-          padding-right: 10px;
+          padding-right: 15px;
           font-size: 12px;
           white-space: nowrap;
         }
