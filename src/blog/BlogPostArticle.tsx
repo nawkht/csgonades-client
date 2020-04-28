@@ -9,7 +9,6 @@ import { SEO } from "../layout/SEO2";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
 import { SidebarPanel } from "../common/SidebarPanel";
-import { EzoicPlaceHolder } from "../common/ezoicLoader/EzoicPlaceHolder";
 import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
