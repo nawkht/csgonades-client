@@ -58,7 +58,7 @@ export const NadePage: FC = memo(() => {
   return (
     <>
       <ArticleJsonLd
-        key={nade.id}
+        key={`ld-${nade.id}`}
         url={`https://www.csgonades.com/nades/${nade?.slug || nade?.id}`}
         title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
         authorName={nade?.user.nickname}
@@ -70,13 +70,14 @@ export const NadePage: FC = memo(() => {
         publisherLogo={"https://www.csgonades.com/logo.png"}
       />
       <SEO
+        key={`seo-${nade.id}`}
         title={layoutTitle}
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
         thumbnail={nade.images.thumbnailUrl}
       />
 
-      <aside id="nadepage-sidebar">
+      <aside id="nadepage-sidebar" key={`aside-${nade.id}`}>
         <div id="nadepage-sidebar-content">
           <SidebarPanel first title="SHARE">
             <NadeShareActions
@@ -107,7 +108,7 @@ export const NadePage: FC = memo(() => {
         </div>
       </aside>
 
-      <div id="nade-page-grid">
+      <div id="nade-page-grid" key={`main-${nade.id}`}>
         <div id="title">
           {allowEdit && (
             <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
@@ -148,6 +149,7 @@ export const NadePage: FC = memo(() => {
       </div>
 
       <SignInWarning
+        key={`1-${nade.id}`}
         visible={showSignInWarning}
         onDismiss={() => setShowSignInWarning(false)}
         message="favorite"
@@ -155,6 +157,7 @@ export const NadePage: FC = memo(() => {
 
       {allowEdit && (
         <TitleEditor
+          key={`2-${nade.id}`}
           nadeId={nade.id}
           title={nade.title}
           visisble={editTitleVisisble}
@@ -164,6 +167,7 @@ export const NadePage: FC = memo(() => {
 
       {allowEdit && (
         <DecriptionEditor
+          key={`3-${nade.id}`}
           visisble={editDescVisisble}
           nade={nade}
           onDismiss={() => setEditDescisisble(false)}
@@ -172,6 +176,7 @@ export const NadePage: FC = memo(() => {
 
       {allowEdit && (
         <MetaEditor
+          key={`4-${nade.id}`}
           visisble={editMetaVisible}
           nade={nade}
           onDismiss={() => setEditMetaVisible(false)}
