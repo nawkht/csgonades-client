@@ -45,7 +45,7 @@ export const Footer: FC = memo(() => {
 
         .footer {
           background: ${colors.PRIMARY};
-          padding: 50px 30px;
+          padding: 50px ${Dimensions.GUTTER_SIZE}px;
         }
 
         .footer-content {

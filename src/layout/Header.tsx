@@ -5,6 +5,7 @@ import { Logo } from "./Misc/Logo";
 import { SiteNav } from "./Navigation/SiteNav";
 import { UserNav } from "./Navigation/UserNav";
 import { ThemeToggler } from "./Misc/ThemeToggler";
+import { Dimensions } from "../constants/Constants";
 
 type Props = {};
 
@@ -28,8 +29,8 @@ export const Header: FC<Props> = memo(({}) => {
       <style jsx>{`
         #header {
           padding: 10px;
-          padding-left: 30px;
-          padding-right: 30px;
+          padding-left: ${Dimensions.GUTTER_SIZE}px;
+          padding-right: ${Dimensions.GUTTER_SIZE}px;
           background: ${colors.DP03};
           height: 65px;
         }

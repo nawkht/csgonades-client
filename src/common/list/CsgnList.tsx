@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { Dimensions, Config } from "../../constants/Constants";
-import { AdUnit } from "../adunits/AdUnit";
+import { LazyLoadAd } from "../adunits/LazyLoadAd";
 
 type Props<T> = {
   data: T[];
@@ -46,12 +46,12 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
         ))}
         {displayFirstAd && listAdsEnabled && (
           <div className="ad-1-container">
-            <AdUnit tagType="300x250" />
+            <LazyLoadAd></LazyLoadAd>
           </div>
         )}
         {displaySecondAd && listAdsEnabled && (
           <div className="ad-2-container">
-            <AdUnit tagType="300x250" />
+            <LazyLoadAd></LazyLoadAd>
           </div>
         )}
       </div>
@@ -67,7 +67,7 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
 
         .list {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(316px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
         }
@@ -80,7 +80,6 @@ const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
           background: ${colors.DP02};
           width: 300px;
           height: 250px;
-          justify-self: center;
           border-radius: 5px;
           align-self: center;
         }

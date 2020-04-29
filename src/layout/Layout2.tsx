@@ -43,14 +43,6 @@ export const Layout2: FC = memo(({ children }) => {
       {true && <CookieConsent />}
 
       <style jsx>{`
-        .footer-placement {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 50px;
-          margin-bottom: 50px;
-        }
-
         #page {
           display: grid;
           min-height: 100vh;
@@ -72,7 +64,7 @@ export const Layout2: FC = memo(({ children }) => {
 
         nav {
           grid-area: nav;
-          padding-left: 30px;
+          background: ${colors.DP02};
         }
 
         footer {

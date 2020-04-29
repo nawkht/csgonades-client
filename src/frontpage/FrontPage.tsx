@@ -8,6 +8,7 @@ import { blogNadeAlignCrosshair } from "../pages/blog/smoke-align-crosshair";
 import { bestDust2Nades } from "../pages/blog/best-dust2-nades";
 import { BlogList } from "../blog/BlogList";
 import { blogJumpthrowBind } from "../pages/blog/jumpthrow-bind";
+import { Dimensions } from "../constants/Constants";
 
 const recentPosts = [blogJumpthrowBind, bestDust2Nades, blogNadeAlignCrosshair];
 
@@ -41,17 +42,16 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
         aside {
           grid-area: sidebar;
           width: 300px;
-          margin-right: 30px;
         }
 
         #sidebar-wrap {
           position: sticky;
-          top: calc(65px + 30px);
+          top: calc(65px + ${Dimensions.GUTTER_SIZE}px);
         }
 
         #front-page {
           grid-area: main;
-          margin: 30px;
+          margin: ${Dimensions.GUTTER_SIZE}px;
           margin-bottom: 100px;
         }
 

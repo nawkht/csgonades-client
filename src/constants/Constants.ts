@@ -12,7 +12,7 @@ export const Config = {
 
 export const Dimensions = {
   PAGE_WIDTH: 1290,
-  GUTTER_SIZE: 30,
+  GUTTER_SIZE: 20,
   SIDEBAR_WIDTH: "180px",
   HEADER_HEIGHT: "65px",
   PADDING_SMALL: "6px",

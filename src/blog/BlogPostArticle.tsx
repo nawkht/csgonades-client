@@ -81,7 +81,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
       <style jsx>{`
         .ph-unit {
-          margin-top: 15px;
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
         }
 
         article {
@@ -97,7 +97,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
           color: ${colors.TEXT};
           max-width: 850px;
-          margin: 30px;
+          margin: ${Dimensions.GUTTER_SIZE}px;
           margin-bottom: 100px;
         }
 
@@ -122,12 +122,12 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         #blog-sidebar {
           grid-area: sidebar;
           width: 300px;
-          margin-right: 30px;
+          background: ${colors.DP02};
         }
 
         #blog-sidebar-wrap {
           position: sticky;
-          top: calc(65px + 30px);
+          top: calc(65px);
         }
 
         .article-date {

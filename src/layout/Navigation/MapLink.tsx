@@ -37,7 +37,7 @@ export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
           color: ${colors.TEXT};
           min-width: 90px;
           font-size: 16px;
-          padding: 10px 30px 10px 30px;
+          padding: 10px 20px 10px 20px;
           border-top-left-radius: 5px;
           border-bottom-left-radius: 5px;
           margin-top: 5px;

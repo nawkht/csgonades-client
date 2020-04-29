@@ -67,7 +67,8 @@ export const FrontpageActions: FC = memo(({}) => {
 
         .actions-wrapper {
           width: 100%;
-          margin-bottom: 30px;
+          padding: ${Dimensions.GUTTER_SIZE}px;
+          padding-top: 0;
         }
 
         .action {

@@ -13,6 +13,7 @@ import { capitalize } from "../utils/Common";
 import { TopContributorList } from "./TopContributor";
 import { SidebarPanel } from "../common/SidebarPanel";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 type Props = {
   map: CsgoMap;
@@ -20,6 +21,7 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
+  const { colors } = useTheme();
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
@@ -66,19 +68,19 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         #map-page {
           grid-area: main;
           min-height: 100vh;
-          margin: 30px;
+          margin: ${Dimensions.GUTTER_SIZE}px;
           margin-bottom: 100px;
         }
 
         aside {
           grid-area: sidebar;
           width: 300px;
-          margin-right: 30px;
+          background: ${colors.DP02};
         }
 
         #map-sidebar {
           position: sticky;
-          top: calc(65px + 30px);
+          top: calc(65px);
         }
 
         .map-page-container {

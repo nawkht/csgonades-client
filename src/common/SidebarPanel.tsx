@@ -43,18 +43,8 @@ export const SidebarPanel: FC<Props> = ({
           overflow: hidden;
         }
 
-        .first {
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
-        }
-
-        .last {
-          border-bottom-left-radius: 5px;
-          border-bottom-right-radius: 5px;
-        }
-
         .sidebar-title {
-          padding: 12px 30px;
+          padding: 10px 20px;
           background ${colors.PRIMARY};
           color: white;
           font-size: 12px;
@@ -65,7 +55,7 @@ export const SidebarPanel: FC<Props> = ({
         }
 
         .sidebar-content {
-          padding: 20px 30px 20px 30px;
+          padding: 15px 20px 15px 20px;
         }
         `}</style>
     </>

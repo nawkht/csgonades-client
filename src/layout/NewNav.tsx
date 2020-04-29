@@ -32,7 +32,7 @@ export const NewNav: FC<Props> = ({}) => {
       <style jsx>{`
         #nav {
           position: sticky;
-          top: calc(65px + 30px);
+          top: calc(65px);
         }
 
         #active-duty-nades,
@@ -42,22 +42,12 @@ export const NewNav: FC<Props> = ({}) => {
           overflow: hidden;
         }
 
-        #active-duty-nades {
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
-        }
-
-        #reserve-nades {
-          border-bottom-left-radius: 5px;
-          border-bottom-right-radius: 5px;
-        }
-
         .nav-label {
           font-weight: 500;
           font-size: 12px;
           display: block;
           white-space: nowrap;
-          padding: 15px 30px;
+          padding: 15px 20px;
           background: ${colors.PRIMARY};
           color: white;
         }

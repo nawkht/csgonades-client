@@ -185,12 +185,12 @@ export const NadePage: FC = memo(() => {
 
       <style jsx>{`
         .ph-unit {
-          margin-top: 15px;
+          margin-top: 20px;
         }
 
         .share-label {
           background: ${colors.DP01};
-          padding: 15px 30px 15px 30px;
+          padding: 15px 20px 15px 20px;
           font-weight: normal;
           font-size: 14px;
         }
@@ -201,13 +201,13 @@ export const NadePage: FC = memo(() => {
 
         #nadepage-sidebar-content {
           position: sticky;
-          top: calc(65px + 30px);
+          top: calc(65px);
         }
 
         #nadepage-sidebar {
           grid-area: sidebar;
           width: 300px;
-          margin-right: 30px;
+          background: ${colors.DP02};
         }
 
         #misc {
@@ -215,7 +215,7 @@ export const NadePage: FC = memo(() => {
         }
 
         #nade-page-grid {
-          margin: 30px;
+          margin: ${Dimensions.GUTTER_SIZE}px;
           margin-bottom: 100px;
           grid-area: main;
           display: grid;
@@ -226,8 +226,8 @@ export const NadePage: FC = memo(() => {
             "info info meta"
             "comments comments ."
             "misc misc misc";
-          max-width: 100%;
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+          max-width: 1200px;
         }
 
         .half-page-plactement {
