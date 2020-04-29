@@ -18,9 +18,9 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
   const contributors = useMemo(() => {
     const contCount: { [key: string]: UserContribution } = {};
     nades.forEach((nade) => {
-      const oneWeek = 60 * 24 * 3;
-      const daysAgo = dateMinutesAgo(nade.createdAt);
-      if (daysAgo < oneWeek) {
+      const newCap = 60 * 24 * 2; // Don't count new nades
+      const minutesAgoAdded = dateMinutesAgo(nade.createdAt);
+      if (minutesAgoAdded < newCap) {
         return;
       }
       const steamId = nade.user.steamId;
