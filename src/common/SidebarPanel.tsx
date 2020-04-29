@@ -55,7 +55,7 @@ export const SidebarPanel: FC<Props> = ({
         }
 
         .sidebar-content {
-          padding: 15px 20px 15px 20px;
+          padding: 25px 20px;
         }
         `}</style>
     </>
