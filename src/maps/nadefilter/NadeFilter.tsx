@@ -8,6 +8,7 @@ import { TickrateSelector } from "./TickrateSelector";
 import { useFilterByType } from "../../store/MapStore/hooks/useFilterByType";
 import { useToggleMapview } from "../../store/MapStore/hooks/useToggleMapView";
 import { SidebarPanel } from "../../common/SidebarPanel";
+import { ButtonGroup } from "./ButtonGroup";
 
 type Props = {
   showSingInWarning: () => void;
@@ -47,36 +48,29 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
             <div id="type-label" className="filter-label">
               TYPE
             </div>
-            <div id="smoke-filter">
-              <NadeTypeButton
-                type="smoke"
-                currentType={byType}
-                onFilterByType={filterByType}
-              />
-            </div>
-
-            <div id="flash-filter">
-              <NadeTypeButton
-                type="flash"
-                currentType={byType}
-                onFilterByType={filterByType}
-              />
-            </div>
-
-            <div id="molotov-filter">
-              <NadeTypeButton
-                type="molotov"
-                currentType={byType}
-                onFilterByType={filterByType}
-              />
-            </div>
-
-            <div id="grenade-filter">
-              <NadeTypeButton
-                type="hegrenade"
-                currentType={byType}
-                onFilterByType={filterByType}
-              />
+            <div id="type-filter">
+              <ButtonGroup>
+                <NadeTypeButton
+                  type="smoke"
+                  currentType={byType}
+                  onFilterByType={filterByType}
+                />
+                <NadeTypeButton
+                  type="flash"
+                  currentType={byType}
+                  onFilterByType={filterByType}
+                />
+                <NadeTypeButton
+                  type="molotov"
+                  currentType={byType}
+                  onFilterByType={filterByType}
+                />
+                <NadeTypeButton
+                  type="hegrenade"
+                  currentType={byType}
+                  onFilterByType={filterByType}
+                />
+              </ButtonGroup>
             </div>
           </div>
         </SidebarPanel>
@@ -84,14 +78,16 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
       <style jsx>{`
         #filter-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr 1fr min-content min-content;
           grid-template-areas:
-            "map-label . . ."
-            "map-filter . . ."
-            "type-label type-label type-label type-label"
-            "smoke flash molotov grenade"
-            "tick-label tick-label fav-label fav-label"
-            "tick tick fav fav";
+            "map-label . . . fav-label fav-label"
+            "map-filter . . . fav fav"
+            "type-label type-label type-label type-label tick-label tick-label"
+            "type-filter type-filter type-filter type-filter tick tick";
+        }
+
+        #type-filter {
+          grid-area: type-filter;
         }
 
         #map-label {
@@ -152,13 +148,13 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
         .filter-btn {
           border: none;
           outline: none;
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
           display: flex;
           align-items: center;
           justify-content: space-around;
           color: ${colors.TEXT};
-          font-size: 20px;
+          font-size: 18px;
           cursor: pointer;
           border-radius: 5px;
           background: ${colors.primaryBtnBg};

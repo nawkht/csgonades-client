@@ -65,6 +65,9 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         message="filter"
       />
       <style jsx>{`
+        .ph-unit {
+        }
+
         #map-page {
           grid-area: main;
           min-height: 100vh;
@@ -108,10 +111,6 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         .map-filter-sticky {
           position: sticky;
           top: 50px;
-        }
-
-        .ph-unit {
-          margin-top: 15px;
         }
 
         @media only screen and (max-width: 1210px) {

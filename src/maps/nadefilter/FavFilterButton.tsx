@@ -29,15 +29,15 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
         className={`filter-btn favorite ${active}`}
         onClick={onFilterByFavorite}
       >
-        <FaStar style={{ marginLeft: -1 }} />
+        <FaStar style={{ marginLeft: -1, marginTop: -1 }} />
       </button>
       <style jsx>{`
         .filter-btn {
           border: none;
           outline: none;
           background: ${colors.primaryBtnBg};
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
           display: flex;
           align-items: center;
           justify-content: space-around;
