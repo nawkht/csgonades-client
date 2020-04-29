@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useFilterByTickrate } from "../../store/MapStore/hooks/useFilterByTickrate";
 import { ButtonGroup } from "./ButtonGroup";
+import { Dimensions } from "../../constants/Constants";
 
 type Props = {};
 
@@ -49,13 +50,13 @@ export const TickrateSelector: FC<Props> = ({}) => {
           border: none;
           outline: none;
           appearance: none;
-          width: 35px;
-          height: 35px;
+          width: ${Dimensions.BUTTON_HEIGHT}px;
+          height: ${Dimensions.BUTTON_HEIGHT}px;
           display: flex;
           align-items: center;
           justify-content: space-around;
           cursor: pointer;
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 300;
           background: ${colors.primaryBtnBg};
           color: ${colors.TEXT};

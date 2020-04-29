@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useFilterByFavorites } from "../../store/MapStore/hooks/useFilterByFavorites";
+import { Dimensions } from "../../constants/Constants";
 
 type Props = {
   showSingInWarning: () => void;
@@ -29,20 +30,20 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
         className={`filter-btn favorite ${active}`}
         onClick={onFilterByFavorite}
       >
-        <FaStar style={{ marginLeft: -1, marginTop: -1 }} />
+        <FaStar style={{ marginLeft: -1, marginTop: 0 }} />
       </button>
       <style jsx>{`
         .filter-btn {
           border: none;
           outline: none;
           background: ${colors.primaryBtnBg};
-          width: 35px;
-          height: 35px;
+          width: ${Dimensions.BUTTON_HEIGHT}px;
+          height: ${Dimensions.BUTTON_HEIGHT}px;
           display: flex;
           align-items: center;
           justify-content: space-around;
           color: #767676;
-          font-size: 19px;
+          font-size: ${Dimensions.BUTTON_HEIGHT / 2}px;
           cursor: pointer;
           overflow: hidden;
           border-radius: 5px;

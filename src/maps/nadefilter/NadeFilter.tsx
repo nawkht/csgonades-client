@@ -9,6 +9,7 @@ import { useFilterByType } from "../../store/MapStore/hooks/useFilterByType";
 import { useToggleMapview } from "../../store/MapStore/hooks/useToggleMapView";
 import { SidebarPanel } from "../../common/SidebarPanel";
 import { ButtonGroup } from "./ButtonGroup";
+import { Dimensions } from "../../constants/Constants";
 
 type Props = {
   showSingInWarning: () => void;
@@ -148,17 +149,16 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
         .filter-btn {
           border: none;
           outline: none;
-          width: 35px;
-          height: 35px;
+          width: ${Dimensions.BUTTON_HEIGHT}px;
+          height: ${Dimensions.BUTTON_HEIGHT}px;
           display: flex;
           align-items: center;
           justify-content: space-around;
           color: ${colors.TEXT};
-          font-size: 18px;
+          font-size: ${Dimensions.BUTTON_HEIGHT / 2}px;
           cursor: pointer;
           border-radius: 5px;
           background: ${colors.primaryBtnBg};
-          margin-right: 20px;
         }
 
         .filter-btn:hover {

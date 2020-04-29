@@ -2,6 +2,7 @@ import { FC, memo, useMemo } from "react";
 import { NadeType } from "../../models/Nade/NadeType";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { iconFromType } from "../../utils/Common";
+import { Dimensions } from "../../constants/Constants";
 
 type Props = {
   type: NadeType;
@@ -52,8 +53,8 @@ export const NadeTypeButton: FC<Props> = memo(
             border: none;
             background: transparent;
             outline: none;
-            width: 35px;
-            height: 35px;
+            width: ${Dimensions.BUTTON_HEIGHT}px;
+            height: ${Dimensions.BUTTON_HEIGHT}px;
             background: ${colors.primaryBtnBg};
             border-radius: 5px;
           }
