@@ -18,7 +18,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
   const contributors = useMemo(() => {
     const contCount: { [key: string]: UserContribution } = {};
     nades.forEach((nade) => {
-      const newCap = 60 * 24 * 2; // Don't count new nades
+      const newCap = 60 * 24 * 4; // Don't count new nades
       const minutesAgoAdded = dateMinutesAgo(nade.createdAt);
       if (minutesAgoAdded < newCap) {
         return;
