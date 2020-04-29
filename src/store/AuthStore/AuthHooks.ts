@@ -9,6 +9,7 @@ import { setToken, setUserAction, signOutUser } from "./AuthActions";
 import { userSelector } from "./AuthSelectors";
 import { getUserFavorites } from "../../api/FavoriteApi";
 import { addAllFavoritesAction } from "../FavoriteStore/FavoriteActions";
+import Axios from "axios";
 
 export const useSignedInUser = () => {
   const user = useSelector(userSelector);
@@ -84,9 +85,17 @@ export const usePreloadUser = () => {
 
   useEffect(() => {
     (async () => {
+      const backendOnline = await backendIsOnline();
+
+      if (!backendOnline) {
+        // Don't try signing in if backend is offline
+        return;
+      }
+
       const { userDetails, userToken } = await trySignInFunc();
 
       if (!userDetails || !userToken) {
+        dispatch(signOutUser());
         return;
       }
 
@@ -101,6 +110,15 @@ export const usePreloadUser = () => {
     })();
   }, [dispatch]);
 };
+
+async function backendIsOnline() {
+  try {
+    Axios.get("https://api.csgonades.com/status");
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
 
 async function trySignInFunc() {
   const tokenResult = await AuthApi.refreshToken();
