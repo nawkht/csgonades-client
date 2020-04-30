@@ -13,7 +13,10 @@ type NadeTypeOption = {
   value: NadeType;
 };
 
-export function nadeTypeString(nadeType: NadeType) {
+export function nadeTypeString(nadeType?: NadeType) {
+  if (!nadeType) {
+    return "Missing type";
+  }
   return NadeTypes[nadeType];
 }
 

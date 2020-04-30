@@ -1,37 +1,49 @@
 import { FC } from "react";
-import { FiLogOut } from "react-icons/fi";
 import { User } from "../../models/User";
 import { useSignOut } from "../../store/AuthStore/AuthHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { PageLink } from "../../common/PageLink";
+import { Dropdown } from "semantic-ui-react";
+import { useRouter } from "next/router";
 
 type Props = {
   user: User;
 };
 
 export const UserDropdown: FC<Props> = ({ user }) => {
+  const router = useRouter();
   const { colors } = useTheme();
   const signOut = useSignOut();
+
+  function onDashboardClick() {
+    router.push("/dashboard", "/dashboard");
+  }
+
+  function onProfileClick() {
+    router.push("/users/[user]", `/users/${user.steamId}`);
+  }
 
   return (
     <>
       <div className="user-nav-user">
-        <PageLink href={`/users/[user]`} as={`/users/${user.steamId}`}>
-          <span className="user-link">
-            {user.avatar && (
-              <img
-                className="user-avatar"
-                src={user.avatar}
-                alt={`avatar for ${user.nickname}`}
-              />
-            )}
-            <div>{user.nickname}</div>
-          </span>
-        </PageLink>
-
-        <button className="logout-btn" onClick={signOut}>
-          <FiLogOut />
-        </button>
+        <span className="user-link">
+          {user.avatar && (
+            <img
+              className="user-avatar"
+              src={user.avatar}
+              alt={`avatar for ${user.nickname}`}
+            />
+          )}
+          <div>
+            <Dropdown text={user.nickname} direction="left">
+              <Dropdown.Menu>
+                <Dropdown.Item text="Dashboard" onClick={onDashboardClick} />
+                <Dropdown.Item text="Profile" onClick={onProfileClick} />
+                <Dropdown.Divider />
+                <Dropdown.Item text="Sign out" onClick={signOut} />
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </span>
       </div>
       <style jsx>{`
         .user-nav-user {
@@ -51,26 +63,6 @@ export const UserDropdown: FC<Props> = ({ user }) => {
           display flex;
           align-items: center;
           color: ${colors.TEXT};
-        }
-
-        .logout-btn {
-          margin-left: 12px;
-          position: relative;
-          color: ${colors.TEXT};
-          background: rgba(171, 0, 0, 0.0);
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          transition: background 0.15s;
-          border: none;
-          cursor: pointer;
-        }
-
-        .logout-btn:hover {
-          background: rgba(171, 0, 0, 0.1);
         }
       `}</style>
     </>

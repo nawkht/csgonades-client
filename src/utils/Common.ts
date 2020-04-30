@@ -130,3 +130,9 @@ function truncateString(str, num) {
   // Return str truncated with '...' concatenated to the end of str.
   return str.slice(0, num) + "...";
 }
+
+export function sortByDate(a: Date | string, b: Date | string) {
+  const first = new Date(a);
+  const second = new Date(b);
+  return first > second ? -1 : first < second ? 1 : 0;
+}
