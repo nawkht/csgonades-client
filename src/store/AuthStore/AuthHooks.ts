@@ -154,11 +154,6 @@ export const useOnSignIn = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Force redirect if something doesn't happen for 10 seconds
-    const delay = setTimeout(() => {
-      router.push("/", "/");
-    }, 10000);
-
     (async () => {
       const { userDetails, userToken } = await trySignInFunc();
       if (!userDetails || !userToken) {
@@ -177,10 +172,6 @@ export const useOnSignIn = () => {
         router.push("/", "/");
       }
     })();
-
-    return () => {
-      clearTimeout(delay);
-    };
   }, [dispatch, router]);
 };
 
