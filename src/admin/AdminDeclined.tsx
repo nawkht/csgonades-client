@@ -14,9 +14,11 @@ export const AdminDeclined: FC<Props> = ({}) => {
   useEffect(() => {
     (async () => {
       const token = await getToken();
+
       if (!token) {
         return;
       }
+
       const res = await NadeApi.getDeclined(token);
       if (res.isOk()) {
         setDeclinedNades(res.value);
