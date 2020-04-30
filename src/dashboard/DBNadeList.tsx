@@ -55,6 +55,7 @@ export const DBNadeList: FC<Props> = ({}) => {
               <td>Comments</td>
               <td>Views</td>
               <td>Created</td>
+              <td></td>
             </tr>
           </thead>
           <tbody>
@@ -74,6 +75,8 @@ export const DBNadeList: FC<Props> = ({}) => {
 
         table thead td {
           font-weight: 400;
+          padding: 10px 20px;
+          padding-left: 0px;
         }
       `}</style>
     </>
@@ -103,16 +106,26 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
         <td className="nade-comments">{nade.commentCount}</td>
         <td id="nade-views">{kFormatter(nade.viewCount)}</td>
         <td>{prettyDate(nade.createdAt)}</td>
+        <td className="nade-thumb">
+          <PageLink href="/nades/[nade]" as={`/nades/${nade.slug || nade.id}`}>
+            <img src={nade.images.thumbnailUrl} />
+          </PageLink>
+        </td>
       </tr>
       <style jsx>{`
+        .nade-thumb img {
+          width: 100px;
+          border-radius: 5px;
+        }
+
         .nade-item {
           border-collapse: collapse;
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .nade-item td {
-          padding-bottom: 10px;
-          padding-top: 10px;
+          padding: 10px 20px;
+          padding-left: 0px;
         }
 
         .nade-title {
@@ -122,7 +135,6 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
         .nade-views,
         .nade-fav,
         .nade-type {
-          width: 100px;
         }
 
         .nade-type img {
