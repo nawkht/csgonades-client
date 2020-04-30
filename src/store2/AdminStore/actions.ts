@@ -2,7 +2,12 @@ import { NadeLight } from "../../models/Nade/Nade";
 import { Report } from "../../models/Report";
 import { User } from "../../models/User";
 
-export type AdminRoutes = "pending-nades" | "user" | "reports" | "gallery";
+export type AdminRoutes =
+  | "pending-nades"
+  | "declined-nades"
+  | "user"
+  | "reports"
+  | "gallery";
 
 type ChangeAdminRouterAction = {
   type: "@@admin/CHANGE_ROUTE";

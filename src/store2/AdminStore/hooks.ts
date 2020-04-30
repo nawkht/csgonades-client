@@ -1,8 +1,10 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useState, useEffect } from "react";
 import { AdminRoutes } from "./actions";
 import { AdminStoreContext } from "./context";
 import { UserApi } from "../../api/UserApi";
 import { useGetOrUpdateToken } from "../../store/AuthStore/hooks/useGetToken";
+import { NadeApi } from "../../api/NadeApi";
+import { NadeLight } from "../../models/Nade/Nade";
 
 export const useAdminRoute = () => {
   const { dispatch, state } = useContext(AdminStoreContext);
@@ -22,10 +24,24 @@ export const useAdminRoute = () => {
 };
 
 export const useAdminPendingNades = () => {
-  const { state } = useContext(AdminStoreContext);
+  const getToken = useGetOrUpdateToken();
+  const [pendingNades, setPendingNades] = useState<NadeLight[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const token = await getToken();
+      if (!token) {
+        return;
+      }
+      const res = await NadeApi.getPending(token);
+      if (res.isOk()) {
+        setPendingNades(res.value);
+      }
+    })();
+  }, []);
 
   return {
-    pendingNades: state.pendingNades,
+    pendingNades,
   };
 };
 

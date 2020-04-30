@@ -40,6 +40,22 @@ export class NadeApi {
     }
   }
 
+  static async getDeclined(token: string): AppResult<NadeLight[]> {
+    try {
+      const res = await axios.get<NadeLight[]>(
+        `${Config.API_URL}/nades/declined`,
+        {
+          headers: { Authorization: token },
+        }
+      );
+      const nades = res.data;
+
+      return ok(nades);
+    } catch (error) {
+      return extractApiError(error);
+    }
+  }
+
   static async getByMap(mapName: CsgoMap): AppResult<NadeLight[]> {
     try {
       const res = await axios.get(`${Config.API_URL}/nades/map/${mapName}`);
