@@ -10,10 +10,13 @@ type Props = {
 };
 
 const NadePageComponent: NextPage<Props> = ({ nade }) => {
+  if (!nade) {
+    return <NadeNotFound />;
+  }
+
   return (
     <NadePageStoreProvider key={nade.id} nade={nade}>
-      {nade && <NadePage />}
-      {!nade && <NadeNotFound />}
+      <NadePage />
     </NadePageStoreProvider>
   );
 };

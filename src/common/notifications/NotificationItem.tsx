@@ -72,7 +72,7 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
     <>
       <PageLink
         href={`/nades/[nade]`}
-        as={`/nades/${notification.nadeSlug || notification.id}`}
+        as={`/nades/${notification.nadeSlug || notification.nadeId}`}
       >
         <span className={"notification"}>
           <div className="noti-msg">{notificationMessage(notification)}</div>
