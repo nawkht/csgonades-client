@@ -27,7 +27,7 @@ export const CSGNModal: FC<Props> = ({
     return (
       <>
         <div className="modal-bg" onClick={onDismiss}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
             {children}
           </div>
         </div>
@@ -50,6 +50,8 @@ export const CSGNModal: FC<Props> = ({
             min-width: 50%;
             max-width: 90vw;
             max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid blue;
           }
         `}</style>
       </>
@@ -59,7 +61,7 @@ export const CSGNModal: FC<Props> = ({
   return (
     <>
       <div className="modal-bg" onClick={onDismiss}>
-        <div className="modal" onClick={e => e.stopPropagation()}>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
           {!!title && (
             <div className="modal-title">
               <div className="spacer" />
@@ -88,13 +90,14 @@ export const CSGNModal: FC<Props> = ({
         }
 
         .modal {
-          background: red;
           align-self: center;
           border-radius: ${Dimensions.BORDER_RADIUS};
           max-width: 90vw;
           max-height: 90vh;
           background: ${colors.DP01};
           color: ${colors.TEXT};
+          display: flex;
+          flex-direction: column;
         }
 
         .modal-title {
@@ -132,6 +135,8 @@ export const CSGNModal: FC<Props> = ({
 
         .modal-content {
           padding: 18px;
+          overflow-y: auto;
+          flex: 1;
         }
       `}</style>
     </>
