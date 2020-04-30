@@ -25,15 +25,22 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
     loadAdByType(adData);
   }, [adData]);
 
+  const [width, height] = adData.size.split("x");
+
   return (
     <>
       <div className="ph">
-        <div id={adData.id}></div>
+        <div className="ph-unit" id={adData.id}></div>
       </div>
       <style jsx>{`
         .ph {
           display: flex;
           justify-content: space-around;
+        }
+
+        .ph-unit {
+          width: ${width}px;
+          height: ${height}px;
         }
       `}</style>
     </>
