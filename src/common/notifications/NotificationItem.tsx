@@ -1,7 +1,6 @@
-import { FC, memo, useState } from "react";
+import { FC, memo } from "react";
 import { FaBell } from "react-icons/fa";
 import { Notification } from "../../models/Notification";
-import { useSetNotificationViewed } from "../../store/NotificationStore/hooks/useSetNotificationViewed";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { pluralize } from "../../utils/Common";
 import { prettyDateTime } from "../../utils/DateUtils";
@@ -12,15 +11,12 @@ type Props = {
 };
 
 export const NotificationItem: FC<Props> = memo(({ notification }) => {
-  const [wasViewed] = useState(notification.viewed);
   const { colors } = useTheme();
-
-  useSetNotificationViewed(notification.id);
 
   if (notification.type === "contact-msg") {
     return (
       <>
-        <div className={wasViewed ? "notification" : "notification new"}>
+        <div className={"notification"}>
           <div className="noti-msg">
             <FaBell /> {notificationMessage(notification)}
           </div>
@@ -74,8 +70,11 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
 
   return (
     <>
-      <PageLink href={`/nades/[nade]`} as={`/nades/${notification.nadeId}`}>
-        <span className={wasViewed ? "notification" : "notification new"}>
+      <PageLink
+        href={`/nades/[nade]`}
+        as={`/nades/${notification.nadeSlug || notification.id}`}
+      >
+        <span className={"notification"}>
           <div className="noti-msg">{notificationMessage(notification)}</div>
           <div className="noti-date">
             {prettyDateTime(notification.createdAt)}
@@ -111,29 +110,9 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
           color: ${colors.TEXT};
         }
 
-        .new {
-          animation-name: indicateUnread;
-          animation-duration: 4s;
-        }
-
         .notification:last-child {
           margin-bottom: 0;
           border-bottom: none;
-        }
-
-        @keyframes indicateUnread {
-          0% {
-            background-color: ${colors.UI_BG};
-          }
-          10% {
-            background-color: ${colors.HIGHLIGHT_BG};
-          }
-          90% {
-            background-color: ${colors.HIGHLIGHT_BG};
-          }
-          100% {
-            background-color: ${colors.UI_BG};
-          }
         }
       `}</style>
     </>
@@ -150,14 +129,14 @@ function notificationMessage(
       return <div>New contact message.</div>;
     case "declined-nade":
       return <div>Your nade was declined.</div>;
-    case "favorite":
-      const favCount = notification.favoritedBy.length;
+    case "favorite-agregate":
+      const favCount = notification.count;
       if (favCount === 1) {
         return (
           <div>
             Your nade was favorited by
             <br />
-            {notification.favoritedBy[0]}.
+            {notification.byNickname}.
           </div>
         );
       } else {
@@ -165,8 +144,7 @@ function notificationMessage(
           <div>
             Your nade was favorited by
             <br />
-            {notification.favoritedBy[0]} and {pluralize(favCount - 1, "other")}
-            .
+            {notification.byNickname} and {pluralize(favCount - 1, "other")}.
           </div>
         );
       }

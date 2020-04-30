@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useNotifications } from "../../store/NotificationStore/NotificationHooks";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NotificationItem } from "./NotificationItem";
@@ -8,8 +8,15 @@ type Props = {
 };
 
 export const NotificationList: FC<Props> = ({ visble }) => {
-  const { notifications } = useNotifications();
+  const { notifications, setNotificationsAsViewed } = useNotifications();
   const { colors } = useTheme();
+
+  useEffect(() => {
+    if (visble) {
+      setNotificationsAsViewed();
+    }
+  }, [visble]);
+
   if (!visble) {
     return null;
   }
