@@ -47,7 +47,6 @@ export const CSGNModal: FC<Props> = ({
           .modal {
             align-self: center;
             border-radius: ${Dimensions.BORDER_RADIUS};
-            min-width: 50%;
             max-width: 90vw;
             max-height: 90vh;
             overflow-y: auto;

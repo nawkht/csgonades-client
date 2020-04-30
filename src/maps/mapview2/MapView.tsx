@@ -50,30 +50,53 @@ export const MapView: FC<Props> = ({ map, allNades }) => {
   return (
     <>
       <CSGNModal onDismiss={dismissMapView} visible={mapViewOpen} empty={true}>
-        <div ref={mapViewRef} className="mapview">
-          <div className="mapview-stuff">
-            <div id="mapview-close" onClick={toggleMapViewVisibility}>
-              <FaTimes />
+        <div id="mapview-wrap">
+          <div id="mapview-msg">
+            <p>CLICK A NADE TO ONLY SHOW NADES FOR THE POSITION</p>
+          </div>
+          <div ref={mapViewRef} className="mapview">
+            <div className="mapview-stuff">
+              <div id="mapview-close" onClick={toggleMapViewVisibility}>
+                <FaTimes />
+              </div>
+              <img
+                className="mapview-img"
+                src={`/mapsoverlays/${map}.jpg`}
+                alt="Map overview image"
+                onLoad={onMapViewImageLoaded}
+              />
+              {mapLoaded &&
+                nades.map((n) => (
+                  <MapPosIcon
+                    key={n.id}
+                    nade={n}
+                    mapWidth={mapWidth}
+                    onPress={onNadeClick}
+                  />
+                ))}
             </div>
-            <img
-              className="mapview-img"
-              src={`/mapsoverlays/${map}.jpg`}
-              alt="Map overview image"
-              onLoad={onMapViewImageLoaded}
-            />
-            {mapLoaded &&
-              nades.map((n) => (
-                <MapPosIcon
-                  key={n.id}
-                  nade={n}
-                  mapWidth={mapWidth}
-                  onPress={onNadeClick}
-                />
-              ))}
           </div>
         </div>
       </CSGNModal>
       <style jsx>{`
+        #mapview-wrap {
+          display: flex;
+          justify-content: space-around;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        #mapview-msg p {
+          background: #141414;
+          padding: 10px 30px;
+          display: inline-block;
+          color: white;
+          font-weight: 400;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          font-size: 14px;
+        }
+
         .mapview {
           display: flex;
           justify-content: space-around;
