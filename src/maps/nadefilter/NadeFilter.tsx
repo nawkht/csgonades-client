@@ -10,6 +10,7 @@ import { useToggleMapview } from "../../store/MapStore/hooks/useToggleMapView";
 import { SidebarPanel } from "../../common/SidebarPanel";
 import { ButtonGroup } from "./ButtonGroup";
 import { Dimensions } from "../../constants/Constants";
+import { useAnalytics } from "../../utils/Analytics";
 
 type Props = {
   showSingInWarning: () => void;
@@ -17,8 +18,17 @@ type Props = {
 
 export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
   const { colors } = useTheme();
+  const { event } = useAnalytics();
   const { byType, filterByType } = useFilterByType();
   const { toggleMapViewVisibility } = useToggleMapview();
+
+  function showMapView() {
+    toggleMapViewVisibility();
+    event({
+      category: "MapView",
+      action: "Show",
+    });
+  }
 
   return (
     <>
@@ -42,7 +52,7 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
               <FavFilterButton showSingInWarning={showSingInWarning} />
             </div>
             <div id="map-filter">
-              <button className="filter-btn" onClick={toggleMapViewVisibility}>
+              <button className="filter-btn" onClick={showMapView}>
                 <FaMap />
               </button>
             </div>

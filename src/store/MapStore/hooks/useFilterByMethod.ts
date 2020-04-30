@@ -17,8 +17,9 @@ export const useFilterByMethod = () => {
         method: sortingMethod,
       });
       event({
-        category: "Nade Sort",
-        action: sortingMethod,
+        category: "MapStore",
+        action: "MapStore/SetSortingMethod",
+        label: sortingMethod,
       });
     },
     [dispatch, event]

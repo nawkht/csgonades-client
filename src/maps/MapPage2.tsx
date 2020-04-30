@@ -15,6 +15,7 @@ import { SidebarPanel } from "../common/SidebarPanel";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { SortingMethodSelector } from "./SortingMethodSelector";
+import { useAnalytics } from "../utils/Analytics";
 
 type Props = {
   map: CsgoMap;
@@ -23,11 +24,24 @@ type Props = {
 
 export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
   const { colors } = useTheme();
+  const { event } = useAnalytics();
   useMapChangeHandler();
   const [showLoginWarning, setShowLoginWarning] = useState(false);
 
   function showSignInWarning() {
     setShowLoginWarning(true);
+    event({
+      category: "Sign In Warning",
+      action: "Favorite Not Signed In",
+    });
+  }
+
+  function dismissSignInWarning() {
+    setShowLoginWarning(false);
+    event({
+      category: "Sign In Warning",
+      action: "Dismiss",
+    });
   }
 
   return (
@@ -63,7 +77,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
       <MapView map={map} allNades={allNades} />
       <SignInWarning
         visible={showLoginWarning}
-        onDismiss={() => setShowLoginWarning(false)}
+        onDismiss={dismissSignInWarning}
         message="filter"
       />
       <style jsx>{`

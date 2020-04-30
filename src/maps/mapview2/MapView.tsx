@@ -7,6 +7,7 @@ import { useNadesForMapView } from "../../store/MapStore/hooks/useNadesForMapVie
 import { useFilterByCoords } from "../../store/MapStore/hooks/useFilterByCoords";
 import { NadeLight } from "../../models/Nade/Nade";
 import { FaTimes } from "react-icons/fa";
+import { useAnalytics } from "../../utils/Analytics";
 
 type Props = {
   map: CsgoMap;
@@ -20,10 +21,15 @@ export const MapView: FC<Props> = ({ map, allNades }) => {
   const nades = useNadesForMapView(allNades);
   const filterByCoords = useFilterByCoords();
   const mapViewRef = useRef<HTMLDivElement>(null);
+  const { event } = useAnalytics();
 
   function onNadeClick(pos: { x: number; y: number }) {
     filterByCoords(pos);
     toggleMapViewVisibility();
+    event({
+      category: "MapView",
+      action: "Clicked Nade",
+    });
   }
 
   function onMapViewImageLoaded() {
@@ -33,13 +39,17 @@ export const MapView: FC<Props> = ({ map, allNades }) => {
     }
   }
 
+  function dismissMapView() {
+    toggleMapViewVisibility();
+    event({
+      category: "MapView",
+      action: "Dismiss",
+    });
+  }
+
   return (
     <>
-      <CSGNModal
-        onDismiss={toggleMapViewVisibility}
-        visible={mapViewOpen}
-        empty={true}
-      >
+      <CSGNModal onDismiss={dismissMapView} visible={mapViewOpen} empty={true}>
         <div ref={mapViewRef} className="mapview">
           <div className="mapview-stuff">
             <div id="mapview-close" onClick={toggleMapViewVisibility}>

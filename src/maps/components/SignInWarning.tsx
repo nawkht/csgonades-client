@@ -2,6 +2,7 @@ import { FC, useMemo } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
 import { Config } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { useAnalytics } from "../../utils/Analytics";
 
 type FavMessage = "filter" | "favorite";
 
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export const SignInWarning: FC<Props> = ({ visible, onDismiss, message }) => {
+  const { event } = useAnalytics();
   const { colors } = useTheme();
 
   const warningMessage = useMemo(() => {
@@ -22,12 +24,23 @@ export const SignInWarning: FC<Props> = ({ visible, onDismiss, message }) => {
     }
   }, [message]);
 
+  function onSignIn() {
+    event({
+      category: "Sign In Warning",
+      action: "Sign In Clicked",
+    });
+  }
+
   return (
     <>
       <CSGNModal title="Woops!" visible={visible} onDismiss={onDismiss}>
         <div className="sign-in-warning">
           <p>{warningMessage}</p>
-          <a className="sign-in-btn" href={Config.SIGN_IN_URL}>
+          <a
+            onClick={onSignIn}
+            className="sign-in-btn"
+            href={Config.SIGN_IN_URL}
+          >
             Sign in with steam
           </a>
         </div>
