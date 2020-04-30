@@ -10,15 +10,16 @@ import {
   filterByFavorite,
   filterByTickrate,
   filterByType,
+  filterBySortMethod,
 } from "./helpers";
 import {
-  currentMapSelector,
-  allNadesSelector,
   filterByCoordsSelector,
   filterByTickrateSelector,
   filterByFavoritesSelector,
   filterByTypeSelector,
+  filterByMethodSelector,
 } from "../selectors";
+import { NadeSortingMethod } from "../reducer";
 
 export const useFilterServerSideNades = (ssrNades: NadeLight[]) => {
   const byCoords = useSelector(filterByCoordsSelector);
@@ -26,48 +27,34 @@ export const useFilterServerSideNades = (ssrNades: NadeLight[]) => {
   const byFavorites = useSelector(filterByFavoritesSelector);
   const byType = useSelector(filterByTypeSelector);
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
+  const bySortingMethod = useSelector(filterByMethodSelector);
 
   return useMemo(() => {
     return filterNades(
       ssrNades,
       favoritedNades,
       byFavorites,
+      bySortingMethod,
       byCoords,
       byType,
       byTickrate
     );
-  }, [byCoords, byTickrate, byFavorites, byType, favoritedNades, ssrNades]);
-};
-
-export const useFilteredNades = () => {
-  const currentMap = useSelector(currentMapSelector);
-  const allNades = useSelector(allNadesSelector);
-  const favoritedNades = useSelector(favoritedNadeIdsSelector);
-  const byCoords = useSelector(filterByCoordsSelector);
-  const byTickrate = useSelector(filterByTickrateSelector);
-  const byFavorites = useSelector(filterByFavoritesSelector);
-  const byType = useSelector(filterByTypeSelector);
-
-  const nades = currentMap ? allNades[currentMap] || [] : [];
-
-  const filteredNades = useMemo(() => {
-    return filterNades(
-      nades,
-      favoritedNades,
-      byFavorites,
-      byCoords,
-      byType,
-      byTickrate
-    );
-  }, [byFavorites, byTickrate, nades, byCoords, byType, favoritedNades]);
-
-  return filteredNades;
+  }, [
+    byCoords,
+    byTickrate,
+    byFavorites,
+    byType,
+    favoritedNades,
+    ssrNades,
+    bySortingMethod,
+  ]);
 };
 
 export function filterNades(
   nades: NadeLight[],
   favoritedNades: string[],
   byFavorites: boolean,
+  byMethod: NadeSortingMethod,
   byCoords?: MapCoordinates,
   byType?: NadeType,
   byTickrate?: Tickrate
@@ -80,6 +67,7 @@ export function filterNades(
   thenades = filterByType(thenades, byType);
   thenades = filterByTickrate(thenades, byTickrate);
   thenades = filterByFavorite(thenades, byFavorites);
+  thenades = filterBySortMethod(thenades, byMethod);
   return thenades;
 }
 

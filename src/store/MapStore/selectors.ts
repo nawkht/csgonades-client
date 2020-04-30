@@ -19,3 +19,6 @@ export const filterByFavoritesSelector = (state: AppState) =>
 
 export const mapViewOpenSelector = (state: AppState) =>
   state.mapStore.mapViewOpen;
+
+export const filterByMethodSelector = (state: AppState) =>
+  state.mapStore.sortingMethod;

@@ -13,6 +13,8 @@ import {
 
 type NadesForMap = { [key: string]: NadeLight[] | undefined };
 
+export type NadeSortingMethod = "hot" | "new" | "top";
+
 export type MapStoreState = {
   mapViewOpen: boolean;
   nadeForMap: NadesForMap;
@@ -21,6 +23,7 @@ export type MapStoreState = {
   filterByType?: NadeType;
   filterByCoords?: MapCoordinates;
   filterByTickrate: Tickrate;
+  sortingMethod: NadeSortingMethod;
 };
 
 const initialState: MapStoreState = {
@@ -28,6 +31,7 @@ const initialState: MapStoreState = {
   nadeForMap: {},
   filterByFavorites: false,
   filterByTickrate: "any",
+  sortingMethod: "hot",
 };
 
 const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
@@ -35,6 +39,11 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
   action
 ): MapStoreState => {
   switch (action.type) {
+    case "MapStore/SetSortingMethod":
+      return {
+        ...state,
+        sortingMethod: action.method,
+      };
     case "MapStore/ReplaceNadesForMap":
       return {
         ...state,
@@ -52,6 +61,7 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
           filterByTickrate: "any",
           filterByCoords: undefined,
           filterByType: undefined,
+          sortingMethod: "hot",
         };
       } else {
         return {

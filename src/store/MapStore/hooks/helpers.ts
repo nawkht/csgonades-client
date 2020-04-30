@@ -4,17 +4,47 @@ import { MapStoreActions } from "../actions";
 import { MapCoordinates, NadeLight } from "../../../models/Nade/Nade";
 import { Tickrate } from "../../../models/Nade/NadeTickrate";
 import { NadeType } from "../../../models/Nade/NadeType";
+import { NadeSortingMethod } from "../reducer";
+import { dateMinutesAgo } from "../../../utils/DateUtils";
 
 export const useMapStoreDispatch = () => {
   return useDispatch<Dispatch<MapStoreActions>>();
 };
+
+export function filterBySortMethod(
+  nades: NadeLight[],
+  byMethod: NadeSortingMethod
+) {
+  switch (byMethod) {
+    case "new":
+      return nades.sort(sortByDate);
+    case "top":
+      return nades.sort(sortByTop);
+    default:
+      return nades.sort(sortByScore);
+  }
+}
+
+function sortByScore(a: NadeLight, b: NadeLight) {
+  return b.score - a.score;
+}
+
+function sortByDate(a: NadeLight, b: NadeLight) {
+  return dateMinutesAgo(a.createdAt) - dateMinutesAgo(b.createdAt);
+}
+
+function sortByTop(a: NadeLight, b: NadeLight) {
+  const aScore = a.favoriteCount + a.commentCount + Math.log(a.viewCount);
+  const bScore = b.favoriteCount + b.commentCount + Math.log(b.viewCount);
+  return bScore - aScore;
+}
 
 export function filterByType(
   nades: NadeLight[],
   byType?: NadeType
 ): NadeLight[] {
   if (byType) {
-    return nades.filter(n => n.type === byType);
+    return nades.filter((n) => n.type === byType);
   } else {
     return nades;
   }
@@ -25,7 +55,7 @@ export function filterByFavorite(nades: NadeLight[], byFavorite: boolean) {
     return nades;
   }
 
-  return nades.filter(n => n.isFavorited);
+  return nades.filter((n) => n.isFavorited);
 }
 
 export function filterByTickrate(
@@ -33,9 +63,9 @@ export function filterByTickrate(
   byTickrate?: Tickrate
 ): NadeLight[] {
   if (byTickrate === "tick128") {
-    return nades.filter(n => n.tickrate !== "tick64");
+    return nades.filter((n) => n.tickrate !== "tick64");
   } else if (byTickrate === "tick64") {
-    return nades.filter(n => n.tickrate !== "tick128");
+    return nades.filter((n) => n.tickrate !== "tick128");
   } else {
     return nades;
   }
@@ -47,7 +77,7 @@ export function filterByCoords(nades: NadeLight[], coords?: MapCoordinates) {
   }
 
   const MIN_DISTANCE = 20;
-  return nades.filter(n => {
+  return nades.filter((n) => {
     if (!n.mapEndCoord) {
       return false;
     }
@@ -63,7 +93,7 @@ export function filterByCoords(nades: NadeLight[], coords?: MapCoordinates) {
 }
 
 export function addFavoriteToNades(nades: NadeLight[], favIds: string[]) {
-  return nades.map(n => {
+  return nades.map((n) => {
     if (favIds.includes(n.id)) {
       return {
         ...n,
@@ -79,7 +109,7 @@ export function containsSimilarNade(
   nade: NadeLight,
   nades: NadeLight[]
 ): boolean {
-  const containsSimilar = nades.find(n => {
+  const containsSimilar = nades.find((n) => {
     if (!n.mapEndCoord || !n.type || !nade.mapEndCoord || !nade.type) {
       return false;
     }

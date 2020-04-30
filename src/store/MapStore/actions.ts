@@ -2,6 +2,7 @@ import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeLight, MapCoordinates } from "../../models/Nade/Nade";
 import { NadeType } from "../../models/Nade/NadeType";
 import { Tickrate } from "../../models/Nade/NadeTickrate";
+import { NadeSortingMethod } from "./reducer";
 
 type ReplaceNadesForMap = {
   type: "MapStore/ReplaceNadesForMap";
@@ -41,6 +42,11 @@ type FilterByTickrate = {
   tick: Tickrate;
 };
 
+type SetSortingMethod = {
+  type: "MapStore/SetSortingMethod";
+  method: NadeSortingMethod;
+};
+
 export type IncrementNadeFavoriteCount = {
   type: "MapStore/IncrementNadeFavoriteCount";
   nadeId: string;
@@ -61,4 +67,5 @@ export type MapStoreActions =
   | FilterReset
   | FilterByTickrate
   | IncrementNadeFavoriteCount
-  | DecrementNadeFavoriteCount;
+  | DecrementNadeFavoriteCount
+  | SetSortingMethod;

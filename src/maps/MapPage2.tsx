@@ -14,6 +14,7 @@ import { TopContributorList } from "./TopContributor";
 import { SidebarPanel } from "../common/SidebarPanel";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { SortingMethodSelector } from "./SortingMethodSelector";
 
 type Props = {
   map: CsgoMap;
@@ -40,6 +41,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           )}. Browse our large collection of nades for CS:GO.`}
         />
         <MapPageJumbo map={map} nades={allNades} />
+        <SortingMethodSelector />
         <div className="map-nade-list">
           <MapPageNades allNades={allNades} />
         </div>
