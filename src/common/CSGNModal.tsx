@@ -51,7 +51,6 @@ export const CSGNModal: FC<Props> = ({
             max-width: 90vw;
             max-height: 90vh;
             overflow-y: auto;
-            border: 1px solid blue;
           }
         `}</style>
       </>
