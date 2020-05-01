@@ -23,10 +23,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
         contCount[steamId] = {
           ...currentUser,
           nadeCount: currentUser.nadeCount + 1,
-          bestScore:
-            currentUser.bestScore > nade.favoriteCount
-              ? currentUser.bestScore
-              : nade.favoriteCount,
+          bestScore: Math.max(currentUser.bestScore, nade.favoriteCount),
         };
       } else {
         contCount[steamId] = {
@@ -44,7 +41,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
     sortedContributors = sortedContributors.map((u) => {
       return {
         ...u,
-        score: u.bestScore + Math.log(u.nadeCount + 1),
+        score: u.bestScore + u.nadeCount,
       };
     });
     sortedContributors.sort((a, b) => b.score - a.score);
