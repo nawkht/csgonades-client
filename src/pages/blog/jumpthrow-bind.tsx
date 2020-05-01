@@ -57,7 +57,12 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         <p>
           <em>Change out X with your prefered key.</em>
         </p>
-        <h3>Alias bind in autoexec</h3>
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
+
+        <h3>Alias bind, autoexec</h3>
         <p>
           If you don’t have a autoexec config file allready, you can follow{" "}
           <a href="https://www.dailyesports.gg/how-to-create-a-custom-csgo-config-autoexec-cfg/">
@@ -74,10 +79,6 @@ const NadeAlignCrosshairBlogPost: FC = () => {
             'alias "+jumpthrow" "+jump;-attack;-attack2"\nalias "-jumpthrow" "-jump"\nbind "KEY" "+jumpthrow"'
           }
         />
-
-        <div className="a-tag">
-          <AdUnit tagType="728x90" />
-        </div>
 
         <h2>How to use jumpthrow bind</h2>
         <p>
