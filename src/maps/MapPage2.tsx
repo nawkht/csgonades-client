@@ -19,6 +19,7 @@ import { MapViewFilter } from "./nadefilter/MapViewFilter";
 import { TypeFilter } from "./nadefilter/TypeFilter";
 import { TickrateSelector } from "./nadefilter/TickrateSelector";
 import { FavFilterButton } from "./nadefilter/FavFilterButton";
+import { ResetFilterButton } from "./nadefilter/ResetFilterButton";
 
 type Props = {
   map: CsgoMap;
@@ -74,6 +75,9 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           <div id="filter-fav">
             <FavFilterButton showSingInWarning={showSignInWarning} />
           </div>
+          <div id="filter-reset">
+            <ResetFilterButton />
+          </div>
         </div>
         <div className="map-nade-list">
           <MapPageNades allNades={allNades} />
@@ -105,8 +109,16 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           display: grid;
           grid-template-columns: min-content min-content 1fr min-content min-content min-content;
           grid-template-rows: auto;
-          grid-template-areas: "mapfilter favfilter sortfilter . typefilter tickfilter";
+          grid-template-areas:
+            ". . . . . resetfilter"
+            "mapfilter favfilter sortfilter . typefilter tickfilter";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+          grid-row-gap: ${Dimensions.GUTTER_SIZE / 2}px;
+        }
+
+        #filter-reset {
+          grid-area: resetfilter;
+          justify-self: end;
         }
 
         #filter-map {
@@ -199,6 +211,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             grid-template-columns: min-content min-content min-content min-content;
             grid-template-rows: auto auto;
             grid-template-areas:
+              ". . . reset"
               "sortfilter sortfilter sortfilter typefilter"
               "tickfilter favfilter . .";
             grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
