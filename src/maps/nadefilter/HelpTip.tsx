@@ -1,18 +1,23 @@
 import { FC } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
-import ReactTooltip from "react-tooltip";
+import { Popup } from "semantic-ui-react";
 
 type Props = {};
 
 export const HelpTip: FC<Props> = ({ children }) => {
   return (
     <>
-      <button data-tip data-for="happyFace" className="filter-help">
-        <FaQuestionCircle />
-      </button>
-      <ReactTooltip id="happyFace" backgroundColor="#111" effect="solid">
-        <span>{children}</span>
-      </ReactTooltip>
+      <Popup
+        content={<span>{children}</span>}
+        position="left center"
+        inverted
+        size="mini"
+        trigger={
+          <button data-tip data-for="happyFace" className="filter-help">
+            <FaQuestionCircle />
+          </button>
+        }
+      />
 
       <style jsx>{`
         .filter-help {
