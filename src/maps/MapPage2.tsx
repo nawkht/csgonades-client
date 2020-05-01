@@ -50,7 +50,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         <SEO
           title={mapPageTitleSeo(map)}
           canonical={`/maps/${map}`}
-          description={`Find the best smokes, flashbangs, molotovs and grenades for ${capitalize(
+          description={`Find the best smoke, flashbang, molotov and grenade spots for ${capitalize(
             map
           )}. Browse our large collection of nades for CS:GO.`}
         />
