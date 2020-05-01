@@ -41,6 +41,7 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
           font-size: 12px;
           font-weight: 500;
           margin-bottom: 5px;
+          color: ${colors.TEXT};
         }
 
         .filter-btn {

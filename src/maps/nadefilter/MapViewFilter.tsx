@@ -38,6 +38,7 @@ export const MapViewFilter: FC<Props> = ({}) => {
           font-size: 12px;
           font-weight: 500;
           margin-bottom: 5px;
+          color: ${colors.TEXT};
         }
 
         .filter-btn {

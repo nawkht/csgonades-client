@@ -55,6 +55,10 @@ export const TickrateSelector: FC<Props> = ({}) => {
           font-size: 12px;
           font-weight: 500;
           margin-bottom: 5px;
+          color: ${colors.TEXT};
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
         }
 
         .filter-tick {

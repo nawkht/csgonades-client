@@ -1,10 +1,13 @@
 import { FC } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
 export const HelpTip: FC<Props> = ({ children }) => {
+  const { colors } = useTheme();
+
   return (
     <>
       <Popup
@@ -30,6 +33,7 @@ export const HelpTip: FC<Props> = ({ children }) => {
           outline: none;
           border: none;
           cursor: pointer;
+          color: ${colors.TEXT};
         }
       `}</style>
     </>

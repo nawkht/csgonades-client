@@ -2,10 +2,12 @@ import { FC } from "react";
 import { ButtonGroup } from "./ButtonGroup";
 import { NadeTypeButton } from "./NadeTypeButton";
 import { useFilterByType } from "../../store/MapStore/hooks/useFilterByType";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {};
 
 export const TypeFilter: FC<Props> = ({}) => {
+  const { colors } = useTheme();
   const { byType, filterByType } = useFilterByType();
 
   return (
@@ -40,6 +42,7 @@ export const TypeFilter: FC<Props> = ({}) => {
           font-size: 12px;
           margin-bottom: 5px;
           font-weight: 500;
+          color: ${colors.TEXT};
         }
       `}</style>
     </>
