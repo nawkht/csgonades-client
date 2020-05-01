@@ -113,8 +113,8 @@ export const NadePage: FC = memo(() => {
           <div className="matchmake-warning">
             <div className="warning-title">WARNING</div>
             <div>
-              This nade will not work if you play matchmaking. Only on third
-              party services that have 128 tick servers.
+              Will not work, or be suboptimal if you play matchmaking. Only on
+              third party services that have 128 tick servers.
             </div>
           </div>
         )}
