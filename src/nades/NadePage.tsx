@@ -109,6 +109,16 @@ export const NadePage: FC = memo(() => {
       </aside>
 
       <div id="nade-page-grid" key={`main-${nade.id}`}>
+        {nade?.tickrate === "tick128" && (
+          <div className="matchmake-warning">
+            <div className="warning-title">WARNING</div>
+            <div>
+              This nade will not work if you play matchmaking. Only on third
+              party services that have 128 tick servers.
+            </div>
+          </div>
+        )}
+
         <div id="title">
           {allowEdit && (
             <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
@@ -184,6 +194,21 @@ export const NadePage: FC = memo(() => {
       )}
 
       <style jsx>{`
+        .matchmake-warning {
+          grid-area: warning;
+          background: #8c2323;
+          color: white;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          padding: 10px 20px;
+          display: flex;
+        }
+
+        .warning-title {
+          font-weight: 400;
+          margin-right: 10px;
+        }
+
         .ph-unit {
         }
 
@@ -220,6 +245,7 @@ export const NadePage: FC = memo(() => {
           display: grid;
           grid-template-columns: 1fr 1fr 200px;
           grid-template-areas:
+            "warning warning warning"
             "title title title"
             "video video video"
             "info info meta"
