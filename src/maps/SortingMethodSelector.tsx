@@ -2,6 +2,7 @@ import { FC, useMemo } from "react";
 import { FaRocket, FaLongArrowAltUp, FaSith } from "react-icons/fa";
 import { useFilterByMethod } from "../store/MapStore/hooks/useFilterByMethod";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { Dimensions } from "../constants/Constants";
 
 type Props = {};
 
@@ -35,32 +36,41 @@ export const SortingMethodSelector: FC<Props> = ({}) => {
 
   return (
     <>
-      <div className="sorthing-method-selector">
-        <button
-          className={hotClassName}
-          onClick={() => filterBySortingMethod("hot")}
-        >
-          <FaRocket />
-          <span>HOT</span>
-        </button>
-        <button
-          className={newClassName}
-          onClick={() => filterBySortingMethod("new")}
-        >
-          <FaSith />
-          <span>NEW</span>
-        </button>
-        <button
-          className={topClassName}
-          onClick={() => filterBySortingMethod("top")}
-        >
-          <FaLongArrowAltUp />
-          <span>TOP</span>
-        </button>
+      <div className="sorting-wrapper">
+        <div className="sorting-label">SORT</div>
+        <div className="sorthing-method-selector">
+          <button
+            className={hotClassName}
+            onClick={() => filterBySortingMethod("hot")}
+          >
+            <FaRocket />
+            <span>HOT</span>
+          </button>
+          <button
+            className={newClassName}
+            onClick={() => filterBySortingMethod("new")}
+          >
+            <FaSith />
+            <span>NEW</span>
+          </button>
+          <button
+            className={topClassName}
+            onClick={() => filterBySortingMethod("top")}
+          >
+            <FaLongArrowAltUp />
+            <span>TOP</span>
+          </button>
+        </div>
       </div>
+
       <style jsx>{`
+        .sorting-label {
+          font-size: 12px;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+
         .sorthing-method-selector {
-          margin-bottom: 30px;
           border-radius: 5px;
           overflow: hidden;
           display: inline-flex;
@@ -69,16 +79,16 @@ export const SortingMethodSelector: FC<Props> = ({}) => {
         .method-selector {
           border: none;
           appearance: none;
-          background: ${colors.DP01};
+          background: ${colors.filterBg};
           padding: 10px 10px;
           display: flex;
           align-items: center;
           flex-direction: row;
           cursor: pointer;
           outline: none;
-          border-right: 1px solid ${colors.DP00};
           transition: all 0.2s;
-          color: ${colors.TEXT};
+          color: ${colors.filterColor};
+          height: ${Dimensions.BUTTON_HEIGHT}px;
         }
 
         .method-selector span {
@@ -86,13 +96,11 @@ export const SortingMethodSelector: FC<Props> = ({}) => {
         }
 
         .method-selector:hover {
-          background: ${colors.DP03};
-          color: #a84632;
+          background: ${colors.filterBgHover};
         }
 
         .selected {
-          background: ${colors.DP03};
-          color: #a84632;
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>

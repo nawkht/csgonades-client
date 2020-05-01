@@ -14,6 +14,7 @@ export const ButtonGroup: FC<Props> = ({ children }) => {
           border-radius: 5px;
           background: ${colors.primaryBtnBg};
           display: inline-flex;
+          overflow: hidden;
         }
       `}</style>
     </>

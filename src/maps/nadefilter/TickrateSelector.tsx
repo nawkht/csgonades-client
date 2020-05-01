@@ -3,6 +3,7 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useFilterByTickrate } from "../../store/MapStore/hooks/useFilterByTickrate";
 import { ButtonGroup } from "./ButtonGroup";
 import { Dimensions } from "../../constants/Constants";
+import { HelpTip } from "./HelpTip";
 
 type Props = {};
 
@@ -23,24 +24,39 @@ export const TickrateSelector: FC<Props> = ({}) => {
 
   return (
     <>
-      <div data-tip data-for="tick64" className="filter-tick">
-        <ButtonGroup>
-          <button
-            className={`filter-btn tickrate-btn ${tick64active}`}
-            onClick={filterBy64tick}
-          >
-            64
-          </button>
+      <div className="tick-filter-wrap">
+        <div className="label">
+          TICKRATE{" "}
+          <HelpTip>
+            <div>Matchmaking: 64 Tick</div>
+            <div>3rd Party Services: 128 Tick</div>
+          </HelpTip>
+        </div>
+        <div className="filter-tick">
+          <ButtonGroup>
+            <button
+              className={`filter-btn tickrate-btn ${tick64active}`}
+              onClick={filterBy64tick}
+            >
+              64
+            </button>
 
-          <button
-            className={`filter-btn tickrate-btn ${tick128active}`}
-            onClick={filterByTickrate128}
-          >
-            128
-          </button>
-        </ButtonGroup>
+            <button
+              className={`filter-btn tickrate-btn ${tick128active}`}
+              onClick={filterByTickrate128}
+            >
+              128
+            </button>
+          </ButtonGroup>
+        </div>
       </div>
       <style jsx>{`
+        .label {
+          font-size: 12px;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+
         .filter-tick {
           display: flex;
         }
@@ -58,17 +74,16 @@ export const TickrateSelector: FC<Props> = ({}) => {
           cursor: pointer;
           font-size: 15px;
           font-weight: 300;
-          background: ${colors.primaryBtnBg};
-          color: ${colors.TEXT};
-          border-radius: 5px;
+          background: ${colors.filterBg};
+          color: ${colors.filterColor};
         }
 
         .filter-btn:hover {
-          background: ${colors.primaryBtnHover};
+          background: ${colors.filterBgHover};
         }
 
         .active {
-          background: ${colors.primaryBtnHover};
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>

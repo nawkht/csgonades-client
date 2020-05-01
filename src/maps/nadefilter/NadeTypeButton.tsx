@@ -55,8 +55,7 @@ export const NadeTypeButton: FC<Props> = memo(
             outline: none;
             width: ${Dimensions.BUTTON_HEIGHT}px;
             height: ${Dimensions.BUTTON_HEIGHT}px;
-            background: ${colors.primaryBtnBg};
-            border-radius: 5px;
+            background: ${colors.filterBg};
           }
 
           .nade-type-btn:last-child {
@@ -76,11 +75,11 @@ export const NadeTypeButton: FC<Props> = memo(
           }
 
           .nade-type-btn:hover {
-            background: ${colors.primaryBtnHover};
+            background: ${colors.filterBgHover};
           }
 
           .active {
-            background: ${colors.primaryBtnHover};
+            background: ${colors.filterBgHover};
           }
         `}</style>
       </>

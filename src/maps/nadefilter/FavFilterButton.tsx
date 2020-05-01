@@ -26,17 +26,27 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
 
   return (
     <>
-      <button
-        className={`filter-btn favorite ${active}`}
-        onClick={onFilterByFavorite}
-      >
-        <FaStar style={{ marginLeft: -1, marginTop: 0 }} />
-      </button>
+      <div className="fav-filter-wrap">
+        <div className="label">FAVOURITES</div>
+        <button
+          className={`filter-btn favorite ${active}`}
+          onClick={onFilterByFavorite}
+        >
+          <FaStar style={{ marginLeft: -1, marginTop: 0 }} />
+        </button>
+      </div>
+
       <style jsx>{`
+        .label {
+          font-size: 12px;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+
         .filter-btn {
           border: none;
           outline: none;
-          background: ${colors.primaryBtnBg};
+          background: ${colors.filterBg};
           width: ${Dimensions.BUTTON_HEIGHT}px;
           height: ${Dimensions.BUTTON_HEIGHT}px;
           display: flex;
@@ -54,11 +64,11 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
         }
 
         .filter-btn:hover {
-          background: ${colors.primaryBtnHover};
+          background: ${colors.filterBgHover};
         }
 
         .active {
-          background: ${colors.primaryBtnHover};
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>
