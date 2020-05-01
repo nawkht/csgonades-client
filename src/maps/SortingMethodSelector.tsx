@@ -93,7 +93,8 @@ export const SortingMethodSelector: FC<Props> = ({}) => {
         }
 
         .method-selector span {
-          margin-left: 5px;
+          margin-left: 6px;
+          font-size: 14px;
         }
 
         .method-selector:hover {
