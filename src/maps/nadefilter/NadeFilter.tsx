@@ -11,6 +11,7 @@ import { SidebarPanel } from "../../common/SidebarPanel";
 import { ButtonGroup } from "./ButtonGroup";
 import { Dimensions } from "../../constants/Constants";
 import { useAnalytics } from "../../utils/Analytics";
+import { HelpTip } from "./HelpTip";
 
 type Props = {
   showSingInWarning: () => void;
@@ -40,7 +41,11 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
             </div>
 
             <div id="tick-label" className="filter-label">
-              TICKRATE
+              TICKRATE{" "}
+              <HelpTip>
+                <div>Matchmaking: 64 Tick</div>
+                <div>3rd Party Services: 128 Tick</div>
+              </HelpTip>
             </div>
             <div id="tick-filter">
               <TickrateSelector />
@@ -52,7 +57,12 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
               <FavFilterButton showSingInWarning={showSingInWarning} />
             </div>
             <div id="map-filter">
-              <button className="filter-btn" onClick={showMapView}>
+              <button
+                data-tip="custom show"
+                data-event="click focus"
+                className="filter-btn"
+                onClick={showMapView}
+              >
                 <FaMap />
               </button>
             </div>
@@ -107,6 +117,15 @@ export const NadeFilter: FC<Props> = memo(({ showSingInWarning }) => {
 
         #tick-label {
           grid-area: tick-label;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .filter-help {
+          background: transparent;
+          border: none;
+          outline: none;
+          padding: 0;
         }
 
         #fav-label {

@@ -23,7 +23,7 @@ export const TickrateSelector: FC<Props> = ({}) => {
 
   return (
     <>
-      <div className="filter-tick">
+      <div data-tip data-for="tick64" className="filter-tick">
         <ButtonGroup>
           <button
             className={`filter-btn tickrate-btn ${tick64active}`}

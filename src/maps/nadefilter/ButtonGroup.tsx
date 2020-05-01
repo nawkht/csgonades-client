@@ -13,7 +13,6 @@ export const ButtonGroup: FC<Props> = ({ children }) => {
         .button-group {
           border-radius: 5px;
           background: ${colors.primaryBtnBg};
-          overflow: hidden;
           display: inline-flex;
         }
       `}</style>
