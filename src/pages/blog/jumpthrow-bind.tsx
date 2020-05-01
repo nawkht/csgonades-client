@@ -11,7 +11,7 @@ export const blogJumpthrowBind: BlogPost = {
   imageUrl: "/blogimg/jump.jpg",
   thumbnailUrl: "/blogimg/jump_thumb.jpg",
   createdAt: "2020-04-27T09:30:00.000Z",
-  updatedAt: "2020-04-27T09:30:00.000Z",
+  updatedAt: "2020-05-01T19:05:00.000Z",
   intro:
     "Adding a jumpthrow bind allows you to throw long range smokes consistently. The bind jumps and releases the nade with a single button.",
 };
@@ -48,6 +48,16 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         </p>
 
         <h2>Setting up jumpthrow bind</h2>
+        <h3>Simple keybind</h3>
+        <p>
+          If you don&apos;t want to mess around with your config files, use this
+          simple bind:
+        </p>
+        <BlogCodeSnippet code={'bind "X" "+jump; -attack; -jump"'} />
+        <p>
+          <em>Change out X with your prefered key.</em>
+        </p>
+        <h3>Alias bind in autoexec</h3>
         <p>
           If you don’t have a autoexec config file allready, you can follow{" "}
           <a href="https://www.dailyesports.gg/how-to-create-a-custom-csgo-config-autoexec-cfg/">
@@ -69,7 +79,7 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           <AdUnit tagType="728x90" />
         </div>
 
-        <h3>How to use</h3>
+        <h2>How to use jumpthrow bind</h2>
         <p>
           Take out your smoke, hold down either your left, right or both mouse
           buttons. Then press the button you selected for your bind. The script
@@ -81,12 +91,12 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           Hold down <em>left mouse button</em>, click the bind.
         </p>
 
-        <b>Short range jumpthrow</b>
+        <b>Short range jumpthrow (only for alias bind)</b>
         <p>
           Holde down <em>right mouse button</em>, click the bind.
         </p>
 
-        <b>Medium range jumpthrow</b>
+        <b>Medium range jumpthrow (only for alias bind)</b>
         <p>
           Holde down <em>both mouse button</em>, click the bind.
         </p>
