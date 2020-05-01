@@ -2,7 +2,6 @@ import { FC, useMemo } from "react";
 import { UserLight } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeLight } from "../models/Nade/Nade";
-import { dateMinutesAgo } from "../utils/DateUtils";
 
 interface UserContribution extends UserLight {
   nadeCount: number;
@@ -18,11 +17,6 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
   const contributors = useMemo(() => {
     const contCount: { [key: string]: UserContribution } = {};
     nades.forEach((nade) => {
-      const newCap = 60 * 24 * 4; // Don't count new nades
-      const minutesAgoAdded = dateMinutesAgo(nade.createdAt);
-      if (minutesAgoAdded < newCap) {
-        return;
-      }
       const steamId = nade.user.steamId;
       const currentUser = contCount[steamId];
       if (currentUser) {
@@ -30,13 +24,15 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           ...currentUser,
           nadeCount: currentUser.nadeCount + 1,
           bestScore:
-            currentUser.score > nade.score ? currentUser.score : nade.score,
+            currentUser.bestScore > nade.favoriteCount
+              ? currentUser.bestScore
+              : nade.favoriteCount,
         };
       } else {
         contCount[steamId] = {
           ...nade.user,
           nadeCount: 1,
-          bestScore: nade.score,
+          bestScore: nade.favoriteCount,
           score: 0,
         };
       }
