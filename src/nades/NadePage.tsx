@@ -113,8 +113,8 @@ export const NadePage: FC = memo(() => {
           <div className="matchmake-warning">
             <div className="warning-title">WARNING</div>
             <div>
-              Will not work, or be suboptimal if you play matchmaking. Only on
-              third party services that have 128 tick servers.
+              Will not work, or be suboptimal if you play matchmaking. This nade
+              is made for 128 tick servers.
             </div>
           </div>
         )}
@@ -196,7 +196,7 @@ export const NadePage: FC = memo(() => {
       <style jsx>{`
         .matchmake-warning {
           grid-area: warning;
-          background: #8c2323;
+          background: #d97e00;
           color: white;
           border-radius: 5px;
           margin-bottom: 20px;
@@ -206,7 +206,7 @@ export const NadePage: FC = memo(() => {
 
         .warning-title {
           font-weight: 400;
-          margin-right: 10px;
+          margin-right: 8px;
         }
 
         .ph-unit {
