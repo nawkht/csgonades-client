@@ -198,8 +198,8 @@ export const NadePage: FC = memo(() => {
           grid-area: warning;
           background: #d97e00;
           color: white;
-          border-radius: 5px;
-          margin-bottom: 20px;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
           padding: 10px 20px;
           display: flex;
         }
@@ -245,8 +245,8 @@ export const NadePage: FC = memo(() => {
           display: grid;
           grid-template-columns: 1fr 1fr 200px;
           grid-template-areas:
-            "warning warning warning"
             "title title title"
+            "warning warning warning"
             "video video video"
             "info info meta"
             "comments comments ."
