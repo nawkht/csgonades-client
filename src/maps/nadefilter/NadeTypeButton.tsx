@@ -15,7 +15,6 @@ export const NadeTypeButton: FC<Props> = memo(
   ({ type, currentType, mobile, onFilterByType }) => {
     const { colors } = useTheme();
     const iconUrl = iconFromType(type);
-    const contrast = type === "smoke" ? 70 : 100;
 
     const classNameBuilder = useMemo(() => {
       const base = ["nade-type-btn", "icon"];
@@ -68,10 +67,6 @@ export const NadeTypeButton: FC<Props> = memo(
             display: flex;
             align-items: center;
             justify-content: space-around;
-          }
-
-          .type-icon img {
-            filter: brightness(${contrast}%);
           }
 
           .nade-type-btn:hover {
