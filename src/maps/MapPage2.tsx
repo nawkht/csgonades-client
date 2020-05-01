@@ -68,7 +68,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           <div id="filter-type">
             <TypeFilter />
           </div>
-          <div id="fitler-tick">
+          <div id="filter-tick">
             <TickrateSelector />
           </div>
           <div id="filter-fav">
@@ -103,9 +103,9 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           z-index: 999;
           border-radius: 5px;
           display: grid;
-          grid-template-columns: min-content min-content min-content min-content min-content;
+          grid-template-columns: min-content min-content 1fr min-content min-content min-content;
           grid-template-rows: auto;
-          grid-template-areas: "mapfilter sortfilter typefilter tickfilter favfilter";
+          grid-template-areas: "mapfilter favfilter sortfilter . typefilter tickfilter";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
         }
 
@@ -199,7 +199,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             grid-template-columns: min-content min-content min-content min-content;
             grid-template-rows: auto auto;
             grid-template-areas:
-              "sortfilter sortfilter typefilter typefilter"
+              "sortfilter sortfilter sortfilter typefilter"
               "tickfilter favfilter . .";
             grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
             grid-row-gap: ${Dimensions.GUTTER_SIZE}px;

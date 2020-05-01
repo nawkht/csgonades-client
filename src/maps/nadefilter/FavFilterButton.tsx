@@ -27,7 +27,7 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
   return (
     <>
       <div className="fav-filter-wrap">
-        <div className="label">FAVOURITES</div>
+        <div className="label">FAV</div>
         <button
           className={`filter-btn favorite ${active}`}
           onClick={onFilterByFavorite}
