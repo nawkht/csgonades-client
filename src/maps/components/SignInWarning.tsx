@@ -1,8 +1,8 @@
 import { FC, useMemo } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
-import { Config } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useAnalytics } from "../../utils/Analytics";
+import { SignInnButton } from "../../layout/Misc/SignInnButton";
 
 type FavMessage = "filter" | "favorite";
 
@@ -20,7 +20,7 @@ export const SignInWarning: FC<Props> = ({ visible, onDismiss, message }) => {
     if (message === "favorite") {
       return "You need to be signed in to favorite nades.";
     } else {
-      return "You need to be signed in to filter by your favorites.";
+      return "To show your favourites, you need to sign in.";
     }
   }, [message]);
 
@@ -33,16 +33,16 @@ export const SignInWarning: FC<Props> = ({ visible, onDismiss, message }) => {
 
   return (
     <>
-      <CSGNModal title="Woops!" visible={visible} onDismiss={onDismiss}>
+      <CSGNModal
+        title="💩 Wopsy Dupsy 💩"
+        visible={visible}
+        onDismiss={onDismiss}
+      >
         <div className="sign-in-warning">
           <p>{warningMessage}</p>
-          <a
-            onClick={onSignIn}
-            className="sign-in-btn"
-            href={Config.SIGN_IN_URL}
-          >
-            Sign in with steam
-          </a>
+          <div onClick={onSignIn}>
+            <SignInnButton />
+          </div>
         </div>
       </CSGNModal>
       <style jsx>{`

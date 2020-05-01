@@ -96,14 +96,18 @@ export const CSGNModal: FC<Props> = ({
           color: ${colors.TEXT};
           display: flex;
           flex-direction: column;
+          overflow: hidden;
         }
 
         .modal-title {
-          padding: 18px;
-          border-bottom: 1px solid ${colors.BORDER};
+          background: ${colors.PRIMARY};
+          color: white;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          white-space: nowrap;
+          padding-top: 10px;
+          padding-bottom: 10px;
         }
 
         .spacer {
@@ -115,9 +119,10 @@ export const CSGNModal: FC<Props> = ({
 
         .modal-title h3 {
           margin: 0;
+          padding: 0;
           font-size: 24px;
-          text-align: center;
           flex: 1;
+          text-align: center;
         }
 
         .close-btn {
@@ -128,11 +133,12 @@ export const CSGNModal: FC<Props> = ({
           cursor: pointer;
           padding-top: 7px;
           background: transparent;
-          color: ${colors.TEXT};
+          color: ${colors.ERROR};
+          margin-right: 10px;
         }
 
         .modal-content {
-          padding: 18px;
+          padding: 15px 30px;
           overflow-y: auto;
           flex: 1;
         }
