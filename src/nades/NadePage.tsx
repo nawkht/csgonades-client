@@ -248,7 +248,8 @@ export const NadePage: FC = memo(() => {
             "title title title"
             "warning warning warning"
             "video video video"
-            "info info meta"
+            "meta meta meta"
+            "info info ."
             "comments comments ."
             "misc misc misc";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
@@ -271,7 +272,6 @@ export const NadePage: FC = memo(() => {
 
         #nade-page-main {
           grid-area: video;
-          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #sidebar-right {
@@ -331,9 +331,10 @@ export const NadePage: FC = memo(() => {
             grid-template-columns: 1fr 200px 1fr;
             grid-template-areas:
               "title title title"
+              "warning warning warning"
               "video video video"
+              "meta meta meta"
               "info info info"
-              ". meta ."
               "comments comments comments"
               "misc misc misc";
           }

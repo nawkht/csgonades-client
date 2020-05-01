@@ -50,8 +50,10 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
       <style jsx>{`
         .nade-meta {
           display: flex;
-          flex-direction: column;
           color: white;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          overflow: hidden;
         }
 
         .nade-meta-item {
@@ -60,18 +62,11 @@ export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
           white-space: nowrap;
           padding: 10px;
           background: #729b79;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .nade-meta-item:first-child {
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
+          border-right: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .nade-meta-item:last-child {
-          border-bottom-left-radius: 5px;
-          border-bottom-right-radius: 5px;
-          border-bottom: none;
+          border-right: none;
         }
 
         h4 {
