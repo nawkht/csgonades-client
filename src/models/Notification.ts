@@ -61,6 +61,7 @@ type NewCommentNotification = {
   subjectSteamId: string;
   thumnailUrl?: string;
   createdAt: Date;
+  viewed: boolean;
 };
 
 export type FavoriteNotificationAgregate = {
