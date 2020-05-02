@@ -6,6 +6,7 @@ type AcceptedNadeNotification = {
   subjectSteamId: string;
   viewed: boolean;
   createdAt: Date;
+  thumnailUrl?: string;
 };
 
 type DeclinedNadeNotification = {
@@ -16,6 +17,7 @@ type DeclinedNadeNotification = {
   subjectSteamId: string;
   viewed: boolean;
   createdAt: Date;
+  thumnailUrl?: string;
 };
 
 export type FavoriteNotification = {
@@ -28,6 +30,7 @@ export type FavoriteNotification = {
   subjectSteamId: string;
   viewed: boolean;
   createdAt: Date;
+  thumnailUrl?: string;
 };
 
 type NewContactNotification = {
@@ -57,6 +60,7 @@ export type FavoriteNotificationAgregate = {
   count: number;
   viewed: boolean;
   createdAt: Date;
+  thumnailUrl?: string;
 };
 
 export type Notification =

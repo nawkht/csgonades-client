@@ -38,6 +38,7 @@ function combineFavoriteNotifications(notis: FavoriteNotification[]) {
           createdAt: favNoti.createdAt,
           nadeId: favNoti.nadeId,
           nadeSlug: favNoti.nadeSlug,
+          thumnailUrl: favNoti.thumnailUrl,
         },
       };
     }

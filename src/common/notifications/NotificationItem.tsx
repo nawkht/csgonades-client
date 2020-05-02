@@ -27,7 +27,6 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
         <style jsx>{`
           .notification {
             white-space: nowrap;
-            border: 1px solid ${colors.BORDER};
             padding: 10px 15px;
             border-radius: 4px;
             margin-bottom: 6px;
@@ -43,10 +42,6 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
           .new {
             animation-name: indicateUnread;
             animation-duration: 4s;
-          }
-
-          .notification:last-child {
-            margin-bottom: 0;
           }
 
           @keyframes indicateUnread {
@@ -74,83 +69,115 @@ export const NotificationItem: FC<Props> = memo(({ notification }) => {
         href={`/nades/[nade]`}
         as={`/nades/${notification.nadeSlug || notification.nadeId}`}
       >
-        <span className={"notification"}>
+        <div className={"notification"}>
+          <div className="noti-img">{notificationImage(notification)}</div>
           <div className="noti-msg">{notificationMessage(notification)}</div>
           <div className="noti-date">
             {prettyDateTime(notification.createdAt)}
           </div>
-          <div className="noti-divider"></div>
-        </span>
+        </div>
       </PageLink>
       <style jsx>{`
-        .noti-divider {
-          height: 1px;
-          background: ${colors.BORDER};
-          margin-left: -30px;
-          margin-right: -30px;
-        }
-
         .notification {
           color: ${colors.TEXT};
           white-space: nowrap;
-          padding: 15px 30px;
-          color: black;
           display: block;
+          border-bottom: 1px solid ${colors.BORDER};
+          display: grid;
+          grid-template-columns: min-content 1fr 1fr;
+          grid-template-rows: auto auto;
+          grid-template-areas:
+            "img msg msg"
+            "img date .";
+          width: 100%;
+          padding: 15px;
+        }
+
+        .noti-img {
+          grid-area: img;
+        }
+
+        .noti-msg {
+          grid-area: msg;
+          white-space: normal;
+          padding-bottom: 10px;
+        }
+
+        .noti-date {
+          grid-area: date;
+          text-align: left;
+        }
+
+        .notification img {
+          max-width: 100px;
+          border-radius: 5px;
+          margin-right: 10px;
         }
 
         .noti-msg {
           color: ${colors.TEXT};
-          display: flex;
         }
 
         .noti-date {
           font-size: 0.8em;
-          margin-top: 4px;
-          text-align: right;
           color: ${colors.TEXT};
-        }
-
-        .notification:last-child {
-          margin-bottom: 0;
-          border-bottom: none;
         }
       `}</style>
     </>
   );
 });
 
-function notificationMessage(
+function notificationImage(
   notification: Notification
 ): JSX.Element | undefined {
+  let url: string | undefined = undefined;
+
+  if (
+    notification.type === "favorite-agregate" ||
+    notification.type === "accepted-nade" ||
+    notification.type === "declined-nade"
+  ) {
+    url = notification.thumnailUrl;
+  }
+
+  if (!url) {
+    return undefined;
+  }
+
+  return (
+    <>
+      <img src={url} />
+      <style jsx>{`
+        img {
+          width: 50px;
+          border-radius: 5px;
+          margin-right: 10px;
+        }
+      `}</style>
+    </>
+  );
+}
+
+function notificationMessage(notification: Notification): string {
   switch (notification.type) {
     case "accepted-nade":
-      return <div>Your nade was accepted!</div>;
+      return "Your nade was accepted!";
     case "contact-msg":
-      return <div>New contact message.</div>;
+      return "New contact message.";
     case "declined-nade":
-      return <div>Your nade was declined.</div>;
+      return "Your nade was declined.</div>";
     case "favorite-agregate":
       const favCount = notification.count;
       if (favCount === 1) {
-        return (
-          <div>
-            Your nade was favorited by
-            <br />
-            {notification.byNickname}.
-          </div>
-        );
+        return `Your nade was favorited by ${notification.byNickname}.`;
       } else {
-        return (
-          <div>
-            Your nade was favorited by
-            <br />
-            {notification.byNickname} and {pluralize(favCount - 1, "other")}.
-          </div>
-        );
+        return `Your nade was favorited by ${
+          notification.byNickname
+        } and ${pluralize(favCount - 1, "other")}.`;
       }
     case "new-nade":
-      return <div>New nade!</div>;
+      return "New nade!";
     default:
-      break;
+      return "";
   }
 }
