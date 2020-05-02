@@ -40,6 +40,7 @@ export type Nade = {
   mapEndCoord?: MapCoordinates;
   score: number;
   isFavorited?: boolean;
+  nextUpdateInHours: number;
 };
 
 export type NadeLight = {
@@ -61,6 +62,7 @@ export type NadeLight = {
   technique?: Technique;
   commentCount: number;
   movement?: Movement;
+  nextUpdateInHours: number;
 };
 
 export type NadeBody = {

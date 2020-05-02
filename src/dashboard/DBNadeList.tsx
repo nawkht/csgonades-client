@@ -54,6 +54,7 @@ export const DBNadeList: FC<Props> = ({}) => {
               <td>Favourites</td>
               <td>Comments</td>
               <td>Views</td>
+              <td>Views Refresh</td>
               <td>Created</td>
               <td></td>
             </tr>
@@ -105,6 +106,11 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
         <td className="nade-fav">{nade.favoriteCount}</td>
         <td className="nade-comments">{nade.commentCount}</td>
         <td id="nade-views">{kFormatter(nade.viewCount)}</td>
+        <td>
+          {nade.nextUpdateInHours === 0
+            ? "Soon"
+            : `In ${nade.nextUpdateInHours} hours`}
+        </td>
         <td>{prettyDate(nade.createdAt)}</td>
         <td className="nade-thumb">
           <PageLink href="/nades/[nade]" as={`/nades/${nade.slug || nade.id}`}>
