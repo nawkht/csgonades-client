@@ -135,7 +135,9 @@ function notificationImage(
   if (
     notification.type === "favorite-agregate" ||
     notification.type === "accepted-nade" ||
-    notification.type === "declined-nade"
+    notification.type === "declined-nade" ||
+    notification.type === "favorite" ||
+    notification.type === "new-comment"
   ) {
     url = notification.thumnailUrl;
   }
