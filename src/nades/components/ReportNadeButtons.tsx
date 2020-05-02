@@ -1,9 +1,8 @@
 import { FC, useState } from "react";
 import { FaFlag } from "react-icons/fa";
-import { Button, Form, TextArea } from "semantic-ui-react";
+import { Button, Form, TextArea, Modal } from "semantic-ui-react";
 import { ReportApi } from "../../api/ReportApi";
 import { ButtonWithIcon } from "../../common/ButtonWithIcon";
-import { CSGNModal } from "../../common/CSGNModal";
 import { ReportAddDto } from "../../models/Report";
 import { useDisplayToast } from "../../store/ToastStore/hooks/useDisplayToast";
 
@@ -45,11 +44,8 @@ export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
           onClick={onToggle}
         />
       </div>
-      <CSGNModal
-        visible={showReportForm}
-        onDismiss={onToggle}
-        title="Report nade"
-      >
+
+      <Modal open={showReportForm} onClose={onToggle}>
         <div className="report-nade">
           <p>Explain why you are reporting this nade.</p>
           <Form onSubmit={onSendReport}>
@@ -67,12 +63,14 @@ export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
             </Button>
           </Form>
         </div>
-      </CSGNModal>
+      </Modal>
+
       <style jsx>{`
         .report-button-wrapper {
         }
         .report-nade {
           min-width: 40vw;
+          padding: 15px 30px;
         }
       `}</style>
     </>
