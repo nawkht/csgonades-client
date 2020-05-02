@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import { FaBell } from "react-icons/fa";
 import { Notification } from "../../models/Notification";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { pluralize } from "../../utils/Common";
+import { pluralize, assertNever } from "../../utils/Common";
 import { prettyDateTime } from "../../utils/DateUtils";
 import { PageLink } from "../PageLink";
 
@@ -177,7 +177,12 @@ function notificationMessage(notification: Notification): string {
       }
     case "new-nade":
       return "New nade!";
+    case "new-comment":
+      return `${notification.byNickname} commented on your nade.`;
+    case "favorite":
+      return "";
     default:
+      assertNever(notification.type);
       return "";
   }
 }

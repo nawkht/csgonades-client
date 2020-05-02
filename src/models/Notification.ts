@@ -51,6 +51,18 @@ type NewNadeNotification = {
   createdAt: Date;
 };
 
+type NewCommentNotification = {
+  id: string;
+  type: "new-comment";
+  nadeId: string;
+  nadeSlug?: string;
+  bySteamId: string;
+  byNickname: string;
+  subjectSteamId: string;
+  thumnailUrl?: string;
+  createdAt: Date;
+};
+
 export type FavoriteNotificationAgregate = {
   id: string;
   type: "favorite-agregate";
@@ -69,4 +81,5 @@ export type Notification =
   | FavoriteNotification
   | FavoriteNotificationAgregate
   | NewContactNotification
-  | NewNadeNotification;
+  | NewNadeNotification
+  | NewCommentNotification;
