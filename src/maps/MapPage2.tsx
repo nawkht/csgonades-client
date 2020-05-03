@@ -211,7 +211,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             grid-template-columns: min-content min-content min-content min-content;
             grid-template-rows: auto auto;
             grid-template-areas:
-              ". . . reset"
+              ". . . resetfilter"
               "sortfilter sortfilter sortfilter typefilter"
               "tickfilter favfilter . .";
             grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
@@ -229,6 +229,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             grid-template-columns: min-content min-content;
             grid-template-rows: auto auto;
             grid-template-areas:
+              ". resetfilter"
               "sortfilter tickfilter"
               "typefilter favfilter";
             grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
