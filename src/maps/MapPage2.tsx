@@ -208,14 +208,15 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         @media only screen and (max-width: 700px) {
           #filters {
             display: grid;
-            grid-template-columns: min-content min-content min-content min-content;
-            grid-template-rows: auto auto;
+            grid-template-columns: 1fr min-content;
+            grid-template-rows: auto auto auto;
             grid-template-areas:
-              ". . . resetfilter"
-              "sortfilter sortfilter sortfilter typefilter"
-              "tickfilter favfilter . .";
+              ". resetfilter"
+              "sortfilter tickfilter"
+              "typefilter favfilter";
             grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
             grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+            width: 100%;
           }
 
           #filter-map {
@@ -226,14 +227,15 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
         @media only screen and (max-width: 450px) {
           #filters {
             display: grid;
-            grid-template-columns: min-content min-content;
-            grid-template-rows: auto auto;
+            grid-template-columns: 1fr min-content;
+            grid-template-rows: auto auto auto;
             grid-template-areas:
               ". resetfilter"
               "sortfilter tickfilter"
               "typefilter favfilter";
             grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
             grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+            width: 100%;
           }
 
           #filter-map {
