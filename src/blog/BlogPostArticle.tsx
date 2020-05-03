@@ -74,7 +74,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
             />
           </SidebarPanel>
           <div className="ph-unit">
-            <AdUnit tagType="300x600" />
+            <AdUnit tagType="160x600" />
           </div>
         </div>
       </aside>
