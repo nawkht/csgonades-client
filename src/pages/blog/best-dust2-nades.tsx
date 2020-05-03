@@ -130,17 +130,10 @@ const PractiseConfigBlogPost = () => {
           <span className="dust2-cta">All Dust2 Nades</span>
         </PageLink>
 
-        <p>Here are some Dust2 tricks as well for inspiration:</p>
-        <div className="video-container">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/AAIceD_-NXg"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
+        <PageLink href={`/maps/[map]`} as={`/maps/mirage`}>
+          <span className="dust2-cta">All Mirage Nades</span>
+        </PageLink>
+
         <p>And as always, when playing Dust2, rush B!</p>
         <div className="video-container">
           <iframe
@@ -163,7 +156,7 @@ const PractiseConfigBlogPost = () => {
         }
 
         .dust2-cta {
-          background: #299464;
+          background: #0f456e;
           border-radius: 10px;
           color: white;
           display: block;
