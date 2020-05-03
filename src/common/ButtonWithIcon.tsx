@@ -89,7 +89,7 @@ export const ButtonWithIcon: FC<Props> = memo(
             flex: 1;
             display: block;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             text-align: center;
             width: 100%;
             font-weight: 400;

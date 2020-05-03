@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaTimes } from "react-icons/fa";
 import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { Nade } from "../../models/Nade/Nade";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
@@ -37,15 +37,16 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
     }
   }
 
-  const favoriteText = isFavorited ? "Unfavorite" : "Favorite";
+  const icon = isFavorited ? <FaTimes /> : <FaStar />;
+  const color = isFavorited ? "#3b3305" : "#d4a900";
 
   return (
     <>
       <div className="favorite-wrapper">
         <ButtonWithIcon
-          icon={<FaStar />}
-          backgroundColor="#d4a900"
-          value={favoriteText}
+          icon={icon}
+          backgroundColor={color}
+          value={"FAVORITE"}
           onClick={onFavoriteClick}
           loading={isFavoriteInProgress}
         />

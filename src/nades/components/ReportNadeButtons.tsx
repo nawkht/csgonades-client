@@ -40,7 +40,7 @@ export const ReportNadeButton: FC<Props> = ({ nadeId }) => {
         <ButtonWithIcon
           icon={<FaFlag />}
           backgroundColor="#ab1309"
-          value={"Report"}
+          value={"BROKEN"}
           onClick={onToggle}
         />
       </div>
