@@ -25,7 +25,7 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
     loadAdByType(adData);
   }, [adData]);
 
-  const [width, height] = adData.size.split("x");
+  const [height] = adData.size.split("x");
 
   return (
     <>
@@ -39,7 +39,6 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
         }
 
         .ph-unit {
-          width: ${width}px;
           height: ${height}px;
         }
       `}</style>
