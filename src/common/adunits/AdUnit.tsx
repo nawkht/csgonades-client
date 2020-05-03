@@ -1,7 +1,7 @@
 import { FC, memo, useEffect } from "react";
 import { IS_PROD } from "../../constants/Constants";
 
-type AdType = "300x250" | "300x600" | "728x90";
+type AdType = "300x250" | "300x600" | "728x90" | "160x600";
 
 type Props = {
   tagType: AdType;
@@ -62,10 +62,14 @@ function getAdData(tagType: AdType) {
       };
     case "728x90":
       return {
-        id: "416812087",
+        id: "744224612",
         size: "728x90",
       };
-
+    case "160x600":
+      return {
+        id: "133557531",
+        size: "160x600",
+      };
     default:
       return {
         id: "",
