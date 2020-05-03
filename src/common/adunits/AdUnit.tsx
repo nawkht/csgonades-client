@@ -25,8 +25,6 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
     loadAdByType(adData);
   }, [adData]);
 
-  const [height] = adData.size.split("x");
-
   return (
     <>
       <div className="ph">
@@ -36,10 +34,6 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
         .ph {
           display: flex;
           justify-content: space-around;
-        }
-
-        .ph-unit {
-          height: ${height}px;
         }
       `}</style>
     </>
