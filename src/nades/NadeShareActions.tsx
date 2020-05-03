@@ -71,17 +71,16 @@ export const NadeShareActions: FC<Props> = ({
       <style jsx>{`
         .share-buttons {
           display: flex;
-          justify-content: space-between;
         }
 
         .share-buttons div {
-          margin-bottom: -5px;
         }
 
         .share-icon {
-          width: 40px;
-          height: 40px;
-          font-size: 25px;
+          margin-right: 10px;
+          width: 35px;
+          height: 35px;
+          font-size: 20px;
           display: flex;
           align-items: center;
           justify-content: space-around;
