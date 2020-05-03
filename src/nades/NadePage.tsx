@@ -55,16 +55,20 @@ export const NadePage: FC = memo(() => {
     )}`;
   }
 
+  if (!nade) {
+    return null;
+  }
+
   return (
     <>
       <ArticleJsonLd
         key={`ld-${nade.id}`}
-        url={`https://www.csgonades.com/nades/${nade?.slug || nade?.id}`}
-        title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
-        authorName={nade?.user.nickname}
-        datePublished={nade?.createdAt}
-        dateModified={nade?.updatedAt}
-        images={[nade?.images.thumbnailUrl]}
+        url={`https://www.csgonades.com/nades/${nade.slug || nade.id}`}
+        title={nadeTitleBuilder(nade.type, nade.title, nade.map)}
+        authorName={addslashes(nade.user.nickname)}
+        datePublished={nade.createdAt}
+        dateModified={nade.updatedAt}
+        images={[nade.images.thumbnailUrl]}
         description={descriptionSimplify(nade?.description)}
         publisherName={"CSGO Nades"}
         publisherLogo={"https://www.csgonades.com/logo.png"}
@@ -358,3 +362,7 @@ export const NadePage: FC = memo(() => {
     </>
   );
 });
+
+function addslashes(str: string) {
+  return (str + "").replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0");
+}
