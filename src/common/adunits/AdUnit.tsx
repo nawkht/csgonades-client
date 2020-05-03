@@ -16,19 +16,25 @@ type AdData = {
 const ADS_ENABLED = true;
 
 export const AdUnit: FC<Props> = memo(({ tagType }) => {
-  const adData = getAdData(tagType);
+  const adData: AdData = getAdData(tagType);
   useEffect(() => {
     if (!ADS_ENABLED || !IS_PROD) {
       return;
     }
 
-    loadAdByType(adData);
+    //loadAdByType(adData);
   }, [adData]);
 
   return (
     <>
       <div className="ph">
-        <div className="ph-unit" id={adData.id}></div>
+        <div id={adData.id}>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: adLoadingScript(adData.id, adData.size),
+            }}
+          />
+        </div>
       </div>
       <style jsx>{`
         .ph {
@@ -66,6 +72,7 @@ function getAdData(tagType: AdType) {
   }
 }
 
+/*
 function loadAdByType(adData: AdData) {
   try {
     // @ts-ignore
@@ -76,4 +83,13 @@ function loadAdByType(adData: AdData) {
   } catch (error) {
     console.warn("AdErr", error);
   }
-}
+}*/
+
+const adLoadingScript = (id: string, size: string): string => {
+  return `
+  try {
+    window._mNHandle.queue.push(function (){
+      window._mNDetails.loadTag("${id}", "${size}", "${id}");
+    });
+  } catch (error) {}`;
+};
