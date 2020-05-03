@@ -22,19 +22,13 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
       return;
     }
 
-    //loadAdByType(adData);
+    loadAdByType(adData);
   }, [adData]);
 
   return (
     <>
       <div className="ph">
-        <div id={adData.id}>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: adLoadingScript(adData.id, adData.size),
-            }}
-          />
-        </div>
+        <CleanAdTag id={adData.id} />
       </div>
       <style jsx>{`
         .ph {
@@ -42,6 +36,14 @@ export const AdUnit: FC<Props> = memo(({ tagType }) => {
           justify-content: space-around;
         }
       `}</style>
+    </>
+  );
+});
+
+export const CleanAdTag: FC<{ id: string }> = memo(({ id }) => {
+  return (
+    <>
+      <div id={id}></div>
     </>
   );
 });
@@ -72,7 +74,6 @@ function getAdData(tagType: AdType) {
   }
 }
 
-/*
 function loadAdByType(adData: AdData) {
   try {
     // @ts-ignore
@@ -83,13 +84,4 @@ function loadAdByType(adData: AdData) {
   } catch (error) {
     console.warn("AdErr", error);
   }
-}*/
-
-const adLoadingScript = (id: string, size: string): string => {
-  return `
-  try {
-    window._mNHandle.queue.push(function (){
-      window._mNDetails.loadTag("${id}", "${size}", "${id}");
-    });
-  } catch (error) {}`;
-};
+}
