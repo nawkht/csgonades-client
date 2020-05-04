@@ -39,6 +39,12 @@ export const NadeTitle: FC<Props> = ({
           text-align: left;
           padding: 10px 0px;
         }
+
+        @media only screen and (max-width: 800px) {
+          h1 {
+            font-size: 20px;
+          }
+        }
       `}</style>
     </>
   );
