@@ -66,12 +66,18 @@ export const Layout2: FC = memo(({ children }) => {
         }
 
         nav {
+          position: sticky;
+          top: ${Dimensions.HEADER_HEIGHT}px;
           grid-area: nav;
-          height: ${Dimensions.NAV_HEIGHT}px;
+          z-index: 899;
         }
 
         footer {
           grid-area: footer;
+        }
+
+        main {
+          min-height: calc(100vh - ${Dimensions.HEADER_HEIGHT}px);
         }
 
         @media only screen and (max-width: 910px) {

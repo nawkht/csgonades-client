@@ -26,14 +26,14 @@ export const MapViewSuggested: FC<Props> = ({ nades, onDismiss }) => {
       </CSGNModal>
       <style jsx>{`
         #suggested-nades {
-          max-width: 650px;
+          max-width: 700px;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
         }
 
         .item {
-          width: 300px;
+          width: 320px;
           margin: 10px;
           margin-top: 0px;
         }

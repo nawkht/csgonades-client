@@ -2,7 +2,6 @@ import { FC } from "react";
 import { PageCentralize } from "../common/PageCentralize";
 import { PageLink } from "../common/PageLink";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { Dimensions } from "../constants/Constants";
 
 type Props = {};
 
@@ -66,13 +65,16 @@ export const MapNav: FC<Props> = ({}) => {
       </PageCentralize>
       <style jsx>{`
         #map-nav-wrap {
-          display: flex;
-          justify-content: space-around;
+          background: ${colors.PRIMARY};
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          overflow: hidden;
+          border: 1px solid rgba(0, 0, 0, 0.3);
         }
+
         #map-nav {
           background: ${colors.PRIMARY};
           color: white;
-          height: ${Dimensions.NAV_HEIGHT}px;
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           display: inline-block;
@@ -83,20 +85,24 @@ export const MapNav: FC<Props> = ({}) => {
           list-style: none;
           margin: 0;
           padding: 0;
+          display: flex;
         }
 
         ul li {
-          display: inline-flex;
-          align-items: center;
-          height: ${Dimensions.NAV_HEIGHT}px;
         }
 
         .map-link {
-          display: block;
+          display: flex;
           border-right: 1px solid rgba(0, 0, 0, 0.2);
-          padding: 5px 15px;
+          padding: 10px 15px;
           color: white;
           font-size: 14px;
+          align-items: center;
+          font-weight: 400;
+        }
+
+        .map-link:hover {
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>

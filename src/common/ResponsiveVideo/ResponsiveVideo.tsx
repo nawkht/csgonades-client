@@ -165,7 +165,7 @@ export const ResponsiveVideo: FC<Props> = ({
           bottom: 0;
           left: 0;
           right: 0;
-          z-index: 901;
+          z-index: 800;
           transform: translateY(calc(100% - 5px));
           transition: transform 0.15s;
         }
