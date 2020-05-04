@@ -3,18 +3,26 @@ import { useSelector } from "react-redux";
 import { mapViewSelector } from "../selectors";
 import { useMapStoreDispatch } from "./helpers";
 import { MapView } from "../reducer";
+import { useAnalytics } from "../../../utils/Analytics";
 
 export const useSetMapView = () => {
+  const { event } = useAnalytics();
   const mapView = useSelector(mapViewSelector);
   const dispatch = useMapStoreDispatch();
 
   const setMapView = useCallback(
-    (view: MapView) =>
+    (view: MapView) => {
       dispatch({
         type: "MapStore/SetView",
         view,
-      }),
-    [dispatch]
+      });
+      event({
+        category: "MapStore",
+        action: "MapStore/SetView",
+        label: view,
+      });
+    },
+    [dispatch, event]
   );
 
   return {
