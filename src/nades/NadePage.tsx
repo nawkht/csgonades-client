@@ -29,8 +29,10 @@ import { PageCentralize } from "../common/PageCentralize";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { PageLink } from "../common/PageLink";
 import { FaChevronLeft } from "react-icons/fa";
+import { useAnalytics } from "../utils/Analytics";
 
 export const NadePage: FC = memo(() => {
+  const { event } = useAnalytics();
   const { colors } = useTheme();
   const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
@@ -54,6 +56,13 @@ export const NadePage: FC = memo(() => {
     layoutTitle = `${nade.title} - ${mapString(nade.map)} - ${nadeTypeString(
       nade.type
     )}`;
+  }
+
+  function onBackClick() {
+    event({
+      category: "NadePage",
+      action: "Back Clicked",
+    });
   }
 
   if (!nade) {
@@ -101,7 +110,7 @@ export const NadePage: FC = memo(() => {
           )}
 
           <div id="title">
-            <div id="back">
+            <div id="back" onClick={onBackClick}>
               <PageLink href={"/maps/[map]"} as={`/maps/${nade.map}`}>
                 <span>
                   <FaChevronLeft />
