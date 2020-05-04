@@ -76,8 +76,8 @@ const List: FC<Props<any>> = memo(
           .top-right-comp {
             grid-column-start: 3;
             grid-column-end: 4;
-            grid-row-start: 1;
-            grid-row-end: 3;
+            grid-row-start: 2;
+            grid-row-end: 4;
             background: ${colors.DP02};
             border-radius: 5px;
             overflow: hidden;
@@ -92,8 +92,8 @@ const List: FC<Props<any>> = memo(
             .top-right-comp {
               grid-column-start: 2;
               grid-column-end: 3;
-              grid-row-start: 1;
-              grid-row-end: 3;
+              grid-row-start: 2;
+              grid-row-end: 4;
             }
 
             .second-row-comp {
