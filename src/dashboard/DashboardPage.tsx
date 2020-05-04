@@ -20,7 +20,9 @@ export const DashboardPage: FC<Props> = ({}) => {
       <PageCentralize>
         <div id="message">
           There is currently and issue updating the view count for nades.
-          I&apos;m investigating the issue.
+          I&apos;m investigating the issue. I have hidden the view count in the
+          list items for now. You can still see it here, or on the nade page
+          under the video.
         </div>
         <div id="dashboard-page">
           <h1 id="title">DASHBOARD</h1>

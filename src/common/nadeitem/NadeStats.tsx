@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { FaRunning, FaStar, FaComment } from "react-icons/fa";
+import { FaRunning, FaComment } from "react-icons/fa";
+import { TiStarFullOutline } from "react-icons/ti";
 import { GoEye, GoTerminal } from "react-icons/go";
 import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { tickrateString } from "../../models/Nade/NadeTickrate";
@@ -11,9 +12,22 @@ type Props = {
   nade: NadeLight | Nade;
 };
 
+const VIEW_COUNT_ENABLED = false;
+
 export const NadeStats: FC<Props> = ({ nade }) => {
   const { colors } = useTheme();
-  const favoriteIconColor = nade.isFavorited ? colors.FAV_YELLOW : undefined;
+  const favoriteIconColor = nade.isFavorited ? colors.FAV_YELLOW : colors.TEXT;
+  const favIcon = nade.isFavorited ? (
+    <TiStarFullOutline
+      color={favoriteIconColor}
+      style={{ position: "relative", top: -1, fontSize: 19 }}
+    />
+  ) : (
+    <TiStarFullOutline
+      color={favoriteIconColor}
+      style={{ position: "relative", top: -1, fontSize: 19 }}
+    />
+  );
   const hasMovement = nade.movement === "running";
   const isJumpThrow = nade.technique === "jumpthrow";
   const nadeIsNew = isNew(nade.createdAt);
@@ -22,7 +36,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
     <>
       <div className="item-bottom">
         <div className="stats">
-          {!nadeIsNew && (
+          {!nadeIsNew && VIEW_COUNT_ENABLED && (
             <div className="stat">
               <div className="stat-content">
                 <GoEye style={{ position: "relative", top: -1 }} />
@@ -40,10 +54,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
           {nade.favoriteCount > 0 && (
             <div className="stat">
               <div className="stat-content">
-                <FaStar
-                  color={favoriteIconColor}
-                  style={{ position: "relative", top: -1 }}
-                />
+                {favIcon}
                 <span className="stat-text">{nade.favoriteCount}</span>
               </div>
             </div>
@@ -52,7 +63,9 @@ export const NadeStats: FC<Props> = ({ nade }) => {
           {nade.commentCount > 0 && (
             <div className="stat">
               <div className="stat-content">
-                <FaComment style={{ position: "relative", top: -1 }} />
+                <FaComment
+                  style={{ position: "relative", top: -1, color: colors.TEXT }}
+                />
                 <span className="stat-text">{nade.commentCount}</span>
               </div>
             </div>
@@ -85,8 +98,8 @@ export const NadeStats: FC<Props> = ({ nade }) => {
         .stats {
           display: flex;
           align-items: center;
-          color: #707070;
           flex: 1;
+          opacity: 0.75;
         }
 
         .stat-content {
@@ -103,11 +116,13 @@ export const NadeStats: FC<Props> = ({ nade }) => {
         .special-text {
           font-size: 15px;
           margin-left: 5px;
+          color: ${colors.TEXT};
         }
 
         .specials {
           display: flex;
           align-items: center;
+          opacity: 0.75;
         }
 
         .special:last-child {
