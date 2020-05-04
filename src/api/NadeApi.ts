@@ -150,14 +150,15 @@ export class NadeApi {
 
   static async registerView(id: string) {
     try {
+      console.log("> Counting view");
+      await axios.post(
+        `${Config.API_URL}/nades/${id}/countView`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
     } catch (error) {}
-    await axios.post(
-      `${Config.API_URL}/nades/${id}/countView`,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
   }
 
   static async updateNadeStatus(
