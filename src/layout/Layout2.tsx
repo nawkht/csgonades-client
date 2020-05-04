@@ -10,7 +10,7 @@ import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
 import { CookieConsent } from "../common/CookieConsent";
-import { MapNav } from "./MapNav";
+import { MapNav } from "./Navigation/MapNav";
 import { Dimensions } from "../constants/Constants";
 
 export const Layout2: FC = memo(({ children }) => {

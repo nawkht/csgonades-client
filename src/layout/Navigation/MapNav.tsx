@@ -1,87 +1,182 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import { PageCentralize } from "../../common/PageCentralize";
-import { Dimensions } from "../../constants/Constants";
+import { PageLink } from "../../common/PageLink";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { ThemeToggler } from "../Misc/ThemeToggler";
-import { MapLink } from "./MapLink";
+import { useRouter } from "next/router";
 
 type Props = {};
 
-export const MapNav: FC<Props> = memo(({}) => {
+export const MapNav: FC<Props> = ({}) => {
   const { colors } = useTheme();
+  const { query } = useRouter();
+  const selectedMap = query.map as string;
 
   return (
     <>
-      <nav id="map-nav">
-        <PageCentralize>
-          <div className="comp-wrap">
-            <ul id="map-nav-list">
-              <MapLink map="dust2" />
-              <MapLink map="mirage" />
-              <MapLink map="inferno" />
-              <MapLink map="overpass" />
-              <MapLink map="vertigo" isUpdated={true} />
-              <MapLink map="train" />
-              <MapLink map="nuke" />
-              <MapLink map="cache" />
-              <MapLink map="anubis" isNew={true} />
-              <span id="acduty-label">Active duty</span>
-              <span id="r-label">Reserve</span>
+      <PageCentralize>
+        <div id="map-nav-wrap">
+          <div id="map-nav">
+            <ul>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/dust2">
+                  <span
+                    className={
+                      selectedMap === "dust2" ? "map-link selected" : "map-link"
+                    }
+                  >
+                    Dust2
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/mirage">
+                  <span
+                    className={
+                      selectedMap === "mirage"
+                        ? "map-link selected"
+                        : "map-link"
+                    }
+                  >
+                    Mirage
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/inferno">
+                  <span
+                    className={
+                      selectedMap === "inferno"
+                        ? "map-link selected"
+                        : "map-link"
+                    }
+                  >
+                    Inferno
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/overpass">
+                  <span
+                    className={
+                      selectedMap === "overpass"
+                        ? "map-link selected"
+                        : "map-link"
+                    }
+                  >
+                    Overpass
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/vertigo">
+                  <span
+                    className={
+                      selectedMap === "vertigo"
+                        ? "map-link selected"
+                        : "map-link"
+                    }
+                  >
+                    Vertigo
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/train">
+                  <span
+                    className={
+                      selectedMap === "train" ? "map-link selected" : "map-link"
+                    }
+                  >
+                    Train
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/nuke">
+                  <span
+                    className={
+                      selectedMap === "nuke" ? "map-link selected" : "map-link"
+                    }
+                  >
+                    Nuke
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/cache">
+                  <span
+                    className={
+                      selectedMap === "cache" ? "map-link selected" : "map-link"
+                    }
+                  >
+                    Cache
+                  </span>
+                </PageLink>
+              </li>
+              <li>
+                <PageLink href="/maps/[map]" as="/maps/anubis">
+                  <span
+                    className={
+                      selectedMap === "anubis"
+                        ? "map-link selected"
+                        : "map-link"
+                    }
+                  >
+                    Anubis
+                  </span>
+                </PageLink>
+              </li>
             </ul>
-            <ThemeToggler />
           </div>
-        </PageCentralize>
-      </nav>
+        </div>
+      </PageCentralize>
       <style jsx>{`
+        #map-nav-wrap {
+          background: ${colors.PRIMARY};
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          overflow: hidden;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
         #map-nav {
           background: ${colors.PRIMARY};
-        }
-
-        #map-nav-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: grid;
-          grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-          grid-template-areas:
-            "acduty dust2 mirage inferno overpass vertigo train nuke"
-            "reserve cache anubis . . . . .";
-        }
-
-        #ad-label {
-          grid-area: acduty;
-        }
-
-        #r-label {
-          grid-area: reserve;
-        }
-
-        #acduty-label,
-        #r-label {
-          font-size: 12px;
-          font-weight: 500;
-          padding: 15px 10px;
-          min-width: 83px;
-          background: rgba(0, 0, 0, 0.1);
           color: white;
-          border: 1px solid rgba(0, 0, 0, 0.15);
-          border-top: none;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          display: inline-block;
+          margin: 0 auto;
         }
 
-        .comp-wrap {
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
           display: flex;
-          justify-content: space-between;
         }
 
-        .reserve-wrap {
+        ul li {
         }
 
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          #map-nav {
-            display: none;
-          }
+        .map-link {
+          display: flex;
+          border-right: 1px solid rgba(0, 0, 0, 0.2);
+          padding: 10px 15px;
+          color: white;
+          font-size: 14px;
+          align-items: center;
+          font-weight: 400;
+          transition: background 0.1s;
+        }
+
+        .map-link:hover {
+          background: ${colors.filterBgHover};
+        }
+
+        .selected {
+          background: ${colors.filterBgHover};
         }
       `}</style>
     </>
   );
-});
+};
