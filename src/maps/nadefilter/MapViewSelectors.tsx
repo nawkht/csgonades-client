@@ -25,12 +25,13 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
           <Popup
             inverted
             size="tiny"
+            position="top center"
             content={
               <div className="view-hint">
                 <div>
                   <b>New!</b> Try a different view
                 </div>
-                <button onClick={hideViewSelectorHint}>Close</button>
+                <button onClick={hideViewSelectorHint}>Got it!</button>
               </div>
             }
             open={!vertical && shouldShowViewSelectorHint}
