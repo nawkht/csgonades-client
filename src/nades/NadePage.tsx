@@ -371,13 +371,6 @@ export const NadePage: FC = memo(() => {
           }
         }
 
-        @media only screen and (max-width: 910px) {
-          #nade-page-grid {
-            margin-left: 15px;
-            margin-right: 15px;
-          }
-        }
-
         @media only screen and (max-width: 800px) {
           #nade-page-grid {
             grid-template-columns: 1fr 200px 1fr;
@@ -386,16 +379,11 @@ export const NadePage: FC = memo(() => {
               "warning warning warning"
               "video video video"
               "meta meta meta"
+              "ad ad ad"
               "info info info"
+              "actions actions actions"
               "comments comments comments"
               "misc misc misc";
-          }
-        }
-
-        @media only screen and (max-width: 400px) {
-          #nade-page-main {
-            margin-left: -15px;
-            margin-right: -15px;
           }
         }
       `}</style>
