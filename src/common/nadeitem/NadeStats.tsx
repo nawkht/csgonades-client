@@ -152,5 +152,5 @@ export const NadeStats: FC<Props> = ({ nade }) => {
 function isNew(createdAt: Date | string) {
   const hoursAgoAdded = dateMinutesAgo(createdAt) / 60;
 
-  return hoursAgoAdded < 24;
+  return hoursAgoAdded < 36;
 }
