@@ -5,9 +5,11 @@ import { ButtonGroup } from "./ButtonGroup";
 import { Dimensions } from "../../constants/Constants";
 import { HelpTip } from "./HelpTip";
 
-type Props = {};
+type Props = {
+  vertical?: boolean;
+};
 
-export const TickrateSelector: FC<Props> = ({}) => {
+export const TickrateSelector: FC<Props> = ({ vertical }) => {
   const { colors } = useTheme();
   const { byTickrate, filterByTickrate } = useFilterByTickrate();
 
@@ -34,28 +36,35 @@ export const TickrateSelector: FC<Props> = ({}) => {
         </div>
         <div className="filter-tick">
           <ButtonGroup>
-            <button
-              className={`filter-btn tickrate-btn ${tick64active}`}
-              onClick={filterBy64tick}
-            >
-              64
-            </button>
+            <div className="filter-btns">
+              <button
+                className={`filter-btn tickrate-btn ${tick64active}`}
+                onClick={filterBy64tick}
+              >
+                64
+              </button>
 
-            <button
-              className={`filter-btn tickrate-btn ${tick128active}`}
-              onClick={filterByTickrate128}
-            >
-              128
-            </button>
+              <button
+                className={`filter-btn tickrate-btn ${tick128active}`}
+                onClick={filterByTickrate128}
+              >
+                128
+              </button>
+            </div>
           </ButtonGroup>
         </div>
       </div>
       <style jsx>{`
+        .filter-btns {
+          display: flex;
+          flex-direction: ${vertical ? "column" : "row"};
+        }
+
         .label {
           font-size: 12px;
           font-weight: 500;
           margin-bottom: 5px;
-          color: ${colors.TEXT};
+          color: ${vertical ? "white" : colors.TEXT};
           display: flex;
           align-items: center;
           justify-content: space-between;

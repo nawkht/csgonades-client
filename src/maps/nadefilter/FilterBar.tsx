@@ -7,11 +7,17 @@ import { MapViewSelector } from "./MapViewSelectors";
 import { ResetFilterButton } from "./ResetFilterButton";
 import { Dimensions } from "../../constants/Constants";
 import { useSetMapView } from "../../store/MapStore/hooks/useSetMapView";
+import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 
 type Props = {};
 
 export const FilterBar: FC<Props> = ({}) => {
+  const isSignedIn = useIsSignedIn();
   const { mapView } = useSetMapView();
+
+  if (mapView === "overview") {
+    return null;
+  }
 
   return (
     <>
@@ -28,13 +34,16 @@ export const FilterBar: FC<Props> = ({}) => {
         <div id="filter-tick">
           <TickrateSelector />
         </div>
-        <div id="filter-fav">
-          <FavFilterButton
-            showSingInWarning={() => {
-              //no-op
-            }}
-          />
-        </div>
+        {isSignedIn && (
+          <div id="filter-fav">
+            <FavFilterButton
+              showSingInWarning={() => {
+                //no-op
+              }}
+            />
+          </div>
+        )}
+
         <div id="view-selector">
           <MapViewSelector />
         </div>

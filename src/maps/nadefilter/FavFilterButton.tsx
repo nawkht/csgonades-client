@@ -6,10 +6,11 @@ import { useFilterByFavorites } from "../../store/MapStore/hooks/useFilterByFavo
 import { Dimensions } from "../../constants/Constants";
 
 type Props = {
+  vertical?: boolean;
   showSingInWarning: () => void;
 };
 
-export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
+export const FavFilterButton: FC<Props> = ({ showSingInWarning, vertical }) => {
   const { colors } = useTheme();
   const isSignedIn = useIsSignedIn();
   const { byFavorites, filterByFavorites } = useFilterByFavorites();
@@ -41,7 +42,7 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning }) => {
           font-size: 12px;
           font-weight: 500;
           margin-bottom: 5px;
-          color: ${colors.TEXT};
+          color: ${vertical ? "white" : colors.TEXT};
         }
 
         .filter-btn {

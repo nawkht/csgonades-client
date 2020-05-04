@@ -4,9 +4,11 @@ import { FaMap, FaListUl } from "react-icons/fa";
 import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
-type Props = {};
+type Props = {
+  vertical?: boolean;
+};
 
-export const MapViewSelector: FC<Props> = ({}) => {
+export const MapViewSelector: FC<Props> = ({ vertical }) => {
   const { colors } = useTheme();
   const { mapView, setMapView } = useSetMapView();
 
@@ -36,11 +38,12 @@ export const MapViewSelector: FC<Props> = ({}) => {
           font-size: 12px;
           font-weight: 500;
           margin-bottom: 5px;
-          color: ${colors.TEXT};
+          color: ${vertical ? "white" : colors.TEXT};
         }
 
         .view-selector-btns {
           display: flex;
+          flex-direction: ${vertical ? "column" : "row"};
           background: ${colors.filterBg};
           overflow: hidden;
           border-radius: 5px;

@@ -6,7 +6,7 @@ import { Dimensions } from "../constants/Constants";
 
 type Props = {};
 
-export const SortingMethodSelector: FC<Props> = ({}) => {
+export const SortingMethodSelector: FC<Props> = () => {
   const { colors } = useTheme();
   const { byMethod, filterBySortingMethod } = useFilterByMethod();
 

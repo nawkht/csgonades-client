@@ -2,10 +2,14 @@ import { FC, memo } from "react";
 import { FaUndo } from "react-icons/fa";
 import { useFilterReset } from "../../store/MapStore/hooks/useFilterReset";
 import { Dimensions } from "../../constants/Constants";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
-type Props = {};
+type Props = {
+  vertical?: boolean;
+};
 
-export const ResetFilterButton: FC<Props> = memo(({}) => {
+export const ResetFilterButton: FC<Props> = memo(({ vertical }) => {
+  const { colors } = useTheme();
   const { canReset, resetFilter } = useFilterReset();
 
   function onReset() {
@@ -51,6 +55,7 @@ export const ResetFilterButton: FC<Props> = memo(({}) => {
           font-size: 12px;
           margin-bottom: 5px;
           font-weight: 500;
+          color: ${vertical ? "white" : colors.TEXT};
         }
 
         .icon {

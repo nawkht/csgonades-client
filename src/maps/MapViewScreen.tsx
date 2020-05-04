@@ -8,6 +8,12 @@ import { CsgoMap } from "../models/Nade/CsGoMap";
 import { filterByCoords } from "../store/MapStore/hooks/helpers";
 import { MapViewSuggested } from "./MapViewSuggested";
 import { useFilterServerSideNades } from "../store/MapStore/hooks/useFilteredNades";
+import { TypeFilter } from "./nadefilter/TypeFilter";
+import { MapViewSelector } from "./nadefilter/MapViewSelectors";
+import { TickrateSelector } from "./nadefilter/TickrateSelector";
+import { FavFilterButton } from "./nadefilter/FavFilterButton";
+import { useIsSignedIn } from "../store/AuthStore/AuthHooks";
+import { ResetFilterButton } from "./nadefilter/ResetFilterButton";
 
 type Props = {
   map: CsgoMap;
@@ -22,6 +28,7 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
     null
   );
   const [mapWidth, setMapWidth] = useState(0);
+  const isSignedIn = useIsSignedIn();
   const nades = useNadesForMapView(allNades);
   const mapViewRef = useRef<HTMLDivElement>(null);
 
@@ -48,6 +55,34 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
         nades={suggestedNades}
       />
       <div id="mapview-wrap">
+        <div id="mapview-filters">
+          <div className="space-below">
+            <TypeFilter vertical />
+          </div>
+
+          <div className="space-below">
+            <TickrateSelector vertical />
+          </div>
+          {isSignedIn && (
+            <div className="space-below">
+              <FavFilterButton
+                vertical
+                showSingInWarning={() => {
+                  //no-op
+                }}
+              />
+            </div>
+          )}
+
+          <div className="space-below">
+            <ResetFilterButton vertical />
+          </div>
+        </div>
+
+        <div id="view-selector">
+          <MapViewSelector vertical />
+        </div>
+
         <div id="mapview-screen">
           <div id="mapview" ref={mapViewRef}>
             <img
@@ -67,34 +102,49 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
         </div>
       </div>
       <style jsx>{`
+        #mapview-wrap {
+          display: grid;
+          grid-template-columns: min-content 1fr min-content;
+          grid-template-areas:
+            "mpfilter mpoverview mpviewselector"
+            "mpfilter mpoverview .";
+          background: #151515;
+          border-radius: 5px;
+          padding: ${Dimensions.GUTTER_SIZE}px;
+        }
+
         #mapview-screen {
+          justify-self: center;
+          grid-area: mpoverview;
           height: calc(
             100vh - ${Dimensions.HEADER_HEIGHT}px - ${Dimensions.NAV_HEIGHT}px -
-              ${Dimensions.GUTTER_SIZE * 3}px - 80px
+              ${Dimensions.GUTTER_SIZE * 4}px
           );
           width: calc(
             100vh - ${Dimensions.HEADER_HEIGHT}px - ${Dimensions.NAV_HEIGHT}px -
-              ${Dimensions.GUTTER_SIZE * 3}px - 80px
+              ${Dimensions.GUTTER_SIZE * 4}px
           );
-          max-height: 1000px;
-          max-width: 1000px;
-        }
-
-        #mapview-wrap {
-          background: #151515;
-          border-radius: 5px;
-          display: flex;
-          justify-content: space-around;
-          margin-bottom: 50px;
         }
 
         #mapview {
           position: relative;
         }
 
+        #view-selector {
+          grid-area: mpviewselector;
+        }
+
+        #mapview-filters {
+          grid-area: mpfilter;
+        }
+
         #mapview img {
           width: 100%;
           display: block;
+        }
+
+        .space-below {
+          margin-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
       `}</style>
     </>
