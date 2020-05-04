@@ -116,11 +116,11 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
             "mpfilter mpoverview .";
           background: #151515;
           border-radius: 5px;
-          padding: ${Dimensions.GUTTER_SIZE}px;
         }
 
         #mapview-screen {
           justify-self: center;
+          align-self: center;
           grid-area: mpoverview;
           height: calc(
             100vh - ${Dimensions.HEADER_HEIGHT}px - ${Dimensions.NAV_HEIGHT}px -
@@ -140,10 +140,14 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
 
         #view-selector {
           grid-area: mpviewselector;
+          padding: ${Dimensions.GUTTER_SIZE}px;
+          padding-left: 0;
         }
 
         #mapview-filters {
           grid-area: mpfilter;
+          padding: ${Dimensions.GUTTER_SIZE}px;
+          padding-right: 0;
         }
 
         #mapview img {
