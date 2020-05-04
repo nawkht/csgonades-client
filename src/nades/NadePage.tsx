@@ -6,7 +6,6 @@ import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
 import { useNadeRegisterView } from "../store2/NadePageStore/hooks/useNadeRegisterView";
-import { NadeBreadcrumb } from "./components/NadeBreadcrumb";
 import { NadeTitle, nadeTitleBuilder } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
@@ -28,6 +27,8 @@ import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { PageCentralize } from "../common/PageCentralize";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { PageLink } from "../common/PageLink";
+import { FaChevronLeft } from "react-icons/fa";
 
 export const NadePage: FC = memo(() => {
   const { colors } = useTheme();
@@ -82,6 +83,10 @@ export const NadePage: FC = memo(() => {
       />
 
       <PageCentralize>
+        {allowEdit && (
+          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+        )}
+
         <div id="nade-page-grid" key={`main-${nade.id}`}>
           {nade?.tickrate === "tick128" && (
             <div className="matchmake-warning">
@@ -96,10 +101,13 @@ export const NadePage: FC = memo(() => {
           )}
 
           <div id="title">
-            {allowEdit && (
-              <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
-            )}
-            <NadeBreadcrumb nade={nade} />
+            <div id="back">
+              <PageLink href={"/maps/[map]"} as={`/maps/${nade.map}`}>
+                <span>
+                  <FaChevronLeft />
+                </span>
+              </PageLink>
+            </div>
             <NadeTitle
               title={nade.title}
               map={nade.map}
@@ -196,12 +204,22 @@ export const NadePage: FC = memo(() => {
       )}
 
       <style jsx>{`
+        #back {
+        }
+
+        #back span {
+          color: white;
+          font-size: 24px;
+          padding: 10px 20px;
+          display: block;
+          position: relative;
+          top: 0px;
+        }
+
         .matchmake-warning {
           grid-area: warning;
           background: #ad540a;
           color: white;
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
           padding: 10px 20px;
           display: flex;
           align-items: center;
@@ -319,7 +337,15 @@ export const NadePage: FC = memo(() => {
 
         #title {
           grid-area: title;
-          padding-bottom: ${Dimensions.GUTTER_SIZE}px;
+          background: ${colors.PRIMARY};
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          display: flex;
+          align-items: center;
+        }
+
+        #title h1 {
+          color: white;
         }
 
         #side-bar-ad {

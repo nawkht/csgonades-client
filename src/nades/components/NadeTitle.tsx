@@ -1,7 +1,6 @@
 import { FC, useMemo } from "react";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeType } from "../../models/Nade/NadeType";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { capitalize } from "../../utils/Common";
 import { EditButton } from "./EditButton";
 
@@ -20,8 +19,6 @@ export const NadeTitle: FC<Props> = ({
   onEditNade,
   allowEdit,
 }) => {
-  const { colors } = useTheme();
-
   const nadeTitle = useMemo(() => {
     return nadeTitleBuilder(type, title, map);
   }, [title, map, type]);
@@ -34,13 +31,13 @@ export const NadeTitle: FC<Props> = ({
 
       <style jsx>{`
         h1 {
-          font-size: 32px;
+          font-size: 28px;
           margin: 0;
           padding: 0;
-          margin-left: -1px;
           font-weight: 300;
-          color: ${colors.TEXT};
+          color: white;
           text-align: left;
+          padding: 10px 0px;
         }
       `}</style>
     </>
