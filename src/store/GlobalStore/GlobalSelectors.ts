@@ -8,5 +8,5 @@ export const isNavOpenSelector = (state: AppState) =>
 export const acceptedCookieConsentSelector = (state: AppState) =>
   state.globalStore.acceptedCookieConcent;
 
-export const clientConfigSelector = (state: AppState) =>
-  state.globalStore.clientConfig;
+export const showViewSelectorHintSelector = (state: AppState) =>
+  state.globalStore.showViewSelectorHint;

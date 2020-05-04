@@ -1,5 +1,4 @@
 import { SiteStats } from "../../api/StatsApi";
-import { ClientConfig } from "../../api/ClientConfigApi";
 
 type AddSiteStatsAction = {
   readonly type: "@@global/ADD_SITE_STATS";
@@ -18,9 +17,8 @@ type AcceptCookieConcent = {
   readonly type: "@@global/ACCEPT_COOKIE_CONCENT";
 };
 
-type ReplaceClientConfig = {
-  type: "@@global/ReplaceClientConfig";
-  config: ClientConfig;
+type HideViewSelectorHint = {
+  type: "@@global/HideViewSelectorHint";
 };
 
 export type GlobalActions =
@@ -28,14 +26,7 @@ export type GlobalActions =
   | ToggleNavigation
   | CloseNavigation
   | AcceptCookieConcent
-  | ReplaceClientConfig;
-
-export const replaceClientConfigAction = (
-  config: ClientConfig
-): ReplaceClientConfig => ({
-  type: "@@global/ReplaceClientConfig",
-  config,
-});
+  | HideViewSelectorHint;
 
 export const addSiteStatsActon = (stats: SiteStats): AddSiteStatsAction => ({
   type: "@@global/ADD_SITE_STATS",
