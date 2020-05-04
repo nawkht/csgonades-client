@@ -26,7 +26,7 @@ import { FavoriteButton } from "./components/FavoriteButton";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { SidebarPanel } from "../common/SidebarPanel";
+import { PageCentralize } from "../common/PageCentralize";
 import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadePage: FC = memo(() => {
@@ -81,88 +81,84 @@ export const NadePage: FC = memo(() => {
         thumbnail={nade.images.thumbnailUrl}
       />
 
-      <aside id="nadepage-sidebar" key={`aside-${nade.id}`}>
-        <div id="nadepage-sidebar-content">
-          <SidebarPanel first title="SHARE">
-            <NadeShareActions
-              title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
-              visisble={nade?.status === "accepted"}
-              url={`/nades/${nade?.slug || nade?.id}`}
-              image={nade?.images.thumbnailUrl}
-            />
-          </SidebarPanel>
-
-          <SidebarPanel last title="ACTIONS">
-            <div id="nade-buttons">
-              <div className="nade-btn">
-                <FavoriteButton
-                  showSignInWarning={() => setShowSignInWarning(true)}
-                  nade={nade}
-                />
-              </div>
-              <div className="nade-btn">
-                <ReportNadeButton nadeId={nade.id} />
+      <PageCentralize>
+        <div id="nade-page-grid" key={`main-${nade.id}`}>
+          {nade?.tickrate === "tick128" && (
+            <div className="matchmake-warning">
+              <div className="warning-msg">
+                <div className="warning-title">WARNING</div>
+                <div>
+                  Will not work, or be suboptimal if you play matchmaking. This
+                  nade is made for 128 tick servers.
+                </div>
               </div>
             </div>
-          </SidebarPanel>
-
-          <div className="ph-unit">
-            <AdUnit tagType="300x250" />
-          </div>
-        </div>
-      </aside>
-
-      <div id="nade-page-grid" key={`main-${nade.id}`}>
-        {nade?.tickrate === "tick128" && (
-          <div className="matchmake-warning">
-            <div className="warning-msg">
-              <div className="warning-title">WARNING</div>
-              <div>
-                Will not work, or be suboptimal if you play matchmaking. This
-                nade is made for 128 tick servers.
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div id="title">
-          {allowEdit && (
-            <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
           )}
-          <NadeBreadcrumb nade={nade} />
-          <NadeTitle
-            title={nade.title}
-            map={nade.map}
-            type={nade.type}
-            onEditNade={() => setEditTitleVisisble(true)}
-            allowEdit={allowEditTitle}
-          />
-        </div>
 
-        <div id="nade-meta">
-          <NadeMeta nade={nade} onEditMeta={() => setEditMetaVisible(true)} />
-        </div>
+          <div id="title">
+            {allowEdit && (
+              <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+            )}
+            <NadeBreadcrumb nade={nade} />
+            <NadeTitle
+              title={nade.title}
+              map={nade.map}
+              type={nade.type}
+              onEditNade={() => setEditTitleVisisble(true)}
+              allowEdit={allowEditTitle}
+            />
+          </div>
 
-        <div id="nade-page-main">
-          <NadeVideoContainer nade={nade} />
-        </div>
+          <div id="nade-meta">
+            <NadeMeta nade={nade} onEditMeta={() => setEditMetaVisible(true)} />
+          </div>
 
-        <div id="nade-info-container">
-          <NadeInfoContainer
-            nade={nade}
-            onEditDescription={() => setEditDescisisble(true)}
-          />
-        </div>
+          <div id="nade-page-main">
+            <NadeVideoContainer nade={nade} />
+          </div>
 
-        <div id="nade-comment-container">
-          <NadeComments nadeId={nade.id} />
-        </div>
+          <div id="nade-info-container">
+            <NadeInfoContainer
+              nade={nade}
+              onEditDescription={() => setEditDescisisble(true)}
+            />
+          </div>
 
-        <div id="misc">
-          {allowEdit && <MapPositionEditor nade={nade} />}
-          {isAdminOrMod && <AdminEditor nade={nade} />}
+          <div id="nade-comment-container">
+            <NadeComments nadeId={nade.id} />
+          </div>
+
+          <div id="placement">
+            <AdUnit tagType="728x90" />
+          </div>
+
+          <div id="nade-actions">
+            <div className="nade-action">
+              <NadeShareActions
+                title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
+                visisble={nade?.status === "accepted"}
+                url={`/nades/${nade?.slug || nade?.id}`}
+                image={nade?.images.thumbnailUrl}
+              />
+            </div>
+
+            <div className="nade-action">
+              <FavoriteButton
+                showSignInWarning={() => setShowSignInWarning(true)}
+                nade={nade}
+              />
+            </div>
+            <div className="nade-action">
+              <ReportNadeButton nadeId={nade.id} />
+            </div>
+            <div className="nade-action">
+              {allowEdit && <MapPositionEditor nade={nade} />}
+            </div>
+          </div>
+
+          <div id="misc">{isAdminOrMod && <AdminEditor nade={nade} />}</div>
         </div>
-      </div>
+      </PageCentralize>
 
       <SignInWarning
         key={`1-${nade.id}`}
@@ -250,26 +246,35 @@ export const NadePage: FC = memo(() => {
           grid-area: misc;
         }
 
+        #nade-actions {
+          grid-area: actions;
+        }
+
+        .nade-action {
+          margin-bottom: ${Dimensions.GUTTER_SIZE}px;
+        }
+
         #nade-page-grid {
-          margin: ${Dimensions.GUTTER_SIZE}px;
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
           margin-bottom: 100px;
           grid-area: main;
           display: grid;
-          grid-template-columns: 1fr 1fr 200px;
+          grid-template-columns: 1fr 1fr 160px;
           grid-template-areas:
             "title title title"
             "warning warning warning"
             "video video video"
             "meta meta meta"
-            "info info ."
+            "info info actions"
+            "ad ad ad"
             "comments comments ."
             "misc misc misc";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
-          max-width: 1200px;
+          width: 100%;
         }
 
-        .half-page-plactement {
-          margin-top: ${Dimensions.GUTTER_SIZE}px;
+        #placement {
+          grid-area: ad;
         }
 
         #nade-meta {

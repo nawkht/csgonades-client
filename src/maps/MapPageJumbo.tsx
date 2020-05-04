@@ -1,8 +1,9 @@
-import { FC, memo } from "react";
+import { FC, memo, useMemo } from "react";
 import { capitalize } from "../utils/Common";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { NadeLight } from "../models/Nade/Nade";
+import { useSetMapView } from "../store/MapStore/hooks/useSetMapView";
 
 type Props = {
   map: CsgoMap;
@@ -10,11 +11,20 @@ type Props = {
 };
 
 export const MapPageJumbo: FC<Props> = memo(({ map }) => {
+  const { mapView } = useSetMapView();
   const { colors } = useTheme();
+
+  const classNames = useMemo(() => {
+    const base = ["map-welcome"];
+    if (mapView === "overview") {
+      base.push("hidden");
+    }
+    return base.join(" ");
+  }, [mapView]);
 
   return (
     <>
-      <div className="map-welcome">
+      <div className={classNames}>
         <h1>
           Find the best smoke, flashbang, molotov and grenade spots for{" "}
           {capitalize(map)}.
@@ -26,12 +36,17 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
         </p>
       </div>
       <style jsx>{`
+        .hidden {
+          display: none;
+        }
+
         .map-welcome {
           background: ${colors.DP01};
           padding: 40px 30px;
           margin-bottom: 30px;
           border-radius: 5px;
           color: ${colors.TEXT};
+          transition: all 0.2s;
         }
 
         .map-welcome-wrap {

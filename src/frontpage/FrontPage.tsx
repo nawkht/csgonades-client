@@ -9,6 +9,7 @@ import { bestDust2Nades } from "../pages/blog/best-dust2-nades";
 import { BlogList } from "../blog/BlogList";
 import { blogJumpthrowBind } from "../pages/blog/jumpthrow-bind";
 import { Dimensions } from "../constants/Constants";
+import { PageCentralize } from "../common/PageCentralize";
 
 const recentPosts = [blogJumpthrowBind, bestDust2Nades, blogNadeAlignCrosshair];
 
@@ -21,34 +22,22 @@ export const FrontPage: FC<Props> = memo(({ recentNades, stats }) => {
   return (
     <>
       <div id="front-page">
-        <FrontPageJumbo stats={stats} />
+        <PageCentralize>
+          <FrontPageJumbo stats={stats} />
 
-        <div className="recent-wrap">
-          <BlogList posts={recentPosts} />
-        </div>
+          <div className="recent-wrap">
+            <BlogList posts={recentPosts} />
+          </div>
 
-        <div className="recent-nade-wrap">
-          <RecentNades recentNades={recentNades} />
-        </div>
-      </div>
-      <aside className="front-page-sidebar">
-        <div id="sidebar-wrap">
+          <div className="recent-nade-wrap">
+            <RecentNades recentNades={recentNades} />
+          </div>
+
           <FrontpageActions />
-          <div className="sidebar-placeholder"></div>
-        </div>
-      </aside>
+        </PageCentralize>
+      </div>
 
       <style jsx>{`
-        aside {
-          grid-area: sidebar;
-          width: 300px;
-        }
-
-        #sidebar-wrap {
-          position: sticky;
-          top: calc(65px + ${Dimensions.GUTTER_SIZE}px);
-        }
-
         #front-page {
           grid-area: main;
           margin: ${Dimensions.GUTTER_SIZE}px;

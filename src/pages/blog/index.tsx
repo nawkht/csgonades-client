@@ -7,6 +7,8 @@ import { blogPractiseConfig } from "./practice-config";
 import { blogNadeAlignCrosshair } from "./smoke-align-crosshair";
 import { bestDust2Nades } from "./best-dust2-nades";
 import { blogJumpthrowBind } from "./jumpthrow-bind";
+import { PageCentralize } from "../../common/PageCentralize";
+import { Dimensions } from "../../constants/Constants";
 
 type Props = {};
 
@@ -23,26 +25,23 @@ const BlogPage: FC<Props> = ({}) => {
   return (
     <>
       <SEO title="Blog" canonical="/blog" />
-      <div className="blog-posts">
-        <h1>Blog</h1>
-        <BlogList posts={blogPosts} />
-      </div>
-      <aside></aside>
+      <PageCentralize>
+        <div className="blog-posts">
+          <h1>Blog</h1>
+          <BlogList posts={blogPosts} />
+        </div>
+      </PageCentralize>
       <style jsx>{`
-        aside {
-          grid-area: sidebar;
-          width: 300px;
-        }
         .blog-posts {
           color: ${colors.TEXT};
           grid-area: main;
-          margin: 30px;
+          margin-top: 30px;
           margin-bottom: 100px;
         }
 
         h1 {
           font-weight: 300;
-          margin-bottom: 30px;
+          margin-bottom: ${Dimensions.GUTTER_SIZE}px;
           font-size: 32px;
         }
       `}</style>

@@ -14,6 +14,7 @@ type ContListProps = {
 };
 
 export const TopContributorList: FC<ContListProps> = ({ nades }) => {
+  const { colors } = useTheme();
   const contributors = useMemo(() => {
     const contCount: { [key: string]: UserContribution } = {};
     nades.forEach((nade) => {
@@ -61,9 +62,10 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
   return (
     <>
       <div className="cont-list">
+        <div className="label">TOP CONTRIBUTORS</div>
         {contributors.gold && (
           <>
-            <div id="gold">
+            <div className="gold">
               <span>🏆</span>
               <TopContributor user={contributors.gold} />
             </div>
@@ -72,7 +74,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
 
         {contributors.silver && (
           <>
-            <div id="silver">
+            <div className="silver">
               <span>🥈</span>
               <TopContributor user={contributors.silver} />
             </div>
@@ -81,38 +83,41 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
 
         {contributors.bronce && (
           <>
-            <div id="bronze">
+            <div className="bronze">
               <span>🥉</span>
               <TopContributor user={contributors.bronce} />
             </div>
           </>
         )}
-        <div id="cont-desc">Based on popularity of users nades.</div>
+        <div className="cont-desc">Based on popularity of users nades.</div>
       </div>
       <style jsx>{`
-        #cont-desc {
+        .cont-desc {
           font-size: 12px;
           color: #bbb;
           text-align: center;
-          grid-area: desc;
+          padding: 10px 20px;
         }
 
         .cont-list {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-row-gap: 10px;
-          grid-template-areas:
-            "gold"
-            "silver"
-            "bronze"
-            "desc";
+          background: ${colors.DP01};
+          border-radius: 5px;
+          overflow: hidden;
         }
 
-        #gold,
-        #silver,
-        #bronze {
+        .label {
+          background: ${colors.PRIMARY};
+          color: white;
+          padding: 10px 20px;
+          margin-bottom: 10px;
+        }
+
+        .gold,
+        .silver,
+        .bronze {
           display: flex;
           align-items: center;
+          padding: 10px 20px;
         }
 
         .cont-list span {

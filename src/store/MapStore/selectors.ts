@@ -22,3 +22,5 @@ export const mapViewOpenSelector = (state: AppState) =>
 
 export const filterByMethodSelector = (state: AppState) =>
   state.mapStore.sortingMethod;
+
+export const mapViewSelector = (state: AppState) => state.mapStore.view;

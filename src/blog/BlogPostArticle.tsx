@@ -8,8 +8,8 @@ import { NadeShareActions } from "../nades/NadeShareActions";
 import { SEO } from "../layout/SEO2";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
-import { SidebarPanel } from "../common/SidebarPanel";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { PageCentralize } from "../common/PageCentralize";
 
 type Props = {
   data: BlogPost;
@@ -37,55 +37,68 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
         description={data.intro}
         thumbnail={data.thumbnailUrl}
       />
-      <article>
-        <div id="article-title">
-          <h1>{data.title}</h1>
-        </div>
-        <div id="article-image">
-          <div className="img-wrap">
-            <img className="article-img" src={data.imageUrl} />
-            {!!data.imageCredit && !!data.imageCreditUrl && (
-              <div className="image-credit">
-                Photo by{" "}
-                <a href={data.imageCreditUrl} target="_top">
-                  {data.imageCredit}
-                </a>
+      <PageCentralize>
+        <div id="blog-article">
+          <article>
+            <div id="article-title">
+              <h1>{data.title}</h1>
+            </div>
+            <div id="article-image">
+              <div className="img-wrap">
+                <img className="article-img" src={data.imageUrl} />
+                {!!data.imageCredit && !!data.imageCreditUrl && (
+                  <div className="image-credit">
+                    Photo by{" "}
+                    <a href={data.imageCreditUrl} target="_top">
+                      {data.imageCredit}
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
+            </div>
 
-        <div id="article-content">
-          <div className="article-date">{prettyDate(data.createdAt)}</div>
-          <p className="lead">{data.intro}</p>
-          {children}
-          <BlogAuthor />
-        </div>
-      </article>
+            <div id="article-content">
+              <div className="article-date">{prettyDate(data.createdAt)}</div>
+              <p className="lead">{data.intro}</p>
+              {children}
+              <BlogAuthor />
+            </div>
+          </article>
 
-      <aside id="blog-sidebar">
-        <div id="blog-sidebar-wrap">
-          <SidebarPanel first last title="SHARE">
-            <NadeShareActions
-              url={`/blog/${data.slug}`}
-              title={data.title}
-              image={data.thumbnailUrl}
-              visisble={true}
-            />
-          </SidebarPanel>
-          <div className="ph-unit">
-            <AdUnit tagType="160x600" />
-          </div>
+          <aside id="blog-sidebar">
+            <div id="blog-share">
+              <NadeShareActions
+                url={`/blog/${data.slug}`}
+                title={data.title}
+                image={data.thumbnailUrl}
+                visisble={true}
+              />
+            </div>
+            <div id="blog-sidebar-wrap">
+              <div className="ph-unit">
+                <AdUnit tagType="160x600" />
+              </div>
+            </div>
+          </aside>
         </div>
-      </aside>
+      </PageCentralize>
 
       <style jsx>{`
+        #blog-article {
+          display: grid;
+          grid-template-columns: 1fr 160px;
+          grid-template-areas: "article sidebar";
+          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+          grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+          margin-bottom: 100px;
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
+        }
+
         .ph-unit {
           margin-top: ${Dimensions.GUTTER_SIZE}px;
         }
 
         article {
-          grid-area: main;
           display: grid;
           grid-template-columns: 1fr;
           grid-template-areas:
@@ -96,9 +109,6 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
           color: ${colors.TEXT};
-          max-width: 850px;
-          margin: ${Dimensions.GUTTER_SIZE}px;
-          margin-bottom: 100px;
         }
 
         #article-title {
@@ -121,13 +131,14 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
 
         #blog-sidebar {
           grid-area: sidebar;
-          width: 300px;
-          background: ${colors.DP02};
+          width: 160px;
         }
 
         #blog-sidebar-wrap {
           position: sticky;
-          top: calc(65px);
+          top: calc(
+            ${Dimensions.HEADER_HEIGHT}px + ${Dimensions.GUTTER_SIZE}px
+          );
         }
 
         .article-date {

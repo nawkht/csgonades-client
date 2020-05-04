@@ -4,6 +4,7 @@ import { PageCentralize } from "../common/PageCentralize";
 import { User } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useFinishProfile } from "../store/UsersStore/hooks/useFinishProfile";
+import { Dimensions } from "../constants/Constants";
 
 type Props = { user: User };
 
@@ -35,15 +36,13 @@ export const FinishProfile: FC<Props> = ({ user }) => {
 
   return (
     <>
-      <div className="finish-profile">
-        <PageCentralize>
+      <PageCentralize>
+        <div className="finish-profile">
           <div className="welcome">
             <h1>Hi {user.nickname}, let&apos;s finish your profile!</h1>
             <h2>Then go favorite some nades or add your own 👊</h2>
           </div>
-        </PageCentralize>
-      </div>
-      <PageCentralize>
+        </div>
         {!!error && (
           <div className="error">
             <h3>Error</h3>
@@ -81,15 +80,28 @@ export const FinishProfile: FC<Props> = ({ user }) => {
         .finish-profile {
           background: linear-gradient(
             252.84deg,
-            ${colors.jumboGradientStart} 33.44%,
-            ${colors.jumboGradientEnd} 66.89%
+            ${colors.jumboGradientEnd} 33.44%,
+            ${colors.jumboGradientStart} 66.89%
           );
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
+          border-radius: 5px;
         }
 
         .welcome {
-          padding-top: 50px;
-          padding-bottom: 50px;
           color: ${colors.TEXT};
+          padding: 20px 30px;
+        }
+
+        .welcome h1 {
+          font-size: 32px;
+          margin: 0;
+          padding: 0;
+        }
+
+        .welcome h2 {
+          font-size: 28px;
+          margin: 0;
+          padding: 0;
         }
 
         .error {
@@ -104,9 +116,10 @@ export const FinishProfile: FC<Props> = ({ user }) => {
         .profile-form {
           display: flex;
           flex-direction: column;
-          padding-top: 40px;
-          padding-bottom: 40px;
-          min-height: 70vh;
+          padding: 20px 30px;
+          background: ${colors.DP01};
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
+          margin-bottom: 100px;
         }
 
         .label {

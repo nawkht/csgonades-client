@@ -150,7 +150,6 @@ export class NadeApi {
 
   static async registerView(id: string) {
     try {
-      console.log("> Counting view");
       await axios.post(
         `${Config.API_URL}/nades/${id}/countView`,
         {},

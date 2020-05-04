@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { FaUndo } from "react-icons/fa";
 import { useFilterReset } from "../../store/MapStore/hooks/useFilterReset";
+import { Dimensions } from "../../constants/Constants";
 
 type Props = {};
 
@@ -17,13 +18,17 @@ export const ResetFilterButton: FC<Props> = memo(({}) => {
 
   return (
     <>
-      <button className={`filter-btn ${visible}`} onClick={onReset}>
-        <span className="label">RESET</span>
-        <span className="icon">
+      <div className={`reset ${visible}`}>
+        <div className="label">RESET</div>
+        <button className={`filter-btn`} onClick={onReset}>
           <FaUndo />
-        </span>
-      </button>
+        </button>
+      </div>
       <style jsx>{`
+        .reset {
+          opacity: 0;
+        }
+
         .filter-btn {
           border: none;
           outline: none;
@@ -34,17 +39,18 @@ export const ResetFilterButton: FC<Props> = memo(({}) => {
           background: rgba(173, 0, 0, 0.7);
           color: white;
           border-radius: 5px;
-          opacity: 0;
           transition: all 0.1s;
           box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
           display: flex;
-          padding: 5px 8px;
+          height: ${Dimensions.BUTTON_HEIGHT}px;
+          width: ${Dimensions.BUTTON_HEIGHT}px;
+          cursor: pointer;
         }
 
         .label {
           font-size: 12px;
-          margin-right: 5px;
-          font-weight: bold;
+          margin-bottom: 5px;
+          font-weight: 500;
         }
 
         .icon {
@@ -55,7 +61,6 @@ export const ResetFilterButton: FC<Props> = memo(({}) => {
 
         .visible {
           opacity: 1;
-          cursor: pointer;
         }
       `}</style>
     </>

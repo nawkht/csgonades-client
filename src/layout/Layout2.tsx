@@ -10,7 +10,8 @@ import { MobileNav } from "./Navigation/MobileNav";
 import { ServiceDown } from "./ServiceDown";
 import { AdminLink } from "./Misc/AdminLink";
 import { CookieConsent } from "../common/CookieConsent";
-import { NewNav } from "./NewNav";
+import { MapNav } from "./MapNav";
+import { Dimensions } from "../constants/Constants";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -26,10 +27,10 @@ export const Layout2: FC = memo(({ children }) => {
         </header>
 
         <nav>
-          <NewNav />
+          <MapNav />
         </nav>
 
-        {children}
+        <main>{children}</main>
 
         <footer>
           <Footer />
@@ -48,37 +49,29 @@ export const Layout2: FC = memo(({ children }) => {
           min-height: 100vh;
           width: 100%;
           background: ${colors.DP00};
-          grid-template-columns: auto 1fr auto;
+          grid-template-columns: 1fr;
           grid-template-areas:
-            "header header header"
-            "nav main sidebar"
-            "footer footer footer";
+            "header"
+            "nav"
+            "main"
+            "footer";
         }
 
         header {
           grid-area: header;
           position: sticky;
           top: 0;
-          z-index: 999;
+          z-index: 900;
+          height: ${Dimensions.HEADER_HEIGHT}px;
         }
 
         nav {
           grid-area: nav;
-          background: ${colors.DP02};
+          height: ${Dimensions.NAV_HEIGHT}px;
         }
 
         footer {
           grid-area: footer;
-        }
-
-        @media only screen and (max-width: 1210px) {
-          #page {
-            grid-template-areas:
-              "header header header"
-              "nav main main"
-              "nav sidebar sidebar"
-              "footer footer footer";
-          }
         }
 
         @media only screen and (max-width: 910px) {

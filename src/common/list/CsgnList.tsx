@@ -1,99 +1,109 @@
 import { FC, memo } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { Dimensions, Config } from "../../constants/Constants";
-import { LazyLoadAd } from "../adunits/LazyLoadAd";
+import { Dimensions } from "../../constants/Constants";
 
 type Props<T> = {
   data: T[];
   renderItem: (item: T) => JSX.Element;
   keyExtractor: (item: T) => string;
+  topRightComp?: JSX.Element;
+  secondRowRightComp?: JSX.Element;
 };
 
 function ListBase<T>(props: Props<T>) {
   const { data, renderItem, keyExtractor } = props;
 
   return (
-    <List data={data} keyExtractor={keyExtractor} renderItem={renderItem} />
+    <List
+      {...props}
+      data={data}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
+    />
   );
 }
 
-const List: FC<Props<any>> = memo(({ data, keyExtractor, renderItem }) => {
-  const { colors } = useTheme();
-  const numItems = data.length;
-  const isEmpty = numItems === 0;
+const List: FC<Props<any>> = memo(
+  ({ data, keyExtractor, renderItem, topRightComp, secondRowRightComp }) => {
+    const { colors } = useTheme();
+    const numItems = data.length;
+    const isEmpty = numItems === 0;
 
-  const displayFirstAd = numItems > 10;
-  const displaySecondAd = numItems > 22;
+    const displayFirstAd = numItems > 10;
 
-  const listAdsEnabled = Config.ADS_ENABLED && false;
+    return (
+      <>
+        {isEmpty && (
+          <div className="empty-list">
+            No nades here yet, sign in to add some!
+          </div>
+        )}
+        <div className="list">
+          {data.map((item, i) => (
+            <div
+              className="list-item"
+              key={keyExtractor(item)}
+              style={{ order: i }}
+            >
+              {renderItem(item)}
+            </div>
+          ))}
+          {!!topRightComp && (
+            <div className="top-right-comp">{topRightComp}</div>
+          )}
 
-  return (
-    <>
-      {isEmpty && (
-        <div className="empty-list">
-          No nades here yet, sign in to add some!
+          {!!secondRowRightComp && displayFirstAd && (
+            <div className="second-row-comp">{secondRowRightComp}</div>
+          )}
         </div>
-      )}
-      <div className="list">
-        {data.map((item, i) => (
-          <div
-            className="list-item"
-            key={keyExtractor(item)}
-            style={{ order: i }}
-          >
-            {renderItem(item)}
-          </div>
-        ))}
-        {displayFirstAd && listAdsEnabled && (
-          <div className="ad-1-container">
-            <LazyLoadAd></LazyLoadAd>
-          </div>
-        )}
-        {displaySecondAd && listAdsEnabled && (
-          <div className="ad-2-container">
-            <LazyLoadAd></LazyLoadAd>
-          </div>
-        )}
-      </div>
-      <style jsx>{`
-        .empty-list {
-          border: 1px solid ${colors.BORDER};
-          padding: 30px;
-          font-size: 18px;
-          border-radius: 5px;
-          background: ${colors.DP02};
-          color: ${colors.TEXT};
-        }
+        <style jsx>{`
+          .empty-list {
+            border: 1px solid ${colors.BORDER};
+            padding: 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            background: ${colors.DP02};
+            color: ${colors.TEXT};
+          }
 
-        .list {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
-          grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
-        }
+          .list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+            grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+          }
 
-        .ad-1-container,
-        .ad-2-container {
-          display: ${listAdsEnabled ? "flex" : "none"};
-          align-items: center;
-          justify-content: space-around;
-          background: ${colors.DP02};
-          width: 300px;
-          height: 250px;
-          border-radius: 5px;
-          align-self: center;
-        }
+          .top-right-comp {
+            order: 1;
+          }
 
-        .ad-1-container {
-          order: 9;
-        }
+          .second-row-comp {
+            order: 3;
+          }
 
-        .ad-2-container {
-          order: 20;
-        }
-      `}</style>
-    </>
-  );
-});
+          @media only screen and (max-width: 975px) {
+            .top-right-comp {
+              order: 0;
+            }
+
+            .second-row-comp {
+              order: 1;
+            }
+          }
+
+          @media only screen and (max-width: 600px) {
+            .top-right-comp {
+              display: none;
+            }
+
+            .second-row-comp {
+              order: 2;
+            }
+          }
+        `}</style>
+      </>
+    );
+  }
+);
 
 export const CsgnList = ListBase;

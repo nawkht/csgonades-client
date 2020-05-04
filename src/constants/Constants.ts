@@ -11,10 +11,11 @@ export const Config = {
 };
 
 export const Dimensions = {
-  PAGE_WIDTH: 1290,
+  PAGE_WIDTH: 1000,
   GUTTER_SIZE: 20,
   SIDEBAR_WIDTH: "180px",
-  HEADER_HEIGHT: "65px",
+  HEADER_HEIGHT: 60,
+  NAV_HEIGHT: 40,
   PADDING_SMALL: "6px",
   PADDING_MEDIUM: "12px",
   PADDING_LARGE: "18px",

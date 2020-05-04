@@ -37,7 +37,6 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
           background: ${colors.DP01};
           border-radius: ${Dimensions.BORDER_RADIUS};
           cursor: pointer;
-          box-shadow: ${colors.SHADOW};
           transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
           width: 100%;

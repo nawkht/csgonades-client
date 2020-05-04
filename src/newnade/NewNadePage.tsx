@@ -8,6 +8,7 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { redirectNadePage } from "../utils/Common";
 import { AddGfycat } from "./AddGfycat";
 import { AddImage } from "./AddImage";
+import { PageCentralize } from "../common/PageCentralize";
 
 type NewNadeStep = "gfycat" | "result-img";
 
@@ -62,44 +63,48 @@ export const NewNadePage: FC = () => {
 
   return (
     <>
-      <div className="nade-new-container">
-        <Step.Group>
-          <Step
-            active={currentStep === "gfycat"}
-            icon="video"
-            link
-            title="Video"
-            description="Add gfycat video"
-            onClick={onGfyStepClick}
-          />
-          <Step
-            active={currentStep === "result-img"}
-            icon="image"
-            link
-            title="Screenshot"
-            description="Add a image of the resulting nade"
-            onClick={onImgStepClick}
-          />
-        </Step.Group>
-
-        {error && (
-          <Message negative>
-            <Message.Header>Error</Message.Header>
-            <p>{error}</p>
-          </Message>
-        )}
-
-        <div className="new-nade-step">
-          {currentStep === "gfycat" && (
-            <AddGfycat
-              addGfycat={onGfycatAdded}
-              onError={(e) => setError(e)}
-              clearError={() => setError(null)}
+      <PageCentralize>
+        <div className="nade-new-container">
+          <Step.Group>
+            <Step
+              active={currentStep === "gfycat"}
+              icon="video"
+              link
+              title="Video"
+              description="Add gfycat video"
+              onClick={onGfyStepClick}
             />
+            <Step
+              active={currentStep === "result-img"}
+              icon="image"
+              link
+              title="Screenshot"
+              description="Add a image of the resulting nade"
+              onClick={onImgStepClick}
+            />
+          </Step.Group>
+
+          {error && (
+            <Message negative>
+              <Message.Header>Error</Message.Header>
+              <p>{error}</p>
+            </Message>
           )}
-          {currentStep === "result-img" && <AddImage onAddImage={onAddImage} />}
+
+          <div className="new-nade-step">
+            {currentStep === "gfycat" && (
+              <AddGfycat
+                addGfycat={onGfycatAdded}
+                onError={(e) => setError(e)}
+                clearError={() => setError(null)}
+              />
+            )}
+            {currentStep === "result-img" && (
+              <AddImage onAddImage={onAddImage} />
+            )}
+          </div>
         </div>
-      </div>
+      </PageCentralize>
 
       <style jsx>
         {`

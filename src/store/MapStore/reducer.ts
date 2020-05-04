@@ -14,8 +14,10 @@ import {
 type NadesForMap = { [key: string]: NadeLight[] | undefined };
 
 export type NadeSortingMethod = "hot" | "new" | "top";
+export type MapView = "overview" | "list";
 
 export type MapStoreState = {
+  view: MapView;
   mapViewOpen: boolean;
   nadeForMap: NadesForMap;
   currentMap?: CsgoMap;
@@ -27,6 +29,7 @@ export type MapStoreState = {
 };
 
 const initialState: MapStoreState = {
+  view: "list",
   mapViewOpen: false,
   nadeForMap: {},
   filterByFavorites: false,
@@ -39,6 +42,11 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
   action
 ): MapStoreState => {
   switch (action.type) {
+    case "MapStore/SetView":
+      return {
+        ...state,
+        view: action.view,
+      };
     case "MapStore/SetSortingMethod":
       return {
         ...state,

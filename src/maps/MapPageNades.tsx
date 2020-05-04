@@ -5,16 +5,18 @@ import { NadeItem } from "../common/nadeitem/NadeItem";
 import { isMobileOnly } from "react-device-detect";
 import { NadeItemMobile } from "../common/nadeitem/NadeItemMobile";
 import { useFilterServerSideNades } from "../store/MapStore/hooks/useFilteredNades";
-import { useDisplayingNadesForPosition } from "../store/MapStore/hooks/useFilterReset";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { useSetMapView } from "../store/MapStore/hooks/useSetMapView";
+import { TopContributorList } from "./TopContributor";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   allNades: NadeLight[];
 };
 
 export const MapPageNades: FC<Props> = memo(({ allNades }) => {
+  const { mapView } = useSetMapView();
   const { colors } = useTheme();
-  const { isDisplayingCoords, reset } = useDisplayingNadesForPosition();
   const nades = useFilterServerSideNades(allNades);
 
   function renderItem(item: NadeLight) {
@@ -29,23 +31,26 @@ export const MapPageNades: FC<Props> = memo(({ allNades }) => {
     return item.id;
   }
 
+  if (mapView === "overview") {
+    return null;
+  }
+
   return (
     <>
-      {isDisplayingCoords && (
-        <div id="displaying-coords-wrap">
-          <div id="displaying-coords">
-            <span>Showing nades for your selected position</span>
-            <button onClick={reset}>Reset</button>
-          </div>
-        </div>
-      )}
-
-      <CsgnList<NadeLight>
-        data={nades}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-      />
+      <div className="mappage-nades">
+        <CsgnList<NadeLight>
+          data={nades}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          topRightComp={<TopContributorList nades={allNades} />}
+          secondRowRightComp={<AdUnit tagType="300x250" />}
+        />
+      </div>
       <style jsx>{`
+        .mappage-nades {
+          margin-bottom: 100px;
+        }
+
         #displaying-coords-wrap {
           margin-bottom: 30px;
           display: flex;

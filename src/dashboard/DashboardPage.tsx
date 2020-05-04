@@ -3,6 +3,7 @@ import { DBNadeList } from "./DBNadeList";
 import { useIsSignedIn } from "../store/AuthStore/AuthHooks";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { PageCentralize } from "../common/PageCentralize";
 
 type Props = {};
 
@@ -16,26 +17,39 @@ export const DashboardPage: FC<Props> = ({}) => {
 
   return (
     <>
-      <div id="dashboard-page">
-        <h1 id="title">DASHBOARD</h1>
-        <div id="nade-list">
-          <h2>Your nades</h2>
-          <DBNadeList />
+      <PageCentralize>
+        <div id="message">
+          There is currently and issue updating the view count for nades.
+          I&apos;m investigating the issue.
         </div>
-      </div>
+        <div id="dashboard-page">
+          <h1 id="title">DASHBOARD</h1>
+          <div id="nade-list">
+            <h2>Your nades</h2>
+            <DBNadeList />
+          </div>
+        </div>
+      </PageCentralize>
       <style jsx>{`
+        #message {
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
+          background: ${colors.WARNING};
+          color: white;
+          border-radius: 5px;
+          padding: 10px;
+          text-align: center;
+        }
+
         #dashboard-page {
-          grid-area: main;
-          margin: ${Dimensions.GUTTER_SIZE}px;
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
           background: ${colors.DP02};
           border-radius: 5px;
-          max-width: 1200px;
           display: grid;
-          grid-template-columns: 1fr 1fr min-content;
+          grid-template-columns: 1fr 1fr 1fr;
           grid-template-rows: min-content min-content;
           grid-template-areas:
-            "title title title"
-            "nades nades nades";
+            "dbtitle dbtitle dbtitle"
+            "dbnades dbnades dbnades";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
           margin-bottom: 100px;
@@ -43,7 +57,7 @@ export const DashboardPage: FC<Props> = ({}) => {
         }
 
         #title {
-          grid-area: title;
+          grid-area: dbtitle;
           margin: 0;
           padding: 0;
           font-size: 20px;
@@ -60,7 +74,7 @@ export const DashboardPage: FC<Props> = ({}) => {
         }
 
         #nade-list {
-          grid-area: nades;
+          grid-area: dbnades;
           padding: 0px 30px 20px 30px;
         }
       `}</style>

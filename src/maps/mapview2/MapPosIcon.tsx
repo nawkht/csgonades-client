@@ -7,8 +7,6 @@ type Props = {
   onPress: (pos: { x: number; y: number }) => void;
 };
 
-const ICON_SIZE = 30;
-
 export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
   const position = useMemo(() => {
     const sizeRatio = 1024 / mapWidth;
@@ -28,13 +26,15 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
     }
   }
 
+  const scaledIconSize = mapWidth / 22;
+
   return (
     <>
       <div
         className="point"
         style={{
-          top: position.y - ICON_SIZE / 2,
-          left: position.x - ICON_SIZE / 2,
+          top: position.y - scaledIconSize / 2,
+          left: position.x - scaledIconSize / 2,
         }}
         onClick={onClick}
       >
@@ -43,11 +43,11 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
       <style jsx>{`
         .point {
           position: absolute;
-          width: ${ICON_SIZE}px;
-          height: ${ICON_SIZE}px;
+          width: ${scaledIconSize}px;
+          height: ${scaledIconSize}px;
           border-radius: 50%;
           pointer-events: none;
-          opacity: 0.75;
+          opacity: 0.7;
           transform: scale(1);
           transition: opacity 0.2s, transform 0.2s;
           cursor: pointer;
@@ -61,7 +61,7 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
         .point:hover {
           transform: scale(1.1);
           opacity: 1;
-          z-index: 999;
+          z-index: 500;
         }
       `}</style>
     </>

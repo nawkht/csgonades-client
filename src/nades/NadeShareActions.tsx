@@ -39,28 +39,28 @@ export const NadeShareActions: FC<Props> = ({
   return (
     <>
       <div className="share-buttons">
-        <div onClick={() => onSosialShare("Reddit")}>
+        <div className="share-wrap" onClick={() => onSosialShare("Reddit")}>
           <RedditShareButton url={shareUrl} title={title}>
             <div className="share-icon">
               <FaRedditAlien />
             </div>
           </RedditShareButton>
         </div>
-        <div onClick={() => onSosialShare("Facebook")}>
+        <div className="share-wrap" onClick={() => onSosialShare("Facebook")}>
           <FacebookShareButton url={shareUrl} quote={title}>
             <div className="share-icon">
               <FaFacebookF />
             </div>
           </FacebookShareButton>
         </div>
-        <div onClick={() => onSosialShare("Twitter")}>
+        <div className="share-wrap" onClick={() => onSosialShare("Twitter")}>
           <TwitterShareButton url={shareUrl} title={title}>
             <div className="share-icon">
               <FaTwitter />
             </div>
           </TwitterShareButton>
         </div>
-        <div onClick={() => onSosialShare("VK")}>
+        <div className="share-wrap" onClick={() => onSosialShare("VK")}>
           <VKShareButton url={shareUrl} title={title} image={image}>
             <div className="share-icon vk">
               <FaVk />
@@ -77,17 +77,25 @@ export const NadeShareActions: FC<Props> = ({
         }
 
         .share-icon {
-          margin-right: 10px;
-          width: 35px;
-          height: 35px;
+          width: 40px;
+          height: 40px;
           font-size: 20px;
           display: flex;
           align-items: center;
           justify-content: space-around;
           color: #fff;
           background: #454545;
-          border-radius: 5px;
           transition: background 0.2s;
+        }
+
+        .share-wrap:first-child .share-icon {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+
+        .share-wrap:last-child .share-icon {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
         }
 
         .share-icon:hover {

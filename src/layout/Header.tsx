@@ -6,6 +6,7 @@ import { SiteNav } from "./Navigation/SiteNav";
 import { UserNav } from "./Navigation/UserNav";
 import { ThemeToggler } from "./Misc/ThemeToggler";
 import { Dimensions } from "../constants/Constants";
+import { PageCentralize } from "../common/PageCentralize";
 
 type Props = {};
 
@@ -15,24 +16,27 @@ export const Header: FC<Props> = memo(({}) => {
   return (
     <>
       <div id="header">
-        <div className="header-wrap">
-          <Hamburger />
-          <Logo />
-          <div id="theme-toggle">
-            <ThemeToggler />
+        <PageCentralize>
+          <div className="header-wrap">
+            <Hamburger />
+            <Logo />
+            <div id="theme-toggle">
+              <ThemeToggler />
+            </div>
+            <div className="spacer"></div>
+            <SiteNav />
+            <UserNav />
           </div>
-          <div className="spacer"></div>
-          <SiteNav />
-          <UserNav />
-        </div>
+        </PageCentralize>
       </div>
+
       <style jsx>{`
         #header {
           padding: 10px;
           padding-left: ${Dimensions.GUTTER_SIZE}px;
           padding-right: ${Dimensions.GUTTER_SIZE}px;
           background: ${colors.DP03};
-          height: 65px;
+          height: ${Dimensions.HEADER_HEIGHT}px;
         }
 
         .header-wrap {

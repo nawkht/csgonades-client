@@ -39,6 +39,7 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
 
   const icon = isFavorited ? <FaTimes /> : <FaStar />;
   const color = isFavorited ? "#3b3305" : "#d4a900";
+  const favText = isFavorited ? "UNFAVORITE" : "FAVORITE";
 
   return (
     <>
@@ -46,7 +47,7 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
         <ButtonWithIcon
           icon={icon}
           backgroundColor={color}
-          value={"FAVORITE"}
+          value={favText}
           onClick={onFavoriteClick}
           loading={isFavoriteInProgress}
         />
