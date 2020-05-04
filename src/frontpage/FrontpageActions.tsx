@@ -164,21 +164,17 @@ export const DiscordJoinAction = () => {
         .actions-wrapper {
           width: 100%;
           margin-top: 10px;
-          padding: 0px 20px;
-          padding-bottom: 10px;
         }
 
         .action {
           display: flex;
-          padding: 10px;
+          padding: 10px 20px;
           color: white;
-          border-radius: 5px;
           transition: transform 0.2s;
           justify-content: space-between;
         }
 
         .action:hover {
-          transform: scale(1.02);
         }
 
         .discord-msg {
