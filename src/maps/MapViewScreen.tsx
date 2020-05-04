@@ -124,6 +124,8 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
             100vh - ${Dimensions.HEADER_HEIGHT}px - ${Dimensions.NAV_HEIGHT}px -
               ${Dimensions.GUTTER_SIZE * 4}px
           );
+          max-width: 800px;
+          max-height: 800px;
         }
 
         #mapview {
