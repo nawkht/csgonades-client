@@ -170,6 +170,7 @@ const persistConfig: PersistConfig<MapStoreState> = {
     "filterByCoords",
     "filterByTickrate",
     "currentMap",
+    "view",
   ],
 };
 
