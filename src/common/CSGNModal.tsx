@@ -120,7 +120,7 @@ export const CSGNModal: FC<Props> = ({
         .modal-title h3 {
           margin: 0;
           padding: 0;
-          font-size: 24px;
+          font-size: 20px;
           flex: 1;
           text-align: center;
         }
@@ -129,12 +129,16 @@ export const CSGNModal: FC<Props> = ({
           border: none;
           outline: none;
           appearance: none;
-          font-size: 24px;
+          font-size: 30px;
           cursor: pointer;
           padding-top: 7px;
           background: transparent;
-          color: ${colors.ERROR};
+          color: white;
           margin-right: 10px;
+        }
+
+        .close-btn:hover {
+          color: ${colors.ERROR};
         }
 
         .modal-content {
