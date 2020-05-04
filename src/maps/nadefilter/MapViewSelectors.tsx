@@ -5,18 +5,39 @@ import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { Popup } from "semantic-ui-react";
 import { useShowViewSelectorHint } from "../../store/GlobalStore/hooks/useShowViewSelectorHint";
+import { useAnalytics } from "../../utils/Analytics";
 
 type Props = {
   vertical?: boolean;
 };
 
 export const MapViewSelector: FC<Props> = ({ vertical }) => {
+  const { event } = useAnalytics();
   const { colors } = useTheme();
   const { mapView, setMapView } = useSetMapView();
   const {
     shouldShowViewSelectorHint,
     hideViewSelectorHint,
   } = useShowViewSelectorHint();
+
+  function onSwitchToOverview() {
+    setMapView("overview");
+    if (shouldShowViewSelectorHint) {
+      hideViewSelectorHint();
+      event({
+        category: "Global",
+        action: "Global/HideViewSelectorHintSwitch",
+      });
+    }
+  }
+
+  function onHideHint() {
+    hideViewSelectorHint();
+    event({
+      category: "Global",
+      action: "Global/HideViewSelectorHint",
+    });
+  }
 
   return (
     <>
@@ -31,7 +52,7 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
                 <div>
                   <b>New!</b> Try a different view
                 </div>
-                <button onClick={hideViewSelectorHint}>Got it!</button>
+                <button onClick={onHideHint}>Got it!</button>
               </div>
             }
             open={!vertical && shouldShowViewSelectorHint}
@@ -43,7 +64,7 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
             className={
               mapView === "overview" ? "selector selected" : "selector"
             }
-            onClick={() => setMapView("overview")}
+            onClick={onSwitchToOverview}
           >
             <FaMap />
           </button>

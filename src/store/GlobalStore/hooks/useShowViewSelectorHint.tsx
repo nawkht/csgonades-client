@@ -1,10 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { showViewSelectorHintSelector } from "../GlobalSelectors";
 import { useCallback } from "react";
-import { useAnalytics } from "../../../utils/Analytics";
 
 export const useShowViewSelectorHint = () => {
-  const { event } = useAnalytics();
   const dispatch = useDispatch();
   const shouldShowViewSelectorHint = useSelector(showViewSelectorHintSelector);
 
@@ -12,11 +10,7 @@ export const useShowViewSelectorHint = () => {
     dispatch({
       type: "@@global/HideViewSelectorHint",
     });
-    event({
-      category: "Global",
-      action: "Global/HideViewSelectorHint",
-    });
-  }, [dispatch, event]);
+  }, [dispatch]);
 
   return {
     shouldShowViewSelectorHint,
