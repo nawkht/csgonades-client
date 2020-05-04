@@ -90,6 +90,11 @@ export const SortingMethodSelector: FC<Props> = () => {
           transition: all 0.2s;
           color: ${colors.filterColor};
           height: ${Dimensions.BUTTON_HEIGHT}px;
+          border-right: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        .method-selector:last-child {
+          border-right: none;
         }
 
         .method-selector span {

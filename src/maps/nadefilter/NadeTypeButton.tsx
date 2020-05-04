@@ -55,6 +55,7 @@ export const NadeTypeButton: FC<Props> = memo(
             width: ${Dimensions.BUTTON_HEIGHT}px;
             height: ${Dimensions.BUTTON_HEIGHT}px;
             background: ${colors.filterBg};
+            border-right: 1px solid rgba(0, 0, 0, 0.3);
           }
 
           .nade-type-btn:last-child {
