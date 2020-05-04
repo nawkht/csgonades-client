@@ -28,7 +28,7 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
             content={
               <div className="view-hint">
                 <div>
-                  <b>New!</b> Try a diffrent view
+                  <b>New!</b> Try a different view
                 </div>
                 <button onClick={hideViewSelectorHint}>Close</button>
               </div>
