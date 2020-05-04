@@ -14,6 +14,7 @@ import { TickrateSelector } from "./nadefilter/TickrateSelector";
 import { FavFilterButton } from "./nadefilter/FavFilterButton";
 import { useIsSignedIn } from "../store/AuthStore/AuthHooks";
 import { ResetFilterButton } from "./nadefilter/ResetFilterButton";
+import { useAnalytics } from "../utils/Analytics";
 
 type Props = {
   map: CsgoMap;
@@ -21,6 +22,7 @@ type Props = {
 };
 
 export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
+  const { event } = useAnalytics();
   const filteredNades = useFilterServerSideNades(allNades);
   const { mapView } = useSetMapView();
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -42,6 +44,10 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
   function onNadeClick(pos: { x: number; y: number }) {
     const suggested = filterByCoords(filteredNades, pos);
     setSuggestedNades(suggested);
+    event({
+      category: "MapView",
+      action: "Showing Suggested Nades",
+    });
   }
 
   if (mapView === "list") {
