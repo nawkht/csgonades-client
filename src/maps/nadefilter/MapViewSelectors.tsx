@@ -6,6 +6,7 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { Popup } from "semantic-ui-react";
 import { useShowViewSelectorHint } from "../../store/GlobalStore/hooks/useShowViewSelectorHint";
 import { useAnalytics } from "../../utils/Analytics";
+import { isBrowser } from "react-device-detect";
 
 type Props = {
   vertical?: boolean;
@@ -55,7 +56,7 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
                 <button onClick={onHideHint}>Got it!</button>
               </div>
             }
-            open={!vertical && shouldShowViewSelectorHint}
+            open={!vertical && isBrowser && shouldShowViewSelectorHint}
             trigger={<span>VIEW</span>}
           />
         </div>
