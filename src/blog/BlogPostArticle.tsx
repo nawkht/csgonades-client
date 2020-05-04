@@ -172,25 +172,13 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
           text-decoration: underline;
         }
 
-        @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
-          article {
-            margin: 0;
-          }
-
-          #article-content {
-            grid-area: blog-main;
-            background: ${colors.DP02};
-            padding: 20px 15px;
-            border-radius: 5px;
-            max-width: 100%;
-          }
-
-          #article-title {
-            padding: 15px;
-          }
-
-          #blog-sidebar {
-            display: none;
+        @media only screen and (max-width: 850px) {
+          #blog-article {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-areas:
+              "article"
+              "sidebar";
           }
         }
       `}</style>
