@@ -24,11 +24,13 @@ export const TickrateSelector: FC<Props> = ({ vertical }) => {
   const tick64active = byTickrate === "tick64" ? "active" : "";
   const tick128active = byTickrate === "tick128" ? "active" : "";
 
+  const labelText = vertical ? "TICK" : "TICKRATE";
+
   return (
     <>
       <div className="tick-filter-wrap">
         <div className="label">
-          TICKRATE{" "}
+          {labelText}{" "}
           <HelpTip>
             <div>Matchmaking: 64 Tick</div>
             <div>3rd Party Services: 128 Tick</div>
