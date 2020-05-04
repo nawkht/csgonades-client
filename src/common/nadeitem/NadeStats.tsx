@@ -138,11 +138,11 @@ export const NadeStats: FC<Props> = ({ nade }) => {
 
         .new-badge {
           padding: 3px 6px;
-          font-size: 16px;
-          border-radius: 4px;
+          font-size: 12px;
+          border-radius: 5px;
           background: #709c14;
           color: white;
-          font-weight: normal;
+          font-weight: 500;
         }
       `}</style>
     </>
