@@ -33,8 +33,7 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
           </h1>
           <p>
             I was once a Global Elite, but with age, my reaction time has slowly
-            withered away 🥺
-            <br />I have left these nades for you; It&apos;s your turn to become
+            withered away 🥺 It&apos;s your turn to find some nades and become
             Global 🤩
             <br /> With great power comes great responsibility.
             <br />-{" "}

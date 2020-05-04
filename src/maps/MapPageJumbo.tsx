@@ -29,7 +29,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           Find the best smoke, flashbang, molotov and grenade spots for{" "}
           {capitalize(map)}.
         </h1>
-        <h2>Don&apos;t be like BOT Bob, get some nades, skip the P90 🤖</h2>
+        <h2>Don&apos;t be like BOT Bob 🤖, get some nades.</h2>
         <p>
           Got some amazing nades? Channel your inner Global Elite, sign in and
           add your them to the list 🏆
