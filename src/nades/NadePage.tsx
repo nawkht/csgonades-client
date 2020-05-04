@@ -27,7 +27,6 @@ import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { PageCentralize } from "../common/PageCentralize";
 import { AdUnit } from "../common/adunits/AdUnit";
-import { PageLink } from "../common/PageLink";
 import { FaChevronLeft } from "react-icons/fa";
 import { useAnalytics } from "../utils/Analytics";
 
@@ -63,6 +62,7 @@ export const NadePage: FC = memo(() => {
       category: "NadePage",
       action: "Back Clicked",
     });
+    window.history.back();
   }
 
   if (!nade) {
@@ -110,12 +110,10 @@ export const NadePage: FC = memo(() => {
           )}
 
           <div id="title">
-            <div id="back" onClick={onBackClick}>
-              <PageLink href={"/maps/[map]"} as={`/maps/${nade.map}`}>
-                <span>
-                  <FaChevronLeft />
-                </span>
-              </PageLink>
+            <div id="back">
+              <button onClick={onBackClick}>
+                <FaChevronLeft />
+              </button>
             </div>
             <NadeTitle
               title={nade.title}
@@ -216,13 +214,17 @@ export const NadePage: FC = memo(() => {
         #back {
         }
 
-        #back span {
+        #back button {
           color: white;
           font-size: 24px;
           padding: 10px 20px;
           display: block;
           position: relative;
-          top: 0px;
+          top: 1px;
+          background: transparent;
+          border: none;
+          outline: none;
+          cursor: pointer;
         }
 
         .matchmake-warning {
