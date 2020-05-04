@@ -140,3 +140,69 @@ export const FrontpageActions: FC = memo(({}) => {
     </>
   );
 });
+
+export const DiscordJoinAction = () => {
+  return (
+    <>
+      <div className="actions-wrapper">
+        <a
+          href="https://discord.gg/010h0KFCBNASyMUKv"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >
+          <div className="action discord">
+            <div className="discord-msg">
+              Join us on <b>Discord</b>
+            </div>
+            <div className="discord-logo">
+              <FaDiscord />
+            </div>
+          </div>
+        </a>
+      </div>
+      <style jsx>{`
+        .actions-wrapper {
+          width: 100%;
+          margin-top: 10px;
+          padding: 0px 20px;
+          padding-bottom: 10px;
+        }
+
+        .action {
+          display: flex;
+          padding: 10px;
+          color: white;
+          border-radius: 5px;
+          transition: transform 0.2s;
+          justify-content: space-between;
+        }
+
+        .action:hover {
+          transform: scale(1.02);
+        }
+
+        .discord-msg {
+          margin-bottom: 10px;
+          font-size: 18px;
+          line-height: 28px;
+        }
+
+        .sub-msg {
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .discord {
+          background: #7289da;
+          position: relative;
+        }
+
+        .discord-logo {
+          font-size: 50px;
+          opacity: 0.2;
+          color: #fff;
+        }
+      `}</style>
+    </>
+  );
+};

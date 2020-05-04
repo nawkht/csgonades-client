@@ -9,6 +9,7 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useSetMapView } from "../store/MapStore/hooks/useSetMapView";
 import { TopContributorList } from "./TopContributor";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { DiscordJoinAction } from "../frontpage/FrontpageActions";
 
 type Props = {
   allNades: NadeLight[];
@@ -42,11 +43,30 @@ export const MapPageNades: FC<Props> = memo(({ allNades }) => {
           data={nades}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
-          topRightComp={<TopContributorList nades={allNades} />}
-          secondRowRightComp={<AdUnit tagType="300x250" />}
+          topRightComp={
+            <div className="mini-sidebar">
+              <TopContributorList nades={allNades} />
+              <div className="placement">
+                <AdUnit tagType="300x250" />
+              </div>
+
+              <DiscordJoinAction />
+            </div>
+          }
         />
       </div>
       <style jsx>{`
+        .mini-sidebar {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+        }
+
+        .placement {
+          height: 250px;
+        }
+
         .mappage-nades {
           margin-bottom: 100px;
         }

@@ -99,12 +99,6 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           padding: 10px 20px;
         }
 
-        .cont-list {
-          background: ${colors.DP01};
-          border-radius: 5px;
-          overflow: hidden;
-        }
-
         .label {
           background: ${colors.PRIMARY};
           color: white;

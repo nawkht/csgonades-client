@@ -74,16 +74,26 @@ const List: FC<Props<any>> = memo(
           }
 
           .top-right-comp {
-            order: 1;
+            grid-column-start: 3;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 3;
+            background: ${colors.DP02};
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid ${colors.BORDER};
           }
 
           .second-row-comp {
-            order: 3;
+            order: 10;
           }
 
           @media only screen and (max-width: 975px) {
             .top-right-comp {
-              order: 0;
+              grid-column-start: 2;
+              grid-column-end: 3;
+              grid-row-start: 1;
+              grid-row-end: 3;
             }
 
             .second-row-comp {
