@@ -40,7 +40,7 @@ export const SortingMethodSelector: FC<Props> = () => {
       <div className="sorting-wrapper">
         <div className="sorting-label">
           SORT{" "}
-          <HelpTip>
+          <HelpTip hintLabel="Sort">
             <div>
               <b>Hot:</b> By submit time and favorite count
             </div>

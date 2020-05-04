@@ -4,9 +4,11 @@ import { Popup } from "semantic-ui-react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useAnalytics } from "../../utils/Analytics";
 
-type Props = {};
+type Props = {
+  hintLabel: string;
+};
 
-export const HelpTip: FC<Props> = ({ children }) => {
+export const HelpTip: FC<Props> = ({ children, hintLabel }) => {
   const [eventSent, setEventSent] = useState(false);
   const { event } = useAnalytics();
   const { colors } = useTheme();
@@ -15,7 +17,8 @@ export const HelpTip: FC<Props> = ({ children }) => {
     if (!eventSent) {
       event({
         category: "MapPage",
-        action: "Tickrate Hint Show",
+        action: "Show Hint",
+        label: hintLabel,
       });
     }
     setEventSent(true);

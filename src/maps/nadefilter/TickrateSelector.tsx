@@ -31,7 +31,7 @@ export const TickrateSelector: FC<Props> = ({ vertical }) => {
       <div className="tick-filter-wrap">
         <div className="label">
           {labelText}{" "}
-          <HelpTip>
+          <HelpTip hintLabel="Tickrate">
             <div>Matchmaking: 64 Tick</div>
             <div>3rd Party Services: 128 Tick</div>
           </HelpTip>
