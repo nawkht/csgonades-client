@@ -14,7 +14,7 @@ export const useShowViewSelectorHint = () => {
     });
     event({
       category: "Global",
-      action: "@@global/HideViewSelectorHint",
+      action: "Global/HideViewSelectorHint",
     });
   }, [dispatch, event]);
 
