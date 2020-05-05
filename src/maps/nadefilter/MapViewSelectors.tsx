@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { useSetMapView } from "../../store/MapStore/hooks/useSetMapView";
 import { FaMap, FaListUl } from "react-icons/fa";
 import { Dimensions } from "../../constants/Constants";
@@ -13,6 +13,7 @@ type Props = {
 };
 
 export const MapViewSelector: FC<Props> = ({ vertical }) => {
+  const [displayTip, setDisplayTip] = useState(false);
   const { event } = useAnalytics();
   const { colors } = useTheme();
   const { mapView, setMapView } = useSetMapView();
@@ -21,10 +22,20 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
     hideViewSelectorHint,
   } = useShowViewSelectorHint();
 
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (shouldShowViewSelectorHint) {
+        setDisplayTip(true);
+      }
+    }, 1500);
+    return () => clearTimeout(delay);
+  }, [shouldShowViewSelectorHint]);
+
   function onSwitchToOverview() {
     setMapView("overview");
     if (shouldShowViewSelectorHint) {
       hideViewSelectorHint();
+      setDisplayTip(false);
       event({
         category: "Global",
         action: "Global/HideViewSelectorHintSwitch",
@@ -33,6 +44,7 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
   }
 
   function onHideHint() {
+    setDisplayTip(false);
     hideViewSelectorHint();
     event({
       category: "Global",
@@ -56,7 +68,7 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
                 <button onClick={onHideHint}>Got it!</button>
               </div>
             }
-            open={!vertical && isBrowser && shouldShowViewSelectorHint}
+            open={!vertical && isBrowser && displayTip}
             trigger={<span>VIEW</span>}
           />
         </div>
