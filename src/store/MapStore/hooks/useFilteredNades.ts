@@ -18,20 +18,28 @@ import {
   filterByFavoritesSelector,
   filterByTypeSelector,
   filterByMethodSelector,
+  currentMapSelector,
+  allNadesSelector,
 } from "../selectors";
 import { NadeSortingMethod } from "../reducer";
 
 export const useFilterServerSideNades = (ssrNades: NadeLight[]) => {
+  const currentMap = useSelector(currentMapSelector);
   const byCoords = useSelector(filterByCoordsSelector);
   const byTickrate = useSelector(filterByTickrateSelector);
   const byFavorites = useSelector(filterByFavoritesSelector);
   const byType = useSelector(filterByTypeSelector);
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
   const bySortingMethod = useSelector(filterByMethodSelector);
+  const storeNades = useSelector(allNadesSelector);
 
   return useMemo(() => {
+    const actualNades = currentMap
+      ? storeNades[currentMap] || ssrNades
+      : ssrNades;
+
     return filterNades(
-      ssrNades,
+      actualNades,
       favoritedNades,
       byFavorites,
       bySortingMethod,
@@ -47,6 +55,8 @@ export const useFilterServerSideNades = (ssrNades: NadeLight[]) => {
     favoritedNades,
     ssrNades,
     bySortingMethod,
+    currentMap,
+    storeNades,
   ]);
 };
 

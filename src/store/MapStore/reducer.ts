@@ -161,16 +161,9 @@ function handleIncrementNadeFavCount(
 }
 
 const persistConfig: PersistConfig<MapStoreState> = {
-  key: "settingStore",
+  key: "mapStore",
   storage,
-  whitelist: [
-    "filterByFavorites",
-    "filterByType",
-    "filterByCoords",
-    "filterByTickrate",
-    "currentMap",
-    "view",
-  ],
+  whitelist: ["view"],
 };
 
 export const MapStoreReducer = persistReducer(

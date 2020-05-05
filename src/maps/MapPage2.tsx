@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
-  useMapChangeHandler();
+  useMapChangeHandler(allNades);
 
   return (
     <>
