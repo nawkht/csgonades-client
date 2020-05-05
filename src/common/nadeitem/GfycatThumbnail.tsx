@@ -1,7 +1,6 @@
-import { FC, SyntheticEvent, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeLight, Nade } from "../../models/Nade/Nade";
-import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
 import { SeekBar } from "../SeekBar";
 import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
@@ -12,19 +11,8 @@ type Props = {
 };
 
 export const GfycatThumbnail: FC<Props> = ({ nade }) => {
-  const registerNadeView = useRegisterView();
   const [hovering, setHovering] = useState(false);
-  const [progressForEvent, setProgressForEvent] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [hasSentViewedEvent, setHasSentViewedEvent] = useState(false);
-
-  useEffect(() => {
-    if (!hasSentViewedEvent && progress > 30) {
-      registerNadeView(nade.id);
-      setHasSentViewedEvent(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [progress, hasSentViewedEvent, nade]);
 
   function onVideoTimeUpdate({
     currentTarget,
@@ -32,9 +20,6 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
     const { currentTime, duration } = currentTarget;
     const progressPercentage = Math.round((currentTime / duration) * 100);
     setProgress(progressPercentage);
-    if (progressPercentage > 30 && progressPercentage > progressForEvent) {
-      setProgressForEvent(progressPercentage);
-    }
   }
 
   const onLoad = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
