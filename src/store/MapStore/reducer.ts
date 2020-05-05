@@ -69,7 +69,6 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
           filterByTickrate: "any",
           filterByCoords: undefined,
           filterByType: undefined,
-          sortingMethod: "hot",
         };
       } else {
         return {
