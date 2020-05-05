@@ -1,5 +1,4 @@
 import { FC, memo } from "react";
-import { FrontpageActions } from "./FrontpageActions";
 import { FrontPageJumbo } from "./FrontPageJumbo";
 import { SiteStats } from "../api/StatsApi";
 import { blogNadeAlignCrosshair } from "../pages/blog/smoke-align-crosshair";
@@ -25,7 +24,6 @@ export const FrontPage: FC<Props> = memo(({ stats }) => {
           <div className="recent-wrap">
             <BlogList posts={recentPosts} />
           </div>
-          <FrontpageActions />
         </PageCentralize>
       </div>
 
