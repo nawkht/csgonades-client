@@ -3,7 +3,7 @@ import { FaRunning, FaComment } from "react-icons/fa";
 import { TiStarFullOutline } from "react-icons/ti";
 import { GoEye, GoTerminal } from "react-icons/go";
 import { NadeLight, Nade } from "../../models/Nade/Nade";
-import { tickrateString } from "../../models/Nade/NadeTickrate";
+import { tickrateString, Tickrate } from "../../models/Nade/NadeTickrate";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { kFormatter } from "../../utils/Common";
 import { dateMinutesAgo } from "../../utils/DateUtils";
@@ -30,7 +30,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
     />
   );
   const hasMovement = nade.movement === "running";
-  const isJumpThrow = nade.technique === "jumpthrow";
+  const isJumpThrow = nade.technique === "jumpthrow" && nade.tickrate !== "any";
   const nadeIsNew = isNew(nade.createdAt);
 
   return (
@@ -89,18 +89,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
 
           {isJumpThrow && (
             <Popup
-              content={
-                nade.tickrate === "tick128" ? (
-                  <>
-                    <div className="center">Only for 3rd party services</div>
-                    <div className="center">NOT matchmaking</div>
-                  </>
-                ) : (
-                  <>
-                    <div className="center">Only works on matchmaking</div>
-                  </>
-                )
-              }
+              content={tickrateTooltip(nade.tickrate)}
               position="top center"
               inverted
               size="tiny"
@@ -186,4 +175,24 @@ function isNew(createdAt: Date | string) {
   const hoursAgoAdded = dateMinutesAgo(createdAt) / 60;
 
   return hoursAgoAdded < 36;
+}
+
+function tickrateTooltip(tickrate?: Tickrate) {
+  switch (tickrate) {
+    case "tick128":
+      return (
+        <>
+          <div className="center">Only for 3rd party services</div>
+          <div className="center">NOT matchmaking</div>
+        </>
+      );
+    case "tick64":
+      return (
+        <>
+          <div className="center">Only works on matchmaking</div>
+        </>
+      );
+    default:
+      return null;
+  }
 }
