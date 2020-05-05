@@ -7,6 +7,7 @@ import { tickrateString } from "../../models/Nade/NadeTickrate";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { kFormatter } from "../../utils/Common";
 import { dateMinutesAgo } from "../../utils/DateUtils";
+import { Popup } from "semantic-ui-react";
 
 type Props = {
   nade: NadeLight | Nade;
@@ -73,22 +74,53 @@ export const NadeStats: FC<Props> = ({ nade }) => {
         </div>
         <div className="specials">
           {hasMovement && (
-            <div className="special movement">
-              <FaRunning style={{ position: "relative", top: -1 }} />
-            </div>
+            <Popup
+              inverted
+              size="tiny"
+              position="top center"
+              content="Requires movement"
+              trigger={
+                <div className="special movement">
+                  <FaRunning style={{ position: "relative", top: -1 }} />
+                </div>
+              }
+            />
           )}
 
           {isJumpThrow && (
-            <div className="special tick">
-              <GoTerminal style={{ position: "relative", top: -1 }} />
-              <span className="special-text">
-                {tickrateString(nade.tickrate || "any")}
-              </span>
-            </div>
+            <Popup
+              content={
+                nade.tickrate === "tick128" ? (
+                  <>
+                    <div className="center">Only for 3rd party services</div>
+                    <div className="center">NOT matchmaking</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="center">Only works on matchmaking</div>
+                  </>
+                )
+              }
+              position="top center"
+              inverted
+              size="tiny"
+              trigger={
+                <div className="special tick">
+                  <GoTerminal style={{ position: "relative", top: -1 }} />
+                  <span className="special-text">
+                    {tickrateString(nade.tickrate || "any")}
+                  </span>
+                </div>
+              }
+            />
           )}
         </div>
       </div>
       <style jsx>{`
+        .center {
+          text-align: center;
+        }
+
         .item-bottom {
           display: flex;
           padding: 10px 15px;
