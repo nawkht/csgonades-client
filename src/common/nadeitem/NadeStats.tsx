@@ -93,6 +93,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
           display: flex;
           padding: 10px 15px;
           align-items: center;
+          min-height: 42px;
         }
 
         .stats {
