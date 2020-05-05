@@ -15,49 +15,58 @@ export const FrontpageActions: FC = memo(({}) => {
 
   return (
     <>
-      <div className="actions-wrapper">
-        <a
-          href="https://discord.gg/010h0KFCBNASyMUKv"
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-        >
-          <div className="action discord">
-            <p className="discord-msg">
-              Join us on <b>Discord</b>
-            </p>
+      <div className="front-page-actions">
+        <div className="actions-wrapper">
+          <a
+            href="https://discord.gg/010h0KFCBNASyMUKv"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            <div className="action discord">
+              <p className="discord-msg">
+                Join us on <b>Discord</b>
+              </p>
 
-            <p className="sub-msg">One of us... one of us!</p>
+              <p className="sub-msg">One of us... one of us!</p>
 
-            <div className="discord-logo">
-              <FaDiscord />
+              <div className="discord-logo">
+                <FaDiscord />
+              </div>
             </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
 
-      <div className="actions-wrapper">
-        <a
-          href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=XHPRF8RJZKBHS&item_name=CSGO+Nades&currency_code=USD&source=url"
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          onClick={onDonateClick}
-        >
-          <div className="action paypal">
-            <p className="paypal-msg">
-              Support me on <span>Paypal</span>
-            </p>
+        <div className="actions-wrapper">
+          <a
+            href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=XHPRF8RJZKBHS&item_name=CSGO+Nades&currency_code=USD&source=url"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            onClick={onDonateClick}
+          >
+            <div className="action paypal">
+              <p className="paypal-msg">
+                Support me on <span>Paypal</span>
+              </p>
 
-            <p className="sub-msg">
-              Refill my fuel tank <span className="emoji">🥤</span>
-            </p>
+              <p className="sub-msg">
+                Refill my fuel tank <span className="emoji">🥤</span>
+              </p>
 
-            <div className="paypal-logo">
-              <FaPaypal />
+              <div className="paypal-logo">
+                <FaPaypal />
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
       <style jsx>{`
+        .front-page-actions {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-around;
+        }
+
         .emoji {
           font-size: 2.5em;
           position: relative;
@@ -66,9 +75,10 @@ export const FrontpageActions: FC = memo(({}) => {
         }
 
         .actions-wrapper {
-          width: 100%;
           padding: ${Dimensions.GUTTER_SIZE}px;
           padding-top: 0;
+          flex: 1;
+          min-width: 300px;
         }
 
         .action {
@@ -76,6 +86,7 @@ export const FrontpageActions: FC = memo(({}) => {
           color: white;
           border-radius: 5px;
           transition: transform 0.2s;
+          min-height: 100px;
         }
 
         .action:hover {
