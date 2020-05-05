@@ -52,6 +52,7 @@ export const HelpTip: FC<Props> = ({ children, hintLabel }) => {
           border: none;
           cursor: pointer;
           color: ${colors.TEXT};
+          margin-left: 5px;
         }
       `}</style>
     </>

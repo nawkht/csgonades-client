@@ -82,7 +82,6 @@ export const TickrateSelector: FC<Props> = ({ vertical }) => {
           color: ${vertical ? "white" : colors.TEXT};
           display: flex;
           align-items: center;
-          justify-content: space-between;
         }
 
         .filter-tick {
