@@ -9,12 +9,14 @@ import { Popup } from "semantic-ui-react";
 import { FaStar, FaSpinner, FaTimes } from "react-icons/fa";
 import { useMapFavCount } from "../../store/MapStore/hooks/useMapFavCount";
 import { useAnalytics } from "../../utils/Analytics";
+import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
 
 type Props = {
   nade: NadeLight | Nade;
 };
 
 export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
+  const { setSignInWarning } = useSignInWarning();
   const { event } = useAnalytics();
   const isSignedIn = useIsSignedIn();
   const isFavoriteInProgress = useIsFavoriteInProgress();
@@ -25,6 +27,11 @@ export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
 
   function onFavorite(e: any) {
     e.preventDefault();
+    if (!isSignedIn) {
+      setSignInWarning("favorite");
+      return;
+    }
+
     if (isFavoriteInProgress) {
       return;
     }
@@ -49,10 +56,6 @@ export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
 
   const favoriteText = isFavorite ? "Unfavorite" : "Favorite";
   const iconColor = isFavorite ? "#bbb" : "rgb(250, 200, 0)";
-
-  if (!isSignedIn) {
-    return null;
-  }
 
   return (
     <>

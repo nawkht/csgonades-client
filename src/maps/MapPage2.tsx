@@ -1,14 +1,12 @@
-import { FC, useState, memo } from "react";
+import { FC, memo } from "react";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { NadeLight } from "../models/Nade/Nade";
 import { MapPageNades } from "./MapPageNades";
 import { MapPageJumbo } from "./MapPageJumbo";
-import { SignInWarning } from "./components/SignInWarning";
 import { Dimensions } from "../constants/Constants";
 import { useMapChangeHandler } from "../store/MapStore/hooks/useMapChangeHandler";
 import { SEO } from "../layout/SEO2";
 import { capitalize } from "../utils/Common";
-import { useAnalytics } from "../utils/Analytics";
 import { PageCentralize } from "../common/PageCentralize";
 import { FilterBar } from "./nadefilter/FilterBar";
 import { MapViewScreen } from "./MapViewScreen";
@@ -19,17 +17,7 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
-  const { event } = useAnalytics();
   useMapChangeHandler();
-  const [showLoginWarning, setShowLoginWarning] = useState(false);
-
-  function dismissSignInWarning() {
-    setShowLoginWarning(false);
-    event({
-      category: "Sign In Warning",
-      action: "Dismiss",
-    });
-  }
 
   return (
     <>
@@ -48,12 +36,6 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           <MapViewScreen map={map} allNades={allNades} />
         </div>
       </PageCentralize>
-
-      <SignInWarning
-        visible={showLoginWarning}
-        onDismiss={dismissSignInWarning}
-        message="filter"
-      />
 
       <style jsx>{`
         #map-page {

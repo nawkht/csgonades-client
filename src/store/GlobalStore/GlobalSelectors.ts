@@ -10,3 +10,6 @@ export const acceptedCookieConsentSelector = (state: AppState) =>
 
 export const showViewSelectorHintSelector = (state: AppState) =>
   state.globalStore.showViewSelectorHint;
+
+export const signInWarningSelector = (state: AppState) =>
+  state.globalStore.signInWarning;

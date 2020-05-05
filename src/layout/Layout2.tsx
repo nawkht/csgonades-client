@@ -12,6 +12,7 @@ import { AdminLink } from "./Misc/AdminLink";
 import { CookieConsent } from "../common/CookieConsent";
 import { MapNav } from "./Navigation/MapNav";
 import { Dimensions } from "../constants/Constants";
+import { SignInWarning } from "../maps/components/SignInWarning";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -41,7 +42,8 @@ export const Layout2: FC = memo(({ children }) => {
       <ToastList />
       <MobileNav />
       <AdminLink />
-      {true && <CookieConsent />}
+      <CookieConsent />
+      <SignInWarning />
 
       <style jsx>{`
         #page {

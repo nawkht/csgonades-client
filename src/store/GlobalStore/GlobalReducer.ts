@@ -3,13 +3,14 @@ import { PersistConfig, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { SiteStats } from "../../api/StatsApi";
 import { assertNever } from "../../utils/Common";
-import { GlobalActions } from "./GlobalActions";
+import { GlobalActions, SignInWarningType } from "./GlobalActions";
 
 export type GlobalState = {
   readonly stats: SiteStats;
   readonly isNavOpen: boolean;
   readonly acceptedCookieConcent: boolean;
   readonly showViewSelectorHint: boolean;
+  readonly signInWarning?: SignInWarningType;
 };
 
 const initialState: GlobalState = {
@@ -29,30 +30,40 @@ export const GlobalReducerBase: Reducer<GlobalState, GlobalActions> = (
   action
 ): GlobalState => {
   switch (action.type) {
-    case "@@global/ADD_SITE_STATS":
+    case "Global/AddSiteStats":
       return {
         ...state,
         stats: action.stats,
       };
-    case "@@global/TOGGLE_NAVIGATION":
+    case "Global/ToggleNavigation":
       return {
         ...state,
         isNavOpen: !state.isNavOpen,
       };
-    case "@@global/CLOSE_NAVIGATION":
+    case "Global/CloseNavigation":
       return {
         ...state,
         isNavOpen: false,
       };
-    case "@@global/ACCEPT_COOKIE_CONCENT":
+    case "Global/AcceptCookieConcent":
       return {
         ...state,
         acceptedCookieConcent: true,
       };
-    case "@@global/HideViewSelectorHint":
+    case "Global/HideViewSelectorHint":
       return {
         ...state,
         showViewSelectorHint: false,
+      };
+    case "Global/SetSignInWarning":
+      return {
+        ...state,
+        signInWarning: action.warningType,
+      };
+    case "Global/ClearSignInWarning":
+      return {
+        ...state,
+        signInWarning: undefined,
       };
     default:
       assertNever(action);

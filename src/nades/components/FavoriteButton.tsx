@@ -7,13 +7,14 @@ import { useAddFavorite } from "../../store/FavoriteStore/hooks/useAddFavorite";
 import { useIsFavorited } from "../../store/FavoriteStore/hooks/useIsFavorited";
 import { useIsFavoriteInProgress } from "../../store/FavoriteStore/hooks/useIsFavoriteInProgress";
 import { useUnfavorite } from "../../store/FavoriteStore/hooks/useUnFavorite";
+import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
 
 type Props = {
   nade: Nade;
-  showSignInWarning: () => void;
 };
 
-export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
+export const FavoriteButton: FC<Props> = ({ nade }) => {
+  const { setSignInWarning } = useSignInWarning();
   const isFavoriteInProgress = useIsFavoriteInProgress();
   const isSignedIn = useIsSignedIn();
   const favorite = useIsFavorited(nade.id);
@@ -23,7 +24,7 @@ export const FavoriteButton: FC<Props> = ({ nade, showSignInWarning }) => {
 
   function onFavoriteClick() {
     if (!isSignedIn) {
-      showSignInWarning();
+      setSignInWarning("favorite");
       return;
     }
 

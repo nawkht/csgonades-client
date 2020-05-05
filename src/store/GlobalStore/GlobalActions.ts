@@ -1,46 +1,59 @@
 import { SiteStats } from "../../api/StatsApi";
 
-type AddSiteStatsAction = {
-  readonly type: "@@global/ADD_SITE_STATS";
+type AddSiteStats = {
+  readonly type: "Global/AddSiteStats";
   readonly stats: SiteStats;
 };
 
 type ToggleNavigation = {
-  readonly type: "@@global/TOGGLE_NAVIGATION";
+  readonly type: "Global/ToggleNavigation";
 };
 
 type CloseNavigation = {
-  readonly type: "@@global/CLOSE_NAVIGATION";
+  readonly type: "Global/CloseNavigation";
 };
 
 type AcceptCookieConcent = {
-  readonly type: "@@global/ACCEPT_COOKIE_CONCENT";
+  readonly type: "Global/AcceptCookieConcent";
 };
 
 type HideViewSelectorHint = {
-  type: "@@global/HideViewSelectorHint";
+  type: "Global/HideViewSelectorHint";
+};
+
+export type SignInWarningType = "favorite";
+
+type SetSignInWarning = {
+  type: "Global/SetSignInWarning";
+  warningType: SignInWarningType;
+};
+
+type ClearSignInWarning = {
+  type: "Global/ClearSignInWarning";
 };
 
 export type GlobalActions =
-  | AddSiteStatsAction
+  | AddSiteStats
   | ToggleNavigation
   | CloseNavigation
   | AcceptCookieConcent
-  | HideViewSelectorHint;
+  | HideViewSelectorHint
+  | SetSignInWarning
+  | ClearSignInWarning;
 
-export const addSiteStatsActon = (stats: SiteStats): AddSiteStatsAction => ({
-  type: "@@global/ADD_SITE_STATS",
+export const addSiteStatsActon = (stats: SiteStats): AddSiteStats => ({
+  type: "Global/AddSiteStats",
   stats,
 });
 
 export const acceptCookieConcentAction = (): AcceptCookieConcent => ({
-  type: "@@global/ACCEPT_COOKIE_CONCENT",
+  type: "Global/AcceptCookieConcent",
 });
 
 export const toggleNavigationAction = (): ToggleNavigation => ({
-  type: "@@global/TOGGLE_NAVIGATION",
+  type: "Global/ToggleNavigation",
 });
 
 export const closeNavigationAction = (): CloseNavigation => ({
-  type: "@@global/CLOSE_NAVIGATION",
+  type: "Global/CloseNavigation",
 });

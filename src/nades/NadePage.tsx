@@ -1,5 +1,4 @@
 import { FC, memo, useEffect, useState } from "react";
-import { SignInWarning } from "../maps/components/SignInWarning";
 import { mapString } from "../models/Nade/CsGoMap";
 import { nadeTypeString } from "../models/Nade/NadeType";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
@@ -40,7 +39,6 @@ export const NadePage: FC = memo(() => {
   const [editTitleVisisble, setEditTitleVisisble] = useState(false);
   const [editDescVisisble, setEditDescisisble] = useState(false);
   const [editMetaVisible, setEditMetaVisible] = useState(false);
-  const [showSignInWarning, setShowSignInWarning] = useState(false);
 
   const allowEditTitle = allowEdit && nade.status !== "accepted";
 
@@ -158,10 +156,7 @@ export const NadePage: FC = memo(() => {
             </div>
 
             <div className="nade-action">
-              <FavoriteButton
-                showSignInWarning={() => setShowSignInWarning(true)}
-                nade={nade}
-              />
+              <FavoriteButton nade={nade} />
             </div>
             <div className="nade-action">
               <ReportNadeButton nadeId={nade.id} />
@@ -174,13 +169,6 @@ export const NadePage: FC = memo(() => {
           <div id="misc">{isAdminOrMod && <AdminEditor nade={nade} />}</div>
         </div>
       </PageCentralize>
-
-      <SignInWarning
-        key={`1-${nade.id}`}
-        visible={showSignInWarning}
-        onDismiss={() => setShowSignInWarning(false)}
-        message="favorite"
-      />
 
       {allowEdit && (
         <TitleEditor

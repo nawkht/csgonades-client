@@ -1,28 +1,23 @@
-import { FC, useMemo } from "react";
+import { FC, memo, useEffect } from "react";
 import { CSGNModal } from "../../common/CSGNModal";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useAnalytics } from "../../utils/Analytics";
 import { SignInnButton } from "../../layout/Misc/SignInnButton";
+import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
 
-type FavMessage = "filter" | "favorite";
+type Props = {};
 
-type Props = {
-  visible: boolean;
-  onDismiss: () => void;
-  message: FavMessage;
-};
-
-export const SignInWarning: FC<Props> = ({ visible, onDismiss, message }) => {
+export const SignInWarning: FC<Props> = memo(() => {
+  const { signInWarning, clearSignInWarning } = useSignInWarning();
   const { event } = useAnalytics();
-  const { colors } = useTheme();
 
-  const warningMessage = useMemo(() => {
-    if (message === "favorite") {
-      return "You need to be signed in to favorite nades.";
-    } else {
-      return "To show your favourites, you need to sign in.";
+  useEffect(() => {
+    if (signInWarning) {
+      event({
+        category: "Sign In Warning",
+        action: "Displayed",
+      });
     }
-  }, [message]);
+  }, [signInWarning, event]);
 
   function onSignIn() {
     event({
@@ -34,33 +29,38 @@ export const SignInWarning: FC<Props> = ({ visible, onDismiss, message }) => {
   return (
     <>
       <CSGNModal
-        title="💩 Wopsy Dupsy 💩"
-        visible={visible}
-        onDismiss={onDismiss}
+        title="Not Signed In"
+        visible={!!signInWarning}
+        onDismiss={clearSignInWarning}
       >
         <div className="sign-in-warning">
-          <p>{warningMessage}</p>
-          <div onClick={onSignIn}>
+          <div className="section">
+            I see you&apos;re not signed in 😥
+            <br />
+            That&apos;s ok. But if you sign in, you can:
+          </div>
+          <div className="section">🤩 Favorite nades</div>
+          <div className="section">🧐 Comment on nades</div>
+          <div className="section">🤤 Filter nades by your favorite ones</div>
+          <div className="btn" onClick={onSignIn}>
             <SignInnButton />
           </div>
         </div>
       </CSGNModal>
       <style jsx>{`
-        .sign-in-warning {
+        .btn {
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 20px 40px;
-          max-width: 300px;
+          justify-content: space-around;
         }
-        .sign-in-btn {
-          color: white;
-          background: ${colors.PRIMARY};
-          padding: 10px;
-          border-radius: 5px;
-          margin-top: 5px;
+
+        .section {
+          margin-bottom: 10px;
+        }
+
+        .btn {
+          margin-top: 20px;
         }
       `}</style>
     </>
   );
-};
+});
