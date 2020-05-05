@@ -1,10 +1,9 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useState } from "react";
 import { mapString } from "../models/Nade/CsGoMap";
 import { nadeTypeString } from "../models/Nade/NadeType";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
-import { useNadeRegisterView } from "../store2/NadePageStore/hooks/useNadeRegisterView";
 import { NadeTitle, nadeTitleBuilder } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
@@ -34,7 +33,6 @@ export const NadePage: FC = memo(() => {
   const { colors } = useTheme();
   const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
-  const registerView = useNadeRegisterView();
   const allowEdit = useCanEditNade(nade);
   const [editTitleVisisble, setEditTitleVisisble] = useState(false);
   const [editDescVisisble, setEditDescisisble] = useState(false);
@@ -42,10 +40,10 @@ export const NadePage: FC = memo(() => {
 
   const allowEditTitle = allowEdit && nade.status !== "accepted";
 
-  useEffect(() => {
+  /*useEffect(() => {
     registerView(nade.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nade.id]);
+  }, [nade.id]);*/
 
   let layoutTitle = "New nade";
 

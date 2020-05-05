@@ -2,12 +2,15 @@ import { FC } from "react";
 import { ResponsiveVideo } from "../common/ResponsiveVideo/ResponsiveVideo";
 import { isMobile } from "react-device-detect";
 import { Nade } from "../models/Nade/Nade";
+import { GfycatIframe } from "./components/GfycatIframe";
 
 type Props = {
   nade: Nade;
 };
 
 export const NadeVideoContainer: FC<Props> = ({ nade }) => {
+  return <GfycatIframe nade={nade} />;
+
   return (
     <ResponsiveVideo
       gfyId={nade.gfycat.gfyId}
