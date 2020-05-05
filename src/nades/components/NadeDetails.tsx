@@ -4,6 +4,7 @@ import { Nade } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { prettyDate } from "../../utils/DateUtils";
 import { PageLink } from "../../common/PageLink";
+import { pluralize } from "../../utils/Common";
 
 type Props = {
   nade: Nade;
@@ -23,7 +24,8 @@ export const NadeDetails: FC<Props> = ({ nade }) => {
 
         <div className="nade-stats">
           <span>
-            {nade.commentCount} comments | {nade.favoriteCount} favorites |{" "}
+            {pluralize(nade.favoriteCount, "favorite")} |{" "}
+            {pluralize(nade.commentCount, "comment")} |{" "}
             {prettyDate(nade.createdAt)}
           </span>
         </div>
