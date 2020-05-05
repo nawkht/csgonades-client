@@ -14,7 +14,9 @@ export const FooterPaypal: FC<Props> = ({}) => {
         >
           <div className="action discord">
             <p className="discord-msg">
-              Support me on <b>Paypal</b>
+              Love the site?
+              <br />
+              Consider supporting me on <b>Paypal</b>
             </p>
 
             <div className="discord-logo">
