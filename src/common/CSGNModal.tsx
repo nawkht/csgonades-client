@@ -46,10 +46,6 @@ export const CSGNModal: FC<Props> = ({
 
           .modal {
             align-self: center;
-            border-radius: ${Dimensions.BORDER_RADIUS};
-            max-width: 90vw;
-            max-height: 90vh;
-            overflow-y: auto;
           }
         `}</style>
       </>
@@ -142,7 +138,6 @@ export const CSGNModal: FC<Props> = ({
         }
 
         .modal-content {
-          padding: 15px 30px;
           overflow-y: auto;
           flex: 1;
         }
