@@ -26,12 +26,20 @@ export const SignInWarning: FC<Props> = memo(() => {
     });
   }
 
+  function onDismiss() {
+    clearSignInWarning();
+    event({
+      category: "Sign In Warning",
+      action: "Dismiss",
+    });
+  }
+
   return (
     <>
       <CSGNModal
         title="Not Signed In"
         visible={!!signInWarning}
-        onDismiss={clearSignInWarning}
+        onDismiss={onDismiss}
       >
         <div className="sign-in-warning">
           <div className="section">
