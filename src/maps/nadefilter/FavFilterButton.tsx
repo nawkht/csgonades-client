@@ -7,10 +7,9 @@ import { Dimensions } from "../../constants/Constants";
 
 type Props = {
   vertical?: boolean;
-  showSingInWarning: () => void;
 };
 
-export const FavFilterButton: FC<Props> = ({ showSingInWarning, vertical }) => {
+export const FavFilterButton: FC<Props> = ({ vertical }) => {
   const { colors } = useTheme();
   const isSignedIn = useIsSignedIn();
   const { byFavorites, filterByFavorites } = useFilterByFavorites();
@@ -20,8 +19,6 @@ export const FavFilterButton: FC<Props> = ({ showSingInWarning, vertical }) => {
   function onFilterByFavorite() {
     if (isSignedIn) {
       filterByFavorites();
-    } else {
-      showSingInWarning();
     }
   }
 

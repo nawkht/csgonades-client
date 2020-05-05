@@ -7,28 +7,6 @@ import {
   filterByFavoritesSelector,
   filterByTypeSelector,
 } from "../selectors";
-import { useAnalytics } from "../../../utils/Analytics";
-
-export const useDisplayingNadesForPosition = () => {
-  const dispatch = useMapStoreDispatch();
-  const byCoords = useSelector(filterByCoordsSelector);
-  const { event } = useAnalytics();
-
-  const reset = useCallback(() => {
-    dispatch({
-      type: "MapStore/FilterReset",
-    });
-    event({
-      category: "MapStore",
-      action: "MapStore/FilterReset",
-    });
-  }, [dispatch, event]);
-
-  return {
-    isDisplayingCoords: !!byCoords,
-    reset,
-  };
-};
 
 export const useFilterReset = () => {
   const byCoords = useSelector(filterByCoordsSelector);

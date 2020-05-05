@@ -71,12 +71,7 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
           </div>
           {isSignedIn && (
             <div className="space-below">
-              <FavFilterButton
-                vertical
-                showSingInWarning={() => {
-                  //no-op
-                }}
-              />
+              <FavFilterButton vertical />
             </div>
           )}
 

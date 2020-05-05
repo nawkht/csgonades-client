@@ -36,11 +36,7 @@ export const FilterBar: FC<Props> = ({}) => {
         </div>
         {isSignedIn && (
           <div id="filter-fav">
-            <FavFilterButton
-              showSingInWarning={() => {
-                //no-op
-              }}
-            />
+            <FavFilterButton />
           </div>
         )}
 
