@@ -30,6 +30,7 @@ export const HelpTip: FC<Props> = ({ children, hintLabel }) => {
         content={<span>{children}</span>}
         position="top center"
         onOpen={onTipOpen}
+        on="click"
         inverted
         size="mini"
         trigger={
