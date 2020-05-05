@@ -15,7 +15,6 @@ export const AdminNav: FC = () => {
         </button>
         <button onClick={() => changeAdminRoute("user")}>Users</button>
         <button onClick={() => changeAdminRoute("reports")}>Reports</button>
-        <button onClick={() => changeAdminRoute("gallery")}>Gallery</button>
       </div>
       <style jsx>{`
         .admin-nav {

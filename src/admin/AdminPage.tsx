@@ -2,13 +2,13 @@ import { FC } from "react";
 import { Dimensions } from "../constants/Constants";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 import { useAdminRoute } from "../store2/AdminStore/hooks";
-import { AdminGallery } from "./AdminGallery/AdminGallery";
 import { AdminNav } from "./AdminNav";
 import { AdminPendingNades } from "./AdminPendingNades";
 import { AdminReports } from "./AdminReports";
 import { AdminUsers } from "./AdminUsers";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { AdminDeclined } from "./AdminDeclined";
+import { PageCentralize } from "../common/PageCentralize";
 
 export const AdminPage: FC = () => {
   const { colors } = useTheme();
@@ -27,8 +27,6 @@ export const AdminPage: FC = () => {
         return <AdminUsers />;
       case "reports":
         return <AdminReports />;
-      case "gallery":
-        return <AdminGallery />;
       case "declined-nades":
         return <AdminDeclined />;
       default:
@@ -38,31 +36,31 @@ export const AdminPage: FC = () => {
 
   return (
     <>
-      <div className="admin-container">
-        <div className="admin-content">{pageContent()}</div>
-      </div>
+      <PageCentralize>
+        <div className="admin-container">
+          <aside className="admin-nav">
+            <AdminNav />
+          </aside>
+          <div className="admin-content">{pageContent()}</div>
+        </div>
+      </PageCentralize>
 
-      <aside className="admin-nav">
-        <AdminNav />
-      </aside>
       <style jsx>{`
         .admin-container {
-          grid-area: main;
-          margin: ${Dimensions.GUTTER_SIZE}
+          margin-top: ${Dimensions.GUTTER_SIZE}px;
           display: flex;
-          margin: 30px;
+          flex-direction: row;
           background: ${colors.DP01};
           border-radius: 5px;
           overflow: hidden;
-          min-height: 80vh;
           padding: 20px 30px;
+          margin-bottom: 100px;
         }
 
         .admin-nav {
           grid-area: sidebar;
-          margin-right: ${Dimensions.GUTTER_SIZE};
-          width: 300px;
-          padding: 30px;
+          margin-right: ${Dimensions.GUTTER_SIZE}px;
+          width: 200px;
         }
 
         .admin-content {

@@ -6,8 +6,7 @@ export type AdminRoutes =
   | "pending-nades"
   | "declined-nades"
   | "user"
-  | "reports"
-  | "gallery";
+  | "reports";
 
 type ChangeAdminRouterAction = {
   type: "@@admin/CHANGE_ROUTE";
