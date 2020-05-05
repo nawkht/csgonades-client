@@ -102,6 +102,10 @@ const PractiseConfigBlogPost = () => {
           <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-xbox" />
         </div>
 
+        <div className="a-tag">
+          <AdUnit tagType="300x250" />
+        </div>
+
         <h2>5. B Door Smoke</h2>
         <p>
           Recently the skybox in tunnels was removed on Dust2; thrown some

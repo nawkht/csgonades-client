@@ -95,6 +95,11 @@ const PractiseConfigBlogPost = () => {
           </a>
           .
         </p>
+
+        <div className="a-tag">
+          <AdUnit tagType="300x250" />
+        </div>
+
         <h3>1. Fly command</h3>
         <p>Allows you to fly freely in the air.</p>
         <BlogCodeSnippet code="bind X noclip" />

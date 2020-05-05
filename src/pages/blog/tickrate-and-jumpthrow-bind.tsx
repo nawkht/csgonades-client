@@ -109,6 +109,10 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           tickrates, if it uses a jumpthrow bind.
         </p>
 
+        <div className="a-tag">
+          <AdUnit tagType="300x250" />
+        </div>
+
         <p>
           Here is also the YouTuber{" "}
           <a href="https://www.youtube.com/channel/UCPKbW1excf-E7Tmwom1AgkQ">

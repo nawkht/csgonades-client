@@ -108,6 +108,10 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           your settings when you release the button.
         </p>
 
+        <div className="a-tag">
+          <AdUnit tagType="300x250" />
+        </div>
+
         <p>The result of the command is the following:</p>
         <img
           src="/blogimg/nade-align-crosshair/big_crosshair_example_advanced.jpg"

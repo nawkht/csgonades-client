@@ -102,6 +102,10 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           Holde down <em>both mouse button</em>, click the bind.
         </p>
 
+        <div className="a-tag">
+          <AdUnit tagType="300x250" />
+        </div>
+
         <h2>Conclusion</h2>
         <p>
           Now that you got your jumpthrow bind is set up, head over to your
