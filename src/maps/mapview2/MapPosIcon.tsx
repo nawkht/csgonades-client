@@ -1,5 +1,6 @@
 import { FC, useMemo } from "react";
 import { NadeLight } from "../../models/Nade/Nade";
+import { NadeType } from "../../models/Nade/NadeType";
 
 type Props = {
   nade: NadeLight;
@@ -26,7 +27,7 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
     }
   }
 
-  const scaledIconSize = mapWidth / 22;
+  const scaledIconSize = mapWidth / 21;
 
   return (
     <>
@@ -45,17 +46,18 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
           position: absolute;
           width: ${scaledIconSize}px;
           height: ${scaledIconSize}px;
-          border-radius: 50%;
           pointer-events: none;
-          opacity: 0.7;
+          opacity: 0.8;
           transform: scale(1);
-          transition: opacity 0.2s, transform 0.2s;
           cursor: pointer;
           pointer-events: all;
+          z-index: ${zIndexByType(nade.type)};
+          transition: all 0.2s;
         }
 
         .point img {
           width: 100%;
+          display: block;
         }
 
         .point:hover {
@@ -67,3 +69,16 @@ export const MapPosIcon: FC<Props> = ({ nade, mapWidth, onPress }) => {
     </>
   );
 };
+
+function zIndexByType(type?: NadeType) {
+  switch (type) {
+    case "smoke":
+      return 499;
+    case "molotov":
+      return 498;
+    case "flash":
+      return 497;
+    default:
+      return 496;
+  }
+}
