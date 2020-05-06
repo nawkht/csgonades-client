@@ -156,11 +156,11 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
           grid-area: mpoverview;
           height: calc(
             100vh - ${Dimensions.HEADER_HEIGHT}px - ${Dimensions.NAV_HEIGHT}px -
-              ${Dimensions.GUTTER_SIZE * 4}px
+              ${Dimensions.GUTTER_SIZE * 2}px
           );
           width: calc(
             100vh - ${Dimensions.HEADER_HEIGHT}px - ${Dimensions.NAV_HEIGHT}px -
-              ${Dimensions.GUTTER_SIZE * 4}px
+              ${Dimensions.GUTTER_SIZE * 2}px
           );
           max-width: 800px;
           max-height: 800px;
