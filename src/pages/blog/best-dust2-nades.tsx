@@ -11,7 +11,7 @@ export const bestDust2Nades: BlogPost = {
   imageUrl: "/blogimg/dust2-b.jpg",
   thumbnailUrl: "/blogimg/dust2-b_thumb.jpg",
   createdAt: "2020-04-23T02:32:00.000Z",
-  updatedAt: "2020-04-24T15:05:00.000Z",
+  updatedAt: "2020-05-06T17:05:37.729Z",
   intro:
     "Dust2 is one of the most popular maps in CS:GO. Let's take a look at the essential nades everyone should know to gain an edge on the map.",
 };
@@ -96,10 +96,12 @@ const PractiseConfigBlogPost = () => {
         <h2>4. The Mid to B Smoke</h2>
         <p>
           Rush B!? Rush A!!.. Nah... Let&apos;s go mid to B instead. Throw this
-          smoke and do a B split.
+          smoke and do a B split. Optionally throw the flash to make life a
+          little easier.
         </p>
         <div className="nade-list">
           <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-xbox" />
+          <BlogNadeItem nadeSlug="flash-mid-doors-from-xbox" />
         </div>
 
         <div className="a-tag">
