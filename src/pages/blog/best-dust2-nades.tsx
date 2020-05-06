@@ -4,6 +4,8 @@ import { BlogNadeItem } from "../../blog/BlogNadeItem";
 import { PageLink } from "../../common/PageLink";
 import { Dimensions } from "../../constants/Constants";
 import { AdUnit } from "../../common/adunits/AdUnit";
+import { FC } from "react";
+import Link from "next/link";
 
 export const bestDust2Nades: BlogPost = {
   title: "Best Grenade Spots for Dust2 - Must Know!",
@@ -19,7 +21,7 @@ export const bestDust2Nades: BlogPost = {
 const PractiseConfigBlogPost = () => {
   return (
     <>
-      <BlogPostArticle data={bestDust2Nades}>
+      <BlogPostArticle SideBarComp={BlogSideBar} data={bestDust2Nades}>
         <p>
           Dust2 is probably one of the most recognized maps in CS:GO. If you
           enter a competitive queue, it&apos;s a very high chance you will be
@@ -208,6 +210,66 @@ const PractiseConfigBlogPost = () => {
             margin-left: -10px;
             margin-right: -10px;
           }
+        }
+      `}</style>
+    </>
+  );
+};
+
+const BlogSideBar: FC = () => {
+  return (
+    <>
+      <div className="blog-sidebar">
+        <Link href="/maps/[map]" as="/maps/dust2">
+          <button className="cta">
+            <span>Find Dust2 Smokes</span>{" "}
+            <img src="/icons/grenades/smoke.png" />
+          </button>
+        </Link>
+        <Link href="/maps/[map]" as="/maps/dust2">
+          <button className="cta">
+            <span>Find Dust2 Flashes</span>{" "}
+            <img src="/icons/grenades/flash.png" />
+          </button>
+        </Link>
+        <Link href="/maps/[map]" as="/maps/dust2">
+          <button className="cta">
+            <span>Find Dust2 Molotovs</span>{" "}
+            <img src="/icons/grenades/molotov.png" />
+          </button>
+        </Link>
+      </div>
+      <style jsx>{`
+        .blog-sidebar {
+          margin-bottom: 50vh;
+        }
+
+        .cta {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 10px;
+          background: #106b5c;
+          margin-bottom: ${Dimensions.GUTTER_SIZE}px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .cta:hover {
+          background: #0b4d42;
+        }
+
+        .cta span {
+          white-space: nowrap;
+          color: white;
+          margin-bottom: 5px;
+        }
+
+        .cta img {
+          width: 30px;
+          height: 30px;
+          display: block;
         }
       `}</style>
     </>

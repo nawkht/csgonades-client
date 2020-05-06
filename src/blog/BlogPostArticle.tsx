@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, FunctionComponent } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { BlogPost } from "./BlogPost";
 import { Dimensions } from "../constants/Constants";
@@ -13,33 +13,34 @@ import { PageCentralize } from "../common/PageCentralize";
 
 type Props = {
   data: BlogPost;
+  SideBarComp?: FunctionComponent;
 };
 
-export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
-  const { colors } = useTheme();
+export const BlogPostArticle: FC<Props> = memo(
+  ({ children, data, SideBarComp }) => {
+    const { colors } = useTheme();
 
-  return (
-    <>
-      <ArticleJsonLd
-        url={`https://www.csgonades.com/blog/${data.slug}`}
-        authorName="Mellet Solbakk"
-        datePublished={data.createdAt}
-        dateModified={data.updatedAt || data.createdAt}
-        description={descriptionSimplify(data.intro)}
-        images={[data.imageUrl]}
-        publisherLogo="https://www.csgonades.com/logo.png"
-        publisherName="CSGO Nades"
-        title={data.title}
-      />
-      <SEO
-        title={data.title}
-        canonical={`/blog/${data.slug}`}
-        description={data.intro}
-        thumbnail={data.thumbnailUrl}
-      />
-      <PageCentralize>
-        <div id="blog-article">
-          <article>
+    return (
+      <>
+        <ArticleJsonLd
+          url={`https://www.csgonades.com/blog/${data.slug}`}
+          authorName="Mellet Solbakk"
+          datePublished={data.createdAt}
+          dateModified={data.updatedAt || data.createdAt}
+          description={descriptionSimplify(data.intro)}
+          images={[data.imageUrl]}
+          publisherLogo="https://www.csgonades.com/logo.png"
+          publisherName="CSGO Nades"
+          title={data.title}
+        />
+        <SEO
+          title={data.title}
+          canonical={`/blog/${data.slug}`}
+          description={data.intro}
+          thumbnail={data.thumbnailUrl}
+        />
+        <PageCentralize>
+          <article id="blog-article">
             <div id="article-title">
               <h1>{data.title}</h1>
             </div>
@@ -63,9 +64,7 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
               {children}
               <BlogAuthor />
             </div>
-          </article>
 
-          <aside id="blog-sidebar">
             <div id="blog-share">
               <NadeShareActions
                 url={`/blog/${data.slug}`}
@@ -74,114 +73,128 @@ export const BlogPostArticle: FC<Props> = memo(({ children, data }) => {
                 visisble={true}
               />
             </div>
-            <div id="blog-sidebar-wrap">
-              <div className="ph-unit">
-                <AdUnit tagType="160x600" />
+
+            <aside>
+              {!!SideBarComp && (
+                <div id="blog-side-comp">
+                  <SideBarComp />
+                </div>
+              )}
+
+              <div id="blog-sidebar-wrap">
+                <div className="ph-unit">
+                  <AdUnit tagType="160x600" />
+                </div>
               </div>
-            </div>
-          </aside>
-        </div>
-      </PageCentralize>
+            </aside>
+          </article>
+        </PageCentralize>
 
-      <style jsx>{`
-        #blog-article {
-          display: grid;
-          grid-template-columns: 1fr 160px;
-          grid-template-areas: "article sidebar";
-          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
-          grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
-          margin-bottom: 100px;
-          margin-top: ${Dimensions.GUTTER_SIZE}px;
-        }
-
-        .ph-unit {
-          margin-top: ${Dimensions.GUTTER_SIZE}px;
-        }
-
-        article {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-template-areas:
-            "blog-title"
-            "blog-image"
-            "blog-main"
-            "blog-main";
-          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
-          grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
-          color: ${colors.TEXT};
-        }
-
-        #article-title {
-          width: 100%;
-          grid-area: blog-title;
-        }
-
-        #article-title h1 {
-          font-weight: 300;
-          font-size: 32px;
-        }
-
-        #article-content {
-          grid-area: blog-main;
-          background: ${colors.DP02};
-          padding: 20px 30px;
-          border-radius: 5px;
-          max-width: 100%;
-        }
-
-        #blog-sidebar {
-          grid-area: sidebar;
-          width: 160px;
-        }
-
-        #blog-sidebar-wrap {
-          position: sticky;
-          top: calc(
-            ${Dimensions.HEADER_HEIGHT}px + ${Dimensions.GUTTER_SIZE}px
-          );
-        }
-
-        .article-date {
-          color: #bbb;
-          margin-bottom: 15px;
-        }
-
-        #article-image {
-          grid-area: blog-image;
-          max-width: 100%;
-          border-radius: 5px;
-          overflow: hidden;
-        }
-
-        .article-img {
-          width: 100%;
-          display: block;
-        }
-
-        .image-credit {
-          text-align: right;
-          padding-top: 10px;
-          font-style: italic;
-        }
-
-        .image-credit a {
-          color: ${colors.PRIMARY};
-        }
-
-        .image-credit a:hover {
-          text-decoration: underline;
-        }
-
-        @media only screen and (max-width: 850px) {
+        <style jsx>{`
           #blog-article {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 160px;
+            grid-template-rows:
+              min-content
+              min-content
+              min-content
+              min-content;
             grid-template-areas:
-              "article"
-              "sidebar";
+              "title share"
+              "image . "
+              "article sidebar"
+              "article sidebar";
+            grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
+            grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
+            margin-bottom: 100px;
+            margin-top: ${Dimensions.GUTTER_SIZE}px;
           }
-        }
-      `}</style>
-    </>
-  );
-});
+
+          aside {
+            grid-area: sidebar;
+          }
+
+          #blog-side-comp {
+          }
+
+          .ph-unit {
+            margin-top: ${Dimensions.GUTTER_SIZE}px;
+          }
+
+          #article-title {
+            width: 100%;
+            grid-area: title;
+          }
+
+          #article-title h1 {
+            font-weight: 300;
+            font-size: 32px;
+          }
+
+          #article-content {
+            grid-area: article;
+            background: ${colors.DP02};
+            padding: 20px 30px;
+            border-radius: 5px;
+            max-width: 100%;
+          }
+
+          #blog-sidebar-wrap {
+            grid-area: ad;
+            position: sticky;
+            top: calc(
+              ${Dimensions.HEADER_HEIGHT}px + ${Dimensions.GUTTER_SIZE * 2}px
+            );
+          }
+
+          .article-date {
+            color: #bbb;
+            margin-bottom: 15px;
+          }
+
+          #article-image {
+            grid-area: image;
+            max-width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+          }
+
+          .article-img {
+            width: 100%;
+            display: block;
+          }
+
+          .image-credit {
+            text-align: right;
+            padding-top: 10px;
+            font-style: italic;
+          }
+
+          .image-credit a {
+            color: ${colors.PRIMARY};
+          }
+
+          .image-credit a:hover {
+            text-decoration: underline;
+          }
+
+          @media only screen and (max-width: 850px) {
+            #blog-article {
+              grid-template-columns: 1fr;
+              grid-template-areas:
+                "share"
+                "title"
+                "image"
+                "article"
+                "article";
+            }
+
+            aside {
+              display: none;
+            }
+          }
+        `}</style>
+      </>
+    );
+  }
+);
