@@ -45,17 +45,14 @@ export const BlogPostArticle: FC<Props> = memo(
               <h1>{data.title}</h1>
             </div>
             <div id="article-image">
-              <div className="img-wrap">
-                <img className="article-img" src={data.imageUrl} />
-                {!!data.imageCredit && !!data.imageCreditUrl && (
-                  <div className="image-credit">
-                    Photo by{" "}
-                    <a href={data.imageCreditUrl} target="_top">
-                      {data.imageCredit}
-                    </a>
-                  </div>
-                )}
-              </div>
+              {!!data.imageCredit && !!data.imageCreditUrl && (
+                <div className="image-credit">
+                  Photo by{" "}
+                  <a href={data.imageCreditUrl} target="_top">
+                    {data.imageCredit}
+                  </a>
+                </div>
+              )}
             </div>
 
             <div id="article-content">
@@ -153,21 +150,26 @@ export const BlogPostArticle: FC<Props> = memo(
           }
 
           #article-image {
+            position: relative;
             grid-area: image;
-            max-width: 100%;
+            width: 100%;
+            padding-bottom: 56.25%;
             border-radius: 5px;
             overflow: hidden;
-          }
-
-          .article-img {
-            width: 100%;
-            display: block;
+            background: url(${data.imageUrl});
+            background-size: cover;
           }
 
           .image-credit {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
             text-align: right;
-            padding-top: 10px;
             font-style: italic;
+            background: rgba(255, 255, 255, 0.8);
+            color: #111;
+            padding: 10px;
+            border-radius: 5px;
           }
 
           .image-credit a {
