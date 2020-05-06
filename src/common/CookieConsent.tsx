@@ -39,9 +39,9 @@ export const CookieConsent: FC = memo(() => {
           <div className="consent-txt">
             <p>
               In order to give you a better service CSGO Nades uses{" "}
-              <a href="/policy">cookies</a> for analytics and advertising. By
-              continuing to browse the site you are agreeing to our use of
-              cookies.
+              <a href="/policy">cookies</a> for analytics and advertising.
+              <br /> By continuing to browse the site you are agreeing to our
+              use of cookies.
             </p>
           </div>
 
@@ -65,10 +65,7 @@ export const CookieConsent: FC = memo(() => {
           display: flex;
           transform: translateY(200%);
           transition: transform 0.15s;
-          padding-left: 15px;
-          padding-right: 15px;
-          padding-bottom: 75px;
-          padding-top: 50px;
+          padding ${Dimensions.GUTTER_SIZE}px;
         }
 
         .visible {
@@ -76,24 +73,23 @@ export const CookieConsent: FC = memo(() => {
         }
 
         .cookie-consent {
-          max-width: 500px;
           border-radius: 5px;
           color: #fff;
           display: flex;
-          flex-direction: column;
-          align-items: center;
+          flex-direction: row;
           font-size: 18px;
         }
 
         .cookie-icon {
           display: flex;
           align-items: center;
-          font-size: 2em;
-          margin-bottom: 10px;
+          font-size: 1.5em;
+          margin-right: ${Dimensions.GUTTER_SIZE}px;
         }
 
         .consent-txt {
-          margin-bottom: 20px;
+          font-size: 16px;
+          margin-right: ${Dimensions.GUTTER_SIZE}px;
         }
 
         .close-button {
@@ -106,13 +102,13 @@ export const CookieConsent: FC = memo(() => {
           border: none;
           background: ${colors.PRIMARY};
           white-space: nowrap;
-          padding: 20px 40px;
+          padding: 10px 20px;
           color: #fff;
           border-radius: 5px;
-          font-weight: 300;
+          font-weight: 400;
           border: none;
           cursor: pointer;
-          font-size: 1em;
+          font-size: 16px;
           outline: none;
         }
 
@@ -121,6 +117,19 @@ export const CookieConsent: FC = memo(() => {
         }
 
         @media only screen and (max-width: ${Dimensions.MOBILE_THRESHHOLD}) {
+          .cookie-consent {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .consent-txt {
+            text-align: center;
+          }
+
+          .consent-txt, .cookie-icon {
+            margin: 0;
+            margin-bottom: ${Dimensions.GUTTER_SIZE}px;
+          }
         }
       `}</style>
     </>
