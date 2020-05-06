@@ -10,6 +10,8 @@ import { capitalize } from "../utils/Common";
 import { PageCentralize } from "../common/PageCentralize";
 import { FilterBar } from "./nadefilter/FilterBar";
 import { MapViewScreen } from "./MapViewScreen";
+import { AdUnit } from "../common/adunits/AdUnit";
+import { useIsClientSide } from "../common/MinSizeRender";
 
 type Props = {
   map: CsgoMap;
@@ -17,6 +19,7 @@ type Props = {
 };
 
 export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
+  const isClientSide = useIsClientSide();
   useMapChangeHandler(allNades);
 
   return (
@@ -33,11 +36,18 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           <MapPageJumbo map={map} nades={allNades} />
           <FilterBar />
           <MapPageNades allNades={allNades} />
-          <MapViewScreen map={map} allNades={allNades} />
+          {isClientSide && <MapViewScreen map={map} allNades={allNades} />}
+        </div>
+        <div className="ph">
+          <AdUnit tagType="728x90" />
         </div>
       </PageCentralize>
 
       <style jsx>{`
+        .ph {
+          margin-bottom: 50px;
+        }
+
         #map-page {
           grid-area: main;
           margin-top: ${Dimensions.GUTTER_SIZE}px;
@@ -45,6 +55,7 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             100vh - ${Dimensions.HEADER_HEIGHT}px -
               ${Dimensions.GUTTER_SIZE * 3}px
           );
+          margin-bottom: 50px;
         }
 
         @media only screen and (max-width: 100px) {

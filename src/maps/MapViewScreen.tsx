@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useRef, useState, useEffect } from "react";
 import { useSetMapView } from "../store/MapStore/hooks/useSetMapView";
 import { Dimensions } from "../constants/Constants";
 import { useNadesForMapView } from "../store/MapStore/hooks/useNadesForMapView";
@@ -15,6 +15,8 @@ import { FavFilterButton } from "./nadefilter/FavFilterButton";
 import { useIsSignedIn } from "../store/AuthStore/AuthHooks";
 import { ResetFilterButton } from "./nadefilter/ResetFilterButton";
 import { useAnalytics } from "../utils/Analytics";
+import { MinSizeRender, useWindowSize } from "../common/MinSizeRender";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 type Props = {
   map: CsgoMap;
@@ -22,6 +24,7 @@ type Props = {
 };
 
 export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
+  const windowSize = useWindowSize();
   const { event } = useAnalytics();
   const filteredNades = useFilterServerSideNades(allNades);
   const { mapView } = useSetMapView();
@@ -33,6 +36,13 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
   const isSignedIn = useIsSignedIn();
   const nades = useNadesForMapView(allNades);
   const mapViewRef = useRef<HTMLDivElement>(null);
+
+  // Adjust mapview on resize
+  useEffect(() => {
+    if (mapViewRef.current) {
+      setMapWidth(mapViewRef.current.offsetHeight);
+    }
+  }, [windowSize]);
 
   function onMapViewImageLoaded() {
     if (mapViewRef.current) {
@@ -101,9 +111,36 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
               ))}
           </div>
         </div>
+
+        <MinSizeRender minSize={1400}>
+          <div id="fixed-right">
+            <div className="ph">
+              <AdUnit tagType="160x600" />
+            </div>
+          </div>
+        </MinSizeRender>
       </div>
+
       <style jsx>{`
+        .ph {
+          width: 160px;
+        }
+
+        #fixed-right {
+          position: absolute;
+          top: 0;
+          left: 100%;
+          bottom: 0;
+          width: 160px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          margin-left: ${Dimensions.GUTTER_SIZE}px;
+          z-index: 500;
+        }
+
         #mapview-wrap {
+          position: relative;
           display: grid;
           grid-template-columns: min-content 1fr min-content;
           grid-template-areas:

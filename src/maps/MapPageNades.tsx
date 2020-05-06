@@ -68,7 +68,6 @@ export const MapPageNades: FC<Props> = memo(({ allNades }) => {
         }
 
         .mappage-nades {
-          margin-bottom: 100px;
         }
 
         #displaying-coords-wrap {
