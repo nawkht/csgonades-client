@@ -33,13 +33,12 @@ const PractiseConfigBlogPost = () => {
         </p>
 
         <p>
-          This list is my personal favorites, but you can also browse all Dust2
-          nades to find your own preferrences.
+          This list is my personal favorites, but you can also browse{" "}
+          <Link href="/maps/[map]" as="/maps/dust2">
+            all Dust2 nades
+          </Link>{" "}
+          to find your own preferrences.
         </p>
-
-        <PageLink href={`/maps/[map]`} as={`/maps/dust2`}>
-          <span className="dust2-cta">All Dust2 Nades</span>
-        </PageLink>
 
         <h2>1. Xbox Smoke</h2>
         <p>
@@ -76,9 +75,9 @@ const PractiseConfigBlogPost = () => {
         </p>
         <p>
           Here are my favourites, but go over to{" "}
-          <PageLink href={`/maps/[map]`} as={`/maps/dust2`}>
+          <Link href="/maps/[map]" as="/maps/dust2">
             Dust2 nades
-          </PageLink>{" "}
+          </Link>{" "}
           if you prefer to throw it from T Spawn:
         </p>
         <div className="nade-list">
@@ -130,17 +129,13 @@ const PractiseConfigBlogPost = () => {
           is part of the game, but there is so much more to learn.
         </p>
         <p>
-          If you want to learn even more nades for Dust2, head over there. Or,
-          if you know a good one, sign in and add it for everyone else to enjoy!
+          If you want to learn even more nades for Dust2,{" "}
+          <Link href="/maps/[map]" as="/maps/dust2">
+            head over to see all the nades for Dust2
+          </Link>
+          . Or, if you know a good one, sign in and add it for everyone else to
+          enjoy!
         </p>
-
-        <PageLink href={`/maps/[map]`} as={`/maps/dust2`}>
-          <span className="dust2-cta">All Dust2 Nades</span>
-        </PageLink>
-
-        <PageLink href={`/maps/[map]`} as={`/maps/mirage`}>
-          <span className="dust2-cta">All Mirage Nades</span>
-        </PageLink>
 
         <p>And as always, when playing Dust2, rush B!</p>
         <div className="video-container">
