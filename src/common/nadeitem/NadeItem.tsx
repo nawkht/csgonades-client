@@ -26,6 +26,8 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
           onClick={onItemClick}
         >
           <NadeItemTitle
+            startPosition={nade.startPosition}
+            endPosition={nade.endPosition}
             type={nade.type}
             status={nade.status}
             title={nade.title}

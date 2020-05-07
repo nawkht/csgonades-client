@@ -20,7 +20,7 @@ export const ForceUserSettings: FC<Props> = ({ nadeId, onClose }) => {
 
   return (
     <>
-      <CsgnInput value={steamIdOrUrl} onChange={setSteamIdOrUrl} />
+      <CsgnInput initialValue={steamIdOrUrl} onChange={setSteamIdOrUrl} />
       <CsgnSaveButton onClick={onUpdateUser} />
     </>
   );

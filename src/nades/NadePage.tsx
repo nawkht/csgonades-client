@@ -1,22 +1,14 @@
-import { FC, memo, useState } from "react";
-import { mapString } from "../models/Nade/CsGoMap";
-import { nadeTypeString } from "../models/Nade/NadeType";
-import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
-import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
+import { FC, memo } from "react";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
-import { NadeTitle, nadeTitleBuilder } from "./components/NadeTitle";
+import { NadeTitle } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
 import { NadeVideoContainer } from "./NadeVideoContainer";
 import { NadeShareActions } from "./NadeShareActions";
 import { NadeComments } from "./comments/NadeComments";
 import NadeStatus from "./components/NadeStatus";
-import TitleEditor from "./editcontainers/TitleEditor";
-import DecriptionEditor from "./editcontainers/DescriptionEditor";
-import MetaEditor from "./editcontainers/MetaEditor";
-import AdminEditor from "./admineditor2/AdminEditor";
 import { ArticleJsonLd } from "next-seo";
-import { descriptionSimplify } from "../utils/Common";
+import { descriptionSimplify, generateTitle } from "../utils/Common";
 import { NadeMeta } from "./components/NadeMeta";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
@@ -30,27 +22,7 @@ import { useAnalytics } from "../utils/Analytics";
 export const NadePage: FC = memo(() => {
   const { event } = useAnalytics();
   const { colors } = useTheme();
-  const isAdminOrMod = useIsAdminOrModerator();
   const nade = useNade();
-  const allowEdit = useCanEditNade(nade);
-  const [editTitleVisisble, setEditTitleVisisble] = useState(false);
-  const [editDescVisisble, setEditDescisisble] = useState(false);
-  const [editMetaVisible, setEditMetaVisible] = useState(false);
-
-  const allowEditTitle = allowEdit && nade.status !== "accepted";
-
-  /*useEffect(() => {
-    registerView(nade.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nade.id]);*/
-
-  let layoutTitle = "New nade";
-
-  if (nade.title && nade.map && nade.type) {
-    layoutTitle = `${nade.title} - ${mapString(nade.map)} - ${nadeTypeString(
-      nade.type
-    )}`;
-  }
 
   function onBackClick() {
     event({
@@ -64,12 +36,19 @@ export const NadePage: FC = memo(() => {
     return null;
   }
 
+  const layoutTitle = generateTitle(
+    nade.title,
+    nade.startPosition,
+    nade.endPosition,
+    nade.type
+  );
+
   return (
     <>
       <ArticleJsonLd
         key={`ld-${nade.id}`}
         url={`https://www.csgonades.com/nades/${nade.slug || nade.id}`}
-        title={nadeTitleBuilder(nade.type, nade.title, nade.map)}
+        title={layoutTitle}
         authorName={addslashes(nade.user.nickname)}
         datePublished={nade.createdAt}
         dateModified={nade.updatedAt}
@@ -87,9 +66,7 @@ export const NadePage: FC = memo(() => {
       />
 
       <PageCentralize>
-        {allowEdit && (
-          <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
-        )}
+        <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
 
         <div id="nade-page-grid" key={`main-${nade.id}`}>
           {nade?.tickrate === "tick128" && (
@@ -110,17 +87,11 @@ export const NadePage: FC = memo(() => {
                 <FaChevronLeft />
               </button>
             </div>
-            <NadeTitle
-              title={nade.title}
-              map={nade.map}
-              type={nade.type}
-              onEditNade={() => setEditTitleVisisble(true)}
-              allowEdit={allowEditTitle}
-            />
+            <NadeTitle title={layoutTitle} />
           </div>
 
           <div id="nade-meta">
-            <NadeMeta nade={nade} onEditMeta={() => setEditMetaVisible(true)} />
+            <NadeMeta nade={nade} />
           </div>
 
           <div id="nade-page-main">
@@ -128,10 +99,7 @@ export const NadePage: FC = memo(() => {
           </div>
 
           <div id="nade-info-container">
-            <NadeInfoContainer
-              nade={nade}
-              onEditDescription={() => setEditDescisisble(true)}
-            />
+            <NadeInfoContainer nade={nade} />
           </div>
 
           <div id="nade-comment-container">
@@ -145,10 +113,15 @@ export const NadePage: FC = memo(() => {
           <div id="nade-actions">
             <div className="nade-action">
               <NadeShareActions
-                title={nadeTitleBuilder(nade?.type, nade?.title, nade.map)}
-                visisble={nade?.status === "accepted"}
+                title={generateTitle(
+                  nade.title,
+                  nade.startPosition,
+                  nade.endPosition,
+                  nade.type
+                )}
+                visisble={nade.status === "accepted"}
                 url={`/nades/${nade?.slug || nade?.id}`}
-                image={nade?.images.thumbnailUrl}
+                image={nade.images.thumbnailUrl}
               />
             </div>
 
@@ -159,38 +132,8 @@ export const NadePage: FC = memo(() => {
               <ReportNadeButton nadeId={nade.id} />
             </div>
           </div>
-
-          <div id="misc">{isAdminOrMod && <AdminEditor nade={nade} />}</div>
         </div>
       </PageCentralize>
-
-      {allowEdit && (
-        <TitleEditor
-          key={`2-${nade.id}`}
-          nadeId={nade.id}
-          title={nade.title}
-          visisble={editTitleVisisble}
-          onClose={() => setEditTitleVisisble(false)}
-        />
-      )}
-
-      {allowEdit && (
-        <DecriptionEditor
-          key={`3-${nade.id}`}
-          visisble={editDescVisisble}
-          nade={nade}
-          onDismiss={() => setEditDescisisble(false)}
-        />
-      )}
-
-      {allowEdit && (
-        <MetaEditor
-          key={`4-${nade.id}`}
-          visisble={editMetaVisible}
-          nade={nade}
-          onDismiss={() => setEditMetaVisible(false)}
-        />
-      )}
 
       <style jsx>{`
         #back {
@@ -278,8 +221,7 @@ export const NadePage: FC = memo(() => {
             "meta meta meta"
             "info info actions"
             "ad ad ad"
-            "comments comments ."
-            "misc misc misc";
+            "comments comments .";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           width: 100%;
         }

@@ -9,7 +9,7 @@ type Props = {
   statusInfo?: StatusInfo;
 };
 
-const NadeStatus: FC<Props> = memo(({ status, statusInfo }) => {
+const NadeStatus: FC<Props> = memo(({ status }) => {
   const { colors } = useTheme();
 
   if (status === "accepted") {
@@ -20,43 +20,29 @@ const NadeStatus: FC<Props> = memo(({ status, statusInfo }) => {
     switch (status) {
       case "pending":
         return (
-          <div>
-            <h3>Waiting for approval</h3>
-            <p>
-              To make the process go fast, hold your mouse over the{" "}
-              <strong>title</strong>, <strong>description</strong> and the{" "}
-              <strong>meta panel</strong> to edit them.
-            </p>
+          <>
+            <div className="pending">Waiting for approval</div>
             <style jsx>{`
-              h3 {
-                font-size: 20px;
-                text-align: center;
-                margin-bottom: 10px;
-                font-weight: 400;
-              }
-              p {
-                font-size: 18px;
-                text-align: center;
+              .pending {
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
               }
             `}</style>
-          </div>
+          </>
         );
       case "declined":
         return (
-          <div>
-            <h3>Declined</h3>
-            <p>{statusInfo}</p>
+          <>
+            <div className="declined">Declined, see comment under nade</div>
             <style jsx>{`
-              h3 {
-                font-size: 24px;
-                text-align: center;
-              }
-              p {
-                font-size: 16px;
-                text-align: center;
+              .declined {
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
               }
             `}</style>
-          </div>
+          </>
         );
       default:
         return <></>;
@@ -70,13 +56,20 @@ const NadeStatus: FC<Props> = memo(({ status, statusInfo }) => {
       <div className="status-container">{statusText()}</div>
       <style jsx>{`
         .status-container {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
           background: ${statusColors.background};
           border: 1px solid ${statusColors.border};
-          padding: 12px 18px;
+          padding: 10px 20px;
           color: ${statusColors.text};
-          border-radius: ${Dimensions.BORDER_RADIUS};
-          margin-top: 20px;
-          margin-bottom: 20px;
+          border-top-left-radius: ${Dimensions.BORDER_RADIUS};
+          border-top-right-radius: ${Dimensions.BORDER_RADIUS};
+          z-index: 999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       `}</style>
     </>

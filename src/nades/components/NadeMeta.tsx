@@ -1,52 +1,42 @@
 import { FC } from "react";
 import { Nade } from "../../models/Nade/Nade";
-import {} from "../../models/Nade/NadeMovement";
 import { tickrateString } from "../../models/Nade/NadeTickrate";
 import { nadeTypeString } from "../../models/Nade/NadeType";
 import { techniqueString } from "../../models/Nade/Technique";
 import { capitalize } from "../../utils/Common";
-import { useCanEditNade } from "../../store/NadeStore/hooks/useCanEditNade";
-import { EditButton } from "./EditButton";
 
 type Props = {
   nade: Nade;
-  onEditMeta: () => void;
 };
 
-export const NadeMeta: FC<Props> = ({ nade, onEditMeta }) => {
-  const allowEdit = useCanEditNade(nade);
-
+export const NadeMeta: FC<Props> = ({ nade }) => {
   return (
     <>
-      <EditButton allowEdit={allowEdit} onClick={onEditMeta}>
-        <div className="nade-meta">
-          <div className="nade-meta-item">
-            <h4>Type</h4>
-            <span>{nade.type ? nadeTypeString(nade.type) : "Not set."}</span>
-          </div>
-
-          <div className="nade-meta-item">
-            <h4>Movement</h4>
-            <span>
-              {nade.movement ? capitalize(nade.movement) : "Not set."}
-            </span>
-          </div>
-
-          <div className="nade-meta-item">
-            <h4>Technique</h4>
-            <span>
-              {nade.technique ? techniqueString(nade.technique) : "Not set."}
-            </span>
-          </div>
-
-          {nade.tickrate && (
-            <div className="nade-meta-item">
-              <h4>Tickrate</h4>
-              <span>{tickrateString(nade.tickrate)}</span>
-            </div>
-          )}
+      <div className="nade-meta">
+        <div className="nade-meta-item">
+          <h4>Type</h4>
+          <span>{nade.type ? nadeTypeString(nade.type) : "Not set."}</span>
         </div>
-      </EditButton>
+
+        <div className="nade-meta-item">
+          <h4>Movement</h4>
+          <span>{nade.movement ? capitalize(nade.movement) : "Not set."}</span>
+        </div>
+
+        <div className="nade-meta-item">
+          <h4>Technique</h4>
+          <span>
+            {nade.technique ? techniqueString(nade.technique) : "Not set."}
+          </span>
+        </div>
+
+        {nade.tickrate && (
+          <div className="nade-meta-item">
+            <h4>Tickrate</h4>
+            <span>{tickrateString(nade.tickrate)}</span>
+          </div>
+        )}
+      </div>
       <style jsx>{`
         .nade-meta {
           display: flex;

@@ -136,3 +136,18 @@ export function sortByDate(a: Date | string, b: Date | string) {
   const second = new Date(b);
   return first > second ? -1 : first < second ? 1 : 0;
 }
+
+export function generateTitle(
+  title?: string,
+  starPosition?: string,
+  endPosition?: string,
+  nadeType?: NadeType
+) {
+  if (starPosition && endPosition && nadeType) {
+    return `${endPosition} ${capitalize(nadeType)} from ${starPosition}`;
+  } else if (title) {
+    return title;
+  } else {
+    return "No Title";
+  }
+}

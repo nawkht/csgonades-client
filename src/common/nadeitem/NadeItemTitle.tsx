@@ -1,19 +1,27 @@
 import { FC, useMemo } from "react";
 import { Status } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { iconFromType } from "../../utils/Common";
+import { iconFromType, generateTitle } from "../../utils/Common";
 import { NadeType } from "../../models/Nade/NadeType";
 
 type Props = {
   type?: NadeType;
   title?: string;
+  startPosition?: string;
+  endPosition?: string;
   status: Status;
 };
 
-export const NadeItemTitle: FC<Props> = ({ title, type, status }) => {
+export const NadeItemTitle: FC<Props> = ({
+  title,
+  type,
+  status,
+  startPosition,
+  endPosition,
+}) => {
   const { colors } = useTheme();
   const iconUrl = iconFromType(type);
-  const gtitle = title || "No title...";
+  const generatedTitle = generateTitle(title, startPosition, endPosition, type);
 
   const titleClassName = useMemo(() => {
     const classNames = ["title"];
@@ -37,7 +45,7 @@ export const NadeItemTitle: FC<Props> = ({ title, type, status }) => {
           />
         )}
 
-        <div className="title-text">{gtitle}</div>
+        <div className="title-text">{generatedTitle}</div>
       </div>
       <style jsx>{`
         .title {

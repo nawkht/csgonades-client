@@ -12,17 +12,65 @@ import { DescriptionInput } from "./components/DescriptionInput";
 import { ImageSelector } from "./components/ImageSelector";
 import { MovementSelector } from "./components/MovementSelector";
 import { TechniqueSelector } from "./components/TechniqueSelector";
-import { useCreateNadeState } from "./CreateNadeReducer";
+import { useCreateNadeState, validateState } from "./CreateNadeReducer";
 import { PreviewNade } from "./PreviewNades";
 import { ImageUploader } from "../newnade/ImageUploader";
 import { MapPositionEditor } from "../nades/components/MapPositionEditor";
 import { SumbitBtn } from "./components/SubmitBtn";
+import { NadeApi } from "../api/NadeApi";
+import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";
+import { useDisplayToast } from "../store/ToastStore/hooks/useDisplayToast";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 export const CreateNadePage: FC<Props> = ({}) => {
+  const router = useRouter();
+  const showToast = useDisplayToast();
+  const getToken = useGetOrUpdateToken();
   const { colors } = useTheme();
   const { state, dispatch, disableSubmit } = useCreateNadeState();
+
+  async function onSubmit() {
+    const validState = validateState(state);
+    if (!validState) {
+      console.warn("Something missing");
+      return;
+    }
+
+    const body = validState;
+    const token = await getToken();
+
+    if (!token) {
+      return showToast({
+        severity: "error",
+        message:
+          "Looks like your not signed in. Try signing out, and then in again.",
+        durationSeconds: 15,
+      });
+    }
+
+    const res = await NadeApi.save(body, token);
+
+    if (res.isErr()) {
+      return showToast({
+        severity: "error",
+        message: "Failed to add nade, check if you forgot to add something",
+        durationSeconds: 15,
+      });
+    }
+
+    const newNade = res.value;
+
+    showToast({
+      severity: "success",
+      message:
+        "Nade added! A moderator will take a look and accept it if it looks good.",
+      durationSeconds: 10,
+    });
+
+    router.push(`/nades/[nade]`, `/nades/${newNade.id}`);
+  }
 
   return (
     <>
@@ -132,7 +180,7 @@ export const CreateNadePage: FC<Props> = ({}) => {
           </div>
 
           <div id="submit">
-            <SumbitBtn disabled={disableSubmit} />
+            <SumbitBtn onSubmit={onSubmit} disabled={disableSubmit} />
           </div>
 
           {state.showImageAdder && (

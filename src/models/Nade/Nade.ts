@@ -19,6 +19,8 @@ export type MapCoordinates = {
 export type Nade = {
   id: string;
   title: string;
+  startPosition?: string;
+  endPosition?: string;
   slug?: string;
   description?: string;
   gfycat: GfycatData;
@@ -47,6 +49,8 @@ export type NadeLight = {
   id: string;
   status: Status;
   title?: string;
+  startPosition?: string;
+  endPosition?: string;
   slug?: string;
   gfycat: GfycatData;
   images: NadeImages;

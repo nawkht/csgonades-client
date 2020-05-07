@@ -5,10 +5,10 @@ import { CsgoMap } from "../models/Nade/CsGoMap";
 import { GfycatData } from "../models/Nade/GfycatData";
 import {
   Nade,
-  NadeBody,
   NadeLight,
   NadeStatusDTO,
   NadeUpdateBody,
+  NadeCreateBody,
 } from "../models/Nade/Nade";
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
@@ -102,7 +102,7 @@ export class NadeApi {
     }
   }
 
-  static async save(nadeBody: NadeBody, token: string): AppResult<Nade> {
+  static async save(nadeBody: NadeCreateBody, token: string): AppResult<Nade> {
     try {
       const res = await axios.post(`${Config.API_URL}/nades`, nadeBody, {
         headers: { Authorization: token },

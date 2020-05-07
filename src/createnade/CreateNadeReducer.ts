@@ -8,6 +8,7 @@ import { Technique } from "../models/Nade/Technique";
 
 interface CreateNadeState extends Partial<NadeCreateBody> {
   showImageAdder: boolean;
+  loading: boolean;
 }
 
 type SetMap = {
@@ -64,6 +65,14 @@ type SetTechnique = {
   technique: Technique;
 };
 
+type SetLoading = {
+  type: "CreateNade/SetLoading";
+};
+
+type SetNotLoading = {
+  type: "CreateNade/SetNotLoading";
+};
+
 type Actions =
   | SetMap
   | SetGfyData
@@ -75,7 +84,9 @@ type Actions =
   | SetImage
   | ShowImageSelector
   | SetEndPosCoords
-  | SetTechnique;
+  | SetTechnique
+  | SetLoading
+  | SetNotLoading;
 
 const reducer: Reducer<CreateNadeState, Actions> = (state, action) => {
   switch (action.type) {
@@ -135,18 +146,28 @@ const reducer: Reducer<CreateNadeState, Actions> = (state, action) => {
         ...state,
         technique: action.technique,
       };
+    case "CreateNade/SetLoading":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "CreateNade/SetNotLoading":
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }
 };
 
 export const useCreateNadeState = () => {
-  const [state, dispatch] = useReducer(reducer, { showImageAdder: false });
+  const [state, dispatch] = useReducer(reducer, {
+    showImageAdder: false,
+    loading: false,
+  });
 
   const disableSubmit = useMemo(() => {
-    console.log({
-      state,
-    });
     if (
       !state.map ||
       !state.description ||
@@ -168,5 +189,50 @@ export const useCreateNadeState = () => {
     state,
     dispatch,
     disableSubmit,
+  };
+};
+
+export const validateState = (
+  state: CreateNadeState
+): NadeCreateBody | false => {
+  const {
+    map,
+    description,
+    endPosition,
+    gfycat,
+    imageBase64,
+    mapEndCoord,
+    movement,
+    startPosition,
+    technique,
+    type,
+    tickrate,
+  } = state;
+  if (
+    !map ||
+    !description ||
+    !endPosition ||
+    !gfycat ||
+    !imageBase64 ||
+    !mapEndCoord ||
+    !movement ||
+    !startPosition ||
+    !technique ||
+    !type
+  ) {
+    return false;
+  }
+  return {
+    map,
+    description,
+    endPosition,
+    gfycat,
+    imageBase64,
+    mapEndCoord,
+    movement,
+    startPosition,
+    technique,
+    type,
+    tickrate,
   };
 };

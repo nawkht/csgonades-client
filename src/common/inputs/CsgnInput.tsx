@@ -5,6 +5,7 @@ import { Popup } from "semantic-ui-react";
 
 type Props = {
   label?: string;
+  initialValue?: string;
   value?: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -14,6 +15,7 @@ type Props = {
 export const CsgnInput: FC<Props> = ({
   onChange,
   value,
+  initialValue,
   label,
   placeholder,
   required,
@@ -43,6 +45,7 @@ export const CsgnInput: FC<Props> = ({
         )}
         <input
           value={value}
+          defaultValue={initialValue}
           placeholder={placeholder}
           onBlur={(e) => onChange(e.target.value)}
         ></input>

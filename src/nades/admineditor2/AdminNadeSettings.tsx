@@ -64,7 +64,7 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
         <h3>Delete</h3>
         <CsgnInput
           label={`Write "DELETE"`}
-          value={deleteConfimMessage}
+          initialValue={deleteConfimMessage}
           onChange={setDeleteConfimMessage}
         />
         <button onClick={onDelete}>Delete</button>

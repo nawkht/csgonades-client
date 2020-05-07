@@ -4,15 +4,14 @@ import { Nade } from "../models/Nade/Nade";
 
 type Props = {
   nade: Nade;
-  onEditDescription: () => void;
 };
 
-export const NadeInfoContainer: FC<Props> = ({ nade, onEditDescription }) => {
+export const NadeInfoContainer: FC<Props> = ({ nade }) => {
   return (
     <>
       <div className="nade-info">
         <div className="nade-info-description">
-          <NadeInfo nade={nade} onEditTitle={onEditDescription} />
+          <NadeInfo nade={nade} />
         </div>
       </div>
       <style jsx>{`

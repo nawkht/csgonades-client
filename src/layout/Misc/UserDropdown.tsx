@@ -23,7 +23,7 @@ export const UserDropdown: FC<Props> = ({ user }) => {
   }
 
   function onAddNade() {
-    router.push("/newnade");
+    router.push("/createnade");
   }
 
   return (

@@ -1,13 +1,14 @@
 import { FC } from "react";
 
 type Props = {
+  onSubmit: () => void;
   disabled?: boolean;
 };
 
-export const SumbitBtn: FC<Props> = ({ disabled }) => {
+export const SumbitBtn: FC<Props> = ({ disabled, onSubmit }) => {
   return (
     <>
-      <button disabled={disabled} className="sumbit-btn">
+      <button onClick={onSubmit} disabled={disabled} className="sumbit-btn">
         SUBMIT
       </button>
       <style jsx>{`
