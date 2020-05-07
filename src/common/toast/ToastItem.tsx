@@ -59,17 +59,16 @@ export const ToastItem: FC<Props> = memo(({ notification }) => {
         .notification-item {
           position: relative;
           background: ${colors.DP02};
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
           color: ${colors.TEXT};
           display: inline-block;
-          border-radius: 0.25rem;
+          border-radius: 5px;
           opacity: 1;
-          transition: opacity 0.5s;
+          transition: opacity 0.15s;
           display: flex;
           flex-direction: column;
-          margin-top: 12px;
-          min-width: 200px;
+          margin-bottom: 12px;
+          width: 250px;
           opacity: 0;
           animation-name: fadeIn;
           animation-duration: 1s;
@@ -79,7 +78,7 @@ export const ToastItem: FC<Props> = memo(({ notification }) => {
         }
 
         .toast-title {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          background: ${colors.DP01};
           padding: 8px 12px;
           display: flex;
           justify-content: space-between;

@@ -5,6 +5,7 @@ import { User } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { useFinishProfile } from "../store/UsersStore/hooks/useFinishProfile";
 import { Dimensions } from "../constants/Constants";
+import { useDisplayToast } from "../store/ToastStore/hooks/useDisplayToast";
 
 type Props = { user: User };
 
@@ -16,6 +17,7 @@ export const FinishProfile: FC<Props> = ({ user }) => {
   const [bio, setBio] = useState(user.bio);
   const [error, setError] = useState<string | undefined>();
   const { colors } = useTheme();
+  const displayToast = useDisplayToast();
 
   function onSubmit() {
     if (nickname.includes("@")) {
@@ -30,6 +32,13 @@ export const FinishProfile: FC<Props> = ({ user }) => {
       nickname,
       email,
       bio,
+    });
+    displayToast({
+      severity: "success",
+      message:
+        "Your profile is ready! Btw, come join the rest of us on Discord 😎 You can find the link to join on the bottom of the website.",
+      title: "All set!",
+      durationSeconds: 30,
     });
     Router.push("/");
   }
