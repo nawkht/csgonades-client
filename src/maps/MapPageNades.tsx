@@ -53,6 +53,11 @@ export const MapPageNades: FC<Props> = memo(({ allNades }) => {
               <DiscordJoinAction />
             </div>
           }
+          secondRowRightComp={
+            <div className="ph-incontent">
+              <AdUnit tagType="300x250-incontent" />
+            </div>
+          }
         />
       </div>
       <style jsx>{`

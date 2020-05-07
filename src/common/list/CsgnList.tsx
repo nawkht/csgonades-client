@@ -29,7 +29,7 @@ const List: FC<Props<any>> = memo(
     const numItems = data.length;
     const isEmpty = numItems === 0;
 
-    const displayFirstAd = numItems > 10;
+    const displayFirstAd = numItems >= 15;
 
     return (
       <>
@@ -85,7 +85,7 @@ const List: FC<Props<any>> = memo(
           }
 
           .second-row-comp {
-            order: 10;
+            order: 13;
           }
 
           @media only screen and (max-width: 975px) {
@@ -97,7 +97,7 @@ const List: FC<Props<any>> = memo(
             }
 
             .second-row-comp {
-              order: 1;
+              order: 13;
             }
           }
 
