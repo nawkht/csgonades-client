@@ -1,17 +1,17 @@
 import { FC } from "react";
 import { CsgnTextArea } from "../../common/inputs/CsgnTextArea";
 
-type Props = {};
+type Props = {
+  onChange: (value: string) => void;
+};
 
-export const DescriptionInput: FC<Props> = ({}) => {
+export const DescriptionInput: FC<Props> = ({ onChange }) => {
   return (
     <>
       <CsgnTextArea
         placeholder="Write how to perform the throw."
         label="Description"
-        onChange={() => {
-          // no-op
-        }}
+        onChange={onChange}
       />
     </>
   );

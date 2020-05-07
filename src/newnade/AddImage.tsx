@@ -1,20 +1,13 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Message } from "semantic-ui-react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { ImageUploader } from "./ImageUploader";
 
 type Props = {
   onAddImage: (imageData: string) => void;
 };
 
-export const AddImage: FC<Props> = ({ onAddImage }) => {
-  const [loading, setLoading] = useState(false);
+export const AddImage: FC<Props> = ({}) => {
   const { colors } = useTheme();
-
-  function addImage(image: string) {
-    setLoading(true);
-    onAddImage(image);
-  }
 
   return (
     <>
@@ -31,7 +24,6 @@ export const AddImage: FC<Props> = ({ onAddImage }) => {
             r_drawviewmodel 1; cl_draw_only_deathnotices 1; cl_drawhud 1
           </code>
         </Message>
-        <ImageUploader loading={loading} onImageCropped={addImage} />
       </div>
       <style jsx>{`
         h2 {

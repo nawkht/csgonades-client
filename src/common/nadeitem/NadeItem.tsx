@@ -25,11 +25,30 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
           style={{ display: "inline-block" }}
           onClick={onItemClick}
         >
-          <NadeItemTitle nade={nade} />
+          <NadeItemTitle
+            type={nade.type}
+            status={nade.status}
+            title={nade.title}
+          />
           <div className="video">
-            <GfycatThumbnail nade={nade} />
+            <GfycatThumbnail
+              nadeId={nade.id}
+              smallVideoUrl={nade.gfycat.smallVideoUrl}
+              thumbnailUrl={nade.images.thumbnailUrl}
+              avgColor={nade.gfycat.avgColor}
+              nadeSlug={nade.slug}
+            />
           </div>
-          <NadeStats nade={nade} />
+          <NadeStats
+            commentCount={nade.commentCount}
+            createdAt={nade.createdAt}
+            favoriteCount={nade.favoriteCount}
+            viewCount={nade.viewCount}
+            isFavorited={nade.isFavorited}
+            movement={nade.movement}
+            technique={nade.technique}
+            tickrate={nade.tickrate}
+          />
         </div>
       </PageLink>
       <style jsx>{`

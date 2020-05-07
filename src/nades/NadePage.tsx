@@ -14,7 +14,6 @@ import NadeStatus from "./components/NadeStatus";
 import TitleEditor from "./editcontainers/TitleEditor";
 import DecriptionEditor from "./editcontainers/DescriptionEditor";
 import MetaEditor from "./editcontainers/MetaEditor";
-import MapPositionEditor from "./components/MapPositionEditor";
 import AdminEditor from "./admineditor2/AdminEditor";
 import { ArticleJsonLd } from "next-seo";
 import { descriptionSimplify } from "../utils/Common";
@@ -158,9 +157,6 @@ export const NadePage: FC = memo(() => {
             </div>
             <div className="nade-action">
               <ReportNadeButton nadeId={nade.id} />
-            </div>
-            <div className="nade-action">
-              {allowEdit && <MapPositionEditor nade={nade} />}
             </div>
           </div>
 

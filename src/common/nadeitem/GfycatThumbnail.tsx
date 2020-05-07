@@ -1,16 +1,27 @@
 import { FC, SyntheticEvent, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { SeekBar } from "../SeekBar";
 import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
 import { isSafari } from "react-device-detect";
 
 type Props = {
-  nade: NadeLight | Nade;
+  disableAction?: boolean;
+  nadeId: string;
+  nadeSlug?: string;
+  thumbnailUrl?: string;
+  smallVideoUrl?: string;
+  avgColor?: string;
 };
 
-export const GfycatThumbnail: FC<Props> = ({ nade }) => {
+export const GfycatThumbnail: FC<Props> = ({
+  thumbnailUrl,
+  smallVideoUrl,
+  nadeId,
+  nadeSlug,
+  disableAction,
+  avgColor,
+}) => {
   const [hovering, setHovering] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -44,15 +55,17 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
         onMouseLeave={onMouseLeave}
       >
         <div className="front">
-          <LazyLoadImage
-            effect="blur"
-            alt={`nade thumbnail`}
-            src={nade.images.thumbnailUrl} // use normal <img> attributes as props
-            width={"100%"}
-          />
+          {thumbnailUrl && (
+            <LazyLoadImage
+              effect="blur"
+              alt={`nade thumbnail`}
+              src={thumbnailUrl} // use normal <img> attributes as props
+              width={"100%"}
+            />
+          )}
         </div>
 
-        {hovering && (
+        {hovering && !!smallVideoUrl && (
           <div className="back">
             <video
               autoPlay
@@ -60,15 +73,19 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
               loop
               playsInline
               controls={false}
-              poster={nade.images.thumbnailUrl}
+              poster={thumbnailUrl}
               onTimeUpdate={onVideoTimeUpdate}
               onLoadStart={onLoad}
             >
-              <source src={nade.gfycat.smallVideoUrl} type="video/mp4" />
+              <source src={smallVideoUrl} type="video/mp4" />
             </video>
             <SeekBar progress={progress} />
             <GfycatThumbnailControls />
-            <NadeItemFavBtn nade={nade} />
+            <NadeItemFavBtn
+              nadeId={nadeId}
+              slug={nadeSlug}
+              disableAction={disableAction}
+            />
           </div>
         )}
       </div>
@@ -84,7 +101,7 @@ export const GfycatThumbnail: FC<Props> = ({ nade }) => {
           overflow: hidden;
           display: block;
           padding-top: 56.25%;
-          background: ${nade.gfycat.avgColor || "black"};
+          background: ${avgColor || "black"};
         }
 
         .front {

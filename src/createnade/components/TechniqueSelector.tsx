@@ -3,17 +3,17 @@ import { MiniLabel } from "./MiniLabel";
 import { CsGnDropdown } from "./CsGnDropdown";
 import { Technique, nadeTechniqueOptions } from "../../models/Nade/Technique";
 
-type Props = {};
+type Props = {
+  onChange: (tech: Technique) => void;
+};
 
-export const TechniqueSelector: FC<Props> = ({}) => {
+export const TechniqueSelector: FC<Props> = ({ onChange }) => {
   return (
     <>
       <MiniLabel value="Technique" />
       <CsGnDropdown<Technique>
         options={nadeTechniqueOptions()}
-        onChange={() => {
-          //no-op
-        }}
+        onChange={onChange}
       />
     </>
   );

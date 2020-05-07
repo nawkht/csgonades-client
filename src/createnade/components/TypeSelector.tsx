@@ -1,21 +1,17 @@
 import { FC } from "react";
 import { MiniLabel } from "./MiniLabel";
 import { CsGnDropdown } from "./CsGnDropdown";
-import { nadeTypeOptions } from "../../models/Nade/NadeType";
+import { nadeTypeOptions, NadeType } from "../../models/Nade/NadeType";
 
-type Props = {};
+type Props = {
+  onChange: (nadeType: NadeType) => void;
+};
 
-export const TypeSelector: FC<Props> = ({}) => {
+export const TypeSelector: FC<Props> = ({ onChange }) => {
   return (
     <>
       <MiniLabel value="Type" />
-      <CsGnDropdown
-        options={nadeTypeOptions()}
-        onChange={() => {
-          //no-op
-        }}
-      />
-      <style jsx>{``}</style>
+      <CsGnDropdown options={nadeTypeOptions()} onChange={onChange} />
     </>
   );
 };

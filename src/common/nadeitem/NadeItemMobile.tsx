@@ -84,7 +84,11 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           </div>
         )}
 
-        <NadeItemTitle nade={nade} />
+        <NadeItemTitle
+          title={nade.title}
+          status={nade.status}
+          type={nade.type}
+        />
         <div className="media-canvas">
           <div className="media-content">
             <div className="media-image">
@@ -105,7 +109,16 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           </div>
         </div>
 
-        <NadeStats nade={nade} />
+        <NadeStats
+          commentCount={nade.commentCount}
+          createdAt={nade.createdAt}
+          favoriteCount={nade.favoriteCount}
+          viewCount={nade.viewCount}
+          isFavorited={nade.isFavorited}
+          movement={nade.movement}
+          technique={nade.technique}
+          tickrate={nade.tickrate}
+        />
       </div>
       <style jsx>{`
         .nadebox {

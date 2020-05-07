@@ -1,28 +1,30 @@
 import { FC, useMemo } from "react";
-import { Dimensions } from "../../constants/Constants";
-import { NadeLight } from "../../models/Nade/Nade";
+import { Status } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { iconFromType } from "../../utils/Common";
+import { NadeType } from "../../models/Nade/NadeType";
 
 type Props = {
-  nade: NadeLight;
+  type?: NadeType;
+  title?: string;
+  status: Status;
 };
 
-export const NadeItemTitle: FC<Props> = ({ nade }) => {
+export const NadeItemTitle: FC<Props> = ({ title, type, status }) => {
   const { colors } = useTheme();
-  const iconUrl = iconFromType(nade.type);
-  const title = nade.title || "No title...";
+  const iconUrl = iconFromType(type);
+  const gtitle = title || "No title...";
 
   const titleClassName = useMemo(() => {
     const classNames = ["title"];
-    if (nade.status === "pending") {
+    if (status === "pending") {
       classNames.push("pending");
     }
-    if (nade.status === "declined") {
+    if (status === "declined") {
       classNames.push("declined");
     }
     return classNames.join(" ");
-  }, [nade.status]);
+  }, [status]);
 
   return (
     <>
@@ -31,34 +33,36 @@ export const NadeItemTitle: FC<Props> = ({ nade }) => {
           <img
             className="nade-type-icon"
             src={iconUrl}
-            alt={`nade icon ${nade.type}`}
+            alt={`nade icon ${type}`}
           />
         )}
 
-        <span className="title-text">{title}</span>
+        <div className="title-text">{gtitle}</div>
       </div>
       <style jsx>{`
         .title {
-          padding: 10px 15px;
-          display: block;
+          position: relative;
           background: ${colors.DP02};
           color: ${colors.TEXT};
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-bottom: 1px solid ${colors.BORDER};
+          padding: 10px 15px;
+          overflow: hidden;
+        }
+
+        .nade-type-icon {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          transform: scale(1.1) translateY(20px) translateX(10px);
+          opacity: 0.9;
         }
 
         .title-text {
+          grid-area: title;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
           font-size: 18px;
-        }
-
-        .nade-type-icon {
-          width: 20px;
-          margin-right: ${Dimensions.PADDING_SMALL};
+          text-align: center;
         }
 
         .title.pending {

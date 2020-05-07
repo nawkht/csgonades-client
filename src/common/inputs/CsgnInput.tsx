@@ -44,7 +44,7 @@ export const CsgnInput: FC<Props> = ({
         <input
           value={value}
           placeholder={placeholder}
-          onChange={(e) => onChange(e.target.value)}
+          onBlur={(e) => onChange(e.target.value)}
         ></input>
       </div>
       <style jsx>{`

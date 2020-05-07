@@ -39,7 +39,6 @@ export const NotificationIndicator: FC = memo(() => {
         .notification-wrapper {
           display: flex;
           position: relative;
-          margin-right: 18px;
           align-items: center;
           font-size: 0.9em;
           z-index: 999;

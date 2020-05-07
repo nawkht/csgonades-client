@@ -12,11 +12,17 @@ import { DescriptionInput } from "./components/DescriptionInput";
 import { ImageSelector } from "./components/ImageSelector";
 import { MovementSelector } from "./components/MovementSelector";
 import { TechniqueSelector } from "./components/TechniqueSelector";
+import { useCreateNadeState } from "./CreateNadeReducer";
+import { PreviewNade } from "./PreviewNades";
+import { ImageUploader } from "../newnade/ImageUploader";
+import { MapPositionEditor } from "../nades/components/MapPositionEditor";
+import { SumbitBtn } from "./components/SubmitBtn";
 
 type Props = {};
 
 export const CreateNadePage: FC<Props> = ({}) => {
   const { colors } = useTheme();
+  const { state, dispatch, disableSubmit } = useCreateNadeState();
 
   return (
     <>
@@ -28,23 +34,41 @@ export const CreateNadePage: FC<Props> = ({}) => {
           </div>
 
           <div id="map-selector">
-            <MapSelector />
+            <MapSelector
+              onChange={(map) => dispatch({ type: "CreateNade/SetMap", map })}
+            />
           </div>
 
           <div id="gfy-input">
-            <GfyInput />
+            <GfyInput
+              onChange={(data) =>
+                dispatch({ type: "CreateNade/SetGfyData", data })
+              }
+            />
           </div>
 
           <div id="end-pos">
-            <EndPosInput />
+            <EndPosInput
+              onChange={(endPosition) =>
+                dispatch({ type: "CreateNade/SetEndPosition", endPosition })
+              }
+            />
           </div>
 
           <div id="start-pos">
-            <ThrownFromInput />
+            <ThrownFromInput
+              onChange={(startPosition) =>
+                dispatch({ type: "CreateNade/SetStartPosition", startPosition })
+              }
+            />
           </div>
 
           <div id="description">
-            <DescriptionInput />
+            <DescriptionInput
+              onChange={(description) =>
+                dispatch({ type: "CreateNade/SetDescription", description })
+              }
+            />
           </div>
 
           <div id="media-label">
@@ -52,37 +76,89 @@ export const CreateNadePage: FC<Props> = ({}) => {
           </div>
 
           <div id="result-image">
-            <ImageSelector />
+            <ImageSelector
+              imageIsSet={!!state.imageBase64}
+              onClick={() => dispatch({ type: "CreateNade/ShowImageSelector" })}
+            />
+          </div>
+
+          <div id="map-position-selector">
+            <MapPositionEditor
+              map={state.map}
+              endPos={state.mapEndCoord}
+              onSave={(coords) =>
+                dispatch({ type: "CreateNade/SetEndPosCoords", coords })
+              }
+            />
           </div>
 
           <div id="meta-label">
-            <BigLabel value="Meta data" />
+            <BigLabel value="Meta Data" />
           </div>
 
           <div id="type-selector">
-            <TypeSelector />
+            <TypeSelector
+              onChange={(nadeType) =>
+                dispatch({ type: "CreateNade/SetNadeType", nadeType })
+              }
+            />
           </div>
 
           <div id="movement-selector">
-            <MovementSelector />
+            <MovementSelector
+              onChange={(movement) =>
+                dispatch({ type: "CreateNade/SetMovement", movement })
+              }
+            />
           </div>
 
           <div id="technique-selector">
-            <TechniqueSelector />
+            <TechniqueSelector
+              onChange={(technique) =>
+                dispatch({
+                  type: "CreateNade/SetTechnique",
+                  technique,
+                })
+              }
+            />
           </div>
 
           <div id="preview-label">
             <BigLabel value="Preview" />
           </div>
 
-          <div id="preview">Preview...</div>
+          <div id="preview">
+            <PreviewNade nade={state} />
+          </div>
 
-          <button id="submit">Submit</button>
+          <div id="submit">
+            <SumbitBtn disabled={disableSubmit} />
+          </div>
+
+          {state.showImageAdder && (
+            <div id="image-adder">
+              <ImageUploader
+                onImageCropped={(image) =>
+                  dispatch({ type: "CreateNade/SetImage", image })
+                }
+              />
+            </div>
+          )}
         </div>
       </PageCentralize>
 
       <aside></aside>
       <style jsx>{`
+        #image-adder {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.9);
+          padding: ${Dimensions.GUTTER_SIZE}px;
+        }
+
         #title {
           background: ${colors.DP01};
           font-size: 24px;
@@ -95,17 +171,17 @@ export const CreateNadePage: FC<Props> = ({}) => {
         }
 
         #create-nade-page {
+          position: relative;
           display: grid;
           grid-template-columns: 1fr 300px;
           grid-template-areas:
             "infolabel medialabel"
             "mapsel resultimg"
-            "gfyip metalabel"
-            "endpos typesel"
-            "startpos movesel"
-            "desc techsel"
-            "desc ."
-            "desc previewlabel"
+            "posselector metalabel"
+            "typesel movesel"
+            "gfyip techsel"
+            "endpos previewlabel"
+            "startpos preview"
             "desc preview"
             ". submit";
           grid-row-gap: ${Dimensions.GUTTER_SIZE / 1.5}px;
@@ -115,6 +191,15 @@ export const CreateNadePage: FC<Props> = ({}) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           margin-bottom: 150px;
+        }
+
+        #map-position-selector {
+          grid-area: posselector;
+        }
+
+        #meta-label {
+          grid-area: metalabel;
+          align-self: end;
         }
 
         #preview {
@@ -157,11 +242,6 @@ export const CreateNadePage: FC<Props> = ({}) => {
           grid-area: medialabel;
         }
 
-        #meta-label {
-          grid-area: metalabel;
-          align-self: end;
-        }
-
         #type-selector {
           grid-area: typesel;
         }
@@ -176,6 +256,7 @@ export const CreateNadePage: FC<Props> = ({}) => {
 
         #preview-label {
           grid-area: previewlabel;
+          align-self: end;
         }
       `}</style>
     </>

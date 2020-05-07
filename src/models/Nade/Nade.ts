@@ -70,6 +70,20 @@ export type NadeBody = {
   imageBase64: string;
 };
 
+export type NadeCreateBody = {
+  gfycat: GfycatData;
+  imageBase64: string;
+  startPosition: string;
+  endPosition: string;
+  description: string;
+  map: CsgoMap;
+  movement: Movement;
+  technique: Technique;
+  tickrate?: Tickrate;
+  type: NadeType;
+  mapEndCoord: MapCoordinates;
+};
+
 export type NadeUpdateBody = {
   title?: string;
   description?: string;

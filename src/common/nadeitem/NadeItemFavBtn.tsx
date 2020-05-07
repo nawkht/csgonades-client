@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useIsFavoriteInProgress } from "../../store/FavoriteStore/hooks/useIsFavoriteInProgress";
 import { useIsFavorited } from "../../store/FavoriteStore/hooks/useIsFavorited";
@@ -12,15 +11,17 @@ import { useAnalytics } from "../../utils/Analytics";
 import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
 
 type Props = {
-  nade: NadeLight | Nade;
+  nadeId: string;
+  slug?: string;
+  disableAction?: boolean;
 };
 
-export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
+export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
   const { setSignInWarning } = useSignInWarning();
   const { event } = useAnalytics();
   const isSignedIn = useIsSignedIn();
   const isFavoriteInProgress = useIsFavoriteInProgress();
-  const isFavorite = useIsFavorited(nade.id);
+  const isFavorite = useIsFavorited(nadeId);
   const addFavorite = useAddFavorite();
   const unFavorite = useUnfavorite();
   const { incrementNadeFavCount, decrementNadeFavCount } = useMapFavCount();
@@ -37,19 +38,19 @@ export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
     }
     if (isFavorite) {
       unFavorite(isFavorite.id);
-      decrementNadeFavCount(nade.id);
+      decrementNadeFavCount(nadeId);
       event({
         category: "Favorite",
         action: "Unfavorite from Thumbnail",
-        label: nade.slug,
+        label: slug,
       });
     } else {
-      addFavorite(nade.id);
-      incrementNadeFavCount(nade.id);
+      addFavorite(nadeId);
+      incrementNadeFavCount(nadeId);
       event({
         category: "Favorite",
         action: "Favorite from Thumbnail",
-        label: nade.slug,
+        label: slug || nadeId,
       });
     }
   }
@@ -59,19 +60,22 @@ export const NadeItemFavBtn: FC<Props> = ({ nade }) => {
 
   return (
     <>
-      <Popup
-        inverted
-        trigger={
-          <div className="fav-btn" onClick={onFavorite}>
-            {isFavoriteInProgress && <FaSpinner style={{ color: "#fff" }} />}
-            {!isFavoriteInProgress && isFavorite && <FaTimes />}
-            {!isFavoriteInProgress && !isFavorite && <FaStar />}
-          </div>
-        }
-        size="mini"
-        position="left center"
-        content={favoriteText}
-      ></Popup>
+      {!disableAction && (
+        <Popup
+          inverted
+          trigger={
+            <div className="fav-btn" onClick={onFavorite}>
+              {isFavoriteInProgress && <FaSpinner style={{ color: "#fff" }} />}
+              {!isFavoriteInProgress && isFavorite && <FaTimes />}
+              {!isFavoriteInProgress && !isFavorite && <FaStar />}
+            </div>
+          }
+          size="mini"
+          position="left center"
+          content={favoriteText}
+        ></Popup>
+      )}
+
       <style jsx>{`
         .icon-wrap {
           border: 1px solid red;

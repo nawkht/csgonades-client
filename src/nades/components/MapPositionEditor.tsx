@@ -1,62 +1,72 @@
 import { FC, useState } from "react";
-import { Button } from "semantic-ui-react";
-import { MapCoordinates, Nade } from "../../models/Nade/Nade";
-import { useCanEditNade } from "../../store/NadeStore/hooks/useCanEditNade";
-import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
+import { MapCoordinates } from "../../models/Nade/Nade";
 import { MapPositionModal } from "./MapPositionModal";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
-  nade: Nade;
+  onSave: (coords: MapCoordinates) => void;
+  map?: CsgoMap;
+  endPos?: MapCoordinates;
 };
 
-const MapPositionEditor: FC<Props> = ({ nade }) => {
-  const allowEdit = useCanEditNade(nade);
-  const updateNade = useUpdateNade();
-
+export const MapPositionEditor: FC<Props> = ({ onSave, map, endPos }) => {
+  const { colors } = useTheme();
   const [showPositionEditor, setShowPositionEditor] = useState(false);
 
   const toggleEditor = () => {
     setShowPositionEditor(!showPositionEditor);
   };
 
-  const onPositionSave = (coords: MapCoordinates) => {
+  function onSavePos(pos: MapCoordinates) {
     setShowPositionEditor(false);
-    updateNade(nade.id, {
-      mapEndCoord: coords,
-    });
-  };
-
-  if (!allowEdit || !nade.map) {
-    return null;
+    onSave(pos);
   }
 
   return (
     <>
-      <div className="position-btn">
-        <Button
-          fluid
-          content="Set position"
-          icon="location arrow"
-          labelPosition="left"
-          color="orange"
-          onClick={toggleEditor}
+      <button className="position-btn" onClick={toggleEditor} disabled={!map}>
+        SET OVERVIEW POSITION
+      </button>
+      {!!map && (
+        <MapPositionModal
+          onSave={onSavePos}
+          visible={showPositionEditor}
+          map={map}
+          mapEndCoord={endPos}
+          onDismiss={toggleEditor}
         />
-      </div>
-      <MapPositionModal
-        onSave={onPositionSave}
-        visible={showPositionEditor}
-        map={nade.map}
-        mapEndCoord={nade.mapEndCoord}
-        onDismiss={toggleEditor}
-      />
+      )}
+
       <style jsx>{`
         .position-btn {
-          max-width: 150px;
-          margin: 0 auto;
-          padding-bottom: 30px;
+          width: 100%;
+          background: ${colors.filterBg};
+          color: white;
+          border: none;
+          outline: none;
+          height: 41px;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          font-size: 14px;
+          cursor: pointer;
+        }
+
+        .position-btn:hover {
+          background: ${colors.filterBgHover};
+        }
+
+        .position-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .position-btn:disabled:hover {
+          background: ${colors.filterBg};
         }
       `}</style>
     </>
   );
 };
-export default MapPositionEditor;

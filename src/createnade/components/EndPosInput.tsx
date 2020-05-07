@@ -1,18 +1,17 @@
 import { FC } from "react";
 import { CsgnInput } from "../../common/inputs/CsgnInput";
 
-type Props = {};
+type Props = {
+  onChange: (value: string) => void;
+};
 
-export const EndPosInput: FC<Props> = ({}) => {
+export const EndPosInput: FC<Props> = ({ onChange }) => {
   return (
     <>
       <CsgnInput
-        required
         label="Nade end location"
         placeholder="Example: XBox"
-        onChange={() => {
-          // no-op
-        }}
+        onChange={onChange}
       />
     </>
   );

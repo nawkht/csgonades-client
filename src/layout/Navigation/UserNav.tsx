@@ -1,15 +1,12 @@
-import { useRouter } from "next/router";
 import { FC, memo } from "react";
-import { FaPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { ButtonWithIcon } from "../../common/ButtonWithIcon";
 import { NotificationIndicator } from "../../common/notifications/NotificationIndicator";
 import { userSelector } from "../../store/AuthStore/AuthSelectors";
 import { SignInnButton } from "../Misc/SignInnButton";
 import { UserDropdown } from "../Misc/UserDropdown";
+import { Dimensions } from "../../constants/Constants";
 
 export const UserNav: FC = memo(() => {
-  const router = useRouter();
   const user = useSelector(userSelector);
 
   if (!user) {
@@ -21,17 +18,6 @@ export const UserNav: FC = memo(() => {
           <div id="noti-ind">
             <NotificationIndicator />
           </div>
-          <div id="user-new-nade">
-            <ButtonWithIcon
-              onClick={() => {
-                router.push("/newnade", "/newnade");
-              }}
-              small
-              icon={<FaPlus />}
-              value="ADD NADE"
-              backgroundColor="#56a100"
-            />
-          </div>
           <UserDropdown user={user} />
         </div>
         <style jsx>{`
@@ -41,8 +27,8 @@ export const UserNav: FC = memo(() => {
             align-items: center;
           }
 
-          #user-new-nade {
-            margin-right: 20px;
+          #noti-ind {
+            margin-right: ${Dimensions.GUTTER_SIZE}px;
           }
 
           @media only screen and (max-width: 930px) {

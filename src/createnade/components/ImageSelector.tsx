@@ -2,15 +2,25 @@ import { FC } from "react";
 import { MiniLabel } from "./MiniLabel";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
-type Props = {};
+type Props = {
+  onClick: () => void;
+  imageIsSet?: boolean;
+};
 
-export const ImageSelector: FC<Props> = ({}) => {
+export const ImageSelector: FC<Props> = ({ onClick, imageIsSet }) => {
   const { colors } = useTheme();
+
+  const msgString = imageIsSet
+    ? "CHANGE IMAGE (ONLY JPG)"
+    : "SET IMAGE (ONLY JPG)";
 
   return (
     <>
       <MiniLabel value="Result image" />
-      <button className="image-selector">SET IMAGE</button>
+
+      <button onClick={onClick} className="image-selector">
+        {msgString}
+      </button>
       <style jsx>{`
         .image-selector {
           width: 100%;

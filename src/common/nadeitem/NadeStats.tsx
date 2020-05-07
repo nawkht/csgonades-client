@@ -2,23 +2,40 @@ import { FC } from "react";
 import { FaRunning, FaComment } from "react-icons/fa";
 import { TiStarFullOutline } from "react-icons/ti";
 import { GoEye, GoTerminal } from "react-icons/go";
-import { NadeLight, Nade } from "../../models/Nade/Nade";
 import { tickrateString, Tickrate } from "../../models/Nade/NadeTickrate";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { kFormatter } from "../../utils/Common";
 import { dateMinutesAgo } from "../../utils/DateUtils";
 import { Popup } from "semantic-ui-react";
+import { Movement } from "../../models/Nade/NadeMovement";
+import { Technique } from "../../models/Nade/Technique";
 
 type Props = {
-  nade: NadeLight | Nade;
+  isFavorited?: boolean;
+  technique?: Technique;
+  movement?: Movement;
+  tickrate?: Tickrate;
+  createdAt: Date | string;
+  viewCount: number;
+  favoriteCount: number;
+  commentCount: number;
 };
 
 const VIEW_COUNT_ENABLED = false;
 
-export const NadeStats: FC<Props> = ({ nade }) => {
+export const NadeStats: FC<Props> = ({
+  isFavorited,
+  tickrate,
+  technique,
+  movement,
+  createdAt,
+  viewCount,
+  favoriteCount,
+  commentCount,
+}) => {
   const { colors } = useTheme();
-  const favoriteIconColor = nade.isFavorited ? colors.FAV_YELLOW : colors.TEXT;
-  const favIcon = nade.isFavorited ? (
+  const favoriteIconColor = isFavorited ? colors.FAV_YELLOW : colors.TEXT;
+  const favIcon = isFavorited ? (
     <TiStarFullOutline
       color={favoriteIconColor}
       style={{ position: "relative", top: -1, fontSize: 19 }}
@@ -29,9 +46,12 @@ export const NadeStats: FC<Props> = ({ nade }) => {
       style={{ position: "relative", top: -1, fontSize: 19 }}
     />
   );
-  const hasMovement = nade.movement === "running";
-  const isJumpThrow = nade.technique === "jumpthrow" && nade.tickrate !== "any";
-  const nadeIsNew = isNew(nade.createdAt);
+  const hasMovement =
+    movement === "running" ||
+    movement === "crouchwalking" ||
+    movement === "walking";
+  const isJumpThrow = technique === "jumpthrow" && tickrate !== "any";
+  const nadeIsNew = isNew(createdAt);
 
   return (
     <>
@@ -41,7 +61,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
             <div className="stat">
               <div className="stat-content">
                 <GoEye style={{ position: "relative", top: -1 }} />
-                <span className="stat-text">{kFormatter(nade.viewCount)}</span>
+                <span className="stat-text">{kFormatter(viewCount)}</span>
               </div>
             </div>
           )}
@@ -52,22 +72,22 @@ export const NadeStats: FC<Props> = ({ nade }) => {
             </div>
           )}
 
-          {nade.favoriteCount > 0 && (
+          {favoriteCount > 0 && (
             <div className="stat">
               <div className="stat-content">
                 {favIcon}
-                <span className="stat-text">{nade.favoriteCount}</span>
+                <span className="stat-text">{favoriteCount}</span>
               </div>
             </div>
           )}
 
-          {nade.commentCount > 0 && (
+          {commentCount > 0 && (
             <div className="stat">
               <div className="stat-content">
                 <FaComment
                   style={{ position: "relative", top: -1, color: colors.TEXT }}
                 />
-                <span className="stat-text">{nade.commentCount}</span>
+                <span className="stat-text">{commentCount}</span>
               </div>
             </div>
           )}
@@ -89,7 +109,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
 
           {isJumpThrow && (
             <Popup
-              content={tickrateTooltip(nade.tickrate)}
+              content={tickrateTooltip(tickrate)}
               position="top center"
               inverted
               size="tiny"
@@ -97,7 +117,7 @@ export const NadeStats: FC<Props> = ({ nade }) => {
                 <div className="special tick">
                   <GoTerminal style={{ position: "relative", top: -1 }} />
                   <span className="special-text">
-                    {tickrateString(nade.tickrate || "any")}
+                    {tickrateString(tickrate || "any")}
                   </span>
                 </div>
               }

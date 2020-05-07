@@ -1,18 +1,17 @@
 import { FC } from "react";
 import { CsgnInput } from "../../common/inputs/CsgnInput";
 
-type Props = {};
+type Props = {
+  onChange: (value: string) => void;
+};
 
-export const ThrownFromInput: FC<Props> = ({}) => {
+export const ThrownFromInput: FC<Props> = ({ onChange }) => {
   return (
     <>
       <CsgnInput
-        required
         label="Thrown from"
         placeholder="Example: T Spawn"
-        onChange={() => {
-          // no-op
-        }}
+        onChange={onChange}
       />
     </>
   );

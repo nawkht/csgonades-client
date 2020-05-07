@@ -4,10 +4,9 @@ import { Button } from "semantic-ui-react";
 
 type Props = {
   onImageCropped: (croppedImageBase64: string) => void;
-  loading: boolean;
 };
 
-export const ImageUploader = ({ onImageCropped, loading }: Props) => {
+export const ImageUploader = ({ onImageCropped }: Props) => {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -93,7 +92,7 @@ export const ImageUploader = ({ onImageCropped, loading }: Props) => {
 
     return new Promise((resolve, reject) => {
       canvas.toBlob(
-        blob => {
+        (blob) => {
           if (!blob) {
             console.error("Failed to load image blob");
             return reject("Failed to load image blob");
@@ -119,23 +118,13 @@ export const ImageUploader = ({ onImageCropped, loading }: Props) => {
           onChange={onSelectFile}
         />
         <div className="file-selector-btn">
-          <Button
-            loading={loading}
-            disabled={loading}
-            onClick={onSelectFileClick}
-            color="teal"
-          >
+          <Button onClick={onSelectFileClick} color="teal">
             Add image
           </Button>
           {image && (
             <>
               <br />
-              <Button
-                loading={loading}
-                disabled={loading}
-                positive
-                onClick={cropImage}
-              >
+              <Button positive onClick={cropImage}>
                 Submit
               </Button>
             </>

@@ -1,56 +1,18 @@
 import { FC, useState } from "react";
 import { Message, Step } from "semantic-ui-react";
-import { NadeApi } from "../api/NadeApi";
-import { GfycatData } from "../models/Nade/GfycatData";
-import { NadeBody } from "../models/Nade/Nade";
-import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { redirectNadePage } from "../utils/Common";
 import { AddGfycat } from "./AddGfycat";
-import { AddImage } from "./AddImage";
 import { PageCentralize } from "../common/PageCentralize";
 
 type NewNadeStep = "gfycat" | "result-img";
 
 export const NewNadePage: FC = () => {
-  const getToken = useGetOrUpdateToken();
   const [currentStep, setCurrentStep] = useState<NewNadeStep>("gfycat");
   const { colors } = useTheme();
-  const [gfyData, setGfyData] = useState<GfycatData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  function onGfycatAdded(gfyData: GfycatData) {
-    setGfyData(gfyData);
+  function onGfycatAdded() {
     setCurrentStep("result-img");
-  }
-
-  async function onAddImage(imageData: string) {
-    const token = await getToken();
-    if (!token) {
-      setError("You need to be signed in to add a nade");
-      return;
-    }
-
-    if (!gfyData) {
-      setError("Missing gfycat video, you forgot a step.");
-      return;
-    }
-
-    const nadeBody: NadeBody = {
-      imageBase64: imageData,
-      gfycatIdOrUrl: gfyData.gfyId,
-    };
-
-    const result = await NadeApi.save(nadeBody, token);
-
-    if (result.isErr()) {
-      setError("Failed to submit, try again or the service might be down.");
-      return;
-    }
-
-    const { id } = result.value;
-
-    redirectNadePage(id);
   }
 
   function onGfyStepClick() {
@@ -99,9 +61,7 @@ export const NewNadePage: FC = () => {
                 clearError={() => setError(null)}
               />
             )}
-            {currentStep === "result-img" && (
-              <AddImage onAddImage={onAddImage} />
-            )}
+            {currentStep === "result-img" && <></>}
           </div>
         </div>
       </PageCentralize>

@@ -22,6 +22,10 @@ export const UserDropdown: FC<Props> = ({ user }) => {
     router.push("/users/[user]", `/users/${user.steamId}`);
   }
 
+  function onAddNade() {
+    router.push("/newnade");
+  }
+
   return (
     <>
       <div className="user-nav-user">
@@ -36,10 +40,27 @@ export const UserDropdown: FC<Props> = ({ user }) => {
           <div>
             <Dropdown text={user.nickname} direction="left">
               <Dropdown.Menu>
-                <Dropdown.Item text="Dashboard" onClick={onDashboardClick} />
-                <Dropdown.Item text="Profile" onClick={onProfileClick} />
+                <Dropdown.Item
+                  icon="plus"
+                  text="Add Nade"
+                  onClick={onAddNade}
+                />
+                <Dropdown.Item
+                  icon="dashboard"
+                  text="Dashboard"
+                  onClick={onDashboardClick}
+                />
+                <Dropdown.Item
+                  icon="user"
+                  text="Profile"
+                  onClick={onProfileClick}
+                />
                 <Dropdown.Divider />
-                <Dropdown.Item text="Sign out" onClick={signOut} />
+                <Dropdown.Item
+                  icon="sign-out"
+                  text="Sign out"
+                  onClick={signOut}
+                />
               </Dropdown.Menu>
             </Dropdown>
           </div>

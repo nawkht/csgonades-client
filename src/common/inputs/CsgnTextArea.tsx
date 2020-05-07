@@ -23,7 +23,7 @@ export const CsgnTextArea: FC<Props> = ({
         <textarea
           placeholder={placeholder}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onBlur={(e) => onChange(e.target.value)}
         />
       </div>
       <style jsx>{`
