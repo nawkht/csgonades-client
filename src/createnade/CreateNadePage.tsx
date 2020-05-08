@@ -21,6 +21,7 @@ import { NadeApi } from "../api/NadeApi";
 import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";
 import { useDisplayToast } from "../store/ToastStore/hooks/useDisplayToast";
 import { useRouter } from "next/router";
+import { SEO } from "../layout/SEO2";
 
 type Props = {};
 
@@ -75,6 +76,8 @@ export const CreateNadePage: FC<Props> = ({}) => {
   return (
     <>
       <PageCentralize>
+        <SEO title={"Submit nade"} canonical={`/createnade`} />
+
         <h1 id="title">SUBMIT NADE</h1>
         <div id="create-nade-page">
           <div id="info-label">

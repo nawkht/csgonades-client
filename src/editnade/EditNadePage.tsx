@@ -20,6 +20,7 @@ import { PreviewNade } from "../createnade/PreviewNades";
 import { SumbitBtn } from "../createnade/components/SubmitBtn";
 import { ImageUploader } from "../newnade/ImageUploader";
 import { OneWaySelector } from "../createnade/components/OneWaySelector";
+import { SEO } from "../layout/SEO2";
 
 type Props = {
   nade: Nade;
@@ -37,6 +38,12 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
   return (
     <>
       <PageCentralize>
+        <SEO
+          key={`seo-${nade.id}`}
+          title={"Edit nade"}
+          canonical={`/nades/${nade.slug || nade.id}/edit`}
+        />
+
         <h1 id="title">EDIT NADE</h1>
         <div id="edit-nade-page">
           <div id="info-label">
