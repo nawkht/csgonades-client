@@ -1,7 +1,6 @@
 import { FC, SyntheticEvent, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { SeekBar } from "../SeekBar";
-import { GfycatThumbnailControls } from "./GfycatThumbnailControls";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
 import { isSafari } from "react-device-detect";
 
@@ -80,7 +79,6 @@ export const GfycatThumbnail: FC<Props> = ({
               <source src={smallVideoUrl} type="video/mp4" />
             </video>
             <SeekBar progress={progress} />
-            <GfycatThumbnailControls />
             <NadeItemFavBtn
               nadeId={nadeId}
               slug={nadeSlug}

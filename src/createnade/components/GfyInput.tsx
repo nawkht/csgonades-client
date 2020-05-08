@@ -6,10 +6,11 @@ import { GfycatData } from "../../models/Nade/GfycatData";
 import { useDisplayToast } from "../../store/ToastStore/hooks/useDisplayToast";
 
 type Props = {
+  defaultValue?: string;
   onChange: (value: GfycatData) => void;
 };
 
-export const GfyInput: FC<Props> = ({ onChange }) => {
+export const GfyInput: FC<Props> = ({ onChange, defaultValue }) => {
   const displayToast = useDisplayToast();
 
   function onGfySet(value: string) {
@@ -34,6 +35,7 @@ export const GfyInput: FC<Props> = ({ onChange }) => {
   return (
     <>
       <CsgnInput
+        initialValue={defaultValue}
         label="Gfycat Video Url"
         placeholder="Example: https://gfycat.com/confusedwiltedamazonparrot"
         onChange={onGfySet}

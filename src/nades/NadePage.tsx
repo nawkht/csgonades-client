@@ -18,11 +18,13 @@ import { PageCentralize } from "../common/PageCentralize";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { FaChevronLeft } from "react-icons/fa";
 import { useAnalytics } from "../utils/Analytics";
+import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 
 export const NadePage: FC = memo(() => {
   const { event } = useAnalytics();
   const { colors } = useTheme();
   const nade = useNade();
+  const canEdit = useCanEditNade(nade);
 
   function onBackClick() {
     event({
@@ -87,7 +89,12 @@ export const NadePage: FC = memo(() => {
                 <FaChevronLeft />
               </button>
             </div>
-            <NadeTitle title={layoutTitle} />
+            <NadeTitle
+              title={layoutTitle}
+              canEdit={canEdit}
+              nadeId={nade.id}
+              nadeSlug={nade.slug}
+            />
           </div>
 
           <div id="nade-meta">
@@ -136,16 +143,13 @@ export const NadePage: FC = memo(() => {
       </PageCentralize>
 
       <style jsx>{`
-        #back {
-        }
-
         #back button {
-          color: white;
+          color: ${colors.TEXT};
           font-size: 24px;
           padding: 10px 20px;
           display: block;
           position: relative;
-          top: 1px;
+          top: 2px;
           background: transparent;
           border: none;
           outline: none;
@@ -272,15 +276,11 @@ export const NadePage: FC = memo(() => {
 
         #title {
           grid-area: title;
-          background: ${colors.PRIMARY};
+          background: ${colors.DP01};
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
           display: flex;
           align-items: center;
-        }
-
-        #title h1 {
-          color: white;
         }
 
         #side-bar-ad {

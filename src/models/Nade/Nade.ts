@@ -89,19 +89,19 @@ export type NadeCreateBody = {
 };
 
 export type NadeUpdateBody = {
-  title?: string;
+  gfycat?: GfycatData;
+  imageBase64?: string;
+  startPosition?: string;
+  endPosition?: string;
   description?: string;
-  gfycatIdOrUrl?: string;
   map?: CsgoMap;
   movement?: Movement;
   technique?: Technique;
   tickrate?: Tickrate;
   type?: NadeType;
-  steamId?: string;
-  status?: Status;
-  statusInfo?: StatusInfo;
-  createdAt?: Date;
   mapEndCoord?: MapCoordinates;
+  status?: Status;
+  slug?: string;
 };
 
 export type NadeStatusDTO = {

@@ -3,6 +3,7 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   label: string;
+  defaultValue?: string;
   value?: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -13,6 +14,7 @@ export const CsgnTextArea: FC<Props> = ({
   onChange,
   label,
   placeholder,
+  defaultValue,
 }) => {
   const { colors } = useTheme();
 
@@ -21,6 +23,7 @@ export const CsgnTextArea: FC<Props> = ({
       <div className="text-area-wrapper">
         <label>{label}</label>
         <textarea
+          defaultValue={defaultValue}
           placeholder={placeholder}
           value={value}
           onBlur={(e) => onChange(e.target.value)}

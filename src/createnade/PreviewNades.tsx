@@ -1,9 +1,10 @@
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { NadeCreateBody } from "../models/Nade/Nade";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "../common/nadeitem/NadeItemTitle";
 import { GfycatThumbnail } from "../common/nadeitem/GfycatThumbnail";
 import { NadeStats } from "../common/nadeitem/NadeStats";
+import { generateTitle } from "../utils/Common";
 
 type Props = {
   nade: Partial<NadeCreateBody>;
@@ -22,13 +23,7 @@ export const PreviewNade: FC<Props> = ({ nade }) => {
     tickrate,
   } = nade;
 
-  const title = useMemo(() => {
-    if (!startPosition || !endPosition || !type) {
-      return "No title";
-    }
-
-    return `${endPosition} ${type} from ${startPosition}`;
-  }, [startPosition, endPosition, type]);
+  const title = generateTitle(undefined, startPosition, endPosition, type);
 
   return (
     <>

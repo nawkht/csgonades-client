@@ -2,12 +2,13 @@ import { useState } from "react";
 import { DropdownProps, Dropdown } from "semantic-ui-react";
 
 type Props<T> = {
+  defaultValue?: T;
   onChange: (newValue: T) => void;
   options: any;
 };
 
 export function CsGnDropdown<T>(props: Props<T>) {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<any>(props.defaultValue);
 
   function onChange(_: any, data: DropdownProps) {
     const value = data.value as any;

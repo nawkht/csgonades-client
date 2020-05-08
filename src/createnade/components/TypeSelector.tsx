@@ -4,14 +4,19 @@ import { CsGnDropdown } from "./CsGnDropdown";
 import { nadeTypeOptions, NadeType } from "../../models/Nade/NadeType";
 
 type Props = {
+  defaultValue?: NadeType;
   onChange: (nadeType: NadeType) => void;
 };
 
-export const TypeSelector: FC<Props> = ({ onChange }) => {
+export const TypeSelector: FC<Props> = ({ onChange, defaultValue }) => {
   return (
     <>
       <MiniLabel value="Type" />
-      <CsGnDropdown options={nadeTypeOptions()} onChange={onChange} />
+      <CsGnDropdown
+        defaultValue={defaultValue}
+        options={nadeTypeOptions()}
+        onChange={onChange}
+      />
     </>
   );
 };

@@ -52,7 +52,7 @@ export const NadeItemTitle: FC<Props> = ({
           position: relative;
           background: ${colors.DP02};
           color: ${colors.TEXT};
-          padding: 10px 15px;
+          padding: 10px;
           overflow: hidden;
         }
 
@@ -69,7 +69,7 @@ export const NadeItemTitle: FC<Props> = ({
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          font-size: 18px;
+          font-size: 17px;
           text-align: center;
         }
 
