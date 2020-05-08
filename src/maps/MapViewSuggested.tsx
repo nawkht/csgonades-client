@@ -57,6 +57,25 @@ export const MapViewSuggested: FC<Props> = ({ nades, onDismiss }) => {
           padding: ${Dimensions.GUTTER_SIZE}px;
         }
 
+        .suggested-nades::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        /* Track */
+        .suggested-nades::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Handle */
+        .suggested-nades::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Handle on hover */
+        .suggested-nades::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.8);
+        }
+
         .title {
           color: white;
           text-transform: uppercase;
