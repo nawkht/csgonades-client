@@ -42,7 +42,7 @@ export const NadeModal: FC = memo(() => {
         </div>
 
         <div id="ph">
-          <AdUnit tagType="728x90" />
+          <AdUnit tagType="728x90" modalTop />
         </div>
 
         <div id="center">
@@ -54,7 +54,6 @@ export const NadeModal: FC = memo(() => {
       <style jsx>{`
         #ph {
           height: 90px;
-          background: rgba(255, 255, 255, 0.8);
         }
 
         #nade-modal-close {

@@ -1,4 +1,4 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { IS_PROD } from "../../constants/Constants";
 
 type AdType =
@@ -11,6 +11,7 @@ type AdType =
 type Props = {
   tagType: AdType;
   center?: boolean;
+  modalTop?: boolean;
 };
 
 type AdData = {
@@ -20,27 +21,40 @@ type AdData = {
 
 const ADS_ENABLED = true;
 
-export const AdUnit: FC<Props> = memo(({ tagType }) => {
+export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
+  const [adBlockDetected, setAdBlockDetected] = useState(false);
+
+  const className = modalTop ? "ph top" : "ph";
+
   const adData: AdData = getAdData(tagType);
   useEffect(() => {
     if (!ADS_ENABLED || !IS_PROD) {
       return;
     }
 
-    loadAdByType(adData);
+    const adBlockDisabled = loadAdByType(adData);
+    setAdBlockDetected(adBlockDisabled);
   }, [adData]);
 
   //const height = adData.size.split("x")[1];
 
+  if (adBlockDetected) {
+    return null;
+  }
+
   return (
     <>
-      <div className="ph">
+      <div className={className}>
         <CleanAdTag id={adData.id} />
       </div>
       <style jsx>{`
         .ph {
           display: flex;
           justify-content: space-around;
+        }
+
+        .top {
+          background: rgba(255, 255, 255, 0.8);
         }
       `}</style>
     </>
@@ -97,7 +111,8 @@ function loadAdByType(adData: AdData) {
       // @ts-ignore
       window._mNDetails.loadTag(adData.id, adData.size, adData.id);
     });
+    return false;
   } catch (error) {
-    console.warn("AdErr", error);
+    return true;
   }
 }
