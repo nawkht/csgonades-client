@@ -171,18 +171,18 @@ export function generateSeoTitle(
   map?: CsgoMap
 ) {
   if (oneWay && endPosition && nadeType && map) {
-    return `${endPosition} One-Way ${nadeTypeString(nadeType)} ${capitalize(
-      map
+    return `${capitalize(map)} ${endPosition} One-Way ${nadeTypeString(
+      nadeType
     )}`;
   }
   if (starPosition && endPosition && nadeType && map) {
     if (nadeType === "flash") {
-      return `${endPosition} ${nadeTypeString(nadeType)} ${capitalize(map)}`;
+      return `${capitalize(map)} ${endPosition} ${nadeTypeString(nadeType)}`;
     }
 
-    return `${endPosition} ${nadeTypeString(
+    return `${capitalize(map)} ${endPosition} ${nadeTypeString(
       nadeType
-    )} from ${starPosition} ${capitalize(map)}`;
+    )} from ${starPosition} `;
   } else if (title) {
     return title;
   } else {
