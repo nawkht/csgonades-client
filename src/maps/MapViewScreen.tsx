@@ -118,14 +118,15 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
               ))}
           </div>
         </div>
-
-        <MinSizeRender minSize={1400}>
-          <div id="fixed-right">
-            <div className="ph">
-              <AdUnit tagType="160x600" />
+        {false && (
+          <MinSizeRender minSize={1400}>
+            <div id="fixed-right">
+              <div className="ph">
+                <AdUnit tagType="160x600" />
+              </div>
             </div>
-          </div>
-        </MinSizeRender>
+          </MinSizeRender>
+        )}
       </div>
 
       <style jsx>{`
