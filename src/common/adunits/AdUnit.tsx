@@ -116,6 +116,8 @@ function loadAdByType(adData: AdData) {
 
     // @ts-ignore
     if (!window._mNDetails) {
+      return true;
+    } else {
       return false;
     }
   } catch (error) {
