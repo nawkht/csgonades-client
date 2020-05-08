@@ -85,6 +85,11 @@ const PractiseConfigBlogPost = () => {
           to retreat. If the smoke is not present, the CT can get a frag and
           move behind the wall for cover.
         </p>
+
+        <div className="a-tag">
+          <AdUnit tagType="300x250" />
+        </div>
+
         <p>
           Here are my favourites, but go over to{" "}
           <Link href="/maps/[map]" as="/maps/dust2">
@@ -115,10 +120,6 @@ const PractiseConfigBlogPost = () => {
         <div className="nade-list">
           <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-xbox" />
           <BlogNadeItem nadeSlug="flash-mid-doors-from-xbox" />
-        </div>
-
-        <div className="a-tag">
-          <AdUnit tagType="300x250" />
         </div>
 
         <h2>5. B Door Smoke</h2>
