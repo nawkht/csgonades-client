@@ -42,7 +42,8 @@ export const NadePage: FC = memo(() => {
     nade.title,
     nade.startPosition,
     nade.endPosition,
-    nade.type
+    nade.type,
+    nade.oneWay
   );
 
   return (
