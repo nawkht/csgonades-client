@@ -38,6 +38,7 @@ export const PreviewNade: FC<Props> = ({ nade }) => {
           nadeId=""
           smallVideoUrl={gfycat?.smallVideoUrl}
           thumbnailUrl={imageBase64}
+          gfyId={gfycat?.gfyId || ""}
         />
         <NadeStats
           commentCount={10}

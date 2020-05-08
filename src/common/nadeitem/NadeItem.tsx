@@ -40,6 +40,7 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
               thumbnailUrl={nade.images.thumbnailUrl}
               avgColor={nade.gfycat.avgColor}
               nadeSlug={nade.slug}
+              gfyId={nade.gfycat.gfyId}
             />
           </div>
           <NadeStats

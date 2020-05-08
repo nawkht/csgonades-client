@@ -1,8 +1,7 @@
-import { FC, SyntheticEvent, useState } from "react";
+import { FC, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { SeekBar } from "../SeekBar";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
-import { isSafari } from "react-device-detect";
+import { MiniGfycatIframe } from "./MiniGfycatIframe";
 
 type Props = {
   disableAction?: boolean;
@@ -11,6 +10,7 @@ type Props = {
   thumbnailUrl?: string;
   smallVideoUrl?: string;
   avgColor?: string;
+  gfyId: string;
 };
 
 export const GfycatThumbnail: FC<Props> = ({
@@ -20,23 +20,9 @@ export const GfycatThumbnail: FC<Props> = ({
   nadeSlug,
   disableAction,
   avgColor,
+  gfyId,
 }) => {
   const [hovering, setHovering] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  function onVideoTimeUpdate({
-    currentTarget,
-  }: SyntheticEvent<HTMLVideoElement, Event>) {
-    const { currentTime, duration } = currentTarget;
-    const progressPercentage = Math.round((currentTime / duration) * 100);
-    setProgress(progressPercentage);
-  }
-
-  const onLoad = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
-    if (!isSafari) {
-      e.currentTarget.playbackRate = 3;
-    }
-  };
 
   function onMouseEnter() {
     setHovering(true);
@@ -66,19 +52,7 @@ export const GfycatThumbnail: FC<Props> = ({
 
         {hovering && !!smallVideoUrl && (
           <div className="back">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls={false}
-              poster={thumbnailUrl}
-              onTimeUpdate={onVideoTimeUpdate}
-              onLoadStart={onLoad}
-            >
-              <source src={smallVideoUrl} type="video/mp4" />
-            </video>
-            <SeekBar progress={progress} />
+            <MiniGfycatIframe gfyId={gfyId} />
             <NadeItemFavBtn
               nadeId={nadeId}
               slug={nadeSlug}
@@ -146,7 +120,7 @@ export const GfycatThumbnail: FC<Props> = ({
           right: 0;
           opacity: 0;
           animation-name: revealVideo;
-          animation-duration: 0.3s;
+          animation-duration: 0.8s;
           animation-fill-mode: forwards;
         }
 
@@ -157,6 +131,9 @@ export const GfycatThumbnail: FC<Props> = ({
 
         @keyframes revealVideo {
           0% {
+            opacity: 0;
+          }
+          90% {
             opacity: 0;
           }
           100% {
