@@ -1,7 +1,7 @@
 import { FC, useMemo } from "react";
 import { Status } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { iconFromType, generateTitle } from "../../utils/Common";
+import { iconFromType, generateNadeItemTitle } from "../../utils/Common";
 import { NadeType } from "../../models/Nade/NadeType";
 
 type Props = {
@@ -23,7 +23,7 @@ export const NadeItemTitle: FC<Props> = ({
 }) => {
   const { colors } = useTheme();
   const iconUrl = iconFromType(type);
-  const generatedTitle = generateTitle(
+  const [generatedTitle, subTitle] = generateNadeItemTitle(
     title,
     startPosition,
     endPosition,
@@ -53,14 +53,16 @@ export const NadeItemTitle: FC<Props> = ({
           />
         )}
 
-        <div className="title-text">{generatedTitle}</div>
+        <div className="title-text">
+          <span className="main-title">{generatedTitle}</span>
+          <span className="sub-title">{subTitle}</span>
+        </div>
       </div>
       <style jsx>{`
         .title {
           position: relative;
           background: ${colors.DP02};
           color: ${colors.TEXT};
-          padding: 10px;
           overflow: hidden;
         }
 
@@ -74,11 +76,26 @@ export const NadeItemTitle: FC<Props> = ({
 
         .title-text {
           grid-area: title;
-          overflow: hidden;
+          font-size: 17px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .main-title {
           text-overflow: ellipsis;
           white-space: nowrap;
-          font-size: 17px;
           text-align: center;
+          display: block;
+          margin-bottom: -7px;
+          padding-top: 5px;
+        }
+
+        .sub-title {
+          white-space: nowrap;
+          text-align: center;
+          font-size: 12px;
+          display: block;
+          opacity: 0.75;
         }
 
         .title.pending {

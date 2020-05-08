@@ -189,3 +189,28 @@ export function generateSeoTitle(
     return "No Title";
   }
 }
+
+export function generateNadeItemTitle(
+  title?: string,
+  starPosition?: string,
+  endPosition?: string,
+  nadeType?: NadeType,
+  oneWay?: boolean
+) {
+  if (oneWay && endPosition && nadeType) {
+    return [
+      `${endPosition} One-Way ${nadeTypeString(nadeType)}`,
+      `from ${starPosition}`,
+    ];
+  }
+  if (starPosition && endPosition && nadeType) {
+    return [
+      `${endPosition} ${nadeTypeString(nadeType)}`,
+      `from ${starPosition}`,
+    ];
+  } else if (title) {
+    return [title, ""];
+  } else {
+    return ["No Title", ""];
+  }
+}
