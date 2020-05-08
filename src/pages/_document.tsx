@@ -58,7 +58,7 @@ class MyDocument extends Document {
               async
             ></script>
           </Head>
-          <body>
+          <body id="app">
             <Main />
             <NextScript />
           </body>

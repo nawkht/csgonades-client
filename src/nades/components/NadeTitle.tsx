@@ -2,13 +2,18 @@ import { FC } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import Link from "next/link";
 import { FaEdit, FaChevronLeft } from "react-icons/fa";
+import { TitleFavBtn } from "./TitleFavBtn";
+import { TitleReportBtn } from "./TileReportBtn";
+import { CsgoMap } from "../../models/Nade/CsGoMap";
 
 type Props = {
+  inModal?: boolean;
   nadeId: string;
   nadeSlug?: string;
   title: string;
   subTitle?: string;
   canEdit?: boolean;
+  map?: CsgoMap;
 };
 
 export const NadeTitle: FC<Props> = ({
@@ -17,21 +22,28 @@ export const NadeTitle: FC<Props> = ({
   nadeId,
   canEdit,
   nadeSlug,
+  inModal,
+  map,
 }) => {
   const { colors } = useTheme();
-
-  function onBackClick() {
-    window.history.back();
-  }
 
   return (
     <>
       <div className="title">
-        <div id="back">
-          <button onClick={onBackClick}>
-            <FaChevronLeft />
-          </button>
+        <div id="actions">
+          <TitleReportBtn nadeId={nadeId} />
+          <TitleFavBtn nadeId={nadeId} />
         </div>
+
+        {!inModal && (
+          <div id="back">
+            <Link href="/maps/[map]" as={`/maps/${map}`}>
+              <button>
+                <FaChevronLeft />
+              </button>
+            </Link>
+          </div>
+        )}
 
         <h1 className="nade-title">
           <span className="main-title">{title}</span>
@@ -54,12 +66,22 @@ export const NadeTitle: FC<Props> = ({
 
       <style jsx>{`
         .title {
+          position: relative;
           display: grid;
-          grid-template-columns: 70px 1fr 70px;
-          grid-template-areas: "backbtn title editbtn";
+          grid-template-columns: 50px 100px 1fr 100px 50px;
+          grid-template-areas:
+            "backbtn backbtn title actions actions"
+            "backbtn backbtn title actions actions";
           width: 100%;
           padding-left: 20px;
           padding-right: 20px;
+        }
+
+        #actions {
+          grid-area: actions;
+          align-self: center;
+          justify-self: end;
+          display: flex;
         }
 
         #back {
@@ -91,8 +113,11 @@ export const NadeTitle: FC<Props> = ({
 
         .edit {
           grid-area: editbtn;
-          justify-self: end;
           align-self: center;
+          position: absolute;
+          bottom: 100%;
+          right: 0;
+          margin-bottom: 5px;
         }
 
         .edit-btn {
@@ -133,9 +158,41 @@ export const NadeTitle: FC<Props> = ({
           margin-top: -8px;
         }
 
-        @media only screen and (max-width: 800px) {
-          h1 {
-            font-size: 20px;
+        @media only screen and (max-width: 700px) {
+          .title {
+            grid-template-columns: 50px 1fr 50px;
+            grid-template-areas:
+              "backbtn title actions"
+              "backbtn title actions";
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+        }
+
+        @media only screen and (max-width: 600px) {
+          .main-title {
+            font-size: 18px;
+          }
+
+          .sub-title {
+            font-size: 12px;
+            opacity: 0.75;
+            margin-top: -8px;
+          }
+        }
+
+        @media only screen and (max-width: 500px) {
+          .title {
+            grid-template-columns: 30px 1fr 30px;
+            grid-template-areas:
+              "backbtn title actions"
+              "backbtn title actions";
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+
+          #actions {
+            display: none;
           }
         }
       `}</style>

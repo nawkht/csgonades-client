@@ -29,7 +29,7 @@ type Props = {
 export const EditNadePage: FC<Props> = ({ nade }) => {
   const { state, dispatch, onUpdate, disableSubmit } = useEditNadeState(nade);
   const { colors } = useTheme();
-  const canEdit = useCanEditNade(nade);
+  const canEdit = useCanEditNade(nade.steamId);
 
   if (!canEdit) {
     return null;

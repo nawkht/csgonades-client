@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { Nade } from "../../../models/Nade/Nade";
 import { userSelector } from "../../AuthStore/AuthSelectors";
 
-export const useCanEditNade = (nade: Nade): boolean => {
+export const useCanEditNade = (ownerSteamId: string): boolean => {
   const user = useSelector(userSelector);
 
   const canEdit = useMemo(() => {
@@ -11,12 +10,12 @@ export const useCanEditNade = (nade: Nade): boolean => {
       return false;
     } else if (user.role === "administrator" || user.role === "moderator") {
       return true;
-    } else if (user.steamId === nade.steamId) {
+    } else if (user.steamId === ownerSteamId) {
       return true;
     } else {
       return false;
     }
-  }, [user, nade.steamId]);
+  }, [user, ownerSteamId]);
 
   return canEdit;
 };

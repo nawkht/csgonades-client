@@ -1,5 +1,4 @@
-import { FC, memo, useEffect } from "react";
-import { useNade } from "../store2/NadePageStore/hooks/useNade";
+import { FC, memo } from "react";
 import { NadeTitle } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
 import { NadeInfoContainer } from "./NadeInfoContainer";
@@ -15,26 +14,20 @@ import {
   generateNadeItemTitle,
 } from "../utils/Common";
 import { NadeMeta } from "./components/NadeMeta";
-import { FavoriteButton } from "./components/FavoriteButton";
-import { ReportNadeButton } from "./components/ReportNadeButtons";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
-import { PageCentralize } from "../common/PageCentralize";
-import { AdUnit } from "../common/adunits/AdUnit";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
+import { Nade } from "../models/Nade/Nade";
+import { TickWarning } from "./components/TickWarning";
 
-export const NadePage: FC = memo(() => {
+type Props = {
+  nade: Nade;
+  inModal?: boolean;
+};
+
+export const NadePage: FC<Props> = memo(({ nade, inModal }) => {
   const { colors } = useTheme();
-  const nade = useNade();
-  const canEdit = useCanEditNade(nade);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  if (!nade) {
-    return null;
-  }
+  const canEdit = useCanEditNade(nade.steamId);
 
   const [layoutTitle, subTitle] = generateNadeItemTitle(
     nade.title,
@@ -53,6 +46,8 @@ export const NadePage: FC = memo(() => {
     nade.map
   );
 
+  const createdAtString = new Date(nade.createdAt).toString();
+
   return (
     <>
       <ArticleJsonLd
@@ -60,7 +55,7 @@ export const NadePage: FC = memo(() => {
         url={`https://www.csgonades.com/nades/${nade.slug || nade.id}`}
         title={seoTitle}
         authorName={addslashes(nade.user.nickname)}
-        datePublished={nade.createdAt}
+        datePublished={createdAtString}
         dateModified={nade.updatedAt}
         images={[nade.images.thumbnailUrl]}
         description={descriptionSimplify(nade?.description)}
@@ -75,99 +70,67 @@ export const NadePage: FC = memo(() => {
         thumbnail={nade.images.thumbnailUrl}
       />
 
-      <PageCentralize>
-        <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
+      <NadeStatus status={nade.status} statusInfo={nade.statusInfo} />
 
-        <div id="nade-page-grid" key={`main-${nade.id}`}>
-          {nade?.tickrate === "tick128" && (
-            <div className="matchmake-warning">
-              <div className="warning-msg">
-                <div className="warning-title">WARNING</div>
-                <div>
-                  Will not work, or be suboptimal if you play matchmaking. This
-                  nade is made for 128 tick servers.
-                </div>
-              </div>
-            </div>
-          )}
+      <div id="nade-page-grid" key={`main-${nade.id}`}>
+        <div className="matchmake-warning">
+          <TickWarning />
+        </div>
 
-          <div id="title">
-            <NadeTitle
-              title={layoutTitle}
-              subTitle={subTitle}
-              canEdit={canEdit}
-              nadeId={nade.id}
-              nadeSlug={nade.slug}
+        <div id="title">
+          <NadeTitle
+            title={layoutTitle}
+            subTitle={subTitle}
+            canEdit={canEdit}
+            nadeId={nade.id}
+            nadeSlug={nade.slug}
+            map={nade.map}
+          />
+        </div>
+
+        <div id="nade-meta">
+          <NadeMeta
+            type={nade.type}
+            movement={nade.movement}
+            technique={nade.technique}
+            tickrate={nade.tickrate}
+            rounded
+          />
+        </div>
+
+        <div id="nade-page-main">
+          <NadeVideoContainer gfyId={nade.gfycat.gfyId} />
+        </div>
+
+        <div id="nade-info-container">
+          <NadeInfoContainer nade={nade} />
+        </div>
+
+        <div id="nade-comment-container">
+          <NadeComments nadeId={nade.id} />
+        </div>
+
+        <div id="nade-actions">
+          <div className="nade-action">
+            <NadeShareActions
+              title={generateTitle(
+                nade.title,
+                nade.startPosition,
+                nade.endPosition,
+                nade.type,
+                nade.oneWay
+              )}
+              visisble={nade.status === "accepted"}
+              url={`/nades/${nade?.slug || nade?.id}`}
+              image={nade.images.thumbnailUrl}
             />
           </div>
-
-          <div id="nade-meta">
-            <NadeMeta nade={nade} />
-          </div>
-
-          <div id="nade-page-main">
-            <NadeVideoContainer nade={nade} />
-          </div>
-
-          <div id="nade-info-container">
-            <NadeInfoContainer nade={nade} />
-          </div>
-
-          <div id="nade-comment-container">
-            <NadeComments nadeId={nade.id} />
-          </div>
-
-          <div id="placement">
-            <AdUnit tagType="728x90" />
-          </div>
-
-          <div id="nade-actions">
-            <div className="nade-action">
-              <NadeShareActions
-                title={generateTitle(
-                  nade.title,
-                  nade.startPosition,
-                  nade.endPosition,
-                  nade.type,
-                  nade.oneWay
-                )}
-                visisble={nade.status === "accepted"}
-                url={`/nades/${nade?.slug || nade?.id}`}
-                image={nade.images.thumbnailUrl}
-              />
-            </div>
-
-            <div className="nade-action">
-              <FavoriteButton nade={nade} />
-            </div>
-            <div className="nade-action">
-              <ReportNadeButton nadeId={nade.id} />
-            </div>
-          </div>
         </div>
-      </PageCentralize>
+      </div>
 
       <style jsx>{`
         .matchmake-warning {
           grid-area: warning;
-          background: #ad540a;
-          color: white;
-          padding: 10px 20px;
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-        }
-
-        .warning-msg {
-          display: flex;
-        }
-
-        .warning-title {
-          font-weight: 400;
-          margin-right: 8px;
-        }
-
-        .ph-unit {
         }
 
         .share-label {
@@ -181,23 +144,13 @@ export const NadePage: FC = memo(() => {
           padding: 15px 30px 30px 30px;
         }
 
-        #nadepage-sidebar-content {
-          position: sticky;
-          top: calc(65px);
-        }
-
-        #nadepage-sidebar {
-          grid-area: sidebar;
-          width: 300px;
-          background: ${colors.DP02};
-        }
-
         #misc {
           grid-area: misc;
         }
 
         #nade-actions {
           grid-area: actions;
+          padding-right: ${inModal ? Dimensions.GUTTER_SIZE : 0}px;
         }
 
         .nade-action {
@@ -205,25 +158,20 @@ export const NadePage: FC = memo(() => {
         }
 
         #nade-page-grid {
-          margin-top: ${Dimensions.GUTTER_SIZE}px;
-          margin-bottom: 100px;
-          grid-area: main;
+          margin-top: ${inModal ? "0px" : `${Dimensions.GUTTER_SIZE}px`};
+          margin-bottom: ${inModal ? "0px" : `100px`};
           display: grid;
-          grid-template-columns: 1fr 1fr 160px;
+          grid-template-columns: 1fr 1fr ${inModal ? "190px" : "160px"};
           grid-template-areas:
             "title title title"
             "warning warning warning"
             "video video video"
             "meta meta meta"
             "info info actions"
-            "ad ad ad"
             "comments comments .";
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           width: 100%;
-        }
-
-        #placement {
-          grid-area: ad;
+          border-radius: 5px;
         }
 
         #nade-meta {
@@ -234,6 +182,7 @@ export const NadePage: FC = memo(() => {
         #nade-info-container {
           grid-area: info;
           padding-bottom: ${Dimensions.GUTTER_SIZE}px;
+          padding-left: ${inModal ? Dimensions.GUTTER_SIZE : 0}px;
         }
 
         #nade-page-main {
@@ -256,6 +205,7 @@ export const NadePage: FC = memo(() => {
 
         #nade-comment-container {
           grid-area: comments;
+          padding-left: ${inModal ? Dimensions.GUTTER_SIZE : 0}px;
           padding-bottom: ${Dimensions.GUTTER_SIZE}px;
         }
 
@@ -280,10 +230,6 @@ export const NadePage: FC = memo(() => {
         @media only screen and (max-width: 1210px) {
           #nade-page-grid {
             margin-right: 30px;
-          }
-
-          #nadepage-sidebar {
-            width: 100%;
           }
         }
 

@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { NadeLight } from "../models/Nade/Nade";
-import { CSGNModal } from "../common/CSGNModal";
 import { NadeItem } from "../common/nadeitem/NadeItem";
+import { FaTimes } from "react-icons/fa";
+import { CsgnList } from "../common/list/CsgnList";
 import { Dimensions } from "../constants/Constants";
-import { useTheme } from "../store/SettingsStore/SettingsHooks";
 
 type Props = {
   nades: NadeLight[] | null;
@@ -11,7 +11,13 @@ type Props = {
 };
 
 export const MapViewSuggested: FC<Props> = ({ nades, onDismiss }) => {
-  const { colors } = useTheme();
+  function renderItem(item: NadeLight) {
+    return <NadeItem nade={item} />;
+  }
+
+  function keyExtractor(item: NadeLight) {
+    return item.id;
+  }
 
   if (!nades) {
     return null;
@@ -19,43 +25,67 @@ export const MapViewSuggested: FC<Props> = ({ nades, onDismiss }) => {
 
   return (
     <>
-      <CSGNModal
-        title="Found some nade options"
-        onDismiss={onDismiss}
-        visible={true}
-      >
-        <div id="suggested-nades">
-          <div className="nade-list-wrap">
-            {nades.map((n) => (
-              <div key={n.id} className="item">
-                <NadeItem nade={n} />
-              </div>
-            ))}
+      <div className="suggested-nades">
+        <div className="title">
+          <div className="label">Found multiple nades for location</div>
+          <div className="close-btn" onClick={onDismiss}>
+            <FaTimes />
           </div>
         </div>
-      </CSGNModal>
+        <div className="nade-list-wrap">
+          <CsgnList<NadeLight>
+            data={nades}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+          />
+        </div>
+      </div>
       <style jsx>{`
-        #suggested-nades {
+        .suggested-nades {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
           border-radius: 5px;
-          background: ${colors.DP01};
-          border-radius: 10px;
-          max-width: 1000px;
-          max-height: calc(
-            100vh - ${Dimensions.HEADER_HEIGHT}px - ${Dimensions.NAV_HEIGHT}px
-          );
+          background: rgba(0, 0, 0, 0.9);
+          z-index: 900;
+          animation-name: slide-down;
+          animation-duration: 0.25s;
+          animation-fill-mode: forwards;
+          overflow-y: auto;
+          padding: ${Dimensions.GUTTER_SIZE}px;
         }
 
-        .nade-list-wrap {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          padding-top: ${Dimensions.GUTTER_SIZE / 2}px;
-          padding-bottom: ${Dimensions.GUTTER_SIZE / 2}px;
+        .title {
+          color: white;
+          text-transform: uppercase;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 500;
+          margin-bottom: 20px;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-areas: ". msg close";
         }
 
-        .item {
-          width: 300px;
-          margin: ${Dimensions.GUTTER_SIZE / 2}px;
+        .label {
+          grid-area: msg;
+        }
+
+        .close-btn {
+          grid-area: close;
+          font-size: 24px;
+          justify-self: end;
+        }
+
+        @keyframes slide-down {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
       `}</style>
     </>

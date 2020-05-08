@@ -13,6 +13,7 @@ import { CookieConsent } from "../common/CookieConsent";
 import { MapNav } from "./Navigation/MapNav";
 import { Dimensions } from "../constants/Constants";
 import { SignInWarning } from "../maps/components/SignInWarning";
+import { NadeModal } from "../nades/NadeModal";
 
 export const Layout2: FC = memo(({ children }) => {
   const { colors } = useTheme();
@@ -44,6 +45,7 @@ export const Layout2: FC = memo(({ children }) => {
       <AdminLink />
       <CookieConsent />
       <SignInWarning />
+      <NadeModal />
 
       <style jsx>{`
         #page {

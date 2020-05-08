@@ -56,6 +56,10 @@ export const SignInWarning: FC<Props> = memo(() => {
         </div>
       </CSGNModal>
       <style jsx>{`
+        .sign-in-warning {
+          padding: 20px;
+        }
+
         .btn {
           display: flex;
           justify-content: space-around;

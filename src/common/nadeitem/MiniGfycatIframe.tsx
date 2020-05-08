@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
@@ -6,6 +6,7 @@ type Props = {
 };
 
 export const MiniGfycatIframe: FC<Props> = ({ gfyId }) => {
+  const [loaded, setLoaded] = useState(false);
   const { colors } = useTheme();
 
   return (
@@ -13,6 +14,7 @@ export const MiniGfycatIframe: FC<Props> = ({ gfyId }) => {
       <div className="gfycat-super-wrap">
         <div className="gfycat-wrap">
           <iframe
+            onLoad={() => setLoaded(true)}
             className="gfycat-iframe"
             src={`https://gfycat.com/ifr/${gfyId}?hd=0&controls=0&speed=3`}
             frameBorder="0"
@@ -26,7 +28,7 @@ export const MiniGfycatIframe: FC<Props> = ({ gfyId }) => {
 
       <style jsx>{`
         .gfycat-super-wrap {
-          background: ${colors.DP01};
+          background: #121212;
           overflow: hidden;
           cursor: pointer;
           pointer-events: none;
@@ -37,6 +39,8 @@ export const MiniGfycatIframe: FC<Props> = ({ gfyId }) => {
           padding-bottom: calc(56.25% + 44px);
           background: ${colors.DP01};
           overflow: hidden;
+          opacity: ${loaded ? 1 : 0};
+          transition: opacity 0.2s;
         }
 
         .gfycat-iframe {

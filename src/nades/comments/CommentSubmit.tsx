@@ -73,32 +73,48 @@ export const CommentSubmit: FC<Props> = memo(
           }
 
           .nade-submit {
+            position: relative;
             display: flex;
             flex-direction: column;
           }
 
-          .nade-submit textarea {
-            width: 100%;
-            min-height: 200px;
-            font-size: 18px;
-            padding: 20px;
-            border: 1px dashed ${colors.PRIMARY};
-            outline: none;
+          textarea {
             background: ${colors.DP03};
-            color: ${colors.TEXT};
+            outline: none;
+            min-height: 200px;
+            resize: none;
+            padding: 15px;
             border-radius: 5px;
+            color: ${colors.TEXT};
+            border: 1px solid rgba(0, 0, 0, 0.15);
+          }
+
+          textarea:focus {
+            border: 1px solid ${colors.filterBgHover};
+          }
+
+          textarea::placeholder {
+            color: #ccc;
+            font-weight: 300;
           }
 
           .nade-submit button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
             align-self: flex-end;
             border: none;
-            background: ${colors.PRIMARY};
+            background: ${colors.filterBg};
             padding: 10px 15px;
             border-radius: 5px;
             margin-top: 10px;
             color: white;
             outline: none;
             cursor: pointer;
+          }
+
+          .nade-submit button:hover {
+            background: ${colors.filterBgHover};
           }
         `}</style>
       </>

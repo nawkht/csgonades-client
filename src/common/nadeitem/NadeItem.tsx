@@ -5,65 +5,64 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { GfycatThumbnail } from "./GfycatThumbnail";
 import { NadeItemTitle } from "./NadeItemTitle";
 import { NadeStats } from "./NadeStats";
-import { PageLink } from "../PageLink";
+import { useNadeModal } from "../../store/MapStore/hooks/useNadeModal";
 
 interface Props {
   nade: NadeLight;
-  onItemClick?: () => void;
 }
 
-export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
+export const NadeItem: FC<Props> = memo(({ nade }) => {
+  const { setNadeForModal } = useNadeModal();
   const { colors } = useTheme();
 
-  const urlIdOrSlug = nade.slug || nade.id;
+  function onItemClick() {
+    setNadeForModal(nade);
+  }
 
   return (
     <>
-      <PageLink href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
-        <div
-          className={"nadebox"}
-          style={{ display: "inline-block" }}
-          onClick={onItemClick}
-        >
-          <NadeItemTitle
-            startPosition={nade.startPosition}
-            endPosition={nade.endPosition}
-            type={nade.type}
-            status={nade.status}
-            title={nade.title}
-            oneWay={nade.oneWay}
-          />
-          <div className="video">
-            <GfycatThumbnail
-              nadeId={nade.id}
-              smallVideoUrl={nade.gfycat.smallVideoUrl}
-              thumbnailUrl={nade.images.thumbnailUrl}
-              avgColor={nade.gfycat.avgColor}
-              nadeSlug={nade.slug}
-              gfyId={nade.gfycat.gfyId}
-            />
-          </div>
-          <NadeStats
-            commentCount={nade.commentCount}
-            createdAt={nade.createdAt}
-            favoriteCount={nade.favoriteCount}
-            viewCount={nade.viewCount}
-            isFavorited={nade.isFavorited}
-            movement={nade.movement}
-            technique={nade.technique}
-            tickrate={nade.tickrate}
+      <div
+        className={"nadebox"}
+        style={{ display: "inline-block" }}
+        onClick={onItemClick}
+      >
+        <NadeItemTitle
+          startPosition={nade.startPosition}
+          endPosition={nade.endPosition}
+          type={nade.type}
+          status={nade.status}
+          title={nade.title}
+          oneWay={nade.oneWay}
+        />
+        <div className="video">
+          <GfycatThumbnail
+            nadeId={nade.id}
+            smallVideoUrl={nade.gfycat.smallVideoUrl}
+            thumbnailUrl={nade.images.thumbnailUrl}
+            avgColor={nade.gfycat.avgColor}
+            nadeSlug={nade.slug}
+            gfyId={nade.gfycat.gfyId}
           />
         </div>
-      </PageLink>
+        <NadeStats
+          commentCount={nade.commentCount}
+          createdAt={nade.createdAt}
+          favoriteCount={nade.favoriteCount}
+          viewCount={nade.viewCount}
+          isFavorited={nade.isFavorited}
+          movement={nade.movement}
+          technique={nade.technique}
+          tickrate={nade.tickrate}
+        />
+      </div>
       <style jsx>{`
         .nadebox {
-          background: ${colors.DP01};
+          background: ${colors.DP02};
           border-radius: ${Dimensions.BORDER_RADIUS};
           cursor: pointer;
           transition: box-shadow ${AnimationTimings.fast}s;
           overflow: hidden;
           width: 100%;
-          border: 1px solid ${colors.BORDER};
         }
 
         .nadebox:hover {

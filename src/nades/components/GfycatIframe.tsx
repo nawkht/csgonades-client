@@ -1,21 +1,20 @@
-import { FC } from "react";
-import { NadeLight } from "../../models/Nade/Nade";
-import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { FC, useState } from "react";
 
 type Props = {
-  nade: NadeLight;
+  gfyId: string;
 };
 
-export const GfycatIframe: FC<Props> = ({ nade }) => {
-  const { colors } = useTheme();
+export const GfycatIframe: FC<Props> = ({ gfyId }) => {
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>
       <div className="gfycat-super-wrap">
         <div className="gfycat-wrap">
           <iframe
+            onLoad={() => setLoaded(true)}
             className="gfycat-iframe"
-            src={`https://gfycat.com/ifr/${nade.gfycat.gfyId}?hd=1`}
+            src={`https://gfycat.com/ifr/${gfyId}?hd=1`}
             frameBorder="0"
             scrolling="no"
             width="100%"
@@ -27,16 +26,18 @@ export const GfycatIframe: FC<Props> = ({ nade }) => {
 
       <style jsx>{`
         .gfycat-super-wrap {
-          background: ${colors.DP01};
+          background: #111;
           overflow: hidden;
         }
 
         .gfycat-wrap {
           position: relative;
           padding-bottom: calc(56.25% + 44px);
-          background: ${colors.DP01};
+          background: #000;
           overflow: hidden;
           transform: scale(1.002);
+          opacity: ${loaded ? 1 : 0};
+          transition: opacity 0.2s;
         }
 
         .gfycat-iframe {

@@ -130,7 +130,7 @@ export const BlogPostArticle: FC<Props> = memo(
 
           #article-content {
             grid-area: article;
-            background: ${colors.DP02};
+            background: ${colors.DP01};
             padding: 20px 30px;
             border-radius: 5px;
             max-width: 100%;

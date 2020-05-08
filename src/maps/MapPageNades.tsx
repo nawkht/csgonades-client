@@ -45,7 +45,7 @@ export const MapPageNades: FC<Props> = memo(({ allNades }) => {
           renderItem={renderItem}
           topRightComp={
             <div className="mini-sidebar">
-              <TopContributorList nades={allNades} />
+              {allNades && <TopContributorList nades={allNades} />}
               <div className="placement">
                 <AdUnit tagType="300x250" />
               </div>

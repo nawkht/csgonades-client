@@ -17,6 +17,7 @@ import { ResetFilterButton } from "./nadefilter/ResetFilterButton";
 import { useAnalytics } from "../utils/Analytics";
 import { MinSizeRender, useWindowSize } from "../common/MinSizeRender";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { useNadeModal } from "../store/MapStore/hooks/useNadeModal";
 
 type Props = {
   map: CsgoMap;
@@ -24,6 +25,7 @@ type Props = {
 };
 
 export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
+  const { setNadeForModal } = useNadeModal();
   const windowSize = useWindowSize();
   const { event } = useAnalytics();
   const filteredNades = useFilterServerSideNades(allNades);
@@ -53,6 +55,11 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
 
   function onNadeClick(pos: { x: number; y: number }) {
     const suggested = filterByCoords(filteredNades, pos);
+
+    if (suggested.length === 1) {
+      return setNadeForModal(suggested[0]);
+    }
+
     setSuggestedNades(suggested);
     event({
       category: "MapView",
@@ -66,11 +73,11 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
 
   return (
     <>
-      <MapViewSuggested
-        onDismiss={() => setSuggestedNades(null)}
-        nades={suggestedNades}
-      />
       <div id="mapview-wrap">
+        <MapViewSuggested
+          onDismiss={() => setSuggestedNades(null)}
+          nades={suggestedNades}
+        />
         <div id="mapview-filters">
           <div className="space-below">
             <TypeFilter vertical />
@@ -148,6 +155,7 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
             "mpfilter mpoverview .";
           background: #151515;
           border-radius: 5px;
+          overflow: hidden;
         }
 
         #mapview-screen {

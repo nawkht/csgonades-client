@@ -10,6 +10,10 @@ interface Props {
 }
 
 const Map: NextPage<Props> = ({ map, ssrNades }) => {
+  if (!ssrNades) {
+    return null;
+  }
+
   return <MapPage2 key={map} map={map} allNades={ssrNades} />;
 };
 

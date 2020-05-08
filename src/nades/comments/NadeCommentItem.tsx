@@ -149,22 +149,18 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
         }
 
         .nade-comment-item {
-          border: 1px solid ${colors.BORDER};
-          margin-top: 30px;
-          border-radius: 5px;
-          background: ${colors.DP03};
+          background: ${colors.DP02};
           color: ${colors.TEXT};
         }
 
         .nade-comment-header {
-          background: ${colors.boxTitleBg};
+          background: ${colors.DP01};
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
           padding: 15px 30px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-bottom: 1px solid ${colors.BORDER};
         }
 
         .nade-comment-user {
@@ -174,6 +170,7 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
 
         .nade-comment-user img {
           width: 30px;
+          height: 30px;
           border-radius: 50%;
           margin-right: 10px;
         }

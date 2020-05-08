@@ -1,39 +1,47 @@
 import { FC } from "react";
-import { Nade } from "../../models/Nade/Nade";
-import { tickrateString } from "../../models/Nade/NadeTickrate";
-import { nadeTypeString } from "../../models/Nade/NadeType";
-import { techniqueString } from "../../models/Nade/Technique";
+import { tickrateString, Tickrate } from "../../models/Nade/NadeTickrate";
+import { nadeTypeString, NadeType } from "../../models/Nade/NadeType";
+import { techniqueString, Technique } from "../../models/Nade/Technique";
 import { capitalize } from "../../utils/Common";
+import { Movement } from "../../models/Nade/NadeMovement";
 
 type Props = {
-  nade: Nade;
+  type?: NadeType;
+  movement?: Movement;
+  technique?: Technique;
+  tickrate?: Tickrate;
+  rounded?: boolean;
 };
 
-export const NadeMeta: FC<Props> = ({ nade }) => {
+export const NadeMeta: FC<Props> = ({
+  movement,
+  type,
+  technique,
+  tickrate,
+  rounded,
+}) => {
   return (
     <>
       <div className="nade-meta">
         <div className="nade-meta-item">
           <h4>Type</h4>
-          <span>{nade.type ? nadeTypeString(nade.type) : "Not set."}</span>
+          <span>{type ? nadeTypeString(type) : "Not set."}</span>
         </div>
 
         <div className="nade-meta-item">
           <h4>Movement</h4>
-          <span>{nade.movement ? capitalize(nade.movement) : "Not set."}</span>
+          <span>{movement ? capitalize(movement) : "Not set."}</span>
         </div>
 
         <div className="nade-meta-item">
           <h4>Technique</h4>
-          <span>
-            {nade.technique ? techniqueString(nade.technique) : "Not set."}
-          </span>
+          <span>{technique ? techniqueString(technique) : "Not set."}</span>
         </div>
 
-        {nade.tickrate && (
+        {tickrate && (
           <div className="nade-meta-item">
             <h4>Tickrate</h4>
-            <span>{tickrateString(nade.tickrate)}</span>
+            <span>{tickrateString(tickrate)}</span>
           </div>
         )}
       </div>
@@ -41,8 +49,8 @@ export const NadeMeta: FC<Props> = ({ nade }) => {
         .nade-meta {
           display: flex;
           color: white;
-          border-bottom-left-radius: 5px;
-          border-bottom-right-radius: 5px;
+          border-bottom-left-radius: ${rounded ? "5px" : 0};
+          border-bottom-right-radius: ${rounded ? "5px" : 0};
           overflow: hidden;
         }
 

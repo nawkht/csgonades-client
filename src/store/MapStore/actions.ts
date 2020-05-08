@@ -62,6 +62,15 @@ type SetView = {
   view: MapView;
 };
 
+type SetNadeForModal = {
+  type: "MapStore/SetNadeForModal";
+  id: NadeLight;
+};
+
+type ClearNadeModal = {
+  type: "MapStore/ClearNadeModal";
+};
+
 export type MapStoreActions =
   | SetCurrentMap
   | ReplaceNadesForMap
@@ -74,4 +83,6 @@ export type MapStoreActions =
   | IncrementNadeFavoriteCount
   | DecrementNadeFavoriteCount
   | SetSortingMethod
-  | SetView;
+  | SetView
+  | SetNadeForModal
+  | ClearNadeModal;

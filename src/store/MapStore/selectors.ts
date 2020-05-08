@@ -24,3 +24,6 @@ export const filterByMethodSelector = (state: AppState) =>
   state.mapStore.sortingMethod;
 
 export const mapViewSelector = (state: AppState) => state.mapStore.view;
+
+export const nadeIdForModalSelector = (state: AppState) =>
+  state.mapStore.nadeForModal;

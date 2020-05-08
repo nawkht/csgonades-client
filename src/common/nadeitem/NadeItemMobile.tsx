@@ -1,13 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { FaChevronRight, FaPlay, FaStop } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Dimensions } from "../../constants/Constants";
-import { NadeLight, Status } from "../../models/Nade/Nade";
-import { useRegisterView } from "../../store/NadeStore/hooks/useRegisterView";
+import { NadeLight } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "./NadeItemTitle";
 import { NadeStats } from "./NadeStats";
-import { PageLink } from "../PageLink";
+import Link from "next/link";
 
 interface Props {
   nade: NadeLight;
@@ -15,25 +14,14 @@ interface Props {
 }
 
 export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
-  const registerNadeView = useRegisterView();
+  const [clientSide, setClientSide] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasSentEvent, setHasSentEvent] = useState(false);
   const { colors } = useTheme();
 
   useEffect(() => {
-    let timer: NodeJS.Timer;
-    if (isPlaying && !hasSentEvent) {
-      timer = setTimeout(() => {
-        registerNadeView(nade.id);
-        setHasSentEvent(true);
-      }, 5000);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPlaying, hasSentEvent, nade.id]);
+    setClientSide(true);
+  }, []);
 
   function onNadeItemClick() {
     onItemClick && onItemClick();
@@ -44,17 +32,15 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     setIsPlaying(!isPlaying);
   }
 
-  const nadeBoxClassName = nadeStatusToClassName(nade.status);
-
   const urlIdOrSlug = nade.slug || nade.id;
+
+  if (!clientSide) {
+    return null;
+  }
 
   return (
     <>
-      <div
-        className={nadeBoxClassName}
-        style={{ display: "inline-block" }}
-        onClick={onNadeItemClick}
-      >
+      <div className="nadebox-mobile" onClick={onNadeItemClick}>
         {showMenu && (
           <div className="context-menu">
             <div className="context-btns">
@@ -73,12 +59,12 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
                 )}
               </div>
               <div className="context-action">
-                <PageLink href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
+                <Link href={"/nades/[nade]"} as={`/nades/${urlIdOrSlug}`}>
                   <a className="nade-page-link">
                     Details{" "}
                     <FaChevronRight style={{ position: "relative", top: 2 }} />
                   </a>
-                </PageLink>
+                </Link>
               </div>
             </div>
           </div>
@@ -92,6 +78,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           oneWay={nade.oneWay}
           startPosition={nade.startPosition}
         />
+
         <div className="media-canvas">
           <div className="media-content">
             <div className="media-image">
@@ -124,7 +111,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
         />
       </div>
       <style jsx>{`
-        .nadebox {
+        .nadebox-mobile {
           background: ${colors.DP01};
           width: 100%;
           overflow: hidden;
@@ -197,14 +184,3 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
     </>
   );
 };
-
-function nadeStatusToClassName(status: Status) {
-  switch (status) {
-    case "pending":
-      return "nadebox pending-nade";
-    case "declined":
-      return "nadebox declined-nade";
-    default:
-      return "nadebox";
-  }
-}

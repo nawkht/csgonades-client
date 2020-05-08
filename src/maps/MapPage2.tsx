@@ -36,7 +36,9 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
           <MapPageJumbo map={map} nades={allNades} />
           <FilterBar />
           <MapPageNades allNades={allNades} />
-          {isClientSide && <MapViewScreen map={map} allNades={allNades} />}
+          {isClientSide && !!allNades && (
+            <MapViewScreen map={map} allNades={allNades} />
+          )}
         </div>
         <div className="ph">
           <AdUnit tagType="728x90" />

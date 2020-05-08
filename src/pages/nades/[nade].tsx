@@ -3,7 +3,7 @@ import { NadeApi } from "../../api/NadeApi";
 import { Nade } from "../../models/Nade/Nade";
 import { NadeNotFound } from "../../nades/NadeNotFound";
 import { NadePage } from "../../nades/NadePage";
-import { NadePageStoreProvider } from "../../store2/NadePageStore/context";
+import { PageCentralize } from "../../common/PageCentralize";
 
 type Props = {
   nade: Nade;
@@ -15,9 +15,9 @@ const NadePageComponent: NextPage<Props> = ({ nade }) => {
   }
 
   return (
-    <NadePageStoreProvider key={nade.id} nade={nade}>
-      <NadePage />
-    </NadePageStoreProvider>
+    <PageCentralize>
+      <NadePage key={nade.id} nade={nade} />
+    </PageCentralize>
   );
 };
 

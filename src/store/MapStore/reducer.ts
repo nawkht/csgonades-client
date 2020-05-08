@@ -26,6 +26,7 @@ export type MapStoreState = {
   filterByCoords?: MapCoordinates;
   filterByTickrate: Tickrate;
   sortingMethod: NadeSortingMethod;
+  nadeForModal?: NadeLight;
 };
 
 const initialState: MapStoreState = {
@@ -115,6 +116,16 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
       return handleIncrementNadeFavCount(state, action, "inc");
     case "MapStore/DecrementNadeFavoriteCount":
       return handleIncrementNadeFavCount(state, action, "dec");
+    case "MapStore/SetNadeForModal":
+      return {
+        ...state,
+        nadeForModal: action.id,
+      };
+    case "MapStore/ClearNadeModal":
+      return {
+        ...state,
+        nadeForModal: undefined,
+      };
     default:
       return state;
   }
