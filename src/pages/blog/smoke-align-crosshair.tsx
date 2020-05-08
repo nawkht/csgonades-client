@@ -60,7 +60,7 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         <BlogCodeSnippet code={'bind "X" "toggle cl_crosshairsize 2.5 5000"'} />
 
         <div className="a-tag">
-          <AdUnit tagType="728x90" />
+          <AdUnit tagType="300x250" />
         </div>
 
         <h3>2. Advanced: Hide on release</h3>
@@ -102,15 +102,15 @@ const NadeAlignCrosshairBlogPost: FC = () => {
           }
         />
 
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
+
         <p>Change out X with whatever key you prefer.</p>
         <p>
           On the 2nd line, set the values for your crosshair, so it goes back to
           your settings when you release the button.
         </p>
-
-        <div className="a-tag">
-          <AdUnit tagType="300x250" />
-        </div>
 
         <p>The result of the command is the following:</p>
         <img

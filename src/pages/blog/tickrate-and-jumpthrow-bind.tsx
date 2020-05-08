@@ -71,7 +71,7 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
         </p>
 
         <div className="a-tag">
-          <AdUnit tagType="728x90" />
+          <AdUnit tagType="300x250" />
         </div>
 
         <p>
@@ -102,16 +102,17 @@ const TickRateAndJumpthrowBindBlogPost: FC = () => {
           ></iframe>
         </div>
         <br />
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
+
         <p>
           Using the jumpthrow bind will give you the same result every time, if
           your playing on the same tickrate. If you play on both matchmaking and
           FACEIT, you are going to need to learn the same nade for both
           tickrates, if it uses a jumpthrow bind.
         </p>
-
-        <div className="a-tag">
-          <AdUnit tagType="300x250" />
-        </div>
 
         <p>
           Here is also the YouTuber{" "}

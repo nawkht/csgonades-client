@@ -51,7 +51,7 @@ const PractiseConfigBlogPost = () => {
         />
 
         <div className="a-tag">
-          <AdUnit tagType="728x90" />
+          <AdUnit tagType="300x250" />
         </div>
 
         <h2>What does the config do?</h2>
@@ -79,6 +79,10 @@ const PractiseConfigBlogPost = () => {
           wall bangs and see if bullets can penetrate walls.
         </p>
 
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
+
         <h2>Useful commands while practising</h2>
         <p>
           Here are some of the commands I find most helpful while I&apos;m
@@ -95,10 +99,6 @@ const PractiseConfigBlogPost = () => {
           </a>
           .
         </p>
-
-        <div className="a-tag">
-          <AdUnit tagType="300x250" />
-        </div>
 
         <h3>1. Fly command</h3>
         <p>Allows you to fly freely in the air.</p>

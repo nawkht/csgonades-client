@@ -59,7 +59,7 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         </p>
 
         <div className="a-tag">
-          <AdUnit tagType="728x90" />
+          <AdUnit tagType="300x250" />
         </div>
 
         <h3>Alias bind, autoexec</h3>
@@ -79,6 +79,10 @@ const NadeAlignCrosshairBlogPost: FC = () => {
             'alias "+jumpthrow" "+jump;-attack;-attack2"\nalias "-jumpthrow" "-jump"\nbind "KEY" "+jumpthrow"'
           }
         />
+
+        <div className="a-tag">
+          <AdUnit tagType="728x90" />
+        </div>
 
         <h2>How to use jumpthrow bind</h2>
         <p>
@@ -101,10 +105,6 @@ const NadeAlignCrosshairBlogPost: FC = () => {
         <p>
           Holde down <em>both mouse button</em>, click the bind.
         </p>
-
-        <div className="a-tag">
-          <AdUnit tagType="300x250" />
-        </div>
 
         <h2>Conclusion</h2>
         <p>
