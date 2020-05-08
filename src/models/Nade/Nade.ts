@@ -43,6 +43,7 @@ export type Nade = {
   score: number;
   isFavorited?: boolean;
   nextUpdateInHours: number;
+  oneWay?: boolean;
 };
 
 export type NadeLight = {
@@ -67,11 +68,7 @@ export type NadeLight = {
   commentCount: number;
   movement?: Movement;
   nextUpdateInHours: number;
-};
-
-export type NadeBody = {
-  gfycatIdOrUrl: string;
-  imageBase64: string;
+  oneWay?: boolean;
 };
 
 export type NadeCreateBody = {
@@ -86,6 +83,7 @@ export type NadeCreateBody = {
   tickrate?: Tickrate;
   type: NadeType;
   mapEndCoord: MapCoordinates;
+  oneWay?: boolean;
 };
 
 export type NadeUpdateBody = {
@@ -102,6 +100,7 @@ export type NadeUpdateBody = {
   mapEndCoord?: MapCoordinates;
   status?: Status;
   slug?: string;
+  oneWay?: boolean;
 };
 
 export type NadeStatusDTO = {

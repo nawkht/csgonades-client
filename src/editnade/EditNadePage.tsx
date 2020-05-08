@@ -19,6 +19,7 @@ import { TechniqueSelector } from "../createnade/components/TechniqueSelector";
 import { PreviewNade } from "../createnade/PreviewNades";
 import { SumbitBtn } from "../createnade/components/SubmitBtn";
 import { ImageUploader } from "../newnade/ImageUploader";
+import { OneWaySelector } from "../createnade/components/OneWaySelector";
 
 type Props = {
   nade: Nade;
@@ -135,6 +136,15 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
             />
           </div>
 
+          <div id="oneway-selector">
+            <OneWaySelector
+              initialValue={nade.oneWay}
+              onClick={(oneWay) =>
+                dispatch({ type: "EditNade/SetOneWay", oneWay })
+              }
+            />
+          </div>
+
           <div id="preview-label">
             <BigLabel value="Preview" />
           </div>
@@ -194,8 +204,9 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
             "posselector metalabel"
             "typesel movesel"
             "gfyip techsel"
-            "endpos previewlabel"
-            "startpos preview"
+            "endpos oneway"
+            "startpos previewlabel"
+            "desc preview"
             "desc preview"
             ". submit";
           grid-row-gap: ${Dimensions.GUTTER_SIZE / 1.5}px;
@@ -205,6 +216,10 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           margin-bottom: 150px;
+        }
+
+        #oneway-selector {
+          grid-area: oneway;
         }
 
         #map-position-selector {

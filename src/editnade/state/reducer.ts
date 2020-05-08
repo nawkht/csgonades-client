@@ -86,6 +86,11 @@ type SetNotLoading = {
   type: "CreateNade/SetNotLoading";
 };
 
+type SetOneWay = {
+  type: "EditNade/SetOneWay";
+  oneWay: boolean;
+};
+
 type Actions =
   | SetMap
   | SetGfyData
@@ -99,7 +104,8 @@ type Actions =
   | SetEndPosCoords
   | SetTechnique
   | SetLoading
-  | SetNotLoading;
+  | SetNotLoading
+  | SetOneWay;
 
 const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
   console.log(action.type, action);
@@ -169,6 +175,11 @@ const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case "EditNade/SetOneWay":
+      return {
+        ...state,
+        oneWay: action.oneWay,
       };
     default:
       return state;
@@ -257,34 +268,35 @@ export const useEditNadeState = (nade: Nade) => {
 
 function createNadeUpdateBody(state: EditNadeState): NadeUpdateBody {
   //console.log("CurState", state);
-  const { originalNade: oritignalNade } = state;
+  const { originalNade } = state;
 
   const updateBody: NadeUpdateBody = {
     description: newValueIfDifferent(
-      oritignalNade.description,
+      originalNade.description,
       state.description
     ),
     endPosition: newValueIfDifferent(
-      oritignalNade.endPosition,
+      originalNade.endPosition,
       state.endPosition
     ),
-    gfycat: newValueIfDifferent(oritignalNade.gfycat, state.gfycat),
-    imageBase64: newValueIfDifferent(oritignalNade.images, state.imageBase64),
-    map: newValueIfDifferent(oritignalNade.map, state.map),
+    gfycat: newValueIfDifferent(originalNade.gfycat, state.gfycat),
+    imageBase64: newValueIfDifferent(originalNade.images, state.imageBase64),
+    map: newValueIfDifferent(originalNade.map, state.map),
     mapEndCoord: newValueIfDifferent(
-      oritignalNade.mapEndCoord,
+      originalNade.mapEndCoord,
       state.mapEndCoord
     ),
-    movement: newValueIfDifferent(oritignalNade.movement, state.movement),
-    slug: newValueIfDifferent(oritignalNade.slug, state.slug),
+    movement: newValueIfDifferent(originalNade.movement, state.movement),
+    slug: newValueIfDifferent(originalNade.slug, state.slug),
     startPosition: newValueIfDifferent(
-      oritignalNade.startPosition,
+      originalNade.startPosition,
       state.startPosition
     ),
-    status: newValueIfDifferent(oritignalNade.status, state.status),
-    technique: newValueIfDifferent(oritignalNade.technique, state.technique),
-    tickrate: newValueIfDifferent(oritignalNade.tickrate, state.tickrate),
-    type: newValueIfDifferent(oritignalNade.type, state.type),
+    status: newValueIfDifferent(originalNade.status, state.status),
+    technique: newValueIfDifferent(originalNade.technique, state.technique),
+    tickrate: newValueIfDifferent(originalNade.tickrate, state.tickrate),
+    type: newValueIfDifferent(originalNade.type, state.type),
+    oneWay: newValueIfDifferent(originalNade, state.oneWay),
   };
 
   // Remove undefine keys

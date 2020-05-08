@@ -3,7 +3,6 @@ import ReactDatePicker from "react-datepicker";
 import { CsgnInput } from "../../common/inputs/CsgnInput";
 import { Nade, Status, StatusInfo } from "../../models/Nade/Nade";
 import { useDeleteNade } from "../../store/NadeStore/hooks/useDeleteNade";
-import { useUpdateNade } from "../../store/NadeStore/hooks/useUpdateNade";
 import { useUpdateNadeStatus } from "../../store/NadeStore/hooks/useUpdateNadeStatus";
 import { ForceUserSettings } from "./ForceUserSettings";
 import { StatusEditor } from "./StatusEditor";
@@ -15,7 +14,6 @@ type Props = {
 
 export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
   const updateNadeStatus = useUpdateNadeStatus();
-  const updateNade = useUpdateNade();
   const deleteNade = useDeleteNade();
   const [deleteConfimMessage, setDeleteConfimMessage] = useState("");
   const [createdAt, setCreatedAt] = useState<Date | null>(
@@ -31,14 +29,6 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
     if (deleteConfimMessage === "DELETE") {
       deleteNade(nade.id);
     }
-  }
-
-  function onUpdateCreatedAt() {
-    if (createdAt) {
-      updateNade(nade.id, { createdAt: createdAt });
-    }
-
-    onDismiss();
   }
 
   return (
@@ -60,7 +50,6 @@ export const AdminNadeSettings: FC<Props> = ({ nade, onDismiss }) => {
           onChange={(newDate) => setCreatedAt(newDate)}
         />
         <br />
-        <button onClick={onUpdateCreatedAt}>UPDATE YEAR</button>
         <h3>Delete</h3>
         <CsgnInput
           label={`Write "DELETE"`}
