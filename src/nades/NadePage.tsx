@@ -12,6 +12,7 @@ import {
   descriptionSimplify,
   generateTitle,
   generateSeoTitle,
+  generateNadeItemTitle,
 } from "../utils/Common";
 import { NadeMeta } from "./components/NadeMeta";
 import { FavoriteButton } from "./components/FavoriteButton";
@@ -20,12 +21,9 @@ import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { PageCentralize } from "../common/PageCentralize";
 import { AdUnit } from "../common/adunits/AdUnit";
-import { FaChevronLeft } from "react-icons/fa";
-import { useAnalytics } from "../utils/Analytics";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 
 export const NadePage: FC = memo(() => {
-  const { event } = useAnalytics();
   const { colors } = useTheme();
   const nade = useNade();
   const canEdit = useCanEditNade(nade);
@@ -34,19 +32,11 @@ export const NadePage: FC = memo(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  function onBackClick() {
-    event({
-      category: "NadePage",
-      action: "Back Clicked",
-    });
-    window.history.back();
-  }
-
   if (!nade) {
     return null;
   }
 
-  const layoutTitle = generateTitle(
+  const [layoutTitle, subTitle] = generateNadeItemTitle(
     nade.title,
     nade.startPosition,
     nade.endPosition,
@@ -102,13 +92,9 @@ export const NadePage: FC = memo(() => {
           )}
 
           <div id="title">
-            <div id="back">
-              <button onClick={onBackClick}>
-                <FaChevronLeft />
-              </button>
-            </div>
             <NadeTitle
               title={layoutTitle}
+              subTitle={subTitle}
               canEdit={canEdit}
               nadeId={nade.id}
               nadeSlug={nade.slug}
@@ -162,19 +148,6 @@ export const NadePage: FC = memo(() => {
       </PageCentralize>
 
       <style jsx>{`
-        #back button {
-          color: ${colors.TEXT};
-          font-size: 24px;
-          padding: 10px 20px;
-          display: block;
-          position: relative;
-          top: 2px;
-          background: transparent;
-          border: none;
-          outline: none;
-          cursor: pointer;
-        }
-
         .matchmake-warning {
           grid-area: warning;
           background: #ad540a;
@@ -298,8 +271,6 @@ export const NadePage: FC = memo(() => {
           background: ${colors.DP01};
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
-          display: flex;
-          align-items: center;
         }
 
         #side-bar-ad {
