@@ -7,6 +7,5 @@ type Props = {
 };
 
 export const NadeVideoContainer: FC<Props> = memo(({ gfyId }) => {
-  console.log("> Render gfycat video");
   return <GfycatIframe gfyId={gfyId} />;
 });

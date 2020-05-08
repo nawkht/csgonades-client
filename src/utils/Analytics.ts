@@ -46,6 +46,7 @@ export const useAnalytics = () => {
       if (isAdmin) {
         return;
       }
+      console.log("#pageview", opts);
       GoogleAnalytics.pageView(opts);
     },
     [isAdmin]

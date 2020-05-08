@@ -22,11 +22,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const [nadeId, operation] = query.slug;
 
-  console.log({
-    nadeId,
-    operation,
-  });
-
   if (!nadeId || !operation) {
     res.statusCode = 404;
     return {
