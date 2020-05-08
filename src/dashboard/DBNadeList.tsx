@@ -2,7 +2,7 @@ import { FC, useState, useEffect, useMemo } from "react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { NadeApi } from "../api/NadeApi";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
-import { sortByDate, generateTitle } from "../utils/Common";
+import { sortByDate, generateTitle, kFormatter } from "../utils/Common";
 import { PageLink } from "../common/PageLink";
 import { prettyDate } from "../utils/DateUtils";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
@@ -15,6 +15,7 @@ import {
   FaClock,
   FaStar,
   FaComment,
+  FaEye,
 } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 
@@ -67,6 +68,9 @@ export const DBNadeList: FC<Props> = ({}) => {
               </td>
               <td>
                 <FaComment />
+              </td>
+              <td>
+                <FaEye />
               </td>
               <td>Created</td>
               <td></td>
@@ -127,8 +131,9 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
             </span>
           </PageLink>
         </td>
-        <td className="nade-fav">{nade.favoriteCount}</td>
-        <td className="nade-comments">{nade.commentCount}</td>
+        <td className="nade-fav">{kFormatter(nade.favoriteCount)}</td>
+        <td className="nade-comments">{kFormatter(nade.commentCount)}</td>
+        <td className="nade-comments">{kFormatter(nade.viewCount)}</td>
         <td>{prettyDate(nade.createdAt)}</td>
         <td className="nade-thumb">
           <PageLink href="/nades/[nade]" as={`/nades/${nade.slug || nade.id}`}>

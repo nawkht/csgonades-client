@@ -4,6 +4,7 @@ import { useIsSignedIn } from "../store/AuthStore/AuthHooks";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { PageCentralize } from "../common/PageCentralize";
+import { SEO } from "../layout/SEO2";
 
 type Props = {};
 
@@ -17,6 +18,7 @@ export const DashboardPage: FC<Props> = ({}) => {
 
   return (
     <>
+      <SEO canonical="/dashboard" title="Dashboard" />
       <PageCentralize>
         <div id="message">
           There is currently and issue updating the view count for nades.
