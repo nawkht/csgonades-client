@@ -4,7 +4,6 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "../common/nadeitem/NadeItemTitle";
 import { GfycatThumbnail } from "../common/nadeitem/GfycatThumbnail";
 import { NadeStats } from "../common/nadeitem/NadeStats";
-import { generateTitle } from "../utils/Common";
 
 type Props = {
   nade: Partial<NadeCreateBody>;
@@ -21,14 +20,19 @@ export const PreviewNade: FC<Props> = ({ nade }) => {
     movement,
     technique,
     tickrate,
+    oneWay,
   } = nade;
-
-  const title = generateTitle(undefined, startPosition, endPosition, type);
 
   return (
     <>
       <div className="nade-container">
-        <NadeItemTitle status="accepted" title={title} type={type} />
+        <NadeItemTitle
+          status="accepted"
+          type={type}
+          endPosition={endPosition}
+          oneWay={oneWay}
+          startPosition={startPosition}
+        />
         <GfycatThumbnail
           disableAction
           nadeId=""

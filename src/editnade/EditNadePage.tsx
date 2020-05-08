@@ -163,6 +163,7 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
                 technique: state.technique || nade.technique,
                 tickrate: state.tickrate || nade.tickrate,
                 type: state.type || nade.type,
+                oneWay: state.oneWay || nade.oneWay,
               }}
             />
           </div>

@@ -141,8 +141,12 @@ export function generateTitle(
   title?: string,
   starPosition?: string,
   endPosition?: string,
-  nadeType?: NadeType
+  nadeType?: NadeType,
+  oneWay?: boolean
 ) {
+  if (oneWay && endPosition && nadeType) {
+    return `${endPosition} One-Way ${capitalize(nadeType)}`;
+  }
   if (starPosition && endPosition && nadeType) {
     return `${endPosition} ${capitalize(nadeType)} from ${starPosition}`;
   } else if (title) {

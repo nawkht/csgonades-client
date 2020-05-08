@@ -31,6 +31,7 @@ export const NadeItem: FC<Props> = memo(({ nade, onItemClick }) => {
             type={nade.type}
             status={nade.status}
             title={nade.title}
+            oneWay={nade.oneWay}
           />
           <div className="video">
             <GfycatThumbnail

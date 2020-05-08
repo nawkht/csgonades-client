@@ -7,6 +7,7 @@ import { NadeType } from "../../models/Nade/NadeType";
 type Props = {
   type?: NadeType;
   title?: string;
+  oneWay?: boolean;
   startPosition?: string;
   endPosition?: string;
   status: Status;
@@ -18,10 +19,17 @@ export const NadeItemTitle: FC<Props> = ({
   status,
   startPosition,
   endPosition,
+  oneWay,
 }) => {
   const { colors } = useTheme();
   const iconUrl = iconFromType(type);
-  const generatedTitle = generateTitle(title, startPosition, endPosition, type);
+  const generatedTitle = generateTitle(
+    title,
+    startPosition,
+    endPosition,
+    type,
+    oneWay
+  );
 
   const titleClassName = useMemo(() => {
     const classNames = ["title"];

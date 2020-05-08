@@ -88,6 +88,9 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           title={nade.title}
           status={nade.status}
           type={nade.type}
+          endPosition={nade.endPosition}
+          oneWay={nade.oneWay}
+          startPosition={nade.startPosition}
         />
         <div className="media-canvas">
           <div className="media-content">
