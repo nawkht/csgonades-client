@@ -41,11 +41,11 @@ export const NadeModal: FC = memo(() => {
           <FaTimes />
         </div>
 
-        <div id="center">
-          <div id="ph">
-            <AdUnit tagType="728x90" />
-          </div>
+        <div id="ph">
+          <AdUnit tagType="728x90" />
+        </div>
 
+        <div id="center">
           <div id="nade-page-content" onClick={(e) => e.stopPropagation()}>
             <NadeModalPage nadeLight={nadeForModal} nade={nade} />
           </div>
@@ -53,11 +53,13 @@ export const NadeModal: FC = memo(() => {
       </div>
       <style jsx>{`
         #ph {
+          height: 90px;
+          background: rgba(255, 255, 255, 0.8);
         }
 
         #nade-modal-close {
           position: fixed;
-          top: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          top: ${90 + Dimensions.GUTTER_SIZE * 1.5}px;
           right: ${Dimensions.GUTTER_SIZE * 1.5}px;
           font-size: 30px;
           color: rgba(255, 255, 255, 0.75);
@@ -85,7 +87,7 @@ export const NadeModal: FC = memo(() => {
         }
 
         #nade-page-content {
-          margin-top: ${Dimensions.GUTTER_SIZE * 2}px;
+          margin-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
           background: ${colors.DP00};
           margin-bottom: 100px;
           border-radius: 5px;
