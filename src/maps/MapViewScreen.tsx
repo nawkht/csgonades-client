@@ -134,11 +134,11 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
         }
 
         #fixed-right {
-          position: absolute;
-          top: 0;
-          left: 100%;
-          bottom: 0;
+          position: fixed;
+          top: ${Dimensions.HEADER_HEIGHT}px;
+          right: ${Dimensions.GUTTER_SIZE / 2}px;
           width: 160px;
+          height: calc(100vh - ${Dimensions.HEADER_HEIGHT}px);
           display: flex;
           align-items: center;
           justify-content: space-around;
