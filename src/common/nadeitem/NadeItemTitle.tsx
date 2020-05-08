@@ -70,7 +70,7 @@ export const NadeItemTitle: FC<Props> = ({
           position: absolute;
           bottom: 0;
           right: 0;
-          transform: scale(1.1) translateY(20px) translateX(10px);
+          transform: scale(1) translateY(15px) translateX(10px);
           opacity: 0.5;
         }
 
