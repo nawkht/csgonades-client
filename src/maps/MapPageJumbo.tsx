@@ -31,8 +31,7 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
         </h1>
         <h2>Don&apos;t be like BOT Bob 🤖, get some nades.</h2>
         <p>
-          Got some amazing nades? Channel your inner Global Elite, sign in and
-          add your them to the list 🏆
+          Channel your inner Global Elite. Sign in and add a nade to the list 🏆
         </p>
       </div>
       <style jsx>{`
