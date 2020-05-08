@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useEffect } from "react";
 import { useNade } from "../store2/NadePageStore/hooks/useNade";
 import { NadeTitle } from "./components/NadeTitle";
 import { SEO } from "../layout/SEO2";
@@ -29,6 +29,10 @@ export const NadePage: FC = memo(() => {
   const { colors } = useTheme();
   const nade = useNade();
   const canEdit = useCanEditNade(nade);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   function onBackClick() {
     event({
