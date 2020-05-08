@@ -2,10 +2,21 @@ import { FC, useState, useEffect, useMemo } from "react";
 import { NadeLight, Status } from "../models/Nade/Nade";
 import { NadeApi } from "../api/NadeApi";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
-import { kFormatter, sortByDate, capitalize } from "../utils/Common";
+import { sortByDate, generateTitle } from "../utils/Common";
 import { PageLink } from "../common/PageLink";
 import { prettyDate } from "../utils/DateUtils";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import Link from "next/link";
+import {
+  FaCheck,
+  FaQuestion,
+  FaExclamationTriangle,
+  FaEdit,
+  FaClock,
+  FaStar,
+  FaComment,
+} from "react-icons/fa";
+import { Popup } from "semantic-ui-react";
 
 type Props = {};
 
@@ -48,14 +59,17 @@ export const DBNadeList: FC<Props> = ({}) => {
         <table>
           <thead>
             <tr>
-              <td>Status</td>
+              <td></td>
               <td>Type</td>
               <td>Title</td>
-              <td>Favourites</td>
-              <td>Comments</td>
-              <td>Views</td>
-              <td>Views Refresh</td>
+              <td>
+                <FaStar />
+              </td>
+              <td>
+                <FaComment />
+              </td>
               <td>Created</td>
+              <td></td>
               <td></td>
             </tr>
           </thead>
@@ -89,6 +103,8 @@ type NadeItemProps = {
 };
 
 export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
+  const { colors } = useTheme();
+
   return (
     <>
       <tr className="nade-item">
@@ -100,25 +116,52 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
         </td>
         <td id="nade-title">
           <PageLink href="/nades/[nade]" as={`/nades/${nade.slug || nade.id}`}>
-            <span>{nade.title}</span>
+            <span>
+              {generateTitle(
+                nade.title,
+                nade.startPosition,
+                nade.endPosition,
+                nade.type,
+                nade.oneWay
+              )}
+            </span>
           </PageLink>
         </td>
         <td className="nade-fav">{nade.favoriteCount}</td>
         <td className="nade-comments">{nade.commentCount}</td>
-        <td id="nade-views">{kFormatter(nade.viewCount)}</td>
-        <td>
-          {nade.nextUpdateInHours === 0
-            ? "Soon"
-            : `In ${nade.nextUpdateInHours} hours`}
-        </td>
         <td>{prettyDate(nade.createdAt)}</td>
         <td className="nade-thumb">
           <PageLink href="/nades/[nade]" as={`/nades/${nade.slug || nade.id}`}>
             <img src={nade.images.thumbnailUrl} />
           </PageLink>
         </td>
+        <td>
+          <Link
+            href="/nades/[...slug]"
+            as={`/nades/${nade.slug || nade.id}/edit`}
+          >
+            <button className="edit-btn">
+              <FaEdit /> Edit
+            </button>
+          </Link>
+        </td>
       </tr>
       <style jsx>{`
+        .edit-btn {
+          background: ${colors.filterBg};
+          padding: 5px 10px;
+          border: none;
+          outline: none;
+          white-space: nowrap;
+          border-radius: 5px;
+          color: white;
+          cursor: pointer;
+        }
+
+        .edit-btn:hover {
+          background: ${colors.filterBgHover};
+        }
+
         .nade-thumb img {
           width: 100px;
           border-radius: 5px;
@@ -154,11 +197,49 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
 };
 
 const StatusText: FC<{ status: Status }> = ({ status }) => {
-  const statusString = capitalize(status);
+  const statusIcon = useMemo(() => {
+    if (status === "accepted") {
+      return (
+        <Popup
+          position="top center"
+          content="Accepted"
+          inverted
+          size="tiny"
+          trigger={<FaCheck />}
+        />
+      );
+    }
+    if (status === "pending") {
+      return (
+        <Popup
+          position="top center"
+          content="Waiting for approval"
+          inverted
+          size="tiny"
+          trigger={<FaClock />}
+        />
+      );
+    }
+    if (status === "declined") {
+      return (
+        <Popup
+          position="top center"
+          content="Declined, see nade comment"
+          inverted
+          size="tiny"
+          trigger={<FaExclamationTriangle />}
+        />
+      );
+    }
+
+    return <FaQuestion />;
+  }, [status]);
 
   const statusColor = useMemo(() => {
     if (status === "accepted") {
-      return "green";
+      return "#96bd15";
+    } else if (status === "pending") {
+      return "#fc9003";
     } else {
       return "red";
     }
@@ -166,7 +247,7 @@ const StatusText: FC<{ status: Status }> = ({ status }) => {
 
   return (
     <>
-      <span>{statusString}</span>
+      <span>{statusIcon}</span>
       <style jsx>{`
         span {
           color: ${statusColor};

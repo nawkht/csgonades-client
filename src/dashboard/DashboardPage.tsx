@@ -34,6 +34,7 @@ export const DashboardPage: FC<Props> = ({}) => {
       </PageCentralize>
       <style jsx>{`
         #message {
+          display: none;
           margin-top: ${Dimensions.GUTTER_SIZE}px;
           background: ${colors.WARNING};
           color: white;
