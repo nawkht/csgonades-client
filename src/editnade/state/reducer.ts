@@ -154,7 +154,7 @@ const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
     case "CreateNade/ShowImageSelector":
       return {
         ...state,
-        showImageAdder: true,
+        showImageAdder: !state.showImageAdder,
       };
     case "CreateNade/SetEndPosCoords":
       return {

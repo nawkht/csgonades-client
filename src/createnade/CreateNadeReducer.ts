@@ -51,7 +51,7 @@ type SetImage = {
   image: string;
 };
 
-type ShowImageSelector = {
+type ToggleImageSelector = {
   type: "CreateNade/ShowImageSelector";
 };
 
@@ -82,7 +82,7 @@ type Actions =
   | SetNadeType
   | SetMovement
   | SetImage
-  | ShowImageSelector
+  | ToggleImageSelector
   | SetEndPosCoords
   | SetTechnique
   | SetLoading
@@ -134,7 +134,7 @@ const reducer: Reducer<CreateNadeState, Actions> = (state, action) => {
     case "CreateNade/ShowImageSelector":
       return {
         ...state,
-        showImageAdder: true,
+        showImageAdder: !state.showImageAdder,
       };
     case "CreateNade/SetEndPosCoords":
       return {

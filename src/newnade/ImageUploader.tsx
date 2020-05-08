@@ -1,12 +1,15 @@
 import { ChangeEvent, useRef, useState } from "react";
 import ReactCrop from "react-image-crop";
-import { Button } from "semantic-ui-react";
+import { useTheme } from "../store/SettingsStore/SettingsHooks";
+import { Dimensions } from "../constants/Constants";
 
 type Props = {
+  onDismiss: () => void;
   onImageCropped: (croppedImageBase64: string) => void;
 };
 
-export const ImageUploader = ({ onImageCropped }: Props) => {
+export const ImageUploader = ({ onImageCropped, onDismiss }: Props) => {
+  const { colors } = useTheme();
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -118,15 +121,18 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
           onChange={onSelectFile}
         />
         <div className="file-selector-btn">
-          <Button onClick={onSelectFileClick} color="teal">
-            Add image
-          </Button>
+          <button className="btn cancel" onClick={onDismiss}>
+            CANCEL
+          </button>
+          <button className="btn select-img" onClick={onSelectFileClick}>
+            SELECT IMAGE
+          </button>
+
           {image && (
             <>
-              <br />
-              <Button positive onClick={cropImage}>
-                Submit
-              </Button>
+              <button className="btn save" onClick={cropImage}>
+                SAVE
+              </button>
             </>
           )}
         </div>
@@ -149,6 +155,31 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
         />
       </div>
       <style jsx>{`
+        .btn {
+          border: none;
+          outline: none;
+          font-size: 14px;
+          background: ${colors.filterBg};
+          cursor: pointer;
+          margin-right: ${Dimensions.GUTTER_SIZE}px;
+          color: white;
+          border-radius: 5px;
+          height: 42px;
+          padding: 0px 20px;
+        }
+
+        .btn:hover {
+          background: ${colors.filterBgHover};
+        }
+
+        .save {
+          background: #94b83b;
+        }
+
+        .save:hover {
+          background: #7d9c32;
+        }
+
         .image-uploader {
           max-width: 1200px;
           display: block;

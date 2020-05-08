@@ -182,6 +182,9 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           {state.showImageAdder && (
             <div id="image-adder">
               <ImageUploader
+                onDismiss={() =>
+                  dispatch({ type: "CreateNade/ShowImageSelector" })
+                }
                 onImageCropped={(image) =>
                   dispatch({ type: "CreateNade/SetImage", image })
                 }
