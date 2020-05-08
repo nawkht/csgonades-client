@@ -130,7 +130,7 @@ export const NadeTitle: FC<Props> = ({
         .sub-title {
           font-size: 15px;
           opacity: 0.75;
-          margin-top: -10px;
+          margin-top: -8px;
         }
 
         @media only screen and (max-width: 800px) {
