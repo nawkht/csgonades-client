@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useEffect } from "react";
 import { IS_PROD } from "../../constants/Constants";
 
 type AdType =
@@ -22,8 +22,6 @@ type AdData = {
 const ADS_ENABLED = true;
 
 export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
-  const [adBlockDetected, setAdBlockDetected] = useState(false);
-
   const className = modalTop ? "ph top" : "ph";
 
   const adData: AdData = getAdData(tagType);
@@ -32,15 +30,10 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
       return;
     }
 
-    const adBlockDisabled = loadAdByType(adData);
-    setAdBlockDetected(adBlockDisabled);
+    loadAdByType(adData);
   }, [adData]);
 
   const height = adData.size.split("x")[1];
-
-  if (adBlockDetected) {
-    return null;
-  }
 
   return (
     <>
@@ -113,14 +106,5 @@ function loadAdByType(adData: AdData) {
       // @ts-ignore
       window._mNDetails.loadTag(adData.id, adData.size, adData.id);
     });
-
-    // @ts-ignore
-    if (!window._mNDetails) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    return true;
-  }
+  } catch (error) {}
 }
