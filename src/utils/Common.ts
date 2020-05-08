@@ -2,6 +2,7 @@ import Router from "next/router";
 import { NadeType } from "../models/Nade/NadeType";
 import removeMd from "remove-markdown";
 import { nadeTypeString } from "../models/Nade/NadeType";
+import { CsgoMap } from "../models/Nade/CsGoMap";
 
 export const capitalize = (s: string) => {
   if (typeof s !== "string") return "";
@@ -154,6 +155,34 @@ export function generateTitle(
     }
 
     return `${endPosition} ${nadeTypeString(nadeType)} from ${starPosition}`;
+  } else if (title) {
+    return title;
+  } else {
+    return "No Title";
+  }
+}
+
+export function generateSeoTitle(
+  title?: string,
+  starPosition?: string,
+  endPosition?: string,
+  nadeType?: NadeType,
+  oneWay?: boolean,
+  map?: CsgoMap
+) {
+  if (oneWay && endPosition && nadeType && map) {
+    return `${endPosition} One-Way ${nadeTypeString(nadeType)} ${capitalize(
+      map
+    )}`;
+  }
+  if (starPosition && endPosition && nadeType && map) {
+    if (nadeType === "flash") {
+      return `${endPosition} ${nadeTypeString(nadeType)} ${capitalize(map)}`;
+    }
+
+    return `${endPosition} ${nadeTypeString(
+      nadeType
+    )} from ${starPosition} ${capitalize(map)}`;
   } else if (title) {
     return title;
   } else {

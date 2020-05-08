@@ -8,7 +8,11 @@ import { NadeShareActions } from "./NadeShareActions";
 import { NadeComments } from "./comments/NadeComments";
 import NadeStatus from "./components/NadeStatus";
 import { ArticleJsonLd } from "next-seo";
-import { descriptionSimplify, generateTitle } from "../utils/Common";
+import {
+  descriptionSimplify,
+  generateTitle,
+  generateSeoTitle,
+} from "../utils/Common";
 import { NadeMeta } from "./components/NadeMeta";
 import { FavoriteButton } from "./components/FavoriteButton";
 import { ReportNadeButton } from "./components/ReportNadeButtons";
@@ -46,12 +50,21 @@ export const NadePage: FC = memo(() => {
     nade.oneWay
   );
 
+  const seoTitle = generateSeoTitle(
+    nade.title,
+    nade.startPosition,
+    nade.endPosition,
+    nade.type,
+    nade.oneWay,
+    nade.map
+  );
+
   return (
     <>
       <ArticleJsonLd
         key={`ld-${nade.id}`}
         url={`https://www.csgonades.com/nades/${nade.slug || nade.id}`}
-        title={layoutTitle}
+        title={seoTitle}
         authorName={addslashes(nade.user.nickname)}
         datePublished={nade.createdAt}
         dateModified={nade.updatedAt}
@@ -62,7 +75,7 @@ export const NadePage: FC = memo(() => {
       />
       <SEO
         key={`seo-${nade.id}`}
-        title={layoutTitle}
+        title={seoTitle}
         description={nade.description}
         canonical={`/nades/${nade.slug || nade.id}`}
         thumbnail={nade.images.thumbnailUrl}
