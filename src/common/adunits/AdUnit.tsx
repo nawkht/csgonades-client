@@ -113,7 +113,11 @@ function loadAdByType(adData: AdData) {
       // @ts-ignore
       window._mNDetails.loadTag(adData.id, adData.size, adData.id);
     });
-    return false;
+
+    // @ts-ignore
+    if (!window._mNDetails) {
+      return false;
+    }
   } catch (error) {
     return true;
   }
