@@ -61,7 +61,7 @@ export const NadeItemTitle: FC<Props> = ({
           bottom: 0;
           right: 0;
           transform: scale(1.1) translateY(20px) translateX(10px);
-          opacity: 0.9;
+          opacity: 0.5;
         }
 
         .title-text {
