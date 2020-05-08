@@ -54,6 +54,7 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
         }
 
         .top {
+          grid-area: ph;
           background: rgba(255, 255, 255, 0.8);
         }
       `}</style>

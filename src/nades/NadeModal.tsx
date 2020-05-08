@@ -37,8 +37,10 @@ export const NadeModal: FC = memo(() => {
   return (
     <>
       <div id="nade-modal" onClick={onDismiss}>
-        <div id="nade-modal-close">
-          <FaTimes />
+        <div id="close-wrap">
+          <div id="nade-modal-close">
+            <FaTimes />
+          </div>
         </div>
 
         <div id="ph">
@@ -52,22 +54,6 @@ export const NadeModal: FC = memo(() => {
         </div>
       </div>
       <style jsx>{`
-        #ph {
-          height: 90px;
-        }
-
-        #nade-modal-close {
-          position: fixed;
-          top: ${90 + Dimensions.GUTTER_SIZE * 1.5}px;
-          right: ${Dimensions.GUTTER_SIZE * 1.5}px;
-          font-size: 30px;
-          color: rgba(255, 255, 255, 0.75);
-        }
-
-        #nade-modal-close:hover {
-          color: rgba(255, 255, 255, 1);
-        }
-
         #nade-modal {
           position: fixed;
           top: 0;
@@ -77,16 +63,43 @@ export const NadeModal: FC = memo(() => {
           z-index: 998;
           background: rgba(0, 0, 0, 0.8);
           overflow-y: auto;
-          display: block;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-areas:
+            "ph ph ph"
+            ". md close";
         }
 
         #center {
+          grid-area: md;
           width: 1000px;
-          margin: 0 auto;
+          margin-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
+        }
+
+        #ph {
+          grid-area: ph;
+        }
+
+        #close-wrap {
+          margin-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          margin-right: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          grid-area: close;
+          justify-self: end;
+        }
+
+        #nade-modal-close {
+          position: sticky;
+          top: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          font-size: 30px;
+          color: rgba(255, 255, 255, 0.75);
+          cursor: pointer;
+        }
+
+        #nade-modal-close:hover {
+          color: rgba(255, 255, 255, 1);
         }
 
         #nade-page-content {
-          margin-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
           background: ${colors.DP00};
           margin-bottom: 100px;
           border-radius: 5px;
