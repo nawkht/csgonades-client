@@ -36,7 +36,7 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
     setAdBlockDetected(adBlockDisabled);
   }, [adData]);
 
-  //const height = adData.size.split("x")[1];
+  const height = adData.size.split("x")[1];
 
   if (adBlockDetected) {
     return null;
@@ -51,6 +51,7 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
         .ph {
           display: flex;
           justify-content: space-around;
+          height: ${height}px;
         }
 
         .top {
