@@ -95,7 +95,12 @@ export const DBNadeList: FC<Props> = ({}) => {
         table thead td {
           font-weight: 400;
           padding: 10px 20px;
-          padding-left: 0px;
+          border-right: 1px solid rgba(0, 0, 0, 0.05);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        table thead td:last-child {
+          border-right: none;
         }
       `}</style>
     </>
@@ -152,6 +157,16 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
         </td>
       </tr>
       <style jsx>{`
+        td {
+          border-right: 1px solid rgba(0, 0, 0, 0.05);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          padding: 10px 20px;
+        }
+
+        td:last-child {
+          border-right: none;
+        }
+
         .edit-btn {
           background: ${colors.filterBg};
           padding: 5px 10px;
@@ -168,18 +183,13 @@ export const NadeItem: FC<NadeItemProps> = ({ nade }) => {
         }
 
         .nade-thumb img {
-          width: 100px;
+          width: 75px;
           border-radius: 5px;
         }
 
         .nade-item {
           border-collapse: collapse;
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .nade-item td {
-          padding: 10px 20px;
-          padding-left: 0px;
         }
 
         .nade-title {
