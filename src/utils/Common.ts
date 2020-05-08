@@ -1,6 +1,7 @@
 import Router from "next/router";
 import { NadeType } from "../models/Nade/NadeType";
 import removeMd from "remove-markdown";
+import { nadeTypeString } from "../models/Nade/NadeType";
 
 export const capitalize = (s: string) => {
   if (typeof s !== "string") return "";
@@ -145,14 +146,14 @@ export function generateTitle(
   oneWay?: boolean
 ) {
   if (oneWay && endPosition && nadeType) {
-    return `${endPosition} One-Way ${capitalize(nadeType)}`;
+    return `${endPosition} One-Way ${nadeTypeString(nadeType)}`;
   }
   if (starPosition && endPosition && nadeType) {
     if (nadeType === "flash") {
-      return `${endPosition} ${capitalize(nadeType)}`;
+      return `${endPosition} ${nadeTypeString(nadeType)}`;
     }
 
-    return `${endPosition} ${capitalize(nadeType)} from ${starPosition}`;
+    return `${endPosition} ${nadeTypeString(nadeType)} from ${starPosition}`;
   } else if (title) {
     return title;
   } else {
