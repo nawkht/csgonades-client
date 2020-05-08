@@ -7,7 +7,6 @@ import { BlogList } from "../blog/BlogList";
 import { blogJumpthrowBind } from "../pages/blog/jumpthrow-bind";
 import { Dimensions } from "../constants/Constants";
 import { PageCentralize } from "../common/PageCentralize";
-import { AdUnit } from "../common/adunits/AdUnit";
 
 const recentPosts = [blogJumpthrowBind, bestDust2Nades, blogNadeAlignCrosshair];
 
@@ -24,10 +23,6 @@ export const FrontPage: FC<Props> = memo(({ stats }) => {
 
           <div className="recent-wrap">
             <BlogList posts={recentPosts} />
-          </div>
-
-          <div className="placement">
-            <AdUnit tagType="728x90" />
           </div>
         </PageCentralize>
       </div>

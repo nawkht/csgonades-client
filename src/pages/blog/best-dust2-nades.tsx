@@ -77,10 +77,6 @@ const PractiseConfigBlogPost = () => {
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-top-mid-aJd" />
         </div>
 
-        <div className="a-tag">
-          <AdUnit tagType="728x90" />
-        </div>
-
         <h2>2. Long Corner Smoke</h2>
         <p>
           Why do we throw this smoke? It forces the CT to have to go wide to
