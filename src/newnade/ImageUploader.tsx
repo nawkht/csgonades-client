@@ -145,6 +145,7 @@ export const ImageUploader = ({ onImageCropped }: Props) => {
           onImageLoaded={onImageLoaded}
           onComplete={onCropComplete}
           onChange={onCropChange}
+          ruleOfThirds
         />
       </div>
       <style jsx>{`
