@@ -4,8 +4,9 @@ import { BlogNadeItem } from "../../blog/BlogNadeItem";
 import { PageLink } from "../../common/PageLink";
 import { Dimensions } from "../../constants/Constants";
 import { AdUnit } from "../../common/adunits/AdUnit";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Link from "next/link";
+import { useDisplayToast } from "../../store/ToastStore/hooks/useDisplayToast";
 
 export const bestDust2Nades: BlogPost = {
   title: "Best Grenade Spots for Dust2 - Must Know!",
@@ -19,6 +20,21 @@ export const bestDust2Nades: BlogPost = {
 };
 
 const PractiseConfigBlogPost = () => {
+  const displayToast = useDisplayToast();
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      displayToast({
+        severity: "info",
+        message:
+          "Sorry to disturb 😏 You can click on Dust2 in the navigation to see even more nades for the map. Carry on!🖖",
+        title: "Psst...",
+        durationSeconds: 20,
+      });
+    }, 1000 * 10);
+    return () => clearTimeout(delay);
+  }, [displayToast]);
+
   return (
     <>
       <BlogPostArticle SideBarComp={BlogSideBar} data={bestDust2Nades}>
