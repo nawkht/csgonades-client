@@ -148,6 +148,10 @@ export function generateTitle(
     return `${endPosition} One-Way ${capitalize(nadeType)}`;
   }
   if (starPosition && endPosition && nadeType) {
+    if (nadeType === "flash") {
+      return `${endPosition} ${capitalize(nadeType)}`;
+    }
+
     return `${endPosition} ${capitalize(nadeType)} from ${starPosition}`;
   } else if (title) {
     return title;
