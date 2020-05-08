@@ -10,7 +10,6 @@ import { capitalize } from "../utils/Common";
 import { PageCentralize } from "../common/PageCentralize";
 import { FilterBar } from "./nadefilter/FilterBar";
 import { MapViewScreen } from "./MapViewScreen";
-import { AdUnit } from "../common/adunits/AdUnit";
 import { useIsClientSide } from "../common/MinSizeRender";
 
 type Props = {
@@ -40,16 +39,9 @@ export const MapPage2: FC<Props> = memo(({ map, allNades }) => {
             <MapViewScreen map={map} allNades={allNades} />
           )}
         </div>
-        <div className="ph">
-          <AdUnit tagType="728x90" />
-        </div>
       </PageCentralize>
 
       <style jsx>{`
-        .ph {
-          margin-bottom: 50px;
-        }
-
         #map-page {
           grid-area: main;
           margin-top: ${Dimensions.GUTTER_SIZE}px;

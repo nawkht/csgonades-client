@@ -6,6 +6,7 @@ import { FaTimes } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeModalPage } from "./NadeModalPage";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadeModal: FC = memo(() => {
   const { colors } = useTheme();
@@ -41,17 +42,24 @@ export const NadeModal: FC = memo(() => {
         </div>
 
         <div id="center">
+          <div id="ph">
+            <AdUnit tagType="728x90" />
+          </div>
+
           <div id="nade-page-content" onClick={(e) => e.stopPropagation()}>
             <NadeModalPage nadeLight={nadeForModal} nade={nade} />
           </div>
         </div>
       </div>
       <style jsx>{`
+        #ph {
+        }
+
         #nade-modal-close {
           position: fixed;
           top: ${Dimensions.GUTTER_SIZE * 1.5}px;
           right: ${Dimensions.GUTTER_SIZE * 1.5}px;
-          font-size: 24px;
+          font-size: 30px;
           color: rgba(255, 255, 255, 0.75);
         }
 
@@ -65,7 +73,7 @@ export const NadeModal: FC = memo(() => {
           bottom: 0;
           left: 0;
           right: 0;
-          z-index: 999;
+          z-index: 998;
           background: rgba(0, 0, 0, 0.8);
           overflow-y: auto;
           display: block;
@@ -77,7 +85,7 @@ export const NadeModal: FC = memo(() => {
         }
 
         #nade-page-content {
-          margin-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          margin-top: ${Dimensions.GUTTER_SIZE * 2}px;
           background: ${colors.DP00};
           margin-bottom: 100px;
           border-radius: 5px;
