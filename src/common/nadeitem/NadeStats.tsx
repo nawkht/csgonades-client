@@ -38,17 +38,11 @@ export const NadeStats: FC<Props> = ({
 }) => {
   const { event } = useAnalytics();
   const { colors } = useTheme();
-  const favoriteIconColor = isFavorited ? colors.FAV_YELLOW : colors.TEXT;
+  const favoriteIconColor = isFavorited ? colors.FAV_YELLOW : colors.GREY;
   const favIcon = isFavorited ? (
-    <TiStarFullOutline
-      color={favoriteIconColor}
-      style={{ position: "relative", top: -0.5, fontSize: 18 }}
-    />
+    <TiStarFullOutline className="icon-fix" color={favoriteIconColor} />
   ) : (
-    <TiStarFullOutline
-      color={favoriteIconColor}
-      style={{ position: "relative", top: -0.5, fontSize: 18 }}
-    />
+    <TiStarFullOutline className="icon-fix" color={favoriteIconColor} />
   );
   const hasMovement =
     movement === "running" ||
@@ -64,7 +58,7 @@ export const NadeStats: FC<Props> = ({
           {!nadeIsNew && VIEW_COUNT_ENABLED && (
             <div className="stat">
               <div className="stat-content">
-                <GoEye style={{ position: "relative", top: -0.5 }} />
+                <GoEye className="icon-fix" />
                 <span className="stat-text">{kFormatter(viewCount)}</span>
               </div>
             </div>
@@ -88,13 +82,7 @@ export const NadeStats: FC<Props> = ({
           {commentCount > 0 && (
             <div className="stat">
               <div className="stat-content">
-                <FaComment
-                  style={{
-                    position: "relative",
-                    top: -0.5,
-                    color: colors.TEXT,
-                  }}
-                />
+                <FaComment className="icon-fix" />
                 <span className="stat-text">{commentCount}</span>
               </div>
             </div>
@@ -109,7 +97,7 @@ export const NadeStats: FC<Props> = ({
               content="Requires movement"
               trigger={
                 <div className="special movement">
-                  <FaRunning style={{ position: "relative", top: -1 }} />
+                  <FaRunning className="icon-fix" />
                 </div>
               }
             />
@@ -123,7 +111,7 @@ export const NadeStats: FC<Props> = ({
               size="tiny"
               trigger={
                 <div className="special tick">
-                  <GoTerminal style={{ position: "relative", top: -1 }} />
+                  <GoTerminal className="icon-fix" />
                   <span className="special-text ticktext">
                     {tickrateString(tickrate || "any")}
                   </span>
@@ -155,7 +143,7 @@ export const NadeStats: FC<Props> = ({
               }
               trigger={
                 <div className="special pro">
-                  <FaCheckCircle style={{ position: "relative", top: -1 }} />
+                  <FaCheckCircle className="icon-fix" />
                   <span>PRO</span>
                 </div>
               }
@@ -185,6 +173,7 @@ export const NadeStats: FC<Props> = ({
         .stat-content {
           display: flex;
           align-items: center;
+          color: ${colors.GREY};
         }
 
         .stat {
@@ -194,9 +183,9 @@ export const NadeStats: FC<Props> = ({
 
         .stat-text,
         .special-text {
-          font-size: 14px;
+          font-size: 10px;
+          font-weight: 500;
           margin-left: 3px;
-          color: ${colors.TEXT};
         }
 
         .specials {
@@ -239,6 +228,12 @@ export const NadeStats: FC<Props> = ({
         .ticktext {
           font-size: 10px;
           color: ${colors.NADE_ITEM_HIGHLIGHT};
+        }
+      `}</style>
+      <style jsx global>{`
+        .icon-fix {
+          position: relative;
+          top: -1px;
         }
       `}</style>
     </>
