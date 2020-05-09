@@ -16,6 +16,7 @@ import { useDisplayToast } from "../../store/ToastStore/hooks/useDisplayToast";
 import { NadeApi } from "../../api/NadeApi";
 import { useRouter } from "next/router";
 import { assertNever } from "../../utils/Common";
+import { Tickrate } from "../../models/Nade/NadeTickrate";
 
 interface EditNadeState extends Partial<NadeCreateBody> {
   originalNade: Nade;
@@ -107,6 +108,11 @@ type SetNadeStatus = {
   status: Status;
 };
 
+type SetTickrate = {
+  type: "EditNade/SetTickrate";
+  tick: Tickrate;
+};
+
 type Actions =
   | SetMap
   | SetGfyData
@@ -124,7 +130,8 @@ type Actions =
   | SetOneWay
   | SetNadeStatus
   | ToggleLineupImageAdder
-  | SetLineUpImage;
+  | SetLineUpImage
+  | SetTickrate;
 
 const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
   console.log(action.type, action);
@@ -216,6 +223,11 @@ const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
         lineUpImageBase64: action.image,
         showLineupImgAdder: false,
       };
+    case "EditNade/SetTickrate":
+      return {
+        ...state,
+        tickrate: action.tick,
+      };
     default:
       assertNever(action);
       return state;
@@ -234,13 +246,10 @@ export const useEditNadeState = (nade: Nade) => {
   });
 
   const onUpdate = useCallback(async () => {
+    dispatch({ type: "CreateNade/SetLoading" });
     const updateDto = createNadeUpdateBody(state);
 
     const changedFields = Object.keys(updateDto).length;
-
-    console.log({
-      updateDto,
-    });
 
     if (!changedFields) {
       displayToast({
@@ -248,7 +257,7 @@ export const useEditNadeState = (nade: Nade) => {
         title: "Nothing Changed",
         message: "Nothing changed from original nade",
       });
-      return;
+      return dispatch({ type: "CreateNade/SetNotLoading" });
     }
 
     const token = await getToken();
@@ -258,7 +267,7 @@ export const useEditNadeState = (nade: Nade) => {
         title: "Not Signed In",
         message: "You don't seem to be signed in.",
       });
-      return;
+      return dispatch({ type: "CreateNade/SetNotLoading" });
     }
 
     const result = await NadeApi.update(
@@ -272,14 +281,15 @@ export const useEditNadeState = (nade: Nade) => {
         severity: "error",
         message: "Failed to update nade",
       });
-      console.error(result.error);
-      return;
+      return dispatch({ type: "CreateNade/SetNotLoading" });
     }
 
     displayToast({
       severity: "success",
       message: "Nade updated!",
     });
+
+    dispatch({ type: "CreateNade/SetNotLoading" });
 
     router.push(
       "/nades/[nade]",
@@ -292,7 +302,7 @@ export const useEditNadeState = (nade: Nade) => {
 
     const changedFields = Object.keys(updateDto).length;
 
-    return changedFields === 0;
+    return changedFields === 0 || state.loading;
   }, [state]);
 
   return {

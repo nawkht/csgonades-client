@@ -3,14 +3,17 @@ import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   value: string;
+  optional?: boolean;
 };
 
-export const MiniLabel: FC<Props> = ({ value }) => {
+export const MiniLabel: FC<Props> = ({ value, optional }) => {
   const { colors } = useTheme();
 
   return (
     <>
-      <div className="label">{value}</div>
+      <div className="label">
+        {value} {optional ? "(optional)" : ""}
+      </div>
       <style jsx>{`
         .label {
           font-size: 12px;

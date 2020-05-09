@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { Nade } from "../models/Nade/Nade";
 import { useCanEditNade } from "../store/NadeStore/hooks/useCanEditNade";
 import { PageCentralize } from "../common/PageCentralize";
@@ -23,6 +23,7 @@ import { OneWaySelector } from "../createnade/components/OneWaySelector";
 import { SEO } from "../layout/SEO2";
 import { StatusSelector } from "./comp/StatusSelector";
 import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
+import { TickrateSelector } from "../createnade/components/TickrateSelector";
 
 type Props = {
   nade: Nade;
@@ -33,6 +34,16 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
   const { state, dispatch, onUpdate, disableSubmit } = useEditNadeState(nade);
   const { colors } = useTheme();
   const canEdit = useCanEditNade(nade.steamId);
+
+  const showTickrateSelector = useMemo(() => {
+    if (state.technique && state.technique === "jumpthrow") {
+      return true;
+    }
+    if (!state.technique && nade.technique === "jumpthrow") {
+      return true;
+    }
+    return false;
+  }, [nade.technique, state.technique]);
 
   if (!canEdit) {
     return null;
@@ -105,6 +116,7 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
 
           <div id="lineup-image">
             <ImageSelector
+              optional
               label="Line Up Image"
               imageIsSet={!!nade.images.lineupId || !!state.lineUpImageBase64}
               onClick={() =>
@@ -156,6 +168,17 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
               }
             />
           </div>
+
+          {showTickrateSelector && (
+            <div id="tickrate-selector">
+              <TickrateSelector
+                defaultValue={nade.tickrate}
+                onChange={(tick) =>
+                  dispatch({ type: "EditNade/SetTickrate", tick })
+                }
+              />
+            </div>
+          )}
 
           <div id="oneway-selector">
             <OneWaySelector
@@ -238,7 +261,7 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
                     </ul>
                     <p>
                       Don&apos;t resize it. Keep it as it is. A crosshair will
-                      be added on top of the image automaticly.
+                      be added on top of the image automatically.
                     </p>
                   </div>
                 }
@@ -285,7 +308,8 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
             "typesel metalabel"
             "gfyip movesel"
             "endpos techsel"
-            "startpos oneway"
+            "startpos tick"
+            ". oneway"
             "desc previewlabel"
             "desc preview"
             "desc preview"
@@ -299,6 +323,10 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           margin-bottom: 150px;
+        }
+
+        #tickrate-selector {
+          grid-area: tick;
         }
 
         #lineup-image {

@@ -6,9 +6,15 @@ type Props = {
   label: string;
   onClick: () => void;
   imageIsSet?: boolean;
+  optional?: boolean;
 };
 
-export const ImageSelector: FC<Props> = ({ onClick, imageIsSet, label }) => {
+export const ImageSelector: FC<Props> = ({
+  onClick,
+  imageIsSet,
+  label,
+  optional,
+}) => {
   const { colors } = useTheme();
 
   const msgString = imageIsSet
@@ -17,7 +23,7 @@ export const ImageSelector: FC<Props> = ({ onClick, imageIsSet, label }) => {
 
   return (
     <>
-      <MiniLabel value={label} />
+      <MiniLabel value={label} optional={optional} />
 
       <button onClick={onClick} className="image-selector">
         {msgString}

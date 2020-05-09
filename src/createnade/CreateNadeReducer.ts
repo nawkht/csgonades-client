@@ -5,9 +5,12 @@ import { NadeCreateBody, MapCoordinates } from "../models/Nade/Nade";
 import { NadeType } from "../models/Nade/NadeType";
 import { Movement } from "../models/Nade/NadeMovement";
 import { Technique } from "../models/Nade/Technique";
+import { assertNever } from "../utils/Common";
+import { Tickrate } from "../models/Nade/NadeTickrate";
 
 interface CreateNadeState extends Partial<NadeCreateBody> {
   showImageAdder: boolean;
+  showLineUpAdder: boolean;
   loading: boolean;
 }
 
@@ -73,6 +76,20 @@ type SetNotLoading = {
   type: "CreateNade/SetNotLoading";
 };
 
+type SetTickrate = {
+  type: "CreateNade/SetTickrate";
+  tick: Tickrate;
+};
+
+type ToggleLineupImageAdder = {
+  type: "CreateNade/ToggleLineupImageAdder";
+};
+
+type SetLineUpImage = {
+  type: "CreateNade/SetLineUpImage";
+  img: string;
+};
+
 type Actions =
   | SetMap
   | SetGfyData
@@ -83,10 +100,13 @@ type Actions =
   | SetMovement
   | SetImage
   | ToggleImageSelector
+  | ToggleLineupImageAdder
   | SetEndPosCoords
   | SetTechnique
   | SetLoading
-  | SetNotLoading;
+  | SetNotLoading
+  | SetTickrate
+  | SetLineUpImage;
 
 const reducer: Reducer<CreateNadeState, Actions> = (state, action) => {
   switch (action.type) {
@@ -156,7 +176,23 @@ const reducer: Reducer<CreateNadeState, Actions> = (state, action) => {
         ...state,
         loading: false,
       };
+    case "CreateNade/SetTickrate":
+      return {
+        ...state,
+        tickrate: action.tick,
+      };
+    case "CreateNade/ToggleLineupImageAdder":
+      return {
+        ...state,
+        showLineUpAdder: !state.showLineUpAdder,
+      };
+    case "CreateNade/SetLineUpImage":
+      return {
+        ...state,
+        lineUpImageBase64: action.img,
+      };
     default:
+      assertNever(action);
       return state;
   }
 };
@@ -164,6 +200,7 @@ const reducer: Reducer<CreateNadeState, Actions> = (state, action) => {
 export const useCreateNadeState = () => {
   const [state, dispatch] = useReducer(reducer, {
     showImageAdder: false,
+    showLineUpAdder: false,
     loading: false,
   });
 

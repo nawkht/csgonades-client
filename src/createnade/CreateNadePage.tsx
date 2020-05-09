@@ -22,6 +22,7 @@ import { useGetOrUpdateToken } from "../store/AuthStore/hooks/useGetToken";
 import { useDisplayToast } from "../store/ToastStore/hooks/useDisplayToast";
 import { useRouter } from "next/router";
 import { SEO } from "../layout/SEO2";
+import { TickrateSelector } from "./components/TickrateSelector";
 
 type Props = {};
 
@@ -33,16 +34,17 @@ export const CreateNadePage: FC<Props> = ({}) => {
   const { state, dispatch, disableSubmit } = useCreateNadeState();
 
   async function onSubmit() {
+    dispatch({ type: "CreateNade/SetLoading" });
     const validState = validateState(state);
     if (!validState) {
-      console.warn("Something missing");
-      return;
+      return dispatch({ type: "CreateNade/SetNotLoading" });
     }
 
     const body = validState;
     const token = await getToken();
 
     if (!token) {
+      dispatch({ type: "CreateNade/SetNotLoading" });
       return showToast({
         severity: "error",
         message:
@@ -54,6 +56,7 @@ export const CreateNadePage: FC<Props> = ({}) => {
     const res = await NadeApi.save(body, token);
 
     if (res.isErr()) {
+      dispatch({ type: "CreateNade/SetNotLoading" });
       return showToast({
         severity: "error",
         message: "Failed to add nade, check if you forgot to add something",
@@ -69,6 +72,8 @@ export const CreateNadePage: FC<Props> = ({}) => {
         "Nade added! A moderator will take a look and accept it if it looks good.",
       durationSeconds: 10,
     });
+
+    dispatch({ type: "CreateNade/SetNotLoading" });
 
     router.push(`/nades/[nade]`, `/nades/${newNade.id}`);
   }
@@ -134,6 +139,17 @@ export const CreateNadePage: FC<Props> = ({}) => {
             />
           </div>
 
+          <div id="lineup-image">
+            <ImageSelector
+              optional
+              label="Line Up Image"
+              imageIsSet={!!state.lineUpImageBase64}
+              onClick={() =>
+                dispatch({ type: "CreateNade/ToggleLineupImageAdder" })
+              }
+            />
+          </div>
+
           <div id="map-position-selector">
             <MapPositionEditor
               map={state.map}
@@ -175,6 +191,16 @@ export const CreateNadePage: FC<Props> = ({}) => {
             />
           </div>
 
+          {state.technique === "jumpthrow" && (
+            <div id="tickrate-selector">
+              <TickrateSelector
+                onChange={(tick) =>
+                  dispatch({ type: "CreateNade/SetTickrate", tick })
+                }
+              />
+            </div>
+          )}
+
           <div id="preview-label">
             <BigLabel value="Preview" />
           </div>
@@ -184,7 +210,10 @@ export const CreateNadePage: FC<Props> = ({}) => {
           </div>
 
           <div id="submit">
-            <SumbitBtn onSubmit={onSubmit} disabled={disableSubmit} />
+            <SumbitBtn
+              onSubmit={onSubmit}
+              disabled={disableSubmit || state.loading}
+            />
           </div>
 
           {state.showImageAdder && (
@@ -200,12 +229,50 @@ export const CreateNadePage: FC<Props> = ({}) => {
               />
             </div>
           )}
+
+          {state.showLineUpAdder && (
+            <div id="lineup-adder">
+              <ImageUploader
+                message={
+                  <div className="lineup-msg">
+                    <ul>
+                      <li>Aim at the position</li>
+                      <li>
+                        Remove your hud (cl_drawhud 0; r_drawviewmodel 0;)
+                      </li>
+                      <li>Take screenshot</li>
+                    </ul>
+                    <p>
+                      Don&apos;t resize it. Keep it as it is. A crosshair will
+                      be added on top of the image automatically.
+                    </p>
+                  </div>
+                }
+                aspectRatio="16:9"
+                onDismiss={() =>
+                  dispatch({ type: "CreateNade/ToggleLineupImageAdder" })
+                }
+                onImageCropped={(img) =>
+                  dispatch({ type: "CreateNade/SetLineUpImage", img })
+                }
+              />
+            </div>
+          )}
         </div>
       </PageCentralize>
 
       <aside></aside>
       <style jsx>{`
-        #image-adder {
+        .lineup-msg {
+          background: rgba(255, 255, 255, 0.8);
+          color: #111;
+          border-radius: 5px;
+          margin-bottom: 15px;
+          padding: 10px;
+        }
+
+        #image-adder,
+        #lineup-adder {
           position: absolute;
           top: 0;
           left: 0;
@@ -233,11 +300,13 @@ export const CreateNadePage: FC<Props> = ({}) => {
           grid-template-areas:
             "infolabel medialabel"
             "mapsel resultimg"
-            "posselector metalabel"
-            "typesel movesel"
-            "gfyip techsel"
-            "endpos previewlabel"
-            "startpos preview"
+            "posselector lineup"
+            "typesel metalabel"
+            "gfyip movesel"
+            "endpos techsel"
+            "startpos tick"
+            "desc previewlabel"
+            "desc preview"
             "desc preview"
             ". submit";
           grid-row-gap: ${Dimensions.GUTTER_SIZE / 1.5}px;
@@ -247,6 +316,14 @@ export const CreateNadePage: FC<Props> = ({}) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           margin-bottom: 150px;
+        }
+
+        #lineup-image {
+          grid-area: lineup;
+        }
+
+        #tickrate-selector {
+          grid-area: tick;
         }
 
         #map-position-selector {
