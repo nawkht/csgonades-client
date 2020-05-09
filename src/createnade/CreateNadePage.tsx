@@ -128,6 +128,7 @@ export const CreateNadePage: FC<Props> = ({}) => {
 
           <div id="result-image">
             <ImageSelector
+              label="Result image"
               imageIsSet={!!state.imageBase64}
               onClick={() => dispatch({ type: "CreateNade/ShowImageSelector" })}
             />
