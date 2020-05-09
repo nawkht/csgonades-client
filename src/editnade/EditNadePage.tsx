@@ -231,7 +231,9 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
                   <div className="lineup-msg">
                     <ul>
                       <li>Aim at the position</li>
-                      <li>Remove your hud (cl_drawhud 0)</li>
+                      <li>
+                        Remove your hud (cl_drawhud 0; r_drawviewmodel 0;)
+                      </li>
                       <li>Take screenshot</li>
                     </ul>
                     <p>
