@@ -1,6 +1,7 @@
 import { FC, memo, useState, useEffect } from "react";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { SiteStats, StatsApi } from "../api/StatsApi";
+import { Twemoji } from "../common/Twemoji";
 
 type Props = {
   stats: SiteStats | null;
@@ -33,8 +34,8 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
           </h1>
           <p>
             I was once a Global Elite, but with age, my reaction time has slowly
-            withered away 🥺 It&apos;s your turn to find some nades and become
-            Global 🤩
+            withered away <Twemoji emoji="🥺" /> It&apos;s your turn to find
+            some nades and become Global <Twemoji emoji="🤩" />
             <br /> With great power comes great responsibility.
             <br />-{" "}
             <a
@@ -168,6 +169,11 @@ export const FrontPageJumbo: FC<Props> = memo(({ stats }) => {
             margin-bottom: 30px;
             border-radius: 5px;
           }
+        }
+      `}</style>
+      <style jsx global>{`
+        .tihi {
+          font-size: 2em;
         }
       `}</style>
     </>

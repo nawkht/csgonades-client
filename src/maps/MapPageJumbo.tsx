@@ -4,6 +4,7 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { CsgoMap } from "../models/Nade/CsGoMap";
 import { NadeLight } from "../models/Nade/Nade";
 import { useSetMapView } from "../store/MapStore/hooks/useSetMapView";
+import { Twemoji } from "../common/Twemoji";
 
 type Props = {
   map: CsgoMap;
@@ -29,9 +30,12 @@ export const MapPageJumbo: FC<Props> = memo(({ map }) => {
           Find the best smoke, flashbang, molotov and grenade spots for{" "}
           {capitalize(map)}.
         </h1>
-        <h2>Don&apos;t be like BOT Bob 🤖, get some nades.</h2>
+        <h2>
+          Don&apos;t be like BOT Bob <Twemoji emoji="🤖" />, get some nades.
+        </h2>
         <p>
-          Channel your inner Global Elite. Sign in and add a nade to the list 🏆
+          Channel your inner Global Elite. Sign in and add a nade to the list{" "}
+          <Twemoji emoji="🏆" />
         </p>
       </div>
       <style jsx>{`

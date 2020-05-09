@@ -2,6 +2,7 @@ import { FC, useMemo } from "react";
 import { UserLight } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeLight } from "../models/Nade/Nade";
+import { Twemoji } from "../common/Twemoji";
 
 interface UserContribution extends UserLight {
   nadeCount: number;
@@ -66,7 +67,9 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
         {contributors.gold && (
           <>
             <div className="gold">
-              <span>🏆</span>
+              <span>
+                <Twemoji emoji="🧠" />
+              </span>
               <TopContributor user={contributors.gold} />
             </div>
           </>
@@ -75,7 +78,9 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
         {contributors.silver && (
           <>
             <div className="silver">
-              <span>🥈</span>
+              <span>
+                <Twemoji emoji="🐇" />
+              </span>
               <TopContributor user={contributors.silver} />
             </div>
           </>
@@ -84,7 +89,9 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
         {contributors.bronce && (
           <>
             <div className="bronze">
-              <span>🥉</span>
+              <span>
+                <Twemoji emoji="🐢" />
+              </span>
               <TopContributor user={contributors.bronce} />
             </div>
           </>

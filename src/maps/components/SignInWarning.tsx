@@ -3,6 +3,7 @@ import { CSGNModal } from "../../common/CSGNModal";
 import { useAnalytics } from "../../utils/Analytics";
 import { SignInnButton } from "../../layout/Misc/SignInnButton";
 import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
+import { Twemoji } from "../../common/Twemoji";
 
 type Props = {};
 
@@ -43,13 +44,19 @@ export const SignInWarning: FC<Props> = memo(() => {
       >
         <div className="sign-in-warning">
           <div className="section">
-            I see you&apos;re not signed in 😥
+            I see you&apos;re not signed in <Twemoji emoji="😥" />
             <br />
             That&apos;s ok. But if you sign in, you can:
           </div>
-          <div className="section">🤩 Favorite nades</div>
-          <div className="section">🧐 Comment on nades</div>
-          <div className="section">🤤 Filter nades by your favorite ones</div>
+          <div className="section">
+            <Twemoji emoji="🤩" /> Favorite nades
+          </div>
+          <div className="section">
+            <Twemoji emoji="🧐" /> Comment on nades
+          </div>
+          <div className="section">
+            <Twemoji emoji="🤤" /> Filter nades by your favorite ones
+          </div>
           <div className="btn" onClick={onSignIn}>
             <SignInnButton />
           </div>
