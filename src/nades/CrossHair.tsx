@@ -5,22 +5,20 @@ type Props = {};
 export const CrossHair: FC<Props> = ({}) => {
   return (
     <>
-      <svg
-        viewBox="0 0 100 101"
-        style={{ position: "relative", top: 2, left: 1 }}
-      >
-        <defs>
-          <style>{".prefix__a{fill:#fff}"}</style>
-        </defs>
-        <title>{"Untitled-2"}</title>
-        <path className="prefix__a" d="M.5 45.5h36v7H.5z" />
-        <path d="M36 46v6H1v-6h35m1-1H0v8h37v-8z" />
-        <path className="prefix__a" d="M46.5.5h7v36h-7z" />
-        <path d="M53 1v35h-6V1h6m1-1h-8v37h8V0z" />
-        <path className="prefix__a" d="M46.5 64.5h7v36h-7z" />
-        <path d="M53 65v35h-6V65h6m1-1h-8v37h8V64z" />
-        <path className="prefix__a" d="M63.5 45.5h36v7h-36z" />
-        <path d="M99 46v6H64v-6h35m1-1H63v8h37v-8z" />
+      <svg viewBox="0 0 600 600">
+        <style>
+          {
+            ".prefix__st0{fill:#7ddd00;stroke:#000;stroke-width:.25;stroke-miterlimit:10}.prefix__st1{opacity:.5;fill:#fff}"
+          }
+        </style>
+        <path
+          className="prefix__st0"
+          d="M299.25 303h1.5v10h-1.5zM313 299.25v1.5h-10v-1.5zM297 299.3v1.4h-10v-1.4zM299.3 287h1.4v10h-1.4z"
+        />
+        <path
+          className="prefix__st1"
+          d="M299.5 316h1v284h-1zM299.5 0h1v284h-1zM316 300.5v-1h284v1zM0 300.5v-1h284v1z"
+        />
       </svg>
       <style jsx>{``}</style>
     </>

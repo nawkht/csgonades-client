@@ -76,16 +76,19 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
         }
 
         .crosshair {
-          width: 22px;
-          height: 22px;
-          opacity: 0.8;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          opacity: 1;
           transform: scale(1);
+          opacity: 0.9;
           transition: all 0.2s;
         }
 
         .lineup {
-          border-left: 3px solid rgba(255, 255, 255, 0.75);
-          border-bottom: 3px solid rgba(255, 255, 255, 0.75);
+          border: 2px solid rgba(0, 0, 0, 0.75);
           overflow: hidden;
           z-index: 799;
           display: flex;
@@ -93,14 +96,14 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           align-items: center;
           cursor: pointer;
           position: absolute;
-          top: -1px;
-          right: -1px;
+          top: 10px;
+          right: 10px;
           background: url(${lineUpUrl});
-          background-size: auto 150%;
+          background-size: auto 125%;
           background-position: center;
           width: ${videoHeight}px;
           height: ${videoHeight}px;
-          border-bottom-left-radius: 20px;
+          border-radius: 20px;
           transform-origin: top right;
           transform: scale(${zoomLineUp ? "1" : "0.3"});
           transition: all 0.2s;
@@ -109,7 +112,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
 
         .lineup:hover {
           opacity: 1;
-          background-size: auto 300%;
+          background-size: auto 250%;
         }
 
         .lineup:hover .crosshair {
