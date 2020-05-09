@@ -68,7 +68,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           <>
             <div className="gold">
               <span>
-                <Twemoji emoji="🧠" />
+                <Twemoji emoji="🦉" />
               </span>
               <TopContributor user={contributors.gold} />
             </div>
@@ -79,7 +79,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           <>
             <div className="silver">
               <span>
-                <Twemoji emoji="🐇" />
+                <Twemoji emoji="🐧" />
               </span>
               <TopContributor user={contributors.silver} />
             </div>
@@ -90,7 +90,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           <>
             <div className="bronze">
               <span>
-                <Twemoji emoji="🐢" />
+                <Twemoji emoji="🐥" />
               </span>
               <TopContributor user={contributors.bronce} />
             </div>
