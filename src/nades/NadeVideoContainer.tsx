@@ -1,4 +1,4 @@
-import { FC, memo, useState } from "react";
+import { FC, memo, useState, useCallback } from "react";
 
 import { GfycatIframe } from "./components/GfycatIframe";
 import { useAnalytics } from "../utils/Analytics";
@@ -9,8 +9,16 @@ type Props = {
 };
 
 export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
+  const [videoHeight, setVideoHeight] = useState(0);
   const { event } = useAnalytics();
   const [zoomLineUp, setZoomLineUp] = useState(false);
+
+  const ref = useCallback((node: HTMLDivElement) => {
+    if (!node) {
+      return;
+    }
+    setVideoHeight(node.clientHeight * 0.8);
+  }, []);
 
   function onToggle() {
     if (!zoomLineUp) {
@@ -29,29 +37,25 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
 
   return (
     <>
-      <div className="video-wrap">
+      <div className="video-wrap" ref={ref}>
         <GfycatIframe gfyId={gfyId} />
-        {lineUpUrl && (
-          <div
-            className="lineup"
-            onClick={onToggle}
-          ></div>
-        )}
+        {lineUpUrl && <div className="lineup" onClick={onToggle}></div>}
       </div>
       <style jsx>{`
         .video-wrap {
           position: relative;
+          overflow: hidden;
         }
 
         .lineup {
           cursor: pointer;
           position: absolute;
-          top: 0;
-          right: 0;
+          top: -1px;
+          right: -1px;
           background: url(${lineUpUrl});
           background-size: contain;
-          width: 400px;
-          height: 400px;
+          width: ${videoHeight}px;
+          height: ${videoHeight}px;
           border-bottom-left-radius: 20px;
           transform-origin: top right;
           transform: scale(${zoomLineUp ? "1" : "0.3"});
