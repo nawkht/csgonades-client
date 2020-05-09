@@ -1,5 +1,5 @@
 export const NadeTickrate = {
-  any: "Any",
+  any: "Both",
   tick64: "64 Tick",
   tick128: "128 Tick",
 };

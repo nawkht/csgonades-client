@@ -251,20 +251,43 @@ function tickrateTooltip(tickrate?: Tickrate) {
     case "tick128":
       return (
         <>
+          <div className="center">
+            <b>Jumpthrow Bind</b>
+          </div>
           <div className="center">Only for 3rd party services</div>
-          <div className="center">NOT matchmaking</div>
+          <style jsx>{`
+            .center {
+              text-align: center;
+            }
+          `}</style>
         </>
       );
     case "tick64":
       return (
         <>
+          <div className="center">
+            <b>Jumpthrow Bind</b>
+          </div>
           <div className="center">Only works on matchmaking</div>
+          <style jsx>{`
+            .center {
+              text-align: center;
+            }
+          `}</style>
         </>
       );
     default:
       return (
         <>
-          <div className="center">Jumpthrow Bind</div>
+          <div className="center">
+            <b>Jumpthrow Bind</b>
+          </div>
+          <div className="center">Works on matching and 3rd party services</div>
+          <style jsx>{`
+            .center {
+              text-align: center;
+            }
+          `}</style>
         </>
       );
   }
