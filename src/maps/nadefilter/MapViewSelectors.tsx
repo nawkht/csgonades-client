@@ -1,20 +1,15 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 import { useSetMapView } from "../../store/MapStore/hooks/useSetMapView";
 import { FaMap, FaListUl } from "react-icons/fa";
 import { Dimensions } from "../../constants/Constants";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
-import { Popup } from "semantic-ui-react";
 import { useShowViewSelectorHint } from "../../store/GlobalStore/hooks/useShowViewSelectorHint";
-import { useAnalytics } from "../../utils/Analytics";
-import { isBrowser } from "react-device-detect";
 
 type Props = {
   vertical?: boolean;
 };
 
 export const MapViewSelector: FC<Props> = ({ vertical }) => {
-  const [displayTip, setDisplayTip] = useState(false);
-  const { event } = useAnalytics();
   const { colors } = useTheme();
   const { mapView, setMapView } = useSetMapView();
   const {
@@ -22,55 +17,18 @@ export const MapViewSelector: FC<Props> = ({ vertical }) => {
     hideViewSelectorHint,
   } = useShowViewSelectorHint();
 
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      if (shouldShowViewSelectorHint) {
-        setDisplayTip(true);
-      }
-    }, 1500);
-    return () => clearTimeout(delay);
-  }, [shouldShowViewSelectorHint]);
-
   function onSwitchToOverview() {
     setMapView("overview");
     if (shouldShowViewSelectorHint) {
       hideViewSelectorHint();
-      setDisplayTip(false);
-      event({
-        category: "Global",
-        action: "Global/HideViewSelectorHintSwitch",
-      });
     }
-  }
-
-  function onHideHint() {
-    setDisplayTip(false);
-    hideViewSelectorHint();
-    event({
-      category: "Global",
-      action: "Global/HideViewSelectorHint",
-    });
   }
 
   return (
     <>
       <div className="view-selector">
         <div className="label">
-          <Popup
-            inverted
-            size="tiny"
-            position="top center"
-            content={
-              <div className="view-hint">
-                <div>
-                  <b>New!</b> Try a different view
-                </div>
-                <button onClick={onHideHint}>Got it!</button>
-              </div>
-            }
-            open={!vertical && isBrowser && displayTip}
-            trigger={<span>VIEW</span>}
-          />
+          <span>VIEW</span>
         </div>
         <div className="view-selector-btns">
           <button
