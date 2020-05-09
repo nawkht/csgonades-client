@@ -156,7 +156,6 @@ export const ImageUploader = ({
           crop={crop}
           maxWidth={1000}
           minWidth={620}
-          minHeight={620}
           onImageLoaded={onImageLoaded}
           onComplete={onCropComplete}
           onChange={onCropChange}
