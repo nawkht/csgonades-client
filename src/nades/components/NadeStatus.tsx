@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { Dimensions } from "../../constants/Constants";
-import { Status, StatusInfo } from "../../models/Nade/Nade";
+import { StatusInfo } from "../../models/Nade/Nade";
+import { Status } from "../../models/Nade/Status";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { ThemeColors } from "../../store/SettingsStore/Themes";
 
@@ -35,6 +36,21 @@ const NadeStatus: FC<Props> = memo(({ status }) => {
         return (
           <>
             <div className="declined">Declined, see comment under nade</div>
+            <style jsx>{`
+              .declined {
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
+              }
+            `}</style>
+          </>
+        );
+      case "deleted":
+        return (
+          <>
+            <div className="deleted">
+              Deleted, will be removed permanently at a later point
+            </div>
             <style jsx>{`
               .declined {
                 font-size: 14px;
@@ -96,7 +112,12 @@ function statusColor(status: Status, colors: ThemeColors) {
         background: "#bf0000",
         text: "white",
       };
-
+    case "deleted":
+      return {
+        border: colors.BORDER,
+        background: "#bf0000",
+        text: "white",
+      };
     default:
       return {
         border: colors.BORDER,

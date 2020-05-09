@@ -80,7 +80,10 @@ export const NadeModalPage: FC<Props> = memo(({ nade, nadeLight }) => {
           />
           <TickWarning tickrate={nadeLight.tickrate} />
           <div id="nade-page-main">
-            <NadeVideoContainer gfyId={nadeLight.gfycat.gfyId} />
+            <NadeVideoContainer
+              lineUpUrl={nadeLight.images.lineupUrl}
+              gfyId={nadeLight.gfycat.gfyId}
+            />
           </div>
           <div id="nade-meta">
             <NadeMeta

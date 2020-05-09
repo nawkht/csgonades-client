@@ -3,6 +3,7 @@ import { MapCoordinates } from "../../models/Nade/Nade";
 import { MapPositionModal } from "./MapPositionModal";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import { MiniLabel } from "../../createnade/components/MiniLabel";
 
 type Props = {
   onSave: (coords: MapCoordinates) => void;
@@ -25,6 +26,7 @@ export const MapPositionEditor: FC<Props> = ({ onSave, map, endPos }) => {
 
   return (
     <>
+      <MiniLabel value="Overview position" />
       <button className="position-btn" onClick={toggleEditor} disabled={!map}>
         SET OVERVIEW POSITION
       </button>

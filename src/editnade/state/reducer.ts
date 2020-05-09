@@ -4,8 +4,8 @@ import {
   Nade,
   MapCoordinates,
   NadeUpdateBody,
-  Status,
 } from "../../models/Nade/Nade";
+import { Status } from "../../models/Nade/Status";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { GfycatData } from "../../models/Nade/GfycatData";
 import { NadeType } from "../../models/Nade/NadeType";
@@ -15,10 +15,12 @@ import { useGetOrUpdateToken } from "../../store/AuthStore/hooks/useGetToken";
 import { useDisplayToast } from "../../store/ToastStore/hooks/useDisplayToast";
 import { NadeApi } from "../../api/NadeApi";
 import { useRouter } from "next/router";
+import { assertNever } from "../../utils/Common";
 
 interface EditNadeState extends Partial<NadeCreateBody> {
   originalNade: Nade;
   showImageAdder: boolean;
+  showLineupImgAdder: boolean;
   loading: boolean;
   slug?: string;
   status?: Status;
@@ -64,8 +66,17 @@ type SetImage = {
   image: string;
 };
 
+type SetLineUpImage = {
+  type: "EditNade/SetLineUpImage";
+  image: string;
+};
+
 type ShowImageSelector = {
   type: "CreateNade/ShowImageSelector";
+};
+
+type ToggleLineupImageAdder = {
+  type: "EditNade/ToggleLineupImageAdder";
 };
 
 type SetEndPosCoords = {
@@ -91,6 +102,11 @@ type SetOneWay = {
   oneWay: boolean;
 };
 
+type SetNadeStatus = {
+  type: "EditNade/SetNadeStatus";
+  status: Status;
+};
+
 type Actions =
   | SetMap
   | SetGfyData
@@ -105,11 +121,19 @@ type Actions =
   | SetTechnique
   | SetLoading
   | SetNotLoading
-  | SetOneWay;
+  | SetOneWay
+  | SetNadeStatus
+  | ToggleLineupImageAdder
+  | SetLineUpImage;
 
 const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
   console.log(action.type, action);
   switch (action.type) {
+    case "EditNade/ToggleLineupImageAdder":
+      return {
+        ...state,
+        showLineupImgAdder: !state.showLineupImgAdder,
+      };
     case "CreateNade/SetMap":
       return {
         ...state,
@@ -181,7 +205,19 @@ const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
         ...state,
         oneWay: action.oneWay,
       };
+    case "EditNade/SetNadeStatus":
+      return {
+        ...state,
+        status: action.status,
+      };
+    case "EditNade/SetLineUpImage":
+      return {
+        ...state,
+        lineUpImageBase64: action.image,
+        showLineupImgAdder: false,
+      };
     default:
+      assertNever(action);
       return state;
   }
 };
@@ -194,6 +230,7 @@ export const useEditNadeState = (nade: Nade) => {
     originalNade: nade,
     showImageAdder: false,
     loading: false,
+    showLineupImgAdder: false,
   });
 
   const onUpdate = useCallback(async () => {
@@ -296,7 +333,11 @@ function createNadeUpdateBody(state: EditNadeState): NadeUpdateBody {
     technique: newValueIfDifferent(originalNade.technique, state.technique),
     tickrate: newValueIfDifferent(originalNade.tickrate, state.tickrate),
     type: newValueIfDifferent(originalNade.type, state.type),
-    oneWay: newValueIfDifferent(originalNade, state.oneWay),
+    oneWay: newValueIfDifferent(originalNade.oneWay, state.oneWay),
+    lineUpImageBase64: newValueIfDifferent(
+      originalNade.images,
+      state.lineUpImageBase64
+    ),
   };
 
   // Remove undefine keys

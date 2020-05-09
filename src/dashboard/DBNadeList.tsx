@@ -1,5 +1,6 @@
 import { FC, useState, useEffect, useMemo } from "react";
-import { NadeLight, Status } from "../models/Nade/Nade";
+import { NadeLight } from "../models/Nade/Nade";
+import { Status } from "../models/Nade/Status";
 import { NadeApi } from "../api/NadeApi";
 import { useSignedInUser } from "../store/AuthStore/AuthHooks";
 import { sortByDate, generateTitle, kFormatter } from "../utils/Common";
@@ -16,6 +17,7 @@ import {
   FaStar,
   FaComment,
   FaEye,
+  FaTrash,
 } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 
@@ -243,6 +245,18 @@ const StatusText: FC<{ status: Status }> = ({ status }) => {
           inverted
           size="tiny"
           trigger={<FaExclamationTriangle />}
+        />
+      );
+    }
+
+    if (status === "deleted") {
+      return (
+        <Popup
+          position="top center"
+          content="Deleted, will be removed later"
+          inverted
+          size="tiny"
+          trigger={<FaTrash />}
         />
       );
     }

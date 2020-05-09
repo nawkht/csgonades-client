@@ -21,12 +21,15 @@ import { SumbitBtn } from "../createnade/components/SubmitBtn";
 import { ImageUploader } from "../newnade/ImageUploader";
 import { OneWaySelector } from "../createnade/components/OneWaySelector";
 import { SEO } from "../layout/SEO2";
+import { StatusSelector } from "./comp/StatusSelector";
+import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
 
 type Props = {
   nade: Nade;
 };
 
 export const EditNadePage: FC<Props> = ({ nade }) => {
+  const isAdminOrModerator = useIsAdminOrModerator();
   const { state, dispatch, onUpdate, disableSubmit } = useEditNadeState(nade);
   const { colors } = useTheme();
   const canEdit = useCanEditNade(nade.steamId);
@@ -94,8 +97,19 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
 
           <div id="result-image">
             <ImageSelector
+              label="Result Image"
               imageIsSet={true}
               onClick={() => dispatch({ type: "CreateNade/ShowImageSelector" })}
+            />
+          </div>
+
+          <div id="lineup-image">
+            <ImageSelector
+              label="Line Up Image"
+              imageIsSet={!!nade.images.lineupId || !!state.lineUpImageBase64}
+              onClick={() =>
+                dispatch({ type: "EditNade/ToggleLineupImageAdder" })
+              }
             />
           </div>
 
@@ -179,6 +193,23 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
             <SumbitBtn onSubmit={onUpdate} disabled={disableSubmit} />
           </div>
 
+          {isAdminOrModerator && (
+            <>
+              <div id="modlabel">
+                <BigLabel value="Moderator settings" />
+              </div>
+
+              <div id="status">
+                <StatusSelector
+                  initValue={nade.status}
+                  onChange={(status) =>
+                    dispatch({ type: "EditNade/SetNadeStatus", status })
+                  }
+                />
+              </div>
+            </>
+          )}
+
           {state.showImageAdder && (
             <div id="image-adder">
               <ImageUploader
@@ -187,6 +218,20 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
                 }
                 onImageCropped={(image) =>
                   dispatch({ type: "CreateNade/SetImage", image })
+                }
+              />
+            </div>
+          )}
+
+          {state.showLineupImgAdder && (
+            <div id="lineup-adder">
+              <ImageUploader
+                aspectRatio="1:1"
+                onDismiss={() =>
+                  dispatch({ type: "EditNade/ToggleLineupImageAdder" })
+                }
+                onImageCropped={(image) =>
+                  dispatch({ type: "EditNade/SetLineUpImage", image })
                 }
               />
             </div>
@@ -212,13 +257,16 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           grid-template-areas:
             "infolabel medialabel"
             "mapsel resultimg"
-            "posselector metalabel"
-            "typesel movesel"
-            "gfyip techsel"
-            "endpos oneway"
-            "startpos previewlabel"
+            "posselector lineup"
+            "typesel metalabel"
+            "gfyip movesel"
+            "endpos techsel"
+            "startpos oneway"
+            "desc previewlabel"
             "desc preview"
             "desc preview"
+            "modlabel preview"
+            "status preview"
             ". submit";
           grid-row-gap: ${Dimensions.GUTTER_SIZE / 1.5}px;
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
@@ -227,6 +275,18 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           margin-bottom: 150px;
+        }
+
+        #lineup-image {
+          grid-area: lineup;
+        }
+
+        #modlabel {
+          grid-area: modlabel;
+        }
+
+        #status {
+          grid-area: status;
         }
 
         #oneway-selector {
@@ -299,7 +359,8 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           align-self: end;
         }
 
-        #image-adder {
+        #image-adder,
+        #lineup-adder {
           position: absolute;
           top: 0;
           left: 0;

@@ -3,18 +3,25 @@ import ReactCrop from "react-image-crop";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { Dimensions } from "../constants/Constants";
 
+type AspectRatio = "1:1" | "16:9";
+
 type Props = {
+  aspectRatio?: AspectRatio;
   onDismiss: () => void;
   onImageCropped: (croppedImageBase64: string) => void;
 };
 
-export const ImageUploader = ({ onImageCropped, onDismiss }: Props) => {
+export const ImageUploader = ({
+  onImageCropped,
+  onDismiss,
+  aspectRatio,
+}: Props) => {
   const { colors } = useTheme();
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [crop, setCrop] = useState<ReactCrop.Crop>({
-    aspect: 16 / 9,
+    aspect: aspectRatio === "1:1" ? 1 / 1 : 16 / 9,
     unit: "%",
     width: 100,
   });
@@ -148,6 +155,8 @@ export const ImageUploader = ({ onImageCropped, onDismiss }: Props) => {
           src={imageSrc}
           crop={crop}
           maxWidth={1000}
+          minWidth={400}
+          minHeight={400}
           onImageLoaded={onImageLoaded}
           onComplete={onCropComplete}
           onChange={onCropChange}

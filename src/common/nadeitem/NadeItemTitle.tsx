@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react";
-import { Status } from "../../models/Nade/Nade";
+import { Status } from "../../models/Nade/Status";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { iconFromType, generateNadeItemTitle } from "../../utils/Common";
 import { NadeType } from "../../models/Nade/NadeType";

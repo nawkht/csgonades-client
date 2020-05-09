@@ -3,11 +3,12 @@ import { MiniLabel } from "./MiniLabel";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
+  label: string;
   onClick: () => void;
   imageIsSet?: boolean;
 };
 
-export const ImageSelector: FC<Props> = ({ onClick, imageIsSet }) => {
+export const ImageSelector: FC<Props> = ({ onClick, imageIsSet, label }) => {
   const { colors } = useTheme();
 
   const msgString = imageIsSet
@@ -16,7 +17,7 @@ export const ImageSelector: FC<Props> = ({ onClick, imageIsSet }) => {
 
   return (
     <>
-      <MiniLabel value="Result image" />
+      <MiniLabel value={label} />
 
       <button onClick={onClick} className="image-selector">
         {msgString}

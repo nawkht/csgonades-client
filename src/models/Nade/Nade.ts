@@ -6,8 +6,7 @@ import { Movement } from "./NadeMovement";
 import { Tickrate } from "./NadeTickrate";
 import { NadeType } from "./NadeType";
 import { Technique } from "./Technique";
-
-export type Status = "pending" | "accepted" | "declined" | "deleted";
+import { Status } from "./Status";
 
 export type StatusInfo = string;
 
@@ -74,6 +73,7 @@ export type NadeLight = {
 export type NadeCreateBody = {
   gfycat: GfycatData;
   imageBase64: string;
+  lineUpImageBase64?: string;
   startPosition: string;
   endPosition: string;
   description: string;
@@ -89,6 +89,7 @@ export type NadeCreateBody = {
 export type NadeUpdateBody = {
   gfycat?: GfycatData;
   imageBase64?: string;
+  lineUpImageBase64?: string;
   startPosition?: string;
   endPosition?: string;
   description?: string;

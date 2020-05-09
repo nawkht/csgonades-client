@@ -99,7 +99,10 @@ export const NadePage: FC<Props> = memo(({ nade, inModal }) => {
         </div>
 
         <div id="nade-page-main">
-          <NadeVideoContainer gfyId={nade.gfycat.gfyId} />
+          <NadeVideoContainer
+            lineUpUrl={nade.images.lineupUrl}
+            gfyId={nade.gfycat.gfyId}
+          />
         </div>
 
         <div id="nade-info-container">
