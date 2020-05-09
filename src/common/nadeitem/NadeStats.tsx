@@ -285,7 +285,9 @@ function tickrateTooltip(tickrate?: Tickrate) {
           <div className="center">
             <b>Jumpthrow Bind</b>
           </div>
-          <div className="center">Works on matching and 3rd party services</div>
+          <div className="center">
+            Works on matchmaking and 3rd party services
+          </div>
           <style jsx>{`
             .center {
               text-align: center;
