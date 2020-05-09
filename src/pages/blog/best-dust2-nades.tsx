@@ -60,11 +60,11 @@ const PractiseConfigBlogPost = () => {
         <p>
           Aaah... Xbox. Everyone wants to smoke Xbox. Why? Because there is
           always an annoying AWP in mid stopping you from going short. So here
-          are three options for you. For 64 tick and 128 tick if you use{" "}
+          are two options for you. For 64 tick and 128 tick, both use{" "}
           <PageLink href="/blog/jumpthrow-bind" as="/blog/jumpthrow-bind">
             jumpthrow bind
           </PageLink>
-          , or the last one if you prefer not to use the bind.
+          .
         </p>
         <p className="tip">
           <strong>
@@ -74,7 +74,6 @@ const PractiseConfigBlogPost = () => {
         <div className="nade-list">
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-t-spawn-7Nn" />
           <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-t-spawn" />
-          <BlogNadeItem nadeSlug="dust2-smoke-xbox-from-top-mid-aJd" />
         </div>
 
         <h2>2. Long Corner Smoke</h2>
@@ -105,17 +104,18 @@ const PractiseConfigBlogPost = () => {
         <p>
           Almost there, let&apos;s plant A site! Nothing can stop us now... Oh,
           wait... You just got fragged by an AWP while crossing to A-site. You
-          should have smoked CT spawn. Here you go, some options:
+          should have smoked CT spawn. <br />
+          You can just wing this one pretty easily, but you could get caught
+          with a nade in your hand.
         </p>
         <div className="nade-list">
           <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-long-doors" />
-          <BlogNadeItem nadeSlug="dust2-smoke-a-cross-from-long-doors" />
         </div>
         <h2>4. The Mid to B Smoke</h2>
         <p>
           Rush B!? Rush A!!.. Nah... Let&apos;s go mid to B instead. Throw this
           smoke and do a B split. Optionally throw the flash to make life a
-          little easier.
+          little easier. It flashes anyone standing behind the door perfectly.
         </p>
         <div className="nade-list">
           <BlogNadeItem nadeSlug="dust2-smoke-ct-spawn-from-xbox" />
