@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { CsgnTextArea } from "../../common/inputs/CsgnTextArea";
+import { FaCheckCircle } from "react-icons/fa";
 
 type Props = {
   defaultValue?: string;
@@ -11,10 +12,28 @@ export const DescriptionInput: FC<Props> = ({ onChange, defaultValue }) => {
     <>
       <CsgnTextArea
         defaultValue={defaultValue}
-        placeholder="Write how to perform the throw."
+        placeholder="Write how to perform the throw. "
         label="Description"
         onChange={onChange}
       />
+      <em>
+        <span>
+          <FaCheckCircle />
+        </span>
+        <br />
+        Get a blue checkmark on the nade (Verified Pro).
+        <br />
+        Add a link to a video showing a pro CS:GO player throwing this nade in
+        the description.
+        <br /> Include timestamp if needed.
+        <br />
+        It has to be the exact nade, or very very similar.
+      </em>
+      <style jsx>{`
+        span {
+          color: #00b8d9;
+        }
+      `}</style>
     </>
   );
 };
