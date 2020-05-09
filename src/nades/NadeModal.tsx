@@ -83,6 +83,10 @@ export const NadeModal: FC = memo(() => {
           grid-template-areas:
             "ph ph ph"
             ". md close";
+          opacity: 0;
+          animation-name: fadeIn;
+          animation-duration: 0.2s;
+          animation-fill-mode: forwards;
         }
 
         #center {

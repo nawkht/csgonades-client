@@ -8,7 +8,7 @@ export const CrossHair: FC<Props> = ({}) => {
       <svg viewBox="0 0 600 600">
         <style>
           {
-            ".prefix__st0{fill:#7ddd00;stroke:#000;stroke-width:.25;stroke-miterlimit:10}.prefix__st1{opacity:.5;fill:#eaeaea}"
+            ".prefix__st0{fill:#7ddd00;stroke:#000;stroke-width:.25;stroke-miterlimit:10}.prefix__st1{opacity:.4;fill:#0f6ebc}"
           }
         </style>
         <path
