@@ -8,12 +8,12 @@ export const CrossHair: FC<Props> = ({}) => {
       <svg viewBox="0 0 600 600">
         <style>
           {
-            ".prefix__st0{fill:#7ddd00;stroke:#000;stroke-width:.25;stroke-miterlimit:10}.prefix__st1{opacity:.5;fill:#fff}"
+            ".prefix__st0{fill:#7ddd00;stroke:#000;stroke-width:.25;stroke-miterlimit:10}.prefix__st1{opacity:.5;fill:#eaeaea}"
           }
         </style>
         <path
           className="prefix__st0"
-          d="M299.25 303h1.5v10h-1.5zM313 299.25v1.5h-10v-1.5zM297 299.3v1.4h-10v-1.4zM299.3 287h1.4v10h-1.4z"
+          d="M299.25 303h1.5v8h-1.5zM311 299.25v1.5h-8v-1.5zM297 299.3v1.4h-8v-1.4zM299.3 289h1.4v8h-1.4z"
         />
         <path
           className="prefix__st1"
