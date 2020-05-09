@@ -85,10 +85,6 @@ const PractiseConfigBlogPost = () => {
           move behind the wall for cover.
         </p>
 
-        <div className="a-tag">
-          <AdUnit tagType="300x250" />
-        </div>
-
         <p>
           Here are my favourites, but go over to{" "}
           <Link href="/maps/[map]" as="/maps/dust2">
@@ -100,6 +96,11 @@ const PractiseConfigBlogPost = () => {
           <BlogNadeItem nadeSlug="dust2-smoke-long-corner-from-long-doors" />
           <BlogNadeItem nadeSlug="dust2-smoke-long-corner-from-outside-long" />
         </div>
+
+        <div className="a-tag">
+          <AdUnit tagType="300x250" />
+        </div>
+
         <h2>3. A Site, CT Spawn</h2>
         <p>
           Almost there, let&apos;s plant A site! Nothing can stop us now... Oh,
