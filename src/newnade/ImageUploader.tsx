@@ -2,6 +2,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import ReactCrop from "react-image-crop";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { Dimensions } from "../constants/Constants";
+import { useWindowSize } from "../common/MinSizeRender";
 
 type AspectRatio = "1:1" | "16:9";
 
@@ -18,6 +19,7 @@ export const ImageUploader = ({
   aspectRatio,
   message,
 }: Props) => {
+  const windowSize = useWindowSize();
   const { colors } = useTheme();
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string>("");
@@ -129,7 +131,7 @@ export const ImageUploader = ({
           accept="image/jpeg"
           onChange={onSelectFile}
         />
-        <div className="message">{message}</div>
+
         <div className="file-selector-btn">
           <button className="btn cancel" onClick={onDismiss}>
             CANCEL
@@ -147,17 +149,14 @@ export const ImageUploader = ({
           )}
         </div>
         {!image && (
-          <img
-            width="100%"
-            src="https://www.urbansplash.co.uk/images/placeholder-16-9.jpg"
-            alt="Placeholder for result image"
-          />
+          <div className="placeholder">
+            <div className="message">{message}</div>
+          </div>
         )}
 
         <ReactCrop
           src={imageSrc}
           crop={crop}
-          maxWidth={1000}
           minWidth={620}
           onImageLoaded={onImageLoaded}
           onComplete={onCropComplete}
@@ -166,6 +165,15 @@ export const ImageUploader = ({
         />
       </div>
       <style jsx>{`
+        .placeholder {
+          position: relative;
+          width: 100%;
+          padding-bottom: 56.25%;
+          background: rgba(255, 255, 255, 0.5);
+          margin-top: 20px;
+          border-radius: 5px;
+        }
+
         .btn {
           border: none;
           outline: none;
@@ -192,8 +200,19 @@ export const ImageUploader = ({
         }
 
         .image-uploader {
-          max-width: 1200px;
           display: block;
+          width: ${windowSize[0] / 1.35}px;
+        }
+
+        .message {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .file-selector-btn {

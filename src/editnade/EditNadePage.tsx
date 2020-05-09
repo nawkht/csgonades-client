@@ -267,7 +267,9 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
               <ImageUploader
                 message={
                   <div className="lineup-msg">
+                    <h3>Guideline</h3>
                     <ul>
+                      <li>Image must be 16:9 aspect ratio</li>
                       <li>Aim at the position</li>
                       <li>
                         Remove your hud (cl_drawhud 0; r_drawviewmodel 0;)
@@ -275,8 +277,12 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
                       <li>Take screenshot</li>
                     </ul>
                     <p>
-                      Don&apos;t resize it. Keep it as it is. A crosshair will
-                      be added on top of the image automatically.
+                      Don&apos;t resize the image. Keep it as it is. A crosshair
+                      will be added in the middle of the image automatically.
+                    </p>
+                    <p>
+                      If you must, you can draw anything on the image in your
+                      own software, just don&apos;t resize the image.
                     </p>
                   </div>
                 }
@@ -433,13 +439,17 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
 
         #image-adder,
         #lineup-adder {
-          position: absolute;
+          position: fixed;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
           background: rgba(0, 0, 0, 0.9);
           padding: ${Dimensions.GUTTER_SIZE}px;
+          z-index: 999;
+          overflow-y: auto;
+          display: flex;
+          justify-content: space-around;
         }
       `}</style>
     </>
