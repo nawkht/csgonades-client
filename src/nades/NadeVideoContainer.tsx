@@ -2,6 +2,7 @@ import { FC, memo, useState, useCallback } from "react";
 
 import { GfycatIframe } from "./components/GfycatIframe";
 import { useAnalytics } from "../utils/Analytics";
+import { CrossHair } from "./CrossHair";
 
 type Props = {
   lineUpUrl?: string;
@@ -39,7 +40,13 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
     <>
       <div className="video-wrap" ref={ref}>
         <GfycatIframe gfyId={gfyId} />
-        {lineUpUrl && <div className="lineup" onClick={onToggle}></div>}
+        {lineUpUrl && (
+          <div className="lineup" onClick={onToggle}>
+            <div className="crosshair">
+              <CrossHair />
+            </div>
+          </div>
+        )}
       </div>
       <style jsx>{`
         .video-wrap {
@@ -47,13 +54,24 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           overflow: hidden;
         }
 
+        .crosshair {
+          width: 50px;
+          height: 50px;
+
+          opacity: 0.8;
+        }
+
         .lineup {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
           cursor: pointer;
           position: absolute;
           top: -1px;
           right: -1px;
           background: url(${lineUpUrl});
-          background-size: contain;
+          background-size: auto 100%;
+          background-position: center;
           width: ${videoHeight}px;
           height: ${videoHeight}px;
           border-bottom-left-radius: 20px;
@@ -65,6 +83,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
 
         .lineup:hover {
           opacity: 1;
+          background-size: auto 200%;
         }
 
         button {
