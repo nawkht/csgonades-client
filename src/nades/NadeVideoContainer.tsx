@@ -41,11 +41,14 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
       <div className="video-wrap" ref={ref}>
         <GfycatIframe gfyId={gfyId} />
         {lineUpUrl && (
-          <div className="lineup" onClick={onToggle}>
-            <div className="crosshair">
-              <CrossHair />
+          <>
+            <div className="lineup" onClick={onToggle}>
+              {!zoomLineUp && <div className="msg">SHOW LINEUP</div>}
+              <div className="crosshair">
+                <CrossHair />
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
       <style jsx>{`
@@ -54,14 +57,37 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           overflow: hidden;
         }
 
-        .crosshair {
-          width: 50px;
-          height: 50px;
+        .msg {
+          display: block;
+          outline: none;
+          padding: 40px;
+          position: absolute;
+          bottom: 0px;
+          right: 0px;
+          left: 0px;
+          z-index: 800;
+          color: white;
+          font-size: 50px;
+          font-weight: 500;
+          background: rgba(0, 0, 0, 0.8);
+          color: white;
+          pointer-events: none;
+          text-align: center;
+        }
 
+        .crosshair {
+          width: 22px;
+          height: 22px;
           opacity: 0.8;
+          transform: scale(1);
+          transition: all 0.2s;
         }
 
         .lineup {
+          border-left: 3px solid rgba(255, 255, 255, 0.75);
+          border-bottom: 3px solid rgba(255, 255, 255, 0.75);
+          overflow: hidden;
+          z-index: 799;
           display: flex;
           justify-content: space-around;
           align-items: center;
@@ -70,7 +96,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           top: -1px;
           right: -1px;
           background: url(${lineUpUrl});
-          background-size: auto 100%;
+          background-size: auto 150%;
           background-position: center;
           width: ${videoHeight}px;
           height: ${videoHeight}px;
@@ -83,7 +109,12 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
 
         .lineup:hover {
           opacity: 1;
-          background-size: auto 200%;
+          background-size: auto 300%;
+        }
+
+        .lineup:hover .crosshair {
+          transform: scale(${zoomLineUp ? "2.0" : "1.0"});
+          transition: all 0.2s;
         }
 
         button {
