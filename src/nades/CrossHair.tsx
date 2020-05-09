@@ -13,7 +13,7 @@ export const CrossHair: FC<Props> = ({}) => {
         </style>
         <path
           className="prefix__st0"
-          d="M299.25 303h1.5v8h-1.5zM311 299.25v1.5h-8v-1.5zM297 299.3v1.4h-8v-1.4zM299.3 289h1.4v8h-1.4z"
+          d="M299 303h2v9h-2zM312 299v2h-9v-2zM297 299v2h-9v-2zM299 288h2v9h-2z"
         />
         <path
           className="prefix__st1"
