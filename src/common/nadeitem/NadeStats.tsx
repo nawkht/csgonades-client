@@ -82,7 +82,11 @@ export const NadeStats: FC<Props> = ({
           {commentCount > 0 && (
             <div className="stat">
               <div className="stat-content">
-                <FaComment className="icon-fix" />
+                <FaComment
+                  className="icon-fix"
+                  fontSize={12}
+                  style={{ position: "relative", top: 0 }}
+                />
                 <span className="stat-text">{commentCount}</span>
               </div>
             </div>
@@ -158,16 +162,15 @@ export const NadeStats: FC<Props> = ({
 
         .item-bottom {
           display: flex;
-          padding: 10px 15px;
+          padding: 8px 20px;
           align-items: center;
-          min-height: 42px;
         }
 
         .stats {
           display: flex;
           align-items: center;
           flex: 1;
-          opacity: 0.75;
+          opacity: 1;
         }
 
         .stat-content {
