@@ -11,10 +11,15 @@ import { AdUnit } from "../common/adunits/AdUnit";
 export const NadeModal: FC = memo(() => {
   const { colors } = useTheme();
   const { nadeForModal, clearNadeForModal } = useNadeModal();
+  const [prevPath, setPrevPath] = useState<string | undefined>();
   const [nade, setNade] = useState<Nade | null>(null);
 
   useEffect(() => {
     if (nadeForModal) {
+      const curPath = window.location.pathname;
+      setPrevPath(curPath);
+      const path = `/nades/${nadeForModal.slug || nadeForModal.id}`;
+      window.history.pushState("", "", path);
       (async () => {
         const result = await NadeApi.byId(nadeForModal.id);
         if (result.isOk()) {
@@ -26,8 +31,10 @@ export const NadeModal: FC = memo(() => {
     }
   }, [nadeForModal]);
 
+  // Restore path url when user dismisses
   function onDismiss() {
     clearNadeForModal();
+    window.history.pushState("", "", prevPath);
   }
 
   if (!nadeForModal) {

@@ -21,14 +21,6 @@ export const NadeModalPage: FC<Props> = memo(({ nade, nadeLight }) => {
   const { pageView } = useAnalytics();
   const canEdit = useCanEditNade(nade?.steamId || "");
 
-  // Handle set url
-  useEffect(() => {
-    const prevPath = window.location.pathname;
-    const path = `/nades/${nadeLight.slug || nadeLight.id}`;
-    window.history.pushState("", "", path);
-    return () => window.history.pushState("", "", prevPath);
-  }, [nadeLight]);
-
   // Handle pageview
   useEffect(() => {
     if (!nade) {
