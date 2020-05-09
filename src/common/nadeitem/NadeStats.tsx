@@ -142,7 +142,9 @@ export const NadeStats: FC<Props> = ({
                   <br />
                   Nade has been thrown by a
                   <br />
-                  professional CS:GO player.
+                  professional CS:GO player
+                  <br />
+                  in a official game.
                 </div>
               }
               trigger={
