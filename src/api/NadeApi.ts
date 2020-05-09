@@ -13,6 +13,19 @@ import {
 import { AppResult, extractApiError } from "../utils/ErrorUtil";
 
 export class NadeApi {
+  static async slugIsFree(slug: string): Promise<boolean> {
+    try {
+      const res = await axios.get<boolean>(
+        `${Config.API_URL}/nades/${slug}/checkslug`
+      );
+
+      const isFree = res.data;
+      return isFree;
+    } catch (error) {
+      return false;
+    }
+  }
+
   static async getAll(): AppResult<NadeLight[]> {
     try {
       const res = await axios.get(`${Config.API_URL}/nades`);

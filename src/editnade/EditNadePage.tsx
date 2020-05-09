@@ -22,14 +22,19 @@ import { ImageUploader } from "../newnade/ImageUploader";
 import { OneWaySelector } from "../createnade/components/OneWaySelector";
 import { SEO } from "../layout/SEO2";
 import { StatusSelector } from "./comp/StatusSelector";
-import { useIsAdminOrModerator } from "../store/AuthStore/AuthHooks";
+import {
+  useIsAdminOrModerator,
+  useIsAdmin,
+} from "../store/AuthStore/AuthHooks";
 import { TickrateSelector } from "../createnade/components/TickrateSelector";
+import { SlugInput } from "./comp/SlugInput";
 
 type Props = {
   nade: Nade;
 };
 
 export const EditNadePage: FC<Props> = ({ nade }) => {
+  const isAdmin = useIsAdmin();
   const isAdminOrModerator = useIsAdminOrModerator();
   const { state, dispatch, onUpdate, disableSubmit } = useEditNadeState(nade);
   const { colors } = useTheme();
@@ -230,6 +235,16 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
                   }
                 />
               </div>
+              {isAdmin && (
+                <div id="slug">
+                  <SlugInput
+                    defaultValue={nade.slug}
+                    onChange={(slug) =>
+                      dispatch({ type: "EditNade/SetSlug", slug })
+                    }
+                  />
+                </div>
+              )}
             </>
           )}
 
@@ -315,6 +330,7 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
             "desc preview"
             "modlabel preview"
             "status preview"
+            "slug preview"
             ". submit";
           grid-row-gap: ${Dimensions.GUTTER_SIZE / 1.5}px;
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
@@ -323,6 +339,10 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           margin-bottom: 150px;
+        }
+
+        #slug {
+          grid-area: slug;
         }
 
         #tickrate-selector {

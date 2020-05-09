@@ -113,6 +113,11 @@ type SetTickrate = {
   tick: Tickrate;
 };
 
+type SetSlug = {
+  type: "EditNade/SetSlug";
+  slug: string;
+};
+
 type Actions =
   | SetMap
   | SetGfyData
@@ -131,7 +136,8 @@ type Actions =
   | SetNadeStatus
   | ToggleLineupImageAdder
   | SetLineUpImage
-  | SetTickrate;
+  | SetTickrate
+  | SetSlug;
 
 const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
   console.log(action.type, action);
@@ -227,6 +233,11 @@ const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
       return {
         ...state,
         tickrate: action.tick,
+      };
+    case "EditNade/SetSlug":
+      return {
+        ...state,
+        slug: action.slug,
       };
     default:
       assertNever(action);
