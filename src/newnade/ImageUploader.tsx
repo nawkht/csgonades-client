@@ -98,7 +98,7 @@ export const ImageUploader = ({
       crop.height
     );
 
-    const base64Image = canvas.toDataURL("image/jpeg");
+    const base64Image = canvas.toDataURL("image/jpeg", 1);
 
     onImageCropped(base64Image);
 
