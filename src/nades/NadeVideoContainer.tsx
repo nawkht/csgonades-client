@@ -81,7 +81,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           left: 0px;
           z-index: 800;
           color: white;
-          font-size: 50px;
+          font-size: 40px;
           font-weight: 500;
           background: rgba(0, 0, 0, 0.8);
           color: white;
@@ -102,7 +102,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
         }
 
         .lineup {
-          border: 5px solid rgba(0, 0, 0, 0.75);
+          border: 1px solid rgba(0, 0, 0, 0.75);
           overflow: hidden;
           z-index: 799;
           display: flex;
@@ -121,7 +121,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           transform-origin: top right;
           transform: scale(${zoomLineUp ? "1" : "0.3"});
           transition: all 0.2s;
-          opacity: ${zoomLineUp ? 1 : 0.85};
+          opacity: ${zoomLineUp ? 1 : 0.8};
         }
 
         .lineup:hover {
@@ -132,15 +132,6 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
         .lineup:hover .crosshair {
           transform: scale(${zoomLineUp ? "2.0" : "5.0"});
           transition: all 0.2s;
-        }
-
-        button {
-          background: rgba(0, 0, 0, 0.9);
-          border-radius: 5px;
-          color: white;
-          font-size: 14px;
-          border: none;
-          outline: none;
         }
 
         @keyframes example {
