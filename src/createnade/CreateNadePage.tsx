@@ -190,6 +190,7 @@ export const CreateNadePage: FC<Props> = ({}) => {
           {state.showImageAdder && (
             <div id="image-adder">
               <ImageUploader
+                message={<></>}
                 onDismiss={() =>
                   dispatch({ type: "CreateNade/ShowImageSelector" })
                 }

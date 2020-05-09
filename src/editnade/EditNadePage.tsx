@@ -213,6 +213,7 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           {state.showImageAdder && (
             <div id="image-adder">
               <ImageUploader
+                message={<></>}
                 onDismiss={() =>
                   dispatch({ type: "CreateNade/ShowImageSelector" })
                 }
@@ -226,7 +227,20 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           {state.showLineupImgAdder && (
             <div id="lineup-adder">
               <ImageUploader
-                aspectRatio="1:1"
+                message={
+                  <div className="lineup-msg">
+                    <ul>
+                      <li>Aim at the position</li>
+                      <li>Remove your hud (cl_drawhud 0)</li>
+                      <li>Take screenshot</li>
+                    </ul>
+                    <p>
+                      Don&apos;t resize it. Keep it as it is. A crosshair will
+                      be added on top of the image automaticly.
+                    </p>
+                  </div>
+                }
+                aspectRatio="16:9"
                 onDismiss={() =>
                   dispatch({ type: "EditNade/ToggleLineupImageAdder" })
                 }
@@ -239,6 +253,14 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
         </div>
       </PageCentralize>
       <style jsx>{`
+        .lineup-msg {
+          background: rgba(255, 255, 255, 0.8);
+          color: #111;
+          border-radius: 5px;
+          margin-bottom: 15px;
+          padding: 10px;
+        }
+
         #title {
           background: ${colors.DP01};
           font-size: 24px;

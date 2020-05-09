@@ -6,6 +6,7 @@ import { Dimensions } from "../constants/Constants";
 type AspectRatio = "1:1" | "16:9";
 
 type Props = {
+  message: any;
   aspectRatio?: AspectRatio;
   onDismiss: () => void;
   onImageCropped: (croppedImageBase64: string) => void;
@@ -15,6 +16,7 @@ export const ImageUploader = ({
   onImageCropped,
   onDismiss,
   aspectRatio,
+  message,
 }: Props) => {
   const { colors } = useTheme();
   const [image, setImage] = useState<HTMLImageElement | null>(null);
@@ -127,6 +129,7 @@ export const ImageUploader = ({
           accept="image/jpeg"
           onChange={onSelectFile}
         />
+        <div className="message">{message}</div>
         <div className="file-selector-btn">
           <button className="btn cancel" onClick={onDismiss}>
             CANCEL
