@@ -27,6 +27,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
   const { incrementNadeFavCount, decrementNadeFavCount } = useMapFavCount();
 
   function onFavorite(e: any) {
+    e.stopPropagation();
     e.preventDefault();
     if (!isSignedIn) {
       setSignInWarning("favorite");
