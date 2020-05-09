@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaRunning, FaComment } from "react-icons/fa";
+import { FaRunning, FaComment, FaCheckCircle } from "react-icons/fa";
 import { TiStarFullOutline } from "react-icons/ti";
 import { GoEye, GoTerminal } from "react-icons/go";
 import { tickrateString, Tickrate } from "../../models/Nade/NadeTickrate";
@@ -19,6 +19,7 @@ type Props = {
   viewCount: number;
   favoriteCount: number;
   commentCount: number;
+  isPro?: boolean;
 };
 
 const VIEW_COUNT_ENABLED = false;
@@ -32,6 +33,7 @@ export const NadeStats: FC<Props> = ({
   viewCount,
   favoriteCount,
   commentCount,
+  isPro,
 }) => {
   const { colors } = useTheme();
   const favoriteIconColor = isFavorited ? colors.FAV_YELLOW : colors.TEXT;
@@ -93,6 +95,28 @@ export const NadeStats: FC<Props> = ({
           )}
         </div>
         <div className="specials">
+          {isPro && (
+            <Popup
+              inverted
+              size="tiny"
+              position="top center"
+              content={
+                <div className="center">
+                  <b>Verified Pro</b>
+                  <br />
+                  Nade has been thrown by a
+                  <br />
+                  professional CS:GO player.
+                </div>
+              }
+              trigger={
+                <div className="special pro">
+                  <FaCheckCircle style={{ position: "relative", top: -1 }} />
+                </div>
+              }
+            />
+          )}
+
           {hasMovement && (
             <Popup
               inverted
@@ -185,6 +209,10 @@ export const NadeStats: FC<Props> = ({
           background: #709c14;
           color: white;
           font-weight: 500;
+        }
+
+        .pro {
+          color: #00b8d9;
         }
       `}</style>
     </>

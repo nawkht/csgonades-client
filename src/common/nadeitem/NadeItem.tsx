@@ -57,6 +57,7 @@ export const NadeItem: FC<Props> = memo(({ nade }) => {
               movement={nade.movement}
               technique={nade.technique}
               tickrate={nade.tickrate}
+              isPro={nade.isPro}
             />
           </div>
         </a>

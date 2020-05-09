@@ -108,6 +108,7 @@ export const NadeItemMobile: FC<Props> = ({ nade, onItemClick }) => {
           movement={nade.movement}
           technique={nade.technique}
           tickrate={nade.tickrate}
+          isPro={nade.isPro}
         />
       </div>
       <style jsx>{`

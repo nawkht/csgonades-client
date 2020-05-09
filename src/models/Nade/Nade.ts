@@ -43,6 +43,7 @@ export type Nade = {
   isFavorited?: boolean;
   nextUpdateInHours: number;
   oneWay?: boolean;
+  isPro?: boolean;
 };
 
 export type NadeLight = {
@@ -68,6 +69,7 @@ export type NadeLight = {
   movement?: Movement;
   nextUpdateInHours: number;
   oneWay?: boolean;
+  isPro?: boolean;
 };
 
 export type NadeCreateBody = {
