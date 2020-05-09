@@ -112,18 +112,16 @@ export const NadeTitle: FC<Props> = ({
         }
 
         .edit {
-          grid-area: editbtn;
-          align-self: center;
           position: absolute;
-          bottom: 100%;
-          right: 0;
-          margin-bottom: 5px;
+          top: 0;
+          left: 0;
         }
 
         .edit-btn {
           background: ${colors.filterBg};
           border: none;
-          border-radius: 5px;
+          border-top-left-radius: 5px;
+          border-bottom-right-radius: 5px;
           color: white;
           padding: 5px 10px;
           outline: none;
