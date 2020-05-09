@@ -287,11 +287,8 @@ export const CreateNadePage: FC<Props> = ({}) => {
           right: 0;
           bottom: 0;
           background: rgba(0, 0, 0, 0.9);
-          padding: ${Dimensions.GUTTER_SIZE}px;
           z-index: 999;
           overflow-y: auto;
-          display: flex;
-          justify-content: space-around;
         }
 
         #title {

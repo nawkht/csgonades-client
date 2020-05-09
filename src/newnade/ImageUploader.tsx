@@ -200,8 +200,11 @@ export const ImageUploader = ({
         }
 
         .image-uploader {
+          padding-top: 10px;
+          padding-bottom: 10px;
           display: block;
-          width: ${windowSize[0] / 1.35}px;
+          width: ${windowSize[0] / 1.14}px;
+          margin: 0 auto;
         }
 
         .message {
