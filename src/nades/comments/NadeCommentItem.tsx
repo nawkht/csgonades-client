@@ -95,7 +95,11 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
         onDismiss={() => setEditorVisisble(false)}
       >
         <div className="comment-editor">
-          <CsgnTextArea label="Message" value={message} onChange={setMessage} />
+          <CsgnTextArea
+            label="Message"
+            defaultValue={message}
+            onChange={setMessage}
+          />
           <CsgnSaveButton onClick={onUpdateComment} />
         </div>
       </CSGNModal>
