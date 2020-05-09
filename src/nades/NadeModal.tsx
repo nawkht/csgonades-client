@@ -7,8 +7,10 @@ import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeModalPage } from "./NadeModalPage";
 import { AdUnit } from "../common/adunits/AdUnit";
+import { useAnalytics } from "../utils/Analytics";
 
 export const NadeModal: FC = memo(() => {
+  const { pageView } = useAnalytics();
   const { colors } = useTheme();
   const { nadeForModal, clearNadeForModal } = useNadeModal();
   const [prevPath, setPrevPath] = useState<string | undefined>();
@@ -18,8 +20,8 @@ export const NadeModal: FC = memo(() => {
     if (nadeForModal) {
       const curPath = window.location.pathname;
       setPrevPath(curPath);
-      const path = `/nades/${nadeForModal.slug || nadeForModal.id}`;
-      window.history.pushState("", "", path);
+      const nadePath = `/nades/${nadeForModal.slug || nadeForModal.id}`;
+      window.history.pushState("", "", nadePath);
       (async () => {
         const result = await NadeApi.byId(nadeForModal.id);
         if (result.isOk()) {
@@ -34,7 +36,12 @@ export const NadeModal: FC = memo(() => {
   // Restore path url when user dismisses
   function onDismiss() {
     clearNadeForModal();
-    window.history.pushState("", "", prevPath);
+    if (prevPath) {
+      window.history.pushState("", "", prevPath);
+      pageView({
+        path: prevPath,
+      });
+    }
   }
 
   if (!nadeForModal) {
