@@ -42,12 +42,12 @@ export const NadeStats: FC<Props> = ({
   const favIcon = isFavorited ? (
     <TiStarFullOutline
       color={favoriteIconColor}
-      style={{ position: "relative", top: -1, fontSize: 19 }}
+      style={{ position: "relative", top: -0.5, fontSize: 18 }}
     />
   ) : (
     <TiStarFullOutline
       color={favoriteIconColor}
-      style={{ position: "relative", top: -1, fontSize: 19 }}
+      style={{ position: "relative", top: -0.5, fontSize: 18 }}
     />
   );
   const hasMovement =
@@ -64,7 +64,7 @@ export const NadeStats: FC<Props> = ({
           {!nadeIsNew && VIEW_COUNT_ENABLED && (
             <div className="stat">
               <div className="stat-content">
-                <GoEye style={{ position: "relative", top: -1 }} />
+                <GoEye style={{ position: "relative", top: -0.5 }} />
                 <span className="stat-text">{kFormatter(viewCount)}</span>
               </div>
             </div>
@@ -89,7 +89,11 @@ export const NadeStats: FC<Props> = ({
             <div className="stat">
               <div className="stat-content">
                 <FaComment
-                  style={{ position: "relative", top: -1, color: colors.TEXT }}
+                  style={{
+                    position: "relative",
+                    top: -0.5,
+                    color: colors.TEXT,
+                  }}
                 />
                 <span className="stat-text">{commentCount}</span>
               </div>
@@ -97,6 +101,37 @@ export const NadeStats: FC<Props> = ({
           )}
         </div>
         <div className="specials">
+          {hasMovement && (
+            <Popup
+              inverted
+              size="tiny"
+              position="top center"
+              content="Requires movement"
+              trigger={
+                <div className="special movement">
+                  <FaRunning style={{ position: "relative", top: -1 }} />
+                </div>
+              }
+            />
+          )}
+
+          {isJumpThrow && (
+            <Popup
+              content={tickrateTooltip(tickrate)}
+              position="top center"
+              inverted
+              size="tiny"
+              trigger={
+                <div className="special tick">
+                  <GoTerminal style={{ position: "relative", top: -1 }} />
+                  <span className="special-text ticktext">
+                    {tickrateString(tickrate || "any")}
+                  </span>
+                </div>
+              }
+            />
+          )}
+
           {isPro && (
             <Popup
               inverted
@@ -121,37 +156,7 @@ export const NadeStats: FC<Props> = ({
               trigger={
                 <div className="special pro">
                   <FaCheckCircle style={{ position: "relative", top: -1 }} />
-                </div>
-              }
-            />
-          )}
-
-          {hasMovement && (
-            <Popup
-              inverted
-              size="tiny"
-              position="top center"
-              content="Requires movement"
-              trigger={
-                <div className="special movement">
-                  <FaRunning style={{ position: "relative", top: -1 }} />
-                </div>
-              }
-            />
-          )}
-
-          {isJumpThrow && (
-            <Popup
-              content={tickrateTooltip(tickrate)}
-              position="top center"
-              inverted
-              size="tiny"
-              trigger={
-                <div className="special tick">
-                  <GoTerminal style={{ position: "relative", top: -1 }} />
-                  <span className="special-text">
-                    {tickrateString(tickrate || "any")}
-                  </span>
+                  <span>PRO</span>
                 </div>
               }
             />
@@ -189,8 +194,8 @@ export const NadeStats: FC<Props> = ({
 
         .stat-text,
         .special-text {
-          font-size: 15px;
-          margin-left: 5px;
+          font-size: 14px;
+          margin-left: 3px;
           color: ${colors.TEXT};
         }
 
@@ -209,6 +214,7 @@ export const NadeStats: FC<Props> = ({
           display: flex;
           align-items: center;
           margin-right: 12px;
+          font-size: 14px;
         }
 
         .new-badge {
@@ -222,6 +228,17 @@ export const NadeStats: FC<Props> = ({
 
         .pro {
           color: #00b8d9;
+        }
+
+        .pro span {
+          font-size: 10px;
+          font-weight: 500;
+          margin-left: 2px;
+        }
+
+        .ticktext {
+          font-size: 10px;
+          color: ${colors.NADE_ITEM_HIGHLIGHT};
         }
       `}</style>
     </>
@@ -250,6 +267,10 @@ function tickrateTooltip(tickrate?: Tickrate) {
         </>
       );
     default:
-      return null;
+      return (
+        <>
+          <div className="center">Jumpthrow Bind</div>
+        </>
+      );
   }
 }
