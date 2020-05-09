@@ -49,10 +49,11 @@ export const NadeModal: FC = memo(() => {
             <FaTimes />
           </div>
         </div>
-
-        <div id="ph">
-          <AdUnit tagType="728x90" modalTop />
-        </div>
+        {false && (
+          <div id="ph">
+            <AdUnit tagType="728x90" modalTop />
+          </div>
+        )}
 
         <div id="center">
           <div id="nade-page-content" onClick={(e) => e.stopPropagation()}>
