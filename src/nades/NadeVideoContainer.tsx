@@ -3,6 +3,7 @@ import { FC, memo, useState, useCallback } from "react";
 import { GfycatIframe } from "./components/GfycatIframe";
 import { useAnalytics } from "../utils/Analytics";
 import { CrossHair } from "./CrossHair";
+import { FaTimes } from "react-icons/fa";
 
 type Props = {
   lineUpUrl?: string;
@@ -44,6 +45,11 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           <>
             <div className="lineup" onClick={onToggle}>
               {!zoomLineUp && <div className="msg">SHOW LINEUP</div>}
+              {zoomLineUp && (
+                <div className="close">
+                  <FaTimes />
+                </div>
+              )}
               <div className="crosshair">
                 <CrossHair />
               </div>
@@ -52,6 +58,14 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
         )}
       </div>
       <style jsx>{`
+        .close {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 30px;
+        }
+
         .video-wrap {
           position: relative;
           overflow: hidden;
