@@ -151,7 +151,7 @@ export const NadeStats: FC<Props> = ({
         .new-badge {
           display: flex;
           align-items: center;
-          margin-right: 10px;
+          margin-right: 15px;
         }
 
         .new-badge span {
@@ -189,7 +189,7 @@ export const NadeStats: FC<Props> = ({
           color: ${colors.NADE_ITEM_HIGHLIGHT};
           display: flex;
           align-items: center;
-          margin-right: 10px;
+          margin-right: 15px;
         }
 
         .special:last-child {

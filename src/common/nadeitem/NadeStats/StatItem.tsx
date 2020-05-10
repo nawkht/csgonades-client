@@ -32,7 +32,7 @@ export const StatItem: FC<Props> = ({
           display: flex;
           font-size: 11px;
           font-weight: 400;
-          margin-right: 10px;
+          margin-right: 15px;
         }
 
         .icon {
