@@ -269,7 +269,8 @@ function tickrateTooltip(tickrate?: Tickrate) {
             <b>Jumpthrow Bind</b>
           </div>
           <div className="center">
-            Works on <em>Matchmaking</em> and <em>3rd Party Services</em>
+            Works on <em>Matchmaking</em>
+            <br /> and <em>3rd Party Services</em>
           </div>
           <style jsx>{`
             .center {
