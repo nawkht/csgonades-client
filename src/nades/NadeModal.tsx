@@ -6,10 +6,12 @@ import { FaTimes } from "react-icons/fa";
 import { Dimensions } from "../constants/Constants";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeModalPage } from "./NadeModalPage";
-import { AdUnit } from "../common/adunits/AdUnit";
 import { useAnalytics } from "../utils/Analytics";
+import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadeModal: FC = memo(() => {
+  const [hidden, setHidden] = useState(true);
+  const [hasOpened, setHasOpened] = useState(false);
   const { pageView } = useAnalytics();
   const { colors } = useTheme();
   const { nadeForModal, clearNadeForModal } = useNadeModal();
@@ -18,6 +20,8 @@ export const NadeModal: FC = memo(() => {
 
   useEffect(() => {
     if (nadeForModal) {
+      setHidden(false);
+      setHasOpened(true);
       const curPath = window.location.pathname;
       setPrevPath(curPath);
       const nadePath = `/nades/${nadeForModal.slug || nadeForModal.id}`;
@@ -29,7 +33,10 @@ export const NadeModal: FC = memo(() => {
         }
       })();
     } else {
-      setNade(null);
+      setTimeout(() => {
+        setHidden(true);
+        setNade(null);
+      }, 300);
     }
   }, [nadeForModal]);
 
@@ -44,32 +51,31 @@ export const NadeModal: FC = memo(() => {
     }
   }
 
-  if (!nadeForModal) {
-    return null;
-  }
-
   return (
     <>
-      <div id="nade-modal" onClick={onDismiss}>
-        <div id="close-wrap">
-          <div id="nade-modal-close">
-            <FaTimes />
+      <div
+        className={!!nadeForModal ? "nade-modal visible" : "nade-modal"}
+        onClick={onDismiss}
+      >
+        <div id="nade-modal-content">
+          <div id="close-wrap">
+            <div id="nade-modal-close">
+              <FaTimes />
+            </div>
           </div>
-        </div>
-        {false && (
-          <div id="ph">
-            <AdUnit tagType="728x90" modalTop />
-          </div>
-        )}
+          <div id="ph">{hasOpened && <AdUnit tagType="160x600" />}</div>
 
-        <div id="center">
-          <div id="nade-page-content" onClick={(e) => e.stopPropagation()}>
-            <NadeModalPage nadeLight={nadeForModal} nade={nade} />
+          <div id="center">
+            {nadeForModal && (
+              <div id="nade-page-content" onClick={(e) => e.stopPropagation()}>
+                <NadeModalPage nadeLight={nadeForModal} nade={nade} />
+              </div>
+            )}
           </div>
         </div>
       </div>
       <style jsx>{`
-        #nade-modal {
+        .nade-modal {
           position: fixed;
           top: 0;
           bottom: 0;
@@ -78,21 +84,29 @@ export const NadeModal: FC = memo(() => {
           z-index: 998;
           background: rgba(0, 0, 0, 0.8);
           overflow-y: auto;
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          grid-template-areas:
-            "ph ph ph"
-            ". md close";
+          padding-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          padding-bottom: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          display: ${hidden ? "none" : "block"};
           opacity: 0;
-          animation-name: fadeIn;
-          animation-duration: 0.2s;
-          animation-fill-mode: forwards;
+          transition: opacity 0.2s;
+        }
+
+        .visible {
+          opacity: 1;
+        }
+
+        #nade-modal-content {
+          margin: 0 auto;
+          width: calc(100vw - ${Dimensions.GUTTER_SIZE}px);
+          display: grid;
+          grid-template-columns: 190px 1fr 190px;
+          grid-template-areas:
+            "ph md close"
+            "ph md close";
         }
 
         #center {
           grid-area: md;
-          width: 1000px;
-          margin-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
         }
 
         #ph {
@@ -100,15 +114,14 @@ export const NadeModal: FC = memo(() => {
         }
 
         #close-wrap {
-          margin-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
-          margin-right: ${Dimensions.GUTTER_SIZE * 1.5}px;
           grid-area: close;
           justify-self: end;
+          padding-right: ${Dimensions.GUTTER_SIZE / 2}px;
         }
 
         #nade-modal-close {
           position: sticky;
-          top: ${Dimensions.GUTTER_SIZE * 1.5}px;
+          top: 0;
           font-size: 30px;
           color: rgba(255, 255, 255, 0.75);
           cursor: pointer;
@@ -120,9 +133,10 @@ export const NadeModal: FC = memo(() => {
 
         #nade-page-content {
           background: ${colors.DP00};
-          margin-bottom: 100px;
           border-radius: 5px;
           min-height: calc(100vh - ${Dimensions.GUTTER_SIZE * 1.5}px);
+          max-width: ${Dimensions.PAGE_WIDTH}px;
+          margin: 0 auto;
         }
 
         #nade-modal::-webkit-scrollbar {
@@ -144,18 +158,16 @@ export const NadeModal: FC = memo(() => {
           background: rgba(255, 255, 255, 0.8);
         }
 
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
         @media only screen and (max-width: 1200px) {
-          #center {
-            width: 80vw;
+          #nade-modal-content {
+            grid-template-columns: 60px 1fr 60px;
+            grid-template-areas:
+              "ph md close"
+              "ph md close";
+          }
+
+          #ph {
+            display: none;
           }
         }
       `}</style>
