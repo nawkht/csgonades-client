@@ -46,7 +46,7 @@ export const NadeStats: FC<Props> = ({
     movement === "running" ||
     movement === "crouchwalking" ||
     movement === "walking";
-  const isJumpThrow = technique === "jumpthrow" && tickrate !== "any";
+  const isJumpThrow = technique === "jumpthrow";
   const nadeIsNew = isNew(createdAt);
 
   return (
@@ -236,7 +236,9 @@ function tickrateTooltip(tickrate?: Tickrate) {
           <div className="center">
             <b>Jumpthrow Bind</b>
           </div>
-          <div className="center">Only for 3rd party services</div>
+          <div className="center">
+            Only for <em>3rd Party Services</em>
+          </div>
           <style jsx>{`
             .center {
               text-align: center;
@@ -250,7 +252,9 @@ function tickrateTooltip(tickrate?: Tickrate) {
           <div className="center">
             <b>Jumpthrow Bind</b>
           </div>
-          <div className="center">Only works on matchmaking</div>
+          <div className="center">
+            Only for <em>Matchmaking</em>
+          </div>
           <style jsx>{`
             .center {
               text-align: center;
@@ -265,7 +269,7 @@ function tickrateTooltip(tickrate?: Tickrate) {
             <b>Jumpthrow Bind</b>
           </div>
           <div className="center">
-            Works on matchmaking and 3rd party services
+            Works on <em>Matchmaking</em> and <em>3rd Party Services</em>
           </div>
           <style jsx>{`
             .center {
