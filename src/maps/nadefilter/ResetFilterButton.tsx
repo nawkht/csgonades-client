@@ -31,6 +31,7 @@ export const ResetFilterButton: FC<Props> = memo(({ vertical }) => {
       <style jsx>{`
         .reset {
           opacity: 0;
+          pointer-events: none;
         }
 
         .filter-btn {
@@ -65,6 +66,7 @@ export const ResetFilterButton: FC<Props> = memo(({ vertical }) => {
         }
 
         .visible {
+          pointer-events: auto;
           opacity: 1;
         }
       `}</style>

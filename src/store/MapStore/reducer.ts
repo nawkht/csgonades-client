@@ -92,6 +92,7 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
         filterByFavorites: false,
         filterByTickrate: "any",
         filterByType: undefined,
+        filterByPro: false,
       };
     case "MapStore/FilterByTickrate":
       return {

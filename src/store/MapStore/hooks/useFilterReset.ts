@@ -6,6 +6,7 @@ import {
   filterByTickrateSelector,
   filterByFavoritesSelector,
   filterByTypeSelector,
+  filterByProSelector,
 } from "../selectors";
 
 export const useFilterReset = () => {
@@ -13,6 +14,7 @@ export const useFilterReset = () => {
   const byTickrate = useSelector(filterByTickrateSelector);
   const byFavorites = useSelector(filterByFavoritesSelector);
   const byType = useSelector(filterByTypeSelector);
+  const byPro = useSelector(filterByProSelector);
   const dispatch = useMapStoreDispatch();
 
   const resetFilter = useCallback(() => {
@@ -34,8 +36,11 @@ export const useFilterReset = () => {
     if (byType) {
       return true;
     }
+    if (byPro) {
+      return true;
+    }
     return false;
-  }, [byCoords, byTickrate, byFavorites, byType]);
+  }, [byCoords, byTickrate, byFavorites, byType, byPro]);
 
   return {
     resetFilter,
