@@ -6,7 +6,7 @@ import {
   FaStar,
   FaCommentDots,
 } from "react-icons/fa";
-import { GoTerminal } from "react-icons/go";
+import { RiMouseLine } from "react-icons/ri";
 import { tickrateString, Tickrate } from "../../../models/Nade/NadeTickrate";
 import { useTheme } from "../../../store/SettingsStore/SettingsHooks";
 import { dateMinutesAgo } from "../../../utils/DateUtils";
@@ -102,7 +102,7 @@ export const NadeStats: FC<Props> = ({
               trigger={
                 <div className="special tick">
                   <div className="special-icon">
-                    <GoTerminal />
+                    <RiMouseLine />
                   </div>
                   <span className="special-text">
                     {tickrateString(tickrate || "any")}
