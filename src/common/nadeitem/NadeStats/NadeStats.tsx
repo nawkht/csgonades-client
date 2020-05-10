@@ -54,36 +54,27 @@ export const NadeStats: FC<Props> = ({
       <div className="item-bottom">
         <div className="stats">
           {nadeIsNew && (
-            <div className="stat">
-              <span className="new-badge">NEW</span>
+            <div className="new-badge">
+              <span>NEW</span>
             </div>
           )}
 
-          <div className="spacing">
-            <StatItem
-              hidden={nadeIsNew}
-              count={viewCount}
-              icon={<FaEye />}
-              color={colors.GREY}
-            />
-          </div>
+          {!nadeIsNew && (
+            <StatItem count={viewCount} icon={<FaEye />} color={colors.GREY} />
+          )}
 
-          <div className="spacing">
-            <StatItem
-              count={favoriteCount}
-              icon={<FaStar />}
-              color={colors.GREY}
-              iconColor={favoriteIconColor}
-            />
-          </div>
+          <StatItem
+            count={favoriteCount}
+            icon={<FaStar />}
+            color={colors.GREY}
+            iconColor={favoriteIconColor}
+          />
 
-          <div className="spacing">
-            <StatItem
-              count={commentCount}
-              color={colors.GREY}
-              icon={<FaCommentDots />}
-            />
-          </div>
+          <StatItem
+            count={commentCount}
+            color={colors.GREY}
+            icon={<FaCommentDots />}
+          />
         </div>
         <div className="specials">
           {hasMovement && (
@@ -158,15 +149,20 @@ export const NadeStats: FC<Props> = ({
       </div>
       <style jsx>{`
         .new-badge {
-          padding: 3px 6px;
+          display: flex;
+          align-items: center;
+          margin-right: 10px;
+        }
+
+        .new-badge span {
           border-radius: 5px;
           background: #709c14;
           color: white;
           font-weight: 500;
-        }
-
-        .spacing {
-          margin-right: 10px;
+          font-size: 9px;
+          padding-left: 5px;
+          padding-right: 5px;
+          display: inline;
         }
 
         .center {
@@ -176,8 +172,6 @@ export const NadeStats: FC<Props> = ({
         .item-bottom {
           display: flex;
           padding: 8px 20px;
-          align-items: center;
-          min-height: 40px;
         }
 
         .stats {
