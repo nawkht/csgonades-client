@@ -10,7 +10,6 @@ import { useAnalytics } from "../utils/Analytics";
 import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadeModal: FC = memo(() => {
-  const [hidden, setHidden] = useState(true);
   const [hasOpened, setHasOpened] = useState(false);
   const { pageView } = useAnalytics();
   const { colors } = useTheme();
@@ -20,7 +19,6 @@ export const NadeModal: FC = memo(() => {
 
   useEffect(() => {
     if (nadeForModal) {
-      setHidden(false);
       setHasOpened(true);
       const curPath = window.location.pathname;
       setPrevPath(curPath);
@@ -33,10 +31,7 @@ export const NadeModal: FC = memo(() => {
         }
       })();
     } else {
-      setTimeout(() => {
-        setHidden(true);
-        setNade(null);
-      }, 300);
+      setNade(null);
     }
   }, [nadeForModal]);
 
@@ -63,7 +58,13 @@ export const NadeModal: FC = memo(() => {
               <FaTimes />
             </div>
           </div>
-          <div id="ph">{hasOpened && <AdUnit tagType="160x600" />}</div>
+          <div id="ph">
+            {hasOpened && (
+              <div className="ph-stick">
+                <AdUnit tagType="160x600" />
+              </div>
+            )}
+          </div>
 
           <div id="center">
             {nadeForModal && (
@@ -75,6 +76,13 @@ export const NadeModal: FC = memo(() => {
         </div>
       </div>
       <style jsx>{`
+        .ph-stick {
+          position: sticky;
+          top: 0;
+          width: 160px;
+          height: 600px;
+        }
+
         .nade-modal {
           position: fixed;
           top: 0;
@@ -84,20 +92,20 @@ export const NadeModal: FC = memo(() => {
           z-index: 998;
           background: rgba(0, 0, 0, 0.8);
           overflow-y: auto;
+          padding: ${Dimensions.GUTTER_SIZE}px;
           padding-top: ${Dimensions.GUTTER_SIZE * 1.5}px;
           padding-bottom: ${Dimensions.GUTTER_SIZE * 1.5}px;
-          display: ${hidden ? "none" : "block"};
+          display: none;
           opacity: 0;
           transition: opacity 0.2s;
         }
 
         .visible {
+          display: block;
           opacity: 1;
         }
 
         #nade-modal-content {
-          margin: 0 auto;
-          width: calc(100vw - ${Dimensions.GUTTER_SIZE}px);
           display: grid;
           grid-template-columns: 190px 1fr 190px;
           grid-template-areas:
@@ -116,7 +124,6 @@ export const NadeModal: FC = memo(() => {
         #close-wrap {
           grid-area: close;
           justify-self: end;
-          padding-right: ${Dimensions.GUTTER_SIZE / 2}px;
         }
 
         #nade-modal-close {
@@ -173,7 +180,7 @@ export const NadeModal: FC = memo(() => {
       `}</style>
       <style jsx global>{`
         body {
-          overflow: hidden;
+          overflow: ${nadeForModal ? "hidden" : "auto"};
         }
       `}</style>
     </>
