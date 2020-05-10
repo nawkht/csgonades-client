@@ -146,22 +146,22 @@ export const NadeModal: FC = memo(() => {
           margin: 0 auto;
         }
 
-        #nade-modal::-webkit-scrollbar {
+        .nade-modal::-webkit-scrollbar {
           width: 10px;
         }
 
         /* Track */
-        #nade-modal::-webkit-scrollbar-track {
+        .nade-modal::-webkit-scrollbar-track {
           background: rgba(0, 0, 0, 0.1);
         }
 
-        #nade-modal/* Handle */
+        .nade-modal/* Handle */
         ::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.6);
+          background: rgba(255, 255, 255, 0.4);
         }
 
         /* Handle on hover */
-        #nade-modal::-webkit-scrollbar-thumb:hover {
+        .nade-modal::-webkit-scrollbar-thumb:hover {
           background: rgba(255, 255, 255, 0.8);
         }
 
