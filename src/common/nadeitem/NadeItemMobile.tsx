@@ -5,7 +5,7 @@ import { Dimensions } from "../../constants/Constants";
 import { NadeLight } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "./NadeItemTitle";
-import { NadeStats } from "./NadeStats";
+import { NadeStats } from "./NadeStats/NadeStats";
 import Link from "next/link";
 
 interface Props {

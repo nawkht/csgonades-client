@@ -3,7 +3,7 @@ import { NadeCreateBody } from "../models/Nade/Nade";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeItemTitle } from "../common/nadeitem/NadeItemTitle";
 import { GfycatThumbnail } from "../common/nadeitem/GfycatThumbnail";
-import { NadeStats } from "../common/nadeitem/NadeStats";
+import { NadeStats } from "../common/nadeitem/NadeStats/NadeStats";
 
 type Props = {
   nade: Partial<NadeCreateBody>;

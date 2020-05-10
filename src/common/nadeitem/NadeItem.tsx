@@ -4,7 +4,7 @@ import { NadeLight } from "../../models/Nade/Nade";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { GfycatThumbnail } from "./GfycatThumbnail";
 import { NadeItemTitle } from "./NadeItemTitle";
-import { NadeStats } from "./NadeStats";
+import { NadeStats } from "./NadeStats/NadeStats";
 import { useNadeModal } from "../../store/MapStore/hooks/useNadeModal";
 import Link from "next/link";
 
