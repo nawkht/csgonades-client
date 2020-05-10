@@ -27,3 +27,6 @@ export const mapViewSelector = (state: AppState) => state.mapStore.view;
 
 export const nadeIdForModalSelector = (state: AppState) =>
   state.mapStore.nadeForModal;
+
+export const filterByProSelector = (state: AppState) =>
+  state.mapStore.filterByPro;

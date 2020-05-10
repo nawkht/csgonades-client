@@ -4,6 +4,7 @@ import { useAnalytics } from "../../utils/Analytics";
 import { SignInnButton } from "../../layout/Misc/SignInnButton";
 import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
 import { Twemoji } from "../../common/Twemoji";
+import { FaCheckCircle } from "react-icons/fa";
 
 type Props = {};
 
@@ -14,7 +15,7 @@ export const SignInWarning: FC<Props> = memo(() => {
   useEffect(() => {
     if (signInWarning) {
       event({
-        category: "Sign In Warning",
+        category: `Sign In Warning ${signInWarning}`,
         action: "Displayed",
       });
     }
@@ -22,7 +23,7 @@ export const SignInWarning: FC<Props> = memo(() => {
 
   function onSignIn() {
     event({
-      category: "Sign In Warning",
+      category: `Sign In Warning ${signInWarning}`,
       action: "Sign In Clicked",
     });
   }
@@ -30,7 +31,7 @@ export const SignInWarning: FC<Props> = memo(() => {
   function onDismiss() {
     clearSignInWarning();
     event({
-      category: "Sign In Warning",
+      category: `Sign In Warning ${signInWarning}`,
       action: "Dismiss",
     });
   }
@@ -38,7 +39,7 @@ export const SignInWarning: FC<Props> = memo(() => {
   return (
     <>
       <CSGNModal
-        title="Not Signed In"
+        title="Woopsy doopsy!"
         visible={!!signInWarning}
         onDismiss={onDismiss}
       >
@@ -46,8 +47,16 @@ export const SignInWarning: FC<Props> = memo(() => {
           <div className="section">
             I see you&apos;re not signed in <Twemoji emoji="😥" />
             <br />
-            That&apos;s ok. But if you sign in, you can:
+            By signing in you can:
           </div>
+          {signInWarning === "filterpro" && (
+            <div className="section">
+              <span className="check">
+                <FaCheckCircle />
+              </span>{" "}
+              Filter proffesional nades
+            </div>
+          )}
           <div className="section">
             <Twemoji emoji="🤩" /> Favorite nades
           </div>
@@ -57,12 +66,27 @@ export const SignInWarning: FC<Props> = memo(() => {
           <div className="section">
             <Twemoji emoji="🤤" /> Filter nades by your favorite ones
           </div>
+          {signInWarning === "favorite" && (
+            <div className="section">
+              <span className="check">
+                <FaCheckCircle />
+              </span>{" "}
+              Filter proffesional nades
+            </div>
+          )}
+
           <div className="btn" onClick={onSignIn}>
             <SignInnButton />
           </div>
         </div>
       </CSGNModal>
       <style jsx>{`
+        .check {
+          color: #00b8d9;
+          position: relative;
+          top: 2px;
+        }
+
         .sign-in-warning {
           padding: 20px;
         }

@@ -21,7 +21,7 @@ type HideViewSelectorHint = {
   type: "Global/HideViewSelectorHint";
 };
 
-export type SignInWarningType = "favorite";
+export type SignInWarningType = "favorite" | "filterpro";
 
 type SetSignInWarning = {
   type: "Global/SetSignInWarning";

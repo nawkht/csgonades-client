@@ -10,6 +10,7 @@ import {
   IncrementNadeFavoriteCount,
   DecrementNadeFavoriteCount,
 } from "./actions";
+import { assertNever } from "../../utils/Common";
 
 type NadesForMap = { [key: string]: NadeLight[] | undefined };
 
@@ -25,6 +26,7 @@ export type MapStoreState = {
   filterByType?: NadeType;
   filterByCoords?: MapCoordinates;
   filterByTickrate: Tickrate;
+  filterByPro?: boolean;
   sortingMethod: NadeSortingMethod;
   nadeForModal?: NadeLight;
 };
@@ -34,6 +36,7 @@ const initialState: MapStoreState = {
   mapViewOpen: false,
   nadeForMap: {},
   filterByFavorites: false,
+  filterByPro: false,
   filterByTickrate: "any",
   sortingMethod: "hot",
 };
@@ -126,7 +129,13 @@ const MapStoreReducerBase: Reducer<MapStoreState, MapStoreActions> = (
         ...state,
         nadeForModal: undefined,
       };
+    case "MapStore/FilterToggleByPro":
+      return {
+        ...state,
+        filterByPro: !state.filterByPro,
+      };
     default:
+      assertNever(action);
       return state;
   }
 };

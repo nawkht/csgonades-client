@@ -6,6 +6,7 @@ import {
   filterByTickrateSelector,
   filterByFavoritesSelector,
   filterByTypeSelector,
+  filterByProSelector,
 } from "../selectors";
 import {
   addFavoriteToNades,
@@ -13,6 +14,7 @@ import {
   filterByTickrate,
   filterByFavorite,
   containsSimilarNade,
+  filterByPro,
 } from "./helpers";
 
 export const useNadesForMapView = (nades: NadeLight[]): NadeLight[] => {
@@ -20,6 +22,7 @@ export const useNadesForMapView = (nades: NadeLight[]): NadeLight[] => {
   const byFavorites = useSelector(filterByFavoritesSelector);
   const byType = useSelector(filterByTypeSelector);
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
+  const byPro = useSelector(filterByProSelector);
 
   const unqiueNadesForPosition = useMemo(() => {
     const unqiueNades: NadeLight[] = [];
@@ -34,6 +37,7 @@ export const useNadesForMapView = (nades: NadeLight[]): NadeLight[] => {
     filteredNades = filterByType(filteredNades, byType);
     filteredNades = filterByTickrate(filteredNades, byTickrate);
     filteredNades = filterByFavorite(filteredNades, byFavorites);
+    filteredNades = filterByPro(filteredNades, byPro);
 
     for (const nade of filteredNades) {
       if (nade.mapEndCoord && nade.type) {
@@ -43,7 +47,7 @@ export const useNadesForMapView = (nades: NadeLight[]): NadeLight[] => {
       }
     }
     return unqiueNades;
-  }, [nades, byType, byTickrate, byFavorites, favoritedNades]);
+  }, [nades, byType, byTickrate, byFavorites, favoritedNades, byPro]);
 
   return unqiueNadesForPosition;
 };

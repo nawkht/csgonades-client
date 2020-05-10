@@ -18,6 +18,7 @@ import { useAnalytics } from "../utils/Analytics";
 import { MinSizeRender, useWindowSize } from "../common/MinSizeRender";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { useNadeModal } from "../store/MapStore/hooks/useNadeModal";
+import { FilterByProButton } from "./nadefilter/FilterByProButton";
 
 type Props = {
   map: CsgoMap;
@@ -91,6 +92,10 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
               <FavFilterButton vertical />
             </div>
           )}
+
+          <div className="space-below">
+            <FilterByProButton vertical />
+          </div>
 
           <div className="space-below">
             <ResetFilterButton vertical />

@@ -11,6 +11,13 @@ export const useMapStoreDispatch = () => {
   return useDispatch<Dispatch<MapStoreActions>>();
 };
 
+export function filterByPro(nades: NadeLight[], byPro?: boolean) {
+  if (byPro) {
+    return nades.filter((n) => n.isPro);
+  }
+  return nades;
+}
+
 export function filterBySortMethod(
   nades: NadeLight[],
   byMethod: NadeSortingMethod

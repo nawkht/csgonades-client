@@ -11,6 +11,7 @@ import {
   filterByTickrate,
   filterByType,
   filterBySortMethod,
+  filterByPro,
 } from "./helpers";
 import {
   filterByCoordsSelector,
@@ -20,6 +21,7 @@ import {
   filterByMethodSelector,
   currentMapSelector,
   allNadesSelector,
+  filterByProSelector,
 } from "../selectors";
 import { NadeSortingMethod } from "../reducer";
 
@@ -32,6 +34,7 @@ export const useFilterServerSideNades = (ssrNades: NadeLight[]) => {
   const favoritedNades = useSelector(favoritedNadeIdsSelector);
   const bySortingMethod = useSelector(filterByMethodSelector);
   const storeNades = useSelector(allNadesSelector);
+  const byPro = useSelector(filterByProSelector);
 
   return useMemo(() => {
     const actualNades = currentMap
@@ -45,9 +48,11 @@ export const useFilterServerSideNades = (ssrNades: NadeLight[]) => {
       bySortingMethod,
       byCoords,
       byType,
-      byTickrate
+      byTickrate,
+      byPro
     );
   }, [
+    byPro,
     byCoords,
     byTickrate,
     byFavorites,
@@ -67,7 +72,8 @@ export function filterNades(
   byMethod: NadeSortingMethod,
   byCoords?: MapCoordinates,
   byType?: NadeType,
-  byTickrate?: Tickrate
+  byTickrate?: Tickrate,
+  byPro?: boolean
 ) {
   let thenades = [...nades];
   thenades.sort(sortByScore);
@@ -78,6 +84,7 @@ export function filterNades(
   thenades = filterByTickrate(thenades, byTickrate);
   thenades = filterByFavorite(thenades, byFavorites);
   thenades = filterBySortMethod(thenades, byMethod);
+  thenades = filterByPro(thenades, byPro);
   return thenades;
 }
 

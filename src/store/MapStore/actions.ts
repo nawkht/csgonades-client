@@ -71,6 +71,10 @@ type ClearNadeModal = {
   type: "MapStore/ClearNadeModal";
 };
 
+type FilterToggleByPro = {
+  type: "MapStore/FilterToggleByPro";
+};
+
 export type MapStoreActions =
   | SetCurrentMap
   | ReplaceNadesForMap
@@ -85,4 +89,5 @@ export type MapStoreActions =
   | SetSortingMethod
   | SetView
   | SetNadeForModal
-  | ClearNadeModal;
+  | ClearNadeModal
+  | FilterToggleByPro;
