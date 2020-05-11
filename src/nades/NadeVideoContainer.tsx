@@ -93,6 +93,9 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           outline: none;
           padding: 8px;
           color: rgba(255, 255, 255, 0.9);
+          text-transform: uppercase;
+          font-size: 12px;
+          font-weight: 500;
         }
 
         .tab-btn:first-child {
