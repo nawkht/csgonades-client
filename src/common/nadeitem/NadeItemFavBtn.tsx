@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useIsFavoriteInProgress } from "../../store/FavoriteStore/hooks/useIsFavoriteInProgress";
 import { useIsFavorited } from "../../store/FavoriteStore/hooks/useIsFavorited";
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
+  const [render, setRender] = useState(false);
   const { setSignInWarning } = useSignInWarning();
   const { event } = useAnalytics();
   const isSignedIn = useIsSignedIn();
@@ -25,6 +26,13 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
   const addFavorite = useAddFavorite();
   const unFavorite = useUnfavorite();
   const { incrementNadeFavCount, decrementNadeFavCount } = useMapFavCount();
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setRender(true);
+    }, 500);
+    return () => clearTimeout(delay);
+  }, []);
 
   function onFavorite(e: any) {
     e.stopPropagation();
@@ -58,6 +66,10 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
 
   const favoriteText = isFavorite ? "Unfavorite" : "Favorite";
   const iconColor = isFavorite ? "#bbb" : "rgb(250, 200, 0)";
+
+  if (!render) {
+    return null;
+  }
 
   return (
     <>
