@@ -42,6 +42,7 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
       </div>
       <style jsx>{`
         .ph {
+          pointer-events: auto;
           display: flex;
           justify-content: space-around;
           height: ${height}px;
