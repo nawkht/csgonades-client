@@ -47,8 +47,8 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
           height: ${height}px;
           background: rgba(255, 255, 255, 0.15) url("/noph.svg");
           background-repeat: no-repeat;
-          background-position: 10px 10px;
-          background-size: 20px;
+          background-position: 50% 50%;
+          background-size: 18px;
         }
 
         .top {
