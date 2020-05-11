@@ -45,11 +45,10 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
           display: flex;
           justify-content: space-around;
           height: ${height}px;
-          background: rgba(255, 255, 255, 0.1);
-        }
-
-        .ph:empty {
-          background: pink;
+          background: rgba(255, 255, 255, 0.15) url("/noph.svg");
+          background-repeat: no-repeat;
+          background-position: 10px 10px;
+          background-size: 20px;
         }
 
         .top {
