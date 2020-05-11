@@ -7,7 +7,8 @@ type Props<T> = {
   renderItem: (item: T) => JSX.Element;
   keyExtractor: (item: T) => string;
   topRightComp?: JSX.Element;
-  secondRowRightComp?: JSX.Element;
+  firstAd?: JSX.Element;
+  secondAd?: JSX.Element;
 };
 
 function ListBase<T>(props: Props<T>) {
@@ -24,7 +25,7 @@ function ListBase<T>(props: Props<T>) {
 }
 
 const List: FC<Props<any>> = memo(
-  ({ data, keyExtractor, renderItem, topRightComp, secondRowRightComp }) => {
+  ({ data, keyExtractor, renderItem, topRightComp, firstAd, secondAd }) => {
     const { colors } = useTheme();
     const numItems = data.length;
     const isEmpty = numItems === 0;
@@ -52,8 +53,10 @@ const List: FC<Props<any>> = memo(
             <div className="top-right-comp">{topRightComp}</div>
           )}
 
-          {!!secondRowRightComp && displayFirstAd && (
-            <div className="second-row-comp">{secondRowRightComp}</div>
+          {!!firstAd && <div className="first-ph">{firstAd}</div>}
+
+          {!!secondAd && displayFirstAd && (
+            <div className="second-row-comp">{secondAd}</div>
           )}
         </div>
         <style jsx>{`
@@ -73,41 +76,47 @@ const List: FC<Props<any>> = memo(
             grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
           }
 
+          .first-ph {
+            order: 1;
+          }
+
           .top-right-comp {
-            grid-column-start: 3;
-            grid-column-end: 4;
-            grid-row-start: 2;
-            grid-row-end: 4;
             background: ${colors.DP02};
             border-radius: 5px;
             overflow: hidden;
-            border: 1px solid ${colors.BORDER};
+            align-self: start;
+            order: 6;
           }
 
           .second-row-comp {
             order: 13;
           }
 
-          @media only screen and (max-width: 975px) {
+          @media only screen and (max-width: 1020px) {
+            .first-ph {
+              order: 0;
+            }
+
             .top-right-comp {
-              grid-column-start: 2;
-              grid-column-end: 3;
-              grid-row-start: 2;
-              grid-row-end: 4;
+              order: 3;
             }
 
             .second-row-comp {
-              order: 13;
+              order: 10;
             }
           }
 
           @media only screen and (max-width: 600px) {
             .top-right-comp {
-              display: none;
+              order: -1;
+            }
+
+            .first-ph {
+              order: 3;
             }
 
             .second-row-comp {
-              order: 2;
+              order: 12;
             }
           }
         `}</style>

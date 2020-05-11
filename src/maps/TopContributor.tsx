@@ -3,6 +3,7 @@ import { UserLight } from "../models/User";
 import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeLight } from "../models/Nade/Nade";
 import { Twemoji } from "../common/Twemoji";
+import { DiscordJoinAction } from "../frontpage/FrontpageActions";
 
 interface UserContribution extends UserLight {
   nadeCount: number;
@@ -63,7 +64,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
   return (
     <>
       <div className="cont-list">
-        <div className="label">TOP CONTRIBUTORS</div>
+        <div className="label">TOP NADE CONTRIBUTORS</div>
         {contributors.gold && (
           <>
             <div className="gold">
@@ -96,9 +97,12 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
             </div>
           </>
         )}
-        <div className="cont-desc">Based on popularity of users nades.</div>
+        <DiscordJoinAction />
       </div>
       <style jsx>{`
+        .cont-list {
+        }
+
         .cont-desc {
           font-size: 12px;
           color: #bbb;

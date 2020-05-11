@@ -161,7 +161,7 @@ export const DiscordJoinAction = () => {
           target="_blank"
           rel="noopener noreferrer nofollow"
         >
-          <div className="action discord">
+          <div className="action">
             <div className="discord-msg">
               Join us on <b>Discord</b>
             </div>
@@ -181,31 +181,25 @@ export const DiscordJoinAction = () => {
           display: flex;
           padding: 10px 20px;
           color: white;
-          transition: transform 0.2s;
           justify-content: space-between;
+          align-items: center;
+          background: #7289da;
         }
 
         .action:hover {
+          background: #6276bd;
         }
 
         .discord-msg {
-          margin-bottom: 10px;
           font-size: 18px;
-          line-height: 28px;
-        }
-
-        .sub-msg {
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.7);
         }
 
         .discord {
-          background: #7289da;
           position: relative;
         }
 
         .discord-logo {
-          font-size: 50px;
+          font-size: 40px;
           opacity: 0.2;
           color: #fff;
         }
