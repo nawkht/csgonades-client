@@ -26,8 +26,11 @@ export const GfycatIframe: FC<Props> = ({ gfyId }) => {
 
       <style jsx>{`
         .gfycat-super-wrap {
-          background: #111;
           overflow: hidden;
+          background: #121212 url("/loading.gif");
+          background-position: 50% 46.5%;
+          background-repeat: no-repeat;
+          background-size: 20px;
         }
 
         .gfycat-wrap {

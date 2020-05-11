@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, memo } from "react";
+import { FC, useState, useEffect, memo, useRef } from "react";
 import { NadeApi } from "../api/NadeApi";
 import { Nade } from "../models/Nade/Nade";
 import { useNadeModal } from "../store/MapStore/hooks/useNadeModal";
@@ -10,6 +10,7 @@ import { useAnalytics } from "../utils/Analytics";
 import { AdUnit } from "../common/adunits/AdUnit";
 
 export const NadeModal: FC = memo(() => {
+  const modalRef = useRef<HTMLDivElement>(null);
   const [hasOpened, setHasOpened] = useState(false);
   const { pageView } = useAnalytics();
   const { colors } = useTheme();
@@ -30,6 +31,9 @@ export const NadeModal: FC = memo(() => {
           setNade(result.value);
         }
       })();
+      if (modalRef.current) {
+        modalRef.current.scrollTop = 0;
+      }
     } else {
       setNade(null);
     }
@@ -49,6 +53,7 @@ export const NadeModal: FC = memo(() => {
   return (
     <>
       <div
+        ref={modalRef}
         className={!!nadeForModal ? "nade-modal visible" : "nade-modal"}
         onClick={onDismiss}
       >
@@ -67,7 +72,7 @@ export const NadeModal: FC = memo(() => {
           </div>
 
           <div id="center">
-            {nadeForModal && (
+            {!!nadeForModal && (
               <div id="nade-page-content" onClick={(e) => e.stopPropagation()}>
                 <NadeModalPage nadeLight={nadeForModal} nade={nade} />
               </div>

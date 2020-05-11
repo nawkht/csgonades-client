@@ -49,7 +49,7 @@ export const NadeModalPage: FC<Props> = memo(({ nade, nadeLight }) => {
 
   return (
     <>
-      {nade && (
+      {!!nade && (
         <SEO
           key={`seo-${nade.id}`}
           title={seoTitle}
@@ -86,7 +86,7 @@ export const NadeModalPage: FC<Props> = memo(({ nade, nadeLight }) => {
             />
           </div>
           <div id="nade-info">
-            {nade && (
+            {!!nade && (
               <div id="nade-info-container">
                 <NadeInfoContainer nade={nade} />
               </div>

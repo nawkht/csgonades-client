@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Tickrate } from "../../models/Nade/NadeTickrate";
 
 type Props = {
   tickrate?: Tickrate;
 };
 
-export const TickWarning: FC<Props> = ({ tickrate }) => {
+export const TickWarning: FC<Props> = memo(({ tickrate }) => {
   if (!tickrate || tickrate !== "tick128") {
     return null;
   }
@@ -46,4 +46,4 @@ export const TickWarning: FC<Props> = ({ tickrate }) => {
       `}</style>
     </>
   );
-};
+});
