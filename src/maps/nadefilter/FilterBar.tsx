@@ -110,10 +110,10 @@ export const FilterBar: FC<Props> = ({}) => {
           #filters {
             margin-bottom: ${Dimensions.GUTTER_SIZE}px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             grid-template-areas:
-              "typefilter tickfilter favfilter "
-              "sortfilter sortfilter  resetfilter";
+              "typefilter filterpro favfilter resetfilter"
+              "sortfilter sortfilter tickfilter tickfilter";
             grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
             grid-row-gap: ${Dimensions.GUTTER_SIZE}px;
             height: auto;

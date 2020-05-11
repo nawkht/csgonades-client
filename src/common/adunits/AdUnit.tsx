@@ -1,5 +1,6 @@
 import { FC, memo, useEffect } from "react";
 import { IS_PROD } from "../../constants/Constants";
+import { isMobileOnly } from "react-device-detect";
 
 type AdType =
   | "300x250"
@@ -25,15 +26,24 @@ export const AdUnit: FC<Props> = memo(({ tagType, modalTop }) => {
   const className = modalTop ? "ph top" : "ph";
 
   const adData: AdData = getAdData(tagType);
+
   useEffect(() => {
+    if (isMobileOnly && tagType === "728x90") {
+      return;
+    }
+
     if (!ADS_ENABLED || !IS_PROD) {
       return;
     }
 
     loadAdByType(adData);
-  }, [adData]);
+  }, [tagType, adData]);
 
   const height = adData.size.split("x")[1];
+
+  if (isMobileOnly && tagType === "728x90") {
+    return null;
+  }
 
   return (
     <>

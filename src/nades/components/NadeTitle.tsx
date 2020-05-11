@@ -162,7 +162,7 @@ export const NadeTitle: FC<Props> = memo(
 
           @media only screen and (max-width: 600px) {
             .main-title {
-              font-size: 18px;
+              font-size: 20px;
             }
 
             .sub-title {

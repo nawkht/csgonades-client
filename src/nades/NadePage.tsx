@@ -240,13 +240,13 @@ export const NadePage: FC<Props> = memo(({ nade, inModal }) => {
           #nade-page-grid {
             grid-template-columns: 1fr 200px 1fr;
             grid-template-areas:
+              "actions actions actions"
               "title title title"
               "warning warning warning"
               "video video video"
               "meta meta meta"
               "ad ad ad"
               "info info info"
-              "actions actions actions"
               "comments comments comments"
               "misc misc misc";
           }
