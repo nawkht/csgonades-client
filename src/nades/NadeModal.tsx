@@ -79,8 +79,6 @@ export const NadeModal: FC = memo(() => {
         .ph-stick {
           position: sticky;
           top: 0;
-          width: 160px;
-          height: 600px;
         }
 
         .nade-modal {
@@ -107,7 +105,8 @@ export const NadeModal: FC = memo(() => {
 
         #nade-modal-content {
           display: grid;
-          grid-template-columns: 190px 1fr 190px;
+          grid-template-columns: 160px 1fr 160px;
+          grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
           grid-template-areas:
             "ph md close"
             "ph md close";
