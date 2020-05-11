@@ -28,10 +28,13 @@ export const MiniGfycatIframe: FC<Props> = ({ gfyId }) => {
 
       <style jsx>{`
         .gfycat-super-wrap {
-          background: #121212;
           overflow: hidden;
           cursor: pointer;
           pointer-events: none;
+          background: #121212 url("/loading.gif");
+          background-position: 50% 40%;
+          background-repeat: no-repeat;
+          background-size: 20px;
         }
 
         .gfycat-wrap {
@@ -40,7 +43,7 @@ export const MiniGfycatIframe: FC<Props> = ({ gfyId }) => {
           background: ${colors.DP01};
           overflow: hidden;
           opacity: ${loaded ? 1 : 0};
-          transition: opacity 0.2s;
+          transition: opacity 0.3s;
         }
 
         .gfycat-iframe {

@@ -40,7 +40,7 @@ export const GfycatIframe: FC<Props> = ({ gfyId }) => {
           overflow: hidden;
           transform: scale(1.002);
           opacity: ${loaded ? 1 : 0};
-          transition: opacity 0.2s;
+          transition: opacity 0.5s;
         }
 
         .gfycat-iframe {
