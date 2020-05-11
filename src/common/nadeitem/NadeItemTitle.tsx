@@ -45,6 +45,11 @@ export const NadeItemTitle: FC<Props> = ({
   return (
     <>
       <div className={titleClassName}>
+        <h3 className="title-text">
+          <span className="main-title">{generatedTitle}</span>
+          <span className="sub-title">{subTitle}</span>
+        </h3>
+
         {iconUrl && (
           <img
             className="nade-type-icon"
@@ -52,11 +57,6 @@ export const NadeItemTitle: FC<Props> = ({
             alt={`nade icon ${type}`}
           />
         )}
-
-        <div className="title-text">
-          <span className="main-title">{generatedTitle}</span>
-          <span className="sub-title">{subTitle}</span>
-        </div>
       </div>
       <style jsx>{`
         .title {
@@ -79,6 +79,8 @@ export const NadeItemTitle: FC<Props> = ({
           font-size: 17px;
           display: flex;
           flex-direction: column;
+          padding: 0;
+          margin: 0;
         }
 
         .main-title {
