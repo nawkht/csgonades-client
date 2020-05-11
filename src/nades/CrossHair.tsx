@@ -5,22 +5,15 @@ type Props = {};
 export const CrossHair: FC<Props> = ({}) => {
   return (
     <>
-      <svg viewBox="0 0 600 600">
+      <svg width={43} height={44} viewBox="0 0 43 44">
         <style>
-          {
-            ".prefix__st0{fill:#7ddd00;stroke:#000;stroke-width:.25;stroke-miterlimit:10}.prefix__st1{opacity:.4;fill:#0f6ebc}"
-          }
+          {".prefix__st0{fill:#fff;stroke:#000;stroke-miterlimit:10}"}
         </style>
         <path
           className="prefix__st0"
-          d="M299 303h2v9h-2zM312 299v2h-9v-2zM297 299v2h-9v-2zM299 288h2v9h-2z"
-        />
-        <path
-          className="prefix__st1"
-          d="M299.5 316h1v284h-1zM299.5 0h1v284h-1zM316 300.5v-1h284v1zM0 300.5v-1h284v1z"
+          d="M19.5 27.5h4v16h-4zM19.5.5h4v16h-4zM16.5 20v4H.5v-4zM42.5 20v4h-16v-4z"
         />
       </svg>
-      <style jsx>{``}</style>
     </>
   );
 };

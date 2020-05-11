@@ -99,12 +99,6 @@ export const NadeModalPage: FC<Props> = memo(({ nade, nadeLight }) => {
         </div>
       </div>
       <style jsx>{`
-        #nade-page-main {
-        }
-
-        #nade-modal-page {
-        }
-
         #nade-info {
           display: grid;
           grid-template-columns: 1fr 160px;
