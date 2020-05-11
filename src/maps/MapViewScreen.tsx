@@ -15,7 +15,7 @@ import { FavFilterButton } from "./nadefilter/FavFilterButton";
 import { useIsSignedIn } from "../store/AuthStore/AuthHooks";
 import { ResetFilterButton } from "./nadefilter/ResetFilterButton";
 import { useAnalytics } from "../utils/Analytics";
-import { MinSizeRender, useWindowSize } from "../common/MinSizeRender";
+import { useWindowSize } from "../common/MinSizeRender";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { useNadeModal } from "../store/MapStore/hooks/useNadeModal";
 import { FilterByProButton } from "./nadefilter/FilterByProButton";
@@ -74,6 +74,10 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
 
   return (
     <>
+      <div className="ph">
+        <AdUnit tagType="728x90" />
+      </div>
+
       <div id="mapview-wrap">
         <MapViewSuggested
           onDismiss={() => setSuggestedNades(null)}
@@ -123,33 +127,12 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
               ))}
           </div>
         </div>
-        {false && (
-          <MinSizeRender minSize={1400}>
-            <div id="fixed-right">
-              <div className="ph">
-                <AdUnit tagType="160x600" />
-              </div>
-            </div>
-          </MinSizeRender>
-        )}
       </div>
 
       <style jsx>{`
         .ph {
-          width: 160px;
-        }
-
-        #fixed-right {
-          position: fixed;
-          top: ${Dimensions.HEADER_HEIGHT}px;
-          right: ${Dimensions.GUTTER_SIZE / 2}px;
-          width: 160px;
-          height: calc(100vh - ${Dimensions.HEADER_HEIGHT}px);
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          margin-left: ${Dimensions.GUTTER_SIZE}px;
-          z-index: 500;
+          margin-bottom: 15px;
+          margin-top: -15px;
         }
 
         #mapview-wrap {
