@@ -190,6 +190,7 @@ const reducer: Reducer<CreateNadeState, Actions> = (state, action) => {
       return {
         ...state,
         lineUpImageBase64: action.img,
+        showLineUpAdder: false,
       };
     default:
       assertNever(action);
