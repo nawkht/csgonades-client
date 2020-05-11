@@ -118,7 +118,6 @@ export const NadeModal: FC = memo(() => {
 
         #ph {
           grid-area: ph;
-          pointer-events: none;
         }
 
         #close-wrap {
