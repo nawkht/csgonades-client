@@ -53,27 +53,29 @@ export const SortingMethodSelector: FC<Props> = () => {
           </HelpTip>
         </div>
         <div className="sorthing-method-selector">
-          <button
-            className={hotClassName}
-            onClick={() => filterBySortingMethod("hot")}
-          >
-            <FaRocket />
-            <span>HOT</span>
-          </button>
-          <button
-            className={newClassName}
-            onClick={() => filterBySortingMethod("new")}
-          >
-            <FaSith />
-            <span>NEW</span>
-          </button>
-          <button
-            className={topClassName}
-            onClick={() => filterBySortingMethod("top")}
-          >
-            <FaLongArrowAltUp />
-            <span>TOP</span>
-          </button>
+          <div className="sorting-btns">
+            <button
+              className={hotClassName}
+              onClick={() => filterBySortingMethod("hot")}
+            >
+              <FaRocket />
+              <span>HOT</span>
+            </button>
+            <button
+              className={newClassName}
+              onClick={() => filterBySortingMethod("new")}
+            >
+              <FaSith />
+              <span>NEW</span>
+            </button>
+            <button
+              className={topClassName}
+              onClick={() => filterBySortingMethod("top")}
+            >
+              <FaLongArrowAltUp />
+              <span>TOP</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -90,7 +92,11 @@ export const SortingMethodSelector: FC<Props> = () => {
         .sorthing-method-selector {
           border-radius: 5px;
           overflow: hidden;
+        }
+
+        .sorting-btns {
           display: inline-flex;
+          margin-right: -1px;
         }
 
         .method-selector {
@@ -106,7 +112,7 @@ export const SortingMethodSelector: FC<Props> = () => {
           transition: all 0.2s;
           color: ${colors.filterColor};
           height: ${Dimensions.BUTTON_HEIGHT}px;
-          border-right: 1px solid rgba(0, 0, 0, 0.3);
+          border-right: 1px solid rgba(0, 0, 0, 0.5);
         }
 
         .method-selector:last-child {

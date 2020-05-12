@@ -135,7 +135,8 @@ export const MapNav: FC<Props> = ({}) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           overflow: hidden;
-          border: 1px solid rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(0, 0, 0, 0.5);
+          border-top: 0;
         }
 
         #map-nav {
@@ -159,7 +160,7 @@ export const MapNav: FC<Props> = ({}) => {
 
         .map-link {
           display: flex;
-          border-right: 1px solid rgba(0, 0, 0, 0.2);
+          border-right: 1px solid rgba(0, 0, 0, 0.5);
           padding: 10px 15px;
           color: white;
           font-size: 14px;

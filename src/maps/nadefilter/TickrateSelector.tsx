@@ -73,6 +73,7 @@ export const TickrateSelector: FC<Props> = ({ vertical }) => {
         .filter-btns {
           display: flex;
           flex-direction: ${vertical ? "column" : "row"};
+          margin-right: -1px;
         }
 
         .label {
@@ -103,7 +104,7 @@ export const TickrateSelector: FC<Props> = ({ vertical }) => {
           font-weight: 300;
           background: ${colors.filterBg};
           color: ${colors.filterColor};
-          border-right: 1px solid rgba(0, 0, 0, 0.3);
+          border-right: 1px solid rgba(0, 0, 0, 0.5);
         }
 
         .filter-btn:hover {

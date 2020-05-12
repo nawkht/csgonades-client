@@ -45,6 +45,7 @@ export const TypeFilter: FC<Props> = ({ vertical }) => {
         .filter-btns {
           display: flex;
           flex-direction: ${vertical ? "column" : "row"};
+          margin-right: -1px;
         }
 
         .label {
