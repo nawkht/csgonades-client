@@ -5,6 +5,7 @@ import { NadeLight } from "../models/Nade/Nade";
 import { Twemoji } from "../common/Twemoji";
 import { DiscordJoinAction } from "../frontpage/FrontpageActions";
 import { pluralize } from "../utils/Common";
+import Link from "next/link";
 
 interface UserContribution extends UserLight {
   nadeCount: number;
@@ -183,15 +184,18 @@ const TopContributor: FC<Props> = ({ user }) => {
   return (
     <>
       <div className="contributor-wrap">
-        <div className="contributor">
-          <img src={user.avatar} />
-          <span className="nickname">{user.nickname}</span>
-        </div>
+        <Link href={"/users/[user]"} as={`/users/${user.steamId}`}>
+          <a className="contributor">
+            <img src={user.avatar} />
+            <span className="nickname">{user.nickname}</span>
+          </a>
+        </Link>
         <div className="nade-count">
           {pluralize(user.totalScore, "favorite")} on{" "}
           {pluralize(user.nadeCount, "nade")}
         </div>
       </div>
+
       <style jsx>{`
         .contributor-wrap {
           display: flex;
@@ -207,10 +211,14 @@ const TopContributor: FC<Props> = ({ user }) => {
         .contributor {
           display: flex;
           align-items: center;
-          background: ${colors.DP00};
+          background: ${colors.DP01};
           color: ${colors.TEXT};
           overflow: hidden;
           border-radius: 10px;
+        }
+
+        .contributor:hover {
+          background: ${colors.DP00};
         }
 
         .contributor img {

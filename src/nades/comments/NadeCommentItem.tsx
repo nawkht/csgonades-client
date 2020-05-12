@@ -8,6 +8,7 @@ import { CsgnTextArea } from "../../common/inputs/CsgnTextArea";
 import { CsgnSaveButton } from "../../common/inputs/CsgnSaveButton";
 import { useGetOrUpdateToken } from "../../store/AuthStore/hooks/useGetToken";
 import { RenderMarkdown } from "../components/RenderMarkdown";
+import Link from "next/link";
 
 type Props = {
   nadeComment: NadeComment;
@@ -69,10 +70,12 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
     <>
       <div className="nade-comment-item">
         <div className="nade-comment-header">
-          <div className="nade-comment-user">
-            <img src={nadeComment.avatar} />
-            {nadeComment.nickname}
-          </div>
+          <Link href="/users/[user]" as={`/users/${nadeComment.steamId}`}>
+            <a className="nade-comment-user">
+              <img src={nadeComment.avatar} />
+              {nadeComment.nickname}
+            </a>
+          </Link>
           <div className="nade-comment-date">
             {prettyDateTime(nadeComment.createdAt)}
           </div>
@@ -170,6 +173,7 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
         .nade-comment-user {
           display: flex;
           align-items: center;
+          color: ${colors.TEXT};
         }
 
         .nade-comment-user img {
