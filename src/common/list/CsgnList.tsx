@@ -84,8 +84,9 @@ const List: FC<Props<any>> = memo(
             background: ${colors.DP02};
             border-radius: 5px;
             overflow: hidden;
-            align-self: start;
-            order: 6;
+            align-self: center;
+
+            order: 5;
           }
 
           .second-row-comp {
