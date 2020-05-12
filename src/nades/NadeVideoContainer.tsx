@@ -11,6 +11,8 @@ type Props = {
 
 type Tabs = "video" | "lineup";
 
+const CROSSHAIR_SIZE = 7;
+
 export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
   const { event } = useAnalytics();
   const { colors } = useTheme();
@@ -64,6 +66,15 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
         {hasLineUp && currentTab === "lineup" && (
           <div className={"lineup-tab"}>
             <div className="line-up-img">
+              {false && (
+                <>
+                  <div className="vertical-line"></div>
+                  <div className="vertical-line2"></div>
+                  <div className="horizontal-line"></div>
+                  <div className="horizontal-line2"></div>
+                </>
+              )}
+
               <div className="crosshair">
                 <CrossHair />
               </div>
@@ -175,23 +186,50 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
         .crosshair {
           position: absolute;
           top: 0;
-          right: 0;
-          bottom: 0;
+          right: 0.5px;
+          bottom: 1px;
           left: 0;
-          opacity: 0.85;
+          opacity: 0.55;
           display: flex;
           justify-content: center;
           align-items: center;
           transform: scale(0.5);
         }
 
-        @keyframes example {
-          from {
-            background-color: red;
-          }
-          to {
-            background-color: yellow;
-          }
+        .vertical-line,
+        .vertical-line2 {
+          position: absolute;
+          height: 2px;
+          width: ${CROSSHAIR_SIZE}px;
+          background: rgba(255, 255, 255, 0.8);
+          top: calc(50% - 1px);
+          left: calc(50% - ${CROSSHAIR_SIZE + 4}px);
+          outline: 1px solid rgba(0, 0, 0, 0.8);
+        }
+
+        .vertical-line2 {
+          right: calc(50% - ${CROSSHAIR_SIZE + 4}px);
+          left: auto;
+        }
+
+        .horizontal-line {
+          position: absolute;
+          width: 2px;
+          height: ${CROSSHAIR_SIZE}px;
+          background: rgba(255, 255, 255, 0.8);
+          top: calc(50% - ${CROSSHAIR_SIZE + 4}px);
+          left: calc(50% - 1px);
+          outline: 1px solid rgba(0, 0, 0, 0.8);
+        }
+
+        .horizontal-line2 {
+          position: absolute;
+          width: 2px;
+          height: ${CROSSHAIR_SIZE}px;
+          background: rgba(255, 255, 255, 0.8);
+          bottom: calc(50% - ${CROSSHAIR_SIZE + 4}px);
+          left: calc(50% - 1px);
+          outline: 1px solid rgba(0, 0, 0, 0.8);
         }
       `}</style>
     </>
