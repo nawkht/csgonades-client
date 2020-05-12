@@ -66,6 +66,10 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
     setDeleteConfirmVisible(false);
   }
 
+  console.log({
+    nadeComment,
+  });
+
   return (
     <>
       <div className="nade-comment-item">
@@ -74,6 +78,9 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
             <a className="nade-comment-user">
               <img src={nadeComment.avatar} />
               {nadeComment.nickname}
+              {nadeComment.steamId === "76561198026064832" && (
+                <span className="admin-label">ADMIN</span>
+              )}
             </a>
           </Link>
           <div className="nade-comment-date">
@@ -124,6 +131,20 @@ export const NadeCommentItem: FC<Props> = ({ nadeComment, refetchComment }) => {
         </div>
       </CSGNModal>
       <style jsx>{`
+        .admin-label {
+          font-size: 9px;
+          border-radius: 5px;
+          background: #3c9e72;
+          color: white;
+          height: 18px;
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+          padding-left: 3px;
+          padding-right: 3px;
+          font-weight: 500;
+        }
+
         .comment-editor {
           min-width: 400px;
         }
