@@ -79,7 +79,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           position: absolute;
           top: 0px;
           left: calc(50% - 100px);
-          z-index: 999;
+          z-index: 100;
           display: flex;
           justify-content: center;
         }
