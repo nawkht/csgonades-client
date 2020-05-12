@@ -5,7 +5,7 @@ type Props = {};
 export const CrossHair: FC<Props> = ({}) => {
   return (
     <>
-      <svg width={44} height={44} viewBox="0 0 43 44">
+      <svg width={43} height={44} viewBox="0 0 43 44">
         <style>
           {".prefix__st0{fill:#fff;stroke:#000;stroke-miterlimit:10}"}
         </style>

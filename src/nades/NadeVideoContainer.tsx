@@ -185,10 +185,10 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
 
         .crosshair {
           position: absolute;
-          top: 0;
-          right: 0.5px;
-          bottom: 1px;
-          left: 0;
+          top: 1px;
+          right: 0px;
+          bottom: 0px;
+          left: 1px;
           opacity: 0.55;
           display: flex;
           justify-content: center;
