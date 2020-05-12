@@ -9,12 +9,8 @@ export const useFilterByType = () => {
   const dispatch = useMapStoreDispatch();
 
   const filterByType = useCallback(
-    (nadeType: NadeType) => {
-      dispatch({
-        type: "MapStore/FilterByType",
-        payload: nadeType,
-      });
-    },
+    (nadeType: NadeType) =>
+      dispatch({ type: "MapStore/FilterByType", payload: nadeType }),
     [dispatch]
   );
 

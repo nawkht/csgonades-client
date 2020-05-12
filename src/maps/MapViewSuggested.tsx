@@ -49,7 +49,7 @@ export const MapViewSuggested: FC<Props> = ({ nades, onDismiss }) => {
           left: 0;
           border-radius: 5px;
           background: rgba(0, 0, 0, 0.9);
-          z-index: 900;
+          z-index: 800;
           animation-name: slide-down;
           animation-duration: 0.25s;
           animation-fill-mode: forwards;

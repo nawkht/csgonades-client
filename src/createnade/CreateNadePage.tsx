@@ -36,6 +36,7 @@ export const CreateNadePage: FC<Props> = ({}) => {
   async function onSubmit() {
     dispatch({ type: "CreateNade/SetLoading" });
     const validState = validateState(state);
+
     if (!validState) {
       return dispatch({ type: "CreateNade/SetNotLoading" });
     }
@@ -52,7 +53,6 @@ export const CreateNadePage: FC<Props> = ({}) => {
         durationSeconds: 15,
       });
     }
-
     const res = await NadeApi.save(body, token);
 
     if (res.isErr()) {

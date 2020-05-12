@@ -17,11 +17,10 @@ export const useFilterReset = () => {
   const byPro = useSelector(filterByProSelector);
   const dispatch = useMapStoreDispatch();
 
-  const resetFilter = useCallback(() => {
-    dispatch({
-      type: "MapStore/FilterReset",
-    });
-  }, [dispatch]);
+  const resetFilter = useCallback(
+    () => dispatch({ type: "MapStore/FilterReset" }),
+    [dispatch]
+  );
 
   const canReset = useMemo(() => {
     if (byCoords) {

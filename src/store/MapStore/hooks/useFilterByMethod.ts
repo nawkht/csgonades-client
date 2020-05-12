@@ -3,26 +3,18 @@ import { useSelector } from "react-redux";
 import { filterByMethodSelector } from "../selectors";
 import { useMapStoreDispatch } from "./helpers";
 import { NadeSortingMethod } from "../reducer";
-import { useAnalytics } from "../../../utils/Analytics";
 
 export const useFilterByMethod = () => {
   const byMethod = useSelector(filterByMethodSelector);
   const dispatch = useMapStoreDispatch();
-  const { event } = useAnalytics();
 
   const filterBySortingMethod = useCallback(
-    (sortingMethod: NadeSortingMethod) => {
+    (sortingMethod: NadeSortingMethod) =>
       dispatch({
         type: "MapStore/SetSortingMethod",
         method: sortingMethod,
-      });
-      event({
-        category: "MapStore",
-        action: "MapStore/SetSortingMethod",
-        label: sortingMethod,
-      });
-    },
-    [dispatch, event]
+      }),
+    [dispatch]
   );
 
   return {

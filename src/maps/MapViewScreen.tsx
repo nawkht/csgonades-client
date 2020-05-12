@@ -14,7 +14,6 @@ import { TickrateSelector } from "./nadefilter/TickrateSelector";
 import { FavFilterButton } from "./nadefilter/FavFilterButton";
 import { useIsSignedIn } from "../store/AuthStore/AuthHooks";
 import { ResetFilterButton } from "./nadefilter/ResetFilterButton";
-import { useAnalytics } from "../utils/Analytics";
 import { useWindowSize } from "../common/MinSizeRender";
 import { AdUnit } from "../common/adunits/AdUnit";
 import { useNadeModal } from "../store/MapStore/hooks/useNadeModal";
@@ -28,7 +27,6 @@ type Props = {
 export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
   const { setNadeForModal } = useNadeModal();
   const windowSize = useWindowSize();
-  const { event } = useAnalytics();
   const filteredNades = useFilterServerSideNades(allNades);
   const { mapView } = useSetMapView();
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -62,10 +60,6 @@ export const MapViewScreen: FC<Props> = ({ allNades, map }) => {
     }
 
     setSuggestedNades(suggested);
-    event({
-      category: "MapView",
-      action: "Showing Suggested Nades",
-    });
   }
 
   if (mapView === "list") {

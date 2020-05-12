@@ -1,21 +1,34 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 
 type Props = {
   onSubmit: () => void;
   disabled?: boolean;
 };
 
-export const SumbitBtn: FC<Props> = ({ disabled, onSubmit }) => {
+export const SumbitBtn: FC<Props> = ({ onSubmit, disabled }) => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  function onSubmitClik() {
+    if (buttonRef.current) {
+      buttonRef.current.focus();
+      onSubmit();
+    }
+  }
+
   return (
     <>
-      <button onClick={onSubmit} disabled={disabled} className="sumbit-btn">
+      <button
+        ref={buttonRef}
+        onClick={onSubmitClik}
+        disabled={disabled}
+        className="sumbit-btn"
+      >
         SUBMIT
       </button>
       <style jsx>{`
         .sumbit-btn {
           width: 100%;
           background: #63b04a;
-
           color: white;
           border: none;
           outline: none;

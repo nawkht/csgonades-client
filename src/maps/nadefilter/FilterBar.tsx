@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { SortingMethodSelector } from "../SortingMethodSelector";
 import { TypeFilter } from "./TypeFilter";
 import { TickrateSelector } from "./TickrateSelector";
@@ -12,7 +12,7 @@ import { FilterByProButton } from "./FilterByProButton";
 
 type Props = {};
 
-export const FilterBar: FC<Props> = ({}) => {
+export const FilterBar: FC<Props> = memo(({}) => {
   const isSignedIn = useIsSignedIn();
   const { mapView } = useSetMapView();
 
@@ -122,4 +122,4 @@ export const FilterBar: FC<Props> = ({}) => {
       `}</style>
     </>
   );
-};
+});

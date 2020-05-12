@@ -7,9 +7,10 @@ export const useFilterByFavorites = () => {
   const byFavorites = useSelector(filterByFavoritesSelector);
   const dispatch = useMapStoreDispatch();
 
-  const filterByFavorites = useCallback(() => {
+  const toggleFavFilter = () =>
     dispatch({ type: "MapStore/FilterToggleFavorites" });
-  }, [dispatch]);
+
+  const filterByFavorites = useCallback(toggleFavFilter, [dispatch]);
 
   return {
     filterByFavorites,
