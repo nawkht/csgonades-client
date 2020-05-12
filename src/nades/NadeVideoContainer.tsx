@@ -138,7 +138,8 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           background-size: contain;
           background-position: center;
           transform: scale(1);
-          transition: transform 0.2s;
+          transition: all 0.2s;
+          filter: brightness(120%);
         }
 
         .lineup-tab:hover .line-up-img {
