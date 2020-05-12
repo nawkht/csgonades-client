@@ -58,11 +58,9 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           </div>
         )}
 
-        {currentTab === "video" && (
-          <div className="video-tab">
-            <GfycatIframe gfyId={gfyId} />
-          </div>
-        )}
+        <div className="video-tab">
+          <GfycatIframe gfyId={gfyId} />
+        </div>
         {hasLineUp && currentTab === "lineup" && (
           <div className={"lineup-tab"}>
             <div className="line-up-img">
@@ -118,8 +116,16 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
         }
 
         .lineup-tab {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
           overflow: hidden;
-          padding-bottom: calc(56.25% + 44px);
+          padding-bottom: calc(56.25%);
+          background: #121212 url("/loading.gif");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 20px;
         }
 
         .line-up-img {
@@ -129,14 +135,14 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           right: 0;
           bottom: 0;
           background: url(${lineUpUrl});
-          background-size: fill;
+          background-size: contain;
           background-position: center;
           transform: scale(1);
           transition: transform 0.2s;
         }
 
         .lineup-tab:hover .line-up-img {
-          transform: scale(2.5);
+          transform: scale(3);
         }
 
         .close {
@@ -175,7 +181,7 @@ export const NadeVideoContainer: FC<Props> = memo(({ gfyId, lineUpUrl }) => {
           display: flex;
           justify-content: center;
           align-items: center;
-          transform: scale(0.54);
+          transform: scale(0.5);
         }
 
         @keyframes example {
