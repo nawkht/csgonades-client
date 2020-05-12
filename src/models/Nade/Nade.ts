@@ -86,6 +86,7 @@ export type NadeCreateBody = {
   type: NadeType;
   mapEndCoord: MapCoordinates;
   oneWay?: boolean;
+  isPro?: boolean;
 };
 
 export type NadeUpdateBody = {
@@ -104,6 +105,7 @@ export type NadeUpdateBody = {
   status?: Status;
   slug?: string;
   oneWay?: boolean;
+  isPro?: boolean;
 };
 
 export type NadeStatusDTO = {

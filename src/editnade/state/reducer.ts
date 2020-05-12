@@ -118,6 +118,14 @@ type SetSlug = {
   slug: string;
 };
 
+type SetIsPro = {
+  type: "EditNade/SetIsPro";
+};
+
+type UnSetIsPro = {
+  type: "EditNade/UnSetIsPro";
+};
+
 type Actions =
   | SetMap
   | SetGfyData
@@ -137,7 +145,9 @@ type Actions =
   | ToggleLineupImageAdder
   | SetLineUpImage
   | SetTickrate
-  | SetSlug;
+  | SetSlug
+  | SetIsPro
+  | UnSetIsPro;
 
 const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
   console.log(action.type, action);
@@ -238,6 +248,16 @@ const reducer: Reducer<EditNadeState, Actions> = (state, action) => {
       return {
         ...state,
         slug: action.slug,
+      };
+    case "EditNade/SetIsPro":
+      return {
+        ...state,
+        isPro: true,
+      };
+    case "EditNade/UnSetIsPro":
+      return {
+        ...state,
+        isPro: false,
       };
     default:
       assertNever(action);
@@ -354,11 +374,12 @@ function createNadeUpdateBody(state: EditNadeState): NadeUpdateBody {
     technique: newValueIfDifferent(originalNade.technique, state.technique),
     tickrate: newValueIfDifferent(originalNade.tickrate, state.tickrate),
     type: newValueIfDifferent(originalNade.type, state.type),
-    oneWay: newValueIfDifferent(originalNade.oneWay, state.oneWay),
+    oneWay: newBooleanValueIfDifferent(originalNade.oneWay, state.oneWay),
     lineUpImageBase64: newValueIfDifferent(
       originalNade.images,
       state.lineUpImageBase64
     ),
+    isPro: newBooleanValueIfDifferent(originalNade.isPro, state.isPro),
   };
 
   // Remove undefine keys
@@ -380,4 +401,14 @@ function newValueIfDifferent(originalValue?: any, newValue?: any) {
   } else {
     return newValue;
   }
+}
+
+function newBooleanValueIfDifferent(
+  originalValue?: boolean,
+  newValue?: boolean
+) {
+  if (typeof newValue === "boolean" && originalValue !== newValue) {
+    return newValue;
+  }
+  return undefined;
 }

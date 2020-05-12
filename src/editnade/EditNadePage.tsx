@@ -28,6 +28,7 @@ import {
 } from "../store/AuthStore/AuthHooks";
 import { TickrateSelector } from "../createnade/components/TickrateSelector";
 import { SlugInput } from "./comp/SlugInput";
+import { IsProSelector } from "./comp/IsProSelector";
 
 type Props = {
   nade: Nade;
@@ -235,6 +236,20 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
                   }
                 />
               </div>
+
+              <div id="is-pro">
+                <IsProSelector
+                  initialValue={nade.isPro}
+                  onClick={(isPro) => {
+                    if (isPro) {
+                      dispatch({ type: "EditNade/SetIsPro" });
+                    } else {
+                      dispatch({ type: "EditNade/UnSetIsPro" });
+                    }
+                  }}
+                />
+              </div>
+
               {isAdmin && (
                 <div id="slug">
                   <SlugInput
@@ -337,6 +352,7 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
             "modlabel preview"
             "status preview"
             "slug preview"
+            "pro preview"
             ". submit";
           grid-row-gap: ${Dimensions.GUTTER_SIZE / 1.5}px;
           grid-column-gap: ${Dimensions.GUTTER_SIZE}px;
@@ -345,6 +361,10 @@ export const EditNadePage: FC<Props> = ({ nade }) => {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           margin-bottom: 150px;
+        }
+
+        #is-pro {
+          grid-area: pro;
         }
 
         #slug {
