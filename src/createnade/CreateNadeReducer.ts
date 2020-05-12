@@ -245,6 +245,8 @@ export const validateState = (
     technique,
     type,
     tickrate,
+    lineUpImageBase64,
+    oneWay,
   } = state;
   if (
     !map ||
@@ -272,5 +274,7 @@ export const validateState = (
     technique,
     type,
     tickrate,
+    lineUpImageBase64,
+    oneWay,
   };
 };
