@@ -4,10 +4,12 @@ import { useTheme } from "../store/SettingsStore/SettingsHooks";
 import { NadeLight } from "../models/Nade/Nade";
 import { Twemoji } from "../common/Twemoji";
 import { DiscordJoinAction } from "../frontpage/FrontpageActions";
+import { pluralize } from "../utils/Common";
 
 interface UserContribution extends UserLight {
   nadeCount: number;
   bestScore: number;
+  totalScore: number;
   score: number;
 }
 
@@ -27,6 +29,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           ...currentUser,
           nadeCount: currentUser.nadeCount + 1,
           bestScore: Math.max(currentUser.bestScore, nade.favoriteCount),
+          totalScore: currentUser.totalScore + nade.favoriteCount,
         };
       } else {
         contCount[steamId] = {
@@ -34,6 +37,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           nadeCount: 1,
           bestScore: nade.favoriteCount,
           score: 0,
+          totalScore: nade.favoriteCount,
         };
       }
     });
@@ -47,7 +51,13 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
         score: u.bestScore + u.nadeCount,
       };
     });
-    sortedContributors.sort((a, b) => b.score - a.score);
+    sortedContributors.sort((a, b) => {
+      const aScore =
+        Math.log(a.totalScore || 2) + Math.log(a.nadeCount || 2) / 4;
+      const bScore =
+        Math.log(b.totalScore || 2) + Math.log(b.nadeCount || 2) / 4;
+      return bScore - aScore;
+    });
     sortedContributors = sortedContributors.slice(0, 3);
 
     const gold = sortedContributors.shift();
@@ -69,7 +79,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           <>
             <div className="gold">
               <span>
-                <Twemoji emoji="🦉" />
+                <Twemoji emoji="🐔" />
               </span>
               <TopContributor user={contributors.gold} />
             </div>
@@ -80,7 +90,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           <>
             <div className="silver">
               <span>
-                <Twemoji emoji="🐧" />
+                <Twemoji emoji="🐥" />
               </span>
               <TopContributor user={contributors.silver} />
             </div>
@@ -91,7 +101,7 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
           <>
             <div className="bronze">
               <span>
-                <Twemoji emoji="🐥" />
+                <Twemoji emoji="🥚" />
               </span>
               <TopContributor user={contributors.bronce} />
             </div>
@@ -111,10 +121,13 @@ export const TopContributorList: FC<ContListProps> = ({ nades }) => {
         }
 
         .label {
-          background: ${colors.PRIMARY};
-          color: white;
+          background: ${colors.DP01};
+          border-bottom: 1px solid ${colors.BORDER};
+          color: ${colors.TEXT};
           padding: 10px 20px;
           margin-bottom: 10px;
+          text-align: center;
+          font-size: 16px;
         }
 
         .gold,
@@ -172,7 +185,11 @@ const TopContributor: FC<Props> = ({ user }) => {
       <div className="contributor-wrap">
         <div className="contributor">
           <img src={user.avatar} />
-          <span>{user.nickname}</span>
+          <span className="nickname">{user.nickname}</span>
+        </div>
+        <div className="nade-count">
+          {pluralize(user.totalScore, "favorite")} on{" "}
+          {pluralize(user.nadeCount, "nade")}
         </div>
       </div>
       <style jsx>{`
@@ -184,7 +201,7 @@ const TopContributor: FC<Props> = ({ user }) => {
 
         .nade-count {
           font-size: 10px;
-          color: ${colors.TEXT};
+          color: ${colors.GREY};
         }
 
         .contributor {
@@ -202,7 +219,7 @@ const TopContributor: FC<Props> = ({ user }) => {
           border-radius: 50%;
         }
 
-        span {
+        .nickname {
           display: block;
           padding-left: 5px;
           padding-right: 15px;
