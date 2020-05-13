@@ -75,6 +75,10 @@ export const GuideLinesModal: FC<Props> = ({}) => {
                 Remember to backup your own by first clicking "Copy your code"
                 and paste it somewhere you can find it later.
               </em>
+              <img
+                className="crosshair-example"
+                src="/images/crosshair_example.jpg"
+              />
             </p>
             <button onClick={() => setIsOpen(false)} className="accept">
               I have read and understood the guidelines
@@ -83,6 +87,14 @@ export const GuideLinesModal: FC<Props> = ({}) => {
         </div>
       </Modal>
       <style jsx>{`
+        .crosshair-example {
+          display: block;
+          width: 100%;
+          border-radius: 5px;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+
         .accept {
           cursor: pointer;
           background: ${colors.filterBg};
