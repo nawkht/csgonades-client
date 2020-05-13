@@ -50,12 +50,20 @@ export const TitleReportBtn: FC<Props> = ({ nadeId }) => {
 
       <Modal open={showReportForm} onClose={onToggle}>
         <div className="report-nade">
-          <p>Explain why you are reporting this nade.</p>
+          <p>
+            <b>Not working for you?</b>
+            <br />
+            Make sure you read the description under the video if there is some
+            detail you missed.
+            <br />
+            If the nade uses jumpthrow bind, it might not work on Matchmaking or
+            3rd Party Service depending on the tickrate.
+          </p>
           <Form onSubmit={onSendReport}>
             <Form.Field>
-              <label>Reason</label>
+              <label>Report Reason</label>
               <TextArea
-                placeholder="Report reason..."
+                placeholder="Tell me why your reporting the nade"
                 value={reportMsg}
                 rows={10}
                 onChange={(e) => setReportMsg(e.currentTarget.value)}
