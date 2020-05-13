@@ -1,6 +1,6 @@
 import { NextPage } from "next";
-import { AdUnit } from "../common/adunits/AdUnit";
 import { PageCentralize } from "../common/PageCentralize";
+import { PropellerAd } from "../frontpage/PropellerAd";
 
 const AdTesting: NextPage = () => {
   return (
@@ -8,12 +8,7 @@ const AdTesting: NextPage = () => {
       <PageCentralize>
         <div className="ads">
           <h1>Adtesting</h1>
-          <div className="ad-units">
-            <div className="med-rec">
-              Med rectangle
-              <AdUnit tagType="300x250" />
-            </div>
-          </div>
+          <PropellerAd />
         </div>
       </PageCentralize>
       <style jsx>{`
