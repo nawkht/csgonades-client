@@ -23,6 +23,7 @@ import { useDisplayToast } from "../store/ToastStore/hooks/useDisplayToast";
 import { useRouter } from "next/router";
 import { SEO } from "../layout/SEO2";
 import { TickrateSelector } from "./components/TickrateSelector";
+import { GuideLinesModal } from "./guidelines/GuideLinesModal";
 
 type Props = {};
 
@@ -269,7 +270,8 @@ export const CreateNadePage: FC<Props> = ({}) => {
         </div>
       </PageCentralize>
 
-      <aside></aside>
+      <GuideLinesModal />
+
       <style jsx>{`
         .lineup-msg {
           background: rgba(255, 255, 255, 0.8);
@@ -293,6 +295,7 @@ export const CreateNadePage: FC<Props> = ({}) => {
 
         #title {
           background: ${colors.DP01};
+          color: ${colors.TEXT};
           font-size: 24px;
           padding: 15px 30px;
           margin: 0;

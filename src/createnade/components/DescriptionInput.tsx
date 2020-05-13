@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { CsgnTextArea } from "../../common/inputs/CsgnTextArea";
 import { FaCheckCircle } from "react-icons/fa";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   defaultValue?: string;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 export const DescriptionInput: FC<Props> = ({ onChange, defaultValue }) => {
+  const { colors } = useTheme();
+
   return (
     <>
       <CsgnTextArea
@@ -32,6 +35,10 @@ export const DescriptionInput: FC<Props> = ({ onChange, defaultValue }) => {
       <style jsx>{`
         span {
           color: #00b8d9;
+        }
+
+        em {
+          color: ${colors.TEXT};
         }
       `}</style>
     </>

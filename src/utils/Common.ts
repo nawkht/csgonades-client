@@ -211,6 +211,6 @@ export function generateNadeItemTitle(
   } else if (title) {
     return [title, ""];
   } else {
-    return ["No Title", ""];
+    return ["No Title", "..."];
   }
 }
