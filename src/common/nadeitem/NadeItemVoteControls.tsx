@@ -25,7 +25,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
     e.preventDefault();
 
     if (!isSignedIn) {
-      return setSignInWarning("filterpro");
+      return setSignInWarning("vote");
     }
 
     if (isUpvoted) {
@@ -40,7 +40,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
     e.preventDefault();
 
     if (!isSignedIn) {
-      return setSignInWarning("filterpro");
+      return setSignInWarning("vote");
     }
 
     if (isDownvoted) {
