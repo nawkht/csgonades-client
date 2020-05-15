@@ -2,6 +2,7 @@ import { FC } from "react";
 import { PageCentralize } from "../../common/PageCentralize";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 import { useRouter } from "next/router";
+import { MapPageLink } from "./MapNavLink";
 
 type Props = {};
 
@@ -17,7 +18,7 @@ export const MapNav: FC<Props> = ({}) => {
           <div id="map-nav">
             <ul>
               <li>
-                <a href="/maps/dust2">
+                <MapPageLink map="dust2">
                   <span
                     className={
                       selectedMap === "dust2" ? "map-link selected" : "map-link"
@@ -25,10 +26,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Dust2
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/mirage">
+                <MapPageLink map="mirage">
                   <span
                     className={
                       selectedMap === "mirage"
@@ -38,10 +39,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Mirage
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/inferno">
+                <MapPageLink map="inferno">
                   <span
                     className={
                       selectedMap === "inferno"
@@ -51,10 +52,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Inferno
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/overpass">
+                <MapPageLink map="overpass">
                   <span
                     className={
                       selectedMap === "overpass"
@@ -64,10 +65,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Overpass
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/vertigo">
+                <MapPageLink map="vertigo">
                   <span
                     className={
                       selectedMap === "vertigo"
@@ -77,10 +78,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Vertigo
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/train">
+                <MapPageLink map="train">
                   <span
                     className={
                       selectedMap === "train" ? "map-link selected" : "map-link"
@@ -88,10 +89,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Train
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/nuke">
+                <MapPageLink map="nuke">
                   <span
                     className={
                       selectedMap === "nuke" ? "map-link selected" : "map-link"
@@ -99,10 +100,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Nuke
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/cache">
+                <MapPageLink map="cache">
                   <span
                     className={
                       selectedMap === "cache" ? "map-link selected" : "map-link"
@@ -110,10 +111,10 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Cache
                   </span>
-                </a>
+                </MapPageLink>
               </li>
               <li>
-                <a href="/maps/anubis">
+                <MapPageLink map="anubis">
                   <span
                     className={
                       selectedMap === "anubis"
@@ -123,7 +124,7 @@ export const MapNav: FC<Props> = ({}) => {
                   >
                     Anubis
                   </span>
-                </a>
+                </MapPageLink>
               </li>
             </ul>
           </div>

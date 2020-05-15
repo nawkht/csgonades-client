@@ -3,6 +3,7 @@ import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { capitalize } from "../../utils/Common";
 import { useRouter } from "next/router";
 import { useTheme } from "../../store/SettingsStore/SettingsHooks";
+import Link from "next/link";
 
 type Props = {
   map: CsgoMap;
@@ -21,9 +22,11 @@ export const MapLink: FC<Props> = ({ map, isNew, isUpdated }) => {
     <>
       <li className={selected ? "nav-selected" : ""}>
         {showLabel && <span className="new-map">{labelString}</span>}
-        <a href={`/maps/${map}`}>
-          <span className="map-name">{capitalize(map)}</span>
-        </a>
+        <Link href="/maps/[map]" as={`/maps/${map}`}>
+          <a>
+            <span className="map-name">{capitalize(map)}</span>
+          </a>
+        </Link>
       </li>
       <style jsx>{`
         li {
