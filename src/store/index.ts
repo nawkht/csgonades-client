@@ -8,6 +8,7 @@ import { PersistedSettingsReducer } from "./SettingsStore/SettingsReducer";
 import { ToastReducer } from "./ToastStore/ToastReducer";
 import { MapStoreReducer } from "./MapStore/reducer";
 import { AdReducer } from "./AdStore/reducer";
+import { VoteReducer } from "./VoteStore/VoteReducer";
 
 const rootReducer = combineReducers({
   authStore: AuthReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   settingsStore: PersistedSettingsReducer,
   mapStore: MapStoreReducer,
   adStore: AdReducer,
+  voteStore: VoteReducer,
 });
 
 function createMiddleware() {

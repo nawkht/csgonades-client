@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
 import { MiniGfycatIframe } from "./MiniGfycatIframe";
+import { NadeItemVoteControls } from "./NadeItemVoteControls";
 
 type Props = {
   disableAction?: boolean;
@@ -53,6 +54,7 @@ export const GfycatThumbnail: FC<Props> = ({
         {hovering && !!smallVideoUrl && (
           <div className="back">
             <MiniGfycatIframe gfyId={gfyId} />
+            <NadeItemVoteControls nadeId={nadeId} />
             <NadeItemFavBtn
               nadeId={nadeId}
               slug={nadeSlug}

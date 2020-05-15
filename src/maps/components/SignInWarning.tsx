@@ -58,6 +58,9 @@ export const SignInWarning: FC<Props> = memo(() => {
             </div>
           )}
           <div className="section">
+            <Twemoji emoji="👍" /> Up and Down vote nades
+          </div>
+          <div className="section">
             <Twemoji emoji="🤩" /> Favorite nades
           </div>
           <div className="section">
@@ -75,6 +78,10 @@ export const SignInWarning: FC<Props> = memo(() => {
             </div>
           )}
 
+          <div className="msg">
+            So what are you waiting for? <Twemoji emoji="💩" />
+          </div>
+
           <div className="btn" onClick={onSignIn}>
             <SignInnButton />
           </div>
@@ -88,6 +95,12 @@ export const SignInWarning: FC<Props> = memo(() => {
         }
 
         .sign-in-warning {
+          padding: 30px;
+          min-width: 30vw;
+        }
+
+        .msg {
+          text-align: center;
           padding: 20px;
         }
 
