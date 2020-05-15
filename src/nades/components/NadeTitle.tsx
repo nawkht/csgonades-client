@@ -5,6 +5,8 @@ import { FaEdit, FaChevronLeft } from "react-icons/fa";
 import { TitleFavBtn } from "./TitleFavBtn";
 import { TitleReportBtn } from "./TileReportBtn";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
+import { NadeItemVoteControls } from "../../common/nadeitem/NadeItemVoteControls";
+import { isBrowser } from "react-device-detect";
 
 type Props = {
   inModal?: boolean;
@@ -23,6 +25,8 @@ export const NadeTitle: FC<Props> = memo(
     return (
       <>
         <div className="title">
+          {inModal && isBrowser && <NadeItemVoteControls nadeId={nadeId} />}
+
           <div id="actions">
             <TitleReportBtn nadeId={nadeId} />
             <TitleFavBtn nadeId={nadeId} />
@@ -107,18 +111,21 @@ export const NadeTitle: FC<Props> = memo(
           .edit {
             position: absolute;
             top: 0;
-            left: 0;
+            left: calc(50% - 50px);
+            width: 100px;
+            display: flex;
+            justify-content: center;
           }
 
           .edit-btn {
             background: ${colors.filterBg};
             border: none;
-            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             color: white;
             padding: 5px 10px;
             outline: none;
-            font-size: 14px;
+            font-size: 10px;
             cursor: pointer;
             white-space: nowrap;
           }
