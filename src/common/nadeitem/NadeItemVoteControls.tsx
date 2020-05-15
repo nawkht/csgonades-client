@@ -4,12 +4,14 @@ import { Popup } from "semantic-ui-react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useVotes } from "../../store/VoteStore/hooks/useVotes";
 import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
+import { useAnalytics } from "../../utils/Analytics";
 
 type Props = {
   nadeId: string;
 };
 
 export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
+  const { event } = useAnalytics();
   const { castVote, clearVote, votes } = useVotes();
   const isSignedIn = useIsSignedIn();
   const { setSignInWarning } = useSignInWarning();
@@ -30,8 +32,16 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
 
     if (isUpvoted) {
       clearVote(nadeId);
+      event({
+        category: "Vote",
+        action: "Clear",
+      });
     } else {
       castVote(nadeId, 1);
+      event({
+        category: "Vote",
+        action: "Up",
+      });
     }
   }
 
@@ -45,8 +55,16 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
 
     if (isDownvoted) {
       clearVote(nadeId);
+      event({
+        category: "Vote",
+        action: "Clear",
+      });
     } else {
       castVote(nadeId, -1);
+      event({
+        category: "Vote",
+        action: "Down",
+      });
     }
   }
 
