@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { Popup } from "semantic-ui-react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
@@ -11,14 +11,21 @@ type Props = {
 };
 
 export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
+  const [voteValue, setVoteValue] = useState(0);
   const { event } = useAnalytics();
   const { castVote, clearVote, votes } = useVotes();
   const isSignedIn = useIsSignedIn();
   const { setSignInWarning } = useSignInWarning();
 
-  const currentVote = votes.find((v) => v.nadeId === nadeId);
-  const isUpvoted = currentVote?.vote === 1;
-  const isDownvoted = currentVote?.vote === -1;
+  useEffect(() => {
+    const currentVote = votes.find((v) => v.nadeId === nadeId);
+    if (currentVote) {
+      setVoteValue(currentVote.vote);
+    }
+  }, [votes, nadeId]);
+
+  const isUpvoted = voteValue === 1;
+  const isDownvoted = voteValue === -1;
   const upvoteColor = isUpvoted ? "yellow" : "white";
   const downvoteColor = isDownvoted ? "yellow" : "white";
 
@@ -31,12 +38,14 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
     }
 
     if (isUpvoted) {
+      setVoteValue(0);
       clearVote(nadeId);
       event({
         category: "Vote",
         action: "Clear",
       });
     } else {
+      setVoteValue(1);
       castVote(nadeId, 1);
       event({
         category: "Vote",
@@ -54,12 +63,14 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
     }
 
     if (isDownvoted) {
+      setVoteValue(0);
       clearVote(nadeId);
       event({
         category: "Vote",
         action: "Clear",
       });
     } else {
+      setVoteValue(-1);
       castVote(nadeId, -1);
       event({
         category: "Vote",
