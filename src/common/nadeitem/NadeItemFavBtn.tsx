@@ -76,7 +76,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
           mouseEnterDelay={200}
           trigger={
             <div className="fav-btn" onClick={onFavorite}>
-              <FaStar />
+              <FaStar className="icon-fix-yo" />
             </div>
           }
           size="mini"
@@ -85,16 +85,21 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
         ></Popup>
       )}
 
-      <style jsx>{`
-        .icon-wrap {
-          border: 1px solid red;
+      <style jsx global>{`
+        .icon-fix-yo {
+          font-size: 16px;
+          margin: 0;
+          padding: 0;
+          line-height: 16px;
+          position: relative;
         }
+      `}</style>
 
+      <style jsx>{`
         .fav-btn {
           background: rgba(0, 0, 0, 0.5);
-          width: 35px;
-          height: 35px;
-          font-size: 16px;
+          width: 36px;
+          height: 36px;
           display: flex;
           align-items: center;
           justify-content: center;

@@ -90,7 +90,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           inverted
           trigger={
             <button onClick={onUpVote} className="btn up">
-              <FaChevronUp style={{ position: "relative" }} />
+              <FaChevronUp className="icon-fix-yo space-bottom" />
             </button>
           }
         />
@@ -103,11 +103,28 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           inverted
           trigger={
             <button onClick={onDownVote} className="btn down">
-              <FaChevronDown style={{ position: "relative", top: 1 }} />
+              <FaChevronDown className="icon-fix-yo space-top" />
             </button>
           }
         />
       </div>
+      <style jsx global>{`
+        .icon-fix-yo {
+          font-size: 16px;
+          margin: 0;
+          padding: 0;
+          line-height: 16px;
+        }
+
+        .space-bottom {
+          padding-bottom: 2px;
+        }
+
+        .space-top {
+          padding-top: 2px;
+        }
+      `}</style>
+
       <style jsx>{`
         .vote-controls {
           display: flex;
@@ -117,9 +134,8 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
         .btn {
           outline: none;
           background: rgba(0, 0, 0, 0.5);
-          width: 35px;
-          height: 35px;
-          font-size: 16px;
+          width: 36px;
+          height: 36px;
           cursor: pointer;
           border-radius: 5px;
           margin-bottom: 5px;
