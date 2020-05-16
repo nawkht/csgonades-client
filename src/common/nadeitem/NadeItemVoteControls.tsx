@@ -95,6 +95,8 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           }
         />
 
+        <span>{}</span>
+
         <Popup
           content="Down Vote"
           size="mini"

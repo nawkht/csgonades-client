@@ -34,7 +34,8 @@ export const NadePage: FC<Props> = memo(({ nade, inModal }) => {
     nade.startPosition,
     nade.endPosition,
     nade.type,
-    nade.oneWay
+    nade.oneWay,
+    nade.map
   );
 
   const seoTitle = generateSeoTitle(

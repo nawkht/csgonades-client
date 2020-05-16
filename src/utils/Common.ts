@@ -195,17 +195,22 @@ export function generateNadeItemTitle(
   starPosition?: string,
   endPosition?: string,
   nadeType?: NadeType,
-  oneWay?: boolean
+  oneWay?: boolean,
+  map?: CsgoMap
 ) {
   if (oneWay && endPosition && nadeType) {
     return [
-      `${endPosition} One-Way ${nadeTypeString(nadeType)}`,
+      `${
+        map ? capitalize(map) + " " : ""
+      }${endPosition} One-Way ${nadeTypeString(nadeType)}`,
       `from ${starPosition}`,
     ];
   }
   if (starPosition && endPosition && nadeType) {
     return [
-      `${endPosition} ${nadeTypeString(nadeType)}`,
+      `${map ? capitalize(map) + " " : ""} ${endPosition} ${nadeTypeString(
+        nadeType
+      )}`,
       `from ${starPosition}`,
     ];
   } else if (title) {
