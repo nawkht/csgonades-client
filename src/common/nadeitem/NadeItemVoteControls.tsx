@@ -5,12 +5,14 @@ import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useVotes } from "../../store/VoteStore/hooks/useVotes";
 import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
 import { useAnalytics } from "../../utils/Analytics";
+import { useTheme } from "../../store/SettingsStore/SettingsHooks";
 
 type Props = {
   nadeId: string;
 };
 
 export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
+  const { colors } = useTheme();
   const [voteValue, setVoteValue] = useState(0);
   const { event } = useAnalytics();
   const { castVote, clearVote, votes } = useVotes();
@@ -26,8 +28,6 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
 
   const isUpvoted = voteValue === 1;
   const isDownvoted = voteValue === -1;
-  const upvoteColor = isUpvoted ? "#37d4c1" : "white";
-  const downvoteColor = isDownvoted ? "#37d4c1" : "white";
 
   function onUpVote(e: any) {
     e.stopPropagation();
@@ -89,11 +89,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           mouseEnterDelay={200}
           inverted
           trigger={
-            <button
-              onClick={onUpVote}
-              className="btn"
-              style={{ color: upvoteColor }}
-            >
+            <button onClick={onUpVote} className="btn up">
               <FaChevronUp />
             </button>
           }
@@ -106,11 +102,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           mouseEnterDelay={200}
           inverted
           trigger={
-            <button
-              onClick={onDownVote}
-              className="btn"
-              style={{ color: downvoteColor }}
-            >
+            <button onClick={onDownVote} className="btn down">
               <FaChevronDown style={{ position: "relative", top: 1 }} />
             </button>
           }
@@ -137,8 +129,22 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           justify-content: space-around;
         }
 
-        .btn:hover {
+        .up {
+          color: ${isUpvoted ? colors.SUCCESS : "white"};
+        }
+
+        .down {
+          color: ${isDownvoted ? colors.ERROR : "white"};
+        }
+
+        .up:hover {
           background: rgba(0, 0, 0, 0.8);
+          color: ${colors.SUCCESS};
+        }
+
+        .down:hover {
+          background: rgba(0, 0, 0, 0.8);
+          color: ${colors.ERROR};
         }
       `}</style>
     </>
