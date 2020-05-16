@@ -117,11 +117,12 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
         }
 
         .space-bottom {
-          padding-bottom: 2px;
+          position: relative;
         }
 
         .space-top {
-          padding-top: 2px;
+          position: relative;
+          top: 2px;
         }
       `}</style>
 
