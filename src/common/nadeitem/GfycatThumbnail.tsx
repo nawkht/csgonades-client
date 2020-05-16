@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { NadeItemFavBtn } from "./NadeItemFavBtn";
 import { MiniGfycatIframe } from "./MiniGfycatIframe";
@@ -23,7 +23,20 @@ export const GfycatThumbnail: FC<Props> = ({
   avgColor,
   gfyId,
 }) => {
+  const [renderBackControls, setRenderBackControls] = useState(false);
   const [hovering, setHovering] = useState(false);
+
+  useEffect(() => {
+    if (!hovering) {
+      setRenderBackControls(false);
+    }
+    const delay = setTimeout(() => {
+      if (hovering) {
+        setRenderBackControls(true);
+      }
+    }, 750);
+    return () => clearTimeout(delay);
+  }, [hovering]);
 
   function onMouseEnter() {
     setHovering(true);
@@ -54,12 +67,18 @@ export const GfycatThumbnail: FC<Props> = ({
         {hovering && !!smallVideoUrl && (
           <div className="back">
             <MiniGfycatIframe gfyId={gfyId} />
-            <NadeItemVoteControls nadeId={nadeId} />
-            <NadeItemFavBtn
-              nadeId={nadeId}
-              slug={nadeSlug}
-              disableAction={disableAction}
-            />
+            {renderBackControls && (
+              <div className="back-controls">
+                <div className="vote-controls">
+                  <NadeItemVoteControls nadeId={nadeId} />
+                </div>
+                <NadeItemFavBtn
+                  nadeId={nadeId}
+                  slug={nadeSlug}
+                  disableAction={disableAction}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -76,6 +95,16 @@ export const GfycatThumbnail: FC<Props> = ({
           display: block;
           padding-top: 56.25%;
           background: ${avgColor || "black"};
+        }
+
+        .back-controls {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        }
+
+        .vote-controls {
+          margin-bottom: 10px;
         }
 
         .front {

@@ -5,6 +5,8 @@ import {
   FaEye,
   FaStar,
   FaCommentDots,
+  FaChevronUp,
+  FaChevronDown,
 } from "react-icons/fa";
 import { RiMouseLine } from "react-icons/ri";
 import { tickrateString, Tickrate } from "../../../models/Nade/NadeTickrate";
@@ -15,6 +17,7 @@ import { Movement } from "../../../models/Nade/NadeMovement";
 import { Technique } from "../../../models/Nade/Technique";
 import { useAnalytics } from "../../../utils/Analytics";
 import { StatItem } from "./StatItem";
+import { useIsAdmin } from "../../../store/AuthStore/AuthHooks";
 
 type Props = {
   isFavorited?: boolean;
@@ -26,6 +29,8 @@ type Props = {
   favoriteCount: number;
   commentCount: number;
   isPro?: boolean;
+  upVoteCount?: number;
+  downVoteCount?: number;
 };
 
 export const NadeStats: FC<Props> = ({
@@ -38,7 +43,10 @@ export const NadeStats: FC<Props> = ({
   favoriteCount,
   commentCount,
   isPro,
+  downVoteCount,
+  upVoteCount,
 }) => {
+  const isAdmin = useIsAdmin();
   const { event } = useAnalytics();
   const { colors } = useTheme();
   const favoriteIconColor = isFavorited ? colors.FAV_YELLOW : colors.GREY;
@@ -57,6 +65,24 @@ export const NadeStats: FC<Props> = ({
             <div className="new-badge">
               <span>NEW</span>
             </div>
+          )}
+
+          {isAdmin && (
+            <StatItem
+              alwaysShow
+              count={upVoteCount || 0}
+              icon={<FaChevronUp />}
+              color={colors.GREY}
+            />
+          )}
+
+          {isAdmin && (
+            <StatItem
+              alwaysShow
+              count={downVoteCount || 0}
+              icon={<FaChevronDown />}
+              color={colors.GREY}
+            />
           )}
 
           {!nadeIsNew && (

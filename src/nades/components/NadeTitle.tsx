@@ -7,6 +7,7 @@ import { TitleReportBtn } from "./TileReportBtn";
 import { CsgoMap } from "../../models/Nade/CsGoMap";
 import { NadeItemVoteControls } from "../../common/nadeitem/NadeItemVoteControls";
 import { isBrowser } from "react-device-detect";
+import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 
 type Props = {
   inModal?: boolean;
@@ -20,27 +21,31 @@ type Props = {
 
 export const NadeTitle: FC<Props> = memo(
   ({ title, subTitle, nadeId, canEdit, nadeSlug, inModal, map }) => {
+    const isSignedIn = useIsSignedIn();
     const { colors } = useTheme();
 
     return (
       <>
         <div className="title">
-          {inModal && isBrowser && <NadeItemVoteControls nadeId={nadeId} />}
+          <div id="left-controls">
+            {inModal && isBrowser && isSignedIn && (
+              <NadeItemVoteControls nadeId={nadeId} />
+            )}
+            {!inModal && (
+              <div id="back">
+                <Link href="/maps/[map]" as={`/maps/${map}`}>
+                  <button>
+                    <FaChevronLeft />
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
 
           <div id="actions">
             <TitleReportBtn nadeId={nadeId} />
             <TitleFavBtn nadeId={nadeId} />
           </div>
-
-          {!inModal && (
-            <div id="back">
-              <Link href="/maps/[map]" as={`/maps/${map}`}>
-                <button>
-                  <FaChevronLeft />
-                </button>
-              </Link>
-            </div>
-          )}
 
           <h1 className="nade-title">
             <span className="main-title">{title}</span>
@@ -67,11 +72,16 @@ export const NadeTitle: FC<Props> = memo(
             display: grid;
             grid-template-columns: 50px 100px 1fr 100px 50px;
             grid-template-areas:
-              "backbtn backbtn title actions actions"
-              "backbtn backbtn title actions actions";
+              "controls controls title actions actions"
+              "controls controls title actions actions";
             width: 100%;
             padding-left: 20px;
             padding-right: 20px;
+          }
+
+          #left-controls {
+            grid-area: controls;
+            align-self: center;
           }
 
           #actions {
@@ -79,11 +89,6 @@ export const NadeTitle: FC<Props> = memo(
             align-self: center;
             justify-self: end;
             display: flex;
-          }
-
-          #back {
-            grid-area: backbtn;
-            align-self: center;
           }
 
           #back button {

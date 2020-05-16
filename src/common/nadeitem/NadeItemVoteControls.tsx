@@ -26,8 +26,8 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
 
   const isUpvoted = voteValue === 1;
   const isDownvoted = voteValue === -1;
-  const upvoteColor = isUpvoted ? "yellow" : "white";
-  const downvoteColor = isDownvoted ? "yellow" : "white";
+  const upvoteColor = isUpvoted ? "#37d4c1" : "white";
+  const downvoteColor = isDownvoted ? "#37d4c1" : "white";
 
   function onUpVote(e: any) {
     e.stopPropagation();
@@ -85,7 +85,8 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
         <Popup
           content="Up Vote"
           size="mini"
-          position="right center"
+          position="left center"
+          mouseEnterDelay={200}
           inverted
           trigger={
             <button
@@ -101,7 +102,8 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
         <Popup
           content="Down Vote"
           size="mini"
-          position="right center"
+          position="left center"
+          mouseEnterDelay={200}
           inverted
           trigger={
             <button
@@ -109,16 +111,13 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
               className="btn"
               style={{ color: downvoteColor }}
             >
-              <FaChevronDown />
+              <FaChevronDown style={{ position: "relative", top: 1 }} />
             </button>
           }
         />
       </div>
       <style jsx>{`
         .vote-controls {
-          position: absolute;
-          top: 10px;
-          left: 10px;
           display: flex;
           flex-direction: column;
         }
@@ -126,8 +125,8 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
         .btn {
           outline: none;
           background: rgba(0, 0, 0, 0.5);
-          width: 30px;
-          height: 30px;
+          width: 35px;
+          height: 35px;
           font-size: 18px;
           cursor: pointer;
           border-radius: 5px;
@@ -136,6 +135,10 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           display: flex;
           align-items: center;
           justify-content: space-around;
+        }
+
+        .btn:hover {
+          background: rgba(0, 0, 0, 0.8);
         }
       `}</style>
     </>

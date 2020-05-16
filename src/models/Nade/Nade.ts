@@ -44,6 +44,8 @@ export type Nade = {
   nextUpdateInHours: number;
   oneWay?: boolean;
   isPro?: boolean;
+  upVoteCount?: number;
+  downVoteCount?: number;
 };
 
 export type NadeLight = {
@@ -70,6 +72,8 @@ export type NadeLight = {
   nextUpdateInHours: number;
   oneWay?: boolean;
   isPro?: boolean;
+  upVoteCount?: number;
+  downVoteCount?: number;
 };
 
 export type NadeCreateBody = {

@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useIsFavoriteInProgress } from "../../store/FavoriteStore/hooks/useIsFavoriteInProgress";
 import { useIsFavorited } from "../../store/FavoriteStore/hooks/useIsFavorited";
@@ -17,7 +17,6 @@ type Props = {
 };
 
 export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
-  const [render, setRender] = useState(false);
   const { setSignInWarning } = useSignInWarning();
   const { event } = useAnalytics();
   const isSignedIn = useIsSignedIn();
@@ -26,13 +25,6 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
   const addFavorite = useAddFavorite();
   const unFavorite = useUnfavorite();
   const { incrementNadeFavCount, decrementNadeFavCount } = useMapFavCount();
-
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      setRender(true);
-    }, 500);
-    return () => clearTimeout(delay);
-  }, []);
 
   function onFavorite(e: any) {
     e.stopPropagation();
@@ -67,15 +59,12 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
   const favoriteText = isFavorite ? "Unfavorite" : "Favorite";
   const iconColor = isFavorite ? "#bbb" : "rgb(250, 200, 0)";
 
-  if (!render) {
-    return null;
-  }
-
   return (
     <>
       {!disableAction && (
         <Popup
           inverted
+          mouseEnterDelay={200}
           trigger={
             <div className="fav-btn" onClick={onFavorite}>
               {isFavoriteInProgress && <FaSpinner style={{ color: "#fff" }} />}
@@ -95,12 +84,9 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
         }
 
         .fav-btn {
-          position: absolute;
-          top: 10px;
-          right: 10px;
           background: rgba(0, 0, 0, 0.5);
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
           font-size: 18px;
           display: flex;
           align-items: center;

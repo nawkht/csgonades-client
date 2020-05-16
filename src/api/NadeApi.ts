@@ -71,8 +71,10 @@ export class NadeApi {
 
   static async getByMap(mapName: CsgoMap): AppResult<NadeLight[]> {
     try {
-      const res = await axios.get(`${Config.API_URL}/nades/map/${mapName}`);
-      const nades = res.data as NadeLight[];
+      const res = await axios.get<NadeLight[]>(
+        `${Config.API_URL}/nades/map/${mapName}`
+      );
+      const nades = res.data;
 
       return ok(nades);
     } catch (error) {

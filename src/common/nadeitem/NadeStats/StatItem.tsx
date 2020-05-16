@@ -2,6 +2,7 @@ import { FC } from "react";
 import { kFormatter } from "../../../utils/Common";
 
 type Props = {
+  alwaysShow?: boolean;
   hidden?: boolean;
   count: number;
   icon: any;
@@ -15,8 +16,9 @@ export const StatItem: FC<Props> = ({
   color,
   hidden,
   iconColor,
+  alwaysShow,
 }) => {
-  if (hidden || !count) {
+  if ((hidden || !count) && !alwaysShow) {
     return null;
   }
 

@@ -69,7 +69,7 @@ export const SignInWarning: FC<Props> = memo(() => {
           <div className="section">
             <Twemoji emoji="🤤" /> Filter nades by your favorite ones
           </div>
-          {signInWarning === "favorite" && (
+          {signInWarning !== "filterpro" && (
             <div className="section">
               <span className="check">
                 <FaCheckCircle />
@@ -79,7 +79,7 @@ export const SignInWarning: FC<Props> = memo(() => {
           )}
 
           <div className="msg">
-            So what are you waiting for? <Twemoji emoji="💩" />
+            So what are you waiting for? <Twemoji emoji="👊" />
           </div>
 
           <div className="btn" onClick={onSignIn}>
