@@ -43,6 +43,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
       event({
         category: "Vote",
         action: "Clear",
+        label: nadeId,
       });
     } else {
       setVoteValue(1);
@@ -50,6 +51,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
       event({
         category: "Vote",
         action: "Up",
+        label: nadeId,
       });
     }
   }
@@ -68,6 +70,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
       event({
         category: "Vote",
         action: "Clear",
+        label: nadeId,
       });
     } else {
       setVoteValue(-1);
@@ -75,6 +78,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
       event({
         category: "Vote",
         action: "Down",
+        label: nadeId,
       });
     }
   }
