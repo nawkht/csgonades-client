@@ -90,7 +90,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           inverted
           trigger={
             <button onClick={onUpVote} className="btn up">
-              <FaChevronUp />
+              <FaChevronUp style={{ position: "relative" }} />
             </button>
           }
         />
@@ -119,7 +119,7 @@ export const NadeItemVoteControls: FC<Props> = ({ nadeId }) => {
           background: rgba(0, 0, 0, 0.5);
           width: 35px;
           height: 35px;
-          font-size: 18px;
+          font-size: 16px;
           cursor: pointer;
           border-radius: 5px;
           margin-bottom: 5px;

@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { useIsSignedIn } from "../../store/AuthStore/AuthHooks";
 import { useIsFavoriteInProgress } from "../../store/FavoriteStore/hooks/useIsFavoriteInProgress";
 import { useIsFavorited } from "../../store/FavoriteStore/hooks/useIsFavorited";
 import { useAddFavorite } from "../../store/FavoriteStore/hooks/useAddFavorite";
 import { useUnfavorite } from "../../store/FavoriteStore/hooks/useUnFavorite";
 import { Popup } from "semantic-ui-react";
-import { FaStar, FaSpinner, FaTimes } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { useMapFavCount } from "../../store/MapStore/hooks/useMapFavCount";
 import { useAnalytics } from "../../utils/Analytics";
 import { useSignInWarning } from "../../store/GlobalStore/hooks/useSignInWarning";
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
+  const [nadeIsFavorite, setNadeIsFavorite] = useState(false);
   const { setSignInWarning } = useSignInWarning();
   const { event } = useAnalytics();
   const isSignedIn = useIsSignedIn();
@@ -25,6 +26,12 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
   const addFavorite = useAddFavorite();
   const unFavorite = useUnfavorite();
   const { incrementNadeFavCount, decrementNadeFavCount } = useMapFavCount();
+
+  useEffect(() => {
+    if (isFavorite) {
+      setNadeIsFavorite(true);
+    }
+  }, [isFavorite]);
 
   function onFavorite(e: any) {
     e.stopPropagation();
@@ -38,6 +45,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
       return;
     }
     if (isFavorite) {
+      setNadeIsFavorite(false);
       unFavorite(isFavorite.id);
       decrementNadeFavCount(nadeId);
       event({
@@ -46,6 +54,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
         label: slug,
       });
     } else {
+      setNadeIsFavorite(true);
       addFavorite(nadeId);
       incrementNadeFavCount(nadeId);
       event({
@@ -56,8 +65,8 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
     }
   }
 
-  const favoriteText = isFavorite ? "Unfavorite" : "Favorite";
-  const iconColor = isFavorite ? "#bbb" : "rgb(250, 200, 0)";
+  const favoriteText = nadeIsFavorite ? "Unfavorite" : "Favorite";
+  const iconColor = nadeIsFavorite ? "rgb(250, 200, 0)" : "white";
 
   return (
     <>
@@ -67,9 +76,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
           mouseEnterDelay={200}
           trigger={
             <div className="fav-btn" onClick={onFavorite}>
-              {isFavoriteInProgress && <FaSpinner style={{ color: "#fff" }} />}
-              {!isFavoriteInProgress && isFavorite && <FaTimes />}
-              {!isFavoriteInProgress && !isFavorite && <FaStar />}
+              <FaStar />
             </div>
           }
           size="mini"
@@ -87,7 +94,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
           background: rgba(0, 0, 0, 0.5);
           width: 35px;
           height: 35px;
-          font-size: 18px;
+          font-size: 16px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -97,6 +104,7 @@ export const NadeItemFavBtn: FC<Props> = ({ nadeId, slug, disableAction }) => {
 
         .fav-btn:hover {
           background: rgba(0, 0, 0, 1);
+          color: rgb(250, 200, 0);
         }
 
         .spin {
