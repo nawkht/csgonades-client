@@ -47,7 +47,7 @@ export const NadePage: FC<Props> = memo(({ nade, inModal }) => {
     nade.map
   );
 
-  const createdAtString = new Date(nade.createdAt).toString();
+  const createdAtString = new Date(nade.createdAt).toISOString();
 
   return (
     <>
